@@ -2788,3 +2788,11 @@
 "You hit the cap often." = "Sınıra sık sık ulaşıyorsunuz.";
 "Your plan fits how you use it." = "Planınız kullanımınıza uygun.";
 "Not enough history for a verdict yet." = "Değerlendirme için henüz yeterli geçmiş yok.";
+"Plan value" = "Plan değeri";
+"Set a plan price to compare" = "Karşılaştırmak için plan fiyatı belirleyin";
+"API-equivalent vs %@ plan" = "%@ plana karşı API karşılığı";
+"Cache hit rate" = "Önbellek isabet oranı";
+"Cost per 1M tokens" = "1 milyon token başına maliyet";
+"Top model share" = "En çok harcanan modelin payı";
+"%@ vs previous period" = "Önceki döneme göre %@";
+"%@ pts" = "%@ puan";

@@ -2786,3 +2786,11 @@
 "You hit the cap often." = "Bạn thường xuyên chạm giới hạn.";
 "Your plan fits how you use it." = "Gói của bạn phù hợp với cách bạn sử dụng.";
 "Not enough history for a verdict yet." = "Chưa đủ lịch sử để đánh giá.";
+"Plan value" = "Giá trị gói dịch vụ";
+"Set a plan price to compare" = "Đặt giá gói dịch vụ để so sánh";
+"API-equivalent vs %@ plan" = "Tương đương API so với gói dịch vụ %@";
+"Cache hit rate" = "Tỷ lệ trúng bộ nhớ đệm";
+"Cost per 1M tokens" = "Chi phí cho mỗi 1 triệu token";
+"Top model share" = "Tỷ trọng mô hình hàng đầu";
+"%@ vs previous period" = "%@ so với kỳ trước";
+"%@ pts" = "%@ điểm";

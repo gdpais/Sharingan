@@ -2789,3 +2789,11 @@
 "You hit the cap often." = "تبلغ الحد كثيرًا.";
 "Your plan fits how you use it." = "خطتك تناسب طريقة استخدامك.";
 "Not enough history for a verdict yet." = "لا يوجد سجل كافٍ لإصدار حكم بعد.";
+"Plan value" = "قيمة الخطة";
+"Set a plan price to compare" = "حدّد سعر الخطة للمقارنة";
+"API-equivalent vs %@ plan" = "ما يعادل تكلفة API مقابل خطة بسعر %@";
+"Cache hit rate" = "معدل إصابة الذاكرة المؤقتة";
+"Cost per 1M tokens" = "التكلفة لكل مليون رمز";
+"Top model share" = "حصة النموذج الأعلى";
+"%@ vs previous period" = "%@ مقارنة بالفترة السابقة";
+"%@ pts" = "%@ نقطة";

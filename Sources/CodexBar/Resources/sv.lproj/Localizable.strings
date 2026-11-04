@@ -2784,3 +2784,11 @@
 "You hit the cap often." = "Du når ofta gränsen.";
 "Your plan fits how you use it." = "Din plan passar hur du använder den.";
 "Not enough history for a verdict yet." = "Inte tillräckligt med historik för en bedömning än.";
+"Plan value" = "Abonnemangsvärde";
+"Set a plan price to compare" = "Ange ett abonnemangspris för att jämföra";
+"API-equivalent vs %@ plan" = "API-motsvarighet mot abonnemang för %@";
+"Cache hit rate" = "Andel cacheträffar";
+"Cost per 1M tokens" = "Kostnad per 1 milj. token";
+"Top model share" = "Toppmodellens andel";
+"%@ vs previous period" = "%@ jämfört med föregående period";
+"%@ pts" = "%@ p.e.";

@@ -2785,3 +2785,11 @@
 "You hit the cap often." = "上限に頻繁に達しています。";
 "Your plan fits how you use it." = "プランは使い方に合っています。";
 "Not enough history for a verdict yet." = "判定に十分な履歴がまだありません。";
+"Plan value" = "プランの価値";
+"Set a plan price to compare" = "比較するにはプラン料金を設定してください";
+"API-equivalent vs %@ plan" = "%@ のプランに対する API 換算額";
+"Cache hit rate" = "キャッシュヒット率";
+"Cost per 1M tokens" = "100万トークンあたりのコスト";
+"Top model share" = "トップモデルのシェア";
+"%@ vs previous period" = "前期間比 %@";
+"%@ pts" = "%@ ポイント";

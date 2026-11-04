@@ -2782,3 +2782,11 @@
 "You hit the cap often." = "Je bereikt vaak de limiet.";
 "Your plan fits how you use it." = "Je plan past bij hoe je het gebruikt.";
 "Not enough history for a verdict yet." = "Nog niet genoeg geschiedenis voor een oordeel.";
+"Plan value" = "Abonnementswaarde";
+"Set a plan price to compare" = "Stel een abonnementsprijs in om te vergelijken";
+"API-equivalent vs %@ plan" = "API-equivalent vs. abonnement van %@";
+"Cache hit rate" = "Cache-hitrate";
+"Cost per 1M tokens" = "Kosten per 1 mln. tokens";
+"Top model share" = "Aandeel van topmodel";
+"%@ vs previous period" = "%@ t.o.v. vorige periode";
+"%@ pts" = "%@ ptn";

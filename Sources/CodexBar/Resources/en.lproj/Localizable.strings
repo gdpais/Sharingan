@@ -2790,3 +2790,11 @@
 "You hit the cap often." = "You hit the cap often.";
 "Your plan fits how you use it." = "Your plan fits how you use it.";
 "Not enough history for a verdict yet." = "Not enough history for a verdict yet.";
+"Plan value" = "Plan value";
+"Set a plan price to compare" = "Set a plan price to compare";
+"API-equivalent vs %@ plan" = "API-equivalent vs %@ plan";
+"Cache hit rate" = "Cache hit rate";
+"Cost per 1M tokens" = "Cost per 1M tokens";
+"Top model share" = "Top model share";
+"%@ vs previous period" = "%@ vs previous period";
+"%@ pts" = "%@ pts";

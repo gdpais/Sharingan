@@ -2787,3 +2787,11 @@
 "You hit the cap often." = "Arribes sovint al límit.";
 "Your plan fits how you use it." = "El teu pla s'ajusta a com l'utilitzes.";
 "Not enough history for a verdict yet." = "Encara no hi ha prou historial per a un veredicte.";
+"Plan value" = "Valor del pla";
+"Set a plan price to compare" = "Definiu un preu del pla per comparar";
+"API-equivalent vs %@ plan" = "Equivalent d'API davant d'un pla de %@";
+"Cache hit rate" = "Taxa d'encerts de memòria cau";
+"Cost per 1M tokens" = "Cost per 1 M de tokens";
+"Top model share" = "Quota del model principal";
+"%@ vs previous period" = "%@ respecte al període anterior";
+"%@ pts" = "%@ pp";

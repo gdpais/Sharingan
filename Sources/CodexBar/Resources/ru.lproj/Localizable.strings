@@ -2786,3 +2786,11 @@
 "You hit the cap often." = "Вы часто упираетесь в лимит.";
 "Your plan fits how you use it." = "План соответствует вашему использованию.";
 "Not enough history for a verdict yet." = "Пока недостаточно истории для оценки.";
+"Plan value" = "Ценность плана";
+"Set a plan price to compare" = "Укажите цену плана для сравнения";
+"API-equivalent vs %@ plan" = "Эквивалент API против плана за %@";
+"Cache hit rate" = "Доля попаданий в кэш";
+"Cost per 1M tokens" = "Стоимость за 1 млн токенов";
+"Top model share" = "Доля топ-модели";
+"%@ vs previous period" = "%@ к предыдущему периоду";
+"%@ pts" = "%@ п. п.";

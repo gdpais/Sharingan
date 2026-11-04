@@ -2784,3 +2784,11 @@
 "You hit the cap often." = "Chegas ao límite a miúdo.";
 "Your plan fits how you use it." = "O teu plan axústase a como o usas.";
 "Not enough history for a verdict yet." = "Aínda non hai historial abondo para unha valoración.";
+"Plan value" = "Valor do plan";
+"Set a plan price to compare" = "Define un prezo do plan para comparar";
+"API-equivalent vs %@ plan" = "Equivalente en API fronte a un plan de %@";
+"Cache hit rate" = "Taxa de acertos da caché";
+"Cost per 1M tokens" = "Custo por 1 M de tokens";
+"Top model share" = "Cota do modelo principal";
+"%@ vs previous period" = "%@ fronte ao período anterior";
+"%@ pts" = "%@ pp";
