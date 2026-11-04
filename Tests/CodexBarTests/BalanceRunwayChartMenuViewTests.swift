@@ -30,10 +30,11 @@ struct BalanceRunwayChartMenuViewTests {
     @Test
     func `dates add the year only when it differs from the reference`() {
         let nextYear = Self.start.addingTimeInterval(400 * 86400)
+        let withYear = BalanceRunwayChartMenuView.dateText(nextYear, relativeTo: Self.start)
+        let withoutYear = BalanceRunwayChartMenuView.dateText(nextYear, relativeTo: nextYear)
 
-        #expect(
-            BalanceRunwayChartMenuView.dateText(nextYear, relativeTo: Self.start) !=
-                BalanceRunwayChartMenuView.dateText(nextYear, relativeTo: nextYear))
+        #expect(withYear != withoutYear)
+        #expect(withYear.count > withoutYear.count)
     }
 
     @Test

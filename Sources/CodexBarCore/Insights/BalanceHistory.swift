@@ -101,9 +101,9 @@ public enum BalanceHistory {
             }
             guard sample.capturedAt >= last.capturedAt else { return nil }
             let unchanged = abs(sample.balance - last.balance) <= self.unchangedTolerance
-            if self.bucket(for: sample.capturedAt, retention: retention) ==
-                self.bucket(for: last.capturedAt, retention: retention)
-            {
+            let sampleBucket = self.bucket(for: sample.capturedAt, retention: retention)
+            let lastBucket = self.bucket(for: last.capturedAt, retention: retention)
+            if sampleBucket == lastBucket {
                 guard !unchanged else { return nil }
                 updated[updated.count - 1] = sample
             } else {

@@ -112,9 +112,14 @@ struct BalanceHistoryTests {
             currencyCode: "USD",
             balance: 99,
             updatedAt: Self.hourStart)
-        for style in [ProviderCostMenuCardStyle.extraUsageBalance, .zenBalance, .pointsBalance, .prepaidCredits,
-                      .payAsYouGoBalance]
-        {
+        let styles: [ProviderCostMenuCardStyle] = [
+            .extraUsageBalance,
+            .zenBalance,
+            .pointsBalance,
+            .prepaidCredits,
+            .payAsYouGoBalance,
+        ]
+        for style in styles {
             #expect(BalanceHistory.observedBalance(cost: cost, style: style) == 12.5)
         }
     }

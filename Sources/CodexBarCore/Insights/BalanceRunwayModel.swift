@@ -47,7 +47,7 @@ public struct BalanceRunwayEstimate: Equatable, Sendable {
 public enum BalanceRunwayModel {
     public static let secondsPerDay: TimeInterval = 24 * 60 * 60
 
-    /// Samples since the most recent top-up: any increase starts a new segment.
+    /// Samples since the most recent top-up: an increase above `topUpTolerance` starts a new segment.
     public static func currentSegment(
         _ samples: [BalanceHistorySample],
         topUpTolerance: Double = BalanceRunwayConfiguration.standard.topUpTolerance) -> [BalanceHistorySample]
@@ -144,11 +144,8 @@ public struct BalanceRunwayChartModel: Equatable, Sendable {
     {
         let windowStart = estimate.observedAt.addingTimeInterval(-displayWindow)
         let history = BalanceRunwayModel.sortedSamplesInLatestUnit(samples)
-            .filter {
-                $0.currencyCode == estimate.currencyCode &&
-                    $0.capturedAt >= windowStart &&
-                    $0.capturedAt <= estimate.observedAt
-            }
+            .filter { $0.currencyCode == estimate.currencyCode }
+            .filter { $0.capturedAt >= windowStart && $0.capturedAt <= estimate.observedAt }
             .map { Point(date: $0.capturedAt, balance: max(0, $0.balance)) }
         guard history.count >= 2, let first = history.first else { return nil }
 
