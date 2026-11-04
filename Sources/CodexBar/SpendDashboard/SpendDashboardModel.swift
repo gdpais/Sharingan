@@ -282,6 +282,8 @@ struct SpendDashboardModel: Equatable, Sendable {
         let projects: [ProjectRow]
         var retainedDetailUpdatedAt: Date?
         var detailsExcludedFromTotals = false
+        // swiftlint:disable file_length
+        var insightInputs = SpendInsightInputs()
         let selectedDay: Date?
         let hourlyPoints: [HourlyPoint]
         private let hourlyDaysMemo = SpendHourlyDaysMemo()
@@ -717,6 +719,7 @@ struct SpendDashboardModel: Equatable, Sendable {
             timeZone: calendar.timeZone)
         group.retainedDetailUpdatedAt = inputs.compactMap { $0.input.retainedDetailSnapshot?.updatedAt }.min()
         group.detailsExcludedFromTotals = inputs.contains { !aggregateIDs.contains($0.input.id) }
+        group.insightInputs = Self.insightInputs(summaries, bounds, calendar, Self.inputSummary)
         return group
     }
 
