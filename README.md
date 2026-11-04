@@ -285,7 +285,7 @@ make docs-list                       # list docs with frontmatter summaries
 CLI install (the CLI keeps its `codexbar` name and is bundled inside the app):
 ```bash
 # after copying Sharingan.app to /Applications
-sudo ln -sf /Applications/Sharingan.app/Contents/Helpers/CodexBarCLI /usr/local/bin/codexbar
+./bin/install-codexbar-cli.sh
 ```
 
 ## Related (by CodexBar's author)
