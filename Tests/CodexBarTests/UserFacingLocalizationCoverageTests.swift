@@ -202,19 +202,19 @@ struct UserFacingLocalizationCoverageTests {
                 "Credential expiry",
                 "Notify once when a provider account needs you to sign in again.",
                 "Codex needs sign-in",
-                "Open CodexBar to review the account error and sign in again."),
+                "Open Sharingan to review the account error and sign in again."),
             (
                 "zh-Hans",
                 "登录凭据过期",
                 "当服务商账户需要重新登录时，发送一次通知。",
                 "Codex 需要重新登录",
-                "打开 CodexBar 查看账户错误并重新登录。"),
+                "打开 Sharingan 查看账户错误并重新登录。"),
             (
                 "zh-Hant",
                 "登入憑證過期",
                 "當服務商帳戶需要重新登入時，傳送一次通知。",
                 "Codex 需要重新登入",
-                "開啟 CodexBar 查看帳戶錯誤並重新登入。"),
+                "開啟 Sharingan 查看帳戶錯誤並重新登入。"),
         ]
         for (language, title, subtitle, alertTitle, alertBody) in translations {
             CodexBarLocalizationOverride.$appLanguage.withValue(language) {

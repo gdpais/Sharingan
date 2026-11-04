@@ -14,10 +14,10 @@
 "Include API keys, cookies, and tokens" = "Bao gồm các khóa API, cookies và mã thông báo";
 "Sync usage snapshots" = "Đồng bộ hóa ảnh chụp nhanh sử dụng";
 "Show accounts from other Macs" = "Hiển thị tài khoản từ các máy Mac khác";
-"Requires a signed release build of CodexBar." = "Yêu cầu bản phát hành có chữ ký của CodexBar.";
+"Requires a signed release build of CodexBar." = "Yêu cầu bản phát hành có chữ ký của Sharingan.";
 "Sign in to iCloud in System Settings to enable sync." = "Đăng nhập vào iCloud trong Cài đặt hệ thống để bật đồng bộ hóa.";
 "iCloud access is restricted on this Mac." = "Quyền truy cập iCloud bị hạn chế trên máy Mac này.";
-"Sync is paused: another Mac uses a newer version of CodexBar. Update to resume." = "Đồng bộ hóa bị tạm dừng: một máy Mac khác sử dụng phiên bản CodexBar mới hơn. Cập nhật để tiếp tục.";
+"Sync is paused: another Mac uses a newer version of CodexBar. Update to resume." = "Đồng bộ hóa bị tạm dừng: một máy Mac khác sử dụng phiên bản Sharingan mới hơn. Cập nhật để tiếp tục.";
 "Last successful fetch" = "Tìm nạp thành công lần cuối";
 "Last successful push" = "Lần đẩy thành công cuối cùng";
 "Never" = "không bao giờ";
@@ -52,9 +52,9 @@
 "hooks_add_argument" = "Thêm đối số";
 "hooks_delete_argument" = "Xóa đối số";
 
-"ollama_safari_cookie_access_hint" = "Cookie Safari cần Quyền truy cập toàn bộ ổ đĩa cho CodexBar (Cài đặt hệ thống > Quyền riêng tư & Bảo mật).";
+"ollama_safari_cookie_access_hint" = "Cookie Safari cần Quyền truy cập toàn bộ ổ đĩa cho Sharingan (Cài đặt hệ thống > Quyền riêng tư & Bảo mật).";
 "ollama_browser_cookie_decryption_denied" = "Việc giải mã cookie %@ đã bị từ chối trong Chuỗi khóa. Mở thẻ nhà cung cấp và bấm Làm mới (⌘R) để yêu cầu lại quyền truy cập Chuỗi khóa.";
-"ollama_browser_cookie_decryption_disabled" = "Việc giải mã cookie %@ bị tắt trong CodexBar; hãy bật quyền truy cập Chuỗi khóa rồi làm mới.";
+"ollama_browser_cookie_decryption_disabled" = "Việc giải mã cookie %@ bị tắt trong Sharingan; hãy bật quyền truy cập Chuỗi khóa rồi làm mới.";
 
 " providers" = "nhà cung cấp";
 "(System)" = "(Hệ thống)";
@@ -70,7 +70,7 @@
 "AI credits" = "Tín dụng AI";
 "Gateway requests" = "Yêu cầu qua cổng";
 "Future AGI cost history is not available." = "Lịch sử chi phí Future AGI không khả dụng.";
-"Saved in CodexBar's local config file. Or set FI_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của CodexBar. Hoặc đặt FI_API_KEY.";
+"Saved in CodexBar's local config file. Or set FI_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của Sharingan. Hoặc đặt FI_API_KEY.";
 
 "API region" = "API khu vực";
 "API token" = "API token";
@@ -104,7 +104,7 @@
 "Automatic imports browser cookies or stored sessions." = "Tự động nhập cookie trình duyệt hoặc các phiên được lưu trữ.";
 "Automatic imports browser cookies." = "Tự động nhập cookie trình duyệt.";
 "Automatically imports browser session cookie." = "Tự động nhập cookie phiên trình duyệt.";
-"Automatically opens CodexBar when you start your Mac." = "Tự động mở CodexBar khi bạn khởi động máy Mac.";
+"Automatically opens CodexBar when you start your Mac." = "Tự động mở Sharingan khi bạn khởi động máy Mac.";
 "Automation" = "Tự động hóa";
 "Average (\\(label1) + \\(label2))" = "Trung bình (\\(label1) + \\(label2))";
 "Average (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))" = "Trung bình (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))";
@@ -132,7 +132,7 @@
 "Choose up to \\(Self.maxOverviewProviders) providers" = "Chọn tối đa nhà cung cấp \\(Self.maxOverviewProviders)";
 "Choose up to \\(count) providers" = "Chọn tối đa \\(count) nhà cung cấp";
 "Choose what to show in the menu bar (Pace shows usage vs. expected)." = "Chọn nội dung sẽ hiển thị trong thanh menu (Tốc độ hiển thị Mức sử dụng so với dự kiến).";
-"Choose which Codex account CodexBar should follow." = "Chọn tài khoản Codex mà CodexBar sẽ tuân theo.";
+"Choose which Codex account CodexBar should follow." = "Chọn tài khoản Codex mà Sharingan sẽ tuân theo.";
 "Choose which window drives the menu bar percent." = "Chọn cửa sổ nào điều khiển phần trăm thanh menu.";
 "Chrome" = "Chrome";
 "Claude CLI not found" = "Claude CLI không tìm thấy";
@@ -147,9 +147,9 @@
 "Codex binary" = "Codex nhị phân";
 "Codex login failed" = "Đăng nhập Codex không thành công";
 "Codex login timed out" = "Đăng nhập Codex đã hết thời gian chờ";
-"CodexBar Lifecycle Keepalive" = "Lưu giữ vòng đời CodexBar";
-"CodexBar can't show its menu bar icon" = "CodexBar không thể hiển thị biểu tượng thanh menu";
-"CodexBar could not read managed account storage. " = "CodexBar không thể đọc bộ nhớ tài khoản được quản lý.";
+"CodexBar Lifecycle Keepalive" = "Lưu giữ vòng đời Sharingan";
+"CodexBar can't show its menu bar icon" = "Sharingan không thể hiển thị biểu tượng thanh menu";
+"CodexBar could not read managed account storage. " = "Sharingan không thể đọc bộ nhớ tài khoản được quản lý.";
 "Configure…" = "Định cấu hình…";
 "Connected" = "Đã kết nối";
 "Controls how much detail is logged." = "Kiểm soát lượng chi tiết được ghi lại.";
@@ -168,7 +168,7 @@
 "Local token history is unavailable or incomplete." = "Lịch sử token cục bộ không có hoặc chưa đầy đủ.";
 "Could not add Codex account" = "Không thể thêm tài khoản Codex";
 "Could not open Terminal for Gemini" = "Không thể mở Terminal cho Gemini";
-"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "Không thể đọc thông tin xác thực Claude OAuth: bộ nhớ đệm Claude OAuth của CodexBar tạm thời không khả dụng trong Chuỗi khóa macOS. Kiểm tra xem chuỗi khóa đăng nhập đã được mở khóa trong Truy cập chuỗi khóa chưa, rồi thử làm mới lại.";
+"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "Không thể đọc thông tin xác thực Claude OAuth: bộ nhớ đệm Claude OAuth của Sharingan tạm thời không khả dụng trong Chuỗi khóa macOS. Kiểm tra xem chuỗi khóa đăng nhập đã được mở khóa trong Truy cập chuỗi khóa chưa, rồi thử làm mới lại.";
 "Could not start codex login" = "Không thể bắt đầu đăng nhập codex";
 "Could not switch system account" = "Không thể không chuyển đổi tài khoản hệ thống";
 "Credits" = "Tín dụng";
@@ -217,7 +217,7 @@
 "Hide details" = "Ẩn chi tiết";
 "Hide personal information" = "Ẩn thông tin cá nhân";
 "Historical tracking" = "Theo dõi lịch sử";
-"How often CodexBar polls providers in the background." = "Tần suất CodexBar thăm dò ý kiến ​​các nhà cung cấp trong nền.";
+"How often CodexBar polls providers in the background." = "Tần suất Sharingan thăm dò ý kiến ​​các nhà cung cấp trong nền.";
 "Inactive" = "Không hoạt động";
 "Install CLI" = "Cài đặt CLI";
 "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again." = "Cài đặt Claude CLI (npm i -g @anthropic-ai/claude-code) và thử lại.";
@@ -276,7 +276,7 @@
 "Open" = "Mở";
 "Open API Keys" = "Mở API Phím";
 "Open Amp Settings" = "Mở Amp Cài đặt";
-"Open Antigravity to sign in, then refresh CodexBar." = "Mở Chống trọng lực để đăng nhập, sau đó làm mới CodexBar .";
+"Open Antigravity to sign in, then refresh CodexBar." = "Mở Chống trọng lực để đăng nhập, sau đó làm mới Sharingan .";
 "Open Browser" = "Mở trình duyệt";
 "Open Coding Plan" = "Mở kế hoạch mã hóa";
 "Open Console" = "Mở bảng điều khiển";
@@ -321,7 +321,7 @@
 "Progress bars fill as you consume quota (instead of showing remaining)." = "Thanh tiến trình sẽ lấp đầy khi bạn sử dụng Hạn mức (thay vì hiển thị phần còn lại).";
 "Provider" = "Nhà cung cấp";
 "Providers" = "Nhà cung cấp";
-"Quit CodexBar" = "Thoát CodexBar";
+"Quit CodexBar" = "Thoát Sharingan";
 "Random (default)" = "Ngẫu nhiên (mặc định)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Đọc nhật ký Mức sử dụng cục bộ. Hiển thị hôm nay + cửa sổ lịch sử đã chọn trong menu.";
 "Refresh" = "Làm mới";
@@ -329,8 +329,8 @@
 "Remote" = "Từ xa";
 "Remove" = "Xóa";
 "Remove Codex account?" = "Xóa tài khoản Codex?";
-"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "Xóa \\(account.email) khỏi CodexBar ? Trang chủ Codex được quản lý của nó sẽ bị xóa.";
-"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "Xóa \\(email) khỏi CodexBar ? Trang chủ Codex được quản lý của nó sẽ bị xóa.";
+"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "Xóa \\(account.email) khỏi Sharingan ? Trang chủ Codex được quản lý của nó sẽ bị xóa.";
+"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "Xóa \\(email) khỏi Sharingan ? Trang chủ Codex được quản lý của nó sẽ bị xóa.";
 "Remove selected account" = "Xóa tài khoản đã chọn";
 "Replace critter bars with provider branding icons and a percentage." = "Thay thế các thanh sinh vật bằng Nhà cung cấp biểu tượng nhãn hiệu và tỷ lệ phần trăm.";
 "Replay selected animation" = "Phát lại hoạt ảnh đã chọn";
@@ -371,7 +371,7 @@
 "Store multiple Ollama Cookie headers." = "Lưu trữ nhiều tiêu đề Cookie Ollama.";
 "Store multiple OpenCode Cookie headers." = "Lưu trữ nhiều tiêu đề Cookie OpenCode.";
 "Store multiple OpenCode Go Cookie headers." = "Lưu trữ nhiều tiêu đề Cookie OpenCode Go.";
-"Stored in the CodexBar config file." = "Được lưu trữ trong tệp cấu hình CodexBar.";
+"Stored in the CodexBar config file." = "Được lưu trữ trong tệp cấu hình Sharingan.";
 "Stored in ~/.codexbar/config.json. " = "Được lưu trữ trong ~/.codexbar/config.json.";
 "Stored in ~/.codexbar/config.json. Paste the key from the Synthetic dashboard." = "Được lưu trữ trong ~/.codexbar/config.json. Dán khóa từ bảng điều khiển Tổng hợp.";
 "Stored in ~/.codexbar/config.json. Paste your Coding Plan API key from Model Studio." = "Được lưu trữ trong ~/.codexbar/config.json. Dán khóa Kế hoạch mã hóa API của bạn từ Model Studio.";
@@ -446,8 +446,8 @@
 "cursor_on_demand" = "Theo yêu cầu: %@";
 "cursor_on_demand_with_limit" = "Theo yêu cầu: %1$@ / %2$@";
 "extra_usage_format" = "Mức sử dụng bổ sung : %1$@ / %2$@";
-"jetbrains_detected_generate" = "Đã phát hiện: %@ . Sử dụng trợ lý AI một lần để tạo dữ liệu Hạn mức, sau đó làm mới CodexBar .";
-"jetbrains_detected_select" = "Đã phát hiện: %@ . Chọn IDE ưa thích của bạn trong Cài đặt , sau đó làm mới CodexBar .";
+"jetbrains_detected_generate" = "Đã phát hiện: %@ . Sử dụng trợ lý AI một lần để tạo dữ liệu Hạn mức, sau đó làm mới Sharingan .";
+"jetbrains_detected_select" = "Đã phát hiện: %@ . Chọn IDE ưa thích của bạn trong Cài đặt , sau đó làm mới Sharingan .";
 "last_fetch_failed_with_provider" = "Tìm nạp %@ lần cuối không thành công:";
 "last_spend" = "Chi tiêu lần cuối: %@";
 "mcp_model_usage" = "%1$@ : %2$@";
@@ -457,10 +457,10 @@
 "metric_primary" = "Sơ cấp ( %@ )";
 "metric_secondary" = "Trung học ( %@ )";
 "metric_tertiary" = "Cấp ba ( %@ )";
-"multiple_workspaces_found" = "CodexBar đã tìm thấy nhiều không gian làm việc cho %@ . Vui lòng chọn không gian làm việc để thêm.";
+"multiple_workspaces_found" = "Sharingan đã tìm thấy nhiều không gian làm việc cho %@ . Vui lòng chọn không gian làm việc để thêm.";
 "ory_session_…=…; csrftoken=…" = "ory_session_…=…; csrftoken=…";
 "overview_choose_providers" = "Chọn tối đa %@ nhà cung cấp";
-"remove_account_message" = "Xóa %@ khỏi CodexBar ? Trang chủ Codex được quản lý của nó sẽ bị xóa.";
+"remove_account_message" = "Xóa %@ khỏi Sharingan ? Trang chủ Codex được quản lý của nó sẽ bị xóa.";
 "version_format" = "Phiên bản %@";
 "vertex_ai_login_instructions" = "Để theo dõi Vertex AI Mức sử dụng , hãy xác thực bằng Google Cloud.\n\n1. Mở Terminal\n2. Chạy: gcloud auth application-default login\n3. Làm theo lời nhắc của trình duyệt để đăng nhập\n4. Đặt dự án của bạn: gcloud config set project PROJECT_ID\n\nMở Thiết bị đầu cuối bây giờ?";
 "workspaceID is set but only opencode, opencodego, and deepgram support workspaceID." = "ID không gian làm việc được đặt nhưng chỉ có mã mở, opencodego và deepgram hỗ trợ ID không gian làm việc.";
@@ -499,7 +499,7 @@
 "language_korean" = "Tiếng Hàn";
 "language_italian" = "Italiano";
 "start_at_login_title" = "Bắt đầu khi đăng nhập";
-"start_at_login_subtitle" = "Tự động mở CodexBar khi bạn khởi động máy Mac.";
+"start_at_login_subtitle" = "Tự động mở Sharingan khi bạn khởi động máy Mac.";
 "show_cost_summary_subtitle" = "Đọc nhật ký Mức sử dụng cục bộ. Hiển thị hôm nay + cửa sổ lịch sử đã chọn trong menu.";
 "cost_summary_style_title" = "Kiểu hiển thị";
 "cost_summary_style_inline" = "Chỉ nội tuyến";
@@ -524,7 +524,7 @@
 "credential_expiry_notifications_title" = "Thông tin đăng nhập hết hạn";
 "credential_expiry_notifications_subtitle" = "Thông báo một lần khi tài khoản nhà cung cấp yêu cầu bạn đăng nhập lại.";
 "credential_expiry_notification_title" = "%@ cần đăng nhập";
-"credential_expiry_notification_body" = "Mở CodexBar để xem lỗi tài khoản và đăng nhập lại.";
+"credential_expiry_notification_body" = "Mở Sharingan để xem lỗi tài khoản và đăng nhập lại.";
 "session_quota_notifications_subtitle" = "Thông báo khi phiên 5 giờ Hạn mức đạt 0% và khi phiên này khả dụng trở lại.";
 "quota_depleted_title" = "Hạn mức đã cạn & được khôi phục";
 "quota_warning_notifications_subtitle" = "Cảnh báo khi phiên hoặc Hạn mức còn lại hàng tuần vượt qua ngưỡng được định cấu hình.";
@@ -579,7 +579,7 @@
 "quota_warning_warning" = "Cảnh báo";
 "quota_warning_critical" = "Nghiêm trọng";
 "apply" = "Áp dụng";
-"quit_app" = "Thoát CodexBar";
+"quit_app" = "Thoát Sharingan";
 
 /* Tab titles */
 "tab_general" = "Chung";
@@ -605,8 +605,8 @@
 "managed_login_missing_email" = "Đăng nhập Codex đã hoàn tất nhưng không có email tài khoản. Hãy thử lại sau khi xác nhận tài khoản đã đăng nhập đầy đủ.";
 "login_success_notification_title" = "%@ đăng nhập thành công";
 "login_success_notification_body" = "Bạn có thể quay lại ứng dụng; xác thực xong.";
-"workspace_selection_cancelled" = "CodexBar đã tìm thấy nhiều không gian làm việc nhưng không có không gian làm việc nào được chọn.";
-"unsafe_managed_home" = "CodexBar từ chối sửa đổi đường dẫn chính được quản lý không mong muốn: %@";
+"workspace_selection_cancelled" = "Sharingan đã tìm thấy nhiều không gian làm việc nhưng không có không gian làm việc nào được chọn.";
+"unsafe_managed_home" = "Sharingan từ chối sửa đổi đường dẫn chính được quản lý không mong muốn: %@";
 "menu_bar_metric_title" = "thanh menu chỉ số";
 "menu_bar_metric_subtitle" = "Chọn cửa sổ nào thúc đẩy phần trăm thanh menu.";
 "menu_bar_metric_subtitle_deepseek" = "Hiển thị số dư DeepSeek trong thanh menu .";
@@ -724,7 +724,7 @@
 "link_twitter" = "Twitter";
 "link_email" = "Email";
 "link_acknowledgements" = "Lời cảm ơn";
-"acknowledgements_footer" = "CodexBar được xây dựng bằng các dự án mã nguồn mở này.";
+"acknowledgements_footer" = "Sharingan được xây dựng bằng các dự án mã nguồn mở này.";
 "acknowledgements_others" = "%d người khác";
 "acknowledgements_author" = "Tác giả";
 "acknowledgements_authors" = "Tác giả";
@@ -739,7 +739,7 @@
 
 /* Debug Pane */
 "use_javascriptcore_plugin_engine" = "Dùng JavaScriptCore cho phần bổ trợ nhà cung cấp";
-"use_javascriptcore_plugin_engine_subtitle" = "Chỉ dùng để quay lui tương thích. Khởi động lại CodexBar để áp dụng; CODEXBAR_PLUGIN_ENGINE ghi đè cài đặt này.";
+"use_javascriptcore_plugin_engine_subtitle" = "Chỉ dùng để quay lui tương thích. Khởi động lại Sharingan để áp dụng; CODEXBAR_PLUGIN_ENGINE ghi đè cài đặt này.";
 "section_logging" = "Ghi nhật ký";
 "enable_file_logging" = "Cho phép ghi nhật ký tệp";
 "enable_file_logging_subtitle" = "Ghi nhật ký vào %@ để gỡ lỗi.";
@@ -795,7 +795,7 @@
 "login_shell_path" = "Shell đăng nhập PATH (chụp khởi động)";
 "cleared" = "Đã xóa.";
 "no_fetch_attempts" = "Chưa có lần tìm nạp nào.";
-"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe có thể chặn thanh menu ứng dụng trong Hệ thống Cài đặt → thanh menu → Cho phép trong thanh menu . CodexBar đang chạy nhưng macOS có thể đang ẩn biểu tượng của nó. Mở thanh menu Cài đặt và bật CodexBar.";
+"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe có thể chặn thanh menu ứng dụng trong Hệ thống Cài đặt → thanh menu → Cho phép trong thanh menu . Sharingan đang chạy nhưng macOS có thể đang ẩn biểu tượng của nó. Mở thanh menu Cài đặt và bật Sharingan.";
 
 /* Metric preferences */
 "metric_pref_automatic" = "Tự động";
@@ -838,7 +838,7 @@
 "refresh_adaptive" = "Thích ứng";
 "refresh_adaptive_agent_aware" = "Thích ứng (nhận biết tác nhân)";
 "adaptive_activity_consent_title" = "Cho phép làm mới theo hoạt động?";
-"adaptive_activity_consent_message" = "Chế độ Thích ứng nhận biết tác nhân có thể kiểm tra danh sách tiến trình cục bộ đang chạy, bao gồm cả dòng lệnh, để nhận diện Codex và Claude, sau đó đọc siêu dữ liệu của các phiên đã biết mỗi 30 giây trong khi bạn viết mã. Khi tắt Agent Sessions, CodexBar chỉ dùng thời điểm hoạt động gần nhất trong bộ nhớ và loại bỏ đường dẫn cùng danh tính phiên. Dữ liệu này không được gửi đi đâu, còn tính năng phát hiện từ xa và SSH vẫn tắt. Nếu bạn từ chối, CodexBar trở về chế độ Thích ứng thông thường mà không quét hoạt động cục bộ.";
+"adaptive_activity_consent_message" = "Chế độ Thích ứng nhận biết tác nhân có thể kiểm tra danh sách tiến trình cục bộ đang chạy, bao gồm cả dòng lệnh, để nhận diện Codex và Claude, sau đó đọc siêu dữ liệu của các phiên đã biết mỗi 30 giây trong khi bạn viết mã. Khi tắt Agent Sessions, Sharingan chỉ dùng thời điểm hoạt động gần nhất trong bộ nhớ và loại bỏ đường dẫn cùng danh tính phiên. Dữ liệu này không được gửi đi đâu, còn tính năng phát hiện từ xa và SSH vẫn tắt. Nếu bạn từ chối, Sharingan trở về chế độ Thích ứng thông thường mà không quét hoạt động cục bộ.";
 "adaptive_activity_consent_allow" = "Cho phép hoạt động cục bộ";
 "adaptive_activity_consent_decline" = "Dùng Thích ứng thông thường";
 
@@ -887,7 +887,7 @@
 "Status Page" = "Trang trạng thái";
 "Open Status Page" = "Mở trang trạng thái";
 "Settings..." = "Cài đặt ...";
-"About CodexBar" = "Giới thiệu về CodexBar";
+"About CodexBar" = "Giới thiệu về Sharingan";
 "Quit" = "Thoát";
 "Last %d day" = "Ngày %d cuối cùng";
 "Last %d days" = "%d ngày cuối cùng";
@@ -987,8 +987,8 @@
 "Managed by Homebrew" = "Được quản lý bằng Homebrew";
 "Copy update command" = "Sao chép lệnh cập nhật";
 "Update to %@" = "Cập nhật lên %@";
-"CodexBar %@ is available" = "Đã có CodexBar %@";
-"CodexBar is up to date" = "CodexBar đã được cập nhật";
+"CodexBar %@ is available" = "Đã có Sharingan %@";
+"CodexBar is up to date" = "Sharingan đã được cập nhật";
 "Checking for updates…" = "Đang kiểm tra bản cập nhật…";
 "Updating with Homebrew…" = "Đang cập nhật bằng Homebrew…";
 "Homebrew update failed. You can run this command in Terminal instead:" = "Cập nhật bằng Homebrew không thành công. Bạn có thể chạy lệnh này trong Terminal:";
@@ -1152,26 +1152,26 @@
 "Capacity Start" = "Dung lượng Start";
 "Changelog" = "Nhật ký thay đổi";
 "Choose the Moonshot/Kimi API host for international or China mainland accounts." = "Chọn máy chủ Moonshot/Kimi API cho các tài khoản quốc tế hoặc Trung Quốc đại lục.";
-"CodexBar can't replace a system account that is signed in with an API key only setup." = "CodexBar không thể thay thế tài khoản hệ thống được đăng nhập bằng thiết lập chỉ khóa API.";
-"CodexBar could not find saved auth for that account. Re-authenticate it and try again." = "CodexBar không thể tìm thấy xác thực đã lưu cho tài khoản đó. Xác thực lại nó và thử lại.";
-"CodexBar could not read managed account storage. Recover the store before adding another account." = "CodexBar không thể đọc bộ nhớ tài khoản được quản lý. Khôi phục cửa hàng trước khi thêm tài khoản khác.";
-"CodexBar could not read saved auth for that account. Re-authenticate it and try again." = "CodexBar không thể đọc xác thực đã lưu cho tài khoản đó. Xác thực lại nó và thử lại.";
-"CodexBar could not read the current system account on this Mac." = "CodexBar không thể đọc tài khoản hệ thống hiện tại trên máy Mac này.";
-"CodexBar could not replace the live Codex auth on this Mac." = "CodexBar không thể thay thế xác thực Codex trực tiếp trên máy Mac này.";
-"CodexBar could not safely preserve the current system account before switching." = "CodexBar không thể bảo toàn tài khoản hệ thống hiện tại một cách an toàn trước khi chuyển đổi.";
-"CodexBar could not save the current system account before switching." = "CodexBar không thể lưu tài khoản hệ thống hiện tại trước khi chuyển đổi.";
-"CodexBar could not update managed account storage." = "CodexBar không thể cập nhật bộ nhớ tài khoản được quản lý.";
-"CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "CodexBar đã tìm thấy một tài khoản được quản lý khác đã sử dụng tài khoản hệ thống hiện tại. Giải quyết tài khoản trùng lặp trước khi chuyển đổi.";
-"CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain cho “ %@ ” để nó có thể giải mã cookie của trình duyệt và xác thực tài khoản của bạn. Nhấn OK để tiếp tục.";
-"CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain cung cấp Claude Mã OAuth token để nó có thể tìm nạp Claude Mức sử dụng của bạn. Nhấn OK để tiếp tục.";
-"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain cho tiêu đề cookie %@ của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
-"CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain về tiêu đề cookie Claude của bạn để nó có thể tìm nạp Claude web Mức sử dụng . Nhấn OK để tiếp tục.";
-"CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain cho GitHub Copilot token của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
-"CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain cho Kimi auth token của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
-"CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain cung cấp MiniMax API token của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
-"CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain cho tiêu đề cookie OpenAI của bạn để nó có thể tìm nạp các tính năng bổ sung của trang tổng quan Codex. Nhấn OK để tiếp tục.";
-"CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain cung cấp khóa Tổng hợp API của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
-"CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain cung cấp z.ai API token của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
+"CodexBar can't replace a system account that is signed in with an API key only setup." = "Sharingan không thể thay thế tài khoản hệ thống được đăng nhập bằng thiết lập chỉ khóa API.";
+"CodexBar could not find saved auth for that account. Re-authenticate it and try again." = "Sharingan không thể tìm thấy xác thực đã lưu cho tài khoản đó. Xác thực lại nó và thử lại.";
+"CodexBar could not read managed account storage. Recover the store before adding another account." = "Sharingan không thể đọc bộ nhớ tài khoản được quản lý. Khôi phục cửa hàng trước khi thêm tài khoản khác.";
+"CodexBar could not read saved auth for that account. Re-authenticate it and try again." = "Sharingan không thể đọc xác thực đã lưu cho tài khoản đó. Xác thực lại nó và thử lại.";
+"CodexBar could not read the current system account on this Mac." = "Sharingan không thể đọc tài khoản hệ thống hiện tại trên máy Mac này.";
+"CodexBar could not replace the live Codex auth on this Mac." = "Sharingan không thể thay thế xác thực Codex trực tiếp trên máy Mac này.";
+"CodexBar could not safely preserve the current system account before switching." = "Sharingan không thể bảo toàn tài khoản hệ thống hiện tại một cách an toàn trước khi chuyển đổi.";
+"CodexBar could not save the current system account before switching." = "Sharingan không thể lưu tài khoản hệ thống hiện tại trước khi chuyển đổi.";
+"CodexBar could not update managed account storage." = "Sharingan không thể cập nhật bộ nhớ tài khoản được quản lý.";
+"CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "Sharingan đã tìm thấy một tài khoản được quản lý khác đã sử dụng tài khoản hệ thống hiện tại. Giải quyết tài khoản trùng lặp trước khi chuyển đổi.";
+"CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain cho “ %@ ” để nó có thể giải mã cookie của trình duyệt và xác thực tài khoản của bạn. Nhấn OK để tiếp tục.";
+"CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain cung cấp Claude Mã OAuth token để nó có thể tìm nạp Claude Mức sử dụng của bạn. Nhấn OK để tiếp tục.";
+"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain cho tiêu đề cookie %@ của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
+"CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain về tiêu đề cookie Claude của bạn để nó có thể tìm nạp Claude web Mức sử dụng . Nhấn OK để tiếp tục.";
+"CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain cho GitHub Copilot token của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
+"CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain cho Kimi auth token của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
+"CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain cung cấp MiniMax API token của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
+"CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain cho tiêu đề cookie OpenAI của bạn để nó có thể tìm nạp các tính năng bổ sung của trang tổng quan Codex. Nhấn OK để tiếp tục.";
+"CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain cung cấp khóa Tổng hợp API của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
+"CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain cung cấp z.ai API token của bạn để nó có thể tìm nạp Mức sử dụng . Nhấn OK để tiếp tục.";
 "Could not open Cursor login in your browser." = "Không thể mở đăng nhập Con trỏ trong trình duyệt của bạn.";
 "Could not open browser for Antigravity" = "Không thể mở trình duyệt cho AntiGravity";
 "Credits used" = "Tín dụng đã sử dụng";
@@ -1186,7 +1186,7 @@
 "Extra usage balance: %@" = "Số dư sử dụng thêm: %@";
 "Keychain Access Required" = "Keychain Yêu cầu quyền truy cập";
 "keychain_prompt_learn_more" = "Tìm hiểu thêm…";
-"keychain_prompt_privacy_note" = "macOS, không phải CodexBar, xử lý việc nhập mật khẩu đăng nhập Mac. Bạn có thể tắt mọi quyền truy cập Keychain bất kỳ lúc nào trong Cài đặt → Nâng cao.";
+"keychain_prompt_privacy_note" = "macOS, không phải Sharingan, xử lý việc nhập mật khẩu đăng nhập Mac. Bạn có thể tắt mọi quyền truy cập Keychain bất kỳ lúc nào trong Cài đặt → Nâng cao.";
 "Kiro menu bar value" = "Kiro thanh menu value";
 "Label" = "Nhãn";
 "No organizations loaded. Click Refresh after setting your API key." = "Chưa có tổ chức nào được tải. Nhấp vào Làm mới sau khi đặt khóa API của bạn.";
@@ -1250,7 +1250,7 @@
 "Service" = "Dịch vụ";
 "Show or hide Kiro credits, percent, or both next to the menu bar icon." = "Hiển thị hoặc ẩn tín dụng Kiro, phần trăm hoặc cả hai bên cạnh biểu tượng thanh menu.";
 "Show usage for organizations you belong to. Personal account is always shown." = "Hiển thị Mức sử dụng cho các tổ chức mà bạn là thành viên. Tài khoản cá nhân luôn được hiển thị.";
-"Sign in to cursor.com in your browser, then refresh Cursor in CodexBar." = "Đăng nhập vào con trỏ.com trong trình duyệt của bạn, sau đó làm mới Con trỏ trong CodexBar .";
+"Sign in to cursor.com in your browser, then refresh Cursor in CodexBar." = "Đăng nhập vào con trỏ.com trong trình duyệt của bạn, sau đó làm mới Con trỏ trong Sharingan .";
 "Simulated error text" = "Văn bản lỗi mô phỏng";
 "StepFun platform account (phone number or email)." = "Tài khoản nền tảng StepFun (số điện thoại hoặc email).";
 "Stored in ~/.codexbar/config.json." = "Được lưu trữ trong ~/.codexbar/config.json.";
@@ -1266,11 +1266,11 @@
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is preferred; OPENAI_API_KEY still works." = "Được lưu trữ trong ~/.codexbar/config.json. OPENAI_ADMIN_KEY được ưu tiên; OPENAI_API_KEY vẫn hoạt động.";
 "Stored in ~/.codexbar/config.json. Requires an Anthropic Admin API key." = "Được lưu trữ trong ~/.codexbar/config.json. Yêu cầu khóa Anthropic Quản trị viên API.";
 "Stored in ~/.codexbar/config.json. Used for /v1/quota-stats." = "Được lưu trữ trong ~/.codexbar/config.json. Được sử dụng cho /v1/ Hạn mức -stats.";
-"Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`)." = "Được lưu trữ trong ~/.codexbar/config.json. Bạn cũng có thể cung cấp CODEBUFF_API_KEY hoặc để CodexBar đọc ~/.config/manicode/credentials.json (được tạo bởi `codebuff login`).";
+"Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`)." = "Được lưu trữ trong ~/.codexbar/config.json. Bạn cũng có thể cung cấp CODEBUFF_API_KEY hoặc để Sharingan đọc ~/.config/manicode/credentials.json (được tạo bởi `codebuff login`).";
 "Stored in ~/.codexbar/config.json. You can also provide KILO_API_KEY or ~/.local/share/kilo/auth.json (kilo.access)." = "Được lưu trữ trong ~/.codexbar/config.json. Bạn cũng có thể cung cấp KILO_API_KEY hoặc ~/.local/share/kilo/auth.json (kilo.access).";
 "T3 Chat cookie" = "Cookie trò chuyện T3";
 "Team mode" = "Chế độ nhóm";
-"That account is no longer available in CodexBar. Refresh the account list and try again." = "Tài khoản đó không còn khả dụng trong CodexBar . Hãy làm mới danh sách tài khoản và thử lại.";
+"That account is no longer available in CodexBar. Refresh the account list and try again." = "Tài khoản đó không còn khả dụng trong Sharingan . Hãy làm mới danh sách tài khoản và thử lại.";
 "The browser login did not complete in time. Try Antigravity login again." = "Quá trình đăng nhập trình duyệt không hoàn tất kịp thời. Hãy thử đăng nhập lại bằng AntiGravity.";
 "Timed out waiting for Cursor login. %@" = "Đã hết thời gian chờ đăng nhập Con trỏ. %@";
 "Timed out waiting for Cursor login. %@ Last error: %@" = "Đã hết thời gian chờ đăng nhập Con trỏ. %@ Lỗi cuối cùng: %@";
@@ -1355,11 +1355,11 @@
 
 "%@: %@" = "%@: %@";
 "Alternatively, set a custom path in Settings." = "Ngoài ra, hãy đặt đường dẫn tùy chỉnh trong Cài đặt.";
-"Choose a supported browser so CodexBar can read the matching account." = "Chọn một trình duyệt được hỗ trợ để CodexBar có thể đọc tài khoản phù hợp.";
+"Choose a supported browser so CodexBar can read the matching account." = "Chọn một trình duyệt được hỗ trợ để Sharingan có thể đọc tài khoản phù hợp.";
 "Choose Cursor account" = "Chọn tài khoản Cursor";
-"Choose which Cursor account CodexBar should use." = "Chọn tài khoản Cursor mà CodexBar nên sử dụng.";
+"Choose which Cursor account CodexBar should use." = "Chọn tài khoản Cursor mà Sharingan nên sử dụng.";
 "Finish switching to a different Cursor account in your browser, then try again." = "Hoàn tất việc chuyển sang tài khoản Cursor khác trong trình duyệt, sau đó thử lại.";
-"Install a JetBrains IDE with AI Assistant enabled, then refresh CodexBar." = "Cài đặt JetBrains IDE có bật AI Assistant, sau đó làm mới CodexBar.";
+"Install a JetBrains IDE with AI Assistant enabled, then refresh CodexBar." = "Cài đặt JetBrains IDE có bật AI Assistant, sau đó làm mới Sharingan.";
 "Request quota: %@ / %@" = "Hạn mức yêu cầu: %@ / %@";
 "Sign in with Claude Code..." = "Đăng nhập bằng Claude Code...";
 "Timed out waiting for Cursor account switch. %@" = "Đã hết thời gian chờ chuyển đổi tài khoản Cursor. %@";
@@ -1572,7 +1572,7 @@
 "5-hour usage" = "Mức sử dụng 5 giờ";
 "7-day usage" = "Mức sử dụng 7 ngày";
 "Total usage" = "Tổng mức sử dụng";
-"claude_oauth_keychain_access_disabled" = "Quyền truy cập Keychain bị tắt nên CodexBar không thể đọc thông tin đăng nhập Claude.";
+"claude_oauth_keychain_access_disabled" = "Quyền truy cập Keychain bị tắt nên Sharingan không thể đọc thông tin đăng nhập Claude.";
 "claude_oauth_keychain_access_revoked" = "Quyền truy cập Chuỗi khóa Claude đã bị thu hồi do Claude Code xoay vòng mã thông báo. Nhấp vào Làm mới để cấp lại quyền truy cập hoặc chuyển nguồn sử dụng Claude sang CLI/Web.";
 "claude_showing_last_known_usage" = "Đang hiển thị mức sử dụng đã biết gần nhất, được ghi nhận %@.";
 "claude_limited_usage_detail" = "Thông tin sử dụng ít chi tiết";
@@ -1650,7 +1650,7 @@
 /* Overview share flow */
 "Share Usage Snapshot…" = "Chia sẻ tổng quan mức sử dụng…";
 "Usage snapshot unavailable" = "Không có tổng quan mức sử dụng";
-"CodexBar couldn't prepare a shareable usage snapshot. Refresh Usage & Spend and try again." = "CodexBar không thể chuẩn bị tổng quan mức sử dụng để chia sẻ. Hãy làm mới Mức sử dụng và chi phí rồi thử lại.";
+"CodexBar couldn't prepare a shareable usage snapshot. Refresh Usage & Spend and try again." = "Sharingan không thể chuẩn bị tổng quan mức sử dụng để chia sẻ. Hãy làm mới Mức sử dụng và chi phí rồi thử lại.";
 "Incomplete" = "Chưa đầy đủ";
 "Est. subtotal (%@): %@" = "Tổng phụ ước tính (%@): %@";
 "Excluded requests with missing final usage: %d" = "Yêu cầu bị loại trừ do thiếu dữ liệu sử dụng cuối cùng: %d";
@@ -1777,14 +1777,14 @@
 "Codex credits are still loading; will retry shortly." = "Codex Tín dụng vẫn đang tải; sẽ thử lại trong thời gian ngắn.";
 "Codex session expired. Sign in again." = "Phiên Codex đã hết hạn. Đăng nhập lại.";
 "Codex usage is temporarily unavailable. Try refreshing." = "Dữ liệu sử dụng Codex tạm thời không khả dụng. Hãy thử làm mới dữ liệu.";
-"CodexBar Account Usage" = "Sử dụng tài khoản CodexBar";
-"CodexBar Burn Down" = "Sự cố cháy CodexBar Hạn mức";
-"CodexBar Burn Down (Combined)" = "Đốt cháy CodexBar Hạn mức (kết hợp)";
-"CodexBar Help" = "Trợ giúp về CodexBar";
-"CodexBar History" = "Lịch sử CodexBar";
-"CodexBar Metric" = "CodexBar Chỉ số";
-"CodexBar Switcher" = "Bộ chuyển đổi CodexBar";
-"CodexBar Usage" = "Cách sử dụng CodexBar";
+"CodexBar Account Usage" = "Sử dụng tài khoản Sharingan";
+"CodexBar Burn Down" = "Sự cố cháy Sharingan Hạn mức";
+"CodexBar Burn Down (Combined)" = "Đốt cháy Sharingan Hạn mức (kết hợp)";
+"CodexBar Help" = "Trợ giúp về Sharingan";
+"CodexBar History" = "Lịch sử Sharingan";
+"CodexBar Metric" = "Sharingan Chỉ số";
+"CodexBar Switcher" = "Bộ chuyển đổi Sharingan";
+"CodexBar Usage" = "Cách sử dụng Sharingan";
 "Compact widget for credits or cost." = "Tiện ích nhỏ gọn dành cho Tín dụng hoặc có giá thành.";
 "Complete Kiro login in your browser" = "Hoàn tất đăng nhập Kiro trong trình duyệt của bạn";
 "Controls when Claude OAuth may ask macOS for Keychain access." = "Kiểm soát thời điểm Claude OAuth có thể yêu cầu macOS cấp quyền truy cập Chuỗi khóa.";
@@ -1803,8 +1803,8 @@
 "Details for %@" = "Thông tin chi tiết về %@";
 "EST. %@" = "Ước tính %@";
 "Enable Antigravity provider" = "Kích hoạt nhà cung cấp Antigravity";
-"Enable a provider in CodexBar → Settings → Providers." = "Bật một nhà cung cấp trong CodexBar → Cài đặt → Nhà cung cấp.";
-"Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "Kích hoạt tiện ích tài khoản trong CodexBar → Cài đặt → Menu → Tiện ích. Sau đó chỉnh sửa tiện ích này để chọn tài khoản.";
+"Enable a provider in CodexBar → Settings → Providers." = "Bật một nhà cung cấp trong Sharingan → Cài đặt → Nhà cung cấp.";
+"Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "Kích hoạt tiện ích tài khoản trong Sharingan → Cài đặt → Menu → Tiện ích. Sau đó chỉnh sửa tiện ích này để chọn tài khoản.";
 "Error: %@" = "Lỗi: %@";
 "Examples: alt+cmd+2, shift+right. Refresh (cmd+r), Settings (cmd+,) and Quit (cmd+q) are reserved." = "Ví dụ: alt+cmd+2, shift+right. Làm mới (cmd+r), Cài đặt (cmd+,) và Thoát (cmd+q) được bảo lưu.";
 "Export Preferences…" = "Xuất tùy chọn…";
@@ -1821,10 +1821,10 @@
 "Gemini app" = "Ứng dụng Gemini";
 "Gemini CLI" = "Gemini CLI";
 "Gemini app limits use your browser account and are separate from Gemini CLI quotas." = "Giới hạn của ứng dụng Gemini áp dụng cho tài khoản của bạn trong trình duyệt và tách biệt với hạn mức của Gemini CLI.";
-"Generated locally by CodexBar · Data through %@" = "Được tạo cục bộ bởi CodexBar · Dữ liệu đến %@";
+"Generated locally by CodexBar · Data through %@" = "Được tạo cục bộ bởi Sharingan · Dữ liệu đến %@";
 "GitHub cookies" = "GitHub cookies";
 "GitHub does not publish this value. Enter it to show a usage bar. Applies to the selected GitHub account." = "GitHub không công bố giá trị này. Nhập nó để hiển thị một thanh sử dụng. Áp dụng cho tài khoản GitHub đã chọn.";
-"GitHub login succeeded, but CodexBar could not verify which account it belongs to. Please try again." = "Đăng nhập GitHub thành công nhưng CodexBar không thể xác minh nó thuộc về tài khoản nào. Vui lòng thử lại.";
+"GitHub login succeeded, but CodexBar could not verify which account it belongs to. Please try again." = "Đăng nhập GitHub thành công nhưng Sharingan không thể xác minh nó thuộc về tài khoản nào. Vui lòng thử lại.";
 "GitKraken access token" = "GitKraken truy cập mã thông báo";
 "Global uses api.z.ai. China mainland uses open.bigmodel.cn with a BigModel/GLM key; the two key families are not interchangeable." = "Toàn cầu sử dụng api.z.ai. Trung Quốc đại lục sử dụng open.bigmodel.cn với khóa BigModel/GLM; hai họ chủ chốt không thể thay thế cho nhau.";
 "Grok CLI" = "Grok CLI";
@@ -1872,8 +1872,8 @@
 "Open API docs" = "Mở tài liệu API";
 "Open API keys" = "Mở trang khóa API";
 "Open Amp Access Tokens" = "Mở Amp Truy cập mã thông báo";
-"Open CodexBar" = "Mở CodexBar";
-"Open CodexBar to refresh, or edit this widget to choose another account." = "Mở CodexBar để làm mới hoặc chỉnh sửa tiện ích này để chọn tài khoản khác.";
+"Open CodexBar" = "Mở Sharingan";
+"Open CodexBar to refresh, or edit this widget to choose another account." = "Mở Sharingan để làm mới hoặc chỉnh sửa tiện ích này để chọn tài khoản khác.";
 "Open Devin Usage" = "Mở trang sử dụng Devin";
 "Open Fireworks" = "Mở Fireworks";
 "Open GitKraken Account" = "Mở trang tài khoản GitKraken";
@@ -1891,7 +1891,7 @@
 "OpenAI cookies are for %1$@, not %2$@." = "OpenAI cookies dành cho %1$@, không phải %2$@.";
 "OpenAI cookies are for %@." = "OpenAI cookies dành cho %@.";
 "OpenAI web battery saver" = "Trình tiết kiệm pin web OpenAI";
-"OpenAI web dashboard refresh timed out. CodexBar will retry after the refresh cooldown." = "Đã hết thời gian làm mới bảng điều khiển web OpenAI. CodexBar sẽ thử lại sau thời gian hồi chiêu làm mới.";
+"OpenAI web dashboard refresh timed out. CodexBar will retry after the refresh cooldown." = "Đã hết thời gian làm mới bảng điều khiển web OpenAI. Sharingan sẽ thử lại sau thời gian hồi chiêu làm mới.";
 "OpenAI web refresh hit a network error. Check your connection, then refresh OpenAI cookies and try again." = "Làm mới web OpenAI gặp lỗi mạng. Hãy kiểm tra kết nối của bạn, sau đó làm mới OpenAI cookies và thử lại.";
 "OpenAI web refresh timed out. Refresh OpenAI cookies and try again." = "Đã hết thời gian làm mới trang web OpenAI. Hãy làm mới OpenAI cookies và thử lại.";
 "OpenAI web refresh was interrupted. Refresh OpenAI cookies and try again." = "Quá trình làm mới web OpenAI bị gián đoạn. Hãy làm mới OpenAI cookies và thử lại.";
@@ -1900,7 +1900,7 @@
 "Optional additional key for account Activity. Only needed to use a separate Management API key from the one in the required API key field above." = "Khóa bổ sung tùy chọn cho Hoạt động tài khoản. Chỉ cần sử dụng khóa API Quản lý riêng biệt với khóa trong trường khóa API bắt buộc ở trên.";
 "Optional for automatic auth. Use a slug, URL, or internal org-... / org_... ID. Manual auth may need the x-cog-org-id header from a successful Devin quota request." = "Tùy chọn để xác thực tự động. Sử dụng slug, URL hoặc org-... / org_... ID nội bộ. Xác thực thủ công có thể cần tiêu đề x-cog-org-id từ yêu cầu Devin Hạn mức thành công.";
 "Optional gk-org-id header value. Or set GITKRAKEN_ORG_ID." = "Giá trị tiêu đề gk-org-id tùy chọn. Hoặc đặt GITKRAKEN_ORG_ID.";
-"Optional when the API key can access one account; CodexBar discovers it automatically. For multiple accounts, find the slug in the app.fireworks.ai home account switcher or run firectl whoami." = "Tùy chọn khi khóa API có thể truy cập một tài khoản; CodexBar tự động phát hiện ra nó. Đối với nhiều tài khoản, hãy tìm slug trong trình chuyển đổi tài khoản chính app.fireworks.ai hoặc chạy firectl whoami.";
+"Optional when the API key can access one account; CodexBar discovers it automatically. For multiple accounts, find the slug in the app.fireworks.ai home account switcher or run firectl whoami." = "Tùy chọn khi khóa API có thể truy cập một tài khoản; Sharingan tự động phát hiện ra nó. Đối với nhiều tài khoản, hãy tìm slug trong trình chuyển đổi tài khoản chính app.fireworks.ai hoặc chạy firectl whoami.";
 "Optional. Defaults to the first Business or Enterprise workspace on the account." = "Không bắt buộc. Mặc định là không gian làm việc Business hoặc Enterprise đầu tiên trên tài khoản.";
 "Optional. Defaults to the hosted ClawRouter service." = "Không bắt buộc. Mặc định cho dịch vụ ClawRouter được lưu trữ.";
 "Optional. Defaults to the hosted OpenRouter API." = "Không bắt buộc. Mặc định là OpenRouter API được lưu trữ.";
@@ -1968,7 +1968,7 @@
 "SUBSCRIPTIONS" = "ĐĂNG KÝ";
 "Save" = "Lưu";
 "Save display and notification preferences for your dotfiles. Accounts, credentials, login, local paths and consent stay on this Mac." = "Lưu tùy chọn hiển thị và thông báo cho dotfiles của bạn. Tài khoản, thông tin đăng nhập, thông tin đăng nhập, đường dẫn cục bộ và sự đồng ý vẫn còn trên máy Mac này.";
-"Saved in CodexBar's local config file. Or set GITKRAKEN_API_TOKEN." = "Được lưu trong tệp cấu hình cục bộ của CodexBar. Hoặc đặt GITKRAKEN_API_TOKEN.";
+"Saved in CodexBar's local config file. Or set GITKRAKEN_API_TOKEN." = "Được lưu trong tệp cấu hình cục bộ của Sharingan. Hoặc đặt GITKRAKEN_API_TOKEN.";
 "Scoped weekly" = "Hạn mức hàng tuần cho phạm vi đã chọn";
 "Secondary quota" = "Hạn mức thứ cấp";
 "Select position %@" = "Chọn vị trí %@";
@@ -1987,10 +1987,10 @@
 "Show workspace spend" = "Hiển thị chi tiêu không gian làm việc";
 "Shows model-specific Claude quotas, such as Fable, in desktop widgets." = "Hiển thị Claude Hạn mức dành riêng cho mẫu máy, chẳng hạn như Fable, trong các tiện ích trên máy tính để bàn.";
 "Shows the hidden accounts" = "Hiển thị các tài khoản ẩn";
-"Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "Hiển thị mức sử dụng và cho phép bạn chuyển đổi tài khoản thông qua `cswap`. Thông tin xác thực vẫn được quản lý bởi claude-swap; CodexBar không bao giờ đọc chúng.";
-"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "Hiển thị mức sử dụng từ `tcr`; không chuyển đổi tài khoản, vì tcr tự chọn tài khoản cho mỗi yêu cầu. Thông tin xác thực vẫn được quản lý bởi tcr; CodexBar không bao giờ đọc chúng.";
+"Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "Hiển thị mức sử dụng và cho phép bạn chuyển đổi tài khoản thông qua `cswap`. Thông tin xác thực vẫn được quản lý bởi claude-swap; Sharingan không bao giờ đọc chúng.";
+"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "Hiển thị mức sử dụng từ `tcr`; không chuyển đổi tài khoản, vì tcr tự chọn tài khoản cho mỗi yêu cầu. Thông tin xác thực vẫn được quản lý bởi tcr; Sharingan không bao giờ đọc chúng.";
 "Stay Awake" = "Luôn tỉnh táo";
-"Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "Được lưu trữ trong tệp cấu hình CodexBar. Đọc ngân sách hàng tháng và định tuyến mức sử dụng từ /v1/usage.";
+"Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "Được lưu trữ trong tệp cấu hình Sharingan. Đọc ngân sách hàng tháng và định tuyến mức sử dụng từ /v1/usage.";
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is required for organization usage; legacy/user keys only get a best-effort balance fallback." = "Được lưu trữ trong ~/.codexbar/config.json. OPENAI_ADMIN_KEY là bắt buộc để sử dụng trong tổ chức; Khóa kế thừa/người dùng chỉ nhận được dự phòng số dư nỗ lực tốt nhất.";
 "Stored in ~/.codexbar/config.json. You can also provide FACTORY_API_KEY or ~/.factory/.env." = "Được lưu trữ trong ~/.codexbar/config.json. Bạn cũng có thể cung cấp FACTORY_API_KEY hoặc ~/.factory/.env.";
 "Stored in ~/.codexbar/config.json. You can also set AMP_API_KEY." = "Được lưu trữ trong ~/.codexbar/config.json. Bạn cũng có thể đặt AMP_API_KEY.";
@@ -2005,7 +2005,7 @@
 "Switching account…" = "Đang chuyển đổi tài khoản…";
 "TOP MODELS" = "MÔ HÌNH HÀNG ĐẦU";
 "TRACKED TOKENS · %@" = "Token đã ghi nhận · %@";
-"That managed account uses a workspace that differs from its saved Codex auth default. Keep it as a managed account; CodexBar will not rewrite Codex-owned auth to promote it." = "Tài khoản được quản lý đó sử dụng không gian làm việc khác với mặc định xác thực Codex đã lưu. Giữ nó như một tài khoản được quản lý; CodexBar sẽ không viết lại xác thực thuộc sở hữu của Codex để quảng bá nó.";
+"That managed account uses a workspace that differs from its saved Codex auth default. Keep it as a managed account; CodexBar will not rewrite Codex-owned auth to promote it." = "Tài khoản được quản lý đó sử dụng không gian làm việc khác với mặc định xác thực Codex đã lưu. Giữ nó như một tài khoản được quản lý; Sharingan sẽ không viết lại xác thực thuộc sở hữu của Codex để quảng bá nó.";
 "The pasted header is sent only to this tenant." = "Tiêu đề đã dán chỉ được gửi cho đối tượng thuê này.";
 "The selected Codex profile has no verified account email." = "Hồ sơ Codex đã chọn không có email tài khoản được xác minh.";
 "The selected managed Codex account is unavailable." = "Tài khoản Codex được quản lý đã chọn không khả dụng.";
@@ -2034,7 +2034,7 @@
 "Weekly (7-day)" = "Hàng tuần (7 ngày)";
 "When on, runs automatic provider, local usage, and storage refreshes no more often than every 30 minutes. Manual refresh remains available. Automatic follows the system Low Power Mode setting." = "Khi bật, nhà cung cấp tự động chạy, mức sử dụng cục bộ và bộ nhớ sẽ được làm mới không quá 30 phút một lần. Làm mới thủ công vẫn có sẵn. Tự động tuân theo cài đặt Chế độ nguồn điện thấp của hệ thống.";
 "Without configured API credentials, install and authenticate 'arkcli' for Coding/Agent Plan usage. Existing API credentials remain authoritative." = "Nếu không có thông tin đăng nhập API được định cấu hình, hãy cài đặt và xác thực 'arkcli' để sử dụng Mã hóa/Gói đại lý. Thông tin xác thực API hiện tại vẫn có thẩm quyền.";
-"You can close this window and return to CodexBar." = "Bạn có thể đóng cửa sổ này và quay lại CodexBar.";
+"You can close this window and return to CodexBar." = "Bạn có thể đóng cửa sổ này và quay lại Sharingan.";
 "You can close this window and try again." = "Bạn có thể đóng cửa sổ này và thử lại.";
 "ZoomMate capture" = "Chụp ZoomMate";
 "a1.small-equivalent hours" = "Số giờ tương đương a1.small";
@@ -2102,7 +2102,7 @@
 "Premium weekly" = "Mức sử dụng cao cấp hàng tuần Hạn mức";
 "DevPass cost history is not available." = "Lịch sử chi phí DevPass không có sẵn.";
 "DevPass API key" = "Phím DevPass API";
-"Saved in CodexBar's local config file. Or set DEVPASS_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của CodexBar. Hoặc đặt DEVPASS_API_KEY.";
+"Saved in CodexBar's local config file. Or set DEVPASS_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của Sharingan. Hoặc đặt DEVPASS_API_KEY.";
 "Regular LLM Gateway API key" = "Khóa LLM Gateway API thông thường";
 "Memory" = "Sử dụng bộ nhớ";
 "llmman cost summary is not supported." = "Tóm tắt chi phí llmman không được hỗ trợ.";
@@ -2131,7 +2131,7 @@
 "ClawRouter spend is reported by its usage API." = "Chi tiêu ClawRouter được báo cáo theo mức sử dụng API.";
 "Vercel AI Gateway cost history is not available." = "Lịch sử chi phí Vercel AI Gateway không có sẵn.";
 "Vercel AI Gateway API key" = "Phím Vercel AI Gateway API";
-"Saved in CodexBar's local config file. Or set AI_GATEWAY_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của CodexBar. Hoặc đặt AI_GATEWAY_API_KEY.";
+"Saved in CodexBar's local config file. Or set AI_GATEWAY_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của Sharingan. Hoặc đặt AI_GATEWAY_API_KEY.";
 "Savings" = "Tiết kiệm";
 "Reviews" = "Đánh giá";
 "Review count and billing period from CodeRabbit." = "Xem lại số lượng và thời hạn thanh toán từ CodeRabbit.";
@@ -2154,7 +2154,7 @@
 "ClinePass cost history is not available via the usage-limits API." = "Lịch sử chi phí ClinePass không có sẵn thông qua giới hạn sử dụng API.";
 "Paste an API key, or run cline auth. Reads the existing Cline session without copying it." = "Dán khóa API hoặc chạy cline auth. Đọc phiên Cline hiện có mà không cần sao chép nó.";
 "ClinePass API key..." = "Phím ClinePass API...";
-"DeepInfra per-request cost history is not available in CodexBar." = "Lịch sử chi phí mỗi yêu cầu của DeepInfra không có sẵn trong CodexBar.";
+"DeepInfra per-request cost history is not available in CodexBar." = "Lịch sử chi phí mỗi yêu cầu của DeepInfra không có sẵn trong Sharingan.";
 "Store multiple DeepInfra API keys." = "Lưu trữ nhiều khóa DeepInfra API.";
 "Claude credentials" = "Thông tin xác thực Claude";
 "Store Claude sessionKey cookies, OAuth tokens, or Anthropic Admin API keys." = "Lưu trữ khóa Claude sessionKey cookies, OAuth mã thông báo hoặc khóa API của quản trị viên Anthropic.";
@@ -2162,7 +2162,7 @@
 "4-hour quota" = "Hạn mức 4 giờ";
 "Monthly quota" = "Hạn mức hàng tháng";
 "Subscription usage from the Chutes API." = "Mức sử dụng đăng ký từ Chutes API.";
-"Chutes cost history is not available from CodexBar." = "Lịch sử chi phí Chutes không có sẵn từ CodexBar.";
+"Chutes cost history is not available from CodexBar." = "Lịch sử chi phí Chutes không có sẵn từ Sharingan.";
 "Stored in ~/.codexbar/config.json. Paste a Chutes API key." = "Được lưu trữ trong ~/.codexbar/config.json. Dán khóa Chutes API.";
 "chutes key..." = "Khóa API Chutes...";
 "Spend" = "Chi phí";
@@ -2196,7 +2196,7 @@
 "Base" = "Căn cứ";
 "T3 Chat cost summary is not supported." = "Tóm tắt chi phí T3 Chat không được hỗ trợ.";
 "Model quota" = "Mẫu Hạn mức";
-"Helmcode per-request cost history is not available in CodexBar." = "Lịch sử chi phí mỗi yêu cầu của Helmcode không có sẵn trong CodexBar.";
+"Helmcode per-request cost history is not available in CodexBar." = "Lịch sử chi phí mỗi yêu cầu của Helmcode không có sẵn trong Sharingan.";
 "Copy the Cookie request header from your tenant's dashboard. cURL captures are not supported." = "Sao chép tiêu đề yêu cầu Cookie từ bảng điều khiển của đối tượng thuê. Không hỗ trợ chụp cURL.";
 "Store multiple IBM Bob API keys." = "Lưu trữ nhiều khóa IBM Bob API.";
 "Monthly Bobcoins" = "Bobcoin hàng tháng";
@@ -2208,7 +2208,7 @@
 "xai-..." = "xai-...";
 "Team ID" = "Đội ID";
 "Vercel access token" = "Mã truy cập Vercel";
-"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "Tùy chọn. Hiển thị ngân sách cá nhân của bạn thay vì tín dụng của nhóm. Được lưu trong tệp cấu hình cục bộ của CodexBar. Hoặc đặt VERCEL_ACCESS_TOKEN.";
+"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "Tùy chọn. Hiển thị ngân sách cá nhân của bạn thay vì tín dụng của nhóm. Được lưu trong tệp cấu hình cục bộ của Sharingan. Hoặc đặt VERCEL_ACCESS_TOKEN.";
 "Open Vercel tokens" = "Mở mã Vercel";
 "Required with a Vercel access token. Or set VERCEL_TEAM_ID." = "Bắt buộc khi dùng mã truy cập Vercel. Hoặc đặt VERCEL_TEAM_ID.";
 "Required. Shown in the xAI Console URL and team settings." = "Bắt buộc. Hiển thị trong Bảng điều khiển xAI URL và cài đặt nhóm.";
@@ -2259,13 +2259,13 @@
 "__raycast_session=…; csrf_token=…" = "__raycast_session=…; csrf_token=…";
 "Open Raycast Account" = "Mở tài khoản Raycast";
 "ai& spend is summed from the request logs API." = "ai& chi tiêu được tổng hợp từ nhật ký yêu cầu API.";
-"Stored in CodexBar's config file. Create a key in the ai& console (shown once)." = "Được lưu trữ trong tệp cấu hình của CodexBar. Tạo khóa trong ai& console (hiển thị một lần).";
+"Stored in CodexBar's config file. Create a key in the ai& console (shown once)." = "Được lưu trữ trong tệp cấu hình của Sharingan. Tạo khóa trong ai& console (hiển thị một lần).";
 "sk-…" = "sk-…";
 "Store multiple Venice API keys." = "Lưu trữ nhiều khóa Venice API.";
 "Venice per-day cost history is not available via API." = "Lịch sử chi phí mỗi ngày của Venice không có sẵn qua API.";
 "Atlas Cloud cost history is not available." = "Lịch sử chi phí Atlas Cloud không có sẵn.";
 "Atlas Cloud API key" = "Phím Atlas Cloud API";
-"Saved in CodexBar's local config file. Or set ATLASCLOUD_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của CodexBar. Hoặc đặt ATLASCLOUD_API_KEY.";
+"Saved in CodexBar's local config file. Or set ATLASCLOUD_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của Sharingan. Hoặc đặt ATLASCLOUD_API_KEY.";
 "Five-hour quota" = "Hạn mức năm giờ";
 "Weekly tokens" = "mã thông báo hàng tuần";
 "Weekly token quota regenerates continuously." = "mã thông báo Hạn mức tái sinh liên tục hàng tuần.";
@@ -2276,7 +2276,7 @@
 "Daily free tokens" = "mã thông báo miễn phí hàng ngày";
 "xKiro cost history is not available." = "Lịch sử chi phí xKiro không có sẵn.";
 "xKiro API key" = "Phím xKiro API";
-"Saved in CodexBar's local config file. Or set XKIRO_API_KEY. Reads free-token usage only." = "Được lưu trong tệp cấu hình cục bộ của CodexBar. Hoặc đặt XKIRO_API_KEY. Chỉ đọc mức sử dụng mã thông báo miễn phí.";
+"Saved in CodexBar's local config file. Or set XKIRO_API_KEY. Reads free-token usage only." = "Được lưu trong tệp cấu hình cục bộ của Sharingan. Hoặc đặt XKIRO_API_KEY. Chỉ đọc mức sử dụng mã thông báo miễn phí.";
 "Store multiple Hugging Face access tokens." = "Lưu trữ nhiều truy cập Hugging Face mã thông báo.";
 "Paste access token…" = "Dán quyền truy cập mã thông báo…";
 "Inference" = "suy luận";
@@ -2347,7 +2347,7 @@
 "Subscription kWh and prepaid USD balance." = "Đăng ký kWh và số dư USD trả trước.";
 "Neuralwatt token cost history is not available via the quota API." = "Lịch sử chi phí Neuralwatt mã thông báo không có sẵn thông qua Hạn mức API.";
 "Store multiple Neuralwatt API keys." = "Lưu trữ nhiều khóa Neuralwatt API.";
-"Stored in the CodexBar config file. Manage keys from the Neuralwatt dashboard." = "Được lưu trữ trong tệp cấu hình CodexBar. Quản lý khóa từ bảng điều khiển Neuralwatt.";
+"Stored in the CodexBar config file. Manage keys from the Neuralwatt dashboard." = "Được lưu trữ trong tệp cấu hình Sharingan. Quản lý khóa từ bảng điều khiển Neuralwatt.";
 
 // Additional localized settings, provider controls, sharing, and widgets.
 "Monthly allowances" = "Phụ cấp hàng tháng";
@@ -2421,7 +2421,7 @@
 "Speed range needs 4 completed turns." = "Cần 4 lượt hội thoại hoàn tất để hiển thị khoảng tốc độ.";
 "All accounts" = "Tất cả tài khoản";
 "Refresh all accounts" = "Làm mới tất cả tài khoản";
-"CodexBar follows" = "CodexBar theo dõi";
+"CodexBar follows" = "Sharingan theo dõi";
 "%@ accounts" = "%@ tài khoản";
 "Refreshes up to %@ accounts at a time." = "Làm mới tối đa %@ tài khoản cùng lúc.";
 "Each account has its own limits. Viewing usage does not switch accounts." = "Mỗi tài khoản có giới hạn riêng. Việc xem mức sử dụng không chuyển đổi tài khoản.";
@@ -2529,21 +2529,21 @@
 "Monthly AI tokens" = "Token AI hằng tháng";
 "Aerostack cost history is not available." = "Không có lịch sử chi phí của Aerostack.";
 "Account JWT" = "JWT tài khoản";
-"Saved in CodexBar's local config file. Replace when expired; CodexBar does not refresh it." = "Được lưu trong tệp cấu hình cục bộ của CodexBar. Thay thế khi hết hạn; CodexBar không tự gia hạn.";
+"Saved in CodexBar's local config file. Replace when expired; CodexBar does not refresh it." = "Được lưu trong tệp cấu hình cục bộ của Sharingan. Thay thế khi hết hạn; Sharingan không tự gia hạn.";
 "Account JWT, not an Agent Endpoint key" = "JWT tài khoản, không phải khóa Agent Endpoint";
 "Input tokens" = "Token đầu vào";
 "Output tokens" = "Token đầu ra";
 "Cosmic AI cost history is not available." = "Không có lịch sử chi phí của Cosmic AI.";
 "Personal Access Token" = "Token truy cập cá nhân";
-"Saved in CodexBar's local config file. Reads project usage only; bucket keys are not supported." = "Được lưu trong tệp cấu hình cục bộ của CodexBar. Chỉ đọc mức sử dụng của dự án; không hỗ trợ khóa bucket.";
+"Saved in CodexBar's local config file. Reads project usage only; bucket keys are not supported." = "Được lưu trong tệp cấu hình cục bộ của Sharingan. Chỉ đọc mức sử dụng của dự án; không hỗ trợ khóa bucket.";
 "cos_…" = "cos_…";
 "Required. Usage covers this project only. Or set COSMIC_PROJECT_ID." = "Bắt buộc. Mức sử dụng chỉ bao gồm dự án này. Hoặc đặt COSMIC_PROJECT_ID.";
 "Sail Research cost history is not available." = "Không có lịch sử chi phí của Sail Research.";
 "Sail Research API key" = "Khóa API Sail Research";
-"Saved in CodexBar's local config file. Or set SAIL_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của CodexBar. Hoặc đặt SAIL_API_KEY.";
+"Saved in CodexBar's local config file. Or set SAIL_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của Sharingan. Hoặc đặt SAIL_API_KEY.";
 "Sofya cost history is not available." = "Không có lịch sử chi phí của Sofya.";
 "Sofya API key" = "Khóa API Sofya";
-"Saved in CodexBar's local config file. Or set SOFYA_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của CodexBar. Hoặc đặt SOFYA_API_KEY.";
+"Saved in CodexBar's local config file. Or set SOFYA_API_KEY." = "Được lưu trong tệp cấu hình cục bộ của Sharingan. Hoặc đặt SOFYA_API_KEY.";
 "Pace sign" = "Dấu nhịp sử dụng";
 "Ahead of pace is +" = "Vượt nhịp là +";
 "Reserve is +" = "Dự trữ là +";
@@ -2574,7 +2574,7 @@
 "Also restores the provider order in the menu bar. Can be undone." = "Cũng khôi phục thứ tự nhà cung cấp trên thanh menu. Có thể hoàn tác.";
 "Local Codex details; excluded from combined totals." = "Chi tiết Codex cục bộ; không được tính vào tổng kết hợp.";
 
-"Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the Sharingan config file. You can also set COMMAND_CODE_API_KEY.";
 /* OpenAI organization rate limits and live usage */
 "%@ tokens · %@ requests" = "%@ token · %@ yêu cầu";
 "15m" = "15 phút";
@@ -2660,7 +2660,7 @@
 "Daily spend · %@" = "Chi tiêu hằng ngày · %@";
 "Applies to the selected token account “%@”. Each account keeps its own limits." = "Áp dụng cho tài khoản token đã chọn “%@”. Mỗi tài khoản giữ giới hạn riêng.";
 "Applies to the OpenAI API key, not to token accounts." = "Áp dụng cho khóa API OpenAI, không áp dụng cho các tài khoản token.";
-"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "CodexBar sẽ yêu cầu macOS Keychain cung cấp token đăng nhập Muse Code để nó có thể tìm nạp mức sử dụng gói đăng ký Muse Code của bạn. Nhấn OK để tiếp tục.";
+"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "Sharingan sẽ yêu cầu macOS Keychain cung cấp token đăng nhập Muse Code để nó có thể tìm nạp mức sử dụng gói đăng ký Muse Code của bạn. Nhấn OK để tiếp tục.";
 /* Claude Platform provider */
 "API credit" = "Tín dụng API";
 "Purchased credit" = "Tín dụng đã mua";
@@ -2684,7 +2684,7 @@
 "http_server_plain_http" = "Cho phép HTTP không mã hóa bên ngoài máy Mac này";
 "http_server_dashboard" = "Bảng điều khiển";
 "http_server_wildcard" = "Trên thiết bị khác, thay 0.0.0.0 bằng địa chỉ IPv4 VPN hoặc Tailscale của máy Mac này.";
-"http_server_footer" = "Mặc định tắt. Khởi động cùng CodexBar và dừng khi thoát. Cài đặt và mã truy cập chỉ ở trên máy Mac này, không được đồng bộ hoặc xuất. Giữ máy Mac thức để truy cập từ xa.";
+"http_server_footer" = "Mặc định tắt. Khởi động cùng Sharingan và dừng khi thoát. Cài đặt và mã truy cập chỉ ở trên máy Mac này, không được đồng bộ hoặc xuất. Giữ máy Mac thức để truy cập từ xa.";
 /* Claude desktop cookie source */
 "Claude desktop app" = "Ứng dụng Claude trên máy tính";
 "Use Claude desktop app cookies" = "Dùng cookie của ứng dụng Claude trên máy tính";
@@ -2708,7 +2708,7 @@
 
 "Trae CN" = "Trae CN";
 "Show Trae CN usage" = "Hiển thị mức sử dụng Trae CN";
-"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "Đăng nhập vào Trae CN tại trae.cn, rồi làm mới CodexBar.";
+"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "Đăng nhập vào Trae CN tại trae.cn, rồi làm mới Sharingan.";
 "Trae CN usage response format changed." = "Định dạng phản hồi mức sử dụng Trae CN đã thay đổi.";
 "Trae CN request failed. Try refreshing later." = "Yêu cầu Trae CN không thành công. Hãy thử làm mới sau.";
 "Use --provider copilot." = "Dùng --provider copilot.";
@@ -2745,14 +2745,14 @@
 "Chatbox AI denied access. Check your license." = "Chatbox AI đã từ chối truy cập. Hãy kiểm tra giấy phép của bạn.";
 "Chatbox AI is rate limiting requests. Try again later." = "Chatbox AI đang giới hạn tần suất yêu cầu. Hãy thử lại sau.";
 "Chatbox AI request failed. Try refreshing later." = "Yêu cầu Chatbox AI không thành công. Hãy thử làm mới sau.";
-"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI trả về phản hồi không nhận dạng được. Hãy cập nhật CodexBar rồi thử lại.";
+"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI trả về phản hồi không nhận dạng được. Hãy cập nhật Sharingan rồi thử lại.";
 
 /* abliteration.ai */
 "abliteration.ai" = "abliteration.ai";
 "Show abliteration.ai usage" = "Hiển thị mức sử dụng abliteration.ai";
 "abliteration.ai is rate limiting requests. Try again later." = "abliteration.ai đang giới hạn tần suất yêu cầu. Hãy thử lại sau.";
 "abliteration.ai request failed. Try refreshing later." = "Yêu cầu abliteration.ai không thành công. Hãy thử làm mới sau.";
-"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai trả về phản hồi không nhận dạng được. Hãy cập nhật CodexBar rồi thử lại.";
+"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai trả về phản hồi không nhận dạng được. Hãy cập nhật Sharingan rồi thử lại.";
 "Check your API key in Settings." = "Kiểm tra khóa API trong Cài đặt.";
 "Kimi Code" = "Kimi Code";
 
