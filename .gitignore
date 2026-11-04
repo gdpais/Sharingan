@@ -12,6 +12,7 @@ DerivedData
 # Bundles / artifacts
 # Main app bundle (any variation)
 CodexBar.app/
+Sharingan.app/
 CodexBar *.app/
 CodexBar_*.app/
 Codexbar.app/

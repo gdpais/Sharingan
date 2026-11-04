@@ -2,7 +2,7 @@
 set -u
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../../.." && pwd)"
-CLI="${CODEXBAR_CLI:-$ROOT/CodexBar.app/Contents/Helpers/CodexBarCLI}"
+CLI="${CODEXBAR_CLI:-$ROOT/Sharingan.app/Contents/Helpers/CodexBarCLI}"
 TIMEOUT_BIN="${TIMEOUT_BIN:-$(command -v gtimeout || command -v timeout || true)}"
 WEB_TIMEOUT="${CODEXBAR_QA_WEB_TIMEOUT:-12}"
 CASE_TIMEOUT="${CODEXBAR_QA_CASE_TIMEOUT:-60}"

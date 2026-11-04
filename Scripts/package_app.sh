@@ -261,8 +261,10 @@ for ARCH in "${ARCH_LIST[@]}"; do
   stage_build_products "$ARCH"
 done
 
-APP_FINAL="$ROOT/CodexBar.app"
-APP_STAGE="$ROOT/.build/package/CodexBar.app"
+# Sharingan (fork of CodexBar): the bundle is Sharingan.app, but the executable inside stays `CodexBar`
+# (KeychainPromptCoordinator, release dSYM tooling, and the CLI/watchdog helpers key off that name).
+APP_FINAL="$ROOT/Sharingan.app"
+APP_STAGE="$ROOT/.build/package/Sharingan.app"
 rm -rf "$APP_STAGE"
 APP="$APP_STAGE"
 mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources" "$APP/Contents/Frameworks"
@@ -275,11 +277,18 @@ if [[ -f "$ICON_SOURCE" ]]; then
   iconutil --convert icns --output "$ICON_TARGET" "$ICON_SOURCE"
 fi
 
-BUNDLE_ID="com.steipete.codexbar"
-FEED_URL="https://raw.githubusercontent.com/steipete/CodexBar/main/appcast.xml"
-AUTO_CHECKS=true
+BUNDLE_ID="com.gdpais.sharingan"
+# TODO(sharingan): Sharingan has no appcast or Sparkle signing key yet, so every build ships without an
+# update feed (the app hides "Check for Updates" when SUFeedURL is empty). Never point this at upstream's
+# appcast: Sparkle would replace Sharingan with upstream CodexBar. Before re-enabling updates, the owner must
+# publish their own appcast (e.g. https://raw.githubusercontent.com/gdpais/Sharingan/main/appcast.xml), generate
+# their own Sparkle EdDSA key pair, set SPARKLE_PUBLIC_ED_KEY below, and update .github/release.json + CI secrets.
+FEED_URL=""
+SPARKLE_PUBLIC_ED_KEY=""
+AUTO_CHECKS=false
+AUTO_UPDATE=false
 if [[ "$LOWER_CONF" == "debug" ]]; then
-  BUNDLE_ID="com.steipete.codexbar.debug"
+  BUNDLE_ID="com.gdpais.sharingan.debug"
   FEED_URL=""
   AUTO_CHECKS=false
 fi
@@ -289,7 +298,13 @@ if [[ "$SIGNING_MODE" == "adhoc" ]]; then
 fi
 WIDGET_BUNDLE_ID="${BUNDLE_ID}.widget"
 resolve_package_signing_identity
-APP_GROUP_ID="${APP_TEAM_ID}.${BUNDLE_ID}"
+# The app group must match AppGroupSupport.currentGroupID, which keeps the upstream storage identifier
+# (`<team>.com.steipete.codexbar[.debug]`) so the app and widget share one container.
+APP_GROUP_BASE="com.steipete.codexbar"
+if [[ "$LOWER_CONF" == "debug" ]]; then
+  APP_GROUP_BASE="com.steipete.codexbar.debug"
+fi
+APP_GROUP_ID="${APP_TEAM_ID}.${APP_GROUP_BASE}"
 ENTITLEMENTS_DIR="$ROOT/.build/entitlements"
 APP_ENTITLEMENTS="${ENTITLEMENTS_DIR}/CodexBar.entitlements"
 WIDGET_ENTITLEMENTS="${ENTITLEMENTS_DIR}/CodexBarWidget.entitlements"
@@ -301,6 +316,8 @@ fi
 # iCloud sync (CloudKit) requires restricted entitlements authorized by an embedded
 # Developer ID provisioning profile. Only upstream-team identity-signed release builds of the primary
 # bundle ID carry them; other teams and adhoc/debug builds run with sync unavailable.
+# Sharingan: BUNDLE_ID is com.gdpais.sharingan, so this upstream-only gate never fires and iCloud sync stays
+# unavailable. Leave the upstream check untouched to keep merges cheap.
 PROVISIONING_PROFILE_SOURCE="$ROOT/Scripts/profiles/CodexBar-DeveloperID.provisionprofile"
 EMBED_PROVISIONING_PROFILE=0
 ICLOUD_ENTITLEMENT_KEYS=""
@@ -364,8 +381,8 @@ cat > "$APP/Contents/Info.plist" <<PLIST
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>CFBundleName</key><string>CodexBar</string>
-    <key>CFBundleDisplayName</key><string>CodexBar</string>
+    <key>CFBundleName</key><string>Sharingan</string>
+    <key>CFBundleDisplayName</key><string>Sharingan</string>
     <key>CFBundleIdentifier</key><string>${BUNDLE_ID}</string>
     <key>CFBundleExecutable</key><string>CodexBar</string>
     <key>CFBundlePackageType</key><string>APPL</string>
@@ -374,19 +391,19 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>LSMinimumSystemVersion</key><string>14.0</string>
     <key>LSUIElement</key><true/>
     <key>CFBundleIconFile</key><string>Icon</string>
-    <key>NSHumanReadableCopyright</key><string>© 2026 Peter Steinberger. MIT License.</string>
+    <key>NSHumanReadableCopyright</key><string>Sharingan. Based on CodexBar © 2026 Peter Steinberger. MIT License.</string>
     <key>SUFeedURL</key><string>${FEED_URL}</string>
-    <key>SUPublicEDKey</key><string>AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI=</string>
+$(if [[ -n "$SPARKLE_PUBLIC_ED_KEY" ]]; then echo "    <key>SUPublicEDKey</key><string>${SPARKLE_PUBLIC_ED_KEY}</string>"; fi)
     <key>SUEnableAutomaticChecks</key><${AUTO_CHECKS}/>
-    <key>SUAutomaticallyUpdate</key><true/>
+    <key>SUAutomaticallyUpdate</key><${AUTO_UPDATE}/>
     <key>CodexBuildTimestamp</key><string>${BUILD_TIMESTAMP}</string>
     <key>CodexGitCommit</key><string>${GIT_COMMIT}</string>
     <key>CodexBarTeamID</key><string>${APP_TEAM_ID}</string>
     <key>UTExportedTypeDeclarations</key>
     <array>
         <dict>
-            <key>UTTypeIdentifier</key><string>com.steipete.codexbar.menu-layout-item</string>
-            <key>UTTypeDescription</key><string>CodexBar menu bar layout token</string>
+            <key>UTTypeIdentifier</key><string>com.gdpais.sharingan.menu-layout-item</string>
+            <key>UTTypeDescription</key><string>Sharingan menu bar layout token</string>
             <key>UTTypeConformsTo</key>
             <array>
                 <string>public.data</string>

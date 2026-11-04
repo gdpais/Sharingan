@@ -10,17 +10,18 @@ ARCHIVE=$(codexbar_app_zip_name "${TAG#v}" "${ARCHES:-arm64 x86_64}")
 TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/codexbar-release-assets.XXXXXX")
 trap 'rm -rf "$TEMP_DIR"' EXIT
 curl --fail --location --silent --show-error --connect-timeout 15 --max-time 300 \
-  "https://github.com/steipete/CodexBar/releases/download/$TAG/$ARCHIVE" \
+  "https://github.com/gdpais/Sharingan/releases/download/$TAG/$ARCHIVE" \
   --output "$TEMP_DIR/$ARCHIVE"
 ditto -x -k --norsrc "$TEMP_DIR/$ARCHIVE" "$TEMP_DIR"
-if [[ ! -d "$TEMP_DIR/CodexBar.app" || -L "$TEMP_DIR/CodexBar.app" ]]; then
-  echo "Release archive must contain a real CodexBar.app directory." >&2
+if [[ ! -d "$TEMP_DIR/Sharingan.app" || -L "$TEMP_DIR/Sharingan.app" ]]; then
+  echo "Release archive must contain a real Sharingan.app directory." >&2
   exit 1
 fi
-REQUIREMENT='=anchor apple generic and identifier "com.steipete.codexbar"'
+# TODO(sharingan): Y5PE65HELJ is upstream's Developer ID team; replace it with Sharingan's team before releasing.
+REQUIREMENT='=anchor apple generic and identifier "com.gdpais.sharingan"'
 REQUIREMENT+=' and certificate leaf[subject.OU] = "Y5PE65HELJ"'
 REQUIREMENT+=' and certificate 1[field.1.2.840.113635.100.6.2.6] exists'
 REQUIREMENT+=' and certificate leaf[field.1.2.840.113635.100.6.1.13] exists'
 codesign --verify --deep --strict --all-architectures --verbose=2 \
-  --test-requirement "$REQUIREMENT" "$TEMP_DIR/CodexBar.app"
+  --test-requirement "$REQUIREMENT" "$TEMP_DIR/Sharingan.app"
 echo "Release $TAG downloaded app signature verified (all architectures)."
