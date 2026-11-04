@@ -2764,3 +2764,16 @@
 "avg %@ credits/day" = "gem. %@ tegoeden/dag";
 "Average" = "Gemiddelde";
 "avg %@/day" = "gem. %@/dag";
+
+/* Plan fit */
+"Median" = "Mediaan";
+"Median %@%%" = "Mediaan %@%%";
+"capped %d of %d weeks" = "limiet bereikt in %d van %d weken";
+"capped %d of %d months" = "limiet bereikt in %d van %d maanden";
+"capped %d of %d windows" = "limiet bereikt in %d van %d perioden";
+"%@ capped sessions per week" = "%@ sessies per week op de limiet";
+"%@ h capped" = "%@ u op de limiet";
+"You may be paying for headroom you don't use." = "Mogelijk betaal je voor ruimte die je niet gebruikt.";
+"You hit the cap often." = "Je bereikt vaak de limiet.";
+"Your plan fits how you use it." = "Je plan past bij hoe je het gebruikt.";
+"Not enough history for a verdict yet." = "Nog niet genoeg geschiedenis voor een oordeel.";

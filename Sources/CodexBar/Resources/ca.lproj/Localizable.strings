@@ -2769,3 +2769,16 @@
 "avg %@ credits/day" = "mitjana %@ crèdits/dia";
 "Average" = "Mitjana";
 "avg %@/day" = "mitjana %@/dia";
+
+/* Plan fit */
+"Median" = "Mediana";
+"Median %@%%" = "Mediana %@%%";
+"capped %d of %d weeks" = "al límit %d de %d setmanes";
+"capped %d of %d months" = "al límit %d de %d mesos";
+"capped %d of %d windows" = "al límit %d de %d períodes";
+"%@ capped sessions per week" = "%@ sessions al límit per setmana";
+"%@ h capped" = "%@ h al límit";
+"You may be paying for headroom you don't use." = "Potser pagues per un marge que no fas servir.";
+"You hit the cap often." = "Arribes sovint al límit.";
+"Your plan fits how you use it." = "El teu pla s'ajusta a com l'utilitzes.";
+"Not enough history for a verdict yet." = "Encara no hi ha prou historial per a un veredicte.";

@@ -2766,3 +2766,16 @@
 "avg %@ credits/day" = "moy. %@ crédits/jour";
 "Average" = "Moyenne";
 "avg %@/day" = "moy. %@/jour";
+
+/* Plan fit */
+"Median" = "Médiane";
+"Median %@%%" = "Médiane %@%%";
+"capped %d of %d weeks" = "plafond atteint %d semaines sur %d";
+"capped %d of %d months" = "plafond atteint %d mois sur %d";
+"capped %d of %d windows" = "plafond atteint %d périodes sur %d";
+"%@ capped sessions per week" = "%@ séances plafonnées par semaine";
+"%@ h capped" = "%@ h au plafond";
+"You may be paying for headroom you don't use." = "Vous payez peut-être une marge que vous n'utilisez pas.";
+"You hit the cap often." = "Vous atteignez souvent le plafond.";
+"Your plan fits how you use it." = "Votre forfait correspond à votre usage.";
+"Not enough history for a verdict yet." = "Pas encore assez d'historique pour un verdict.";

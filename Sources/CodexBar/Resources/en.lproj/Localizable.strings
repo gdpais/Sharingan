@@ -2772,3 +2772,16 @@
 "avg %@ credits/day" = "avg %@ credits/day";
 "Average" = "Average";
 "avg %@/day" = "avg %@/day";
+
+/* Plan fit */
+"Median" = "Median";
+"Median %@%%" = "Median %@%%";
+"capped %d of %d weeks" = "capped %d of %d weeks";
+"capped %d of %d months" = "capped %d of %d months";
+"capped %d of %d windows" = "capped %d of %d windows";
+"%@ capped sessions per week" = "%@ capped sessions per week";
+"%@ h capped" = "%@ h capped";
+"You may be paying for headroom you don't use." = "You may be paying for headroom you don't use.";
+"You hit the cap often." = "You hit the cap often.";
+"Your plan fits how you use it." = "Your plan fits how you use it.";
+"Not enough history for a verdict yet." = "Not enough history for a verdict yet.";

@@ -2771,3 +2771,16 @@
 "avg %@ credits/day" = "میانگین %@ اعتبار/روز";
 "Average" = "میانگین";
 "avg %@/day" = "میانگین %@/روز";
+
+/* Plan fit */
+"Median" = "میانه";
+"Median %@%%" = "میانه %@%%";
+"capped %d of %d weeks" = "رسیدن به سقف در %d از %d هفته";
+"capped %d of %d months" = "رسیدن به سقف در %d از %d ماه";
+"capped %d of %d windows" = "رسیدن به سقف در %d از %d بازه";
+"%@ capped sessions per week" = "%@ جلسه در هفته به سقف رسید";
+"%@ h capped" = "%@ ساعت در سقف";
+"You may be paying for headroom you don't use." = "شاید برای ظرفیتی پول می‌پردازید که از آن استفاده نمی‌کنید.";
+"You hit the cap often." = "اغلب به سقف می‌رسید.";
+"Your plan fits how you use it." = "طرح شما با نحوه استفاده‌تان سازگار است.";
+"Not enough history for a verdict yet." = "هنوز سابقه کافی برای ارزیابی وجود ندارد.";

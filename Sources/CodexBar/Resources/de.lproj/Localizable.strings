@@ -2765,3 +2765,16 @@
 "avg %@ credits/day" = "Ø %@ Credits/Tag";
 "Average" = "Durchschnitt";
 "avg %@/day" = "Ø %@/Tag";
+
+/* Plan fit */
+"Median" = "Median";
+"Median %@%%" = "Median %@%%";
+"capped %d of %d weeks" = "am Limit in %d von %d Wochen";
+"capped %d of %d months" = "am Limit in %d von %d Monaten";
+"capped %d of %d windows" = "am Limit in %d von %d Zeiträumen";
+"%@ capped sessions per week" = "%@ Sitzungen am Limit pro Woche";
+"%@ h capped" = "%@ Std. am Limit";
+"You may be paying for headroom you don't use." = "Möglicherweise zahlen Sie für Reserven, die Sie nicht nutzen.";
+"You hit the cap often." = "Sie erreichen oft das Limit.";
+"Your plan fits how you use it." = "Ihr Plan passt zu Ihrer Nutzung.";
+"Not enough history for a verdict yet." = "Noch nicht genug Verlauf für eine Einschätzung.";

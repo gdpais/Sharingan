@@ -2770,3 +2770,16 @@
 "avg %@ credits/day" = "ort. %@ kredi/gün";
 "Average" = "Ortalama";
 "avg %@/day" = "ort. %@/gün";
+
+/* Plan fit */
+"Median" = "Medyan";
+"Median %@%%" = "Medyan %@%%";
+"capped %d of %d weeks" = "%d/%d haftada sınırda";
+"capped %d of %d months" = "%d/%d ayda sınırda";
+"capped %d of %d windows" = "%d/%d dönemde sınırda";
+"%@ capped sessions per week" = "haftada %@ oturum sınırda";
+"%@ h capped" = "%@ sa sınırda";
+"You may be paying for headroom you don't use." = "Kullanmadığınız bir pay için ödeme yapıyor olabilirsiniz.";
+"You hit the cap often." = "Sınıra sık sık ulaşıyorsunuz.";
+"Your plan fits how you use it." = "Planınız kullanımınıza uygun.";
+"Not enough history for a verdict yet." = "Değerlendirme için henüz yeterli geçmiş yok.";

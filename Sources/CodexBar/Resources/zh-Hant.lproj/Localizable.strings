@@ -2745,3 +2745,16 @@
 "avg %@ credits/day" = "平均 %@ 額度/天";
 "Average" = "平均值";
 "avg %@/day" = "日均 %@";
+
+/* Plan fit */
+"Median" = "中位數";
+"Median %@%%" = "中位數 %@%%";
+"capped %d of %d weeks" = "%d/%d 週達到上限";
+"capped %d of %d months" = "%d/%d 個月達到上限";
+"capped %d of %d windows" = "%d/%d 個週期達到上限";
+"%@ capped sessions per week" = "每週 %@ 個工作階段達到上限";
+"%@ h capped" = "處於上限 %@ 小時";
+"You may be paying for headroom you don't use." = "你可能在為用不到的餘量付費。";
+"You hit the cap often." = "你經常達到上限。";
+"Your plan fits how you use it." = "你的方案符合你的使用方式。";
+"Not enough history for a verdict yet." = "歷史記錄還不足以給出結論。";

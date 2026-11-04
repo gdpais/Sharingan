@@ -2759,3 +2759,16 @@
 "avg %@ credits/day" = "平均 %@ 额度/天";
 "Average" = "平均值";
 "avg %@/day" = "日均 %@";
+
+/* Plan fit */
+"Median" = "中位数";
+"Median %@%%" = "中位数 %@%%";
+"capped %d of %d weeks" = "%d/%d 周达到上限";
+"capped %d of %d months" = "%d/%d 个月达到上限";
+"capped %d of %d windows" = "%d/%d 个周期达到上限";
+"%@ capped sessions per week" = "每周 %@ 个会话达到上限";
+"%@ h capped" = "处于上限 %@ 小时";
+"You may be paying for headroom you don't use." = "你可能在为用不到的余量付费。";
+"You hit the cap often." = "你经常达到上限。";
+"Your plan fits how you use it." = "你的套餐符合你的使用方式。";
+"Not enough history for a verdict yet." = "历史记录还不足以给出结论。";

@@ -2735,3 +2735,16 @@
 "avg %@ credits/day" = "평균 %@ 크레딧/일";
 "Average" = "평균";
 "avg %@/day" = "평균 %@/일";
+
+/* Plan fit */
+"Median" = "중앙값";
+"Median %@%%" = "중앙값 %@%%";
+"capped %d of %d weeks" = "한도 도달 %d/%d주";
+"capped %d of %d months" = "한도 도달 %d/%d개월";
+"capped %d of %d windows" = "한도 도달 %d/%d기간";
+"%@ capped sessions per week" = "주당 한도 도달 세션 %@회";
+"%@ h capped" = "한도 상태 %@시간";
+"You may be paying for headroom you don't use." = "사용하지 않는 여유분에 비용을 내고 있을 수 있습니다.";
+"You hit the cap often." = "한도에 자주 도달합니다.";
+"Your plan fits how you use it." = "요금제가 사용 방식에 맞습니다.";
+"Not enough history for a verdict yet." = "판단하기에 아직 기록이 부족합니다.";
