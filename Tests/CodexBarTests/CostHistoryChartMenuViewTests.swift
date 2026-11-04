@@ -523,7 +523,7 @@ struct CostHistoryChartMenuViewTests {
 
     @Test
     @MainActor
-    func `axis dates span first to last for multi-day data`() {
+    func `axis dates label Mondays for ranges longer than a week`() {
         let daily = [
             CostUsageDailyReport.Entry(
                 date: "2026-05-21",
@@ -544,11 +544,46 @@ struct CostHistoryChartMenuViewTests {
         ]
         let dates = CostHistoryChartMenuView._axisDatesForTesting(provider: .codex, daily: daily)
         let cal = Calendar.current
-        #expect(dates.count == 2)
-        #expect(cal.component(.month, from: dates[0]) == 5)
-        #expect(cal.component(.day, from: dates[0]) == 21)
-        #expect(cal.component(.month, from: dates[1]) == 6)
-        #expect(cal.component(.day, from: dates[1]) == 17)
+        // 2026-05-21 is a Thursday; the labeled Mondays fall inside the range.
+        #expect(dates.map { cal.component(.month, from: $0) } == [5, 6, 6, 6])
+        #expect(dates.map { cal.component(.day, from: $0) } == [25, 1, 8, 15])
+        #expect(dates.allSatisfy { cal.component(.weekday, from: $0) == 2 })
+    }
+
+    @Test
+    @MainActor
+    func `axis dates label every Monday of a thirty day range`() {
+        let daily = (1...30).map { day in
+            Self.fixtureEntry(String(format: "2026-06-%02d", day), costUSD: Double(day), totalTokens: nil)
+        }
+        let dates = CostHistoryChartMenuView._axisDatesForTesting(provider: .claude, daily: daily)
+        let cal = Calendar.current
+        #expect(dates.map { cal.component(.day, from: $0) } == [1, 8, 15, 22, 29])
+        #expect(dates.allSatisfy { cal.component(.weekday, from: $0) == 2 })
+    }
+
+    @Test
+    @MainActor
+    func `axis dates thin Mondays on long ranges and keep endpoints within a week`() {
+        let start = Calendar.current.date(from: DateComponents(year: 2026, month: 6, day: 1)) ?? Date()
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.dateFormat = "yyyy-MM-dd"
+        let longRange = (0..<90).compactMap { offset in
+            Calendar.current.date(byAdding: .day, value: offset, to: start).map {
+                Self.fixtureEntry(formatter.string(from: $0), costUSD: 1, totalTokens: nil)
+            }
+        }
+        let thinned = CostHistoryChartMenuView._axisDatesForTesting(provider: .claude, daily: longRange)
+        #expect(thinned.count == 5)
+        #expect(thinned.allSatisfy { Calendar.current.component(.weekday, from: $0) == 2 })
+
+        let week = (1...7).map { day in
+            Self.fixtureEntry(String(format: "2026-06-%02d", day), costUSD: 1, totalTokens: nil)
+        }
+        let endpoints = CostHistoryChartMenuView._axisDatesForTesting(provider: .claude, daily: week)
+        #expect(endpoints.map { Calendar.current.component(.day, from: $0) } == [1, 7])
     }
 
     @Test

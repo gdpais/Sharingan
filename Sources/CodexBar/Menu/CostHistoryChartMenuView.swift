@@ -446,6 +446,7 @@ struct CostHistoryChartMenuView: View {
 
     private static let selectionBandColor = Color(nsColor: .labelColor).opacity(0.1)
     static let maxVisibleDetailLines = 4
+    private static let maxWeekAxisLabels = 5
     private static let detailPrimaryLineHeight: CGFloat = 16
     private static let detailTitleLineHeight: CGFloat = 16
     private static let detailSubtitleLineHeight: CGFloat = 13
@@ -670,13 +671,9 @@ struct CostHistoryChartMenuView: View {
             maxValue = max(maxValue, value)
         }
 
-        let axisDates: [Date] = {
-            guard let first = dateKeys.first?.date, let last = dateKeys.last?.date else { return [] }
-            if Calendar.current.isDate(first, inSameDayAs: last) {
-                return [first]
-            }
-            return [first, last]
-        }()
+        let axisDates = self.axisDates(
+            dates: dateKeys.map(\.date),
+            calendar: self.gregorianCalendar(timeZone: Calendar.autoupdatingCurrent.timeZone))
 
         let barColor = Self.barColor(for: provider)
         return Model(
@@ -690,6 +687,33 @@ struct CostHistoryChartMenuView: View {
             detailViewportRowCount: detailLayout.viewportRowCount,
             hasDetailOverflow: detailLayout.hasOverflow,
             detailRowHeight: detailLayout.rowHeight)
+    }
+
+    /// X-axis label dates. Ranges longer than a week label each Monday, the ISO 8601 week start, chosen
+    /// over the locale's `firstWeekday` so every user sees the same week boundaries; long ranges thin to
+    /// every n-th Monday so at most `maxWeekAxisLabels` labels share the axis. Shorter ranges keep the
+    /// first and last dates.
+    private static func axisDates(dates: [Date], calendar: Calendar) -> [Date] {
+        guard let first = dates.first, let last = dates.last else { return [] }
+        if calendar.isDate(first, inSameDayAs: last) {
+            return [first]
+        }
+        let start = calendar.startOfDay(for: first)
+        let end = calendar.startOfDay(for: last)
+        let daySpan = calendar.dateComponents([.day], from: start, to: end).day ?? 0
+        guard daySpan + 1 > 7 else { return [first, last] }
+
+        let mondayWeekday = 2
+        let offsetToMonday = (mondayWeekday - calendar.component(.weekday, from: start) + 7) % 7
+        var mondays: [Date] = []
+        var cursor = calendar.date(byAdding: .day, value: offsetToMonday, to: start)
+        while let monday = cursor, monday <= end {
+            mondays.append(monday)
+            cursor = calendar.date(byAdding: .day, value: 7, to: monday)
+        }
+        guard !mondays.isEmpty else { return [first, last] }
+        let labelStride = max(1, Int((Double(mondays.count) / Double(self.maxWeekAxisLabels)).rounded(.up)))
+        return mondays.enumerated().compactMap { $0.offset.isMultiple(of: labelStride) ? $0.element : nil }
     }
 
     private static func barColor(for provider: UsageProvider) -> Color {
