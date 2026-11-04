@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import CodexBarCore
 import Foundation
 
@@ -282,6 +283,7 @@ struct SpendDashboardModel: Equatable, Sendable {
         let projects: [ProjectRow]
         var retainedDetailUpdatedAt: Date?
         var detailsExcludedFromTotals = false
+        var insights = SpendDashboardInsights()
         let selectedDay: Date?
         let hourlyPoints: [HourlyPoint]
         private let hourlyDaysMemo = SpendHourlyDaysMemo()
@@ -717,6 +719,12 @@ struct SpendDashboardModel: Equatable, Sendable {
             timeZone: calendar.timeZone)
         group.retainedDetailUpdatedAt = inputs.compactMap { $0.input.retainedDetailSnapshot?.updatedAt }.min()
         group.detailsExcludedFromTotals = inputs.contains { !aggregateIDs.contains($0.input.id) }
+        group.insights = Self.insights(
+            summaries: summaries,
+            detailSummaries: detailSummaries,
+            bounds: bounds,
+            detailBounds: detailBounds,
+            calendar: calendar)
         return group
     }
 
@@ -1400,7 +1408,7 @@ struct SpendDashboardModel: Equatable, Sendable {
         return last - first + 1
     }
 
-    private static func day(
+    static func day(
         _ rawValue: String,
         provider: UsageProvider,
         displayCalendar: Calendar) -> Date?
