@@ -20,7 +20,7 @@ ROOT=$(git rev-parse --show-toplevel)
 cd "$ROOT"
 
 git fetch --quiet origin main
-git fetch --quiet "$UPSTREAM_URL" "main:${UPSTREAM_REF}"
+git fetch --quiet "$UPSTREAM_URL" "+main:${UPSTREAM_REF}"
 
 BASE=$(git merge-base origin/main "$UPSTREAM_REF")
 AHEAD=$(git rev-list --count "${BASE}..${UPSTREAM_REF}")
@@ -45,16 +45,19 @@ MESSAGE="Merge upstream CodexBar $(git rev-parse --short "$UPSTREAM_REF")"
 if git -c merge.conflictStyle=diff3 merge --no-ff --no-edit -m "$MESSAGE" "$UPSTREAM_REF" >/dev/null 2>&1; then
     echo "Merged without conflicts."
 else
-    # Catalog paths never contain spaces, so plain word splitting is safe (and works on macOS bash 3.2).
-    STRINGS=$(git diff --name-only --diff-filter=U -- 'Sources/*/Resources/*.lproj/Localizable.strings')
-    if [[ -n "$STRINGS" ]]; then
-        # shellcheck disable=SC2086
-        if python3 "$ROOT/Scripts/sharingan_resolve_strings_appends.py" --rebrand $STRINGS; then
-            # shellcheck disable=SC2086
-            git add -- $STRINGS
-        fi
-        echo "Resolved appended-key conflicts in $(echo "$STRINGS" | wc -l | tr -d ' ') catalog(s) where possible."
+    if ! git rev-parse -q --verify MERGE_HEAD >/dev/null; then
+        echo "git merge failed before producing conflicts; run it by hand in $WORKTREE to see why." >&2
+        exit 1
     fi
+    # Catalog paths never contain spaces, so plain word splitting is safe (and works on macOS bash 3.2).
+    RESOLVED=0
+    for catalog in $(git diff --name-only --diff-filter=U -- 'Sources/*/Resources/*.lproj/Localizable.strings'); do
+        if python3 "$ROOT/Scripts/sharingan_resolve_strings_appends.py" --rebrand "$catalog"; then
+            git add -- "$catalog"
+            RESOLVED=$((RESOLVED + 1))
+        fi
+    done
+    echo "Resolved the appended-key conflicts in ${RESOLVED} catalog(s)."
 fi
 
 echo
@@ -84,3 +87,4 @@ fi
 echo
 echo "Worktree: $WORKTREE (branch $BRANCH)"
 echo "Next: resolve what's listed, run 'make check' and the tests, then push the branch and open a PR."
+[[ -z "$REMAINING" ]]
