@@ -11,10 +11,22 @@ struct QuotaBurndownModel: Equatable, Sendable {
 
     let start: Date
     let reset: Date
+    let now: Date
     let samples: [Sample]
+    /// Expected remaining quota, from the same work-day weighting as the pace text.
     let ideal: [Sample]
+    /// The current burn rate projected from `now` to the run-out or the reset, whichever comes first.
+    let projection: [Sample]
+    /// Set only when the projection empties the quota before the reset.
+    let runOut: Date?
 
-    init?(history: PlanUtilizationSeriesHistory, window: RateWindow, now: Date) {
+    init?(
+        history: PlanUtilizationSeriesHistory,
+        window: RateWindow,
+        now: Date,
+        workDays: Int? = nil,
+        calendar: Calendar = .current)
+    {
         guard window.usedPercent.isFinite,
               !window.isSyntheticPlaceholder,
               let windowMinutes = window.windowMinutes,
@@ -61,14 +73,27 @@ struct QuotaBurndownModel: Equatable, Sendable {
 
         self.start = start
         self.reset = reset
+        self.now = now
         self.samples = currentSegment.map { date, usedPercent in
             Sample(
                 date: date,
                 remainingPercent: (100 - usedPercent).clamped(to: 0...100))
         }
-        self.ideal = [
-            Sample(date: start, remainingPercent: 100),
-            Sample(date: reset, remainingPercent: 0),
-        ]
+        self.ideal = UsagePace.expectedCurve(
+            windowStart: start,
+            resetsAt: reset,
+            workDays: workDays,
+            calendar: calendar).map(Self.remainingSample)
+        let projection = UsagePace.projection(
+            window: window,
+            now: now,
+            workDays: workDays,
+            calendar: calendar)
+        self.projection = projection?.points.map(Self.remainingSample) ?? []
+        self.runOut = projection?.runOutAt
+    }
+
+    private static func remainingSample(_ point: UsagePace.CurvePoint) -> Sample {
+        Sample(date: point.date, remainingPercent: (100 - point.usedPercent).clamped(to: 0...100))
     }
 }

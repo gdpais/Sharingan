@@ -2761,3 +2761,10 @@
 "Show this Mac's recorded OpenCode usage in Codex history. Off by default; scoped or alternate CODEX_HOME locations always stay excluded." = "Показує використання OpenCode, записане на цьому Mac, в історії Codex. Типово вимкнено; розташування CODEX_HOME з обмеженою областю дії або альтернативні розташування завжди виключаються.";
 "Auto uses the active saved session, otherwise an API key or browser cookies." = "Автоматичний режим використовує активний збережений сеанс, інакше — ключ API або файли cookie браузера.";
 "Store multiple Command Code subscription sessions." = "Зберігати кілька сеансів передплати Command Code.";
+"section_history" = "Історія";
+"record_usage_history_title" = "Записувати історію використання";
+"record_usage_history_subtitle" = "Записує погодинні піки використання на цьому Mac для провайдерів, які ще не зберігають історію, а також 8 тижнів щотижневого використання Codex для прогнозів темпу. Використовується для історії тарифу та графіка витрат.";
+"Daily average" = "Середнє за день";
+"avg %@ credits/day" = "у середньому %@ кредитів/день";
+"Average" = "Середнє";
+"avg %@/day" = "у середньому %@/день";

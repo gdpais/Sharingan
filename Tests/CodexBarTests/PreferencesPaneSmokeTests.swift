@@ -623,6 +623,23 @@ struct PreferencesPaneSmokeTests {
         }
     }
 
+    @Test
+    func `usage history section builds and resolves english copy`() {
+        let settings = Self.makeSettingsStore(suite: "PreferencesPaneSmokeTests-usage-history")
+        #expect(settings.historicalTrackingEnabled == false)
+
+        _ = UsageHistorySettingsSection(settings: settings).body
+        settings.historicalTrackingEnabled = true
+        _ = UsageHistorySettingsSection(settings: settings).body
+        #expect(settings.historicalTrackingEnabled)
+
+        CodexBarLocalizationOverride.$appLanguage.withValue("en") {
+            #expect(L("section_history") == "History")
+            #expect(L("record_usage_history_title") == "Record usage history")
+            #expect(L("record_usage_history_subtitle").contains("providers that don't already keep history"))
+        }
+    }
+
     private static func makeSettingsStore(suite: String, reset: Bool = true) -> SettingsStore {
         let defaults = UserDefaults(suiteName: suite)!
         if reset {

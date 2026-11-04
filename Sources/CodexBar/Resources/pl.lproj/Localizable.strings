@@ -2763,3 +2763,10 @@
 "Show this Mac's recorded OpenCode usage in Codex history. Off by default; scoped or alternate CODEX_HOME locations always stay excluded." = "Pokazuje użycie OpenCode zapisane na tym Macu w historii Codex. Domyślnie wyłączone; lokalizacje CODEX_HOME o ograniczonym zakresie lub alternatywne są zawsze wykluczone.";
 "Auto uses the active saved session, otherwise an API key or browser cookies." = "Tryb automatyczny używa aktywnej zapisanej sesji, a w przeciwnym razie klucza API lub plików cookie przeglądarki.";
 "Store multiple Command Code subscription sessions." = "Przechowuj wiele sesji subskrypcji Command Code.";
+"section_history" = "Historia";
+"record_usage_history_title" = "Zapisuj historię użycia";
+"record_usage_history_subtitle" = "Zapisuje na tym Macu godzinowe szczyty użycia dla dostawców, którzy jeszcze nie przechowują historii, oraz 8 tygodni tygodniowego użycia Codex na potrzeby prognoz tempa. Zasila historię planu i wykres zużycia.";
+"Daily average" = "Średnia dzienna";
+"avg %@ credits/day" = "śr. %@ kredytów/dzień";
+"Average" = "Średnia";
+"avg %@/day" = "śr. %@/dzień";

@@ -42,14 +42,17 @@ struct CreditsHistoryChartMenuView: View {
                             width: .ratio(ChartBarHoverSelection.barWidthRatio))
                             .foregroundStyle(Self.barColor)
                     }
-                    if let peak = Self.peakPoint(model: model) {
-                        let capStart = max(peak.creditsUsed - Self.capHeight(maxValue: model.maxCreditsUsed), 0)
-                        BarMark(
-                            x: .value(L("Day"), peak.date, unit: .day),
-                            yStart: .value(L("Cap start"), capStart),
-                            yEnd: .value(L("Cap end"), peak.creditsUsed),
-                            width: .ratio(ChartBarHoverSelection.barWidthRatio))
-                            .foregroundStyle(Color(nsColor: .systemYellow))
+                    if let average = model.dailyAverage {
+                        RuleMark(y: .value(L("Daily average"), average))
+                            .foregroundStyle(ChartReferenceLine.color)
+                            .lineStyle(ChartReferenceLine.strokeStyle)
+                            .annotation(position: .top, alignment: .leading, spacing: 2) {
+                                Text(String(
+                                    format: L("avg %@ credits/day"),
+                                    average.formatted(.number.precision(.fractionLength(0...2)))))
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
                     }
                 }
                 .chartYAxis(.hidden)
@@ -126,19 +129,19 @@ struct CreditsHistoryChartMenuView: View {
     private struct Model {
         let points: [Point]
         let breakdownByDayKey: [String: OpenAIDashboardDailyBreakdown]
-        let pointsByDayKey: [String: Point]
         let dayDates: [(dayKey: String, date: Date)]
         let selectableDayDates: [(dayKey: String, date: Date)]
         let axisDates: [Date]
-        let peakKey: String?
+        let dailyAverage: Double?
         let totalCreditsUsed: Double?
-        let maxCreditsUsed: Double
     }
 
-    private static let barColor = Color(red: 73 / 255, green: 163 / 255, blue: 176 / 255)
+    /// Single-series chart: always the first categorical slot.
+    private static let barColor = ChartPalette.color(for: .index(0))
     private static let selectionBandColor = Color(nsColor: .labelColor).opacity(0.1)
-    private static func capHeight(maxValue: Double) -> Double {
-        maxValue * 0.05
+
+    static func _dailyAverageForTesting(breakdown: [OpenAIDashboardDailyBreakdown]) -> Double? {
+        self.makeModel(from: breakdown).dailyAverage
     }
 
     private static func makeModel(from breakdown: [OpenAIDashboardDailyBreakdown]) -> Model {
@@ -150,9 +153,6 @@ struct CreditsHistoryChartMenuView: View {
         var breakdownByDayKey: [String: OpenAIDashboardDailyBreakdown] = [:]
         breakdownByDayKey.reserveCapacity(sorted.count)
 
-        var pointsByDayKey: [String: Point] = [:]
-        pointsByDayKey.reserveCapacity(sorted.count)
-
         var dayDates: [(dayKey: String, date: Date)] = []
         dayDates.reserveCapacity(sorted.count)
 
@@ -160,8 +160,6 @@ struct CreditsHistoryChartMenuView: View {
         selectableDayDates.reserveCapacity(sorted.count)
 
         var totalCreditsUsed: Double = 0
-        var peak: (key: String, creditsUsed: Double)?
-        var maxCreditsUsed: Double = 0
 
         for day in sorted {
             guard let date = self.dateFromDayKey(day.day) else { continue }
@@ -171,14 +169,7 @@ struct CreditsHistoryChartMenuView: View {
             if day.totalCreditsUsed > 0 {
                 let point = Point(date: date, creditsUsed: day.totalCreditsUsed)
                 points.append(point)
-                pointsByDayKey[day.day] = point
                 selectableDayDates.append((dayKey: day.day, date: date))
-                if let cur = peak {
-                    if day.totalCreditsUsed > cur.creditsUsed { peak = (day.day, day.totalCreditsUsed) }
-                } else {
-                    peak = (day.day, day.totalCreditsUsed)
-                }
-                maxCreditsUsed = max(maxCreditsUsed, day.totalCreditsUsed)
             }
         }
 
@@ -191,13 +182,11 @@ struct CreditsHistoryChartMenuView: View {
         return Model(
             points: points,
             breakdownByDayKey: breakdownByDayKey,
-            pointsByDayKey: pointsByDayKey,
             dayDates: dayDates,
             selectableDayDates: selectableDayDates,
             axisDates: axisDates,
-            peakKey: peak?.key,
-            totalCreditsUsed: totalCreditsUsed > 0 ? totalCreditsUsed : nil,
-            maxCreditsUsed: maxCreditsUsed)
+            dailyAverage: ChartReferenceLine.dailyAverage(points.map(\.creditsUsed)),
+            totalCreditsUsed: totalCreditsUsed > 0 ? totalCreditsUsed : nil)
     }
 
     private static func dateFromDayKey(_ key: String) -> Date? {
@@ -218,11 +207,6 @@ struct CreditsHistoryChartMenuView: View {
         comps.day = day
         comps.hour = 12
         return comps.date
-    }
-
-    private static func peakPoint(model: Model) -> Point? {
-        guard let key = model.peakKey else { return nil }
-        return model.pointsByDayKey[key]
     }
 
     private func selectionBandRect(model: Model, proxy: ChartProxy, geo: GeometryProxy) -> CGRect? {

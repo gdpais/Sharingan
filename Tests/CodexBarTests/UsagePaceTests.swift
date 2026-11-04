@@ -591,6 +591,145 @@ struct UsagePaceTests {
         #expect(abs(paceOne.expectedUsedPercent - paceNil.expectedUsedPercent) < 0.01)
     }
 
+    @Test
+    func `expected curve with five work days stays flat over the weekend`() throws {
+        let calendar = Self.utcCalendar
+        // Mon Jun 8 2026 09:00 → Mon Jun 15 2026 09:00.
+        let start = try Self.date(year: 2026, month: 6, day: 8, hour: 9, calendar: calendar)
+        let reset = start.addingTimeInterval(7 * 24 * 3600)
+
+        let curve = UsagePace.expectedCurve(windowStart: start, resetsAt: reset, workDays: 5, calendar: calendar)
+
+        // 120 work hours: Mon 15h, Tue–Fri 24h each, next Mon 9h.
+        let expected: [(day: Int, hour: Int, used: Double)] = [
+            (8, 9, 0), (9, 0, 12.5), (10, 0, 32.5), (11, 0, 52.5), (12, 0, 72.5),
+            (13, 0, 92.5), (14, 0, 92.5), (15, 0, 92.5), (15, 9, 100),
+        ]
+        #expect(curve.count == expected.count)
+        for (point, want) in zip(curve, expected) {
+            #expect(try point.date == Self.date(
+                year: 2026,
+                month: 6,
+                day: want.day,
+                hour: want.hour,
+                calendar: calendar))
+            #expect(abs(point.usedPercent - want.used) < 0.0001)
+        }
+        #expect(curve.first?.usedPercent == 0)
+        #expect(curve.last?.usedPercent == 100)
+        #expect(zip(curve, curve.dropFirst()).allSatisfy { $0.usedPercent <= $1.usedPercent && $0.date < $1.date })
+    }
+
+    @Test
+    func `expected curve matches weekly pace expected usage`() throws {
+        let calendar = Self.utcCalendar
+        let start = try Self.date(year: 2026, month: 6, day: 8, hour: 9, calendar: calendar)
+        let reset = start.addingTimeInterval(7 * 24 * 3600)
+        // Wed Jun 10 15:00: 54 of 120 work hours elapsed → 45% expected, so 52% used is 7% in deficit.
+        let now = try Self.date(year: 2026, month: 6, day: 10, hour: 15, calendar: calendar)
+        let window = RateWindow(usedPercent: 52, windowMinutes: 10080, resetsAt: reset, resetDescription: nil)
+
+        let pace = try #require(UsagePace.weekly(window: window, now: now, workDays: 5, calendar: calendar))
+        let curve = UsagePace.expectedCurve(windowStart: start, resetsAt: reset, workDays: 5, calendar: calendar)
+        let lower = try #require(curve.last { $0.date <= now })
+        let upper = try #require(curve.first { $0.date > now })
+        let fraction = now.timeIntervalSince(lower.date) / upper.date.timeIntervalSince(lower.date)
+        let curveExpected = lower.usedPercent + (upper.usedPercent - lower.usedPercent) * fraction
+
+        #expect(abs(pace.expectedUsedPercent - 45) < 0.0001)
+        #expect(abs(pace.deltaPercent - 7) < 0.0001)
+        #expect(abs(curveExpected - pace.expectedUsedPercent) < 0.0001)
+    }
+
+    @Test
+    func `expected curve is linear for all days and for non weekly windows`() throws {
+        let calendar = Self.utcCalendar
+        let start = try Self.date(year: 2026, month: 6, day: 8, hour: 9, calendar: calendar)
+        let reset = start.addingTimeInterval(7 * 24 * 3600)
+        let linear = [
+            UsagePace.CurvePoint(date: start, usedPercent: 0),
+            UsagePace.CurvePoint(date: reset, usedPercent: 100),
+        ]
+
+        #expect(UsagePace.expectedCurve(windowStart: start, resetsAt: reset, calendar: calendar) == linear)
+        #expect(UsagePace.expectedCurve(windowStart: start, resetsAt: reset, workDays: 7, calendar: calendar)
+            == linear)
+        let sessionReset = start.addingTimeInterval(5 * 3600)
+        #expect(UsagePace.expectedCurve(
+            windowStart: start,
+            resetsAt: sessionReset,
+            workDays: 5,
+            calendar: calendar) == [
+            UsagePace.CurvePoint(date: start, usedPercent: 0),
+            UsagePace.CurvePoint(date: sessionReset, usedPercent: 100),
+        ])
+        #expect(UsagePace.expectedCurve(windowStart: reset, resetsAt: start, calendar: calendar).isEmpty)
+    }
+
+    @Test
+    func `workday projection runs out at the pace eta and skips the weekend`() throws {
+        let calendar = Self.utcCalendar
+        let start = try Self.date(year: 2026, month: 6, day: 8, hour: 9, calendar: calendar)
+        let reset = start.addingTimeInterval(7 * 24 * 3600)
+        let now = try Self.date(year: 2026, month: 6, day: 10, hour: 15, calendar: calendar)
+        let window = RateWindow(usedPercent: 52, windowMinutes: 10080, resetsAt: reset, resetDescription: nil)
+
+        let pace = try #require(UsagePace.weekly(window: window, now: now, workDays: 5, calendar: calendar))
+        let projection = try #require(UsagePace.projection(
+            window: window,
+            now: now,
+            workDays: 5,
+            calendar: calendar))
+
+        // 52% over 54 work hours; the remaining 48% lasts 49.85 work hours → Fri Jun 12 ≈16:50.
+        let etaSeconds = try #require(pace.etaSeconds)
+        let runOut = try #require(projection.runOutAt)
+        #expect(abs(runOut.timeIntervalSince(now) - etaSeconds) < 0.001)
+        #expect(try runOut > Self.date(year: 2026, month: 6, day: 12, hour: 16, minute: 50, calendar: calendar))
+        #expect(try runOut < Self.date(year: 2026, month: 6, day: 12, hour: 16, minute: 51, calendar: calendar))
+        let thursday = try Self.date(year: 2026, month: 6, day: 11, hour: 0, calendar: calendar)
+        let friday = try Self.date(year: 2026, month: 6, day: 12, hour: 0, calendar: calendar)
+        #expect(projection.points.map(\.date) == [now, thursday, friday, runOut])
+        #expect(projection.points.first?.usedPercent == 52)
+        #expect(abs(projection.points[1].usedPercent - (52 + 9 * 52.0 / 54)) < 0.0001)
+        #expect(projection.points.last?.usedPercent == 100)
+
+        let lasting = RateWindow(usedPercent: 30, windowMinutes: 10080, resetsAt: reset, resetDescription: nil)
+        let lastingProjection = try #require(UsagePace.projection(
+            window: lasting,
+            now: now,
+            workDays: 5,
+            calendar: calendar))
+        let saturday = try Self.date(year: 2026, month: 6, day: 13, hour: 0, calendar: calendar)
+        let monday = try Self.date(year: 2026, month: 6, day: 15, hour: 0, calendar: calendar)
+        let atSaturday = try #require(lastingProjection.points.first { $0.date == saturday })
+        let atMonday = try #require(lastingProjection.points.first { $0.date == monday })
+        #expect(lastingProjection.runOutAt == nil)
+        #expect(lastingProjection.points.last?.date == reset)
+        #expect(atSaturday.usedPercent == atMonday.usedPercent)
+        // 30% + 66 remaining work hours at 30/54 per hour.
+        #expect(abs((lastingProjection.points.last?.usedPercent ?? 0) - (30 + 66 * 30.0 / 54)) < 0.0001)
+    }
+
+    @Test
+    func `linear projection reaches zero at the eta`() throws {
+        let now = Date(timeIntervalSince1970: 0)
+        let window = RateWindow(
+            usedPercent: 50,
+            windowMinutes: 10080,
+            resetsAt: now.addingTimeInterval(4 * 24 * 3600),
+            resetDescription: nil)
+
+        let projection = try #require(UsagePace.projection(window: window, now: now))
+
+        let runOut = try #require(projection.runOutAt)
+        #expect(abs(runOut.timeIntervalSince(now) - 3 * 24 * 3600) < 1)
+        #expect(projection.points == [
+            UsagePace.CurvePoint(date: now, usedPercent: 50),
+            UsagePace.CurvePoint(date: runOut, usedPercent: 100),
+        ])
+    }
+
     private static var utcCalendar: Calendar {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!

@@ -2738,3 +2738,10 @@
 "Show this Mac's recorded OpenCode usage in Codex history. Off by default; scoped or alternate CODEX_HOME locations always stay excluded." = "在 Codex 歷史記錄中顯示此 Mac 上記錄的 OpenCode 用量。預設關閉；一律排除限定範圍或其他 CODEX_HOME 位置。";
 "Auto uses the active saved session, otherwise an API key or browser cookies." = "自動使用目前啟用的已儲存工作階段，否則使用 API 金鑰或瀏覽器 Cookie。";
 "Store multiple Command Code subscription sessions." = "儲存多個 Command Code 訂閱工作階段。";
+"section_history" = "歷史記錄";
+"record_usage_history_title" = "記錄用量歷史";
+"record_usage_history_subtitle" = "在此 Mac 上為尚未保存歷史記錄的供應商記錄每小時用量峰值，並記錄 8 週的 Codex 每週用量以用於節奏預測。為方案歷史與消耗圖表提供資料。";
+"Daily average" = "每日平均";
+"avg %@ credits/day" = "平均 %@ 額度/天";
+"Average" = "平均值";
+"avg %@/day" = "日均 %@";
