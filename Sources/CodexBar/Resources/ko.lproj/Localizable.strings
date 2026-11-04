@@ -2735,3 +2735,4 @@
 "avg %@ credits/day" = "평균 %@ 크레딧/일";
 "Average" = "평균";
 "avg %@/day" = "평균 %@/일";
+"%@ vs previous %d days" = "%@ (이전 %d일 대비)";

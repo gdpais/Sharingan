@@ -2770,3 +2770,4 @@
 "avg %@ credits/day" = "ort. %@ kredi/gün";
 "Average" = "Ortalama";
 "avg %@/day" = "ort. %@/gün";
+"%@ vs previous %d days" = "%@ (önceki %d güne göre)";

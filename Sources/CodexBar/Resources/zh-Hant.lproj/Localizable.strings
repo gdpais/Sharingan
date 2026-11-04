@@ -2745,3 +2745,4 @@
 "avg %@ credits/day" = "平均 %@ 額度/天";
 "Average" = "平均值";
 "avg %@/day" = "日均 %@";
+"%@ vs previous %d days" = "%@（較前 %d 天）";

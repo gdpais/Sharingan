@@ -2770,3 +2770,4 @@
 "avg %@ credits/day" = "śr. %@ kredytów/dzień";
 "Average" = "Średnia";
 "avg %@/day" = "śr. %@/dzień";
+"%@ vs previous %d days" = "%@ wobec poprzednich %d dni";

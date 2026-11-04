@@ -2766,3 +2766,4 @@
 "avg %@ credits/day" = "moy. %@ crédits/jour";
 "Average" = "Moyenne";
 "avg %@/day" = "moy. %@/jour";
+"%@ vs previous %d days" = "%@ par rapport aux %d jours précédents";

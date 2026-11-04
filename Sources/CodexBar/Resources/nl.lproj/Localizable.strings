@@ -2764,3 +2764,4 @@
 "avg %@ credits/day" = "gem. %@ tegoeden/dag";
 "Average" = "Gemiddelde";
 "avg %@/day" = "gem. %@/dag";
+"%@ vs previous %d days" = "%@ ten opzichte van de vorige %d dagen";

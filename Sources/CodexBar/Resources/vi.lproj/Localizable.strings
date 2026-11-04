@@ -2768,3 +2768,4 @@
 "avg %@ credits/day" = "TB %@ tín dụng/ngày";
 "Average" = "Trung bình";
 "avg %@/day" = "trung bình %@/ngày";
+"%@ vs previous %d days" = "%@ so với %d ngày trước đó";

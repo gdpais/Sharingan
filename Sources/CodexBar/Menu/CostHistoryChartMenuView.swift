@@ -74,9 +74,13 @@ struct CostHistoryChartMenuView: View {
     /// in the user's preferred currency while chart geometry stays in source values.
     private let costMultiplier: Double
     private let historyCoverageIsEstablished: Bool
+    private let historyDays: Int
     private let windowLabel: String
     private let projects: [CostUsageProjectBreakdown]
     private let sessions: [CostUsageSessionBreakdown]
+    /// Source-currency cost of the previous period of equal length; nil hides the delta.
+    private let previousPeriodCostUSD: Double?
+    private let stackByModel: Bool
     private let hidePersonalInfo: Bool
     private let width: CGFloat
     private let onMetricChanged: (@MainActor (ChartMetric) -> Void)?
@@ -95,6 +99,8 @@ struct CostHistoryChartMenuView: View {
         windowLabel: String? = nil,
         projects: [CostUsageProjectBreakdown] = [],
         sessions: [CostUsageSessionBreakdown] = [],
+        previousPeriodCostUSD: Double? = nil,
+        stackByModel: Bool = true,
         hidePersonalInfo: Bool,
         width: CGFloat,
         initialMetric: ChartMetric? = nil,
@@ -107,9 +113,12 @@ struct CostHistoryChartMenuView: View {
         self.currencyCode = currencyCode
         self.costMultiplier = costMultiplier
         self.historyCoverageIsEstablished = historyCoverageIsEstablished
+        self.historyDays = max(1, historyDays)
         self.windowLabel = windowLabel.map { L($0) } ?? Self.windowLabel(days: max(1, historyDays))
         self.projects = projects
         self.sessions = sessions
+        self.previousPeriodCostUSD = previousPeriodCostUSD
+        self.stackByModel = stackByModel
         self.hidePersonalInfo = hidePersonalInfo
         self.width = width
         self.onMetricChanged = onMetricChanged
@@ -125,7 +134,11 @@ struct CostHistoryChartMenuView: View {
         let activeMetric = availableMetrics.contains(self.metric)
             ? self.metric
             : Self.defaultMetric(provider: self.provider, daily: self.daily)
-        let model = Self.makeModel(provider: self.provider, daily: self.daily, metric: activeMetric)
+        let model = Self.makeModel(
+            provider: self.provider,
+            daily: self.daily,
+            metric: activeMetric,
+            stackByModel: self.stackByModel)
         let showsHistoryRefreshing = Self.showsHistoryRefreshing(
             provider: self.provider,
             metric: activeMetric,
@@ -154,9 +167,13 @@ struct CostHistoryChartMenuView: View {
                     .accessibilityHidden(true)
 
                 Chart {
+                    Self.weekendShading(model.weekendIntervals)
+                    if let stack = model.stack {
+                        Self.stackedBars(stack.segments, metricTitle: activeMetric.title)
+                    }
                     ForEach(model.points) { point in
                         let hasValue = activeMetric == .cost ? point.costUSD != nil : point.totalTokens != nil
-                        if hasValue {
+                        if hasValue, !model.stackedDates.contains(point.date) {
                             BarMark(
                                 x: .value(L("Day"), point.date, unit: .day),
                                 y: .value(activeMetric.title, point.value),
@@ -239,6 +256,10 @@ struct CostHistoryChartMenuView: View {
                             .contentShape(Rectangle())
                         }
                     }
+                }
+
+                if model.reservesStackLegendRow {
+                    CostHistoryStackLegend(items: model.stack?.legendItems ?? [])
                 }
 
                 if availableMetrics.count > 1 || showsHistoryRefreshing {
@@ -359,6 +380,17 @@ struct CostHistoryChartMenuView: View {
                         .lineLimit(1)
                         .truncationMode(.head)
                         .frame(height: Self.detailPrimaryLineHeight, alignment: .leading)
+                    if let delta = Self.previousPeriodDeltaText(
+                        currentCostUSD: self.totalCostUSD,
+                        previousPeriodCostUSD: self.previousPeriodCostUSD,
+                        historyDays: self.historyDays,
+                        incompleteCount: incompleteCount)
+                    {
+                        Text(delta)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(1)
+                    }
                     if let disclaimer = UsageFormatter.incompleteUsageNote(incompleteCount)
                         ?? Self.estimateDisclaimer(provider: self.provider, daily: self.daily)
                     {
@@ -447,6 +479,10 @@ struct CostHistoryChartMenuView: View {
         let detailViewportRowCount: Int
         let hasDetailOverflow: Bool
         let detailRowHeight: CGFloat
+        let stack: CostHistoryStackPresentation?
+        let stackedDates: Set<Date>
+        let reservesStackLegendRow: Bool
+        let weekendIntervals: [DateInterval]
     }
 
     private static let selectionBandColor = Color(nsColor: .labelColor).opacity(0.1)
@@ -641,7 +677,8 @@ struct CostHistoryChartMenuView: View {
     private static func makeModel(
         provider: UsageProvider,
         daily: [DailyEntry],
-        metric: ChartMetric) -> Model
+        metric: ChartMetric,
+        stackByModel: Bool = true) -> Model
     {
         let sorted = daily.sorted { lhs, rhs in lhs.date < rhs.date }
         let detailLayout = self.detailLayout(provider: provider, daily: sorted)
@@ -681,6 +718,12 @@ struct CostHistoryChartMenuView: View {
             calendar: self.gregorianCalendar(timeZone: Calendar.autoupdatingCurrent.timeZone))
 
         let barColor = Self.barColor(for: provider)
+        let stack = stackByModel ? self.stackPresentation(provider: provider, sortedDaily: sorted, metric: metric) : nil
+        let weekendIntervals: [DateInterval] = if let first = dateKeys.first?.date, let last = dateKeys.last?.date {
+            CostHistoryModelStack.weekendIntervals(from: first, through: last, calendar: .autoupdatingCurrent)
+        } else {
+            []
+        }
         return Model(
             points: points,
             pointsByDateKey: pointsByKey,
@@ -691,7 +734,15 @@ struct CostHistoryChartMenuView: View {
             maxValue: maxValue,
             detailViewportRowCount: detailLayout.viewportRowCount,
             hasDetailOverflow: detailLayout.hasOverflow,
-            detailRowHeight: detailLayout.rowHeight)
+            detailRowHeight: detailLayout.rowHeight,
+            stack: stack,
+            stackedDates: stack?.stackedDates ?? [],
+            reservesStackLegendRow: stackByModel && self.reservesStackLegendRow(
+                provider: provider,
+                sortedDaily: sorted,
+                activeStack: stack,
+                activeMetric: metric),
+            weekendIntervals: weekendIntervals)
     }
 
     /// X-axis label dates. Ranges longer than a week label each Monday, the ISO 8601 week start, chosen
@@ -758,7 +809,7 @@ struct CostHistoryChartMenuView: View {
         return displayCalendar.startOfDay(for: date)
     }
 
-    private static func chartPointInput(
+    static func chartPointInput(
         for entry: DailyEntry,
         provider: UsageProvider,
         metric: ChartMetric) -> (value: Double, date: Date)?
@@ -1035,11 +1086,18 @@ struct CostHistoryChartMenuView: View {
         if parts.isEmpty { parts.append("—") }
         let primary = "\(dayLabel): \(parts.joined(separator: " · "))"
             + UsageFormatter.incompleteUsageSuffix(point.incompleteRequestCount)
+        // A stacked day's rows take their series colors so they read against the legend.
+        let stack = model.stack.flatMap { $0.stackedDayKeys.contains(key) ? $0 : nil }
         return DetailContent(
-            primary: primary, rows: self.breakdownRows(entry: model.entriesByDateKey[key], barColor: model.barColor))
+            primary: primary,
+            rows: self.breakdownRows(entry: model.entriesByDateKey[key], barColor: model.barColor, stack: stack))
     }
 
-    func breakdownRows(entry: DailyEntry?, barColor: Color) -> [DetailRow] {
+    func breakdownRows(
+        entry: DailyEntry?,
+        barColor: Color,
+        stack: CostHistoryStackPresentation? = nil) -> [DetailRow]
+    {
         guard let entry else { return [] }
         return Self.displayBreakdownItems(entry)
             .enumerated()
@@ -1049,7 +1107,8 @@ struct CostHistoryChartMenuView: View {
                     title: UsageFormatter.modelDisplayName(item.modelName),
                     subtitle: entry.modelBreakdowns?.isEmpty == false ? self.modelBreakdownTotalSubtitle(item) : nil,
                     modeSubtitle: self.modelBreakdownModeSubtitle(item),
-                    accentColor: barColor.opacity(Self.breakdownAccentOpacity(for: index)))
+                    accentColor: stack?.accentColor(forModel: item.modelName)
+                        ?? barColor.opacity(Self.breakdownAccentOpacity(for: index)))
             }
     }
 

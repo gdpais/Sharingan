@@ -2767,3 +2767,4 @@
 "avg %@ credits/day" = "média %@ créditos/dia";
 "Average" = "Média";
 "avg %@/day" = "média %@/dia";
+"%@ vs previous %d days" = "%@ em relação aos %d dias anteriores";

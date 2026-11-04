@@ -2769,3 +2769,4 @@
 "avg %@ credits/day" = "mitjana %@ crèdits/dia";
 "Average" = "Mitjana";
 "avg %@/day" = "mitjana %@/dia";
+"%@ vs previous %d days" = "%@ respecte als %d dies anteriors";

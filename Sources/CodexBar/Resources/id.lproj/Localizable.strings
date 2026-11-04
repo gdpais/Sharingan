@@ -2769,3 +2769,4 @@
 "avg %@ credits/day" = "rata-rata %@ kredit/hari";
 "Average" = "Rata-rata";
 "avg %@/day" = "rata-rata %@/hari";
+"%@ vs previous %d days" = "%@ dibanding %d hari sebelumnya";

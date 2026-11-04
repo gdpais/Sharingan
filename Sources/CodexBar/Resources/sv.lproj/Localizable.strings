@@ -2766,3 +2766,4 @@
 "avg %@ credits/day" = "snitt %@ krediter/dag";
 "Average" = "Genomsnitt";
 "avg %@/day" = "snitt %@/dag";
+"%@ vs previous %d days" = "%@ jämfört med föregående %d dagar";

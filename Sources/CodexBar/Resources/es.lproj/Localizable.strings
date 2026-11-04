@@ -2765,3 +2765,4 @@
 "avg %@ credits/day" = "prom. %@ créditos/día";
 "Average" = "Promedio";
 "avg %@/day" = "prom. %@/día";
+"%@ vs previous %d days" = "%@ frente a los %d días anteriores";
