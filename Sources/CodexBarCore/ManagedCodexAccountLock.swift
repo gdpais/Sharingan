@@ -13,7 +13,7 @@ public enum ManagedCodexAccountLockError: Error, LocalizedError, Equatable {
 
     public var errorDescription: String? {
         switch self {
-        case .busy: "Another CodexBar process is changing managed accounts. Try again after it finishes."
+        case .busy: "Another Sharingan process is changing managed accounts. Try again after it finishes."
         case .unavailable: "Could not lock the managed Codex account store."
         }
     }

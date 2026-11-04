@@ -570,13 +570,13 @@ public enum CursorStatusProbeError: LocalizedError, Sendable {
     case costRequestForbidden
 
     static let safariFullDiskAccessHint =
-        "If you use Safari, grant CodexBar Full Disk Access in System Settings ▸ Privacy & Security."
+        "If you use Safari, grant Sharingan Full Disk Access in System Settings ▸ Privacy & Security."
 
     public var errorDescription: String? {
         switch self {
         case .notLoggedIn:
             #if os(macOS)
-            "Not logged in to Cursor. Please log in via the CodexBar menu."
+            "Not logged in to Cursor. Please log in via the Sharingan menu."
             #else
             "Not logged in to Cursor. Paste a Cookie header copied from cursor.com into "
                 + "~/.config/codexbar/config.json (legacy: ~/.codexbar/config.json)."
@@ -591,7 +591,7 @@ public enum CursorStatusProbeError: LocalizedError, Sendable {
             #if os(macOS)
             "No Cursor session found. \(Self.safariFullDiskAccessHint) "
                 + "Please log in to cursor.com in \(cursorCookieImportOrder.loginHint). "
-                + "You can also sign in to Cursor from the CodexBar menu (Add / switch account)."
+                + "You can also sign in to Cursor from the Sharingan menu (Add / switch account)."
             #else
             "No Cursor session found. Paste a Cookie header copied from cursor.com into "
                 + "~/.config/codexbar/config.json (legacy: ~/.codexbar/config.json)."

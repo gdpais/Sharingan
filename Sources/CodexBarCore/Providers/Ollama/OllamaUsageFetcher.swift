@@ -136,12 +136,12 @@ public enum OllamaUsageError: LocalizedError, Sendable {
             "Ollama cookie source is Manual, but no cookie header is configured. " +
                 "Paste a Cookie header from https://ollama.com/settings, or set Cookie source to Auto."
         case .safariCookieAccessDenied:
-            "Safari cookies need Full Disk Access for CodexBar (System Settings > Privacy & Security)."
+            "Safari cookies need Full Disk Access for Sharingan (System Settings > Privacy & Security)."
         case let .browserCookieDecryptionDenied(browserName):
             "\(browserName) cookie decryption was declined in Keychain. " +
                 "Open the provider card and click Refresh (⌘R) to request Keychain access again."
         case let .browserCookieDecryptionDisabled(browserName):
-            "\(browserName) cookie decryption is disabled in CodexBar; enable Keychain access and refresh."
+            "\(browserName) cookie decryption is disabled in Sharingan; enable Keychain access and refresh."
         }
     }
 }

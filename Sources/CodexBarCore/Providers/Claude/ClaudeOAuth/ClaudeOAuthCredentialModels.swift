@@ -262,7 +262,7 @@ public enum ClaudeOAuthCredentialsError: LocalizedError, Sendable {
         case .mcpOAuthOnlyKeychain:
             return "Claude keychain contains MCP OAuth state only (no claudeAiOauth). "
                 + "Claude Code may store subscription OAuth elsewhere now. "
-                + "Open the CodexBar menu and click Refresh to re-authenticate, "
+                + "Open the Sharingan menu and click Refresh to re-authenticate, "
                 + "or switch Claude Usage source to Web/CLI."
         case .missingAccessToken:
             return "Claude OAuth access token missing. Run `claude` to authenticate."
@@ -270,7 +270,7 @@ public enum ClaudeOAuthCredentialsError: LocalizedError, Sendable {
             return "Claude OAuth credentials not found. Run `claude` to authenticate."
         case let .credentialsChanged(date):
             return "Claude Code credentials changed (\(UsageFormatter.updatedString(from: date))). "
-                + "Click Refresh to re-grant CodexBar access."
+                + "Click Refresh to re-grant Sharingan access."
         case .keychainAccessRevoked:
             return "Claude Keychain access was revoked by Claude Code's token rotation. "
                 + "Click Refresh to re-grant access, or switch Claude Usage source to CLI/Web."
@@ -281,7 +281,7 @@ public enum ClaudeOAuthCredentialsError: LocalizedError, Sendable {
                 || status == Int(errSecInteractionNotAllowed)
                 || status == Int(errSecNoAccessForItem)
             {
-                return "Claude Keychain access was denied. CodexBar will back off in the background until you retry "
+                return "Claude Keychain access was denied. Sharingan will back off in the background until you retry "
                     + "via a user action (menu open / manual refresh). "
                     + "Switch Claude Usage source to Web/CLI, or allow access in Keychain Access."
             }

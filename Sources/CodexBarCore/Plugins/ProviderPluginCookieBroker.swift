@@ -269,13 +269,13 @@ final class ProviderPluginCookieBroker: @unchecked Sendable {
                 .sorted { $0.profileDenied && !$1.profileDenied }
                 .map { failure in
                     if failure.browser == .safari {
-                        return "Safari cookies need Full Disk Access for CodexBar in System Settings → "
+                        return "Safari cookies need Full Disk Access for Sharingan in System Settings → "
                             + "Privacy & Security → Full Disk Access, then refresh."
                     }
                     if failure.profileDenied {
                         return "Cannot read \(failure.browser.displayName)'s profile. In System Settings → "
                             + "Privacy & Security → Files & Folders, turn on \(failure.browser.displayName) "
-                            + "under CodexBar, then refresh."
+                            + "under Sharingan, then refresh."
                     }
                     let permission = failure.browser.usesKeychainForCookieDecryption
                         ? "Keychain permission" : "browser permission"

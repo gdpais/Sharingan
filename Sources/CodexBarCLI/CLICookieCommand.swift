@@ -165,7 +165,7 @@ extension CodexBarCLI {
         let classifiedError = ((error as? ProviderBrowserSessionFailure)?.underlyingError ?? error)
             as? ProviderFetchClassifiedError
         let message: String = if let browser = promptCapableBrowsers.first, KeychainAccessGate.isDisabled {
-            "\(browser.displayName) cookie decryption is disabled in CodexBar; " +
+            "\(browser.displayName) cookie decryption is disabled in Sharingan; " +
                 "enable Keychain access and refresh."
         } else if let browser = promptCapableBrowsers
             .first(where: { BrowserCookieAccessGate.hasActiveDenial(for: $0) })
@@ -179,7 +179,7 @@ extension CodexBarCLI {
                 "Permission was denied while refreshing the browser session. Check access and retry."
             case .rateLimited: "The provider rate limited the refresh. Wait and retry."
             case .providerUnavailable: "The provider is temporarily unavailable. Retry later."
-            case .parseFailure: "The provider response could not be read. Check for a CodexBar update."
+            case .parseFailure: "The provider response could not be read. Check for a Sharingan update."
             case .networkFailure: "The provider could not be reached. Check your connection and retry."
             case .apiFailure: "The provider could not validate the browser session. Retry later."
             case .missingCredential, nil:
@@ -209,7 +209,7 @@ extension CodexBarCLI {
         "No browser session cookie was refreshed. Sign in in a configured browser and retry."
 
     private static let browserCookieAccessFailureHint = Self.browserSessionFailureHint + " " +
-        "If Keychain access was declined, CodexBar keeps the six-hour denial cooldown; " +
+        "If Keychain access was declined, Sharingan keeps the six-hour denial cooldown; " +
         "use --allow-keychain-prompt only for an explicit interactive retry."
 
     private static func refreshCookie(

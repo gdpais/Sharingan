@@ -554,7 +554,7 @@ extension CodexBarCLI {
             {
                 let usage = hit.entry.usage.scoped(to: provider)
                 let source = "codexbar-app" + command.sourceLabelSuffix
-                let appNote = "Cached by the CodexBar app (the keychain was unavailable here). "
+                let appNote = "Cached by the Sharingan app (the keychain was unavailable here). "
                     + UsageFormatter.updatedString(from: usage.updatedAt)
                 Self.appendSuccessRenderOutput(
                     UsageSuccessRenderInput(

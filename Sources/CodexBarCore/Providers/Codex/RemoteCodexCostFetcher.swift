@@ -101,7 +101,7 @@ public enum RemoteCodexCostError: LocalizedError {
         case .invalidHost:
             "Enter one SSH host alias or user@host."
         case .invalidReport:
-            "The remote CLI returned an unsupported or invalid cost summary. Update CodexBar on that host."
+            "The remote CLI returned an unsupported or invalid cost summary. Update Sharingan on that host."
         case .unavailable:
             "Could not read remote costs. Check SSH and that the remote CodexBar CLI supports --summary-only."
         }

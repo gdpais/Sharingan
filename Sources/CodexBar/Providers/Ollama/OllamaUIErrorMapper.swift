@@ -22,7 +22,7 @@ struct OllamaUIErrorMapper {
         }
         if let browserName = self.browserName(
             in: trimmed,
-            suffix: " cookie decryption is disabled in CodexBar; enable Keychain access and refresh.")
+            suffix: " cookie decryption is disabled in Sharingan; enable Keychain access and refresh.")
         {
             return String(format: localize("ollama_browser_cookie_decryption_disabled"), browserName)
         }

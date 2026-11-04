@@ -98,8 +98,8 @@ enum DashboardManagedCodexAccounts {
             }
             // Raw refresh errors may contain paths or credential diagnostics; export only their presence.
             let error = record?.error != nil
-                ? "Saved usage refresh failed. Refresh this account in CodexBar."
-                : record?.snapshot == nil ? "No saved usage for this account. Refresh it in CodexBar." : nil
+                ? "Saved usage refresh failed. Refresh this account in Sharingan."
+                : record?.snapshot == nil ? "No saved usage for this account. Refresh it in Sharingan." : nil
             return ProviderAccountUsageSnapshot(
                 id: ProviderAccountIdentity(source: "codex-managed", opaqueID: label.id),
                 provider: Self.provider,
