@@ -54,7 +54,8 @@ extension StatusItemController {
             let burndownView = QuotaBurndownChartMenuView(
                 provider: provider,
                 histories: histories,
-                width: width)
+                width: width,
+                workDays: self.settings.weeklyProgressWorkDays)
             if burndownView.hasSeries {
                 self.appendUsageHistoryChart(burndownView, to: submenu, provider: provider, width: width)
                 submenu.addItem(.separator())
