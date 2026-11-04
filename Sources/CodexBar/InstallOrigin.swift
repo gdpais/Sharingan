@@ -6,6 +6,20 @@ enum InstallOrigin {
         URL(fileURLWithPath: "/usr/local/Caskroom"),
     ]
 
+    /// The `codexbar` Homebrew cask installs upstream CodexBar, which ships under this bundle identifier.
+    static let upstreamCaskBundleIdentifier = "com.steipete.codexbar"
+
+    /// Sharingan: Homebrew updates run `brew upgrade --cask codexbar`, which would replace this fork with
+    /// upstream CodexBar. Only the upstream bundle may ever be treated as managed by that cask.
+    static func isUpstreamHomebrewCask(
+        appBundleURL: URL,
+        bundleIdentifier: String?,
+        caskroomURLs: [URL] = Self.caskroomURLs) -> Bool
+    {
+        guard bundleIdentifier == self.upstreamCaskBundleIdentifier else { return false }
+        return self.isHomebrewCask(appBundleURL: appBundleURL, caskroomURLs: caskroomURLs)
+    }
+
     static func isHomebrewCask(
         appBundleURL: URL,
         caskroomURLs: [URL] = Self.caskroomURLs) -> Bool

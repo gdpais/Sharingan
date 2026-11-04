@@ -11,6 +11,46 @@ struct InstallOriginTests {
         }
     }
 
+    @Test(arguments: [
+        ("com.steipete.codexbar", true),
+        ("com.gdpais.sharingan", false),
+        ("com.gdpais.sharingan.debug", false),
+        ("com.steipete.codexbar.debug", false),
+    ])
+    func `only the upstream bundle is managed by the codexbar cask`(bundleIdentifier: String, expected: Bool) {
+        let app = URL(fileURLWithPath: "/opt/homebrew/Caskroom/codexbar/1.0.0/CodexBar.app")
+
+        #expect(InstallOrigin.isHomebrewCask(appBundleURL: app, caskroomURLs: []))
+        #expect(InstallOrigin.isUpstreamHomebrewCask(
+            appBundleURL: app,
+            bundleIdentifier: bundleIdentifier,
+            caskroomURLs: []) == expected)
+    }
+
+    @Test
+    func `a missing bundle identifier is never managed by the codexbar cask`() {
+        let app = URL(fileURLWithPath: "/usr/local/Caskroom/codexbar/1.0.0/CodexBar.app")
+
+        #expect(!InstallOrigin.isUpstreamHomebrewCask(appBundleURL: app, bundleIdentifier: nil, caskroomURLs: []))
+    }
+
+    @Test
+    func `Sharingan linked from the codexbar caskroom is not managed by Homebrew`() throws {
+        try self.withFixture { root, app, artifact in
+            try FileManager.default.createSymbolicLink(at: artifact, withDestinationURL: app)
+            let caskrooms = [root.appendingPathComponent("brew/Caskroom")]
+
+            #expect(InstallOrigin.isUpstreamHomebrewCask(
+                appBundleURL: app,
+                bundleIdentifier: InstallOrigin.upstreamCaskBundleIdentifier,
+                caskroomURLs: caskrooms))
+            #expect(!InstallOrigin.isUpstreamHomebrewCask(
+                appBundleURL: app,
+                bundleIdentifier: "com.gdpais.sharingan",
+                caskroomURLs: caskrooms))
+        }
+    }
+
     @Test
     func `unrelated caskroom directory does not claim the app`() {
         #expect(!InstallOrigin.isHomebrewCask(

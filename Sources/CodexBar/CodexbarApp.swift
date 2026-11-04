@@ -363,7 +363,10 @@ private func makeUpdaterController() -> UpdaterProviding {
         return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
     }
 
-    if InstallOrigin.isHomebrewCask(appBundleURL: bundleURL) {
+    if InstallOrigin.isUpstreamHomebrewCask(
+        appBundleURL: bundleURL,
+        bundleIdentifier: Bundle.main.bundleIdentifier)
+    {
         return HomebrewUpdaterController(
             savedAutoCheck: (UserDefaults.standard.object(forKey: "autoUpdateEnabled") as? Bool) ?? true,
             notifier: HomebrewUpdateNotifier(dependencies: .live))
