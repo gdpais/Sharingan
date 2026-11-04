@@ -48,7 +48,7 @@ struct ShareStatsCardView: View {
             HStack(spacing: 14) {
                 ShareStatsMark(accent: self.accent)
                     .frame(width: 34, height: 34)
-                Text("CodexBar")
+                Text(AppBrand.displayName)
                     .font(.system(size: 26, weight: .semibold, design: .rounded))
             }
             Spacer()
