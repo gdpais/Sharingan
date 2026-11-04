@@ -2770,3 +2770,4 @@
 "Spend by hour of week" = "曜日・時間帯別の支出";
 "By hour of week" = "曜日・時間帯別";
 "%@ of spend on weekends" = "週末の支出: %@";
+"%@ vs previous %d days" = "%@（直前の%d日間比）";

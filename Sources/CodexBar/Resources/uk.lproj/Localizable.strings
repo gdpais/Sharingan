@@ -2771,3 +2771,4 @@
 "Spend by hour of week" = "Витрати за годинами тижня";
 "By hour of week" = "За годинами тижня";
 "%@ of spend on weekends" = "%@ витрат припадає на вихідні";
+"%@ vs previous %d days" = "%@ порівняно з попередніми %d дн.";

@@ -2774,3 +2774,4 @@
 "Spend by hour of week" = "Spesa per ora della settimana";
 "By hour of week" = "Per ora della settimana";
 "%@ of spend on weekends" = "%@ della spesa nei fine settimana";
+"%@ vs previous %d days" = "%@ rispetto ai %d giorni precedenti";

@@ -2771,3 +2771,4 @@
 "Spend by hour of week" = "Chi tiêu theo giờ trong tuần";
 "By hour of week" = "Theo giờ trong tuần";
 "%@ of spend on weekends" = "%@ chi tiêu vào cuối tuần";
+"%@ vs previous %d days" = "%@ so với %d ngày trước đó";

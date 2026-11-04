@@ -2769,3 +2769,4 @@
 "Spend by hour of week" = "Utgifter per veckotimme";
 "By hour of week" = "Per veckotimme";
 "%@ of spend on weekends" = "%@ av utgifterna på helger";
+"%@ vs previous %d days" = "%@ jämfört med föregående %d dagar";

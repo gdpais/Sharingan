@@ -2762,3 +2762,4 @@
 "Spend by hour of week" = "一周各时段支出";
 "By hour of week" = "一周各时段";
 "%@ of spend on weekends" = "周末支出占 %@";
+"%@ vs previous %d days" = "%@（较前 %d 天）";
