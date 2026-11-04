@@ -14,10 +14,10 @@
 "Include API keys, cookies, and tokens" = "Sertakan kunci API, cookies, dan token";
 "Sync usage snapshots" = "Sinkronkan snapshot penggunaan";
 "Show accounts from other Macs" = "Tampilkan akun dari Mac lain";
-"Requires a signed release build of CodexBar." = "Memerlukan build rilis CodexBar yang ditandatangani.";
+"Requires a signed release build of CodexBar." = "Memerlukan build rilis Sharingan yang ditandatangani.";
 "Sign in to iCloud in System Settings to enable sync." = "Masuk ke iCloud di Pengaturan Sistem untuk mengaktifkan sinkronisasi.";
 "iCloud access is restricted on this Mac." = "Akses iCloud dibatasi di Mac ini.";
-"Sync is paused: another Mac uses a newer version of CodexBar. Update to resume." = "Sinkronisasi dijeda: Mac lain menggunakan versi CodexBar yang lebih baru. Perbarui untuk melanjutkan.";
+"Sync is paused: another Mac uses a newer version of CodexBar. Update to resume." = "Sinkronisasi dijeda: Mac lain menggunakan versi Sharingan yang lebih baru. Perbarui untuk melanjutkan.";
 "Last successful fetch" = "Pengambilan terakhir yang berhasil";
 "Last successful push" = "Dorongan terakhir yang berhasil";
 "Never" = "Tidak pernah";
@@ -31,9 +31,9 @@
 "%dh ago" = "%dj yang lalu";
 "%dd ago" = "%d hari yang lalu";
 
-"ollama_safari_cookie_access_hint" = "Cookie Safari memerlukan Akses Disk Penuh untuk CodexBar (Pengaturan Sistem > Privasi & Keamanan).";
+"ollama_safari_cookie_access_hint" = "Cookie Safari memerlukan Akses Disk Penuh untuk Sharingan (Pengaturan Sistem > Privasi & Keamanan).";
 "ollama_browser_cookie_decryption_denied" = "Dekripsi cookie %@ ditolak di Rantai Kunci. Buka kartu penyedia dan klik Segarkan (⌘R) untuk meminta akses Rantai Kunci lagi.";
-"ollama_browser_cookie_decryption_disabled" = "Dekripsi cookie %@ dinonaktifkan di CodexBar; aktifkan akses Rantai Kunci lalu segarkan.";
+"ollama_browser_cookie_decryption_disabled" = "Dekripsi cookie %@ dinonaktifkan di Sharingan; aktifkan akses Rantai Kunci lalu segarkan.";
 
 " providers" = " penyedia";
 "(System)" = "(Sistem)";
@@ -49,7 +49,7 @@
 "AI credits" = "Kredit AI";
 "Gateway requests" = "Permintaan gateway";
 "Future AGI cost history is not available." = "Riwayat biaya Future AGI tidak tersedia.";
-"Saved in CodexBar's local config file. Or set FI_API_KEY." = "Disimpan dalam file konfigurasi lokal CodexBar. Atau atur FI_API_KEY.";
+"Saved in CodexBar's local config file. Or set FI_API_KEY." = "Disimpan dalam file konfigurasi lokal Sharingan. Atau atur FI_API_KEY.";
 
 "API region" = "Wilayah API";
 "API token" = "Token API";
@@ -84,7 +84,7 @@
 "Automatic imports browser cookies or stored sessions." = "Otomatis mengimpor cookie browser atau sesi tersimpan.";
 "Automatic imports browser cookies." = "Otomatis mengimpor cookie browser.";
 "Automatically imports browser session cookie." = "Otomatis mengimpor cookie sesi browser.";
-"Automatically opens CodexBar when you start your Mac." = "Otomatis membuka CodexBar saat Anda menyalakan Mac.";
+"Automatically opens CodexBar when you start your Mac." = "Otomatis membuka Sharingan saat Anda menyalakan Mac.";
 "Automation" = "Otomatisasi";
 "Average (\\(label1) + \\(label2))" = "Rata-rata (\\(label1) + \\(label2))";
 "Average (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))" = "Rata-rata (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))";
@@ -106,7 +106,7 @@
 "Check for updates automatically" = "Periksa pembaruan secara otomatis";
 "Check if you like your agents having some fun up there." = "Centang jika Anda suka agen bersenang-senang di atas sana.";
 "Check provider status" = "Periksa status penyedia";
-"Choose a supported browser so CodexBar can read the matching account." = "Pilih browser yang didukung agar CodexBar dapat membaca akun yang sesuai.";
+"Choose a supported browser so CodexBar can read the matching account." = "Pilih browser yang didukung agar Sharingan dapat membaca akun yang sesuai.";
 "Choose Codex workspace" = "Pilih workspace Codex";
 "Choose Cursor account" = "Pilih akun Cursor";
 "Choose the MiniMax host (global .io or China mainland .com)." = "Pilih host MiniMax (global .io atau Tiongkok daratan .com).";
@@ -114,8 +114,8 @@
 "Choose up to \\(Self.maxOverviewProviders) providers" = "Pilih hingga \\(Self.maxOverviewProviders) penyedia";
 "Choose up to \\(count) providers" = "Pilih hingga \\(count) penyedia";
 "Choose what to show in the menu bar (Pace shows usage vs. expected)." = "Pilih apa yang ditampilkan di menu bar (Pace menampilkan penggunaan vs. perkiraan).";
-"Choose which Codex account CodexBar should follow." = "Pilih akun Codex mana yang harus diikuti CodexBar.";
-"Choose which Cursor account CodexBar should use." = "Pilih akun Cursor yang harus digunakan CodexBar.";
+"Choose which Codex account CodexBar should follow." = "Pilih akun Codex mana yang harus diikuti Sharingan.";
+"Choose which Cursor account CodexBar should use." = "Pilih akun Cursor yang harus digunakan Sharingan.";
 "Choose which window drives the menu bar percent." = "Pilih jendela mana yang menggerakkan persentase menu bar.";
 "Chrome" = "Chrome";
 "Claude CLI not found" = "Claude CLI tidak ditemukan";
@@ -130,9 +130,9 @@
 "Codex binary" = "Biner Codex";
 "Codex login failed" = "Login Codex gagal";
 "Codex login timed out" = "Login Codex kehabisan waktu";
-"CodexBar Lifecycle Keepalive" = "CodexBar Siklus Hidup Tetap Hidup";
-"CodexBar can't show its menu bar icon" = "CodexBar tidak dapat menampilkan ikon menu bar";
-"CodexBar could not read managed account storage. " = "CodexBar tidak dapat membaca penyimpanan akun terkelola. ";
+"CodexBar Lifecycle Keepalive" = "Sharingan Siklus Hidup Tetap Hidup";
+"CodexBar can't show its menu bar icon" = "Sharingan tidak dapat menampilkan ikon menu bar";
+"CodexBar could not read managed account storage. " = "Sharingan tidak dapat membaca penyimpanan akun terkelola. ";
 "Configure…" = "Konfigurasi…";
 "Connected" = "Terhubung";
 "Controls how much detail is logged." = "Mengontrol seberapa banyak detail yang dicatat.";
@@ -151,7 +151,7 @@
 "Local token history is unavailable or incomplete." = "Riwayat token lokal tidak tersedia atau tidak lengkap.";
 "Could not add Codex account" = "Tidak dapat menambahkan akun Codex";
 "Could not open Terminal for Gemini" = "Tidak dapat membuka Terminal untuk Gemini";
-"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "Gagal membaca kredensial Claude OAuth: cache Claude OAuth CodexBar untuk sementara tidak tersedia di Rantai Kunci macOS. Pastikan rantai kunci masuk sudah dibuka di Akses Rantai Kunci, lalu coba segarkan lagi.";
+"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "Gagal membaca kredensial Claude OAuth: cache Claude OAuth Sharingan untuk sementara tidak tersedia di Rantai Kunci macOS. Pastikan rantai kunci masuk sudah dibuka di Akses Rantai Kunci, lalu coba segarkan lagi.";
 "Could not start codex login" = "Tidak dapat memulai codex login";
 "Could not switch system account" = "Tidak dapat beralih akun sistem";
 "Credits" = "Kredit";
@@ -200,13 +200,13 @@
 "Hide details" = "Sembunyikan detail";
 "Hide personal information" = "Sembunyikan informasi pribadi";
 "Historical tracking" = "Pelacakan riwayat";
-"How often CodexBar polls providers in the background." = "Seberapa sering CodexBar memeriksa penyedia di latar belakang.";
+"How often CodexBar polls providers in the background." = "Seberapa sering Sharingan memeriksa penyedia di latar belakang.";
 "Inactive" = "Tidak aktif";
 "Install CLI" = "Pasang CLI";
 "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again." = "Pasang Claude CLI (npm i -g @anthropic-ai/claude-code) dan coba lagi.";
 "Install the Codex CLI (npm i -g @openai/codex) and try again." = "Pasang Codex CLI (npm i -g @openai/codex) dan coba lagi.";
 "Install the Gemini CLI (npm i -g @google/gemini-cli) and try again." = "Pasang Gemini CLI (npm i -g @google/gemini-cli) dan coba lagi.";
-"Install a JetBrains IDE with AI Assistant enabled, then refresh CodexBar." = "Pasang JetBrains IDE dengan AI Assistant aktif, lalu segarkan CodexBar.";
+"Install a JetBrains IDE with AI Assistant enabled, then refresh CodexBar." = "Pasang JetBrains IDE dengan AI Assistant aktif, lalu segarkan Sharingan.";
 "JetBrains AI is ready" = "JetBrains AI siap";
 "JetBrains IDE" = "JetBrains IDE";
 "Keep CLI sessions alive" = "Pertahankan sesi CLI";
@@ -260,7 +260,7 @@
 "Open" = "Buka";
 "Open API Keys" = "Buka Kunci API";
 "Open Amp Settings" = "Buka Pengaturan Amp";
-"Open Antigravity to sign in, then refresh CodexBar." = "Buka Antigravity untuk masuk, lalu segarkan CodexBar.";
+"Open Antigravity to sign in, then refresh CodexBar." = "Buka Antigravity untuk masuk, lalu segarkan Sharingan.";
 "Open Browser" = "Buka Browser";
 "Open Coding Plan" = "Buka Coding Plan";
 "Open Console" = "Buka Konsol";
@@ -305,7 +305,7 @@
 "Progress bars fill as you consume quota (instead of showing remaining)." = "Bilah progres terisi saat Anda menggunakan kuota (alih-alih menampilkan sisa).";
 "Provider" = "Penyedia";
 "Providers" = "Penyedia";
-"Quit CodexBar" = "Keluar CodexBar";
+"Quit CodexBar" = "Keluar Sharingan";
 "Random (default)" = "Acak (bawaan)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Membaca log penggunaan lokal. Menampilkan hari ini + jendela riwayat yang dipilih di menu.";
 "Refresh" = "Segarkan";
@@ -313,8 +313,8 @@
 "Remote" = "Jarak jauh";
 "Remove" = "Hapus";
 "Remove Codex account?" = "Hapus akun Codex?";
-"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "Hapus \\(account.email) dari CodexBar? Home Codex terkelolanya akan dihapus.";
-"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "Hapus \\(email) dari CodexBar? Home Codex terkelolanya akan dihapus.";
+"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "Hapus \\(account.email) dari Sharingan? Home Codex terkelolanya akan dihapus.";
+"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "Hapus \\(email) dari Sharingan? Home Codex terkelolanya akan dihapus.";
 "Remove selected account" = "Hapus akun terpilih";
 "Replace critter bars with provider branding icons and a percentage." = "Ganti bilah critter dengan ikon merek penyedia dan persentase.";
 "Replay selected animation" = "Putar ulang animasi terpilih";
@@ -356,7 +356,7 @@
 "Store multiple Ollama Cookie headers." = "Simpan beberapa header Cookie Ollama.";
 "Store multiple OpenCode Cookie headers." = "Simpan beberapa header Cookie OpenCode.";
 "Store multiple OpenCode Go Cookie headers." = "Simpan beberapa header Cookie OpenCode Go.";
-"Stored in the CodexBar config file." = "Disimpan dalam file konfigurasi CodexBar.";
+"Stored in the CodexBar config file." = "Disimpan dalam file konfigurasi Sharingan.";
 "Stored in ~/.codexbar/config.json. " = "Disimpan di ~/.codexbar/config.json. ";
 "Stored in ~/.codexbar/config.json. Paste the key from the Synthetic dashboard." = "Disimpan di ~/.codexbar/config.json. Tempel kunci dari dasbor Synthetic.";
 "Stored in ~/.codexbar/config.json. Paste your Coding Plan API key from Model Studio." = "Disimpan di ~/.codexbar/config.json. Tempel kunci API Coding Plan Anda dari Model Studio.";
@@ -432,8 +432,8 @@
 "cursor_on_demand" = "Sesuai permintaan: %@";
 "cursor_on_demand_with_limit" = "Sesuai permintaan: %1$@ / %2$@";
 "extra_usage_format" = "Penggunaan ekstra: %1$@ / %2$@";
-"jetbrains_detected_generate" = "Terdeteksi: %@. Gunakan asisten AI sekali untuk menghasilkan data kuota, lalu segarkan CodexBar.";
-"jetbrains_detected_select" = "Terdeteksi: %@. Pilih IDE pilihan Anda di Pengaturan, lalu segarkan CodexBar.";
+"jetbrains_detected_generate" = "Terdeteksi: %@. Gunakan asisten AI sekali untuk menghasilkan data kuota, lalu segarkan Sharingan.";
+"jetbrains_detected_select" = "Terdeteksi: %@. Pilih IDE pilihan Anda di Pengaturan, lalu segarkan Sharingan.";
 "last_fetch_failed_with_provider" = "Pengambilan %@ terakhir gagal:";
 "last_spend" = "Pengeluaran terakhir: %@";
 "mcp_model_usage" = "%1$@: %2$@";
@@ -443,10 +443,10 @@
 "metric_primary" = "Utama (%@)";
 "metric_secondary" = "Sekunder (%@)";
 "metric_tertiary" = "Tersier (%@)";
-"multiple_workspaces_found" = "CodexBar menemukan beberapa workspace untuk %@. Silakan pilih workspace yang akan ditambahkan.";
+"multiple_workspaces_found" = "Sharingan menemukan beberapa workspace untuk %@. Silakan pilih workspace yang akan ditambahkan.";
 "ory_session_…=…; csrftoken=…" = "ory_session_…=…; csrftoken=…";
 "overview_choose_providers" = "Pilih hingga %@ penyedia";
-"remove_account_message" = "Hapus %@ dari CodexBar? Home Codex terkelolanya akan dihapus.";
+"remove_account_message" = "Hapus %@ dari Sharingan? Home Codex terkelolanya akan dihapus.";
 "version_format" = "Versi %@";
 "vertex_ai_login_instructions" = "Untuk melacak penggunaan Vertex AI, autentikasi dengan Google Cloud.\n\n1. Buka Terminal\n2. Jalankan: gcloud auth application-default login\n3. Ikuti petunjuk browser untuk masuk\n4. Atur proyek Anda: gcloud config set project PROJECT_ID\n\nBuka Terminal sekarang?";
 "workspaceID is set but only opencode, opencodego, and deepgram support workspaceID." = "workspaceID diatur tetapi hanya opencode, opencodego, dan deepgram yang mendukung workspaceID.";
@@ -489,7 +489,7 @@
 "language_indonesian" = "Bahasa Indonesia";
 "language_polish" = "Bahasa Polandia";
 "start_at_login_title" = "Mulai saat Login";
-"start_at_login_subtitle" = "Otomatis membuka CodexBar saat Anda menyalakan Mac.";
+"start_at_login_subtitle" = "Otomatis membuka Sharingan saat Anda menyalakan Mac.";
 "show_cost_summary_subtitle" = "Membaca log penggunaan lokal. Menampilkan hari ini + jendela riwayat yang dipilih di menu.";
 "cost_summary_style_title" = "Gaya tampilan";
 "cost_summary_style_inline" = "Hanya sebaris";
@@ -514,7 +514,7 @@
 "credential_expiry_notifications_title" = "Kedaluwarsa kredensial";
 "credential_expiry_notifications_subtitle" = "Beri tahu sekali saat akun penyedia mengharuskan Anda masuk kembali.";
 "credential_expiry_notification_title" = "%@ perlu masuk";
-"credential_expiry_notification_body" = "Buka CodexBar untuk meninjau kesalahan akun dan masuk kembali.";
+"credential_expiry_notification_body" = "Buka Sharingan untuk meninjau kesalahan akun dan masuk kembali.";
 "session_quota_notifications_subtitle" = "Memberi tahu saat kuota sesi 5 jam mencapai 0% dan saat tersedia kembali.";
 "quota_depleted_title" = "Kuota habis & tersedia kembali";
 "quota_warning_notifications_subtitle" = "Memperingatkan saat sisa kuota sesi atau mingguan melewati ambang batas yang dikonfigurasi.";
@@ -569,7 +569,7 @@
 "quota_warning_warning" = "Peringatan";
 "quota_warning_critical" = "Kritis";
 "apply" = "Terapkan";
-"quit_app" = "Keluar CodexBar";
+"quit_app" = "Keluar Sharingan";
 
 /* Tab titles */
 "tab_general" = "Umum";
@@ -617,8 +617,8 @@
 "managed_login_missing_email" = "Login Codex selesai, tetapi email akun tidak tersedia. Coba lagi setelah mengonfirmasi akun sudah sepenuhnya masuk.";
 "login_success_notification_title" = "Login %@ berhasil";
 "login_success_notification_body" = "Anda dapat kembali ke aplikasi; autentikasi selesai.";
-"workspace_selection_cancelled" = "CodexBar menemukan beberapa workspace, tetapi tidak ada workspace yang dipilih.";
-"unsafe_managed_home" = "CodexBar menolak memodifikasi path home terkelola yang tidak terduga: %@";
+"workspace_selection_cancelled" = "Sharingan menemukan beberapa workspace, tetapi tidak ada workspace yang dipilih.";
+"unsafe_managed_home" = "Sharingan menolak memodifikasi path home terkelola yang tidak terduga: %@";
 "menu_bar_metric_title" = "Metrik menu bar";
 "menu_bar_metric_subtitle" = "Pilih jendela mana yang menggerakkan persentase menu bar.";
 "menu_bar_metric_subtitle_deepseek" = "Menampilkan saldo DeepSeek di menu bar.";
@@ -736,7 +736,7 @@
 "link_twitter" = "Twitter";
 "link_email" = "Surel";
 "link_acknowledgements" = "Ucapan Terima Kasih";
-"acknowledgements_footer" = "CodexBar dibangun dengan proyek sumber terbuka ini.";
+"acknowledgements_footer" = "Sharingan dibangun dengan proyek sumber terbuka ini.";
 "acknowledgements_others" = "%d lainnya";
 "acknowledgements_author" = "Penulis";
 "acknowledgements_authors" = "Penulis";
@@ -751,7 +751,7 @@
 
 /* Debug Pane */
 "use_javascriptcore_plugin_engine" = "Gunakan JavaScriptCore untuk plugin penyedia";
-"use_javascriptcore_plugin_engine_subtitle" = "Hanya untuk rollback kompatibilitas. Mulai ulang CodexBar untuk menerapkan; CODEXBAR_PLUGIN_ENGINE mengganti pengaturan ini.";
+"use_javascriptcore_plugin_engine_subtitle" = "Hanya untuk rollback kompatibilitas. Mulai ulang Sharingan untuk menerapkan; CODEXBAR_PLUGIN_ENGINE mengganti pengaturan ini.";
 "section_logging" = "Pencatatan";
 "enable_file_logging" = "Aktifkan pencatatan file";
 "enable_file_logging_subtitle" = "Tulis log ke %@ untuk debugging.";
@@ -807,7 +807,7 @@
 "login_shell_path" = "PATH shell login (tangkapan startup)";
 "cleared" = "Dihapus.";
 "no_fetch_attempts" = "Belum ada percobaan pengambilan.";
-"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe dapat memblokir aplikasi menu bar di Pengaturan Sistem → Menu Bar → Izinkan di Menu Bar. CodexBar berjalan, tetapi macOS mungkin menyembunyikan ikonnya. Buka pengaturan Menu Bar dan aktifkan CodexBar.";
+"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe dapat memblokir aplikasi menu bar di Pengaturan Sistem → Menu Bar → Izinkan di Menu Bar. Sharingan berjalan, tetapi macOS mungkin menyembunyikan ikonnya. Buka pengaturan Menu Bar dan aktifkan Sharingan.";
 
 /* Metric preferences */
 "metric_pref_automatic" = "Otomatis";
@@ -850,7 +850,7 @@
 "refresh_adaptive" = "Adaptif";
 "refresh_adaptive_agent_aware" = "Adaptif (peka agen)";
 "adaptive_activity_consent_title" = "Izinkan penyegaran yang peka terhadap aktivitas?";
-"adaptive_activity_consent_message" = "Mode Adaptif yang peka terhadap agen dapat memeriksa daftar proses lokal yang sedang berjalan, termasuk baris perintah, untuk mengenali Codex dan Claude, lalu membaca metadata sesi yang dikenal setiap 30 detik saat Anda menulis kode. Saat Agent Sessions dinonaktifkan, CodexBar hanya menggunakan waktu aktivitas terbaru di memori serta membuang jalur dan identitas sesi. Data ini tidak dikirim ke mana pun, dan penemuan jarak jauh serta SSH tetap nonaktif. Jika Anda menolak, CodexBar kembali ke mode Adaptif biasa tanpa pemindaian aktivitas lokal.";
+"adaptive_activity_consent_message" = "Mode Adaptif yang peka terhadap agen dapat memeriksa daftar proses lokal yang sedang berjalan, termasuk baris perintah, untuk mengenali Codex dan Claude, lalu membaca metadata sesi yang dikenal setiap 30 detik saat Anda menulis kode. Saat Agent Sessions dinonaktifkan, Sharingan hanya menggunakan waktu aktivitas terbaru di memori serta membuang jalur dan identitas sesi. Data ini tidak dikirim ke mana pun, dan penemuan jarak jauh serta SSH tetap nonaktif. Jika Anda menolak, Sharingan kembali ke mode Adaptif biasa tanpa pemindaian aktivitas lokal.";
 "adaptive_activity_consent_allow" = "Izinkan Aktivitas Lokal";
 "adaptive_activity_consent_decline" = "Gunakan Adaptif Biasa";
 
@@ -899,7 +899,7 @@
 "Status Page" = "Halaman Status";
 "Open Status Page" = "Buka Halaman Status";
 "Settings..." = "Pengaturan...";
-"About CodexBar" = "Tentang CodexBar";
+"About CodexBar" = "Tentang Sharingan";
 "Quit" = "Keluar";
 "Last %d day" = "%d hari terakhir";
 "Last %d days" = "%d hari terakhir";
@@ -1000,8 +1000,8 @@
 "Managed by Homebrew" = "Dikelola oleh Homebrew";
 "Copy update command" = "Salin perintah pembaruan";
 "Update to %@" = "Perbarui ke %@";
-"CodexBar %@ is available" = "CodexBar %@ tersedia";
-"CodexBar is up to date" = "CodexBar sudah terbaru";
+"CodexBar %@ is available" = "Sharingan %@ tersedia";
+"CodexBar is up to date" = "Sharingan sudah terbaru";
 "Checking for updates…" = "Memeriksa pembaruan…";
 "Updating with Homebrew…" = "Memperbarui dengan Homebrew…";
 "Homebrew update failed. You can run this command in Terminal instead:" = "Pembaruan Homebrew gagal. Anda dapat menjalankan perintah ini di Terminal:";
@@ -1175,27 +1175,27 @@
 "Capacity Start" = "Awal Kapasitas";
 "Changelog" = "Log perubahan";
 "Choose the Moonshot/Kimi API host for international or China mainland accounts." = "Pilih host API Moonshot/Kimi untuk akun internasional atau Tiongkok daratan.";
-"CodexBar can't replace a system account that is signed in with an API key only setup." = "CodexBar tidak dapat mengganti akun sistem yang masuk dengan pengaturan hanya kunci API.";
-"CodexBar could not find saved auth for that account. Re-authenticate it and try again." = "CodexBar tidak dapat menemukan auth tersimpan untuk akun tersebut. Autentikasi ulang dan coba lagi.";
-"CodexBar could not read managed account storage. Recover the store before adding another account." = "CodexBar tidak dapat membaca penyimpanan akun terkelola. Pulihkan penyimpanan sebelum menambahkan akun lain.";
-"CodexBar could not read saved auth for that account. Re-authenticate it and try again." = "CodexBar tidak dapat membaca auth tersimpan untuk akun tersebut. Autentikasi ulang dan coba lagi.";
-"CodexBar could not read the current system account on this Mac." = "CodexBar tidak dapat membaca akun sistem saat ini di Mac ini.";
-"CodexBar could not replace the live Codex auth on this Mac." = "CodexBar tidak dapat mengganti auth Codex aktif di Mac ini.";
-"CodexBar could not safely preserve the current system account before switching." = "CodexBar tidak dapat menyimpan akun sistem saat ini dengan aman sebelum beralih.";
-"CodexBar could not save the current system account before switching." = "CodexBar tidak dapat menyimpan akun sistem saat ini sebelum beralih.";
-"CodexBar could not update managed account storage." = "CodexBar tidak dapat memperbarui penyimpanan akun terkelola.";
-"CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "CodexBar menemukan akun terkelola lain yang sudah menggunakan akun sistem saat ini. Selesaikan akun duplikat sebelum beralih.";
-"CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "CodexBar akan meminta Rantai Kunci macOS untuk “%@” agar dapat mendekripsi cookie browser dan mengautentikasi akun Anda. Klik OK untuk melanjutkan.";
-"CodexBar will ask macOS Keychain for \U201c%@\U201d so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "CodexBar akan meminta Keychain macOS untuk \U201c%@\U201d agar dapat mendekripsi cookie browser dan mengautentikasi akun Anda. Klik OK untuk melanjutkan.";
-"CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "CodexBar akan meminta Keychain macOS untuk token OAuth Claude Code agar dapat mengambil penggunaan Claude Anda. Klik OK untuk melanjutkan.";
-"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "CodexBar akan meminta Keychain macOS untuk header cookie %@ Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
-"CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "CodexBar akan meminta Keychain macOS untuk header cookie Claude Anda agar dapat mengambil penggunaan web Claude. Klik OK untuk melanjutkan.";
-"CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "CodexBar akan meminta Keychain macOS untuk token GitHub Copilot Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
-"CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "CodexBar akan meminta Keychain macOS untuk token auth Kimi Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
-"CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "CodexBar akan meminta Keychain macOS untuk token API MiniMax Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
-"CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "CodexBar akan meminta Keychain macOS untuk header cookie OpenAI Anda agar dapat mengambil ekstra dasbor Codex. Klik OK untuk melanjutkan.";
-"CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "CodexBar akan meminta Keychain macOS untuk kunci API Synthetic Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
-"CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "CodexBar akan meminta Keychain macOS untuk token API z.ai Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
+"CodexBar can't replace a system account that is signed in with an API key only setup." = "Sharingan tidak dapat mengganti akun sistem yang masuk dengan pengaturan hanya kunci API.";
+"CodexBar could not find saved auth for that account. Re-authenticate it and try again." = "Sharingan tidak dapat menemukan auth tersimpan untuk akun tersebut. Autentikasi ulang dan coba lagi.";
+"CodexBar could not read managed account storage. Recover the store before adding another account." = "Sharingan tidak dapat membaca penyimpanan akun terkelola. Pulihkan penyimpanan sebelum menambahkan akun lain.";
+"CodexBar could not read saved auth for that account. Re-authenticate it and try again." = "Sharingan tidak dapat membaca auth tersimpan untuk akun tersebut. Autentikasi ulang dan coba lagi.";
+"CodexBar could not read the current system account on this Mac." = "Sharingan tidak dapat membaca akun sistem saat ini di Mac ini.";
+"CodexBar could not replace the live Codex auth on this Mac." = "Sharingan tidak dapat mengganti auth Codex aktif di Mac ini.";
+"CodexBar could not safely preserve the current system account before switching." = "Sharingan tidak dapat menyimpan akun sistem saat ini dengan aman sebelum beralih.";
+"CodexBar could not save the current system account before switching." = "Sharingan tidak dapat menyimpan akun sistem saat ini sebelum beralih.";
+"CodexBar could not update managed account storage." = "Sharingan tidak dapat memperbarui penyimpanan akun terkelola.";
+"CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "Sharingan menemukan akun terkelola lain yang sudah menggunakan akun sistem saat ini. Selesaikan akun duplikat sebelum beralih.";
+"CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "Sharingan akan meminta Rantai Kunci macOS untuk “%@” agar dapat mendekripsi cookie browser dan mengautentikasi akun Anda. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for \U201c%@\U201d so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "Sharingan akan meminta Keychain macOS untuk \U201c%@\U201d agar dapat mendekripsi cookie browser dan mengautentikasi akun Anda. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "Sharingan akan meminta Keychain macOS untuk token OAuth Claude Code agar dapat mengambil penggunaan Claude Anda. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "Sharingan akan meminta Keychain macOS untuk header cookie %@ Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "Sharingan akan meminta Keychain macOS untuk header cookie Claude Anda agar dapat mengambil penggunaan web Claude. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "Sharingan akan meminta Keychain macOS untuk token GitHub Copilot Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "Sharingan akan meminta Keychain macOS untuk token auth Kimi Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "Sharingan akan meminta Keychain macOS untuk token API MiniMax Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "Sharingan akan meminta Keychain macOS untuk header cookie OpenAI Anda agar dapat mengambil ekstra dasbor Codex. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "Sharingan akan meminta Keychain macOS untuk kunci API Synthetic Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "Sharingan akan meminta Keychain macOS untuk token API z.ai Anda agar dapat mengambil penggunaan. Klik OK untuk melanjutkan.";
 "Could not open Cursor login in your browser." = "Tidak dapat membuka login Cursor di browser Anda.";
 "Could not open browser for Antigravity" = "Tidak dapat membuka browser untuk Antigravity";
 "Credits used" = "Kredit terpakai";
@@ -1210,7 +1210,7 @@
 "Extra usage balance: %@" = "Saldo penggunaan ekstra: %@";
 "Keychain Access Required" = "Akses Keychain Diperlukan";
 "keychain_prompt_learn_more" = "Pelajari Lebih Lanjut…";
-"keychain_prompt_privacy_note" = "macOS—bukan CodexBar—menangani pemasukan kata sandi masuk Mac. Anda dapat menonaktifkan semua akses Keychain kapan saja di Pengaturan → Lanjutan.";
+"keychain_prompt_privacy_note" = "macOS—bukan Sharingan—menangani pemasukan kata sandi masuk Mac. Anda dapat menonaktifkan semua akses Keychain kapan saja di Pengaturan → Lanjutan.";
 "Kiro menu bar value" = "Nilai menu bar Kiro";
 "Label" = "Label";
 "No organizations loaded. Click Refresh after setting your API key." = "Tidak ada organisasi dimuat. Klik Segarkan setelah mengatur kunci API Anda.";
@@ -1274,7 +1274,7 @@
 "Service" = "Layanan";
 "Show or hide Kiro credits, percent, or both next to the menu bar icon." = "Tampilkan atau sembunyikan kredit Kiro, persen, atau keduanya di sebelah ikon menu bar.";
 "Show usage for organizations you belong to. Personal account is always shown." = "Tampilkan penggunaan untuk organisasi yang Anda ikuti. Akun pribadi selalu ditampilkan.";
-"Sign in to cursor.com in your browser, then refresh Cursor in CodexBar." = "Masuk ke cursor.com di browser Anda, lalu segarkan Cursor di CodexBar.";
+"Sign in to cursor.com in your browser, then refresh Cursor in CodexBar." = "Masuk ke cursor.com di browser Anda, lalu segarkan Cursor di Sharingan.";
 "Simulated error text" = "Teks error simulasi";
 "StepFun platform account (phone number or email)." = "Akun platform StepFun (nomor telepon atau email).";
 "Stored in ~/.codexbar/config.json." = "Disimpan di ~/.codexbar/config.json.";
@@ -1290,11 +1290,11 @@
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is preferred; OPENAI_API_KEY still works." = "Disimpan di ~/.codexbar/config.json. OPENAI_ADMIN_KEY lebih diutamakan; OPENAI_API_KEY masih berfungsi.";
 "Stored in ~/.codexbar/config.json. Requires an Anthropic Admin API key." = "Disimpan di ~/.codexbar/config.json. Memerlukan kunci API Admin Anthropic.";
 "Stored in ~/.codexbar/config.json. Used for /v1/quota-stats." = "Disimpan di ~/.codexbar/config.json. Digunakan untuk /v1/quota-stats.";
-"Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`)." = "Disimpan di ~/.codexbar/config.json. Anda juga dapat menyediakan CODEBUFF_API_KEY atau biarkan CodexBar membaca ~/.config/manicode/credentials.json (dibuat oleh `codebuff login`).";
+"Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`)." = "Disimpan di ~/.codexbar/config.json. Anda juga dapat menyediakan CODEBUFF_API_KEY atau biarkan Sharingan membaca ~/.config/manicode/credentials.json (dibuat oleh `codebuff login`).";
 "Stored in ~/.codexbar/config.json. You can also provide KILO_API_KEY or ~/.local/share/kilo/auth.json (kilo.access)." = "Disimpan di ~/.codexbar/config.json. Anda juga dapat menyediakan KILO_API_KEY atau ~/.local/share/kilo/auth.json (kilo.access).";
 "T3 Chat cookie" = "Cookie T3 Chat";
 "Team mode" = "Mode tim";
-"That account is no longer available in CodexBar. Refresh the account list and try again." = "Akun tersebut tidak lagi tersedia di CodexBar. Segarkan daftar akun dan coba lagi.";
+"That account is no longer available in CodexBar. Refresh the account list and try again." = "Akun tersebut tidak lagi tersedia di Sharingan. Segarkan daftar akun dan coba lagi.";
 "The browser login did not complete in time. Try Antigravity login again." = "Login browser tidak selesai tepat waktu. Coba login Antigravity lagi.";
 "Timed out waiting for Cursor login. %@" = "Kehabisan waktu menunggu login Cursor. %@";
 "Timed out waiting for Cursor login. %@ Last error: %@" = "Kehabisan waktu menunggu login Cursor. %@ Error terakhir: %@";
@@ -1576,7 +1576,7 @@
 "5-hour usage" = "Penggunaan 5 jam";
 "7-day usage" = "Penggunaan 7 hari";
 "Total usage" = "Total penggunaan";
-"claude_oauth_keychain_access_disabled" = "Akses Keychain dinonaktifkan, sehingga CodexBar tidak dapat membaca informasi masuk Claude.";
+"claude_oauth_keychain_access_disabled" = "Akses Keychain dinonaktifkan, sehingga Sharingan tidak dapat membaca informasi masuk Claude.";
 "claude_oauth_keychain_access_revoked" = "Akses Rantai Kunci Claude dicabut akibat rotasi token Claude Code. Klik Segarkan untuk memberikan akses lagi, atau ubah sumber penggunaan Claude ke CLI/Web.";
 "claude_showing_last_known_usage" = "Menampilkan penggunaan terakhir yang diketahui, diambil %@.";
 "claude_limited_usage_detail" = "Rincian penggunaan terbatas";
@@ -1653,7 +1653,7 @@
 /* Overview share flow */
 "Share Usage Snapshot…" = "Bagikan ringkasan penggunaan…";
 "Usage snapshot unavailable" = "Ringkasan penggunaan tidak tersedia";
-"CodexBar couldn't prepare a shareable usage snapshot. Refresh Usage & Spend and try again." = "CodexBar tidak dapat menyiapkan ringkasan penggunaan untuk dibagikan. Segarkan Penggunaan & pengeluaran, lalu coba lagi.";
+"CodexBar couldn't prepare a shareable usage snapshot. Refresh Usage & Spend and try again." = "Sharingan tidak dapat menyiapkan ringkasan penggunaan untuk dibagikan. Segarkan Penggunaan & pengeluaran, lalu coba lagi.";
 "Incomplete" = "Tidak lengkap";
 "Est. subtotal (%@): %@" = "Subtotal perkiraan (%@): %@";
 "Excluded requests with missing final usage: %d" = "Permintaan yang dikecualikan karena data penggunaan akhir tidak tersedia: %d";
@@ -1780,14 +1780,14 @@
 "Codex credits are still loading; will retry shortly." = "Codex Kredit masih memuat; akan segera mencoba lagi.";
 "Codex session expired. Sign in again." = "Sesi Codex berakhir. Masuk lagi.";
 "Codex usage is temporarily unavailable. Try refreshing." = "Data penggunaan Codex untuk sementara tidak tersedia. Coba segarkan datanya.";
-"CodexBar Account Usage" = "Penggunaan Akun CodexBar";
-"CodexBar Burn Down" = "CodexBar Kuota terbakar";
-"CodexBar Burn Down (Combined)" = "Pembakaran CodexBar Kuota (gabungan)";
-"CodexBar Help" = "Bantuan CodexBar";
-"CodexBar History" = "CodexBar Sejarah";
-"CodexBar Metric" = "CodexBar Metrik";
-"CodexBar Switcher" = "Pengalih CodexBar";
-"CodexBar Usage" = "Penggunaan CodexBar";
+"CodexBar Account Usage" = "Penggunaan Akun Sharingan";
+"CodexBar Burn Down" = "Sharingan Kuota terbakar";
+"CodexBar Burn Down (Combined)" = "Pembakaran Sharingan Kuota (gabungan)";
+"CodexBar Help" = "Bantuan Sharingan";
+"CodexBar History" = "Sharingan Sejarah";
+"CodexBar Metric" = "Sharingan Metrik";
+"CodexBar Switcher" = "Pengalih Sharingan";
+"CodexBar Usage" = "Penggunaan Sharingan";
 "Compact widget for credits or cost." = "Widget ringkas untuk Kredit atau biaya.";
 "Complete Kiro login in your browser" = "Selesaikan login Kiro di browser Anda";
 "Controls when Claude OAuth may ask macOS for Keychain access." = "Mengontrol kapan Claude OAuth dapat meminta macOS untuk akses Gantungan Kunci.";
@@ -1806,8 +1806,8 @@
 "Details for %@" = "Detail untuk %@";
 "EST. %@" = "Perkiraan %@";
 "Enable Antigravity provider" = "Aktifkan penyedia Antigravity";
-"Enable a provider in CodexBar → Settings → Providers." = "Aktifkan penyedia di CodexBar → Pengaturan → Penyedia.";
-"Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "Aktifkan widget akun di CodexBar → Pengaturan → Menu → Widget. Kemudian edit widget ini untuk memilih akun.";
+"Enable a provider in CodexBar → Settings → Providers." = "Aktifkan penyedia di Sharingan → Pengaturan → Penyedia.";
+"Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "Aktifkan widget akun di Sharingan → Pengaturan → Menu → Widget. Kemudian edit widget ini untuk memilih akun.";
 "Error: %@" = "Kesalahan: %@";
 "Examples: alt+cmd+2, shift+right. Refresh (cmd+r), Settings (cmd+,) and Quit (cmd+q) are reserved." = "Contoh: alt+cmd+2, shift+right. Refresh (cmd+r), Pengaturan (cmd+,) dan Keluar (cmd+q) dicadangkan.";
 "Export Preferences…" = "Preferensi Ekspor…";
@@ -1824,10 +1824,10 @@
 "Gemini app" = "Aplikasi Gemini";
 "Gemini CLI" = "Gemini CLI";
 "Gemini app limits use your browser account and are separate from Gemini CLI quotas." = "Batas aplikasi Gemini berlaku untuk akun peramban Anda dan terpisah dari kuota Gemini CLI.";
-"Generated locally by CodexBar · Data through %@" = "Dibuat secara lokal oleh CodexBar · Data per %@";
+"Generated locally by CodexBar · Data through %@" = "Dibuat secara lokal oleh Sharingan · Data per %@";
 "GitHub cookies" = "GitHub cookies";
 "GitHub does not publish this value. Enter it to show a usage bar. Applies to the selected GitHub account." = "GitHub tidak mempublikasikan nilai ini. Masukkan untuk menampilkan bilah penggunaan. Berlaku untuk akun GitHub yang dipilih.";
-"GitHub login succeeded, but CodexBar could not verify which account it belongs to. Please try again." = "Login GitHub berhasil, tetapi CodexBar tidak dapat memverifikasi akun miliknya. Silakan coba lagi.";
+"GitHub login succeeded, but CodexBar could not verify which account it belongs to. Please try again." = "Login GitHub berhasil, tetapi Sharingan tidak dapat memverifikasi akun miliknya. Silakan coba lagi.";
 "GitKraken access token" = "GitKraken mengakses token";
 "Global uses api.z.ai. China mainland uses open.bigmodel.cn with a BigModel/GLM key; the two key families are not interchangeable." = "Global menggunakan api.z.ai. Tiongkok daratan menggunakan open.bigmodel.cn dengan kunci BigModel/GLM; dua keluarga kunci tidak dapat dipertukarkan.";
 "Grok CLI" = "Grok CLI";
@@ -1875,8 +1875,8 @@
 "Open API docs" = "Buka dokumen API";
 "Open API keys" = "Buka halaman kunci API";
 "Open Amp Access Tokens" = "Buka Amp Akses token";
-"Open CodexBar" = "Buka CodexBar";
-"Open CodexBar to refresh, or edit this widget to choose another account." = "Buka CodexBar untuk menyegarkan, atau edit widget ini untuk memilih akun lain.";
+"Open CodexBar" = "Buka Sharingan";
+"Open CodexBar to refresh, or edit this widget to choose another account." = "Buka Sharingan untuk menyegarkan, atau edit widget ini untuk memilih akun lain.";
 "Open Devin Usage" = "Buka halaman penggunaan Devin";
 "Open Fireworks" = "Buka Fireworks";
 "Open GitKraken Account" = "Buka halaman akun GitKraken";
@@ -1894,7 +1894,7 @@
 "OpenAI cookies are for %1$@, not %2$@." = "OpenAI cookies adalah untuk %1$@, bukan %2$@.";
 "OpenAI cookies are for %@." = "OpenAI cookies adalah untuk %@.";
 "OpenAI web battery saver" = "Penghemat baterai web OpenAI";
-"OpenAI web dashboard refresh timed out. CodexBar will retry after the refresh cooldown." = "Waktu penyegaran dasbor web OpenAI telah habis. CodexBar akan mencoba lagi setelah cooldown penyegaran.";
+"OpenAI web dashboard refresh timed out. CodexBar will retry after the refresh cooldown." = "Waktu penyegaran dasbor web OpenAI telah habis. Sharingan akan mencoba lagi setelah cooldown penyegaran.";
 "OpenAI web refresh hit a network error. Check your connection, then refresh OpenAI cookies and try again." = "Penyegaran web OpenAI mengalami kesalahan jaringan. Periksa koneksi Anda, lalu segarkan OpenAI cookies dan coba lagi.";
 "OpenAI web refresh timed out. Refresh OpenAI cookies and try again." = "Waktu penyegaran web OpenAI habis. Segarkan OpenAI cookies dan coba lagi.";
 "OpenAI web refresh was interrupted. Refresh OpenAI cookies and try again." = "Penyegaran web OpenAI terganggu. Segarkan OpenAI cookies dan coba lagi.";
@@ -1903,7 +1903,7 @@
 "Optional additional key for account Activity. Only needed to use a separate Management API key from the one in the required API key field above." = "Kunci tambahan opsional untuk Aktivitas akun. Hanya perlu menggunakan kunci Manajemen API yang terpisah dari kunci API yang diperlukan di atas.";
 "Optional for automatic auth. Use a slug, URL, or internal org-... / org_... ID. Manual auth may need the x-cog-org-id header from a successful Devin quota request." = "Opsional untuk autentikasi otomatis. Gunakan slug, URL, atau internal org-... / org_... ID. Otentikasi manual mungkin memerlukan header x-cog-org-id dari permintaan Devin Kuota yang berhasil.";
 "Optional gk-org-id header value. Or set GITKRAKEN_ORG_ID." = "Nilai header gk-org-id opsional. Atau atur GITKRAKEN_ORG_ID.";
-"Optional when the API key can access one account; CodexBar discovers it automatically. For multiple accounts, find the slug in the app.fireworks.ai home account switcher or run firectl whoami." = "Opsional ketika kunci API dapat mengakses satu akun; CodexBar menemukannya secara otomatis. Untuk beberapa akun, temukan slug di pengalih akun rumah app.fireworks.ai atau jalankan firectl whoami.";
+"Optional when the API key can access one account; CodexBar discovers it automatically. For multiple accounts, find the slug in the app.fireworks.ai home account switcher or run firectl whoami." = "Opsional ketika kunci API dapat mengakses satu akun; Sharingan menemukannya secara otomatis. Untuk beberapa akun, temukan slug di pengalih akun rumah app.fireworks.ai atau jalankan firectl whoami.";
 "Optional. Defaults to the first Business or Enterprise workspace on the account." = "Opsional. Defaultnya adalah ruang kerja Business atau Enterprise pertama di akun.";
 "Optional. Defaults to the hosted ClawRouter service." = "Opsional. Defaultnya adalah layanan ClawRouter yang dihosting.";
 "Optional. Defaults to the hosted OpenRouter API." = "Opsional. Defaultnya adalah OpenRouter API yang dihosting.";
@@ -1971,7 +1971,7 @@
 "SUBSCRIPTIONS" = "BERLANGGANAN";
 "Save" = "Simpan";
 "Save display and notification preferences for your dotfiles. Accounts, credentials, login, local paths and consent stay on this Mac." = "Simpan preferensi tampilan dan notifikasi untuk dotfiles Anda. Akun, kredensial, login, jalur lokal, dan persetujuan tetap ada di Mac ini.";
-"Saved in CodexBar's local config file. Or set GITKRAKEN_API_TOKEN." = "Disimpan dalam file konfigurasi lokal CodexBar. Atau atur GITKRAKEN_API_TOKEN.";
+"Saved in CodexBar's local config file. Or set GITKRAKEN_API_TOKEN." = "Disimpan dalam file konfigurasi lokal Sharingan. Atau atur GITKRAKEN_API_TOKEN.";
 "Scoped weekly" = "Kuota mingguan untuk cakupan yang dipilih";
 "Secondary quota" = "Kuota sekunder";
 "Select position %@" = "Pilih posisi %@";
@@ -1990,10 +1990,10 @@
 "Show workspace spend" = "Tampilkan pembelanjaan ruang kerja";
 "Shows model-specific Claude quotas, such as Fable, in desktop widgets." = "Menampilkan Claude Kuota khusus model, seperti Fable, di widget desktop.";
 "Shows the hidden accounts" = "Menampilkan akun yang tersembunyi";
-"Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "Menunjukkan penggunaan dan memungkinkan Anda berpindah akun melalui `cswap`. Kredensial tetap dikelola oleh claude-swap; CodexBar tidak pernah membacanya.";
-"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "Menunjukkan penggunaan dari `tcr`; tidak berpindah akun, karena tcr memilih akun untuk setiap permintaan. Kredensial tetap dikelola oleh tcr; CodexBar tidak pernah membacanya.";
+"Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "Menunjukkan penggunaan dan memungkinkan Anda berpindah akun melalui `cswap`. Kredensial tetap dikelola oleh claude-swap; Sharingan tidak pernah membacanya.";
+"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "Menunjukkan penggunaan dari `tcr`; tidak berpindah akun, karena tcr memilih akun untuk setiap permintaan. Kredensial tetap dikelola oleh tcr; Sharingan tidak pernah membacanya.";
 "Stay Awake" = "Tetap terjaga";
-"Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "Disimpan dalam file konfigurasi CodexBar. Membaca anggaran bulanan dan penggunaan yang dialihkan dari /v1/usage.";
+"Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "Disimpan dalam file konfigurasi Sharingan. Membaca anggaran bulanan dan penggunaan yang dialihkan dari /v1/usage.";
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is required for organization usage; legacy/user keys only get a best-effort balance fallback." = "Disimpan di ~/.codexbar/config.json. OPENAI_ADMIN_KEY diperlukan untuk penggunaan organisasi; kunci lama/pengguna hanya mendapatkan penggantian keseimbangan upaya terbaik.";
 "Stored in ~/.codexbar/config.json. You can also provide FACTORY_API_KEY or ~/.factory/.env." = "Disimpan di ~/.codexbar/config.json. Anda juga dapat memberikan FACTORY_API_KEY atau ~/.factory/.env.";
 "Stored in ~/.codexbar/config.json. You can also set AMP_API_KEY." = "Disimpan di ~/.codexbar/config.json. Anda juga dapat mengatur AMP_API_KEY.";
@@ -2008,7 +2008,7 @@
 "Switching account…" = "Beralih akun…";
 "TOP MODELS" = "MODEL TERATAS";
 "TRACKED TOKENS · %@" = "Token tercatat · %@";
-"That managed account uses a workspace that differs from its saved Codex auth default. Keep it as a managed account; CodexBar will not rewrite Codex-owned auth to promote it." = "Akun terkelola tersebut menggunakan ruang kerja yang berbeda dari default autentikasi Codex yang disimpan. Simpan sebagai akun terkelola; CodexBar tidak akan menulis ulang autentikasi milik Codex untuk mempromosikannya.";
+"That managed account uses a workspace that differs from its saved Codex auth default. Keep it as a managed account; CodexBar will not rewrite Codex-owned auth to promote it." = "Akun terkelola tersebut menggunakan ruang kerja yang berbeda dari default autentikasi Codex yang disimpan. Simpan sebagai akun terkelola; Sharingan tidak akan menulis ulang autentikasi milik Codex untuk mempromosikannya.";
 "The pasted header is sent only to this tenant." = "Header yang ditempel hanya dikirim ke penyewa ini.";
 "The selected Codex profile has no verified account email." = "Profil Codex yang dipilih tidak memiliki email akun terverifikasi.";
 "The selected managed Codex account is unavailable." = "Akun Codex terkelola yang dipilih tidak tersedia.";
@@ -2037,7 +2037,7 @@
 "Weekly (7-day)" = "Mingguan (7 hari)";
 "When on, runs automatic provider, local usage, and storage refreshes no more often than every 30 minutes. Manual refresh remains available. Automatic follows the system Low Power Mode setting." = "Jika aktif, jalankan penyegaran penyedia otomatis, penggunaan lokal, dan penyimpanan tidak lebih dari setiap 30 menit. Penyegaran manual tetap tersedia. Otomatis mengikuti pengaturan Mode Daya Rendah sistem.";
 "Without configured API credentials, install and authenticate 'arkcli' for Coding/Agent Plan usage. Existing API credentials remain authoritative." = "Tanpa kredensial API yang dikonfigurasi, instal dan autentikasi 'arkcli' untuk penggunaan Coding/Agent Plan. Kredensial API yang ada tetap resmi.";
-"You can close this window and return to CodexBar." = "Anda dapat menutup jendela ini dan kembali ke CodexBar.";
+"You can close this window and return to CodexBar." = "Anda dapat menutup jendela ini dan kembali ke Sharingan.";
 "You can close this window and try again." = "Anda dapat menutup jendela ini dan mencoba lagi.";
 "ZoomMate capture" = "Pengambilan ZoomMate";
 "a1.small-equivalent hours" = "Jam setara a1.small";
@@ -2105,7 +2105,7 @@
 "Premium weekly" = "Penggunaan mingguan premium Kuota";
 "DevPass cost history is not available." = "Riwayat biaya DevPass tidak tersedia.";
 "DevPass API key" = "Kunci DevPass API";
-"Saved in CodexBar's local config file. Or set DEVPASS_API_KEY." = "Disimpan dalam file konfigurasi lokal CodexBar. Atau atur DEVPASS_API_KEY.";
+"Saved in CodexBar's local config file. Or set DEVPASS_API_KEY." = "Disimpan dalam file konfigurasi lokal Sharingan. Atau atur DEVPASS_API_KEY.";
 "Regular LLM Gateway API key" = "Kunci LLM Gateway API biasa";
 "Memory" = "Penggunaan memori";
 "llmman cost summary is not supported." = "Ringkasan biaya llmman tidak didukung.";
@@ -2134,7 +2134,7 @@
 "ClawRouter spend is reported by its usage API." = "Pembelanjaan ClawRouter dilaporkan berdasarkan penggunaannya API.";
 "Vercel AI Gateway cost history is not available." = "Riwayat biaya Vercel AI Gateway tidak tersedia.";
 "Vercel AI Gateway API key" = "Kunci Vercel AI Gateway API";
-"Saved in CodexBar's local config file. Or set AI_GATEWAY_API_KEY." = "Disimpan dalam file konfigurasi lokal CodexBar. Atau atur AI_GATEWAY_API_KEY.";
+"Saved in CodexBar's local config file. Or set AI_GATEWAY_API_KEY." = "Disimpan dalam file konfigurasi lokal Sharingan. Atau atur AI_GATEWAY_API_KEY.";
 "Savings" = "Tabungan";
 "Reviews" = "Ulasan";
 "Review count and billing period from CodeRabbit." = "Jumlah ulasan dan periode penagihan mulai CodeRabbit.";
@@ -2157,7 +2157,7 @@
 "ClinePass cost history is not available via the usage-limits API." = "Riwayat biaya ClinePass tidak tersedia melalui batas penggunaan API.";
 "Paste an API key, or run cline auth. Reads the existing Cline session without copying it." = "Tempelkan kunci API, atau jalankan cline auth. Membaca sesi Cline yang ada tanpa menyalinnya.";
 "ClinePass API key..." = "Kunci ClinePass API...";
-"DeepInfra per-request cost history is not available in CodexBar." = "DeepInfra riwayat biaya per permintaan tidak tersedia di CodexBar.";
+"DeepInfra per-request cost history is not available in CodexBar." = "DeepInfra riwayat biaya per permintaan tidak tersedia di Sharingan.";
 "Store multiple DeepInfra API keys." = "Simpan beberapa kunci DeepInfra API.";
 "Claude credentials" = "Kredensial Claude";
 "Store Claude sessionKey cookies, OAuth tokens, or Anthropic Admin API keys." = "Simpan kunci Claude sessionKey cookies, OAuth token, atau Anthropic Admin API.";
@@ -2165,7 +2165,7 @@
 "4-hour quota" = "Kuota 4 jam";
 "Monthly quota" = "Kuota bulanan";
 "Subscription usage from the Chutes API." = "Penggunaan berlangganan dari Chutes API.";
-"Chutes cost history is not available from CodexBar." = "Riwayat biaya Chutes tidak tersedia dari CodexBar.";
+"Chutes cost history is not available from CodexBar." = "Riwayat biaya Chutes tidak tersedia dari Sharingan.";
 "Stored in ~/.codexbar/config.json. Paste a Chutes API key." = "Disimpan di ~/.codexbar/config.json. Tempelkan kunci Chutes API.";
 "chutes key..." = "Kunci API Chutes...";
 "Spend" = "Pengeluaran";
@@ -2199,7 +2199,7 @@
 "Base" = "Pangkalan";
 "T3 Chat cost summary is not supported." = "Ringkasan biaya T3 Chat tidak didukung.";
 "Model quota" = "Model Kuota";
-"Helmcode per-request cost history is not available in CodexBar." = "Helmcode riwayat biaya per permintaan tidak tersedia di CodexBar.";
+"Helmcode per-request cost history is not available in CodexBar." = "Helmcode riwayat biaya per permintaan tidak tersedia di Sharingan.";
 "Copy the Cookie request header from your tenant's dashboard. cURL captures are not supported." = "Salin header permintaan Cookie dari dasbor penyewa Anda. Pengambilan gambar cURL tidak didukung.";
 "Store multiple IBM Bob API keys." = "Simpan beberapa kunci IBM Bob API.";
 "Monthly Bobcoins" = "Bobcoin Bulanan";
@@ -2211,7 +2211,7 @@
 "xai-..." = "xai-...";
 "Team ID" = "Tim ID";
 "Vercel access token" = "Token akses Vercel";
-"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "Opsional. Menampilkan anggaran pribadi Anda, bukan kredit tim. Disimpan di file konfigurasi lokal CodexBar. Atau atur VERCEL_ACCESS_TOKEN.";
+"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "Opsional. Menampilkan anggaran pribadi Anda, bukan kredit tim. Disimpan di file konfigurasi lokal Sharingan. Atau atur VERCEL_ACCESS_TOKEN.";
 "Open Vercel tokens" = "Buka token Vercel";
 "Required with a Vercel access token. Or set VERCEL_TEAM_ID." = "Wajib bersama token akses Vercel. Atau atur VERCEL_TEAM_ID.";
 "Required. Shown in the xAI Console URL and team settings." = "Diperlukan. Ditampilkan di Konsol xAI URL dan pengaturan tim.";
@@ -2262,13 +2262,13 @@
 "__raycast_session=…; csrf_token=…" = "__raycast_session=…; csrf_token=…";
 "Open Raycast Account" = "Buka Akun Raycast";
 "ai& spend is summed from the request logs API." = "ai& pembelanjaan dijumlahkan dari log permintaan API.";
-"Stored in CodexBar's config file. Create a key in the ai& console (shown once)." = "Disimpan dalam file konfigurasi CodexBar. Buat kunci di konsol ai& (ditampilkan satu kali).";
+"Stored in CodexBar's config file. Create a key in the ai& console (shown once)." = "Disimpan dalam file konfigurasi Sharingan. Buat kunci di konsol ai& (ditampilkan satu kali).";
 "sk-…" = "sk-…";
 "Store multiple Venice API keys." = "Simpan beberapa kunci Venice API.";
 "Venice per-day cost history is not available via API." = "Venice riwayat biaya per hari tidak tersedia melalui API.";
 "Atlas Cloud cost history is not available." = "Riwayat biaya Atlas Cloud tidak tersedia.";
 "Atlas Cloud API key" = "Kunci Atlas Cloud API";
-"Saved in CodexBar's local config file. Or set ATLASCLOUD_API_KEY." = "Disimpan dalam file konfigurasi lokal CodexBar. Atau atur ATLASCLOUD_API_KEY.";
+"Saved in CodexBar's local config file. Or set ATLASCLOUD_API_KEY." = "Disimpan dalam file konfigurasi lokal Sharingan. Atau atur ATLASCLOUD_API_KEY.";
 "Five-hour quota" = "Kuota lima jam";
 "Weekly tokens" = "token mingguan";
 "Weekly token quota regenerates continuously." = "token Kuota mingguan dibuat ulang secara terus menerus.";
@@ -2279,7 +2279,7 @@
 "Daily free tokens" = "token gratis setiap hari";
 "xKiro cost history is not available." = "Riwayat biaya xKiro tidak tersedia.";
 "xKiro API key" = "Kunci xKiro API";
-"Saved in CodexBar's local config file. Or set XKIRO_API_KEY. Reads free-token usage only." = "Disimpan dalam file konfigurasi lokal CodexBar. Atau atur XKIRO_API_KEY. Hanya membaca penggunaan token gratis.";
+"Saved in CodexBar's local config file. Or set XKIRO_API_KEY. Reads free-token usage only." = "Disimpan dalam file konfigurasi lokal Sharingan. Atau atur XKIRO_API_KEY. Hanya membaca penggunaan token gratis.";
 "Store multiple Hugging Face access tokens." = "Simpan beberapa akses Hugging Face token.";
 "Paste access token…" = "Tempel akses token…";
 "Inference" = "Kesimpulan";
@@ -2350,7 +2350,7 @@
 "Subscription kWh and prepaid USD balance." = "Berlangganan kWh dan saldo USD prabayar.";
 "Neuralwatt token cost history is not available via the quota API." = "Riwayat biaya Neuralwatt token tidak tersedia melalui Kuota API.";
 "Store multiple Neuralwatt API keys." = "Simpan beberapa kunci Neuralwatt API.";
-"Stored in the CodexBar config file. Manage keys from the Neuralwatt dashboard." = "Disimpan dalam file konfigurasi CodexBar. Kelola kunci dari dasbor Neuralwatt.";
+"Stored in the CodexBar config file. Manage keys from the Neuralwatt dashboard." = "Disimpan dalam file konfigurasi Sharingan. Kelola kunci dari dasbor Neuralwatt.";
 
 // Additional localized settings, provider controls, sharing, and widgets.
 "Monthly allowances" = "Tunjangan bulanan";
@@ -2424,7 +2424,7 @@
 "Speed range needs 4 completed turns." = "Rentang kecepatan memerlukan 4 giliran percakapan yang selesai.";
 "All accounts" = "Semua akun";
 "Refresh all accounts" = "Segarkan semua akun";
-"CodexBar follows" = "CodexBar mengikuti";
+"CodexBar follows" = "Sharingan mengikuti";
 "%@ accounts" = "%@ akun";
 "Refreshes up to %@ accounts at a time." = "Menyegarkan hingga %@ akun sekaligus.";
 "Each account has its own limits. Viewing usage does not switch accounts." = "Setiap akun memiliki batasnya sendiri. Melihat penggunaan tidak mengganti akun.";
@@ -2532,21 +2532,21 @@
 "Monthly AI tokens" = "Token AI bulanan";
 "Aerostack cost history is not available." = "Riwayat biaya Aerostack tidak tersedia.";
 "Account JWT" = "JWT akun";
-"Saved in CodexBar's local config file. Replace when expired; CodexBar does not refresh it." = "Disimpan dalam file konfigurasi lokal CodexBar. Ganti saat kedaluwarsa; CodexBar tidak memperbaruinya.";
+"Saved in CodexBar's local config file. Replace when expired; CodexBar does not refresh it." = "Disimpan dalam file konfigurasi lokal Sharingan. Ganti saat kedaluwarsa; Sharingan tidak memperbaruinya.";
 "Account JWT, not an Agent Endpoint key" = "JWT akun, bukan kunci Agent Endpoint";
 "Input tokens" = "Token input";
 "Output tokens" = "Token output";
 "Cosmic AI cost history is not available." = "Riwayat biaya Cosmic AI tidak tersedia.";
 "Personal Access Token" = "Token akses pribadi";
-"Saved in CodexBar's local config file. Reads project usage only; bucket keys are not supported." = "Disimpan dalam file konfigurasi lokal CodexBar. Hanya membaca penggunaan proyek; kunci bucket tidak didukung.";
+"Saved in CodexBar's local config file. Reads project usage only; bucket keys are not supported." = "Disimpan dalam file konfigurasi lokal Sharingan. Hanya membaca penggunaan proyek; kunci bucket tidak didukung.";
 "cos_…" = "cos_…";
 "Required. Usage covers this project only. Or set COSMIC_PROJECT_ID." = "Wajib diisi. Penggunaan hanya mencakup proyek ini. Atau atur COSMIC_PROJECT_ID.";
 "Sail Research cost history is not available." = "Riwayat biaya Sail Research tidak tersedia.";
 "Sail Research API key" = "Kunci API Sail Research";
-"Saved in CodexBar's local config file. Or set SAIL_API_KEY." = "Disimpan dalam file konfigurasi lokal CodexBar. Atau atur SAIL_API_KEY.";
+"Saved in CodexBar's local config file. Or set SAIL_API_KEY." = "Disimpan dalam file konfigurasi lokal Sharingan. Atau atur SAIL_API_KEY.";
 "Sofya cost history is not available." = "Riwayat biaya Sofya tidak tersedia.";
 "Sofya API key" = "Kunci API Sofya";
-"Saved in CodexBar's local config file. Or set SOFYA_API_KEY." = "Disimpan dalam file konfigurasi lokal CodexBar. Atau atur SOFYA_API_KEY.";
+"Saved in CodexBar's local config file. Or set SOFYA_API_KEY." = "Disimpan dalam file konfigurasi lokal Sharingan. Atau atur SOFYA_API_KEY.";
 "Pace sign" = "Tanda laju penggunaan";
 "Ahead of pace is +" = "Di atas laju adalah +";
 "Reserve is +" = "Cadangan adalah +";
@@ -2577,7 +2577,7 @@
 "Also restores the provider order in the menu bar. Can be undone." = "Juga memulihkan urutan penyedia di bar menu. Dapat diurungkan.";
 "Local Codex details; excluded from combined totals." = "Detail Codex lokal; tidak termasuk dalam total gabungan.";
 
-"Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the Sharingan config file. You can also set COMMAND_CODE_API_KEY.";
 /* OpenAI organization rate limits and live usage */
 "%@ tokens · %@ requests" = "%@ token · %@ permintaan";
 "15m" = "15 mnt";
@@ -2661,7 +2661,7 @@
 "Daily spend · %@" = "Pengeluaran harian · %@";
 "Applies to the selected token account “%@”. Each account keeps its own limits." = "Berlaku untuk akun token yang dipilih “%@”. Setiap akun menyimpan batasnya sendiri.";
 "Applies to the OpenAI API key, not to token accounts." = "Berlaku untuk kunci API OpenAI, bukan untuk akun token.";
-"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "CodexBar akan meminta token login Muse Code dari Keychain macOS agar dapat mengambil penggunaan langganan Muse Code Anda. Klik OK untuk melanjutkan.";
+"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "Sharingan akan meminta token login Muse Code dari Keychain macOS agar dapat mengambil penggunaan langganan Muse Code Anda. Klik OK untuk melanjutkan.";
 /* Claude Platform provider */
 "API credit" = "Kredit API";
 "Purchased credit" = "Kredit yang dibeli";
@@ -2685,7 +2685,7 @@
 "http_server_plain_http" = "Izinkan HTTP tanpa enkripsi di luar Mac ini";
 "http_server_dashboard" = "Dasbor";
 "http_server_wildcard" = "Pada perangkat lain, ganti 0.0.0.0 dengan alamat IPv4 VPN atau Tailscale Mac ini.";
-"http_server_footer" = "Nonaktif secara default. Dimulai bersama CodexBar dan berhenti saat ditutup. Pengaturan dan token tetap di Mac ini, tanpa sinkronisasi atau ekspor. Biarkan Mac tetap terjaga untuk akses jarak jauh.";
+"http_server_footer" = "Nonaktif secara default. Dimulai bersama Sharingan dan berhenti saat ditutup. Pengaturan dan token tetap di Mac ini, tanpa sinkronisasi atau ekspor. Biarkan Mac tetap terjaga untuk akses jarak jauh.";
 /* Claude desktop cookie source */
 "Claude desktop app" = "Aplikasi desktop Claude";
 "Use Claude desktop app cookies" = "Gunakan cookie aplikasi desktop Claude";
@@ -2709,7 +2709,7 @@
 
 "Trae CN" = "Trae CN";
 "Show Trae CN usage" = "Tampilkan penggunaan Trae CN";
-"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "Masuk ke Trae CN di trae.cn, lalu segarkan CodexBar.";
+"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "Masuk ke Trae CN di trae.cn, lalu segarkan Sharingan.";
 "Trae CN usage response format changed." = "Format respons penggunaan Trae CN telah berubah.";
 "Trae CN request failed. Try refreshing later." = "Permintaan Trae CN gagal. Coba segarkan lagi nanti.";
 "Use --provider copilot." = "Gunakan --provider copilot.";
@@ -2746,14 +2746,14 @@
 "Chatbox AI denied access. Check your license." = "Chatbox AI menolak akses. Periksa lisensi Anda.";
 "Chatbox AI is rate limiting requests. Try again later." = "Chatbox AI membatasi frekuensi permintaan. Coba lagi nanti.";
 "Chatbox AI request failed. Try refreshing later." = "Permintaan Chatbox AI gagal. Coba segarkan lagi nanti.";
-"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI mengembalikan respons yang tidak dikenali. Perbarui CodexBar dan coba lagi.";
+"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI mengembalikan respons yang tidak dikenali. Perbarui Sharingan dan coba lagi.";
 
 /* abliteration.ai */
 "abliteration.ai" = "abliteration.ai";
 "Show abliteration.ai usage" = "Tampilkan penggunaan abliteration.ai";
 "abliteration.ai is rate limiting requests. Try again later." = "abliteration.ai membatasi frekuensi permintaan. Coba lagi nanti.";
 "abliteration.ai request failed. Try refreshing later." = "Permintaan abliteration.ai gagal. Coba segarkan lagi nanti.";
-"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai mengembalikan respons yang tidak dikenali. Perbarui CodexBar dan coba lagi.";
+"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai mengembalikan respons yang tidak dikenali. Perbarui Sharingan dan coba lagi.";
 "Check your API key in Settings." = "Periksa kunci API Anda di Pengaturan.";
 "Kimi Code" = "Kimi Code";
 

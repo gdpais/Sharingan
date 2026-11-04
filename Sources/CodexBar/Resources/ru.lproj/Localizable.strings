@@ -14,10 +14,10 @@
 "Include API keys, cookies, and tokens" = "Включите ключи API, cookies и токены.";
 "Sync usage snapshots" = "Синхронизировать снимки использования";
 "Show accounts from other Macs" = "Показать учетные записи с других компьютеров Mac";
-"Requires a signed release build of CodexBar." = "Требуется подписанная сборка выпуска CodexBar.";
+"Requires a signed release build of CodexBar." = "Требуется подписанная сборка выпуска Sharingan.";
 "Sign in to iCloud in System Settings to enable sync." = "Войдите в iCloud в настройках системы, чтобы включить синхронизацию.";
 "iCloud access is restricted on this Mac." = "Доступ к iCloud на этом Mac ограничен.";
-"Sync is paused: another Mac uses a newer version of CodexBar. Update to resume." = "Синхронизация приостановлена: на другом Mac используется более новая версия CodexBar. Обновите, чтобы возобновить работу.";
+"Sync is paused: another Mac uses a newer version of CodexBar. Update to resume." = "Синхронизация приостановлена: на другом Mac используется более новая версия Sharingan. Обновите, чтобы возобновить работу.";
 "Last successful fetch" = "Последнее успешное получение";
 "Last successful push" = "Последний успешный толчок";
 "Never" = "Никогда";
@@ -52,9 +52,9 @@
 "hooks_add_argument" = "Добавить аргумент";
 "hooks_delete_argument" = "Удалить аргумент";
 
-"ollama_safari_cookie_access_hint" = "Для файлов cookie Safari приложению CodexBar нужен полный доступ к диску (Системные настройки > Конфиденциальность и безопасность).";
+"ollama_safari_cookie_access_hint" = "Для файлов cookie Safari приложению Sharingan нужен полный доступ к диску (Системные настройки > Конфиденциальность и безопасность).";
 "ollama_browser_cookie_decryption_denied" = "Расшифровка файлов cookie %@ была отклонена в Связке ключей. Откройте карточку провайдера и нажмите «Обновить» (⌘R), чтобы снова запросить доступ к Связке ключей.";
-"ollama_browser_cookie_decryption_disabled" = "Расшифровка файлов cookie %@ отключена в CodexBar; включите доступ к Связке ключей и обновите.";
+"ollama_browser_cookie_decryption_disabled" = "Расшифровка файлов cookie %@ отключена в Sharingan; включите доступ к Связке ключей и обновите.";
 
 " providers" = " провайдеров";
 "(System)" = "(Система)";
@@ -70,7 +70,7 @@
 "AI credits" = "Кредиты ИИ";
 "Gateway requests" = "Запросы к шлюзу";
 "Future AGI cost history is not available." = "История расходов Future AGI недоступна.";
-"Saved in CodexBar's local config file. Or set FI_API_KEY." = "Сохраняется в локальном файле конфигурации CodexBar. Или задайте FI_API_KEY.";
+"Saved in CodexBar's local config file. Or set FI_API_KEY." = "Сохраняется в локальном файле конфигурации Sharingan. Или задайте FI_API_KEY.";
 
 "API region" = "Регион API";
 "API token" = "API-токен";
@@ -105,7 +105,7 @@
 "Automatic imports browser cookies or stored sessions." = "Автоматически импортирует cookie браузера или сохранённые сеансы.";
 "Automatic imports browser cookies." = "Автоматически импортирует cookie браузера.";
 "Automatically imports browser session cookie." = "Автоматически импортирует cookie сеанса браузера.";
-"Automatically opens CodexBar when you start your Mac." = "Автоматически открывает CodexBar при запуске Mac.";
+"Automatically opens CodexBar when you start your Mac." = "Автоматически открывает Sharingan при запуске Mac.";
 "Automation" = "Автоматизация";
 "Average (\\(label1) + \\(label2))" = "Среднее (\\(label1) + \\(label2))";
 "Average (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))" = "Среднее (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))";
@@ -133,7 +133,7 @@
 "Choose up to \\(Self.maxOverviewProviders) providers" = "Выберите до \\(Self.maxOverviewProviders) провайдеров";
 "Choose up to \\(count) providers" = "Выберите до \\(count) провайдеров";
 "Choose what to show in the menu bar (Pace shows usage vs. expected)." = "Выберите, что показывать в строке меню: темп сравнивает фактическое использование с ожидаемым.";
-"Choose which Codex account CodexBar should follow." = "Выберите аккаунт Codex, за которым должен следить CodexBar.";
+"Choose which Codex account CodexBar should follow." = "Выберите аккаунт Codex, за которым должен следить Sharingan.";
 "Choose which window drives the menu bar percent." = "Выберите окно, по которому рассчитывается процент в строке меню.";
 "Chrome" = "Chrome";
 "Claude CLI not found" = "Claude CLI не найден";
@@ -148,9 +148,9 @@
 "Codex binary" = "Бинарный файл Codex";
 "Codex login failed" = "Не удалось войти в Codex";
 "Codex login timed out" = "Время входа в Codex истекло";
-"CodexBar Lifecycle Keepalive" = "Поддержание жизненного цикла CodexBar";
-"CodexBar can't show its menu bar icon" = "CodexBar не может показать значок в строке меню";
-"CodexBar could not read managed account storage. " = "CodexBar не удалось прочитать хранилище управляемых аккаунтов. ";
+"CodexBar Lifecycle Keepalive" = "Поддержание жизненного цикла Sharingan";
+"CodexBar can't show its menu bar icon" = "Sharingan не может показать значок в строке меню";
+"CodexBar could not read managed account storage. " = "Sharingan не удалось прочитать хранилище управляемых аккаунтов. ";
 "Configure…" = "Настроить…";
 "Connected" = "Подключено";
 "Controls how much detail is logged." = "Управляет подробностью журналирования.";
@@ -169,7 +169,7 @@
 "Local token history is unavailable or incomplete." = "Локальная история токенов недоступна или неполна.";
 "Could not add Codex account" = "Не удалось добавить аккаунт Codex";
 "Could not open Terminal for Gemini" = "Не удалось открыть Terminal для Gemini.";
-"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "Не удалось прочитать учётные данные Claude OAuth: кэш Claude OAuth в CodexBar временно недоступен в связке ключей macOS. Убедитесь, что связка ключей входа разблокирована в приложении «Связка ключей», затем повторите обновление.";
+"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "Не удалось прочитать учётные данные Claude OAuth: кэш Claude OAuth в Sharingan временно недоступен в связке ключей macOS. Убедитесь, что связка ключей входа разблокирована в приложении «Связка ключей», затем повторите обновление.";
 "Could not start codex login" = "Не удалось запустить вход в Codex";
 "Could not switch system account" = "Не удалось переключить системный аккаунт";
 "Credits" = "Кредиты";
@@ -218,13 +218,13 @@
 "Hide details" = "Скрыть подробности";
 "Hide personal information" = "Скрыть личную информацию";
 "Historical tracking" = "История использования";
-"How often CodexBar polls providers in the background." = "Как часто CodexBar опрашивает провайдеров в фоновом режиме.";
+"How often CodexBar polls providers in the background." = "Как часто Sharingan опрашивает провайдеров в фоновом режиме.";
 "Inactive" = "Неактивный";
 "Install CLI" = "Установить CLI";
 "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again." = "Установите Claude CLI (npm i -g @anthropic-ai/claude-code) и повторите попытку.";
 "Install the Codex CLI (npm i -g @openai/codex) and try again." = "Установите Codex CLI (npm i -g @openai/codex) и повторите попытку.";
 "Install the Gemini CLI (npm i -g @google/gemini-cli) and try again." = "Установите Gemini CLI (npm i -g @google/gemini-cli) и повторите попытку.";
-"Install a JetBrains IDE with AI Assistant enabled, then refresh CodexBar." = "Установите JetBrains IDE с включённым AI Assistant, затем обновите CodexBar.";
+"Install a JetBrains IDE with AI Assistant enabled, then refresh CodexBar." = "Установите JetBrains IDE с включённым AI Assistant, затем обновите Sharingan.";
 "JetBrains AI is ready" = "JetBrains AI готов";
 "JetBrains IDE" = "JetBrains IDE";
 "Keep CLI sessions alive" = "Поддерживать CLI-сеансы активными";
@@ -278,7 +278,7 @@
 "Open" = "Открыть";
 "Open API Keys" = "Открыть ключи API";
 "Open Amp Settings" = "Открыть настройки Amp";
-"Open Antigravity to sign in, then refresh CodexBar." = "Откройте Antigravity, войдите в аккаунт, затем обновите CodexBar.";
+"Open Antigravity to sign in, then refresh CodexBar." = "Откройте Antigravity, войдите в аккаунт, затем обновите Sharingan.";
 "Open Browser" = "Открыть браузер";
 "Open Coding Plan" = "Открыть Coding Plan";
 "Open Console" = "Открыть консоль";
@@ -323,7 +323,7 @@
 "Progress bars fill as you consume quota (instead of showing remaining)." = "Индикаторы заполняются по мере расходования квоты, а не показывают остаток.";
 "Provider" = "Провайдер";
 "Providers" = "Провайдеры";
-"Quit CodexBar" = "Закрыть CodexBar";
+"Quit CodexBar" = "Закрыть Sharingan";
 "Random (default)" = "Случайный (по умолчанию)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "Читает локальные журналы использования. Показывает в меню сегодняшние расходы и выбранное окно истории.";
 "Refresh" = "Обновить";
@@ -331,8 +331,8 @@
 "Remote" = "Удалённо";
 "Remove" = "Удалить";
 "Remove Codex account?" = "Удалить аккаунт Codex?";
-"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "Удалить \\(account.email) из CodexBar? Его управляемый каталог Codex будет удалён.";
-"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "Удалить \\(email) из CodexBar? Его управляемый каталог Codex будет удалён.";
+"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "Удалить \\(account.email) из Sharingan? Его управляемый каталог Codex будет удалён.";
+"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "Удалить \\(email) из Sharingan? Его управляемый каталог Codex будет удалён.";
 "Remove selected account" = "Удалить выбранный аккаунт";
 "Replace critter bars with provider branding icons and a percentage." = "Заменить декоративные индикаторы значками провайдеров и процентом.";
 "Replay selected animation" = "Воспроизвести выбранную анимацию";
@@ -374,7 +374,7 @@
 "Store multiple Ollama Cookie headers." = "Хранить несколько Cookie-заголовков Ollama.";
 "Store multiple OpenCode Cookie headers." = "Хранить несколько Cookie-заголовков OpenCode.";
 "Store multiple OpenCode Go Cookie headers." = "Хранить несколько Cookie-заголовков OpenCode Go.";
-"Stored in the CodexBar config file." = "Хранится в конфигурационном файле CodexBar.";
+"Stored in the CodexBar config file." = "Хранится в конфигурационном файле Sharingan.";
 "Stored in ~/.codexbar/config.json. " = "Хранится в ~/.codexbar/config.json. ";
 "Stored in ~/.codexbar/config.json. Paste the key from the Synthetic dashboard." = "Хранится в ~/.codexbar/config.json. Вставьте ключ с дашборда Synthetic.";
 "Stored in ~/.codexbar/config.json. Paste your Coding Plan API key from Model Studio." = "Хранится в ~/.codexbar/config.json. Вставьте API-ключ Coding Plan из Model Studio.";
@@ -449,8 +449,8 @@
 "cursor_on_demand" = "По требованию: %@";
 "cursor_on_demand_with_limit" = "По требованию: %1$@ / %2$@";
 "extra_usage_format" = "Дополнительное использование: %1$@ / %2$@";
-"jetbrains_detected_generate" = "Обнаружено: %@. Используйте AI-помощник один раз, чтобы сгенерировать данные о квотах, затем обновите CodexBar.";
-"jetbrains_detected_select" = "Обнаружено: %@. Выберите предпочитаемый IDE в настройках, затем обновите CodexBar.";
+"jetbrains_detected_generate" = "Обнаружено: %@. Используйте AI-помощник один раз, чтобы сгенерировать данные о квотах, затем обновите Sharingan.";
+"jetbrains_detected_select" = "Обнаружено: %@. Выберите предпочитаемый IDE в настройках, затем обновите Sharingan.";
 "last_fetch_failed_with_provider" = "Последнее получение %@ не удалось:";
 "last_spend" = "Последняя трата: %@";
 "mcp_model_usage" = "%1$@: %2$@";
@@ -460,10 +460,10 @@
 "metric_primary" = "Основной (%@)";
 "metric_secondary" = "Вторичный (%@)";
 "metric_tertiary" = "Третичный (%@)";
-"multiple_workspaces_found" = "CodexBar нашёл несколько рабочих областей для %@. Выберите рабочую область для добавления.";
+"multiple_workspaces_found" = "Sharingan нашёл несколько рабочих областей для %@. Выберите рабочую область для добавления.";
 "ory_session_…=…; csrftoken=…" = "ory_session_…=…; csrftoken=…";
 "overview_choose_providers" = "Выберите до %@ провайдеров";
-"remove_account_message" = "Удалить %@ из CodexBar? Его управляемый каталог Codex будет удалён.";
+"remove_account_message" = "Удалить %@ из Sharingan? Его управляемый каталог Codex будет удалён.";
 "version_format" = "Версия %@";
 "vertex_ai_login_instructions" = "Чтобы отслеживать использование Vertex AI, авторизуйтесь через Google Cloud.\n\n1. Откройте Terminal\n2. Запустите: gcloud auth application-default login\n3. Следуйте инструкциям в браузере\n4. Укажите проект: gcloud config set project PROJECT_ID\n\nОткрыть Terminal сейчас?";
 "workspaceID is set but only opencode, opencodego, and deepgram support workspaceID." = "WorkspaceID установлен, но только opencode, opencodego и deepgram поддерживают WorkspaceID.";
@@ -504,7 +504,7 @@
 "language_italian" = "Italiano";
 "language_polish" = "Polski";
 "start_at_login_title" = "Запускать при входе";
-"start_at_login_subtitle" = "Автоматически открывает CodexBar при запуске Mac.";
+"start_at_login_subtitle" = "Автоматически открывает Sharingan при запуске Mac.";
 "show_cost_summary_subtitle" = "Читает локальные журналы использования. Показывает в меню сегодняшние расходы и выбранное окно истории.";
 "cost_summary_style_title" = "Стиль отображения";
 "cost_summary_style_inline" = "Только в строке";
@@ -529,7 +529,7 @@
 "credential_expiry_notifications_title" = "Истечение срока учётных данных";
 "credential_expiry_notifications_subtitle" = "Уведомлять один раз, когда учётная запись провайдера требует повторного входа.";
 "credential_expiry_notification_title" = "%@ требует входа";
-"credential_expiry_notification_body" = "Откройте CodexBar, чтобы проверить ошибку учётной записи и войти снова.";
+"credential_expiry_notification_body" = "Откройте Sharingan, чтобы проверить ошибку учётной записи и войти снова.";
 "session_quota_notifications_subtitle" = "Уведомляет, когда квота 5-часового сеанса достигает 0 % и когда она снова становится доступной.";
 "quota_depleted_title" = "Исчерпание и восстановление квоты";
 "quota_warning_notifications_subtitle" = "Предупреждает, когда остаток сессионной или недельной квоты пересекает заданные пороги.";
@@ -584,7 +584,7 @@
 "quota_warning_warning" = "Предупреждение";
 "quota_warning_critical" = "Критично";
 "apply" = "Применить";
-"quit_app" = "Выйти из CodexBar";
+"quit_app" = "Выйти из Sharingan";
 
 /* Tab titles */
 "tab_general" = "Общие";
@@ -610,8 +610,8 @@
 "managed_login_missing_email" = "Вход в Codex выполнен, но email аккаунта недоступен. Повторите попытку после полного входа в аккаунт.";
 "login_success_notification_title" = "%@ вход успешен";
 "login_success_notification_body" = "Можно вернуться в приложение; авторизация завершена.";
-"workspace_selection_cancelled" = "CodexBar обнаружил несколько рабочих областей, но рабочая область не выбрана.";
-"unsafe_managed_home" = "CodexBar отказался изменять неожиданный управляемый каталог: %@";
+"workspace_selection_cancelled" = "Sharingan обнаружил несколько рабочих областей, но рабочая область не выбрана.";
+"unsafe_managed_home" = "Sharingan отказался изменять неожиданный управляемый каталог: %@";
 "menu_bar_metric_title" = "Метрика строки меню";
 "menu_bar_metric_subtitle" = "Выберите, какое окно управляет процентами строки меню.";
 "menu_bar_metric_subtitle_deepseek" = "Показывает баланс DeepSeek в строке меню.";
@@ -729,7 +729,7 @@
 "link_twitter" = "Twitter";
 "link_email" = "электронная почта";
 "link_acknowledgements" = "Благодарности";
-"acknowledgements_footer" = "CodexBar создан с использованием этих проектов с открытым исходным кодом.";
+"acknowledgements_footer" = "Sharingan создан с использованием этих проектов с открытым исходным кодом.";
 "acknowledgements_others" = "ещё %d";
 "acknowledgements_author" = "Автор";
 "acknowledgements_authors" = "Авторы";
@@ -744,7 +744,7 @@
 
 /* Debug Pane */
 "use_javascriptcore_plugin_engine" = "Использовать JavaScriptCore для плагинов провайдеров";
-"use_javascriptcore_plugin_engine_subtitle" = "Только для отката совместимости. Перезапустите CodexBar; CODEXBAR_PLUGIN_ENGINE переопределяет эту настройку.";
+"use_javascriptcore_plugin_engine_subtitle" = "Только для отката совместимости. Перезапустите Sharingan; CODEXBAR_PLUGIN_ENGINE переопределяет эту настройку.";
 "section_logging" = "Журналирование";
 "enable_file_logging" = "Включить запись логов";
 "enable_file_logging_subtitle" = "Записывать логи в %@ для отладки.";
@@ -800,7 +800,7 @@
 "login_shell_path" = "PATH login shell (снимок при запуске)";
 "cleared" = "Очищено.";
 "no_fetch_attempts" = "Попыток получения пока нет.";
-"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe может блокировать приложения строки меню в разделе «Системные настройки» → «Строка меню» → «Разрешить в строке меню». CodexBar запущен, но macOS может скрывать его значок. Откройте настройки строки меню и включите CodexBar.";
+"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe может блокировать приложения строки меню в разделе «Системные настройки» → «Строка меню» → «Разрешить в строке меню». Sharingan запущен, но macOS может скрывать его значок. Откройте настройки строки меню и включите Sharingan.";
 
 /* Metric preferences */
 "metric_pref_automatic" = "Автоматически";
@@ -843,7 +843,7 @@
 "refresh_adaptive" = "Адаптивно";
 "refresh_adaptive_agent_aware" = "Адаптивно (с учётом агентов)";
 "adaptive_activity_consent_title" = "Разрешить обновление с учётом активности?";
-"adaptive_activity_consent_message" = "Адаптивный режим с учётом агентов может проверять список запущенных локальных процессов, включая командные строки, чтобы распознавать Codex и Claude, а затем во время программирования каждые 30 секунд считывать метаданные известных сеансов. Когда Agent Sessions отключено, CodexBar хранит в памяти только время последней активности и отбрасывает пути и идентификаторы сеансов. Эти данные никуда не отправляются, а удалённое обнаружение и SSH остаются отключёнными. При отказе CodexBar вернётся к обычному адаптивному режиму без сканирования локальной активности.";
+"adaptive_activity_consent_message" = "Адаптивный режим с учётом агентов может проверять список запущенных локальных процессов, включая командные строки, чтобы распознавать Codex и Claude, а затем во время программирования каждые 30 секунд считывать метаданные известных сеансов. Когда Agent Sessions отключено, Sharingan хранит в памяти только время последней активности и отбрасывает пути и идентификаторы сеансов. Эти данные никуда не отправляются, а удалённое обнаружение и SSH остаются отключёнными. При отказе Sharingan вернётся к обычному адаптивному режиму без сканирования локальной активности.";
 "adaptive_activity_consent_allow" = "Разрешить локальную активность";
 "adaptive_activity_consent_decline" = "Использовать обычный адаптивный режим";
 
@@ -892,7 +892,7 @@
 "Status Page" = "Страница статуса";
 "Open Status Page" = "Открыть страницу статуса";
 "Settings..." = "Настройки…";
-"About CodexBar" = "О CodexBar";
+"About CodexBar" = "О Sharingan";
 "Quit" = "Выйти";
 "Last %d day" = "Последний %d день";
 "Last %d days" = "Последние %d дн.";
@@ -993,8 +993,8 @@
 "Managed by Homebrew" = "Управляется через Homebrew";
 "Copy update command" = "Скопировать команду обновления";
 "Update to %@" = "Обновить до %@";
-"CodexBar %@ is available" = "Доступна версия CodexBar %@";
-"CodexBar is up to date" = "CodexBar обновлён";
+"CodexBar %@ is available" = "Доступна версия Sharingan %@";
+"CodexBar is up to date" = "Sharingan обновлён";
 "Checking for updates…" = "Проверка обновлений…";
 "Updating with Homebrew…" = "Обновление через Homebrew…";
 "Homebrew update failed. You can run this command in Terminal instead:" = "Не удалось обновить через Homebrew. Вместо этого можно выполнить эту команду в Терминале:";
@@ -1161,26 +1161,26 @@
 "Capacity Start" = "Начало лимита";
 "Changelog" = "Журнал изменений";
 "Choose the Moonshot/Kimi API host for international or China mainland accounts." = "Выберите хост Moonshot/Kimi API для международных аккаунтов или аккаунтов в материковом Китае.";
-"CodexBar can't replace a system account that is signed in with an API key only setup." = "CodexBar не может заменить системный аккаунт, который настроен только через API-ключ.";
-"CodexBar could not find saved auth for that account. Re-authenticate it and try again." = "CodexBar не удалось найти сохранённые данные авторизации для этого аккаунта. Авторизуйтесь заново и повторите попытку.";
-"CodexBar could not read managed account storage. Recover the store before adding another account." = "CodexBar не удалось прочитать хранилище управляемых аккаунтов. Восстановите хранилище перед добавлением другого аккаунта.";
-"CodexBar could not read saved auth for that account. Re-authenticate it and try again." = "CodexBar не удалось прочитать сохранённые данные авторизации для этого аккаунта. Авторизуйтесь заново и повторите попытку.";
-"CodexBar could not read the current system account on this Mac." = "CodexBar не удалось прочитать текущий системный аккаунт на этом Mac.";
-"CodexBar could not replace the live Codex auth on this Mac." = "CodexBar не удалось заменить текущую авторизацию Codex на этом Mac.";
-"CodexBar could not safely preserve the current system account before switching." = "CodexBar не удалось безопасно сохранить текущий системный аккаунт перед переключением.";
-"CodexBar could not save the current system account before switching." = "CodexBar не удалось сохранить текущий системный аккаунт перед переключением.";
-"CodexBar could not update managed account storage." = "CodexBar не удалось обновить хранилище управляемых аккаунтов.";
-"CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "CodexBar обнаружил другой управляемый аккаунт, который уже использует текущий системный аккаунт. Устраните дублирующий аккаунт перед переключением.";
-"CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "CodexBar запросит у macOS Keychain «%@», чтобы расшифровать cookie браузера и авторизовать ваш аккаунт. Нажмите OK, чтобы продолжить.";
-"CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "CodexBar запросит у macOS Keychain OAuth-токен Claude Code, чтобы получить данные об использовании Claude. Нажмите OK, чтобы продолжить.";
-"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "CodexBar запросит у macOS Keychain Cookie-заголовок %@, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
-"CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "CodexBar запросит у macOS Keychain Cookie-заголовок Claude, чтобы получить данные об использовании Claude Web. Нажмите OK, чтобы продолжить.";
-"CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "CodexBar запросит у macOS Keychain токен GitHub Copilot, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
-"CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "CodexBar запросит у macOS Keychain токен авторизации Kimi, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
-"CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "CodexBar запросит у macOS Keychain API-токен MiniMax, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
-"CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "CodexBar запросит у macOS Keychain Cookie-заголовок OpenAI, чтобы получить дополнительные данные дашборда Codex. Нажмите OK, чтобы продолжить.";
-"CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "CodexBar запросит у macOS Keychain API-ключ Synthetic, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
-"CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "CodexBar запросит у macOS Keychain API-токен z.ai, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
+"CodexBar can't replace a system account that is signed in with an API key only setup." = "Sharingan не может заменить системный аккаунт, который настроен только через API-ключ.";
+"CodexBar could not find saved auth for that account. Re-authenticate it and try again." = "Sharingan не удалось найти сохранённые данные авторизации для этого аккаунта. Авторизуйтесь заново и повторите попытку.";
+"CodexBar could not read managed account storage. Recover the store before adding another account." = "Sharingan не удалось прочитать хранилище управляемых аккаунтов. Восстановите хранилище перед добавлением другого аккаунта.";
+"CodexBar could not read saved auth for that account. Re-authenticate it and try again." = "Sharingan не удалось прочитать сохранённые данные авторизации для этого аккаунта. Авторизуйтесь заново и повторите попытку.";
+"CodexBar could not read the current system account on this Mac." = "Sharingan не удалось прочитать текущий системный аккаунт на этом Mac.";
+"CodexBar could not replace the live Codex auth on this Mac." = "Sharingan не удалось заменить текущую авторизацию Codex на этом Mac.";
+"CodexBar could not safely preserve the current system account before switching." = "Sharingan не удалось безопасно сохранить текущий системный аккаунт перед переключением.";
+"CodexBar could not save the current system account before switching." = "Sharingan не удалось сохранить текущий системный аккаунт перед переключением.";
+"CodexBar could not update managed account storage." = "Sharingan не удалось обновить хранилище управляемых аккаунтов.";
+"CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "Sharingan обнаружил другой управляемый аккаунт, который уже использует текущий системный аккаунт. Устраните дублирующий аккаунт перед переключением.";
+"CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "Sharingan запросит у macOS Keychain «%@», чтобы расшифровать cookie браузера и авторизовать ваш аккаунт. Нажмите OK, чтобы продолжить.";
+"CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "Sharingan запросит у macOS Keychain OAuth-токен Claude Code, чтобы получить данные об использовании Claude. Нажмите OK, чтобы продолжить.";
+"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "Sharingan запросит у macOS Keychain Cookie-заголовок %@, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
+"CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "Sharingan запросит у macOS Keychain Cookie-заголовок Claude, чтобы получить данные об использовании Claude Web. Нажмите OK, чтобы продолжить.";
+"CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "Sharingan запросит у macOS Keychain токен GitHub Copilot, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
+"CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "Sharingan запросит у macOS Keychain токен авторизации Kimi, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
+"CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "Sharingan запросит у macOS Keychain API-токен MiniMax, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
+"CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "Sharingan запросит у macOS Keychain Cookie-заголовок OpenAI, чтобы получить дополнительные данные дашборда Codex. Нажмите OK, чтобы продолжить.";
+"CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "Sharingan запросит у macOS Keychain API-ключ Synthetic, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
+"CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "Sharingan запросит у macOS Keychain API-токен z.ai, чтобы получить данные об использовании. Нажмите OK, чтобы продолжить.";
 "Could not open Cursor login in your browser." = "Не удалось открыть вход в Cursor в браузере.";
 "Could not open browser for Antigravity" = "Не удалось открыть браузер для Antigravity.";
 "Credits used" = "Использовано кредитов";
@@ -1195,7 +1195,7 @@
 "Extra usage balance: %@" = "Баланс доп. использования: %@";
 "Keychain Access Required" = "Требуется доступ к Keychain";
 "keychain_prompt_learn_more" = "Узнать больше…";
-"keychain_prompt_privacy_note" = "macOS, а не CodexBar, обрабатывает любой ввод пароля для входа в Mac. Вы можете в любой момент отключить доступ к Keychain в «Настройки» → «Дополнительно».";
+"keychain_prompt_privacy_note" = "macOS, а не Sharingan, обрабатывает любой ввод пароля для входа в Mac. Вы можете в любой момент отключить доступ к Keychain в «Настройки» → «Дополнительно».";
 "Kiro menu bar value" = "Значение строки меню Kiro";
 "Label" = "Метка";
 "No organizations loaded. Click Refresh after setting your API key." = "Организации не загружены. Нажмите «Обновить» после настройки API-ключа.";
@@ -1259,7 +1259,7 @@
 "Service" = "Сервис";
 "Show or hide Kiro credits, percent, or both next to the menu bar icon." = "Показывать или скрывать кредиты Kiro, процент или оба значения рядом со значком в строке меню.";
 "Show usage for organizations you belong to. Personal account is always shown." = "Показывать использование организаций, в которых вы состоите. Личный аккаунт отображается всегда.";
-"Sign in to cursor.com in your browser, then refresh Cursor in CodexBar." = "Войдите в cursor.com в браузере, затем обновите Cursor в CodexBar.";
+"Sign in to cursor.com in your browser, then refresh Cursor in CodexBar." = "Войдите в cursor.com в браузере, затем обновите Cursor в Sharingan.";
 "Simulated error text" = "Имитированный текст ошибки";
 "StepFun platform account (phone number or email)." = "Аккаунт платформы StepFun (номер телефона или адрес электронной почты).";
 "Stored in ~/.codexbar/config.json." = "Хранится в ~/.codexbar/config.json.";
@@ -1275,11 +1275,11 @@
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is preferred; OPENAI_API_KEY still works." = "Хранится в ~/.codexbar/config.json. Предпочтителен OPENAI_ADMIN_KEY; OPENAI_API_KEY по-прежнему работает.";
 "Stored in ~/.codexbar/config.json. Requires an Anthropic Admin API key." = "Хранится в ~/.codexbar/config.json. Требуется API-ключ Anthropic Admin.";
 "Stored in ~/.codexbar/config.json. Used for /v1/quota-stats." = "Хранится в ~/.codexbar/config.json. Используется для /v1/quota-stats.";
-"Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`)." = "Хранится в ~/.codexbar/config.json. Также можно задать CODEBUFF_API_KEY или разрешить CodexBar прочитать ~/.config/manicode/credentials.json, который создаёт `codebuff login`.";
+"Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`)." = "Хранится в ~/.codexbar/config.json. Также можно задать CODEBUFF_API_KEY или разрешить Sharingan прочитать ~/.config/manicode/credentials.json, который создаёт `codebuff login`.";
 "Stored in ~/.codexbar/config.json. You can also provide KILO_API_KEY or ~/.local/share/kilo/auth.json (kilo.access)." = "Хранится в ~/.codexbar/config.json. Также можно задать KILO_API_KEY или ~/.local/share/kilo/auth.json (kilo.access).";
 "T3 Chat cookie" = "Cookie чата T3";
 "Team mode" = "Командный режим";
-"That account is no longer available in CodexBar. Refresh the account list and try again." = "Этот аккаунт больше недоступен в CodexBar. Обновите список аккаунтов и повторите попытку.";
+"That account is no longer available in CodexBar. Refresh the account list and try again." = "Этот аккаунт больше недоступен в Sharingan. Обновите список аккаунтов и повторите попытку.";
 "The browser login did not complete in time. Try Antigravity login again." = "Вход в браузере не завершился вовремя. Попробуйте войти в Antigravity ещё раз.";
 "Timed out waiting for Cursor login. %@" = "Истекло время ожидания входа в Cursor. %@";
 "Timed out waiting for Cursor login. %@ Last error: %@" = "Истекло время ожидания входа в Cursor. %@ Последняя ошибка: %@";
@@ -1359,9 +1359,9 @@
 "Select a DeepSeek Chrome profile in Settings." = "Выберите профиль Chrome для DeepSeek в настройках.";
 "Select profile…" = "Выбрать профиль…";
 
-"Choose a supported browser so CodexBar can read the matching account." = "Выберите поддерживаемый браузер, чтобы CodexBar мог прочитать соответствующую учетную запись.";
+"Choose a supported browser so CodexBar can read the matching account." = "Выберите поддерживаемый браузер, чтобы Sharingan мог прочитать соответствующую учетную запись.";
 "Choose Cursor account" = "Выберите учетную запись Cursor";
-"Choose which Cursor account CodexBar should use." = "Выберите, какую учетную запись Cursor следует использовать CodexBar.";
+"Choose which Cursor account CodexBar should use." = "Выберите, какую учетную запись Cursor следует использовать Sharingan.";
 "Finish switching to a different Cursor account in your browser, then try again." = "Завершите переключение на другую учетную запись Cursor в браузере, а затем повторите попытку.";
 "Timed out waiting for Cursor account switch. %@" = "Истекло время ожидания переключения учетной записи Cursor. %@";
 "Timed out waiting for Cursor account switch. %@ Last error: %@" = "Истекло время ожидания переключения учетной записи Cursor. %@ Последняя ошибка: %@";
@@ -1573,7 +1573,7 @@
 "5-hour usage" = "Использование за 5 часов";
 "7-day usage" = "Использование за 7 дней";
 "Total usage" = "Общее использование";
-"claude_oauth_keychain_access_disabled" = "Доступ к Keychain отключён, поэтому CodexBar не может прочитать данные входа в Claude.";
+"claude_oauth_keychain_access_disabled" = "Доступ к Keychain отключён, поэтому Sharingan не может прочитать данные входа в Claude.";
 "claude_oauth_keychain_access_revoked" = "Доступ к Связке ключей Claude был отозван из-за ротации токена в Claude Code. Нажмите «Обновить», чтобы повторно предоставить доступ, или переключите источник использования Claude на CLI/Web.";
 "claude_showing_last_known_usage" = "Показаны последние известные данные об использовании (получены %@).";
 "claude_limited_usage_detail" = "Ограниченная детализация использования";
@@ -1650,7 +1650,7 @@
 /* Overview share flow */
 "Share Usage Snapshot…" = "Поделиться сводкой использования…";
 "Usage snapshot unavailable" = "Сводка использования недоступна";
-"CodexBar couldn't prepare a shareable usage snapshot. Refresh Usage & Spend and try again." = "CodexBar не удалось подготовить сводку использования для отправки. Обновите раздел «Использование и расходы» и повторите попытку.";
+"CodexBar couldn't prepare a shareable usage snapshot. Refresh Usage & Spend and try again." = "Sharingan не удалось подготовить сводку использования для отправки. Обновите раздел «Использование и расходы» и повторите попытку.";
 "Incomplete" = "Неполные данные";
 "Est. subtotal (%@): %@" = "Оценка подытога (%@): %@";
 "Excluded requests with missing final usage: %d" = "Исключённые запросы без итоговых данных об использовании: %d";
@@ -1777,14 +1777,14 @@
 "Codex credits are still loading; will retry shortly." = "Codex Кредиты все еще загружаются; повторю попытку в ближайшее время.";
 "Codex session expired. Sign in again." = "Срок действия сеанса Codex истек. Войдите снова.";
 "Codex usage is temporarily unavailable. Try refreshing." = "Данные об использовании Codex временно недоступны. Попробуйте обновить данные.";
-"CodexBar Account Usage" = "Использование учетной записи CodexBar";
-"CodexBar Burn Down" = "CodexBar Квота выгорание";
-"CodexBar Burn Down (Combined)" = "CodexBar Квота выгорание (комбинированное)";
-"CodexBar Help" = "CodexBar Справка";
-"CodexBar History" = "CodexBar История";
-"CodexBar Metric" = "CodexBar Показатель";
-"CodexBar Switcher" = "Коммутатор CodexBar";
-"CodexBar Usage" = "Использование CodexBar";
+"CodexBar Account Usage" = "Использование учетной записи Sharingan";
+"CodexBar Burn Down" = "Sharingan Квота выгорание";
+"CodexBar Burn Down (Combined)" = "Sharingan Квота выгорание (комбинированное)";
+"CodexBar Help" = "Sharingan Справка";
+"CodexBar History" = "Sharingan История";
+"CodexBar Metric" = "Sharingan Показатель";
+"CodexBar Switcher" = "Коммутатор Sharingan";
+"CodexBar Usage" = "Использование Sharingan";
 "Compact widget for credits or cost." = "Компактный виджет за Кредиты или стоимость.";
 "Complete Kiro login in your browser" = "Завершите вход в систему Kiro в браузере.";
 "Controls when Claude OAuth may ask macOS for Keychain access." = "Определяет, когда Claude OAuth может запросить у macOS доступ к связке ключей.";
@@ -1803,8 +1803,8 @@
 "Details for %@" = "Подробности для %@";
 "EST. %@" = "Расчетное %@";
 "Enable Antigravity provider" = "Включить провайдера Antigravity";
-"Enable a provider in CodexBar → Settings → Providers." = "Включите провайдера в CodexBar → Настройки → Провайдеры.";
-"Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "Включите виджеты аккаунта в CodexBar → Настройки → Меню → Виджеты. Затем отредактируйте этот виджет, чтобы выбрать учетную запись.";
+"Enable a provider in CodexBar → Settings → Providers." = "Включите провайдера в Sharingan → Настройки → Провайдеры.";
+"Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "Включите виджеты аккаунта в Sharingan → Настройки → Меню → Виджеты. Затем отредактируйте этот виджет, чтобы выбрать учетную запись.";
 "Error: %@" = "Ошибка: %@.";
 "Examples: alt+cmd+2, shift+right. Refresh (cmd+r), Settings (cmd+,) and Quit (cmd+q) are reserved." = "Примеры: alt+cmd+2, shift+right. «Обновить» (cmd+r), «Настройки» (cmd+,) и «Выйти» (cmd+q) зарезервированы.";
 "Export Preferences…" = "Экспортировать настройки…";
@@ -1821,10 +1821,10 @@
 "Gemini app" = "Приложение Gemini";
 "Gemini CLI" = "Gemini CLI";
 "Gemini app limits use your browser account and are separate from Gemini CLI quotas." = "Лимиты приложения Gemini применяются к вашему аккаунту в браузере и учитываются отдельно от квот Gemini CLI.";
-"Generated locally by CodexBar · Data through %@" = "Создано локально с помощью CodexBar · Данные на %@";
+"Generated locally by CodexBar · Data through %@" = "Создано локально с помощью Sharingan · Данные на %@";
 "GitHub cookies" = "GitHub cookies";
 "GitHub does not publish this value. Enter it to show a usage bar. Applies to the selected GitHub account." = "GitHub не публикует это значение. Введите его, чтобы отобразить панель использования. Применяется к выбранной учетной записи GitHub.";
-"GitHub login succeeded, but CodexBar could not verify which account it belongs to. Please try again." = "Вход в GitHub удался, но CodexBar не смог проверить, к какой учетной записи он принадлежит. Пожалуйста, попробуйте еще раз.";
+"GitHub login succeeded, but CodexBar could not verify which account it belongs to. Please try again." = "Вход в GitHub удался, но Sharingan не смог проверить, к какой учетной записи он принадлежит. Пожалуйста, попробуйте еще раз.";
 "GitKraken access token" = "GitKraken доступ токены";
 "Global uses api.z.ai. China mainland uses open.bigmodel.cn with a BigModel/GLM key; the two key families are not interchangeable." = "Глобально использует api.z.ai. В материковом Китае используется open.bigmodel.cn с ключом BigModel/GLM; два ключевых семейства не являются взаимозаменяемыми.";
 "Grok CLI" = "Grok CLI";
@@ -1872,8 +1872,8 @@
 "Open API docs" = "Открыть документы API";
 "Open API keys" = "Откройте страницу ключей API.";
 "Open Amp Access Tokens" = "Открыть доступ к Amp токены";
-"Open CodexBar" = "Открыть CodexBar";
-"Open CodexBar to refresh, or edit this widget to choose another account." = "Откройте CodexBar, чтобы обновить, или отредактируйте этот виджет, чтобы выбрать другую учетную запись.";
+"Open CodexBar" = "Открыть Sharingan";
+"Open CodexBar to refresh, or edit this widget to choose another account." = "Откройте Sharingan, чтобы обновить, или отредактируйте этот виджет, чтобы выбрать другую учетную запись.";
 "Open Devin Usage" = "Откройте страницу использования Devin.";
 "Open Fireworks" = "Открыть Fireworks";
 "Open GitKraken Account" = "Откройте страницу учетной записи GitKraken.";
@@ -1891,7 +1891,7 @@
 "OpenAI cookies are for %1$@, not %2$@." = "OpenAI cookies предназначены для %1$@, а не для %2$@.";
 "OpenAI cookies are for %@." = "OpenAI cookies предназначены для %@.";
 "OpenAI web battery saver" = "OpenAI веб-экономитель заряда батареи";
-"OpenAI web dashboard refresh timed out. CodexBar will retry after the refresh cooldown." = "Время обновления веб-панели OpenAI истекло. CodexBar повторит попытку после восстановления обновления.";
+"OpenAI web dashboard refresh timed out. CodexBar will retry after the refresh cooldown." = "Время обновления веб-панели OpenAI истекло. Sharingan повторит попытку после восстановления обновления.";
 "OpenAI web refresh hit a network error. Check your connection, then refresh OpenAI cookies and try again." = "Веб-обновление OpenAI привело к сетевой ошибке. Проверьте подключение, затем обновите OpenAI cookies и повторите попытку.";
 "OpenAI web refresh timed out. Refresh OpenAI cookies and try again." = "Время ожидания веб-обновления OpenAI истекло. Обновите OpenAI cookies и повторите попытку.";
 "OpenAI web refresh was interrupted. Refresh OpenAI cookies and try again." = "Обновление веб-страницы OpenAI было прервано. Обновите OpenAI cookies и повторите попытку.";
@@ -1900,7 +1900,7 @@
 "Optional additional key for account Activity. Only needed to use a separate Management API key from the one in the required API key field above." = "Необязательный дополнительный ключ для активности аккаунта. Необходимо только использовать отдельный ключ управления API, отличный от того, который указан в обязательном поле ключа API выше.";
 "Optional for automatic auth. Use a slug, URL, or internal org-... / org_... ID. Manual auth may need the x-cog-org-id header from a successful Devin quota request." = "Опционально для автоматической аутентификации. Используйте slug, URL или внутренний org-... / org_... ID. Для ручной аутентификации может потребоваться заголовок x-cog-org-id из успешного запроса Devin Квота.";
 "Optional gk-org-id header value. Or set GITKRAKEN_ORG_ID." = "Необязательное значение заголовка gk-org-id. Или установите GITKRAKEN_ORG_ID.";
-"Optional when the API key can access one account; CodexBar discovers it automatically. For multiple accounts, find the slug in the app.fireworks.ai home account switcher or run firectl whoami." = "Необязательно, если ключ API может получить доступ к одной учетной записи; CodexBar обнаруживает его автоматически. Для нескольких учетных записей найдите slug в переключателе домашних учетных записей app.fireworks.ai или запустите firectl whoami.";
+"Optional when the API key can access one account; CodexBar discovers it automatically. For multiple accounts, find the slug in the app.fireworks.ai home account switcher or run firectl whoami." = "Необязательно, если ключ API может получить доступ к одной учетной записи; Sharingan обнаруживает его автоматически. Для нескольких учетных записей найдите slug в переключателе домашних учетных записей app.fireworks.ai или запустите firectl whoami.";
 "Optional. Defaults to the first Business or Enterprise workspace on the account." = "Необязательный. По умолчанию используется первое рабочее пространство Business или Enterprise в учетной записи.";
 "Optional. Defaults to the hosted ClawRouter service." = "Необязательный. По умолчанию используется размещенная служба ClawRouter.";
 "Optional. Defaults to the hosted OpenRouter API." = "Необязательный. По умолчанию используется размещенный OpenRouter API.";
@@ -1968,7 +1968,7 @@
 "SUBSCRIPTIONS" = "ПОДПИСКИ";
 "Save" = "Сохранить";
 "Save display and notification preferences for your dotfiles. Accounts, credentials, login, local paths and consent stay on this Mac." = "Сохраните настройки отображения и уведомлений для своих точечных файлов. Учетные записи, учетные данные, логин, локальные пути и согласие остаются на этом Mac.";
-"Saved in CodexBar's local config file. Or set GITKRAKEN_API_TOKEN." = "Сохраняется в локальном файле конфигурации CodexBar. Или установите GITKRAKEN_API_TOKEN.";
+"Saved in CodexBar's local config file. Or set GITKRAKEN_API_TOKEN." = "Сохраняется в локальном файле конфигурации Sharingan. Или установите GITKRAKEN_API_TOKEN.";
 "Scoped weekly" = "Еженедельно Квота для выбранной области";
 "Secondary quota" = "Вторичный Квота";
 "Select position %@" = "Выберите позицию %@";
@@ -1987,10 +1987,10 @@
 "Show workspace spend" = "Показать расходы на рабочее пространство";
 "Shows model-specific Claude quotas, such as Fable, in desktop widgets." = "Показывает Claude Квота для конкретной модели, например Fable, в виджетах рабочего стола.";
 "Shows the hidden accounts" = "Показывает скрытые аккаунты";
-"Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "Показывает использование и позволяет переключать учетные записи через `cswap`. Учетные данные остаются под управлением claude-swap; CodexBar никогда их не читает.";
-"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "Показывает использование из `tcr`; не переключает учетные записи, потому что tcr выбирает учетную запись для каждого запроса. Учетные данные остаются под управлением tcr; CodexBar никогда их не читает.";
+"Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "Показывает использование и позволяет переключать учетные записи через `cswap`. Учетные данные остаются под управлением claude-swap; Sharingan никогда их не читает.";
+"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "Показывает использование из `tcr`; не переключает учетные записи, потому что tcr выбирает учетную запись для каждого запроса. Учетные данные остаются под управлением tcr; Sharingan никогда их не читает.";
 "Stay Awake" = "Бодрствуйте";
-"Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "Хранится в файле конфигурации CodexBar. Считывает ежемесячный бюджет и маршрутизируемое использование из /v1/usage.";
+"Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "Хранится в файле конфигурации Sharingan. Считывает ежемесячный бюджет и маршрутизируемое использование из /v1/usage.";
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is required for organization usage; legacy/user keys only get a best-effort balance fallback." = "Хранится в ~/.codexbar/config.json. OPENAI_ADMIN_KEY необходим для использования в организации; устаревшие/пользовательские ключи получают только резервный баланс баланса.";
 "Stored in ~/.codexbar/config.json. You can also provide FACTORY_API_KEY or ~/.factory/.env." = "Хранится в ~/.codexbar/config.json. Вы также можете предоставить FACTORY_API_KEY или ~/.factory/.env.";
 "Stored in ~/.codexbar/config.json. You can also set AMP_API_KEY." = "Хранится в ~/.codexbar/config.json. Вы также можете установить AMP_API_KEY.";
@@ -2005,7 +2005,7 @@
 "Switching account…" = "Переключение аккаунта…";
 "TOP MODELS" = "ТОП-МОДЕЛИ";
 "TRACKED TOKENS · %@" = "Учтённые токены · %@";
-"That managed account uses a workspace that differs from its saved Codex auth default. Keep it as a managed account; CodexBar will not rewrite Codex-owned auth to promote it." = "Эта управляемая учетная запись использует рабочую область, которая отличается от сохраненного значения по умолчанию для аутентификации Codex. Сохраняйте его как управляемую учетную запись; CodexBar не будет перезаписывать принадлежащую Codex аутентификацию для ее продвижения.";
+"That managed account uses a workspace that differs from its saved Codex auth default. Keep it as a managed account; CodexBar will not rewrite Codex-owned auth to promote it." = "Эта управляемая учетная запись использует рабочую область, которая отличается от сохраненного значения по умолчанию для аутентификации Codex. Сохраняйте его как управляемую учетную запись; Sharingan не будет перезаписывать принадлежащую Codex аутентификацию для ее продвижения.";
 "The pasted header is sent only to this tenant." = "Вставленный заголовок отправляется только этому клиенту.";
 "The selected Codex profile has no verified account email." = "Выбранный профиль Codex не имеет подтвержденного адреса электронной почты.";
 "The selected managed Codex account is unavailable." = "Выбранный управляемый аккаунт Codex недоступен.";
@@ -2034,7 +2034,7 @@
 "Weekly (7-day)" = "Еженедельно (7 дней)";
 "When on, runs automatic provider, local usage, and storage refreshes no more often than every 30 minutes. Manual refresh remains available. Automatic follows the system Low Power Mode setting." = "Если включено, автоматически запускается поставщик, локальное использование и хранилище обновляются не чаще, чем каждые 30 минут. Ручное обновление остается доступным. Автоматически соответствует настройке режима низкого энергопотребления системы.";
 "Without configured API credentials, install and authenticate 'arkcli' for Coding/Agent Plan usage. Existing API credentials remain authoritative." = "Без настроенных учетных данных API установите и подтвердите подлинность «arkcli» для использования плана кодирования/агента. Существующие учетные данные API остаются действительными.";
-"You can close this window and return to CodexBar." = "Вы можете закрыть это окно и вернуться к CodexBar.";
+"You can close this window and return to CodexBar." = "Вы можете закрыть это окно и вернуться к Sharingan.";
 "You can close this window and try again." = "Вы можете закрыть это окно и повторить попытку.";
 "ZoomMate capture" = "Захват ZoomMate";
 "a1.small-equivalent hours" = "a1.small-эквивалент часов";
@@ -2102,7 +2102,7 @@
 "Premium weekly" = "Премиум-еженедельное использование Квота";
 "DevPass cost history is not available." = "История затрат DevPass недоступна.";
 "DevPass API key" = "DevPass API ключ";
-"Saved in CodexBar's local config file. Or set DEVPASS_API_KEY." = "Сохраняется в локальном файле конфигурации CodexBar. Или установите DEVPASS_API_KEY.";
+"Saved in CodexBar's local config file. Or set DEVPASS_API_KEY." = "Сохраняется в локальном файле конфигурации Sharingan. Или установите DEVPASS_API_KEY.";
 "Regular LLM Gateway API key" = "Обычный ключ LLM Gateway API";
 "Memory" = "Использование памяти";
 "llmman cost summary is not supported." = "Сводка затрат llmman не поддерживается.";
@@ -2131,7 +2131,7 @@
 "ClawRouter spend is reported by its usage API." = "О расходах ClawRouter сообщается по их использованию API.";
 "Vercel AI Gateway cost history is not available." = "История затрат Vercel AI Gateway недоступна.";
 "Vercel AI Gateway API key" = "Vercel AI Gateway API ключ";
-"Saved in CodexBar's local config file. Or set AI_GATEWAY_API_KEY." = "Сохраняется в локальном файле конфигурации CodexBar. Или установите AI_GATEWAY_API_KEY.";
+"Saved in CodexBar's local config file. Or set AI_GATEWAY_API_KEY." = "Сохраняется в локальном файле конфигурации Sharingan. Или установите AI_GATEWAY_API_KEY.";
 "Savings" = "Экономия";
 "Reviews" = "Отзывы";
 "Review count and billing period from CodeRabbit." = "Количество просмотров и расчетный период с CodeRabbit.";
@@ -2154,7 +2154,7 @@
 "ClinePass cost history is not available via the usage-limits API." = "История затрат ClinePass недоступна через ограничения на использование API.";
 "Paste an API key, or run cline auth. Reads the existing Cline session without copying it." = "Вставьте ключ API или запустите cline auth. Читает существующий сеанс Cline, не копируя его.";
 "ClinePass API key..." = "ClinePass API ключ...";
-"DeepInfra per-request cost history is not available in CodexBar." = "История стоимости каждого запроса DeepInfra недоступна в CodexBar.";
+"DeepInfra per-request cost history is not available in CodexBar." = "История стоимости каждого запроса DeepInfra недоступна в Sharingan.";
 "Store multiple DeepInfra API keys." = "Храните несколько ключей DeepInfra API.";
 "Claude credentials" = "Учетные данные Claude";
 "Store Claude sessionKey cookies, OAuth tokens, or Anthropic Admin API keys." = "Сохраните ключи Claude sessionKey cookies, OAuth токены или Anthropic Admin API.";
@@ -2162,7 +2162,7 @@
 "4-hour quota" = "4 часа Квота";
 "Monthly quota" = "Ежемесячно Квота";
 "Subscription usage from the Chutes API." = "Использование подписки от Chutes API.";
-"Chutes cost history is not available from CodexBar." = "История затрат Chutes недоступна из CodexBar.";
+"Chutes cost history is not available from CodexBar." = "История затрат Chutes недоступна из Sharingan.";
 "Stored in ~/.codexbar/config.json. Paste a Chutes API key." = "Хранится в ~/.codexbar/config.json. Вставьте ключ Chutes API.";
 "chutes key..." = "Ключ API Chutes...";
 "Spend" = "Расходы";
@@ -2196,7 +2196,7 @@
 "Base" = "База";
 "T3 Chat cost summary is not supported." = "Сводка затрат T3 Chat не поддерживается.";
 "Model quota" = "Модель Квота";
-"Helmcode per-request cost history is not available in CodexBar." = "История стоимости каждого запроса Helmcode недоступна в CodexBar.";
+"Helmcode per-request cost history is not available in CodexBar." = "История стоимости каждого запроса Helmcode недоступна в Sharingan.";
 "Copy the Cookie request header from your tenant's dashboard. cURL captures are not supported." = "Скопируйте заголовок запроса Cookie с панели мониторинга вашего клиента. Захваты cURL не поддерживаются.";
 "Store multiple IBM Bob API keys." = "Храните несколько ключей IBM Bob API.";
 "Monthly Bobcoins" = "Ежемесячные бобкоины";
@@ -2208,7 +2208,7 @@
 "xai-..." = "xai-...";
 "Team ID" = "Команда ID";
 "Vercel access token" = "Токен доступа Vercel";
-"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "Необязательно. Показывает ваш личный бюджет вместо кредитов команды. Сохраняется в локальном файле конфигурации CodexBar. Или задайте VERCEL_ACCESS_TOKEN.";
+"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "Необязательно. Показывает ваш личный бюджет вместо кредитов команды. Сохраняется в локальном файле конфигурации Sharingan. Или задайте VERCEL_ACCESS_TOKEN.";
 "Open Vercel tokens" = "Открыть токены Vercel";
 "Required with a Vercel access token. Or set VERCEL_TEAM_ID." = "Требуется вместе с токеном доступа Vercel. Или задайте VERCEL_TEAM_ID.";
 "Required. Shown in the xAI Console URL and team settings." = "Обязательно. Отображается в консоли xAI URL и настройках команды.";
@@ -2259,13 +2259,13 @@
 "__raycast_session=…; csrf_token=…" = "__raycast_session=…; csrf_token=…";
 "Open Raycast Account" = "Открыть счет Raycast";
 "ai& spend is summed from the request logs API." = "Расходы ai& суммируются из журналов запросов API.";
-"Stored in CodexBar's config file. Create a key in the ai& console (shown once)." = "Хранится в файле конфигурации CodexBar. Создайте ключ в консоли ai& (показано один раз).";
+"Stored in CodexBar's config file. Create a key in the ai& console (shown once)." = "Хранится в файле конфигурации Sharingan. Создайте ключ в консоли ai& (показано один раз).";
 "sk-…" = "sk-…";
 "Store multiple Venice API keys." = "Храните несколько ключей Venice API.";
 "Venice per-day cost history is not available via API." = "История затрат Venice за день недоступна через API.";
 "Atlas Cloud cost history is not available." = "История затрат Atlas Cloud недоступна.";
 "Atlas Cloud API key" = "Atlas Cloud API ключ";
-"Saved in CodexBar's local config file. Or set ATLASCLOUD_API_KEY." = "Сохраняется в локальном файле конфигурации CodexBar. Или установите ATLASCLOUD_API_KEY.";
+"Saved in CodexBar's local config file. Or set ATLASCLOUD_API_KEY." = "Сохраняется в локальном файле конфигурации Sharingan. Или установите ATLASCLOUD_API_KEY.";
 "Five-hour quota" = "Пятичасовой Квота";
 "Weekly tokens" = "Еженедельно токены";
 "Weekly token quota regenerates continuously." = "Еженедельно токены Квота непрерывно регенерируется.";
@@ -2276,7 +2276,7 @@
 "Daily free tokens" = "Ежедневно бесплатно токены";
 "xKiro cost history is not available." = "История затрат xKiro недоступна.";
 "xKiro API key" = "xKiro API ключ";
-"Saved in CodexBar's local config file. Or set XKIRO_API_KEY. Reads free-token usage only." = "Сохраняется в локальном файле конфигурации CodexBar. Или установите XKIRO_API_KEY. Читает только бесплатное использование токены.";
+"Saved in CodexBar's local config file. Or set XKIRO_API_KEY. Reads free-token usage only." = "Сохраняется в локальном файле конфигурации Sharingan. Или установите XKIRO_API_KEY. Читает только бесплатное использование токены.";
 "Store multiple Hugging Face access tokens." = "Сохраните множественный доступ к Hugging Face токены.";
 "Paste access token…" = "Вставить доступ токены…";
 "Inference" = "Вывод";
@@ -2347,7 +2347,7 @@
 "Subscription kWh and prepaid USD balance." = "Подписка в кВтч и предоплаченный баланс в долларах США.";
 "Neuralwatt token cost history is not available via the quota API." = "История затрат Neuralwatt токены недоступна через Квота API.";
 "Store multiple Neuralwatt API keys." = "Храните несколько ключей Neuralwatt API.";
-"Stored in the CodexBar config file. Manage keys from the Neuralwatt dashboard." = "Хранится в файле конфигурации CodexBar. Управляйте ключами с панели управления Neuralwatt.";
+"Stored in the CodexBar config file. Manage keys from the Neuralwatt dashboard." = "Хранится в файле конфигурации Sharingan. Управляйте ключами с панели управления Neuralwatt.";
 
 // Additional localized settings, provider controls, sharing, and widgets.
 "Monthly allowances" = "Ежемесячные надбавки";
@@ -2421,7 +2421,7 @@
 "Speed range needs 4 completed turns." = "Для диапазона скорости нужны 4 завершённых хода диалога.";
 "All accounts" = "Все аккаунты";
 "Refresh all accounts" = "Обновить все аккаунты";
-"CodexBar follows" = "CodexBar отслеживает";
+"CodexBar follows" = "Sharingan отслеживает";
 "%@ accounts" = "Аккаунтов: %@";
 "Refreshes up to %@ accounts at a time." = "Обновляет до %@ аккаунтов одновременно.";
 "Each account has its own limits. Viewing usage does not switch accounts." = "У каждого аккаунта свои лимиты. Просмотр использования не переключает аккаунты.";
@@ -2529,21 +2529,21 @@
 "Monthly AI tokens" = "Токены ИИ за месяц";
 "Aerostack cost history is not available." = "История затрат Aerostack недоступна.";
 "Account JWT" = "JWT учётной записи";
-"Saved in CodexBar's local config file. Replace when expired; CodexBar does not refresh it." = "Сохраняется в локальном файле конфигурации CodexBar. Замените по истечении срока действия; CodexBar не обновляет его.";
+"Saved in CodexBar's local config file. Replace when expired; CodexBar does not refresh it." = "Сохраняется в локальном файле конфигурации Sharingan. Замените по истечении срока действия; Sharingan не обновляет его.";
 "Account JWT, not an Agent Endpoint key" = "JWT учётной записи, а не ключ Agent Endpoint";
 "Input tokens" = "Входные токены";
 "Output tokens" = "Выходные токены";
 "Cosmic AI cost history is not available." = "История затрат Cosmic AI недоступна.";
 "Personal Access Token" = "Персональный токен доступа";
-"Saved in CodexBar's local config file. Reads project usage only; bucket keys are not supported." = "Сохраняется в локальном файле конфигурации CodexBar. Читает только данные об использовании проекта; ключи бакетов не поддерживаются.";
+"Saved in CodexBar's local config file. Reads project usage only; bucket keys are not supported." = "Сохраняется в локальном файле конфигурации Sharingan. Читает только данные об использовании проекта; ключи бакетов не поддерживаются.";
 "cos_…" = "cos_…";
 "Required. Usage covers this project only. Or set COSMIC_PROJECT_ID." = "Обязательно. Данные об использовании относятся только к этому проекту. Или задайте COSMIC_PROJECT_ID.";
 "Sail Research cost history is not available." = "История затрат Sail Research недоступна.";
 "Sail Research API key" = "API-ключ Sail Research";
-"Saved in CodexBar's local config file. Or set SAIL_API_KEY." = "Сохраняется в локальном файле конфигурации CodexBar. Или задайте SAIL_API_KEY.";
+"Saved in CodexBar's local config file. Or set SAIL_API_KEY." = "Сохраняется в локальном файле конфигурации Sharingan. Или задайте SAIL_API_KEY.";
 "Sofya cost history is not available." = "История затрат Sofya недоступна.";
 "Sofya API key" = "API-ключ Sofya";
-"Saved in CodexBar's local config file. Or set SOFYA_API_KEY." = "Сохраняется в локальном файле конфигурации CodexBar. Или задайте SOFYA_API_KEY.";
+"Saved in CodexBar's local config file. Or set SOFYA_API_KEY." = "Сохраняется в локальном файле конфигурации Sharingan. Или задайте SOFYA_API_KEY.";
 "Pace sign" = "Знак темпа расхода";
 "Ahead of pace is +" = "Опережение темпа — +";
 "Reserve is +" = "Запас — +";
@@ -2574,7 +2574,7 @@
 "Also restores the provider order in the menu bar. Can be undone." = "Также восстанавливает порядок провайдеров в строке меню. Действие можно отменить.";
 "Local Codex details; excluded from combined totals." = "Локальные данные Codex; не учитываются в общих итогах.";
 
-"Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the Sharingan config file. You can also set COMMAND_CODE_API_KEY.";
 /* OpenAI organization rate limits and live usage */
 "%@ tokens · %@ requests" = "%@ токенов · %@ запросов";
 "15m" = "15 мин";
@@ -2660,7 +2660,7 @@
 "Daily spend · %@" = "Расходы за день · %@";
 "Applies to the selected token account “%@”. Each account keeps its own limits." = "Применяется к выбранной учётной записи токена «%@». У каждой учётной записи свои лимиты.";
 "Applies to the OpenAI API key, not to token accounts." = "Применяется к ключу API OpenAI, а не к учётным записям токенов.";
-"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "CodexBar запросит у macOS Keychain токен входа Muse Code, чтобы получить данные об использовании вашей подписки Muse Code. Нажмите OK, чтобы продолжить.";
+"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "Sharingan запросит у macOS Keychain токен входа Muse Code, чтобы получить данные об использовании вашей подписки Muse Code. Нажмите OK, чтобы продолжить.";
 /* Claude Platform provider */
 "API credit" = "Кредит API";
 "Purchased credit" = "Купленный кредит";
@@ -2684,7 +2684,7 @@
 "http_server_plain_http" = "Разрешить незашифрованный HTTP вне этого Mac";
 "http_server_dashboard" = "Панель";
 "http_server_wildcard" = "На других устройствах замените 0.0.0.0 на IPv4-адрес VPN или Tailscale этого Mac.";
-"http_server_footer" = "По умолчанию выключен. Запускается с CodexBar и останавливается при выходе. Настройки и токен остаются на этом Mac и исключены из синхронизации и экспорта. Для удалённого доступа Mac не должен спать.";
+"http_server_footer" = "По умолчанию выключен. Запускается с Sharingan и останавливается при выходе. Настройки и токен остаются на этом Mac и исключены из синхронизации и экспорта. Для удалённого доступа Mac не должен спать.";
 /* Claude desktop cookie source */
 "Claude desktop app" = "Приложение Claude для компьютера";
 "Use Claude desktop app cookies" = "Использовать файлы cookie приложения Claude";
@@ -2708,7 +2708,7 @@
 
 "Trae CN" = "Trae CN";
 "Show Trae CN usage" = "Показывать использование Trae CN";
-"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "Войдите в Trae CN на trae.cn, затем обновите CodexBar.";
+"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "Войдите в Trae CN на trae.cn, затем обновите Sharingan.";
 "Trae CN usage response format changed." = "Формат ответа с данными об использовании Trae CN изменился.";
 "Trae CN request failed. Try refreshing later." = "Запрос к Trae CN не выполнен. Попробуйте обновить позже.";
 "Use --provider copilot." = "Используйте --provider copilot.";
@@ -2745,14 +2745,14 @@
 "Chatbox AI denied access. Check your license." = "Chatbox AI отказал в доступе. Проверьте лицензию.";
 "Chatbox AI is rate limiting requests. Try again later." = "Chatbox AI ограничивает частоту запросов. Повторите попытку позже.";
 "Chatbox AI request failed. Try refreshing later." = "Запрос к Chatbox AI не выполнен. Попробуйте обновить позже.";
-"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI вернул неизвестный ответ. Обновите CodexBar и повторите попытку.";
+"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI вернул неизвестный ответ. Обновите Sharingan и повторите попытку.";
 
 /* abliteration.ai */
 "abliteration.ai" = "abliteration.ai";
 "Show abliteration.ai usage" = "Показывать использование abliteration.ai";
 "abliteration.ai is rate limiting requests. Try again later." = "abliteration.ai ограничивает частоту запросов. Повторите попытку позже.";
 "abliteration.ai request failed. Try refreshing later." = "Запрос к abliteration.ai не выполнен. Попробуйте обновить позже.";
-"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai вернул неизвестный ответ. Обновите CodexBar и повторите попытку.";
+"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai вернул неизвестный ответ. Обновите Sharingan и повторите попытку.";
 "Check your API key in Settings." = "Проверьте ключ API в настройках.";
 "Kimi Code" = "Kimi Code";
 

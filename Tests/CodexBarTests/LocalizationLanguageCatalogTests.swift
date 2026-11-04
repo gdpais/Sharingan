@@ -378,31 +378,31 @@ struct LocalizationLanguageCatalogTests {
             "ar": [
                 "language_arabic": "العربية",
                 "tab_general": "عام",
-                "quit_app": "إنهاء CodexBar",
+                "quit_app": "إنهاء Sharingan",
                 "usage_percent_suffix_left": "متبقٍ",
             ],
             "fa": [
                 "language_persian": "فارسی",
                 "tab_general": "عمومی",
-                "quit_app": "خروج از CodexBar",
+                "quit_app": "خروج از Sharingan",
                 "usage_percent_suffix_left": "باقی مانده",
             ],
             "th": [
                 "language_thai": "ไทย",
                 "tab_general": "ทั่วไป",
-                "quit_app": "ออกจาก CodexBar",
+                "quit_app": "ออกจาก Sharingan",
                 "usage_percent_suffix_left": "คงเหลือ",
             ],
             "ru": [
                 "language_russian": "Русский",
                 "tab_general": "Общие",
-                "quit_app": "Выйти из CodexBar",
+                "quit_app": "Выйти из Sharingan",
                 "usage_percent_suffix_left": "осталось",
             ],
             "gl": [
                 "language_galician": "Galego",
                 "tab_general": "Xeral",
-                "quit_app": "Saír de CodexBar",
+                "quit_app": "Saír de Sharingan",
                 "terminal_app_title": "Terminal predeterminado",
                 "terminal_app_subtitle": "Terminal usado pola acción Abrir terminal",
             ],
@@ -662,7 +662,7 @@ struct LocalizationLanguageCatalogTests {
         #expect(catalog["tab_general"] == "일반")
         #expect(catalog["quota_warning_session"] == "세션")
         #expect(catalog["quota_warning_warn_at"] == "경고 기준")
-        #expect(catalog["quit_app"] == "CodexBar 종료")
+        #expect(catalog["quit_app"] == "Sharingan 종료")
     }
 
     @Test
@@ -680,7 +680,7 @@ struct LocalizationLanguageCatalogTests {
         #expect(Set(turkish.keys) == Set(english.keys))
         #expect(turkish["language_turkish"] == "Türkçe")
         #expect(turkish["tab_general"] == "Genel")
-        #expect(turkish["quit_app"] == "CodexBar'dan Çık")
+        #expect(turkish["quit_app"] == "Sharingan'dan Çık")
         #expect(turkish["display_mode_percent_desc"]?.contains("%45") == true)
         #expect(turkish["session_depleted_notification_body"]?.hasPrefix("0% kaldı.") == true)
 
@@ -871,7 +871,7 @@ extension LocalizationLanguageCatalogTests {
         #expect(Set(indonesian.keys) == Set(english.keys))
         #expect(indonesian["language_indonesian"] == "Bahasa Indonesia")
         #expect(indonesian["tab_general"] == "Umum")
-        #expect(indonesian["quit_app"] == "Keluar CodexBar")
+        #expect(indonesian["quit_app"] == "Keluar Sharingan")
         #expect(indonesian["30d"] == "30 hari")
         #expect(indonesian["On"] == "Aktif")
         #expect(indonesian["Off"] == "Nonaktif")
