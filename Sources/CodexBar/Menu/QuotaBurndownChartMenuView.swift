@@ -94,8 +94,8 @@ struct QuotaBurndownChartMenuView: View {
                             x: .value("Time", point.date),
                             y: .value(L("Usage remaining"), point.remainingPercent),
                             series: .value("Series", "Ideal"))
-                            .foregroundStyle(Color(nsColor: .secondaryLabelColor))
-                            .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 3]))
+                            .foregroundStyle(ChartReferenceLine.color)
+                            .lineStyle(ChartReferenceLine.strokeStyle)
                     }
                     ForEach(selected.model.projection, id: \.date) { point in
                         LineMark(

@@ -177,8 +177,8 @@ struct CostHistoryChartMenuView: View {
                     }
                     if let average = dailyAverage {
                         RuleMark(y: .value(L("Average"), average))
-                            .foregroundStyle(Color.secondary)
-                            .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 3]))
+                            .foregroundStyle(ChartReferenceLine.color)
+                            .lineStyle(ChartReferenceLine.strokeStyle)
                             .annotation(position: .top, alignment: .trailing, spacing: 2) {
                                 Text(self.averageLabel(average, metric: activeMetric))
                                     .font(.caption2)
