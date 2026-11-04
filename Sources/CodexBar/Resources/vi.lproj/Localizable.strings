@@ -2768,3 +2768,6 @@
 "avg %@ credits/day" = "TB %@ tín dụng/ngày";
 "Average" = "Trung bình";
 "avg %@/day" = "trung bình %@/ngày";
+"Spend by hour of week" = "Chi tiêu theo giờ trong tuần";
+"By hour of week" = "Theo giờ trong tuần";
+"%@ of spend on weekends" = "%@ chi tiêu vào cuối tuần";

@@ -59,6 +59,8 @@ final class SpendTrendChartRenderTests: XCTestCase {
             ("13-used-sources-narrow", .daily, 480, .aqua, sparseGroup, "zh-Hans", "zh_CN"),
             ("14-hourly-used-sources", .hourly, 760, .aqua, sparseGroup, "zh-Hans", "zh_CN"),
             ("15-used-sources-dark", .daily, 480, .darkAqua, sparseGroup, "zh-Hans", "zh_CN"),
+            ("16-hour-of-week", .hourOfWeek, 760, .aqua, group, "en", "en_US"),
+            ("17-dark-narrow-hour-of-week", .hourOfWeek, 480, .darkAqua, group, "de", "de_DE"),
         ] {
             try await CodexBarLocalizationOverride.$appLanguage.withValue(language) {
                 let view = VStack(alignment: .leading, spacing: 16) {

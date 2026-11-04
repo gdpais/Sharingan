@@ -2766,3 +2766,6 @@
 "avg %@ credits/day" = "media %@ créditos/día";
 "Average" = "Media";
 "avg %@/day" = "media %@/día";
+"Spend by hour of week" = "Gasto por hora da semana";
+"By hour of week" = "Por hora da semana";
+"%@ of spend on weekends" = "%@ do gasto nas fins de semana";

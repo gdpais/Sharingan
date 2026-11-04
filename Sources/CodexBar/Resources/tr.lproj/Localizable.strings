@@ -2770,3 +2770,6 @@
 "avg %@ credits/day" = "ort. %@ kredi/gün";
 "Average" = "Ortalama";
 "avg %@/day" = "ort. %@/gün";
+"Spend by hour of week" = "Haftanın saatine göre harcama";
+"By hour of week" = "Haftanın saatine göre";
+"%@ of spend on weekends" = "Hafta sonu harcama payı: %@";

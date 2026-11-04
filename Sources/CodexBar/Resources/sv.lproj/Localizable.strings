@@ -2766,3 +2766,6 @@
 "avg %@ credits/day" = "snitt %@ krediter/dag";
 "Average" = "Genomsnitt";
 "avg %@/day" = "snitt %@/dag";
+"Spend by hour of week" = "Utgifter per veckotimme";
+"By hour of week" = "Per veckotimme";
+"%@ of spend on weekends" = "%@ av utgifterna på helger";

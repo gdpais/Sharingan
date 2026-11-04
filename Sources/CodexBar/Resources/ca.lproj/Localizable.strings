@@ -2769,3 +2769,6 @@
 "avg %@ credits/day" = "mitjana %@ crèdits/dia";
 "Average" = "Mitjana";
 "avg %@/day" = "mitjana %@/dia";
+"Spend by hour of week" = "Despesa per hora de la setmana";
+"By hour of week" = "Per hora de la setmana";
+"%@ of spend on weekends" = "%@ de la despesa en caps de setmana";

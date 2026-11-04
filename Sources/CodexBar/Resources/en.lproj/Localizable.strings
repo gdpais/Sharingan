@@ -2772,3 +2772,6 @@
 "avg %@ credits/day" = "avg %@ credits/day";
 "Average" = "Average";
 "avg %@/day" = "avg %@/day";
+"Spend by hour of week" = "Spend by hour of week";
+"By hour of week" = "By hour of week";
+"%@ of spend on weekends" = "%@ of spend on weekends";
