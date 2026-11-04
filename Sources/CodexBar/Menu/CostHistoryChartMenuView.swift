@@ -8,7 +8,7 @@ import SwiftUI
 struct CostHistoryChartMenuView: View {
     typealias DailyEntry = CostUsageDailyReport.Entry
 
-    enum ChartMetric: CaseIterable, Hashable {
+    enum ChartMetric: String, CaseIterable, Hashable {
         case tokens
         case cost
 
@@ -97,6 +97,7 @@ struct CostHistoryChartMenuView: View {
         sessions: [CostUsageSessionBreakdown] = [],
         hidePersonalInfo: Bool,
         width: CGFloat,
+        initialMetric: ChartMetric? = nil,
         onMetricChanged: (@MainActor (ChartMetric) -> Void)? = nil,
         onBrowseSessions: (@MainActor (String?) -> Void)? = nil)
     {
@@ -113,7 +114,10 @@ struct CostHistoryChartMenuView: View {
         self.width = width
         self.onMetricChanged = onMetricChanged
         self.onBrowseSessions = onBrowseSessions
-        self._metric = State(initialValue: Self.defaultMetric(provider: provider, daily: daily))
+        self._metric = State(initialValue: Self.initialMetric(
+            preferred: initialMetric,
+            provider: provider,
+            daily: daily))
     }
 
     var body: some View {
@@ -413,7 +417,8 @@ struct CostHistoryChartMenuView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, Self.verticalPadding)
         .frame(minWidth: self.width, maxWidth: .infinity, alignment: .top)
-        .onChange(of: activeMetric) { _, newMetric in
+        // Report picker changes only: a data-driven fallback must not overwrite the remembered choice.
+        .onChange(of: self.metric) { _, newMetric in
             self.onMetricChanged?(newMetric)
         }
     }
@@ -822,6 +827,18 @@ struct CostHistoryChartMenuView: View {
             return .cost
         }
         return available.first ?? .cost
+    }
+
+    /// A remembered metric wins while the data can still chart it; otherwise the provider default applies.
+    private static func initialMetric(
+        preferred: ChartMetric?,
+        provider: UsageProvider,
+        daily: [DailyEntry]) -> ChartMetric
+    {
+        if let preferred, self.availableMetrics(provider: provider, daily: daily).contains(preferred) {
+            return preferred
+        }
+        return self.defaultMetric(provider: provider, daily: daily)
     }
 
     private static func showsHistoryRefreshing(
@@ -1376,6 +1393,14 @@ extension CostHistoryChartMenuView {
 
     static func _defaultMetricForTesting(provider: UsageProvider, daily: [DailyEntry]) -> ChartMetric {
         self.defaultMetric(provider: provider, daily: daily)
+    }
+
+    static func _initialMetricForTesting(
+        preferred: ChartMetric?,
+        provider: UsageProvider,
+        daily: [DailyEntry]) -> ChartMetric
+    {
+        self.initialMetric(preferred: preferred, provider: provider, daily: daily)
     }
 
     static func _chartValuesForTesting(

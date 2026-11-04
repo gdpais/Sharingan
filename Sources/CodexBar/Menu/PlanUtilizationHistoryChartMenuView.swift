@@ -68,6 +68,7 @@ struct PlanUtilizationHistoryChartMenuView: View {
     private let modelsBySeriesID: [String: Model]
     private let emptyModel: Model
     private let width: CGFloat
+    private let onSeriesChanged: (@MainActor (String) -> Void)?
 
     @State private var selectedSeriesID: String?
     @State private var selectedPointID: Date?
@@ -77,7 +78,9 @@ struct PlanUtilizationHistoryChartMenuView: View {
         histories: [PlanUtilizationSeriesHistory],
         snapshot: UsageSnapshot? = nil,
         width: CGFloat,
-        referenceDate: Date = Date())
+        referenceDate: Date = Date(),
+        initialSeriesID: String? = nil,
+        onSeriesChanged: (@MainActor (String) -> Void)? = nil)
     {
         self.provider = provider
         let visibleSeries = Self.visibleSeries(
@@ -90,6 +93,10 @@ struct PlanUtilizationHistoryChartMenuView: View {
         })
         self.emptyModel = Self.makeModel(history: nil, provider: provider, referenceDate: referenceDate)
         self.width = width
+        self.onSeriesChanged = onSeriesChanged
+        self._selectedSeriesID = State(initialValue: Self.restoredSeriesID(
+            initialSeriesID,
+            visibleSeries: visibleSeries))
     }
 
     var body: some View {
@@ -104,6 +111,7 @@ struct PlanUtilizationHistoryChartMenuView: View {
                     set: { newValue in
                         self.selectedSeriesID = newValue
                         self.selectedPointID = nil
+                        self.onSeriesChanged?(newValue)
                     })) {
                         ForEach(self.visibleSeries) { series in
                             Text(series.title).tag(series.id)
@@ -233,6 +241,12 @@ struct PlanUtilizationHistoryChartMenuView: View {
                         windowMinutes: history.windowMinutes),
                     history: history)
             }
+    }
+
+    /// A remembered series is restored only while it is still visible; nil falls back to the first series.
+    nonisolated static func restoredSeriesID(_ seriesID: String?, visibleSeries: [VisibleSeries]) -> String? {
+        guard let seriesID, visibleSeries.contains(where: { $0.id == seriesID }) else { return nil }
+        return seriesID
     }
 
     /// Histories recorded before duration-based classification stored a 43,200-minute Codex window

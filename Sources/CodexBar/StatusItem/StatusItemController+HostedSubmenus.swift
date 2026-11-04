@@ -451,6 +451,10 @@ extension StatusItemController {
             sessions: tokenSnapshot.sessions,
             hidePersonalInfo: self.settings.hidePersonalInfo,
             width: width,
+            initialMetric: self.settings.costHistoryChartMetric(for: provider),
+            onMetricChanged: { [weak self] metric in
+                self?.settings.setCostHistoryChartMetric(metric, for: provider)
+            },
             onBrowseSessions: { [weak self, weak submenu] sessionID in
                 guard let self else { return }
                 let context = SessionUsageBrowserContext(
