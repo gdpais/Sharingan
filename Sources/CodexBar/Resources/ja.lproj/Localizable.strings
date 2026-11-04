@@ -2767,3 +2767,4 @@
 "avg %@ credits/day" = "平均 %@ クレジット/日";
 "Average" = "平均";
 "avg %@/day" = "平均 %@/日";
+"Lasts until %@ at this rate" = "このペースだと%@まで持ちます";

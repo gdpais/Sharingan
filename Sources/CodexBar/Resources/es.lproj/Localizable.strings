@@ -2765,3 +2765,4 @@
 "avg %@ credits/day" = "prom. %@ créditos/día";
 "Average" = "Promedio";
 "avg %@/day" = "prom. %@/día";
+"Lasts until %@ at this rate" = "Dura hasta el %@ a este ritmo";

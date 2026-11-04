@@ -2764,3 +2764,4 @@
 "avg %@ credits/day" = "gem. %@ tegoeden/dag";
 "Average" = "Gemiddelde";
 "avg %@/day" = "gem. %@/dag";
+"Lasts until %@ at this rate" = "Genoeg tot %@ in dit tempo";

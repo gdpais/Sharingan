@@ -2769,3 +2769,4 @@
 "avg %@ credits/day" = "rata-rata %@ kredit/hari";
 "Average" = "Rata-rata";
 "avg %@/day" = "rata-rata %@/hari";
+"Lasts until %@ at this rate" = "Cukup hingga %@ dengan laju ini";

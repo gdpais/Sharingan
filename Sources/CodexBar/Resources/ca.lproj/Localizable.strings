@@ -2769,3 +2769,4 @@
 "avg %@ credits/day" = "mitjana %@ crèdits/dia";
 "Average" = "Mitjana";
 "avg %@/day" = "mitjana %@/dia";
+"Lasts until %@ at this rate" = "Dura fins al %@ a aquest ritme";

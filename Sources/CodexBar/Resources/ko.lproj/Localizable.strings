@@ -2735,3 +2735,4 @@
 "avg %@ credits/day" = "평균 %@ 크레딧/일";
 "Average" = "평균";
 "avg %@/day" = "평균 %@/일";
+"Lasts until %@ at this rate" = "이 속도라면 %@까지 사용 가능";

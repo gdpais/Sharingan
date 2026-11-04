@@ -2759,3 +2759,4 @@
 "avg %@ credits/day" = "平均 %@ 额度/天";
 "Average" = "平均值";
 "avg %@/day" = "日均 %@";
+"Lasts until %@ at this rate" = "按此速度可用到 %@";

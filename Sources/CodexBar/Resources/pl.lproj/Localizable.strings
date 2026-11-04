@@ -2770,3 +2770,4 @@
 "avg %@ credits/day" = "śr. %@ kredytów/dzień";
 "Average" = "Średnia";
 "avg %@/day" = "śr. %@/dzień";
+"Lasts until %@ at this rate" = "Wystarczy do %@ przy tym tempie";

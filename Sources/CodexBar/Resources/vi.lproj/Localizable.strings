@@ -2768,3 +2768,4 @@
 "avg %@ credits/day" = "TB %@ tín dụng/ngày";
 "Average" = "Trung bình";
 "avg %@/day" = "trung bình %@/ngày";
+"Lasts until %@ at this rate" = "Đủ dùng đến %@ với tốc độ này";

@@ -2770,3 +2770,4 @@
 "avg %@ credits/day" = "ort. %@ kredi/gün";
 "Average" = "Ortalama";
 "avg %@/day" = "ort. %@/gün";
+"Lasts until %@ at this rate" = "Bu hızla %@ tarihine kadar yeter";

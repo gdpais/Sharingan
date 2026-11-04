@@ -2772,3 +2772,4 @@
 "avg %@ credits/day" = "avg %@ credits/day";
 "Average" = "Average";
 "avg %@/day" = "avg %@/day";
+"Lasts until %@ at this rate" = "Lasts until %@ at this rate";

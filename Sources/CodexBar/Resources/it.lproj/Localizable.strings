@@ -2771,3 +2771,4 @@
 "avg %@ credits/day" = "media %@ crediti/giorno";
 "Average" = "Media";
 "avg %@/day" = "media %@/giorno";
+"Lasts until %@ at this rate" = "Dura fino al %@ a questo ritmo";

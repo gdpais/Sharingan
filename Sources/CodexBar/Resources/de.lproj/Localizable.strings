@@ -2765,3 +2765,4 @@
 "avg %@ credits/day" = "Ø %@ Credits/Tag";
 "Average" = "Durchschnitt";
 "avg %@/day" = "Ø %@/Tag";
+"Lasts until %@ at this rate" = "Reicht bis %@ bei diesem Tempo";
