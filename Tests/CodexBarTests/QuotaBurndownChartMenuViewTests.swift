@@ -1,4 +1,6 @@
+import AppKit
 import Foundation
+import SwiftUI
 import Testing
 @testable import CodexBar
 
@@ -240,5 +242,30 @@ struct QuotaBurndownChartMenuViewTests {
         #expect(band.last?.date == weeklyReset)
         #expect(learned._seriesTypicalWeekForTesting["session:300"]?.isEmpty == true)
         #expect(unlearned._seriesTypicalWeekForTesting.values.allSatisfy(\.isEmpty))
+    }
+
+    @Test
+    func `typical week band and legend keep the burndown height`() {
+        let now = Date(timeIntervalSince1970: 1_700_000_000)
+        let weeklyReset = now.addingTimeInterval(3 * 86400)
+        let histories = [
+            PlanUtilizationSeriesHistory(name: .weekly, windowMinutes: 10080, entries: [
+                .init(capturedAt: now, usedPercent: 40, resetsAt: weeklyReset),
+            ]),
+        ]
+        let weeks = QuotaBurndownModelTests.typicalWeeks(windowMinutes: 10080, before: weeklyReset)
+
+        let heights: [CGFloat] = [weeks, []].map { typicalWeeks in
+            let view = QuotaBurndownChartMenuView(
+                provider: .codex,
+                histories: histories,
+                width: 400,
+                typicalWeeks: typicalWeeks,
+                referenceDate: now)
+            return NSHostingView(rootView: view.frame(width: 400)).fittingSize.height
+        }
+
+        #expect(heights.count == 2)
+        #expect(abs(heights[0] - heights[1]) < 0.5)
     }
 }
