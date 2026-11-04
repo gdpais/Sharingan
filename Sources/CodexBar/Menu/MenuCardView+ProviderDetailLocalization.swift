@@ -45,7 +45,9 @@ extension UsageMenuCardView.Model {
                     kind: chart.kind,
                     title: chart.title.map(L),
                     unit: chart.unit.map(L),
-                    points: chart.points)
+                    points: chart.points,
+                    series: chart.series,
+                    references: chart.references)
             }
             return try? ProviderDetailSection(
                 title: section.title.map(L),

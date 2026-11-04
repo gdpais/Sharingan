@@ -163,16 +163,30 @@ public struct ProviderDetailSection: Codable, Equatable, Sendable {
         public let title: String?
         public let unit: String?
         public let points: [Point]
+        /// Named series (chart spec v2); empty for single-series charts drawn from `points`.
+        public let series: [Series]
+        /// Horizontal reference lines (chart spec v2).
+        public let references: [Reference]
 
-        public init(kind: Kind, title: String? = nil, unit: String? = nil, points: [Point]) throws {
+        public init(
+            kind: Kind,
+            title: String? = nil,
+            unit: String? = nil,
+            points: [Point],
+            series: [Series] = [],
+            references: [Reference] = []) throws
+        {
             guard points.count <= ProviderDetailSection.maximumPointsPerChart else {
                 throw ValidationError(
                     "chart.points exceeds \(ProviderDetailSection.maximumPointsPerChart) entries")
             }
+            try Self.validateSpecV2(series: series, references: references)
             self.kind = kind
             self.title = try ProviderDetailSection.optionalString(title, path: "chart.title")
             self.unit = try ProviderDetailSection.optionalString(unit, path: "chart.unit")
             self.points = points
+            self.series = series
+            self.references = references
         }
 
         private enum CodingKeys: String, CodingKey {
@@ -180,15 +194,41 @@ public struct ProviderDetailSection: Codable, Equatable, Sendable {
             case title
             case unit
             case points
+            case series
+            case references
         }
 
         public init(from decoder: Decoder) throws {
             let container = try decoder.container(keyedBy: CodingKeys.self)
+            let series = try container.decodeIfPresent([Series].self, forKey: .series) ?? []
+            // `points` stays required for single-series charts; with series it is an optional fallback.
+            let points: [Point] = if series.isEmpty {
+                try container.decode([Point].self, forKey: .points)
+            } else {
+                try container.decodeIfPresent([Point].self, forKey: .points) ?? []
+            }
             try self.init(
                 kind: container.decode(Kind.self, forKey: .kind),
                 title: container.decodeIfPresent(String.self, forKey: .title),
                 unit: container.decodeIfPresent(String.self, forKey: .unit),
-                points: container.decode([Point].self, forKey: .points))
+                points: points,
+                series: series,
+                references: container.decodeIfPresent([Reference].self, forKey: .references) ?? [])
+        }
+
+        public func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: CodingKeys.self)
+            try container.encode(self.kind, forKey: .kind)
+            try container.encodeIfPresent(self.title, forKey: .title)
+            try container.encodeIfPresent(self.unit, forKey: .unit)
+            try container.encode(self.points, forKey: .points)
+            // Omitted when empty so single-series charts encode exactly as they did before spec v2.
+            if !self.series.isEmpty {
+                try container.encode(self.series, forKey: .series)
+            }
+            if !self.references.isEmpty {
+                try container.encode(self.references, forKey: .references)
+            }
         }
     }
 

@@ -75,7 +75,9 @@ extension UsageMenuCardView.Model {
                     kind: chart.kind,
                     title: PersonalInfoRedactor.redactEmails(in: chart.title, isEnabled: true),
                     unit: chart.unit,
-                    points: points)
+                    points: points,
+                    series: chart.series.compactMap { $0.mappingText(Self.redactedChartText) },
+                    references: chart.references.compactMap { $0.mappingText(Self.redactedChartText) })
             }
             let redacted = try? ProviderDetailSection(
                 title: PersonalInfoRedactor.redactEmails(in: section.title, isEnabled: true),

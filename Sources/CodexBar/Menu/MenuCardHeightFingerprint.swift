@@ -64,6 +64,7 @@ extension [ProviderDetailSection] {
                         MenuCardHeightFingerprint.field("title", chart.title),
                         MenuCardHeightFingerprint.field("unit", chart.unit),
                         "points=\(chart.points.count)",
+                        "series=\(chart.series.count)",
                     ])
                 } ?? "chart=nil",
             ])
