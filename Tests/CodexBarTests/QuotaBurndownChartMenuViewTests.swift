@@ -207,4 +207,38 @@ struct QuotaBurndownChartMenuViewTests {
         #expect(workWeekModel.ideal.last?.remainingPercent == 0)
         #expect(!workWeekModel.projection.isEmpty)
     }
+
+    @Test
+    func `learned weeks draw a typical week behind the weekly burndown only`() {
+        let now = Date(timeIntervalSince1970: 1_700_000_000)
+        let weeklyReset = now.addingTimeInterval(3 * 86400)
+        let histories = [
+            PlanUtilizationSeriesHistory(name: .session, windowMinutes: 300, entries: [
+                .init(capturedAt: now, usedPercent: 20, resetsAt: now.addingTimeInterval(3600)),
+            ]),
+            PlanUtilizationSeriesHistory(name: .weekly, windowMinutes: 10080, entries: [
+                .init(capturedAt: now, usedPercent: 40, resetsAt: weeklyReset),
+            ]),
+        ]
+        let weeks = QuotaBurndownModelTests.typicalWeeks(windowMinutes: 10080, before: weeklyReset)
+
+        let learned = QuotaBurndownChartMenuView(
+            provider: .codex,
+            histories: histories,
+            width: 400,
+            typicalWeeks: weeks,
+            referenceDate: now)
+        let unlearned = QuotaBurndownChartMenuView(
+            provider: .codex,
+            histories: histories,
+            width: 400,
+            referenceDate: now)
+
+        let band = learned._seriesTypicalWeekForTesting["weekly:10080"] ?? []
+        #expect(band.count == 3)
+        #expect(band.first?.date == weeklyReset.addingTimeInterval(-7 * 86400))
+        #expect(band.last?.date == weeklyReset)
+        #expect(learned._seriesTypicalWeekForTesting["session:300"]?.isEmpty == true)
+        #expect(unlearned._seriesTypicalWeekForTesting.values.allSatisfy(\.isEmpty))
+    }
 }

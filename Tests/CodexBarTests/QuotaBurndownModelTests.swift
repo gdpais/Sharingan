@@ -239,6 +239,81 @@ struct QuotaBurndownModelTests {
         #expect(model.projection == [.init(date: Self.now, remainingPercent: 0)])
     }
 
+    @Test
+    func `typical week spans the weekly window from start to reset`() throws {
+        let reset = Self.now.addingTimeInterval(3 * 24 * 3600)
+        let start = reset.addingTimeInterval(-7 * 24 * 3600)
+        let history = PlanUtilizationSeriesHistory(name: .weekly, windowMinutes: 10080, entries: [
+            .init(capturedAt: Self.now.addingTimeInterval(-3600), usedPercent: 35, resetsAt: reset),
+        ])
+        let curve = try #require(TypicalWeekCurve(
+            weeks: Self.typicalWeeks(windowMinutes: 10080, before: reset),
+            windowMinutes: 10080,
+            currentResetsAt: reset))
+
+        let model = try #require(QuotaBurndownModel(
+            history: history,
+            window: RateWindow(usedPercent: 40, windowMinutes: 10080, resetsAt: reset, resetDescription: nil),
+            now: Self.now,
+            typicalWeek: curve))
+
+        // The band covers the whole window even though tracking only began an hour ago.
+        #expect(model.samples.first?.date == Self.now.addingTimeInterval(-3600))
+        #expect(model.typicalWeek == [
+            .init(date: start, lowRemainingPercent: 100, medianRemainingPercent: 100, highRemainingPercent: 100),
+            .init(
+                date: start.addingTimeInterval(3.5 * 24 * 3600),
+                lowRemainingPercent: 67.5,
+                medianRemainingPercent: 75,
+                highRemainingPercent: 82.5),
+            .init(date: reset, lowRemainingPercent: 35, medianRemainingPercent: 50, highRemainingPercent: 65),
+        ])
+    }
+
+    @Test
+    func `typical week restarts at the window start when the window began mid curve`() throws {
+        let reset = Self.now.addingTimeInterval(2 * 3600)
+        // A ten-hour learned curve behind a five-hour window: the window opens halfway along the curve.
+        let curve = try #require(TypicalWeekCurve(
+            weeks: Self.typicalWeeks(windowMinutes: 600, before: reset),
+            windowMinutes: 600,
+            currentResetsAt: reset))
+
+        let model = try #require(QuotaBurndownModel(
+            history: Self.history(entries: []),
+            window: Self.window(usedPercent: 60, reset: reset),
+            now: Self.now,
+            typicalWeek: curve))
+
+        #expect(model.typicalWeek == [
+            .init(date: model.start, lowRemainingPercent: 100, medianRemainingPercent: 100, highRemainingPercent: 100),
+            .init(date: reset, lowRemainingPercent: 67.5, medianRemainingPercent: 75, highRemainingPercent: 82.5),
+        ])
+    }
+
+    @Test
+    func `no typical week without a learned curve`() throws {
+        let reset = Self.now.addingTimeInterval(2 * 3600)
+
+        let model = try #require(QuotaBurndownModel(
+            history: Self.history(entries: []),
+            window: Self.window(usedPercent: 60, reset: reset),
+            now: Self.now))
+
+        #expect(model.typicalWeek.isEmpty)
+    }
+
+    /// Four finished windows using 20, 40, 60 and 80 percent, linearly on a three-point grid.
+    static func typicalWeeks(windowMinutes: Int, before reset: Date) -> [TypicalWeekCurve.Week] {
+        let duration = TimeInterval(windowMinutes) * 60
+        return [20.0, 40, 60, 80].enumerated().map { index, end in
+            TypicalWeekCurve.Week(
+                resetsAt: reset.addingTimeInterval(-Double(index + 1) * duration),
+                windowMinutes: windowMinutes,
+                usedPercent: [0, end / 2, end])
+        }
+    }
+
     private static var utcCalendar: Calendar {
         var calendar = Calendar(identifier: .gregorian)
         calendar.timeZone = TimeZone(secondsFromGMT: 0)!
