@@ -57,6 +57,10 @@ public struct PreferencesDocument: Codable, Sendable {
 
     public init() {}
 
+    public var isEmpty: Bool {
+        self.preferences.isEmpty
+    }
+
     public init(data: Data) throws {
         self = try JSONDecoder().decode(Self.self, from: data)
         try self.validate()
