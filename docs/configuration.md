@@ -335,7 +335,7 @@ Export without `--file` writes JSON to stdout. The CLI exports stored overrides 
 app's defaults); Settings exports the effective preferences. CLI import queues an intentional local edit:
 the running app applies it through its normal settings setters, or applies it at its next launch. The CLI
 reports `{"status":"queued"}`. Multiple pending imports merge, with the latest supplied value winning.
-`--defaults-domain` can select an alternate app preferences domain; it defaults to `com.steipete.codexbar`.
+`--defaults-domain` can select an alternate app preferences domain; it defaults to `com.gdpais.sharingan`.
 These commands transfer macOS UI preferences and are unavailable on Linux.
 
 ```json
