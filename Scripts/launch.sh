@@ -6,14 +6,14 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-APP_PATH="$PROJECT_ROOT/CodexBar.app"
+APP_PATH="$PROJECT_ROOT/Sharingan.app"
 
 echo "==> Killing existing CodexBar instances"
-pkill -x CodexBar || pkill -f CodexBar.app || true
+pkill -x CodexBar || pkill -f Sharingan.app || true
 sleep 0.5
 
 if [[ ! -d "$APP_PATH" ]]; then
-    echo "ERROR: CodexBar.app not found at $APP_PATH"
+    echo "ERROR: Sharingan.app not found at $APP_PATH"
     echo "Run ./Scripts/package_app.sh first to build the app"
     exit 1
 fi

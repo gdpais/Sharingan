@@ -34,9 +34,9 @@ extension CodexBarCLI {
 
     static func printVersion() -> Never {
         if let version = currentVersion() {
-            print("CodexBar \(version)")
+            print("Sharingan \(version)")
         } else {
-            print("CodexBar")
+            print("Sharingan")
         }
         Self.platformExit(0)
     }

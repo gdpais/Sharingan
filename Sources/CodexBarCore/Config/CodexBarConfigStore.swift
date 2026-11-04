@@ -15,11 +15,11 @@ public enum CodexBarConfigStoreError: LocalizedError {
     public var errorDescription: String? {
         switch self {
         case .invalidURL:
-            "Invalid CodexBar config path."
+            "Invalid Sharingan config path."
         case let .decodeFailed(details):
-            "Failed to decode CodexBar config: \(details)"
+            "Failed to decode Sharingan config: \(details)"
         case let .encodeFailed(details):
-            "Failed to encode CodexBar config: \(details)"
+            "Failed to encode Sharingan config: \(details)"
         }
     }
 }

@@ -79,7 +79,7 @@ public enum AlibabaCodingPlanSettingsError: LocalizedError, Sendable {
                 "ALIBABA_QWEN_API_KEY, or DASHSCOPE_API_KEY."
         case let .missingCookie(details):
             let base = "No Alibaba Coding Plan session cookies found in browsers. " +
-                "If you use Safari, enable Full Disk Access for CodexBar/Terminal or paste a manual Cookie header."
+                "If you use Safari, enable Full Disk Access for Sharingan/Terminal or paste a manual Cookie header."
             guard let details, !details.isEmpty else { return base }
             return "\(base) \(details)"
         case .invalidCookie:

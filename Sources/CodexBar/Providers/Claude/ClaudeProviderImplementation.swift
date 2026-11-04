@@ -143,7 +143,7 @@ struct ClaudeProviderImplementation: ProviderImplementation {
                 title: "Allow reading Claude Code's credentials",
                 subtitle: [
                     "Reads Claude Code's Keychain item for OAuth usage; macOS may ask for permission.",
-                    "Off: CodexBar never touches Claude Code's credentials and uses the Claude CLI instead.",
+                    "Off: Sharingan never touches Claude Code's credentials and uses the Claude CLI instead.",
                 ].joined(separator: " "),
                 binding: context.binding(\.claudeOAuthDirectKeychainReadAllowed),
                 statusText: nil,

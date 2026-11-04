@@ -14,10 +14,10 @@
 "Include API keys, cookies, and tokens" = "شامل کلیدهای API، cookies و توکن ها";
 "Sync usage snapshots" = "همگام‌سازی عکس‌های فوری استفاده";
 "Show accounts from other Macs" = "نمایش حساب‌ها از دیگر مک‌ها";
-"Requires a signed release build of CodexBar." = "به نسخه انتشار امضا شده CodexBar نیاز دارد.";
+"Requires a signed release build of CodexBar." = "به نسخه انتشار امضا شده Sharingan نیاز دارد.";
 "Sign in to iCloud in System Settings to enable sync." = "برای فعال کردن همگام سازی، در تنظیمات سیستم وارد iCloud شوید.";
 "iCloud access is restricted on this Mac." = "دسترسی iCloud در این مک محدود شده است.";
-"Sync is paused: another Mac uses a newer version of CodexBar. Update to resume." = "همگام‌سازی متوقف شد: مک دیگری از نسخه جدیدتر CodexBar استفاده می‌کند. به روز رسانی برای از سرگیری.";
+"Sync is paused: another Mac uses a newer version of CodexBar. Update to resume." = "همگام‌سازی متوقف شد: مک دیگری از نسخه جدیدتر Sharingan استفاده می‌کند. به روز رسانی برای از سرگیری.";
 "Last successful fetch" = "آخرین واکشی موفق";
 "Last successful push" = "آخرین فشار موفق";
 "Never" = "هرگز";
@@ -31,9 +31,9 @@
 "%dh ago" = "%dس پیش";
 "%dd ago" = "%dروز پیش";
 
-"ollama_safari_cookie_access_hint" = "کوکی‌های Safari برای CodexBar به دسترسی کامل دیسک نیاز دارند (تنظیمات سیستم > حریم خصوصی و امنیت).";
+"ollama_safari_cookie_access_hint" = "کوکی‌های Safari برای Sharingan به دسترسی کامل دیسک نیاز دارند (تنظیمات سیستم > حریم خصوصی و امنیت).";
 "ollama_browser_cookie_decryption_denied" = "رمزگشایی کوکی‌های %@ در Keychain رد شد. کارت ارائه‌دهنده را باز کنید و روی تازه‌سازی (⌘R) کلیک کنید تا دوباره دسترسی به Keychain درخواست شود.";
-"ollama_browser_cookie_decryption_disabled" = "رمزگشایی کوکی‌های %@ در CodexBar غیرفعال است؛ دسترسی Keychain را فعال و تازه‌سازی کنید.";
+"ollama_browser_cookie_decryption_disabled" = "رمزگشایی کوکی‌های %@ در Sharingan غیرفعال است؛ دسترسی Keychain را فعال و تازه‌سازی کنید.";
 
 " providers" = " ارائه دهندگان";
 "(System)" = "(سیستم)";
@@ -49,7 +49,7 @@
 "AI credits" = "اعتبارهای هوش مصنوعی";
 "Gateway requests" = "درخواست‌های درگاه";
 "Future AGI cost history is not available." = "تاریخچه هزینه‌های Future AGI در دسترس نیست.";
-"Saved in CodexBar's local config file. Or set FI_API_KEY." = "در فایل پیکربندی محلی CodexBar ذخیره می‌شود. یا FI_API_KEY را تنظیم کنید.";
+"Saved in CodexBar's local config file. Or set FI_API_KEY." = "در فایل پیکربندی محلی Sharingan ذخیره می‌شود. یا FI_API_KEY را تنظیم کنید.";
 
 "API region" = "منطقه API";
 "API token" = "API توکن";
@@ -84,7 +84,7 @@
 "Automatic imports browser cookies or stored sessions." = "به طور خودکار کوکی های مرورگر یا جلسات ذخیره شده را وارد می کند.";
 "Automatic imports browser cookies." = "کوکی های مرورگر را به صورت خودکار وارد می کند.";
 "Automatically imports browser session cookie." = "به طور خودکار کوکی نشست مرورگر را وارد می کند.";
-"Automatically opens CodexBar when you start your Mac." = "وقتی مک را روشن می کنید، CodexBar به طور خودکار باز می شود.";
+"Automatically opens CodexBar when you start your Mac." = "وقتی مک را روشن می کنید، Sharingan به طور خودکار باز می شود.";
 "Automation" = "اتوماسیون";
 "Average (\\(label1) + \\(label2))" = "میانگین (\\(label1) + \\(label2))";
 "Average (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))" = "میانگین (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))";
@@ -106,7 +106,7 @@
 "Check for updates automatically" = "به طور خودکار به روزرسانی ها را بررسی کنید";
 "Check if you like your agents having some fun up there." = "بررسی کن که آیا دوست داری مأمورانت آنجا خوش بگذرانند یا نه.";
 "Check provider status" = "وضعیت ارائه دهنده را بررسی کنید";
-"Choose a supported browser so CodexBar can read the matching account." = "یک مرورگر پشتیبانی‌شده انتخاب کنید تا CodexBar بتواند حساب منطبق را بخواند.";
+"Choose a supported browser so CodexBar can read the matching account." = "یک مرورگر پشتیبانی‌شده انتخاب کنید تا Sharingan بتواند حساب منطبق را بخواند.";
 "Choose Codex workspace" = "فضای کاری Codex را انتخاب کنید";
 "Choose Cursor account" = "حساب Cursor را انتخاب کنید";
 "Choose the MiniMax host (global .io or China mainland .com)." = "میزبان MiniMax را انتخاب کنید (جهانی .io یا .com سرزمین اصلی چین).";
@@ -114,8 +114,8 @@
 "Choose up to \\(Self.maxOverviewProviders) providers" = "تا \\(Self.maxOverviewProviders) ارائه دهنده را انتخاب کنید";
 "Choose up to \\(count) providers" = "تا \\(count) ارائه دهنده را انتخاب کنید";
 "Choose what to show in the menu bar (Pace shows usage vs. expected)." = "انتخاب کنید که در نوار منو چه چیزی نمایش داده شود (Pace میزان مصرف در مقابل مورد انتظار را نشان می دهد).";
-"Choose which Codex account CodexBar should follow." = "انتخاب کنید که کدام حساب Codex را دنبال CodexBar.";
-"Choose which Cursor account CodexBar should use." = "انتخاب کنید CodexBar از کدام حساب Cursor استفاده کند.";
+"Choose which Codex account CodexBar should follow." = "انتخاب کنید که کدام حساب Codex را دنبال Sharingan.";
+"Choose which Cursor account CodexBar should use." = "انتخاب کنید Sharingan از کدام حساب Cursor استفاده کند.";
 "Choose which window drives the menu bar percent." = "انتخاب کنید کدام پنجره درصد نوار منو را تنظیم کند.";
 "Chrome" = "Chrome";
 "Claude CLI not found" = "Claude CLI پیدا نشد";
@@ -130,9 +130,9 @@
 "Codex binary" = "Codex دودویی";
 "Codex login failed" = "ورود Codex ناموفق";
 "Codex login timed out" = "ورود Codex به پایان رسید";
-"CodexBar Lifecycle Keepalive" = "CodexBar چرخه زندگی زنده نگه داشتن";
-"CodexBar can't show its menu bar icon" = "CodexBar نمی تواند آیکون نوار منویش را نشان دهد";
-"CodexBar could not read managed account storage. " = "CodexBar نمی توانست ذخیره سازی حساب مدیریت شده را بخواند.  ";
+"CodexBar Lifecycle Keepalive" = "Sharingan چرخه زندگی زنده نگه داشتن";
+"CodexBar can't show its menu bar icon" = "Sharingan نمی تواند آیکون نوار منویش را نشان دهد";
+"CodexBar could not read managed account storage. " = "Sharingan نمی توانست ذخیره سازی حساب مدیریت شده را بخواند.  ";
 "Configure…" = "پیکربندی کن...";
 "Connected" = "متصل";
 "Controls how much detail is logged." = "میزان جزئیات ثبت شده را کنترل می کند.";
@@ -151,7 +151,7 @@
 "Local token history is unavailable or incomplete." = "تاریخچهٔ محلی توکن‌ها در دسترس نیست یا ناقص است.";
 "Could not add Codex account" = "نتوانستم حساب Codex اضافه کنم";
 "Could not open Terminal for Gemini" = "نتوانستم ترمینال را برای Gemini باز کنم";
-"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "خواندن اطلاعات ورود Claude OAuth ناموفق بود: حافظهٔ نهان Claude OAuth در CodexBar موقتاً در دسته‌کلید macOS در دسترس نیست. در برنامهٔ Keychain Access بررسی کنید که دسته‌کلید ورود باز باشد، سپس دوباره تازه‌سازی کنید.";
+"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "خواندن اطلاعات ورود Claude OAuth ناموفق بود: حافظهٔ نهان Claude OAuth در Sharingan موقتاً در دسته‌کلید macOS در دسترس نیست. در برنامهٔ Keychain Access بررسی کنید که دسته‌کلید ورود باز باشد، سپس دوباره تازه‌سازی کنید.";
 "Could not start codex login" = "ورود به کدکس فعال نشد";
 "Could not switch system account" = "نتوانستم حساب سیستم را تغییر دهم";
 "Credits" = "اعتبارات";
@@ -200,13 +200,13 @@
 "Hide details" = "مخفی کردن جزئیات";
 "Hide personal information" = "مخفی کردن اطلاعات شخصی";
 "Historical tracking" = "ردیابی تاریخی";
-"How often CodexBar polls providers in the background." = "چند وقت یکبار CodexBar ارائه دهندگان نظرسنجی در پس زمینه انجام می دهند.";
+"How often CodexBar polls providers in the background." = "چند وقت یکبار Sharingan ارائه دهندگان نظرسنجی در پس زمینه انجام می دهند.";
 "Inactive" = "غیرفعال";
 "Install CLI" = "نصب CLI";
 "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again." = "Claude CLI (npm i -g @anthropic-ai/claude-code) را نصب کنید و دوباره امتحان کنید.";
 "Install the Codex CLI (npm i -g @openai/codex) and try again." = "Codex CLI (npm i -g @openai/codex) را نصب کنید و دوباره امتحان کنید.";
 "Install the Gemini CLI (npm i -g @google/gemini-cli) and try again." = "Gemini CLI (npm i -g @google/gemini-cli) را نصب کنید و دوباره امتحان کنید.";
-"Install a JetBrains IDE with AI Assistant enabled, then refresh CodexBar." = "یک IDE از JetBrains با AI Assistant فعال نصب کنید، سپس CodexBar را تازه‌سازی کنید.";
+"Install a JetBrains IDE with AI Assistant enabled, then refresh CodexBar." = "یک IDE از JetBrains با AI Assistant فعال نصب کنید، سپس Sharingan را تازه‌سازی کنید.";
 "JetBrains AI is ready" = "JetBrains هوش مصنوعی آماده است";
 "JetBrains IDE" = "JetBrains IDE";
 "Keep CLI sessions alive" = "جلسات CLI را زنده نگه دارید";
@@ -260,7 +260,7 @@
 "Open" = "باز";
 "Open API Keys" = "کلیدهای API باز";
 "Open Amp Settings" = "تنظیمات باز Amp";
-"Open Antigravity to sign in, then refresh CodexBar." = "Antigravity را باز کنید تا وارد شوید، سپس CodexBar را تازه کنید.";
+"Open Antigravity to sign in, then refresh CodexBar." = "Antigravity را باز کنید تا وارد شوید، سپس Sharingan را تازه کنید.";
 "Open Browser" = "مرورگر باز";
 "Open Coding Plan" = "طرح کدگذاری باز";
 "Open Console" = "کنسول باز";
@@ -305,7 +305,7 @@
 "Progress bars fill as you consume quota (instead of showing remaining)." = "نوارهای پیشرفت هنگام مصرف سهمیه پر می شوند (به جای اینکه باقی مانده را نشان دهند).";
 "Provider" = "ارائه دهنده";
 "Providers" = "ارائه دهندگان";
-"Quit CodexBar" = "ترک CodexBar";
+"Quit CodexBar" = "ترک Sharingan";
 "Random (default)" = "تصادفی (پیش فرض)";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "گزارش های استفاده محلی را می خواند. امروز نمایش داده می شود + پنجره تاریخچه انتخاب شده در منو.";
 "Refresh" = "تازه سازی";
@@ -313,8 +313,8 @@
 "Remote" = "دورافتاده";
 "Remove" = "حذف";
 "Remove Codex account?" = "حساب Codex حذف کنم؟";
-"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "حذف \\(account.email) از CodexBar؟ مدیریت Codex خانه آن حذف خواهد شد.";
-"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "حذف \\(email) از CodexBar؟ مدیریت Codex خانه آن حذف خواهد شد.";
+"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "حذف \\(account.email) از Sharingan؟ مدیریت Codex خانه آن حذف خواهد شد.";
+"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "حذف \\(email) از Sharingan؟ مدیریت Codex خانه آن حذف خواهد شد.";
 "Remove selected account" = "حذف حساب انتخاب شده";
 "Replace critter bars with provider branding icons and a percentage." = "بارهای کریتر را با آیکون های برندینگ ارائه دهنده و درصدی جایگزین کنید.";
 "Replay selected animation" = "بازپخش انیمیشن انتخاب شده";
@@ -356,7 +356,7 @@
 "Store multiple Ollama Cookie headers." = "چندین هدر Ollama کوکی را ذخیره کنید.";
 "Store multiple OpenCode Cookie headers." = "چندین هدر OpenCode کوکی را ذخیره کنید.";
 "Store multiple OpenCode Go Cookie headers." = "چندین هدر OpenCode Go Cookie را ذخیره کنید.";
-"Stored in the CodexBar config file." = "در فایل پیکربندی CodexBar ذخیره شده است.";
+"Stored in the CodexBar config file." = "در فایل پیکربندی Sharingan ذخیره شده است.";
 "Stored in ~/.codexbar/config.json. " = "ذخیره شده در ~/.codexbar/config.json. ";
 "Stored in ~/.codexbar/config.json. Paste the key from the Synthetic dashboard." = "ذخیره شده در ~/.codexbar/config.json. کلید را از داشبورد Synthetic پیست کنید.";
 "Stored in ~/.codexbar/config.json. Paste your Coding Plan API key from Model Studio." = "ذخیره شده در ~/.codexbar/config.json. کلید API برنامه کدنویسی خود را از مدل استودیو چسبانده کنید.";
@@ -432,8 +432,8 @@
 "cursor_on_demand" = "درخواست: %@";
 "cursor_on_demand_with_limit" = "درخواست: %1$@ / %2$@";
 "extra_usage_format" = "استفاده اضافی: %1$@ / %2$@";
-"jetbrains_detected_generate" = "شناسایی شد: %@. یک بار از دستیار هوش مصنوعی برای تولید داده های سهمیه استفاده کنید، سپس CodexBar را تازه کنید.";
-"jetbrains_detected_select" = "شناسایی شد: %@. IDE مورد علاقه تان را در تنظیمات انتخاب کنید، سپس CodexBar را تازه کنید.";
+"jetbrains_detected_generate" = "شناسایی شد: %@. یک بار از دستیار هوش مصنوعی برای تولید داده های سهمیه استفاده کنید، سپس Sharingan را تازه کنید.";
+"jetbrains_detected_select" = "شناسایی شد: %@. IDE مورد علاقه تان را در تنظیمات انتخاب کنید، سپس Sharingan را تازه کنید.";
 "last_fetch_failed_with_provider" = "آخرین %@ آوردن ناموفق بود:";
 "last_spend" = "آخرین هزینه ها: %@";
 "mcp_model_usage" = "%1$@: %2$@";
@@ -443,10 +443,10 @@
 "metric_primary" = "ابتدایی (%@)";
 "metric_secondary" = "ثانویه (%@)";
 "metric_tertiary" = "دوره سوم (%@)";
-"multiple_workspaces_found" = "CodexBar چندین فضای کاری برای %@ پیدا کردم. لطفا فضای کاری را برای افزودن انتخاب کنید.";
+"multiple_workspaces_found" = "Sharingan چندین فضای کاری برای %@ پیدا کردم. لطفا فضای کاری را برای افزودن انتخاب کنید.";
 "ory_session_…=…; csrftoken=…" = "ory_session_...=...; csrftoken=...";
 "overview_choose_providers" = "تا %@ ارائه دهنده را انتخاب کنید";
-"remove_account_message" = "حذف %@ از CodexBar؟ مدیریت Codex خانه آن حذف خواهد شد.";
+"remove_account_message" = "حذف %@ از Sharingan؟ مدیریت Codex خانه آن حذف خواهد شد.";
 "version_format" = "نسخه %@";
 "vertex_ai_login_instructions" = "برای پیگیری Vertex AI استفاده، با Google Cloud.\n\n1 احراز هویت کنید. ترمینال باز\n2. اجرا: gcloud auth application-default login\n3. دستورالعمل های مرورگر را دنبال کنید تا in\n4 را امضا کنید. پروژه ات را تنظیم کن: gcloud config set project PROJECT_ID\n\nOpen Terminal را همین حالا؟";
 "workspaceID is set but only opencode, opencodego, and deepgram support workspaceID." = "workspaceID فعال است اما فقط opencode، opencodego و deepgram از workspaceID پشتیبانی می کنند.";
@@ -487,7 +487,7 @@
 "language_italian" = "ایتالیانو";
 "language_polish" = "پولسکی";
 "start_at_login_title" = "شروع از ورود";
-"start_at_login_subtitle" = "وقتی مک را روشن می کنید، CodexBar به طور خودکار باز می شود.";
+"start_at_login_subtitle" = "وقتی مک را روشن می کنید، Sharingan به طور خودکار باز می شود.";
 "show_cost_summary_subtitle" = "گزارش های استفاده محلی را می خواند. امروز نمایش داده می شود + پنجره تاریخچه انتخاب شده در منو.";
 "cost_summary_style_title" = "سبک نمایش";
 "cost_summary_style_inline" = "فقط درون‌خطی";
@@ -512,7 +512,7 @@
 "credential_expiry_notifications_title" = "انقضای اطلاعات ورود";
 "credential_expiry_notifications_subtitle" = "وقتی حساب ارائه‌دهنده نیاز به ورود مجدد دارد، یک بار اطلاع بده.";
 "credential_expiry_notification_title" = "%@ نیاز به ورود دارد";
-"credential_expiry_notification_body" = "CodexBar را باز کنید تا خطای حساب را بررسی کرده و دوباره وارد شوید.";
+"credential_expiry_notification_body" = "Sharingan را باز کنید تا خطای حساب را بررسی کرده و دوباره وارد شوید.";
 "session_quota_notifications_subtitle" = "هنگامی که سهمیه جلسه پنج‌ساعته به 0% می‌رسد و دوباره در دسترس قرار می‌گیرد، اطلاع می‌دهد.";
 "quota_depleted_title" = "اتمام و بازیابی سهمیه";
 "quota_warning_notifications_subtitle" = "هشدار می دهد وقتی سهمیه نشست یا هفتگی باقی مانده از آستانه های پیکربندی شده عبور کند.";
@@ -567,7 +567,7 @@
 "quota_warning_warning" = "هشدار";
 "quota_warning_critical" = "بحرانی";
 "apply" = "درخواست بده";
-"quit_app" = "خروج از CodexBar";
+"quit_app" = "خروج از Sharingan";
 
 /* Tab titles */
 "tab_general" = "عمومی";
@@ -615,8 +615,8 @@
 "managed_login_missing_email" = "ورود Codex تکمیل شد، اما هیچ ایمیل حسابی در دسترس نبود. پس از اطمینان از اینکه حساب کاملا وارد شده است، دوباره تلاش کنید.";
 "login_success_notification_title" = "ورود %@ موفقیت آمیز بود";
 "login_success_notification_body" = "می توانید به اپلیکیشن بازگردید؛ احراز هویت تمام شد.";
-"workspace_selection_cancelled" = "CodexBar چندین فضای کاری پیدا کردم، اما هیچ فضای کاری انتخاب نشده بود.";
-"unsafe_managed_home" = "CodexBar از تغییر مسیر خانه مدیریت شده غیرمنتظره خودداری کرد: %@";
+"workspace_selection_cancelled" = "Sharingan چندین فضای کاری پیدا کردم، اما هیچ فضای کاری انتخاب نشده بود.";
+"unsafe_managed_home" = "Sharingan از تغییر مسیر خانه مدیریت شده غیرمنتظره خودداری کرد: %@";
 "menu_bar_metric_title" = "معیار نوار منو";
 "menu_bar_metric_subtitle" = "انتخاب کنید کدام پنجره درصد نوار منو را تنظیم کند.";
 "menu_bar_metric_subtitle_deepseek" = "موجودی DeepSeek را در نوار منو نشان می دهد.";
@@ -734,7 +734,7 @@
 "link_twitter" = "توییتر";
 "link_email" = "ایمیل";
 "link_acknowledgements" = "قدردانی";
-"acknowledgements_footer" = "CodexBar با این پروژه‌های متن‌باز ساخته شده است.";
+"acknowledgements_footer" = "Sharingan با این پروژه‌های متن‌باز ساخته شده است.";
 "acknowledgements_others" = "%d نفر دیگر";
 "acknowledgements_author" = "نویسنده";
 "acknowledgements_authors" = "نویسندگان";
@@ -749,7 +749,7 @@
 
 /* Debug Pane */
 "use_javascriptcore_plugin_engine" = "استفاده از JavaScriptCore برای افزونه‌های ارائه‌دهنده";
-"use_javascriptcore_plugin_engine_subtitle" = "فقط برای بازگشت سازگاری. برای اعمال CodexBar را بازراه‌اندازی کنید؛ CODEXBAR_PLUGIN_ENGINE این تنظیم را لغو می‌کند.";
+"use_javascriptcore_plugin_engine_subtitle" = "فقط برای بازگشت سازگاری. برای اعمال Sharingan را بازراه‌اندازی کنید؛ CODEXBAR_PLUGIN_ENGINE این تنظیم را لغو می‌کند.";
 "section_logging" = "چوب بری";
 "enable_file_logging" = "فعال سازی ثبت فایل";
 "enable_file_logging_subtitle" = "لاگ ها را برای %@ برای اشکال زدایی بنویسید.";
@@ -805,7 +805,7 @@
 "login_shell_path" = "PATH پوسته ورود (ضبط راه انداز)";
 "cleared" = "تأیید شد.";
 "no_fetch_attempts" = "هنوز هیچ تلاشی برای آوردن توپ انجام نشده.";
-"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS تاهو می تواند برنامه های نوار منو را در تنظیمات سیستم → نوار منو → اجازه را در نوار منو مسدود کند. CodexBar در حال اجرا است، اما ممکن است آیکون macOS مخفی شده باشد. تنظیمات نوار منو را باز کنید و CodexBar را روشن کنید.";
+"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS تاهو می تواند برنامه های نوار منو را در تنظیمات سیستم → نوار منو → اجازه را در نوار منو مسدود کند. Sharingan در حال اجرا است، اما ممکن است آیکون macOS مخفی شده باشد. تنظیمات نوار منو را باز کنید و Sharingan را روشن کنید.";
 
 /* Metric preferences */
 "metric_pref_automatic" = "اتوماتیک";
@@ -848,7 +848,7 @@
 "refresh_adaptive" = "تطبیقی";
 "refresh_adaptive_agent_aware" = "تطبیقی (آگاه از عامل)";
 "adaptive_activity_consent_title" = "اجازه به تازه‌سازی آگاه از فعالیت؟";
-"adaptive_activity_consent_message" = "حالت تطبیقی آگاه از عامل می‌تواند برای شناسایی Codex و Claude فهرست فرایندهای محلی در حال اجرا، از جمله خط‌های فرمان، را بررسی کند و هنگام کدنویسی هر ۳۰ ثانیه فرادادهٔ نشست‌های شناخته‌شده را بخواند. وقتی Agent Sessions خاموش است، CodexBar فقط زمان آخرین فعالیت را در حافظه نگه می‌دارد و مسیرها و هویت‌های نشست را دور می‌ریزد. این داده به هیچ‌جا ارسال نمی‌شود و شناسایی راه‌دور و SSH خاموش می‌مانند. اگر رد کنید، CodexBar بدون پویش فعالیت محلی به حالت تطبیقی عادی بازمی‌گردد.";
+"adaptive_activity_consent_message" = "حالت تطبیقی آگاه از عامل می‌تواند برای شناسایی Codex و Claude فهرست فرایندهای محلی در حال اجرا، از جمله خط‌های فرمان، را بررسی کند و هنگام کدنویسی هر ۳۰ ثانیه فرادادهٔ نشست‌های شناخته‌شده را بخواند. وقتی Agent Sessions خاموش است، Sharingan فقط زمان آخرین فعالیت را در حافظه نگه می‌دارد و مسیرها و هویت‌های نشست را دور می‌ریزد. این داده به هیچ‌جا ارسال نمی‌شود و شناسایی راه‌دور و SSH خاموش می‌مانند. اگر رد کنید، Sharingan بدون پویش فعالیت محلی به حالت تطبیقی عادی بازمی‌گردد.";
 "adaptive_activity_consent_allow" = "اجازه به فعالیت محلی";
 "adaptive_activity_consent_decline" = "استفاده از حالت تطبیقی عادی";
 
@@ -897,7 +897,7 @@
 "Status Page" = "صفحه وضعیت";
 "Open Status Page" = "باز کردن صفحه وضعیت";
 "Settings..." = "محیط ها...";
-"About CodexBar" = "درباره CodexBar";
+"About CodexBar" = "درباره Sharingan";
 "Quit" = "ترک کن";
 "Last %d day" = "روز %d گذشته";
 "Last %d days" = "%d روز آخر";
@@ -998,8 +998,8 @@
 "Managed by Homebrew" = "مدیریت‌شده توسط Homebrew";
 "Copy update command" = "کپی فرمان به‌روزرسانی";
 "Update to %@" = "به‌روزرسانی به %@";
-"CodexBar %@ is available" = "CodexBar %@ در دسترس است";
-"CodexBar is up to date" = "CodexBar به‌روز است";
+"CodexBar %@ is available" = "Sharingan %@ در دسترس است";
+"CodexBar is up to date" = "Sharingan به‌روز است";
 "Checking for updates…" = "در حال بررسی به‌روزرسانی…";
 "Updating with Homebrew…" = "در حال به‌روزرسانی با Homebrew…";
 "Homebrew update failed. You can run this command in Terminal instead:" = "به‌روزرسانی با Homebrew ناموفق بود. می‌توانید به‌جای آن این فرمان را در Terminal اجرا کنید:";
@@ -1173,26 +1173,26 @@
 "Capacity Start" = "شروع ظرفیت";
 "Changelog" = "فهرست تغییرات";
 "Choose the Moonshot/Kimi API host for international or China mainland accounts." = "میزبان Moonshot/Kimi API را برای حساب های بین المللی یا حساب های سرزمین اصلی چین انتخاب کنید.";
-"CodexBar can't replace a system account that is signed in with an API key only setup." = "نمی CodexBar حساب سیستمی که فقط با کلید API وارد شده جایگزین شود.";
-"CodexBar could not find saved auth for that account. Re-authenticate it and try again." = "CodexBar نتوانستم احراز هویت ذخیره شده آن حساب را پیدا کنم. دوباره احراز هویت کنید و دوباره تلاش کنید.";
-"CodexBar could not read managed account storage. Recover the store before adding another account." = "CodexBar نمی توانست ذخیره سازی حساب مدیریت شده را بخواند. قبل از اضافه کردن حساب جدید، فروشگاه را بازیابی کنید.";
-"CodexBar could not read saved auth for that account. Re-authenticate it and try again." = "CodexBar نمی توانستم احراز هویت ذخیره شده آن حساب را بخوانم. دوباره احراز هویت کنید و دوباره تلاش کنید.";
-"CodexBar could not read the current system account on this Mac." = "CodexBar نمی توانستم حساب فعلی سیستم را روی این مک بخوانم.";
-"CodexBar could not replace the live Codex auth on this Mac." = "CodexBar نتوانستم احراز هویت زنده Codex این مک را جایگزین کنم.";
-"CodexBar could not safely preserve the current system account before switching." = "CodexBar نتوانستم حساب فعلی سیستم را قبل از تغییر به طور ایمن حفظ کنم.";
-"CodexBar could not save the current system account before switching." = "CodexBar نتوانستم حساب فعلی سیستم را قبل از تغییر ذخیره کنم.";
-"CodexBar could not update managed account storage." = "CodexBar نتوانست ذخیره سازی حساب مدیریت شده را به روزرسانی کند.";
-"CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "CodexBar یک حساب مدیریت شده دیگر پیدا کردم که قبلا از حساب فعلی سیستم استفاده می کند. قبل از تغییر حساب، حساب تکراری را حل کنید.";
-"CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "CodexBar از macOS Keychain درخواست «%@» می کند تا بتواند کوکی های مرورگر را رمزگشایی کرده و حساب شما را احراز هویت کند. برای ادامه روی OK کلیک کنید.";
-"CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "CodexBar از macOS Keychain کد Claude توکن OAuth را درخواست می کند تا بتواند استفاده Claude شما را دریافت کند. برای ادامه روی OK کلیک کنید.";
-"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "CodexBar از macOS Keychain %@ هدر کوکی تان را می خواهید تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
-"CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "CodexBar از macOS Keychain هدر کوکی Claude شما را می خواهید تا بتواند استفاده Claude وب را دریافت کند. برای ادامه روی OK کلیک کنید.";
-"CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "CodexBar از macOS Keychain توکن GitHub Copilot شما را درخواست می کند تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
-"CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "CodexBar از macOS Keychain توکن احراز هویت Kimi می خواهید تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
-"CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "CodexBar از macOS Keychain توکن MiniMax API شما را درخواست می کند تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
-"CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "CodexBar از macOS Keychain OpenAI هدر کوکی تان را می خواهید تا اضافه های داشبورد Codex را دریافت کند. برای ادامه روی OK کلیک کنید.";
-"CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "CodexBar از macOS Keychain کلید Synthetic API می خواهید تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
-"CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "CodexBar از macOS Keychain توکن z.ai API شما را درخواست می کند تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar can't replace a system account that is signed in with an API key only setup." = "نمی Sharingan حساب سیستمی که فقط با کلید API وارد شده جایگزین شود.";
+"CodexBar could not find saved auth for that account. Re-authenticate it and try again." = "Sharingan نتوانستم احراز هویت ذخیره شده آن حساب را پیدا کنم. دوباره احراز هویت کنید و دوباره تلاش کنید.";
+"CodexBar could not read managed account storage. Recover the store before adding another account." = "Sharingan نمی توانست ذخیره سازی حساب مدیریت شده را بخواند. قبل از اضافه کردن حساب جدید، فروشگاه را بازیابی کنید.";
+"CodexBar could not read saved auth for that account. Re-authenticate it and try again." = "Sharingan نمی توانستم احراز هویت ذخیره شده آن حساب را بخوانم. دوباره احراز هویت کنید و دوباره تلاش کنید.";
+"CodexBar could not read the current system account on this Mac." = "Sharingan نمی توانستم حساب فعلی سیستم را روی این مک بخوانم.";
+"CodexBar could not replace the live Codex auth on this Mac." = "Sharingan نتوانستم احراز هویت زنده Codex این مک را جایگزین کنم.";
+"CodexBar could not safely preserve the current system account before switching." = "Sharingan نتوانستم حساب فعلی سیستم را قبل از تغییر به طور ایمن حفظ کنم.";
+"CodexBar could not save the current system account before switching." = "Sharingan نتوانستم حساب فعلی سیستم را قبل از تغییر ذخیره کنم.";
+"CodexBar could not update managed account storage." = "Sharingan نتوانست ذخیره سازی حساب مدیریت شده را به روزرسانی کند.";
+"CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "Sharingan یک حساب مدیریت شده دیگر پیدا کردم که قبلا از حساب فعلی سیستم استفاده می کند. قبل از تغییر حساب، حساب تکراری را حل کنید.";
+"CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "Sharingan از macOS Keychain درخواست «%@» می کند تا بتواند کوکی های مرورگر را رمزگشایی کرده و حساب شما را احراز هویت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "Sharingan از macOS Keychain کد Claude توکن OAuth را درخواست می کند تا بتواند استفاده Claude شما را دریافت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "Sharingan از macOS Keychain %@ هدر کوکی تان را می خواهید تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "Sharingan از macOS Keychain هدر کوکی Claude شما را می خواهید تا بتواند استفاده Claude وب را دریافت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "Sharingan از macOS Keychain توکن GitHub Copilot شما را درخواست می کند تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "Sharingan از macOS Keychain توکن احراز هویت Kimi می خواهید تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "Sharingan از macOS Keychain توکن MiniMax API شما را درخواست می کند تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "Sharingan از macOS Keychain OpenAI هدر کوکی تان را می خواهید تا اضافه های داشبورد Codex را دریافت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "Sharingan از macOS Keychain کلید Synthetic API می خواهید تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "Sharingan از macOS Keychain توکن z.ai API شما را درخواست می کند تا بتواند استفاده را دریافت کند. برای ادامه روی OK کلیک کنید.";
 "Could not open Cursor login in your browser." = "نتوانستم مرورگر Cursor ورود را باز کنم.";
 "Could not open browser for Antigravity" = "برای مدت Antigravity نتوانستم مرورگر را باز کنم";
 "Credits used" = "اعتبارات استفاده شده";
@@ -1207,7 +1207,7 @@
 "Extra usage balance: %@" = "موجودی استفاده اضافی: %@";
 "Keychain Access Required" = "دسترسی Keychain مورد نیاز است";
 "keychain_prompt_learn_more" = "بیشتر بدانید…";
-"keychain_prompt_privacy_note" = "macOS، نه CodexBar، ورود گذرواژهٔ Mac را مدیریت می‌کند. می‌توانید دسترسی به Keychain را هر زمان از تنظیمات ← پیشرفته غیرفعال کنید.";
+"keychain_prompt_privacy_note" = "macOS، نه Sharingan، ورود گذرواژهٔ Mac را مدیریت می‌کند. می‌توانید دسترسی به Keychain را هر زمان از تنظیمات ← پیشرفته غیرفعال کنید.";
 "Kiro menu bar value" = "Kiro مقدار نوار منو";
 "Label" = "برچسب";
 "No organizations loaded. Click Refresh after setting your API key." = "هیچ سازمانی بارگذاری نشده بود. پس از تنظیم کلید API روی «تازه سازی» کلیک کنید.";
@@ -1271,7 +1271,7 @@
 "Service" = "خدمت";
 "Show or hide Kiro credits, percent, or both next to the menu bar icon." = "Kiro اعتبار، درصد یا هر دو را کنار آیکون نوار منو نمایش یا پنهان کنید.";
 "Show usage for organizations you belong to. Personal account is always shown." = "استفاده از سازمان هایی که عضو آن هستید را نشان دهید. حساب شخصی همیشه نمایش داده می شود.";
-"Sign in to cursor.com in your browser, then refresh Cursor in CodexBar." = "در مرورگر خود وارد cursor.com شوید، سپس Cursor را در CodexBar تازه سازی کنید.";
+"Sign in to cursor.com in your browser, then refresh Cursor in CodexBar." = "در مرورگر خود وارد cursor.com شوید، سپس Cursor را در Sharingan تازه سازی کنید.";
 "Simulated error text" = "متن خطای شبیه سازی شده";
 "StepFun platform account (phone number or email)." = "StepFun حساب پلتفرم (شماره تلفن یا ایمیل).";
 "Stored in ~/.codexbar/config.json." = "ذخیره شده در ~/.codexbar/config.json.";
@@ -1287,11 +1287,11 @@
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is preferred; OPENAI_API_KEY still works." = "نگهداری در ~/.codexbar/config.json. OPENAI_ADMIN_KEY ترجیح داده می شود؛ OPENAI_API_KEY هنوز کار می کند.";
 "Stored in ~/.codexbar/config.json. Requires an Anthropic Admin API key." = "ذخیره سازی در ~/.codexbar/config.json. نیاز به کلید API مدیریت انسان شناسی دارد.";
 "Stored in ~/.codexbar/config.json. Used for /v1/quota-stats." = "ذخیره شده در ~/.codexbar/config.json. برای /v1/quota-stats.";
-"Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`)." = "ذخیره شده در ~/.codexbar/config.json. همچنین می توانید CODEBUFF_API_KEY ارائه دهید یا اجازه دهید CodexBar ~/.config/manicode/credentials.json (ایجاد شده توسط `codebuff login`) را بخوانند.";
+"Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`)." = "ذخیره شده در ~/.codexbar/config.json. همچنین می توانید CODEBUFF_API_KEY ارائه دهید یا اجازه دهید Sharingan ~/.config/manicode/credentials.json (ایجاد شده توسط `codebuff login`) را بخوانند.";
 "Stored in ~/.codexbar/config.json. You can also provide KILO_API_KEY or ~/.local/share/kilo/auth.json (kilo.access)." = "ذخیره شده در ~/.codexbar/config.json. همچنین می توانید KILO_API_KEY یا ~/.local/share/kilo/auth.json (kilo.access) ارائه دهید.";
 "T3 Chat cookie" = "T3 Chat کوکی";
 "Team mode" = "حالت تیم";
-"That account is no longer available in CodexBar. Refresh the account list and try again." = "آن حساب دیگر در CodexBar در دسترس نیست. لیست حساب ها را تازه کنید و دوباره تلاش کنید.";
+"That account is no longer available in CodexBar. Refresh the account list and try again." = "آن حساب دیگر در Sharingan در دسترس نیست. لیست حساب ها را تازه کنید و دوباره تلاش کنید.";
 "The browser login did not complete in time. Try Antigravity login again." = "ورود به مرورگر به موقع کامل نشد. دوباره Antigravity حساب کاربری امتحان کن.";
 "Timed out waiting for Cursor login. %@" = "زمان خروج منتظر ورود Cursor هستم. %@";
 "Timed out waiting for Cursor login. %@ Last error: %@" = "زمان خروج منتظر ورود Cursor هستم. %@ آخرین خطا: %@";
@@ -1575,7 +1575,7 @@
 "5-hour usage" = "مصرف ۵ ساعته";
 "7-day usage" = "مصرف ۷ روزه";
 "Total usage" = "مصرف کل";
-"claude_oauth_keychain_access_disabled" = "دسترسی به Keychain غیرفعال است، بنابراین CodexBar نمی‌تواند اطلاعات ورود به Claude را بخواند.";
+"claude_oauth_keychain_access_disabled" = "دسترسی به Keychain غیرفعال است، بنابراین Sharingan نمی‌تواند اطلاعات ورود به Claude را بخواند.";
 "claude_oauth_keychain_access_revoked" = "دسترسی به Keychain کلود با چرخش توکن Claude Code لغو شد. برای اعطای مجدد دسترسی روی «تازه‌سازی» کلیک کنید، یا منبع استفاده Claude را به CLI/Web تغییر دهید.";
 "claude_showing_last_known_usage" = "آخرین میزان استفاده شناخته‌شده که در %@ ثبت شده نمایش داده می‌شود.";
 "claude_limited_usage_detail" = "جزئیات استفاده محدود است";
@@ -1653,7 +1653,7 @@
 /* Overview share flow */
 "Share Usage Snapshot…" = "اشتراک‌گذاری نمای کلی استفاده…";
 "Usage snapshot unavailable" = "نمای کلی استفاده در دسترس نیست";
-"CodexBar couldn't prepare a shareable usage snapshot. Refresh Usage & Spend and try again." = "CodexBar نتوانست نمای کلی استفاده قابل اشتراک‌گذاری را آماده کند. استفاده و هزینه را تازه‌سازی کنید و دوباره امتحان کنید.";
+"CodexBar couldn't prepare a shareable usage snapshot. Refresh Usage & Spend and try again." = "Sharingan نتوانست نمای کلی استفاده قابل اشتراک‌گذاری را آماده کند. استفاده و هزینه را تازه‌سازی کنید و دوباره امتحان کنید.";
 "Incomplete" = "ناقص";
 "Est. subtotal (%@): %@" = "جمع جزئی تخمینی (%@): %@";
 "Excluded requests with missing final usage: %d" = "درخواست‌های حذف‌شده به دلیل نبود داده‌های مصرف نهایی: %d";
@@ -1780,14 +1780,14 @@
 "Codex credits are still loading; will retry shortly." = "Codex اعتبارات هنوز در حال بارگذاری هستند. به زودی دوباره تلاش خواهد کرد.";
 "Codex session expired. Sign in again." = "جلسه Codex منقضی شد. دوباره وارد شوید.";
 "Codex usage is temporarily unavailable. Try refreshing." = "داده های استفاده از Codex به طور موقت در دسترس نیست. سعی کنید داده ها را به روز کنید.";
-"CodexBar Account Usage" = "استفاده از حساب CodexBar";
-"CodexBar Burn Down" = "سوختگی CodexBar سهمیه";
-"CodexBar Burn Down (Combined)" = "سوختگی CodexBar سهمیه (ترکیبی)";
-"CodexBar Help" = "راهنمای CodexBar";
-"CodexBar History" = "تاریخچه CodexBar";
-"CodexBar Metric" = "CodexBar معیار";
-"CodexBar Switcher" = "سوئیچر CodexBar";
-"CodexBar Usage" = "استفاده از CodexBar";
+"CodexBar Account Usage" = "استفاده از حساب Sharingan";
+"CodexBar Burn Down" = "سوختگی Sharingan سهمیه";
+"CodexBar Burn Down (Combined)" = "سوختگی Sharingan سهمیه (ترکیبی)";
+"CodexBar Help" = "راهنمای Sharingan";
+"CodexBar History" = "تاریخچه Sharingan";
+"CodexBar Metric" = "Sharingan معیار";
+"CodexBar Switcher" = "سوئیچر Sharingan";
+"CodexBar Usage" = "استفاده از Sharingan";
 "Compact widget for credits or cost." = "ویجت فشرده برای اعتبارات یا هزینه.";
 "Complete Kiro login in your browser" = "ورود به سیستم Kiro را در مرورگر خود کامل کنید";
 "Controls when Claude OAuth may ask macOS for Keychain access." = "زمانی را کنترل می‌کند که Claude OAuth ممکن است از macOS برای دسترسی به Keychain درخواست کند.";
@@ -1806,8 +1806,8 @@
 "Details for %@" = "جزئیات %@";
 "EST. %@" = "تخمینی %@";
 "Enable Antigravity provider" = "ارائه دهنده Antigravity را فعال کنید";
-"Enable a provider in CodexBar → Settings → Providers." = "یک ارائه‌دهنده را در CodexBar → تنظیمات → ارائه‌دهندگان فعال کنید.";
-"Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "ویجت های حساب را در CodexBar → تنظیمات → منو → ابزارک ها فعال کنید. سپس این ویجت را ویرایش کنید تا یک حساب کاربری انتخاب کنید.";
+"Enable a provider in CodexBar → Settings → Providers." = "یک ارائه‌دهنده را در Sharingan → تنظیمات → ارائه‌دهندگان فعال کنید.";
+"Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "ویجت های حساب را در Sharingan → تنظیمات → منو → ابزارک ها فعال کنید. سپس این ویجت را ویرایش کنید تا یک حساب کاربری انتخاب کنید.";
 "Error: %@" = "خطا: %@";
 "Examples: alt+cmd+2, shift+right. Refresh (cmd+r), Settings (cmd+,) and Quit (cmd+q) are reserved." = "مثال: alt+cmd+2، shift+right. بازخوانی (cmd+r)، تنظیمات (cmd+،) و خروج (cmd+q) رزرو شده است.";
 "Export Preferences…" = "صادرات ترجیحات…";
@@ -1824,10 +1824,10 @@
 "Gemini app" = "برنامهٔ Gemini";
 "Gemini CLI" = "Gemini CLI";
 "Gemini app limits use your browser account and are separate from Gemini CLI quotas." = "محدودیت‌های برنامهٔ Gemini به حساب شما در مرورگر مربوط می‌شوند و از سهمیه‌های Gemini CLI جدا هستند.";
-"Generated locally by CodexBar · Data through %@" = "ایجاد شده به صورت محلی توسط CodexBar · داده‌ها تا %@";
+"Generated locally by CodexBar · Data through %@" = "ایجاد شده به صورت محلی توسط Sharingan · داده‌ها تا %@";
 "GitHub cookies" = "GitHub cookies";
 "GitHub does not publish this value. Enter it to show a usage bar. Applies to the selected GitHub account." = "GitHub این مقدار را منتشر نمی کند. آن را وارد کنید تا نوار استفاده نشان داده شود. برای حساب انتخابی GitHub اعمال می شود.";
-"GitHub login succeeded, but CodexBar could not verify which account it belongs to. Please try again." = "ورود به سیستم GitHub با موفقیت انجام شد، اما CodexBar نتوانست تأیید کند که به کدام حساب تعلق دارد. لطفا دوباره امتحان کنید.";
+"GitHub login succeeded, but CodexBar could not verify which account it belongs to. Please try again." = "ورود به سیستم GitHub با موفقیت انجام شد، اما Sharingan نتوانست تأیید کند که به کدام حساب تعلق دارد. لطفا دوباره امتحان کنید.";
 "GitKraken access token" = "GitKraken دسترسی به توکن ها";
 "Global uses api.z.ai. China mainland uses open.bigmodel.cn with a BigModel/GLM key; the two key families are not interchangeable." = "جهانی از api.z.ai استفاده می کند. سرزمین اصلی چین از open.bigmodel.cn با کلید BigModel/GLM استفاده می کند. دو خانواده کلیدی قابل تعویض نیستند.";
 "Grok CLI" = "Grok CLI";
@@ -1875,8 +1875,8 @@
 "Open API docs" = "اسناد API را باز کنید";
 "Open API keys" = "صفحه کلیدهای API را باز کنید";
 "Open Amp Access Tokens" = "Amp دسترسی به توکن ها را باز کنید";
-"Open CodexBar" = "CodexBar را باز کنید";
-"Open CodexBar to refresh, or edit this widget to choose another account." = "CodexBar را برای بازخوانی باز کنید، یا این ویجت را ویرایش کنید تا حساب دیگری انتخاب کنید.";
+"Open CodexBar" = "Sharingan را باز کنید";
+"Open CodexBar to refresh, or edit this widget to choose another account." = "Sharingan را برای بازخوانی باز کنید، یا این ویجت را ویرایش کنید تا حساب دیگری انتخاب کنید.";
 "Open Devin Usage" = "صفحه استفاده از Devin را باز کنید";
 "Open Fireworks" = "Fireworks را باز کنید";
 "Open GitKraken Account" = "صفحه حساب GitKraken را باز کنید";
@@ -1894,7 +1894,7 @@
 "OpenAI cookies are for %1$@, not %2$@." = "OpenAI cookies برای %1$@ است، نه %2$@.";
 "OpenAI cookies are for %@." = "OpenAI cookies برای %@ است.";
 "OpenAI web battery saver" = "ذخیره‌کننده باتری وب OpenAI";
-"OpenAI web dashboard refresh timed out. CodexBar will retry after the refresh cooldown." = "زمان بازنگری داشبورد وب OpenAI به پایان رسیده است. CodexBar پس از خنک‌سازی به‌روزرسانی دوباره امتحان می‌کند.";
+"OpenAI web dashboard refresh timed out. CodexBar will retry after the refresh cooldown." = "زمان بازنگری داشبورد وب OpenAI به پایان رسیده است. Sharingan پس از خنک‌سازی به‌روزرسانی دوباره امتحان می‌کند.";
 "OpenAI web refresh hit a network error. Check your connection, then refresh OpenAI cookies and try again." = "بازخوانی وب OpenAI با یک خطای شبکه مواجه شد. اتصال خود را بررسی کنید، سپس OpenAI cookies را بازخوانی کنید و دوباره امتحان کنید.";
 "OpenAI web refresh timed out. Refresh OpenAI cookies and try again." = "زمان بازخوانی وب OpenAI به پایان رسیده است. OpenAI cookies را بازخوانی کنید و دوباره امتحان کنید.";
 "OpenAI web refresh was interrupted. Refresh OpenAI cookies and try again." = "بازخوانی وب OpenAI قطع شد. OpenAI cookies را بازخوانی کنید و دوباره امتحان کنید.";
@@ -1903,7 +1903,7 @@
 "Optional additional key for account Activity. Only needed to use a separate Management API key from the one in the required API key field above." = "کلید اضافی اختیاری برای فعالیت حساب. فقط باید از یک کلید مدیریتی جداگانه API از کلید موجود در قسمت کلید API در بالا استفاده کنید.";
 "Optional for automatic auth. Use a slug, URL, or internal org-... / org_... ID. Manual auth may need the x-cog-org-id header from a successful Devin quota request." = "اختیاری برای احراز هویت خودکار از Slug، URL یا org-... / org_... ID داخلی استفاده کنید. احراز هویت دستی ممکن است به هدر x-cog-org-id از یک درخواست موفق Devin سهمیه نیاز داشته باشد.";
 "Optional gk-org-id header value. Or set GITKRAKEN_ORG_ID." = "مقدار هدر gk-org-id اختیاری. یا GITKRAKEN_ORG_ID را تنظیم کنید.";
-"Optional when the API key can access one account; CodexBar discovers it automatically. For multiple accounts, find the slug in the app.fireworks.ai home account switcher or run firectl whoami." = "زمانی که کلید API بتواند به یک حساب دسترسی داشته باشد اختیاری است. CodexBar آن را به طور خودکار کشف می کند. برای چندین حساب، اسلاگ را در تعویض کننده حساب خانگی app.fireworks.ai پیدا کنید یا firectl whoami را اجرا کنید.";
+"Optional when the API key can access one account; CodexBar discovers it automatically. For multiple accounts, find the slug in the app.fireworks.ai home account switcher or run firectl whoami." = "زمانی که کلید API بتواند به یک حساب دسترسی داشته باشد اختیاری است. Sharingan آن را به طور خودکار کشف می کند. برای چندین حساب، اسلاگ را در تعویض کننده حساب خانگی app.fireworks.ai پیدا کنید یا firectl whoami را اجرا کنید.";
 "Optional. Defaults to the first Business or Enterprise workspace on the account." = "اختیاری. پیش‌فرض اولین فضای کاری Business یا Enterprise در حساب است.";
 "Optional. Defaults to the hosted ClawRouter service." = "اختیاری. به طور پیش فرض سرویس ClawRouter میزبانی شده است.";
 "Optional. Defaults to the hosted OpenRouter API." = "اختیاری. به طور پیش فرض برای میزبانی OpenRouter API.";
@@ -1971,7 +1971,7 @@
 "SUBSCRIPTIONS" = "اشتراک ها";
 "Save" = "ذخیره کنید";
 "Save display and notification preferences for your dotfiles. Accounts, credentials, login, local paths and consent stay on this Mac." = "تنظیمات برگزیده نمایش و اعلان را برای dotfiles خود ذخیره کنید. حساب‌ها، اعتبارنامه‌ها، ورود به سیستم، مسیرهای محلی و رضایت در این مک باقی می‌مانند.";
-"Saved in CodexBar's local config file. Or set GITKRAKEN_API_TOKEN." = "در فایل پیکربندی محلی CodexBar ذخیره شده است. یا GITKRAKEN_API_TOKEN را تنظیم کنید.";
+"Saved in CodexBar's local config file. Or set GITKRAKEN_API_TOKEN." = "در فایل پیکربندی محلی Sharingan ذخیره شده است. یا GITKRAKEN_API_TOKEN را تنظیم کنید.";
 "Scoped weekly" = "هفتگی سهمیه برای محدوده انتخاب شده";
 "Secondary quota" = "ثانویه سهمیه";
 "Select position %@" = "موقعیت %@ را انتخاب کنید";
@@ -1990,10 +1990,10 @@
 "Show workspace spend" = "نمایش هزینه فضای کاری";
 "Shows model-specific Claude quotas, such as Fable, in desktop widgets." = "Claude سهمیه برای مدل خاص مانند Fable را در ویجت های دسکتاپ نشان می دهد.";
 "Shows the hidden accounts" = "اکانت های مخفی را نشان می دهد";
-"Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "استفاده را نشان می دهد و به شما امکان می دهد حساب ها را از طریق `cswap` تغییر دهید. اعتبارنامه ها توسط claude-swap مدیریت می شوند. CodexBar هرگز آنها را نمی خواند.";
-"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "استفاده را از `tcr` نشان می دهد؛ حساب ها را تغییر نمی دهد، زیرا tcr برای هر درخواست حساب را انتخاب می کند. اعتبارنامه ها توسط tcr مدیریت می شوند. CodexBar هرگز آنها را نمی خواند.";
+"Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "استفاده را نشان می دهد و به شما امکان می دهد حساب ها را از طریق `cswap` تغییر دهید. اعتبارنامه ها توسط claude-swap مدیریت می شوند. Sharingan هرگز آنها را نمی خواند.";
+"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "استفاده را از `tcr` نشان می دهد؛ حساب ها را تغییر نمی دهد، زیرا tcr برای هر درخواست حساب را انتخاب می کند. اعتبارنامه ها توسط tcr مدیریت می شوند. Sharingan هرگز آنها را نمی خواند.";
 "Stay Awake" = "بیدار بمان";
-"Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "در فایل پیکربندی CodexBar ذخیره می شود. بودجه ماهانه و استفاده مسیریابی شده را از /v1/usage می خواند.";
+"Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "در فایل پیکربندی Sharingan ذخیره می شود. بودجه ماهانه و استفاده مسیریابی شده را از /v1/usage می خواند.";
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is required for organization usage; legacy/user keys only get a best-effort balance fallback." = "ذخیره شده در ~/.codexbar/config.json. OPENAI_ADMIN_KEY برای استفاده سازمان مورد نیاز است. کلیدهای قدیمی/کاربر فقط یک موجودی با بهترین تلاش را دریافت می کنند.";
 "Stored in ~/.codexbar/config.json. You can also provide FACTORY_API_KEY or ~/.factory/.env." = "ذخیره شده در ~/.codexbar/config.json. همچنین می توانید FACTORY_API_KEY یا ~/.factory/.env را ارائه دهید.";
 "Stored in ~/.codexbar/config.json. You can also set AMP_API_KEY." = "ذخیره شده در ~/.codexbar/config.json. همچنین می توانید AMP_API_KEY را تنظیم کنید.";
@@ -2008,7 +2008,7 @@
 "Switching account…" = "در حال تغییر حساب…";
 "TOP MODELS" = "مدل های برتر";
 "TRACKED TOKENS · %@" = "توکن‌های ثبت‌شده · %@";
-"That managed account uses a workspace that differs from its saved Codex auth default. Keep it as a managed account; CodexBar will not rewrite Codex-owned auth to promote it." = "آن حساب مدیریت شده از فضای کاری استفاده می کند که با پیش فرض ذخیره شده Codex آن متفاوت است. آن را به عنوان یک حساب مدیریت شده نگه دارید؛ CodexBar اعتبار متعلق به Codex را برای تبلیغ آن بازنویسی نمی کند.";
+"That managed account uses a workspace that differs from its saved Codex auth default. Keep it as a managed account; CodexBar will not rewrite Codex-owned auth to promote it." = "آن حساب مدیریت شده از فضای کاری استفاده می کند که با پیش فرض ذخیره شده Codex آن متفاوت است. آن را به عنوان یک حساب مدیریت شده نگه دارید؛ Sharingan اعتبار متعلق به Codex را برای تبلیغ آن بازنویسی نمی کند.";
 "The pasted header is sent only to this tenant." = "هدر چسبانده شده فقط برای این مستاجر ارسال می شود.";
 "The selected Codex profile has no verified account email." = "نمایه Codex انتخاب شده هیچ ایمیل حساب تایید شده ای ندارد.";
 "The selected managed Codex account is unavailable." = "حساب مدیریت انتخاب شده Codex در دسترس نیست.";
@@ -2037,7 +2037,7 @@
 "Weekly (7-day)" = "هفتگی (7 روزه)";
 "When on, runs automatic provider, local usage, and storage refreshes no more often than every 30 minutes. Manual refresh remains available. Automatic follows the system Low Power Mode setting." = "وقتی روشن است، ارائه‌دهنده خودکار اجرا می‌شود، استفاده محلی، و فضای ذخیره‌سازی بیشتر از هر 30 دقیقه به‌روزرسانی می‌شود. بازخوانی دستی همچنان در دسترس است. خودکار از تنظیمات حالت کم مصرف سیستم پیروی می کند.";
 "Without configured API credentials, install and authenticate 'arkcli' for Coding/Agent Plan usage. Existing API credentials remain authoritative." = "بدون مجوزهای پیکربندی شده API، \"arkcli\" را برای استفاده از برنامه کدنویسی/عامل نصب و احراز هویت کنید. اعتبار API موجود همچنان معتبر است.";
-"You can close this window and return to CodexBar." = "می توانید این پنجره را ببندید و به CodexBar برگردید.";
+"You can close this window and return to CodexBar." = "می توانید این پنجره را ببندید و به Sharingan برگردید.";
 "You can close this window and try again." = "می توانید این پنجره را ببندید و دوباره امتحان کنید.";
 "ZoomMate capture" = "ضبط ZoomMate";
 "a1.small-equivalent hours" = "ساعت معادل a1.small";
@@ -2105,7 +2105,7 @@
 "Premium weekly" = "استفاده هفتگی ممتاز سهمیه";
 "DevPass cost history is not available." = "تاریخچه هزینه DevPass در دسترس نیست.";
 "DevPass API key" = "کلید DevPass API";
-"Saved in CodexBar's local config file. Or set DEVPASS_API_KEY." = "در فایل پیکربندی محلی CodexBar ذخیره شده است. یا DEVPASS_API_KEY را تنظیم کنید.";
+"Saved in CodexBar's local config file. Or set DEVPASS_API_KEY." = "در فایل پیکربندی محلی Sharingan ذخیره شده است. یا DEVPASS_API_KEY را تنظیم کنید.";
 "Regular LLM Gateway API key" = "کلید معمولی LLM Gateway API";
 "Memory" = "استفاده از حافظه";
 "llmman cost summary is not supported." = "خلاصه هزینه llmman پشتیبانی نمی شود.";
@@ -2134,7 +2134,7 @@
 "ClawRouter spend is reported by its usage API." = "هزینه ClawRouter با استفاده از API گزارش شده است.";
 "Vercel AI Gateway cost history is not available." = "تاریخچه هزینه Vercel AI Gateway در دسترس نیست.";
 "Vercel AI Gateway API key" = "کلید Vercel AI Gateway API";
-"Saved in CodexBar's local config file. Or set AI_GATEWAY_API_KEY." = "در فایل پیکربندی محلی CodexBar ذخیره شده است. یا AI_GATEWAY_API_KEY را تنظیم کنید.";
+"Saved in CodexBar's local config file. Or set AI_GATEWAY_API_KEY." = "در فایل پیکربندی محلی Sharingan ذخیره شده است. یا AI_GATEWAY_API_KEY را تنظیم کنید.";
 "Savings" = "پس انداز";
 "Reviews" = "بررسی ها";
 "Review count and billing period from CodeRabbit." = "بررسی تعداد و دوره صورتحساب از CodeRabbit.";
@@ -2157,7 +2157,7 @@
 "ClinePass cost history is not available via the usage-limits API." = "تاریخچه هزینه ClinePass از طریق محدودیت های استفاده API در دسترس نیست.";
 "Paste an API key, or run cline auth. Reads the existing Cline session without copying it." = "کلید API را جایگذاری کنید یا cline auth را اجرا کنید. جلسه Cline موجود را بدون کپی کردن آن می خواند.";
 "ClinePass API key..." = "کلید ClinePass API...";
-"DeepInfra per-request cost history is not available in CodexBar." = "تاریخچه هزینه هر درخواست DeepInfra در CodexBar موجود نیست.";
+"DeepInfra per-request cost history is not available in CodexBar." = "تاریخچه هزینه هر درخواست DeepInfra در Sharingan موجود نیست.";
 "Store multiple DeepInfra API keys." = "چندین کلید DeepInfra API را ذخیره کنید.";
 "Claude credentials" = "اعتبار Claude";
 "Store Claude sessionKey cookies, OAuth tokens, or Anthropic Admin API keys." = "کلیدهای Claude sessionKey cookies، OAuth توکن ها یا Anthropic Admin API را ذخیره کنید.";
@@ -2165,7 +2165,7 @@
 "4-hour quota" = "4 ساعته سهمیه";
 "Monthly quota" = "ماهانه سهمیه";
 "Subscription usage from the Chutes API." = "استفاده از اشتراک از Chutes API.";
-"Chutes cost history is not available from CodexBar." = "تاریخچه هزینه Chutes از CodexBar در دسترس نیست.";
+"Chutes cost history is not available from CodexBar." = "تاریخچه هزینه Chutes از Sharingan در دسترس نیست.";
 "Stored in ~/.codexbar/config.json. Paste a Chutes API key." = "ذخیره شده در ~/.codexbar/config.json. یک کلید Chutes API جایگذاری کنید.";
 "chutes key..." = "کلید API سرویس Chutes...";
 "Spend" = "هزینه";
@@ -2199,7 +2199,7 @@
 "Base" = "پایه";
 "T3 Chat cost summary is not supported." = "خلاصه هزینه T3 Chat پشتیبانی نمی شود.";
 "Model quota" = "مدل سهمیه";
-"Helmcode per-request cost history is not available in CodexBar." = "تاریخچه هزینه هر درخواست Helmcode در CodexBar موجود نیست.";
+"Helmcode per-request cost history is not available in CodexBar." = "تاریخچه هزینه هر درخواست Helmcode در Sharingan موجود نیست.";
 "Copy the Cookie request header from your tenant's dashboard. cURL captures are not supported." = "هدر درخواست Cookie را از داشبورد مستاجر خود کپی کنید. ضبط cURL پشتیبانی نمی شود.";
 "Store multiple IBM Bob API keys." = "چندین کلید IBM Bob API را ذخیره کنید.";
 "Monthly Bobcoins" = "باب کوین ماهانه";
@@ -2211,7 +2211,7 @@
 "xai-..." = "xai-...";
 "Team ID" = "تیم ID";
 "Vercel access token" = "توکن دسترسی Vercel";
-"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "اختیاری. به‌جای اعتبار تیم، بودجهٔ شخصی شما را نشان می‌دهد. در فایل پیکربندی محلی CodexBar ذخیره می‌شود. یا VERCEL_ACCESS_TOKEN را تنظیم کنید.";
+"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "اختیاری. به‌جای اعتبار تیم، بودجهٔ شخصی شما را نشان می‌دهد. در فایل پیکربندی محلی Sharingan ذخیره می‌شود. یا VERCEL_ACCESS_TOKEN را تنظیم کنید.";
 "Open Vercel tokens" = "باز کردن توکن‌های Vercel";
 "Required with a Vercel access token. Or set VERCEL_TEAM_ID." = "همراه با توکن دسترسی Vercel لازم است. یا VERCEL_TEAM_ID را تنظیم کنید.";
 "Required. Shown in the xAI Console URL and team settings." = "مورد نیاز. در کنسول xAI URL و تنظیمات تیم نشان داده شده است.";
@@ -2262,13 +2262,13 @@
 "__raycast_session=…; csrf_token=…" = "__raycast_session=…; csrf_token=…";
 "Open Raycast Account" = "حساب Raycast را باز کنید";
 "ai& spend is summed from the request logs API." = "ai&spen از لاگ درخواست API خلاصه می شود.";
-"Stored in CodexBar's config file. Create a key in the ai& console (shown once)." = "در فایل پیکربندی CodexBar ذخیره شده است. یک کلید در کنسول ai& ایجاد کنید (یک بار نشان داده شده است).";
+"Stored in CodexBar's config file. Create a key in the ai& console (shown once)." = "در فایل پیکربندی Sharingan ذخیره شده است. یک کلید در کنسول ai& ایجاد کنید (یک بار نشان داده شده است).";
 "sk-…" = "sk-…";
 "Store multiple Venice API keys." = "چندین کلید Venice API را ذخیره کنید.";
 "Venice per-day cost history is not available via API." = "تاریخچه هزینه روزانه Venice از طریق API در دسترس نیست.";
 "Atlas Cloud cost history is not available." = "تاریخچه هزینه Atlas Cloud در دسترس نیست.";
 "Atlas Cloud API key" = "کلید Atlas Cloud API";
-"Saved in CodexBar's local config file. Or set ATLASCLOUD_API_KEY." = "در فایل پیکربندی محلی CodexBar ذخیره شده است. یا ATLASCLOUD_API_KEY را تنظیم کنید.";
+"Saved in CodexBar's local config file. Or set ATLASCLOUD_API_KEY." = "در فایل پیکربندی محلی Sharingan ذخیره شده است. یا ATLASCLOUD_API_KEY را تنظیم کنید.";
 "Five-hour quota" = "پنج ساعته سهمیه";
 "Weekly tokens" = "هفتگی توکن ها";
 "Weekly token quota regenerates continuously." = "هفتگی توکن ها سهمیه به طور مداوم بازسازی می شود.";
@@ -2279,7 +2279,7 @@
 "Daily free tokens" = "توکن ها رایگان روزانه";
 "xKiro cost history is not available." = "تاریخچه هزینه xKiro در دسترس نیست.";
 "xKiro API key" = "کلید xKiro API";
-"Saved in CodexBar's local config file. Or set XKIRO_API_KEY. Reads free-token usage only." = "در فایل پیکربندی محلی CodexBar ذخیره شده است. یا XKIRO_API_KEY را تنظیم کنید. فقط استفاده رایگان توکن ها را می خواند.";
+"Saved in CodexBar's local config file. Or set XKIRO_API_KEY. Reads free-token usage only." = "در فایل پیکربندی محلی Sharingan ذخیره شده است. یا XKIRO_API_KEY را تنظیم کنید. فقط استفاده رایگان توکن ها را می خواند.";
 "Store multiple Hugging Face access tokens." = "دسترسی چندگانه Hugging Face توکن ها را ذخیره کنید.";
 "Paste access token…" = "چسباندن دسترسی به توکن ها…";
 "Inference" = "استنتاج";
@@ -2350,7 +2350,7 @@
 "Subscription kWh and prepaid USD balance." = "اشتراک کیلووات ساعت و موجودی پیش پرداخت USD.";
 "Neuralwatt token cost history is not available via the quota API." = "تاریخچه هزینه Neuralwatt توکن ها از طریق سهمیه API در دسترس نیست.";
 "Store multiple Neuralwatt API keys." = "چندین کلید Neuralwatt API را ذخیره کنید.";
-"Stored in the CodexBar config file. Manage keys from the Neuralwatt dashboard." = "در فایل پیکربندی CodexBar ذخیره می شود. کلیدهای داشبورد Neuralwatt را مدیریت کنید.";
+"Stored in the CodexBar config file. Manage keys from the Neuralwatt dashboard." = "در فایل پیکربندی Sharingan ذخیره می شود. کلیدهای داشبورد Neuralwatt را مدیریت کنید.";
 
 // Additional localized settings, provider controls, sharing, and widgets.
 "Monthly allowances" = "کمک هزینه ماهانه";
@@ -2424,7 +2424,7 @@
 "Speed range needs 4 completed turns." = "بازهٔ سرعت به 4 نوبت گفت‌وگوی کامل نیاز دارد.";
 "All accounts" = "همهٔ حساب‌ها";
 "Refresh all accounts" = "تازه‌سازی همهٔ حساب‌ها";
-"CodexBar follows" = "دنبال‌شده توسط CodexBar";
+"CodexBar follows" = "دنبال‌شده توسط Sharingan";
 "%@ accounts" = "%@ حساب";
 "Refreshes up to %@ accounts at a time." = "در هر نوبت حداکثر %@ حساب را تازه‌سازی می‌کند.";
 "Each account has its own limits. Viewing usage does not switch accounts." = "هر حساب محدودیت‌های خودش را دارد. مشاهدهٔ میزان مصرف، حساب را تغییر نمی‌دهد.";
@@ -2532,21 +2532,21 @@
 "Monthly AI tokens" = "توکن‌های ماهانه هوش مصنوعی";
 "Aerostack cost history is not available." = "تاریخچه هزینه Aerostack در دسترس نیست.";
 "Account JWT" = "JWT حساب";
-"Saved in CodexBar's local config file. Replace when expired; CodexBar does not refresh it." = "در فایل پیکربندی محلی CodexBar ذخیره می‌شود. پس از انقضا آن را جایگزین کنید؛ CodexBar آن را تمدید نمی‌کند.";
+"Saved in CodexBar's local config file. Replace when expired; CodexBar does not refresh it." = "در فایل پیکربندی محلی Sharingan ذخیره می‌شود. پس از انقضا آن را جایگزین کنید؛ Sharingan آن را تمدید نمی‌کند.";
 "Account JWT, not an Agent Endpoint key" = "JWT حساب، نه کلید Agent Endpoint";
 "Input tokens" = "توکن‌های ورودی";
 "Output tokens" = "توکن‌های خروجی";
 "Cosmic AI cost history is not available." = "تاریخچه هزینه Cosmic AI در دسترس نیست.";
 "Personal Access Token" = "توکن دسترسی شخصی";
-"Saved in CodexBar's local config file. Reads project usage only; bucket keys are not supported." = "در فایل پیکربندی محلی CodexBar ذخیره می‌شود. فقط میزان مصرف پروژه را می‌خواند؛ کلیدهای باکت پشتیبانی نمی‌شوند.";
+"Saved in CodexBar's local config file. Reads project usage only; bucket keys are not supported." = "در فایل پیکربندی محلی Sharingan ذخیره می‌شود. فقط میزان مصرف پروژه را می‌خواند؛ کلیدهای باکت پشتیبانی نمی‌شوند.";
 "cos_…" = "cos_…";
 "Required. Usage covers this project only. Or set COSMIC_PROJECT_ID." = "الزامی است. میزان مصرف فقط مربوط به این پروژه است. یا COSMIC_PROJECT_ID را تنظیم کنید.";
 "Sail Research cost history is not available." = "تاریخچه هزینه Sail Research در دسترس نیست.";
 "Sail Research API key" = "کلید API سرویس Sail Research";
-"Saved in CodexBar's local config file. Or set SAIL_API_KEY." = "در فایل پیکربندی محلی CodexBar ذخیره می‌شود. یا SAIL_API_KEY را تنظیم کنید.";
+"Saved in CodexBar's local config file. Or set SAIL_API_KEY." = "در فایل پیکربندی محلی Sharingan ذخیره می‌شود. یا SAIL_API_KEY را تنظیم کنید.";
 "Sofya cost history is not available." = "تاریخچه هزینه Sofya در دسترس نیست.";
 "Sofya API key" = "کلید API سرویس Sofya";
-"Saved in CodexBar's local config file. Or set SOFYA_API_KEY." = "در فایل پیکربندی محلی CodexBar ذخیره می‌شود. یا SOFYA_API_KEY را تنظیم کنید.";
+"Saved in CodexBar's local config file. Or set SOFYA_API_KEY." = "در فایل پیکربندی محلی Sharingan ذخیره می‌شود. یا SOFYA_API_KEY را تنظیم کنید.";
 "Pace sign" = "علامت آهنگ مصرف";
 "Ahead of pace is +" = "جلوتر از آهنگ مصرف یعنی +";
 "Reserve is +" = "ذخیره یعنی +";
@@ -2577,7 +2577,7 @@
 "Also restores the provider order in the menu bar. Can be undone." = "ترتیب ارائه‌دهندگان در نوار منو را نیز بازیابی می‌کند. قابل واگرد است.";
 "Local Codex details; excluded from combined totals." = "جزئیات محلی Codex؛ از مجموع‌های ترکیبی مستثنا شده‌اند.";
 
-"Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the Sharingan config file. You can also set COMMAND_CODE_API_KEY.";
 /* OpenAI organization rate limits and live usage */
 "%@ tokens · %@ requests" = "%@ توکن · %@ درخواست";
 "15m" = "۱۵ دقیقه";
@@ -2663,7 +2663,7 @@
 "Daily spend · %@" = "هزینهٔ روزانه · %@";
 "Applies to the selected token account “%@”. Each account keeps its own limits." = "برای حساب توکن انتخاب‌شده «%@» اعمال می‌شود. هر حساب محدودیت‌های خودش را نگه می‌دارد.";
 "Applies to the OpenAI API key, not to token accounts." = "برای کلید API ‏OpenAI اعمال می‌شود، نه حساب‌های توکن.";
-"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "CodexBar از macOS Keychain توکن ورود Muse Code را درخواست می کند تا بتواند استفاده اشتراک Muse Code شما را دریافت کند. برای ادامه روی OK کلیک کنید.";
+"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "Sharingan از macOS Keychain توکن ورود Muse Code را درخواست می کند تا بتواند استفاده اشتراک Muse Code شما را دریافت کند. برای ادامه روی OK کلیک کنید.";
 /* Claude Platform provider */
 "API credit" = "اعتبار API";
 "Purchased credit" = "اعتبار خریداری‌شده";
@@ -2687,7 +2687,7 @@
 "http_server_plain_http" = "اجازهٔ HTTP بدون رمزگذاری از بیرون این Mac";
 "http_server_dashboard" = "داشبورد";
 "http_server_wildcard" = "در دستگاه‌های دیگر، 0.0.0.0 را با نشانی IPv4 اتصال VPN یا Tailscale این Mac جایگزین کنید.";
-"http_server_footer" = "به‌طور پیش‌فرض خاموش است. همراه CodexBar شروع و با خروج از آن متوقف می‌شود. تنظیمات و توکن در این Mac می‌مانند و همگام‌سازی یا صادر نمی‌شوند. برای دسترسی از راه دور، Mac را بیدار نگه دارید.";
+"http_server_footer" = "به‌طور پیش‌فرض خاموش است. همراه Sharingan شروع و با خروج از آن متوقف می‌شود. تنظیمات و توکن در این Mac می‌مانند و همگام‌سازی یا صادر نمی‌شوند. برای دسترسی از راه دور، Mac را بیدار نگه دارید.";
 /* Claude desktop cookie source */
 "Claude desktop app" = "برنامهٔ دسکتاپ Claude";
 "Use Claude desktop app cookies" = "استفاده از کوکی‌های برنامهٔ دسکتاپ Claude";
@@ -2711,7 +2711,7 @@
 
 "Trae CN" = "Trae CN";
 "Show Trae CN usage" = "نمایش مصرف Trae CN";
-"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "در trae.cn وارد Trae CN شوید، سپس CodexBar را تازه‌سازی کنید.";
+"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "در trae.cn وارد Trae CN شوید، سپس Sharingan را تازه‌سازی کنید.";
 "Trae CN usage response format changed." = "قالب پاسخ مصرف Trae CN تغییر کرده است.";
 "Trae CN request failed. Try refreshing later." = "درخواست Trae CN ناموفق بود. بعداً دوباره تازه‌سازی کنید.";
 "Use --provider copilot." = "از --provider copilot استفاده کنید.";
@@ -2748,14 +2748,14 @@
 "Chatbox AI denied access. Check your license." = "Chatbox AI دسترسی را رد کرد. مجوز خود را بررسی کنید.";
 "Chatbox AI is rate limiting requests. Try again later." = "Chatbox AI تعداد درخواست‌ها را محدود کرده است. بعداً دوباره امتحان کنید.";
 "Chatbox AI request failed. Try refreshing later." = "درخواست Chatbox AI ناموفق بود. بعداً دوباره تازه‌سازی کنید.";
-"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI پاسخی ناشناخته برگرداند. CodexBar را به‌روز کنید و دوباره امتحان کنید.";
+"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI پاسخی ناشناخته برگرداند. Sharingan را به‌روز کنید و دوباره امتحان کنید.";
 
 /* abliteration.ai */
 "abliteration.ai" = "abliteration.ai";
 "Show abliteration.ai usage" = "نمایش مصرف abliteration.ai";
 "abliteration.ai is rate limiting requests. Try again later." = "abliteration.ai تعداد درخواست‌ها را محدود کرده است. بعداً دوباره امتحان کنید.";
 "abliteration.ai request failed. Try refreshing later." = "درخواست abliteration.ai ناموفق بود. بعداً دوباره تازه‌سازی کنید.";
-"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai پاسخی ناشناخته برگرداند. CodexBar را به‌روز کنید و دوباره امتحان کنید.";
+"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai پاسخی ناشناخته برگرداند. Sharingan را به‌روز کنید و دوباره امتحان کنید.";
 "Check your API key in Settings." = "کلید API خود را در تنظیمات بررسی کنید.";
 "Kimi Code" = "Kimi Code";
 

@@ -353,7 +353,7 @@ final class CLIEntryTests: XCTestCase {
                 executableURL: executableURL,
                 argv0: "install/bin/CodexBarCLI",
                 currentDirectoryURL: workingDirectoryURL),
-            "CodexBar 8.7.6\n")
+            "Sharingan 8.7.6\n")
 
         let symlinkURL = linksURL.appendingPathComponent("codexbar")
         try FileManager.default.createSymbolicLink(
@@ -364,7 +364,7 @@ final class CLIEntryTests: XCTestCase {
                 executableURL: symlinkURL,
                 argv0: "codexbar",
                 currentDirectoryURL: workingDirectoryURL),
-            "CodexBar 8.7.6\n")
+            "Sharingan 8.7.6\n")
     }
 
     func test_cliVersionPrefersAdjacentVersionOverStandaloneBundleName() throws {

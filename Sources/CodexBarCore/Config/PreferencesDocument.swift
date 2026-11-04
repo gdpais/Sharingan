@@ -12,8 +12,9 @@ public struct PreferencesDocument: Codable, Sendable {
     }
 
     public static let pendingImportKey = "portablePreferencesPendingImport"
-    public static let importNotification = "com.steipete.codexbar.preferencesImport"
-    public static let defaultsDomain = "com.steipete.codexbar"
+    /// Distributed notification the CLI posts after queueing an import into the app's defaults domain.
+    public static let importNotification = "\(AppDefaultsDomain.release).preferencesImport"
+    public static let defaultsDomain = AppDefaultsDomain.release
     private var version = 1
     private var preferences: [String: ProviderConfigExtensionValue] = [:]
 
@@ -55,6 +56,10 @@ public struct PreferencesDocument: Codable, Sendable {
     }
 
     public init() {}
+
+    public var isEmpty: Bool {
+        self.preferences.isEmpty
+    }
 
     public init(data: Data) throws {
         self = try JSONDecoder().decode(Self.self, from: data)

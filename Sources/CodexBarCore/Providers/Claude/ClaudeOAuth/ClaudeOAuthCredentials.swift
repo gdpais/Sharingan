@@ -89,14 +89,17 @@ public enum ClaudeOAuthCredentialsStore {
         "ClaudeOAuthPendingCodexBarOAuthKeychainCacheClearV1"
     private static let directKeychainReadConsentRevocationMarkerKey =
         "ClaudeOAuthDirectKeychainReadConsentRevocationMarkerV1"
+    // Deliberately not AppDefaultsDomain.release: this state tracks the `com.steipete.codexbar.cache` Keychain item
+    // and Claude's Keychain entry, which keep their CodexBar names, so it stays where every app/CLI already looks.
+    private static let sharedKeychainStateDefaultsDomain = AppDefaultsDomain.legacyRelease
     private static var sharedDefaults: UserDefaults {
-        ClaudeOAuthApplicationDefaults.resolve(domain: "com.steipete.codexbar")
+        ClaudeOAuthApplicationDefaults.resolve(domain: self.sharedKeychainStateDefaultsDomain)
     }
 
     private static let pendingCodexBarOAuthKeychainCacheClearStore: ClaudeOAuthPendingCacheClearStore =
         ClaudeOAuthPendingCacheClearUserDefaultsStore(
             // The cache service is shared by release/debug apps and their CLIs, so its tombstone is shared too.
-            domain: "com.steipete.codexbar",
+            domain: ClaudeOAuthCredentialsStore.sharedKeychainStateDefaultsDomain,
             key: ClaudeOAuthCredentialsStore.pendingCodexBarOAuthKeychainCacheClearKey)
     private static let claudeKeychainChangeCheckLock = NSLock()
     private nonisolated(unsafe) static var lastClaudeKeychainChangeCheckAt: Date?
@@ -406,7 +409,7 @@ public enum ClaudeOAuthCredentialsStore {
                         profileIdentifier: profileIdentifier,
                         clearInvalidCache: clearInvalidCache)
                 case .interactionRequired:
-                    lastError = ClaudeOAuthCredentialsError.readFailed("CodexBar cache requires replacement.")
+                    lastError = ClaudeOAuthCredentialsError.readFailed("Sharingan cache requires replacement.")
                 case .temporarilyUnavailable:
                     cacheTemporarilyUnavailable = true
                     lastError = ClaudeOAuthCredentialsError.readFailed(

@@ -1,5 +1,13 @@
 # Repository Guidelines
 
+## Sharingan fork notes
+- This repo (gdpais/Sharingan) is a fork of CodexBar by Peter Steinberger (https://github.com/steipete/CodexBar). The guidelines below are upstream's; `/Users/steipete/...` paths refer to upstream's machine.
+- Keep internal names as CodexBar: Swift modules, targets, types, file names, the `codexbar` CLI binary, config paths (`~/.config/codexbar`, `~/.codexbar`), and Keychain service/account names.
+- Rename only user-visible surfaces (app/display name, bundle name, menu/settings copy, README) to Sharingan.
+- Keep upstream merges cheap: prefer new, additive files over edits to upstream files; when an upstream file must change, keep the diff minimal.
+- `Localizable.strings`: for branding, edit values in place only; do not rename, move, or reorder keys.
+- README must always credit CodexBar by Peter Steinberger, link https://github.com/steipete/CodexBar, and note the MIT license (link `LICENSE`).
+
 ## Project Structure & Modules
 - `Sources/CodexBar`: Swift 6 menu bar app (usage/credits probes, icon renderer, settings). Keep changes small and reuse existing helpers.
 - `Tests/CodexBarTests`: XCTest coverage for usage parsing, status probes, icon patterns; mirror new logic with focused tests.

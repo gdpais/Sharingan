@@ -65,8 +65,8 @@ struct ClaudeOAuthDelegatedRefreshLinuxTests {
 
         #expect(result.attempts == 0)
         #expect(result.message.contains("background repair is suppressed"))
-        #expect(result.message.contains("Click Refresh in the CodexBar menu"))
-        #expect(!result.message.contains("Open the CodexBar menu or"))
+        #expect(result.message.contains("Click Refresh in the Sharingan menu"))
+        #expect(!result.message.contains("Open the Sharingan menu or"))
     }
 
     private func runDelegatedRefresh(

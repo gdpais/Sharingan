@@ -397,6 +397,12 @@ struct MenuBarLayoutEditorTests {
     }
 
     @Test
+    func `layout drag token matches the exported Info plist type`() {
+        // Scripts/package_app.sh declares this identifier under UTExportedTypeDeclarations.
+        #expect(UTType.codexBarMenuLayoutItem.identifier == "com.gdpais.sharingan.menu-layout-item")
+    }
+
+    @Test
     func `conditional drag payload round trips`() throws {
         let payload = MenuBarLayoutDragItem.palette(.conditional(id: UUID()))
 

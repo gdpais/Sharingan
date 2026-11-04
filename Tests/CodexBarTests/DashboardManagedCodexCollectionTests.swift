@@ -67,7 +67,7 @@ struct DashboardManagedCodexCollectionTests {
         #expect(accounts[0].snapshot?.updatedAt == fixture.updatedAt)
         #expect(accounts[0].error == nil)
         #expect(accounts[1].snapshot == nil)
-        #expect(accounts[1].error == "Saved usage refresh failed. Refresh this account in CodexBar.")
+        #expect(accounts[1].error == "Saved usage refresh failed. Refresh this account in Sharingan.")
         #expect(accounts[1].displayLabel == "second@example.net — Personal")
         #expect(try Data(contentsOf: fixture.accountsURL) == before)
     }

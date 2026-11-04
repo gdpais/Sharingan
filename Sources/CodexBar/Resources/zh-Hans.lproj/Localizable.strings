@@ -14,10 +14,10 @@
 "Include API keys, cookies, and tokens" = "包含 API 密钥、Cookie 和令牌";
 "Sync usage snapshots" = "同步使用情况快照";
 "Show accounts from other Macs" = "显示其他 Mac 上的账户";
-"Requires a signed release build of CodexBar." = "需要经过签名的 CodexBar 正式版本。";
+"Requires a signed release build of CodexBar." = "需要经过签名的 Sharingan 正式版本。";
 "Sign in to iCloud in System Settings to enable sync." = "在“系统设置”中登录 iCloud 以启用同步。";
 "iCloud access is restricted on this Mac." = "此 Mac 上的 iCloud 访问受到限制。";
-"Sync is paused: another Mac uses a newer version of CodexBar. Update to resume." = "同步已暂停：另一台 Mac 使用较新版本的 CodexBar。更新以恢复。";
+"Sync is paused: another Mac uses a newer version of CodexBar. Update to resume." = "同步已暂停：另一台 Mac 使用较新版本的 Sharingan。更新以恢复。";
 "Last successful fetch" = "上次成功获取";
 "Last successful push" = "上次成功推送";
 "Never" = "从未";
@@ -52,9 +52,9 @@
 "hooks_add_argument" = "添加参数";
 "hooks_delete_argument" = "删除参数";
 
-"ollama_safari_cookie_access_hint" = "CodexBar 需要“完全磁盘访问权限”才能读取 Safari Cookie（系统设置 > 隐私与安全性）。";
+"ollama_safari_cookie_access_hint" = "Sharingan 需要“完全磁盘访问权限”才能读取 Safari Cookie（系统设置 > 隐私与安全性）。";
 "ollama_browser_cookie_decryption_denied" = "钥匙串拒绝解密 %@ Cookie。打开提供商卡片并点按“刷新”(⌘R)，再次请求钥匙串访问权限。";
-"ollama_browser_cookie_decryption_disabled" = "CodexBar 中已停用 %@ Cookie 解密；请启用钥匙串访问权限并刷新。";
+"ollama_browser_cookie_decryption_disabled" = "Sharingan 中已停用 %@ Cookie 解密；请启用钥匙串访问权限并刷新。";
 
 " providers" = " 提供商";
 "(System)" = "（System）";
@@ -71,7 +71,7 @@
 "AI credits" = "AI 额度";
 "Gateway requests" = "网关请求";
 "Future AGI cost history is not available." = "无法查看 Future AGI 的费用历史。";
-"Saved in CodexBar's local config file. Or set FI_API_KEY." = "保存在 CodexBar 的本地配置文件中。也可设置 FI_API_KEY。";
+"Saved in CodexBar's local config file. Or set FI_API_KEY." = "保存在 Sharingan 的本地配置文件中。也可设置 FI_API_KEY。";
 
 "API key limit" = "API 密钥限制";
 "API region" = "API 区域";
@@ -108,7 +108,7 @@
 "Automatic imports browser cookies or stored sessions." = "自动导入浏览器 Cookie 或已存储的会话。";
 "Automatic imports browser cookies." = "自动导入浏览器 Cookie。";
 "Automatically imports browser session cookie." = "自动导入浏览器会话 Cookie。";
-"Automatically opens CodexBar when you start your Mac." = "启动 Mac 时自动打开 CodexBar。";
+"Automatically opens CodexBar when you start your Mac." = "启动 Mac 时自动打开 Sharingan。";
 "Automation" = "自动化";
 "Average (\\(label1) + \\(label2))" = "平均（\\(label1) + \\(label2)）";
 "Average (\\(metadata.sessionLabel) + \\(metadata.weeklyLabel))" = "平均（\\(metadata.sessionLabel) + \\(metadata.weeklyLabel)）";
@@ -136,7 +136,7 @@
 "Choose up to \\(Self.maxOverviewProviders) providers" = "选择至多 \\(Self.maxOverviewProviders) 个提供商";
 "Choose up to \\(count) providers" = "选择至多 \\(count) 个提供商";
 "Choose what to show in the menu bar (Pace shows usage vs. expected)." = "选择菜单栏中显示的内容（进度会显示实际用量与预期的对比）。";
-"Choose which Codex account CodexBar should follow." = "选择 CodexBar 要跟随的 Codex 账户。";
+"Choose which Codex account CodexBar should follow." = "选择 Sharingan 要跟随的 Codex 账户。";
 "Choose which window drives the menu bar percent." = "选择用于驱动菜单栏百分比的窗口。";
 "Chrome" = "Chrome";
 "Claude CLI not found" = "未找到 Claude CLI";
@@ -151,8 +151,8 @@
 "Codex binary" = "Codex 二进制文件";
 "Codex login failed" = "Codex 登录失败";
 "Codex login timed out" = "Codex 登录超时";
-"CodexBar Lifecycle Keepalive" = "CodexBar 生命周期保活";
-"CodexBar could not read managed account storage. " = "CodexBar 无法读取托管账户存储。";
+"CodexBar Lifecycle Keepalive" = "Sharingan 生命周期保活";
+"CodexBar could not read managed account storage. " = "Sharingan 无法读取托管账户存储。";
 "Configure…" = "配置…";
 "Connected" = "已连接";
 "Controls how much detail is logged." = "控制日志记录的详细程度。";
@@ -171,7 +171,7 @@
 "Local token history is unavailable or incomplete." = "本地 Token 历史不可用或不完整。";
 "Could not add Codex account" = "无法添加 Codex 账户";
 "Could not open Terminal for Gemini" = "无法为 Gemini 打开终端";
-"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "无法读取 Claude OAuth 凭据：CodexBar 的 Claude OAuth 缓存在 macOS 钥匙串中暂时不可用。请在“钥匙串访问”中确认登录钥匙串已解锁，然后重试刷新。";
+"Claude OAuth credentials read failed: CodexBar's Claude OAuth cache is temporarily unavailable in macOS Keychain. Check that the login keychain is unlocked in Keychain Access, then retry Refresh." = "无法读取 Claude OAuth 凭据：Sharingan 的 Claude OAuth 缓存在 macOS 钥匙串中暂时不可用。请在“钥匙串访问”中确认登录钥匙串已解锁，然后重试刷新。";
 "Could not start codex login" = "无法启动 codex login";
 "Could not switch system account" = "无法切换系统账户";
 "Credits" = "额度";
@@ -220,7 +220,7 @@
 "Hide details" = "隐藏详情";
 "Hide personal information" = "隐藏个人信息";
 "Historical tracking" = "历史跟踪";
-"How often CodexBar polls providers in the background." = "CodexBar 在后台轮询提供商的频率。";
+"How often CodexBar polls providers in the background." = "Sharingan 在后台轮询提供商的频率。";
 "Inactive" = "非活跃";
 "Install CLI" = "安装 CLI";
 "Install the Claude CLI (npm i -g @anthropic-ai/claude-code) and try again." = "安装 Claude CLI（npm i -g @anthropic-ai/claude-code）后重试。";
@@ -284,7 +284,7 @@
 "Open" = "打开";
 "Open API Keys" = "打开 API 密钥";
 "Open Amp Settings" = "打开 Amp 设置";
-"Open Antigravity to sign in, then refresh CodexBar." = "打开 Antigravity 登录，然后刷新 CodexBar。";
+"Open Antigravity to sign in, then refresh CodexBar." = "打开 Antigravity 登录，然后刷新 Sharingan。";
 "Open Browser" = "打开浏览器";
 "Open Coding Plan" = "打开 Coding Plan";
 "Open Console" = "打开控制台";
@@ -329,7 +329,7 @@
 "Progress bars fill as you consume quota (instead of showing remaining)." = "进度条会随配额消耗而填充（而不是显示剩余量）。";
 "Provider" = "提供商";
 "Providers" = "提供商";
-"Quit CodexBar" = "退出 CodexBar";
+"Quit CodexBar" = "退出 Sharingan";
 "Random (default)" = "随机（默认）";
 "Reads local usage logs. Shows today + last 30 days cost in the menu." = "读取本地用量日志。在菜单中显示今天及所选历史窗口的费用。";
 "When on, runs automatic provider, local usage, and storage refreshes no more often than every 30 minutes. Manual refresh remains available. Automatic follows the system Low Power Mode setting." = "开启后，自动供应商刷新、本地用量扫描和存储扫描最多每 30 分钟运行一次；仍可随时手动刷新。选择“自动”时将跟随系统的低电量模式设置。";
@@ -339,8 +339,8 @@
 "Remote" = "远程";
 "Remove" = "移除";
 "Remove Codex account?" = "移除 Codex 账户？";
-"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "要从 CodexBar 中移除 \\(account.email) 吗？其托管的 Codex 主目录将被删除。";
-"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "要从 CodexBar 中移除 \\(email) 吗？其托管的 Codex 主目录将被删除。";
+"Remove \\(account.email) from CodexBar? Its managed Codex home will be deleted." = "要从 Sharingan 中移除 \\(account.email) 吗？其托管的 Codex 主目录将被删除。";
+"Remove \\(email) from CodexBar? Its managed Codex home will be deleted." = "要从 Sharingan 中移除 \\(email) 吗？其托管的 Codex 主目录将被删除。";
 "Remove selected account" = "移除所选账户";
 "Replace critter bars with provider branding icons and a percentage." = "将小动物进度条替换为提供商品牌图标和百分比。";
 "Replay selected animation" = "重放选中的动画";
@@ -384,7 +384,7 @@
 "Store multiple Ollama Cookie headers." = "存储多个 Ollama Cookie 标头。";
 "Store multiple OpenCode Cookie headers." = "存储多个 OpenCode Cookie 标头。";
 "Store multiple OpenCode Go Cookie headers." = "存储多个 OpenCode Go Cookie 标头。";
-"Stored in the CodexBar config file." = "存储在 CodexBar 配置文件中。";
+"Stored in the CodexBar config file." = "存储在 Sharingan 配置文件中。";
 "Stored in ~/.codexbar/config.json. " = "存储在 ~/.codexbar/config.json 中。";
 "Stored in ~/.codexbar/config.json. Paste the key from the Synthetic dashboard." = "存储在 ~/.codexbar/config.json 中。请粘贴来自 Synthetic 仪表盘的密钥。";
 "Stored in ~/.codexbar/config.json. Paste your Coding Plan API key from Model Studio." = "存储在 ~/.codexbar/config.json 中。请粘贴来自 Model Studio 的 Coding Plan API 密钥。";
@@ -460,8 +460,8 @@
 "cursor_on_demand" = "按需计费：%@";
 "cursor_on_demand_with_limit" = "按需计费：%1$@ / %2$@";
 "extra_usage_format" = "额外用量：%1$@ / %2$@";
-"jetbrains_detected_generate" = "检测到：%@。使用一次 AI 助手以生成配额数据，然后刷新 CodexBar。";
-"jetbrains_detected_select" = "检测到：%@。在设置中选择你偏好的 IDE，然后刷新 CodexBar。";
+"jetbrains_detected_generate" = "检测到：%@。使用一次 AI 助手以生成配额数据，然后刷新 Sharingan。";
+"jetbrains_detected_select" = "检测到：%@。在设置中选择你偏好的 IDE，然后刷新 Sharingan。";
 "last_fetch_failed_with_provider" = "上次获取 %@ 失败：";
 "last_spend" = "上次支出：%@";
 "mcp_model_usage" = "%1$@：%2$@";
@@ -471,10 +471,10 @@
 "metric_primary" = "主要（%@）";
 "metric_secondary" = "次要（%@）";
 "metric_tertiary" = "第三（%@）";
-"multiple_workspaces_found" = "CodexBar 发现 %@ 有多个工作区。请选择要添加的工作区。";
+"multiple_workspaces_found" = "Sharingan 发现 %@ 有多个工作区。请选择要添加的工作区。";
 "ory_session_…=…; csrftoken=…" = "ory_session_…=…; csrftoken=…";
 "overview_choose_providers" = "最多选择 %@ 个提供商";
-"remove_account_message" = "要从 CodexBar 中移除 %@ 吗？其托管的 Codex 主目录将被删除。";
+"remove_account_message" = "要从 Sharingan 中移除 %@ 吗？其托管的 Codex 主目录将被删除。";
 "version_format" = "版本 %@";
 "workspaceID is set but only opencode, opencodego, and deepgram support workspaceID." = "已设置 workspaceID，但只有 opencode、opencodego 和 deepgram 支持 workspaceID。";
 "© 2026 Peter Steinberger. MIT License." = "© 2026 Peter Steinberger。MIT 许可证。";
@@ -511,7 +511,7 @@
 "language_italian" = "Italiano";
 "language_polish" = "Polski";
 "start_at_login_title" = "开机启动";
-"start_at_login_subtitle" = "启动 Mac 时自动打开 CodexBar。";
+"start_at_login_subtitle" = "启动 Mac 时自动打开 Sharingan。";
 "show_cost_summary_subtitle" = "读取本地用量日志。在菜单中显示今天及所选历史窗口的费用。";
 "cost_summary_style_title" = "显示样式";
 "cost_summary_style_inline" = "仅内联";
@@ -536,7 +536,7 @@
 "credential_expiry_notifications_title" = "登录凭据过期";
 "credential_expiry_notifications_subtitle" = "当服务商账户需要重新登录时，发送一次通知。";
 "credential_expiry_notification_title" = "%@ 需要重新登录";
-"credential_expiry_notification_body" = "打开 CodexBar 查看账户错误并重新登录。";
+"credential_expiry_notification_body" = "打开 Sharingan 查看账户错误并重新登录。";
 "session_quota_notifications_subtitle" = "当 5 小时会话配额用完及恢复时发送通知。";
 "quota_depleted_title" = "配额耗尽与恢复";
 "quota_warning_notifications_subtitle" = "当会话或每周剩余配额低于设置的阈值时提醒。";
@@ -568,7 +568,7 @@
 "quota_warning_warning" = "警告";
 "quota_warning_critical" = "严重";
 "apply" = "应用";
-"quit_app" = "退出 CodexBar";
+"quit_app" = "退出 Sharingan";
 "tab_general" = "通用";
 "tab_providers" = "提供商";
 "tab_notifications" = "通知";
@@ -588,8 +588,8 @@
 "managed_login_failed" = "托管 Codex 登录未完成。请先在终端确认 `codex --version` 可以运行。如果 macOS 阻止了 `codex` 或将它移到废纸篓，请移除旧的重复安装，运行 `npm install -g --include=optional @openai/codex@latest`，然后重试。";
 "codex_login_output" = "codex login 输出：";
 "managed_login_missing_email" = "Codex 登录已完成，但无法获取账户邮箱。请在确认账户已完全登录后重试。";
-"workspace_selection_cancelled" = "CodexBar 发现多个工作区，但未选择任何工作区。";
-"unsafe_managed_home" = "CodexBar 拒绝修改意外的托管主目录路径：%@";
+"workspace_selection_cancelled" = "Sharingan 发现多个工作区，但未选择任何工作区。";
+"unsafe_managed_home" = "Sharingan 拒绝修改意外的托管主目录路径：%@";
 "menu_bar_metric_title" = "菜单栏指标";
 "menu_bar_metric_subtitle" = "选择哪个窗口驱动菜单栏百分比。";
 "menu_bar_metric_subtitle_deepseek" = "在菜单栏显示 DeepSeek 余额。";
@@ -694,7 +694,7 @@
 "link_twitter" = "Twitter";
 "link_email" = "电子邮件";
 "link_acknowledgements" = "致谢";
-"acknowledgements_footer" = "CodexBar 使用了以下开源项目构建。";
+"acknowledgements_footer" = "Sharingan 使用了以下开源项目构建。";
 "acknowledgements_others" = "其他 %d 人";
 "acknowledgements_author" = "作者";
 "acknowledgements_authors" = "作者";
@@ -707,7 +707,7 @@
 "updates_unavailable" = "此构建中更新不可用。";
 "copyright" = "© 2026 Peter Steinberger。MIT 许可证。";
 "use_javascriptcore_plugin_engine" = "为提供商插件使用 JavaScriptCore";
-"use_javascriptcore_plugin_engine_subtitle" = "仅用于兼容性回退。重启 CodexBar 后生效；CODEXBAR_PLUGIN_ENGINE 会覆盖此设置。";
+"use_javascriptcore_plugin_engine_subtitle" = "仅用于兼容性回退。重启 Sharingan 后生效；CODEXBAR_PLUGIN_ENGINE 会覆盖此设置。";
 "section_logging" = "日志";
 "enable_file_logging" = "启用文件日志";
 "enable_file_logging_subtitle" = "将日志写入 %@ 以进行调试。";
@@ -797,14 +797,14 @@
 "refresh_adaptive" = "自适应";
 "refresh_adaptive_agent_aware" = "自适应（感知智能体活动）";
 "adaptive_activity_consent_title" = "允许根据活动自适应刷新？";
-"adaptive_activity_consent_message" = "感知智能体活动的自适应模式可以检查本地运行中的进程列表（包括命令行）来识别 Codex 和 Claude，并在你编写代码时每 30 秒读取一次已知的会话元数据。关闭 Agent Sessions 时，CodexBar 仅在内存中使用最近一次活动时间，并丢弃会话路径和身份信息。此数据不会发送到任何地方，远程探测和 SSH 保持关闭。如果拒绝，CodexBar 将返回不扫描本地活动的普通自适应模式。";
+"adaptive_activity_consent_message" = "感知智能体活动的自适应模式可以检查本地运行中的进程列表（包括命令行）来识别 Codex 和 Claude，并在你编写代码时每 30 秒读取一次已知的会话元数据。关闭 Agent Sessions 时，Sharingan 仅在内存中使用最近一次活动时间，并丢弃会话路径和身份信息。此数据不会发送到任何地方，远程探测和 SSH 保持关闭。如果拒绝，Sharingan 将返回不扫描本地活动的普通自适应模式。";
 "adaptive_activity_consent_allow" = "允许本地活动";
 "adaptive_activity_consent_decline" = "使用普通自适应模式";
 "not_found" = "未找到";
-"CodexBar can't show its menu bar icon" = "CodexBar 无法显示菜单栏图标";
+"CodexBar can't show its menu bar icon" = "Sharingan 无法显示菜单栏图标";
 "Dismiss" = "关闭";
 "Open Menu Bar Settings" = "打开菜单栏设置";
-"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe 可能会在“系统设置”→“菜单栏”→“允许显示在菜单栏”中阻止菜单栏应用。CodexBar 正在运行，但 macOS 可能隐藏了它的图标。请打开菜单栏设置并启用 CodexBar。";
+"macOS Tahoe can block menu bar apps in System Settings → Menu Bar → Allow in the Menu Bar. CodexBar is running, but macOS may be hiding its icon. Open Menu Bar settings and turn CodexBar on." = "macOS Tahoe 可能会在“系统设置”→“菜单栏”→“允许显示在菜单栏”中阻止菜单栏应用。Sharingan 正在运行，但 macOS 可能隐藏了它的图标。请打开菜单栏设置并启用 Sharingan。";
 "cost_estimate_hint" = "根据本地日志估算 · 可能与账单不同";
 "codex_api_estimate_hint" = "根据 Token 用量估算 · 不是订阅账单";
 "cost_data_explanation" = "费用可能由提供商报告，也可能根据 Token 用量按公开 API 价格估算。估算值不是订阅费用。";
@@ -851,7 +851,7 @@
 "Status Page" = "状态页";
 "Open Status Page" = "打开状态页";
 "Settings..." = "设置…";
-"About CodexBar" = "关于 CodexBar";
+"About CodexBar" = "关于 Sharingan";
 "Quit" = "退出";
 "Last %d day" = "近 %d 天";
 "Last %d days" = "近 %d 天";
@@ -955,8 +955,8 @@
 "Managed by Homebrew" = "由 Homebrew 管理";
 "Copy update command" = "复制更新命令";
 "Update to %@" = "更新到 %@";
-"CodexBar %@ is available" = "CodexBar %@ 已推出";
-"CodexBar is up to date" = "CodexBar 已是最新版本";
+"CodexBar %@ is available" = "Sharingan %@ 已推出";
+"CodexBar is up to date" = "Sharingan 已是最新版本";
 "Checking for updates…" = "正在检查更新…";
 "Updating with Homebrew…" = "正在通过 Homebrew 更新…";
 "Homebrew update failed. You can run this command in Terminal instead:" = "Homebrew 更新失败。你也可以在终端中运行此命令：";
@@ -1134,26 +1134,26 @@
 "Capacity Start" = "容量起点";
 "Changelog" = "变更记录";
 "Choose the Moonshot/Kimi API host for international or China mainland accounts." = "选择国际或中国大陆账号使用的 Moonshot/Kimi API 主机。";
-"CodexBar can't replace a system account that is signed in with an API key only setup." = "CodexBar 无法替换仅使用 API 密钥登录设置的系统账号。";
-"CodexBar could not find saved auth for that account. Re-authenticate it and try again." = "CodexBar 找不到该账号已保存的认证。请重新认证后再试。";
-"CodexBar could not read managed account storage. Recover the store before adding another account." = "CodexBar 无法读取托管账号存储区。请先修复存储区，再添加其他账号。";
-"CodexBar could not read saved auth for that account. Re-authenticate it and try again." = "CodexBar 无法读取该账号已保存的认证。请重新认证后再试。";
-"CodexBar could not read the current system account on this Mac." = "CodexBar 无法读取此 Mac 上当前的系统账号。";
-"CodexBar could not replace the live Codex auth on this Mac." = "CodexBar 无法替换此 Mac 上当前的 Codex 认证。";
-"CodexBar could not safely preserve the current system account before switching." = "CodexBar 无法在切换前安全保留当前的系统账号。";
-"CodexBar could not save the current system account before switching." = "CodexBar 无法在切换前保存当前的系统账号。";
-"CodexBar could not update managed account storage." = "CodexBar 无法更新托管账号存储区。";
-"CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "CodexBar 发现另一个托管账号已使用当前的系统账号。请先解决重复账号，再进行切换。";
-"CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求“%@”，以解密浏览器 Cookie 并认证你的账号。点击“确定”继续。";
-"CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求 Claude Code OAuth token，以获取你的 Claude 用量。点击“确定”继续。";
-"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求你的 %@ Cookie 标头，以获取用量。点击“确定”继续。";
-"CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求你的 Claude Cookie 标头，以获取 Claude 网页用量。点击“确定”继续。";
-"CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求你的 GitHub Copilot token，以获取用量。点击“确定”继续。";
-"CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求你的 Kimi 认证 token，以获取用量。点击“确定”继续。";
-"CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求你的 MiniMax API token，以获取用量。点击“确定”继续。";
-"CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求你的 OpenAI Cookie 标头，以获取 Codex 仪表盘额外数据。点击“确定”继续。";
-"CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求你的 Synthetic API 密钥，以获取用量。点击“确定”继续。";
-"CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求你的 z.ai API token，以获取用量。点击“确定”继续。";
+"CodexBar can't replace a system account that is signed in with an API key only setup." = "Sharingan 无法替换仅使用 API 密钥登录设置的系统账号。";
+"CodexBar could not find saved auth for that account. Re-authenticate it and try again." = "Sharingan 找不到该账号已保存的认证。请重新认证后再试。";
+"CodexBar could not read managed account storage. Recover the store before adding another account." = "Sharingan 无法读取托管账号存储区。请先修复存储区，再添加其他账号。";
+"CodexBar could not read saved auth for that account. Re-authenticate it and try again." = "Sharingan 无法读取该账号已保存的认证。请重新认证后再试。";
+"CodexBar could not read the current system account on this Mac." = "Sharingan 无法读取此 Mac 上当前的系统账号。";
+"CodexBar could not replace the live Codex auth on this Mac." = "Sharingan 无法替换此 Mac 上当前的 Codex 认证。";
+"CodexBar could not safely preserve the current system account before switching." = "Sharingan 无法在切换前安全保留当前的系统账号。";
+"CodexBar could not save the current system account before switching." = "Sharingan 无法在切换前保存当前的系统账号。";
+"CodexBar could not update managed account storage." = "Sharingan 无法更新托管账号存储区。";
+"CodexBar found another managed account that already uses the current system account. Resolve the duplicate account before switching." = "Sharingan 发现另一个托管账号已使用当前的系统账号。请先解决重复账号，再进行切换。";
+"CodexBar will ask macOS Keychain for “%@” so it can decrypt browser cookies and authenticate your account. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求“%@”，以解密浏览器 Cookie 并认证你的账号。点击“确定”继续。";
+"CodexBar will ask macOS Keychain for the Claude Code OAuth token so it can fetch your Claude usage. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求 Claude Code OAuth token，以获取你的 Claude 用量。点击“确定”继续。";
+"CodexBar will ask macOS Keychain for your %@ cookie header so it can fetch usage. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求你的 %@ Cookie 标头，以获取用量。点击“确定”继续。";
+"CodexBar will ask macOS Keychain for your Claude cookie header so it can fetch Claude web usage. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求你的 Claude Cookie 标头，以获取 Claude 网页用量。点击“确定”继续。";
+"CodexBar will ask macOS Keychain for your GitHub Copilot token so it can fetch usage. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求你的 GitHub Copilot token，以获取用量。点击“确定”继续。";
+"CodexBar will ask macOS Keychain for your Kimi auth token so it can fetch usage. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求你的 Kimi 认证 token，以获取用量。点击“确定”继续。";
+"CodexBar will ask macOS Keychain for your MiniMax API token so it can fetch usage. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求你的 MiniMax API token，以获取用量。点击“确定”继续。";
+"CodexBar will ask macOS Keychain for your OpenAI cookie header so it can fetch Codex dashboard extras. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求你的 OpenAI Cookie 标头，以获取 Codex 仪表盘额外数据。点击“确定”继续。";
+"CodexBar will ask macOS Keychain for your Synthetic API key so it can fetch usage. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求你的 Synthetic API 密钥，以获取用量。点击“确定”继续。";
+"CodexBar will ask macOS Keychain for your z.ai API token so it can fetch usage. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求你的 z.ai API token，以获取用量。点击“确定”继续。";
 "Could not open Cursor login in your browser." = "无法在浏览器中打开 Cursor 登录。";
 "Could not open browser for Antigravity" = "无法为 Antigravity 打开浏览器";
 "Credits used" = "已用额度";
@@ -1168,7 +1168,7 @@
 "Extra usage balance: %@" = "额外使用量余额：%@";
 "Keychain Access Required" = "需要钥匙串访问权限";
 "keychain_prompt_learn_more" = "了解更多…";
-"keychain_prompt_privacy_note" = "Mac 登录密码由 macOS（而非 CodexBar）处理。你可以随时在“设置”→“高级”中停用所有钥匙串访问。";
+"keychain_prompt_privacy_note" = "Mac 登录密码由 macOS（而非 Sharingan）处理。你可以随时在“设置”→“高级”中停用所有钥匙串访问。";
 "Kiro menu bar value" = "Kiro 菜单栏数值";
 "Label" = "标签";
 "No organizations loaded. Click Refresh after setting your API key." = "尚未加载组织。设置 API 密钥后点击“刷新”。";
@@ -1232,7 +1232,7 @@
 "Service" = "服务";
 "Show or hide Kiro credits, percent, or both next to the menu bar icon." = "在菜单栏图标旁显示或隐藏 Kiro 额度、百分比，或两者都显示。";
 "Show usage for organizations you belong to. Personal account is always shown." = "显示你所属组织的用量。个人账号始终显示。";
-"Sign in to cursor.com in your browser, then refresh Cursor in CodexBar." = "请在浏览器中登录 cursor.com，然后在 CodexBar 刷新 Cursor。";
+"Sign in to cursor.com in your browser, then refresh Cursor in CodexBar." = "请在浏览器中登录 cursor.com，然后在 Sharingan 刷新 Cursor。";
 "Simulated error text" = "模拟错误文字";
 "StepFun platform account (phone number or email)." = "StepFun 平台账号（手机号或电子邮件）。";
 "Stored in ~/.codexbar/config.json." = "存储在 ~/.codexbar/config.json 中。";
@@ -1248,11 +1248,11 @@
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is preferred; OPENAI_API_KEY still works." = "存储在 ~/.codexbar/config.json 中。优先使用 OPENAI_ADMIN_KEY；OPENAI_API_KEY 仍可使用。";
 "Stored in ~/.codexbar/config.json. Requires an Anthropic Admin API key." = "存储在 ~/.codexbar/config.json 中。需要 Anthropic Admin API 密钥。";
 "Stored in ~/.codexbar/config.json. Used for /v1/quota-stats." = "存储在 ~/.codexbar/config.json 中。用于 /v1/quota-stats。";
-"Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`)." = "存储在 ~/.codexbar/config.json 中。你也可以提供 CODEBUFF_API_KEY，或让 CodexBar 读取由 `codebuff login` 创建的 ~/.config/manicode/credentials.json。";
+"Stored in ~/.codexbar/config.json. You can also provide CODEBUFF_API_KEY or let CodexBar read ~/.config/manicode/credentials.json (created by `codebuff login`)." = "存储在 ~/.codexbar/config.json 中。你也可以提供 CODEBUFF_API_KEY，或让 Sharingan 读取由 `codebuff login` 创建的 ~/.config/manicode/credentials.json。";
 "Stored in ~/.codexbar/config.json. You can also provide KILO_API_KEY or ~/.local/share/kilo/auth.json (kilo.access)." = "存储在 ~/.codexbar/config.json 中。你也可以提供 KILO_API_KEY 或 ~/.local/share/kilo/auth.json（kilo.access）。";
 "T3 Chat cookie" = "T3 Chat Cookie";
 "Team mode" = "团队模式";
-"That account is no longer available in CodexBar. Refresh the account list and try again." = "该账号已无法在 CodexBar 中使用。请刷新账号列表后再试。";
+"That account is no longer available in CodexBar. Refresh the account list and try again." = "该账号已无法在 Sharingan 中使用。请刷新账号列表后再试。";
 "The browser login did not complete in time. Try Antigravity login again." = "浏览器登录未在时限内完成。请再次尝试 Antigravity 登录。";
 "Timed out waiting for Cursor login. %@" = "等待 Cursor 登录超时。%@";
 "Timed out waiting for Cursor login. %@ Last error: %@" = "等待 Cursor 登录超时。%@ 最后错误：%@";
@@ -1338,11 +1338,11 @@
 
 "%@: %@" = "%@：%@";
 "Alternatively, set a custom path in Settings." = "或者在“设置”中指定自定义路径。";
-"Choose a supported browser so CodexBar can read the matching account." = "选择一个受支持的浏览器，以便 CodexBar 读取对应账户。";
+"Choose a supported browser so CodexBar can read the matching account." = "选择一个受支持的浏览器，以便 Sharingan 读取对应账户。";
 "Choose Cursor account" = "选择 Cursor 账户";
-"Choose which Cursor account CodexBar should use." = "选择 CodexBar 应使用的 Cursor 账户。";
+"Choose which Cursor account CodexBar should use." = "选择 Sharingan 应使用的 Cursor 账户。";
 "Finish switching to a different Cursor account in your browser, then try again." = "在浏览器中完成切换到其他 Cursor 账户，然后重试。";
-"Install a JetBrains IDE with AI Assistant enabled, then refresh CodexBar." = "安装并启用 JetBrains IDE 的 AI Assistant，然后刷新 CodexBar。";
+"Install a JetBrains IDE with AI Assistant enabled, then refresh CodexBar." = "安装并启用 JetBrains IDE 的 AI Assistant，然后刷新 Sharingan。";
 "Sign in with Claude Code..." = "使用 Claude Code 登录...";
 "Timed out waiting for Cursor account switch. %@" = "等待切换 Cursor 账户超时。%@";
 "Timed out waiting for Cursor account switch. %@ Last error: %@" = "等待切换 Cursor 账户超时。%@ 最近错误：%@";
@@ -1577,7 +1577,7 @@
 "5-hour usage" = "5 小时用量";
 "7-day usage" = "7 天用量";
 "Total usage" = "总用量";
-"claude_oauth_keychain_access_disabled" = "Keychain 访问已禁用，因此 CodexBar 无法读取 Claude 的登录信息。";
+"claude_oauth_keychain_access_disabled" = "Keychain 访问已禁用，因此 Sharingan 无法读取 Claude 的登录信息。";
 "claude_oauth_keychain_access_revoked" = "Claude Code 轮换令牌后撤销了对 Claude 钥匙串的访问权限。点击“刷新”以重新授权，或将 Claude 用量来源切换为 CLI/Web。";
 "claude_showing_last_known_usage" = "正在显示 %@ 采集的最后已知用量。";
 "claude_limited_usage_detail" = "用量详情有限";
@@ -1664,7 +1664,7 @@
 /* Overview share flow */
 "Share Usage Snapshot…" = "分享用量概览…";
 "Usage snapshot unavailable" = "用量概览不可用";
-"CodexBar couldn't prepare a shareable usage snapshot. Refresh Usage & Spend and try again." = "CodexBar 无法准备可分享的用量概览。请刷新“用量和支出”后重试。";
+"CodexBar couldn't prepare a shareable usage snapshot. Refresh Usage & Spend and try again." = "Sharingan 无法准备可分享的用量概览。请刷新“用量和支出”后重试。";
 "Incomplete" = "不完整";
 "Est. subtotal (%@): %@" = "估算小计（%@）：%@";
 "Excluded requests with missing final usage: %d" = "因缺少最终用量而排除的请求：%d";
@@ -1784,14 +1784,14 @@
 "Codex credits are still loading; will retry shortly." = "Codex 额度仍在加载，将稍后重试。";
 "Codex session expired. Sign in again." = "Codex 登录已过期，请重新登录。";
 "Codex usage is temporarily unavailable. Try refreshing." = "暂时无法获取 Codex 用量，请尝试刷新。";
-"CodexBar Account Usage" = "CodexBar 账户用量";
-"CodexBar Burn Down" = "CodexBar 额度消耗趋势";
-"CodexBar Burn Down (Combined)" = "CodexBar 额度消耗趋势（组合）";
-"CodexBar Help" = "CodexBar 帮助";
-"CodexBar History" = "CodexBar 历史记录";
-"CodexBar Metric" = "CodexBar 指标";
-"CodexBar Switcher" = "CodexBar切换器";
-"CodexBar Usage" = "CodexBar 用量";
+"CodexBar Account Usage" = "Sharingan 账户用量";
+"CodexBar Burn Down" = "Sharingan 额度消耗趋势";
+"CodexBar Burn Down (Combined)" = "Sharingan 额度消耗趋势（组合）";
+"CodexBar Help" = "Sharingan 帮助";
+"CodexBar History" = "Sharingan 历史记录";
+"CodexBar Metric" = "Sharingan 指标";
+"CodexBar Switcher" = "Sharingan切换器";
+"CodexBar Usage" = "Sharingan 用量";
 "Compact widget for credits or cost." = "紧凑显示额度或费用的小组件。";
 "Complete Kiro login in your browser" = "在浏览器中完成 Kiro 登录";
 "Controls when Claude OAuth may ask macOS for Keychain access." = "控制 Claude OAuth 何时可以向 macOS 请求钥匙串访问。";
@@ -1810,8 +1810,8 @@
 "Details for %@" = "%@ 的详细信息";
 "EST. %@" = "预计 %@";
 "Enable Antigravity provider" = "启用 Antigravity 提供程序";
-"Enable a provider in CodexBar → Settings → Providers." = "在 CodexBar → 设置 → 提供商中启用一个提供商。";
-"Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "在 CodexBar → 设置 → 菜单 → 小部件中启用帐户小部件。然后编辑此小部件以选择一个帐户。";
+"Enable a provider in CodexBar → Settings → Providers." = "在 Sharingan → 设置 → 提供商中启用一个提供商。";
+"Enable account widgets in CodexBar → Settings → Menu → Widgets. Then edit this widget to choose an account." = "在 Sharingan → 设置 → 菜单 → 小部件中启用帐户小部件。然后编辑此小部件以选择一个帐户。";
 "Error: %@" = "错误：%@";
 "Examples: alt+cmd+2, shift+right. Refresh (cmd+r), Settings (cmd+,) and Quit (cmd+q) are reserved." = "示例：alt+cmd+2、shift+right。刷新（cmd+r）、设置（cmd+,）和退出（cmd+q）被保留。";
 "Export Preferences…" = "导出首选项...";
@@ -1828,10 +1828,10 @@
 "Gemini app" = "Gemini 应用";
 "Gemini CLI" = "Gemini CLI";
 "Gemini app limits use your browser account and are separate from Gemini CLI quotas." = "Gemini 应用的限额适用于你在浏览器中登录的账户，与 Gemini CLI 配额相互独立。";
-"Generated locally by CodexBar · Data through %@" = "由 CodexBar 本地生成 · 数据截至 %@";
+"Generated locally by CodexBar · Data through %@" = "由 Sharingan 本地生成 · 数据截至 %@";
 "GitHub cookies" = "GitHub Cookie";
 "GitHub does not publish this value. Enter it to show a usage bar. Applies to the selected GitHub account." = "GitHub 不公布该值。输入它以显示使用栏。适用于选定的 GitHub 账户。";
-"GitHub login succeeded, but CodexBar could not verify which account it belongs to. Please try again." = "GitHub登录成功，但CodexBar无法验证其属于哪个帐户。请再试一次。";
+"GitHub login succeeded, but CodexBar could not verify which account it belongs to. Please try again." = "GitHub登录成功，但Sharingan无法验证其属于哪个帐户。请再试一次。";
 "GitKraken access token" = "GitKraken 访问 token";
 "Global uses api.z.ai. China mainland uses open.bigmodel.cn with a BigModel/GLM key; the two key families are not interchangeable." = "国际区域使用 api.z.ai；中国大陆使用 open.bigmodel.cn 和 BigModel / GLM 密钥，两类密钥不能互换。";
 "Grok CLI" = "Grok CLI";
@@ -1878,8 +1878,8 @@
 "Open API docs" = "打开 API 文档";
 "Open API keys" = "打开 API 密钥页面";
 "Open Amp Access Tokens" = "打开 Amp 访问令牌页面";
-"Open CodexBar" = "打开CodexBar";
-"Open CodexBar to refresh, or edit this widget to choose another account." = "打开 CodexBar 进行刷新，或编辑此小部件以选择另一个帐户。";
+"Open CodexBar" = "打开Sharingan";
+"Open CodexBar to refresh, or edit this widget to choose another account." = "打开 Sharingan 进行刷新，或编辑此小部件以选择另一个帐户。";
 "Open Devin Usage" = "打开 Devin 用量页面";
 "Open Fireworks" = "打开 Fireworks";
 "Open GitKraken Account" = "打开 GitKraken 账户页面";
@@ -1896,7 +1896,7 @@
 "Open-platform balance only. Keys are bound to the selected regional host and cannot be sent to the other region." = "仅查看开放平台余额。密钥绑定所选区域的服务器，不会发送到其他区域。";
 "OpenAI cookies are for %1$@, not %2$@." = "OpenAI cookies 适用于 %1$@，而非 %2$@。";
 "OpenAI cookies are for %@." = "OpenAI cookies 适用于 %@。";
-"OpenAI web dashboard refresh timed out. CodexBar will retry after the refresh cooldown." = "OpenAI Web 仪表板刷新超时。 CodexBar 将在刷新冷却后重试。";
+"OpenAI web dashboard refresh timed out. CodexBar will retry after the refresh cooldown." = "OpenAI Web 仪表板刷新超时。 Sharingan 将在刷新冷却后重试。";
 "OpenAI web refresh hit a network error. Check your connection, then refresh OpenAI cookies and try again." = "OpenAI 网页刷新遇到网络错误。检查您的连接，然后刷新 OpenAI cookies 并重试。";
 "OpenAI web refresh timed out. Refresh OpenAI cookies and try again." = "OpenAI 网页刷新超时。刷新 OpenAI cookies 并重试。";
 "OpenAI web refresh was interrupted. Refresh OpenAI cookies and try again." = "OpenAI 网页刷新中断。刷新 OpenAI cookies 并重试。";
@@ -1905,7 +1905,7 @@
 "Optional additional key for account Activity. Only needed to use a separate Management API key from the one in the required API key field above." = "帐户活动的可选附加密钥。只需使用与上述所需 API 密钥字段中的密钥不同的单独的管理 API 密钥。";
 "Optional for automatic auth. Use a slug, URL, or internal org-... / org_... ID. Manual auth may need the x-cog-org-id header from a successful Devin quota request." = "自动身份验证可选。使用 slug、URL 或内部 org-... / org_... ID。手动身份验证可能需要来自成功的 Devin 配额 请求的 x-cog-org-id 标头。";
 "Optional gk-org-id header value. Or set GITKRAKEN_ORG_ID." = "可选的 gk-org-id 标头值。或设置GITKRAKEN_ORG_ID。";
-"Optional when the API key can access one account; CodexBar discovers it automatically. For multiple accounts, find the slug in the app.fireworks.ai home account switcher or run firectl whoami." = "当API密钥可以访问一个帐户时可选； CodexBar 自动发现它。对于多个帐户，请在 app.fireworks.ai 主帐户切换器中找到 slug 或运行 firectl whoami。";
+"Optional when the API key can access one account; CodexBar discovers it automatically. For multiple accounts, find the slug in the app.fireworks.ai home account switcher or run firectl whoami." = "当API密钥可以访问一个帐户时可选； Sharingan 自动发现它。对于多个帐户，请在 app.fireworks.ai 主帐户切换器中找到 slug 或运行 firectl whoami。";
 "Optional. Defaults to the first Business or Enterprise workspace on the account." = "可选。默认使用账户中的第一个 Business 或 Enterprise 工作区。";
 "Optional. Defaults to the hosted ClawRouter service." = "可选。默认使用托管的 ClawRouter 服务。";
 "Optional. Defaults to the hosted OpenRouter API." = "可选。默认使用托管的 OpenRouter API。";
@@ -1972,7 +1972,7 @@
 "SUBSCRIPTIONS" = "订阅";
 "Save" = "保存";
 "Save display and notification preferences for your dotfiles. Accounts, credentials, login, local paths and consent stay on this Mac." = "导出显示和通知偏好设置，便于保存到配置文件。账户、凭据、登录信息、本地路径和授权仍保留在这台 Mac 上。";
-"Saved in CodexBar's local config file. Or set GITKRAKEN_API_TOKEN." = "保存在CodexBar的本地配置文件中。或设置GITKRAKEN_API_TOKEN。";
+"Saved in CodexBar's local config file. Or set GITKRAKEN_API_TOKEN." = "保存在Sharingan的本地配置文件中。或设置GITKRAKEN_API_TOKEN。";
 "Scoped weekly" = "所选范围的每周配额";
 "Secondary quota" = "第二项配额";
 "Select position %@" = "选择第 %@ 项";
@@ -1991,10 +1991,10 @@
 "Show workspace spend" = "显示工作空间支出";
 "Shows model-specific Claude quotas, such as Fable, in desktop widgets." = "在桌面小组件中显示各 Claude 模型的配额，例如 Fable。";
 "Shows the hidden accounts" = "显示隐藏帐户";
-"Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "显示用量，并通过 `cswap` 切换账户。凭据由 claude-swap 管理，CodexBar 不会读取。";
-"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "显示来自 `tcr` 的用量；不会切换账户，因为 tcr 会为每个请求选择账户。凭据由 tcr 管理，CodexBar 不会读取。";
+"Shows usage and lets you switch accounts through `cswap`. Credentials stay managed by claude-swap; CodexBar never reads them." = "显示用量，并通过 `cswap` 切换账户。凭据由 claude-swap 管理，Sharingan 不会读取。";
+"Shows usage from `tcr`; it does not switch accounts, because tcr picks the account for each request. Credentials stay managed by tcr; CodexBar never reads them." = "显示来自 `tcr` 的用量；不会切换账户，因为 tcr 会为每个请求选择账户。凭据由 tcr 管理，Sharingan 不会读取。";
 "Stay Awake" = "保持唤醒";
-"Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "存储在 CodexBar 配置文件中。从 /v1/usage 读取每月预算和路由使用情况。";
+"Stored in the CodexBar config file. Reads monthly budget and routed usage from /v1/usage." = "存储在 Sharingan 配置文件中。从 /v1/usage 读取每月预算和路由使用情况。";
 "Stored in ~/.codexbar/config.json. OPENAI_ADMIN_KEY is required for organization usage; legacy/user keys only get a best-effort balance fallback." = "保存在 ~/.codexbar/config.json 中。查看组织用量需要 OPENAI_ADMIN_KEY；旧版或用户密钥仅能尝试获取余额。";
 "Stored in ~/.codexbar/config.json. You can also provide FACTORY_API_KEY or ~/.factory/.env." = "存储在~/.codexbar/config.json中。您还可以提供 FACTORY_API_KEY 或 ~/.factory/.env。";
 "Stored in ~/.codexbar/config.json. You can also set AMP_API_KEY." = "存储在~/.codexbar/config.json中。您还可以设置AMP_API_KEY。";
@@ -2009,7 +2009,7 @@
 "Switching account…" = "切换帐户...";
 "TOP MODELS" = "最常用模型";
 "TRACKED TOKENS · %@" = "已记录 token · %@";
-"That managed account uses a workspace that differs from its saved Codex auth default. Keep it as a managed account; CodexBar will not rewrite Codex-owned auth to promote it." = "此托管账户的工作区与保存的 Codex 默认认证工作区不同。请继续将其作为托管账户使用；CodexBar 不会修改 Codex 管理的认证信息来将其设为系统账户。";
+"That managed account uses a workspace that differs from its saved Codex auth default. Keep it as a managed account; CodexBar will not rewrite Codex-owned auth to promote it." = "此托管账户的工作区与保存的 Codex 默认认证工作区不同。请继续将其作为托管账户使用；Sharingan 不会修改 Codex 管理的认证信息来将其设为系统账户。";
 "The pasted header is sent only to this tenant." = "粘贴的标头仅发送给该租户。";
 "The selected Codex profile has no verified account email." = "所选的 Codex 配置文件没有经过验证的帐户电子邮件。";
 "The selected managed Codex account is unavailable." = "所选托管 Codex 帐户不可用。";
@@ -2037,7 +2037,7 @@
 "Waiting in browser…" = "在浏览器中等待...";
 "Weekly (7-day)" = "每周（7 天）";
 "Without configured API credentials, install and authenticate 'arkcli' for Coding/Agent Plan usage. Existing API credentials remain authoritative." = "如果没有配置 API 凭据，请安装并验证“arkcli”以供编码/代理计划使用。现有的 API 凭证仍然具有权威性。";
-"You can close this window and return to CodexBar." = "您可以关闭此窗口并返回到 CodexBar。";
+"You can close this window and return to CodexBar." = "您可以关闭此窗口并返回到 Sharingan。";
 "You can close this window and try again." = "您可以关闭此窗口并重试。";
 "ZoomMate capture" = "ZoomMate 请求记录";
 "a1.small-equivalent hours" = "a1.small 等效小时";
@@ -2098,7 +2098,7 @@
 "Premium weekly" = "高级套餐每周额度";
 "DevPass cost history is not available." = "无法获取 DevPass 费用历史。";
 "DevPass API key" = "DevPass API 密钥";
-"Saved in CodexBar's local config file. Or set DEVPASS_API_KEY." = "保存在CodexBar的本地配置文件中。或设置DEVPASS_API_KEY。";
+"Saved in CodexBar's local config file. Or set DEVPASS_API_KEY." = "保存在Sharingan的本地配置文件中。或设置DEVPASS_API_KEY。";
 "Regular LLM Gateway API key" = "Regular LLM Gateway API 密钥";
 "Memory" = "内存";
 "llmman cost summary is not supported." = "暂不支持 llmman 费用汇总。";
@@ -2127,7 +2127,7 @@
 "ClawRouter spend is reported by its usage API." = "ClawRouter 支出按其使用情况 API 报告。";
 "Vercel AI Gateway cost history is not available." = "无法获取 Vercel AI Gateway 费用历史。";
 "Vercel AI Gateway API key" = "Vercel AI Gateway API 密钥";
-"Saved in CodexBar's local config file. Or set AI_GATEWAY_API_KEY." = "保存在CodexBar的本地配置文件中。或设置AI_GATEWAY_API_KEY。";
+"Saved in CodexBar's local config file. Or set AI_GATEWAY_API_KEY." = "保存在Sharingan的本地配置文件中。或设置AI_GATEWAY_API_KEY。";
 "Savings" = "节省费用";
 "Reviews" = "代码审查";
 "Review count and billing period from CodeRabbit." = "来自 CodeRabbit 的代码审查次数和计费周期。";
@@ -2149,7 +2149,7 @@
 "ClinePass cost history is not available via the usage-limits API." = "ClinePass 成本历史记录无法通过使用限制 API 获得。";
 "Paste an API key, or run cline auth. Reads the existing Cline session without copying it." = "粘贴 API 密钥，或运行 cline auth。读取现有的 Cline 会话而不复制它。";
 "ClinePass API key..." = "ClinePass API 密钥...";
-"DeepInfra per-request cost history is not available in CodexBar." = "DeepInfra 每个请求的成本历史记录在 CodexBar 中不可用。";
+"DeepInfra per-request cost history is not available in CodexBar." = "DeepInfra 每个请求的成本历史记录在 Sharingan 中不可用。";
 "Store multiple DeepInfra API keys." = "保存多个 DeepInfra API 密钥。";
 "Claude credentials" = "Claude 凭证";
 "Store Claude sessionKey cookies, OAuth tokens, or Anthropic Admin API keys." = "存储 Claude sessionKey cookies、OAuth token 或 Anthropic Admin API 密钥。";
@@ -2157,7 +2157,7 @@
 "4-hour quota" = "4 小时额度";
 "Monthly quota" = "每月额度";
 "Subscription usage from the Chutes API." = "来自 Chutes API 的订阅使用情况。";
-"Chutes cost history is not available from CodexBar." = "Chutes 成本历史记录无法从 CodexBar 获得。";
+"Chutes cost history is not available from CodexBar." = "Chutes 成本历史记录无法从 Sharingan 获得。";
 "Stored in ~/.codexbar/config.json. Paste a Chutes API key." = "存储在~/.codexbar/config.json中。粘贴 Chutes API 密钥。";
 "chutes key..." = "Chutes API 密钥...";
 "Fireworks spend comes from the billing summary API; cost history is not tracked." = "Fireworks 支出来自账单汇总 API；不跟踪成本历史记录。";
@@ -2190,7 +2190,7 @@
 "Base" = "基础";
 "T3 Chat cost summary is not supported." = "暂不支持 T3 Chat 费用汇总。";
 "Model quota" = "模型额度";
-"Helmcode per-request cost history is not available in CodexBar." = "Helmcode 每个请求的成本历史记录在 CodexBar 中不可用。";
+"Helmcode per-request cost history is not available in CodexBar." = "Helmcode 每个请求的成本历史记录在 Sharingan 中不可用。";
 "Copy the Cookie request header from your tenant's dashboard. cURL captures are not supported." = "从租户的仪表板复制 Cookie 请求标头。不支持 cURL 捕获。";
 "Store multiple IBM Bob API keys." = "保存多个 IBM Bob API 密钥。";
 "Monthly Bobcoins" = "每月 Bobcoin 额度";
@@ -2202,7 +2202,7 @@
 "xai-..." = "xai-...";
 "Team ID" = "团队 ID";
 "Vercel access token" = "Vercel 访问令牌";
-"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "可选。显示你的个人预算，而不是团队额度。保存在 CodexBar 的本地配置文件中。或设置 VERCEL_ACCESS_TOKEN。";
+"Optional. Shows your personal budget instead of team credits. Saved in CodexBar's local config file. Or set VERCEL_ACCESS_TOKEN." = "可选。显示你的个人预算，而不是团队额度。保存在 Sharingan 的本地配置文件中。或设置 VERCEL_ACCESS_TOKEN。";
 "Open Vercel tokens" = "打开 Vercel 令牌";
 "Required with a Vercel access token. Or set VERCEL_TEAM_ID." = "使用 Vercel 访问令牌时必填。或设置 VERCEL_TEAM_ID。";
 "Required. Shown in the xAI Console URL and team settings." = "必填。显示在 xAI 控制台 URL 和团队设置中。";
@@ -2253,13 +2253,13 @@
 "__raycast_session=…; csrf_token=…" = "__raycast_session=…; csrf_token=…";
 "Open Raycast Account" = "打开 Raycast 账户页面";
 "ai& spend is summed from the request logs API." = "ai& 支出通过请求日志 API 汇总。";
-"Stored in CodexBar's config file. Create a key in the ai& console (shown once)." = "存储在CodexBar的配置文件中。在 ai& 控制台中创建一个密钥（显示一次）。";
+"Stored in CodexBar's config file. Create a key in the ai& console (shown once)." = "存储在Sharingan的配置文件中。在 ai& 控制台中创建一个密钥（显示一次）。";
 "sk-…" = "sk-…";
 "Store multiple Venice API keys." = "保存多个 Venice API 密钥。";
 "Venice per-day cost history is not available via API." = "Venice 每日成本历史记录无法通过 API 获得。";
 "Atlas Cloud cost history is not available." = "无法获取 Atlas Cloud 费用历史。";
 "Atlas Cloud API key" = "Atlas Cloud API 密钥";
-"Saved in CodexBar's local config file. Or set ATLASCLOUD_API_KEY." = "保存在CodexBar的本地配置文件中。或设置ATLASCLOUD_API_KEY。";
+"Saved in CodexBar's local config file. Or set ATLASCLOUD_API_KEY." = "保存在Sharingan的本地配置文件中。或设置ATLASCLOUD_API_KEY。";
 "Five-hour quota" = "5 小时额度";
 "Weekly tokens" = "每周 token";
 "Weekly token quota regenerates continuously." = "每周 token 额度会持续恢复。";
@@ -2270,7 +2270,7 @@
 "Daily free tokens" = "每日免费 token";
 "xKiro cost history is not available." = "无法获取 xKiro 费用历史。";
 "xKiro API key" = "xKiro API 密钥";
-"Saved in CodexBar's local config file. Or set XKIRO_API_KEY. Reads free-token usage only." = "保存在CodexBar的本地配置文件中。或设置XKIRO_API_KEY。仅读取免费-token 使用情况。";
+"Saved in CodexBar's local config file. Or set XKIRO_API_KEY. Reads free-token usage only." = "保存在Sharingan的本地配置文件中。或设置XKIRO_API_KEY。仅读取免费-token 使用情况。";
 "Store multiple Hugging Face access tokens." = "存储多个Hugging Face访问token。";
 "Paste access token…" = "粘贴访问token…";
 "Inference" = "推理";
@@ -2341,7 +2341,7 @@
 "Subscription kWh and prepaid USD balance." = "订阅千瓦时和预付美元余额。";
 "Neuralwatt token cost history is not available via the quota API." = "Neuralwatt token 成本历史记录无法通过 配额 API 获得。";
 "Store multiple Neuralwatt API keys." = "保存多个 Neuralwatt API 密钥。";
-"Stored in the CodexBar config file. Manage keys from the Neuralwatt dashboard." = "存储在 CodexBar 配置文件中。从 Neuralwatt 仪表板管理密钥。";
+"Stored in the CodexBar config file. Manage keys from the Neuralwatt dashboard." = "存储在 Sharingan 配置文件中。从 Neuralwatt 仪表板管理密钥。";
 
 // Additional localized settings, provider controls, sharing, and widgets.
 "Monthly allowances" = "每月额度";
@@ -2413,7 +2413,7 @@
 "Speed range needs 4 completed turns." = "速度范围至少需要 4 个完成轮次。";
 "All accounts" = "全部账号";
 "Refresh all accounts" = "刷新全部账号";
-"CodexBar follows" = "CodexBar 跟随账号";
+"CodexBar follows" = "Sharingan 跟随账号";
 "%@ accounts" = "%@ 个账号";
 "Refreshes up to %@ accounts at a time." = "每批最多刷新 %@ 个账号。";
 "Each account has its own limits. Viewing usage does not switch accounts." = "各账号的额度独立计算。查看用量不会切换账号。";
@@ -2521,21 +2521,21 @@
 "Monthly AI tokens" = "每月 AI token";
 "Aerostack cost history is not available." = "无法获取 Aerostack 费用历史。";
 "Account JWT" = "账户 JWT";
-"Saved in CodexBar's local config file. Replace when expired; CodexBar does not refresh it." = "保存在 CodexBar 的本地配置文件中。过期后请更换；CodexBar 不会自动刷新。";
+"Saved in CodexBar's local config file. Replace when expired; CodexBar does not refresh it." = "保存在 Sharingan 的本地配置文件中。过期后请更换；Sharingan 不会自动刷新。";
 "Account JWT, not an Agent Endpoint key" = "账户 JWT，而非 Agent Endpoint 密钥";
 "Input tokens" = "输入 token";
 "Output tokens" = "输出 token";
 "Cosmic AI cost history is not available." = "无法获取 Cosmic AI 费用历史。";
 "Personal Access Token" = "个人访问令牌";
-"Saved in CodexBar's local config file. Reads project usage only; bucket keys are not supported." = "保存在 CodexBar 的本地配置文件中。仅读取项目用量；不支持存储桶密钥。";
+"Saved in CodexBar's local config file. Reads project usage only; bucket keys are not supported." = "保存在 Sharingan 的本地配置文件中。仅读取项目用量；不支持存储桶密钥。";
 "cos_…" = "cos_…";
 "Required. Usage covers this project only. Or set COSMIC_PROJECT_ID." = "必填。用量仅涵盖此项目。也可设置 COSMIC_PROJECT_ID。";
 "Sail Research cost history is not available." = "无法获取 Sail Research 费用历史。";
 "Sail Research API key" = "Sail Research API 密钥";
-"Saved in CodexBar's local config file. Or set SAIL_API_KEY." = "保存在 CodexBar 的本地配置文件中。也可设置 SAIL_API_KEY。";
+"Saved in CodexBar's local config file. Or set SAIL_API_KEY." = "保存在 Sharingan 的本地配置文件中。也可设置 SAIL_API_KEY。";
 "Sofya cost history is not available." = "无法获取 Sofya 费用历史。";
 "Sofya API key" = "Sofya API 密钥";
-"Saved in CodexBar's local config file. Or set SOFYA_API_KEY." = "保存在 CodexBar 的本地配置文件中。也可设置 SOFYA_API_KEY。";
+"Saved in CodexBar's local config file. Or set SOFYA_API_KEY." = "保存在 Sharingan 的本地配置文件中。也可设置 SOFYA_API_KEY。";
 "Pace sign" = "使用节奏符号";
 "Ahead of pace is +" = "超出节奏为 +";
 "Reserve is +" = "余量为 +";
@@ -2566,7 +2566,7 @@
 "Also restores the provider order in the menu bar. Can be undone." = "同时恢复菜单栏中的供应商顺序。可以撤销。";
 "Local Codex details; excluded from combined totals." = "本地 Codex 详情；不计入合并总计。";
 
-"Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY.";
+"Stored in the CodexBar config file. You can also set COMMAND_CODE_API_KEY." = "Stored in the Sharingan config file. You can also set COMMAND_CODE_API_KEY.";
 /* OpenAI organization rate limits and live usage */
 "%@ tokens · %@ requests" = "%@ token · %@ 请求";
 "15m" = "15分钟";
@@ -2651,7 +2651,7 @@
 "Daily spend · %@" = "每日支出 · %@";
 "Applies to the selected token account “%@”. Each account keeps its own limits." = "适用于所选令牌账户“%@”。每个账户保留各自的限制。";
 "Applies to the OpenAI API key, not to token accounts." = "适用于 OpenAI API 密钥，不适用于令牌账户。";
-"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "CodexBar 将向 macOS 钥匙串请求 Muse Code 登录 token，以获取你的 Muse Code 订阅用量。点击“确定”继续。";
+"CodexBar will ask macOS Keychain for the Muse Code login token so it can fetch your Muse Code subscription usage. Click OK to continue." = "Sharingan 将向 macOS 钥匙串请求 Muse Code 登录 token，以获取你的 Muse Code 订阅用量。点击“确定”继续。";
 /* Claude Platform provider */
 "API credit" = "API 额度";
 "Purchased credit" = "已购买额度";
@@ -2675,7 +2675,7 @@
 "http_server_plain_http" = "允许此 Mac 以外的未加密 HTTP 访问";
 "http_server_dashboard" = "仪表盘";
 "http_server_wildcard" = "在其他设备上，请将 0.0.0.0 替换为此 Mac 的 VPN 或 Tailscale IPv4 地址。";
-"http_server_footer" = "默认关闭。随 CodexBar 启动，并在退出时停止。设置和令牌仅保存在此 Mac 上，不会同步或导出。远程访问时请保持 Mac 唤醒。";
+"http_server_footer" = "默认关闭。随 Sharingan 启动，并在退出时停止。设置和令牌仅保存在此 Mac 上，不会同步或导出。远程访问时请保持 Mac 唤醒。";
 /* Claude desktop cookie source */
 "Claude desktop app" = "Claude 桌面应用";
 "Use Claude desktop app cookies" = "使用 Claude 桌面应用的 Cookie";
@@ -2699,7 +2699,7 @@
 
 "Trae CN" = "Trae CN";
 "Show Trae CN usage" = "显示 Trae CN 用量";
-"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "请在 trae.cn 登录 Trae CN，然后刷新 CodexBar。";
+"Sign in to Trae CN at trae.cn, then refresh CodexBar." = "请在 trae.cn 登录 Trae CN，然后刷新 Sharingan。";
 "Trae CN usage response format changed." = "Trae CN 用量响应格式已更改。";
 "Trae CN request failed. Try refreshing later." = "Trae CN 请求失败。请稍后尝试刷新。";
 "Use --provider copilot." = "请使用 --provider copilot。";
@@ -2736,14 +2736,14 @@
 "Chatbox AI denied access. Check your license." = "Chatbox AI 拒绝了访问。请检查许可证。";
 "Chatbox AI is rate limiting requests. Try again later." = "Chatbox AI 正在限制请求频率。请稍后重试。";
 "Chatbox AI request failed. Try refreshing later." = "Chatbox AI 请求失败。请稍后尝试刷新。";
-"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI 返回了无法识别的响应。请更新 CodexBar 后重试。";
+"Chatbox AI returned an unrecognized response. Update CodexBar and try again." = "Chatbox AI 返回了无法识别的响应。请更新 Sharingan 后重试。";
 
 /* abliteration.ai */
 "abliteration.ai" = "abliteration.ai";
 "Show abliteration.ai usage" = "显示 abliteration.ai 用量";
 "abliteration.ai is rate limiting requests. Try again later." = "abliteration.ai 正在限制请求频率。请稍后重试。";
 "abliteration.ai request failed. Try refreshing later." = "abliteration.ai 请求失败。请稍后尝试刷新。";
-"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai 返回了无法识别的响应。请更新 CodexBar 后重试。";
+"abliteration.ai returned an unrecognized response. Update CodexBar and try again." = "abliteration.ai 返回了无法识别的响应。请更新 Sharingan 后重试。";
 "Check your API key in Settings." = "请在设置中检查你的 API 密钥。";
 "Kimi Code" = "Kimi Code";
 

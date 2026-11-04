@@ -528,7 +528,7 @@ struct PreferencesPaneSmokeTests {
         CodexBarLocalizationOverride.$appLanguage.withValue("ja") {
             #expect(L("language_title") == "言語")
             #expect(L("start_at_login_title") == "ログイン時に起動")
-            #expect(L("quit_app") == "CodexBar を終了")
+            #expect(L("quit_app") == "Sharingan を終了")
         }
 
         settings.appLanguage = "id"
@@ -537,7 +537,7 @@ struct PreferencesPaneSmokeTests {
         CodexBarLocalizationOverride.$appLanguage.withValue("id") {
             #expect(L("language_title") == "Bahasa")
             #expect(L("start_at_login_title") == "Mulai saat Login")
-            #expect(L("quit_app") == "Keluar CodexBar")
+            #expect(L("quit_app") == "Keluar Sharingan")
         }
     }
 
@@ -577,7 +577,7 @@ struct PreferencesPaneSmokeTests {
     func `english quit app label resolves without format placeholders`() {
         CodexBarLocalizationOverride.$appLanguage.withValue("en") {
             let label = L("quit_app")
-            #expect(label == "Quit CodexBar")
+            #expect(label == "Quit Sharingan")
             #expect(!label.contains("%@"))
             #expect(!label.contains("%d"))
         }
@@ -592,7 +592,7 @@ struct PreferencesPaneSmokeTests {
         CodexBarLocalizationOverride.$appLanguage.withValue("de") {
             #expect(L("tab_general") == "Allgemein")
             #expect(L("language_title") == "Sprache")
-            #expect(L("quit_app") == "CodexBar beenden")
+            #expect(L("quit_app") == "Sharingan beenden")
             #expect(L("display_mode_reset_time") == "Zurücksetzungszeit")
             #expect(L("display_mode_reset_time_desc").contains("↻ 15:56"))
             #expect(L("vertex_ai_login_instructions").contains("\n\n1. Öffnen Sie Terminal"))
@@ -619,7 +619,7 @@ struct PreferencesPaneSmokeTests {
             #expect(L("language_italian") == "Italiano")
             #expect(L("tab_menu_bar") == "Barra menu")
             #expect(L("tab_advanced") == "Avanzate")
-            #expect(L("quit_app") == "Esci da CodexBar")
+            #expect(L("quit_app") == "Esci da Sharingan")
         }
     }
 

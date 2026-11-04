@@ -1,18 +1,18 @@
 {
-  "app": "CodexBar",
-  "repository": "steipete/CodexBar",
-  "bundle_id": "com.steipete.codexbar",
+  "app": "Sharingan",
+  "repository": "gdpais/Sharingan",
+  "bundle_id": "com.gdpais.sharingan",
   "minimum_macos": "14.0",
   "architectures": [
     "arm64",
     "x86_64"
   ],
   "sparkle_public_key": "AGCY8w5vHirVfGGDGc8Szc5iuOqupZSh9pMj/Qs67XI=",
-  "app_archive": "CodexBar-macos-universal-{version}.zip",
-  "dsym_archive": "CodexBar-macos-universal-{version}.dSYM.zip",
+  "app_archive": "Sharingan-macos-universal-{version}.zip",
+  "dsym_archive": "Sharingan-macos-universal-{version}.dSYM.zip",
   "assets": [
-    "CodexBar-macos-universal-{version}.zip",
-    "CodexBar-macos-universal-{version}.dSYM.zip",
+    "Sharingan-macos-universal-{version}.zip",
+    "Sharingan-macos-universal-{version}.dSYM.zip",
     "CodexBarCLI-v{version}-linux-x86_64.tar.gz",
     "CodexBarCLI-v{version}-linux-aarch64.tar.gz",
     "CodexBarCLI-v{version}-linux-musl-x86_64.tar.gz",

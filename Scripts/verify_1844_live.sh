@@ -14,7 +14,7 @@ fail() {
 }
 
 ARTIFACT="$(mktemp -d "${TMPDIR:-/tmp}/codexbar-claude-ownership.XXXXXX")"
-APP_BUNDLE="$ROOT/CodexBar.app"
+APP_BUNDLE="$ROOT/Sharingan.app"
 CLI="$APP_BUNDLE/Contents/Helpers/CodexBarCLI"
 APP="$APP_BUNDLE/Contents/MacOS/CodexBar"
 LIVE_TIMEOUT_SECONDS="${CODEXBAR_VERIFY_LIVE_TIMEOUT_SECONDS:-45}"

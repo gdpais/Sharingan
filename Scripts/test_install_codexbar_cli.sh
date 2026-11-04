@@ -19,7 +19,7 @@ assert os.geteuid() != 0, "Run installer regression tests as a non-root user."
 source = Path(sys.argv[1]).read_text()
 temp = Path(sys.argv[2]).resolve()
 assert source.startswith("#!/bin/sh -p\n")
-app_line = 'APP="/Applications/CodexBar.app"'
+app_line = 'APP="/Applications/Sharingan.app"'
 assert source.count(app_line) == 1
 assert source.count("/usr/bin/osascript") == 1
 assert 'HELPER="$APP/Contents/Helpers/CodexBarCLI"' in source
@@ -141,7 +141,7 @@ for missing in (False, True):
         failed = run_installer(functions, inherited)
         assert failed.returncode == 1, (label, failed.stderr)
         assert failed.stderr == (
-            f"CodexBarCLI helper not found at {helper}. Please reinstall CodexBar.\n"
+            f"CodexBarCLI helper not found at {helper}. Please reinstall Sharingan.\n"
         ), label
         assert failed.stdout == "", label
         assert not capture.exists(), label

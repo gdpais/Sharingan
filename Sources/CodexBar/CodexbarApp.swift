@@ -126,7 +126,7 @@ struct CodexBarApp: App {
             }
             CommandGroup(replacing: .help) {
                 Button(L("CodexBar Help")) {
-                    guard let url = URL(string: "https://github.com/steipete/CodexBar/blob/main/README.md")
+                    guard let url = URL(string: AppBrand.readmeURL)
                     else { return }
                     NSWorkspace.shared.open(url)
                 }
@@ -168,6 +168,20 @@ protocol UpdaterProviding: AnyObject {
 enum UpdaterPreferenceSync {
     static func applyAutomaticChecks(_ enabled: Bool, to updater: UpdaterProviding) {
         updater.automaticallyChecksForUpdates = enabled
+    }
+}
+
+/// Sharingan ships without an appcast until the owner configures their own feed and Sparkle key
+/// (see `TODO(sharingan)` in Scripts/package_app.sh). Without a feed Sparkle stays off, so the
+/// "Check for Updates" menu item and the About pane update controls are hidden.
+enum UpdateFeedConfiguration {
+    static func hasFeed(infoDictionary: [String: Any]?) -> Bool {
+        guard let value = infoDictionary?["SUFeedURL"] as? String,
+              let url = URL(string: value.trimmingCharacters(in: .whitespacesAndNewlines)),
+              url.scheme == "https",
+              url.host?.isEmpty == false
+        else { return false }
+        return true
     }
 }
 
@@ -349,13 +363,18 @@ private func makeUpdaterController() -> UpdaterProviding {
         return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
     }
 
-    if InstallOrigin.isHomebrewCask(appBundleURL: bundleURL) {
+    if InstallOrigin.isUpstreamHomebrewCask(
+        appBundleURL: bundleURL,
+        bundleIdentifier: Bundle.main.bundleIdentifier)
+    {
         return HomebrewUpdaterController(
             savedAutoCheck: (UserDefaults.standard.object(forKey: "autoUpdateEnabled") as? Bool) ?? true,
             notifier: HomebrewUpdateNotifier(dependencies: .live))
     }
 
-    guard isDeveloperIDSigned(bundleURL: bundleURL) else {
+    guard UpdateFeedConfiguration.hasFeed(infoDictionary: Bundle.main.infoDictionary),
+          isDeveloperIDSigned(bundleURL: bundleURL)
+    else {
         return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
     }
 
@@ -451,6 +470,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    /// Carries portable display preferences over from CodexBar's defaults domain once (read-only on the legacy side).
+    private static func queueLegacyCodexBarPreferencesImportIfNeeded() {
+        guard !TestProcessSafety.isRunning,
+              let bundleIdentifier = Bundle.main.bundleIdentifier,
+              let legacyDomain = LegacyPreferencesDomainImport.legacyDomain(forAppDomain: bundleIdentifier)
+        else { return }
+        LegacyPreferencesDomainImport.queueIfNeeded(
+            into: .standard,
+            legacy: UserDefaults(suiteName: legacyDomain))
+    }
+
     func applicationWillFinishLaunching(_ notification: Notification) {
         MenuBarStatusItemWindowProbe.trace("will-finish-launching")
         AppNotifications.shared.configureUpdateAction { [weak self] in
@@ -484,6 +514,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         self.scheduleSettingsApplicationMenuValidation(
             missingItemRetriesRemaining: Self.settingsMenuReadinessRetryCount,
             fallbackVerificationRetriesRemaining: Self.settingsMenuFallbackVerificationRetryCount)
+        // Queue before the coordinator starts so its existing pending-import consumption applies it.
+        Self.queueLegacyCodexBarPreferencesImportIfNeeded()
         self.cloudSyncCoordinator?.start()
         Task { await self.settings?.httpServer.startSaved() }
         Task { @MainActor [weak self] in

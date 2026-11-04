@@ -87,7 +87,7 @@ Load command 11
         description = item.find('description')
         self.assertEqual(description.attrib.get(f'{{{release.SPARKLE}}}format'), 'markdown')
         self.assertIn('## BlackBar 1.2.3\n\n### Fixed', description.text)
-        self.assertIn('[#4751](https://github.com/steipete/CodexBar/issues/4751)', description.text)
+        self.assertIn('[#4751](https://github.com/gdpais/Sharingan/issues/4751)', description.text)
         self.assertNotIn('<pre>', description.text)
 
     def test_appcast_description_uses_native_markdown_and_links_github_references(self):
@@ -113,7 +113,7 @@ Load command 11
         self.assertIn(
             '**bold text**, `inline code`, and [release docs](https://example.com/notes?a=1&b=2).',
             parsed.text)
-        self.assertIn('[#4736](https://github.com/steipete/CodexBar/issues/4736)', parsed.text)
+        self.assertIn('[#4736](https://github.com/gdpais/Sharingan/issues/4736)', parsed.text)
         self.assertIn('[@Andy115951](https://github.com/Andy115951)', parsed.text)
         self.assertIn('[@octo-user](https://github.com/octo-user)', parsed.text)
         self.assertIn('`#12 @not-a-link` and mail@example.com', parsed.text)
@@ -126,7 +126,7 @@ Load command 11
         self.assertEqual(
             release.link_github_references(markdown),
             'Example:\n\n```text\n#12 @example\n```\n\n'
-            'See [#13](https://github.com/steipete/CodexBar/issues/13) and '
+            'See [#13](https://github.com/gdpais/Sharingan/issues/13) and '
             '[@octo](https://github.com/octo).')
 
     def test_undated_changelog_is_rejected(self):

@@ -1,22 +1,24 @@
-# CodexBar 🎚️ — May your tokens never run out.
+# Sharingan
 
 > Every AI coding limit, in your menu bar.
 
-[![Latest release](https://img.shields.io/github/v/release/steipete/CodexBar?style=flat-square&color=0a0a0c)](https://github.com/steipete/CodexBar/releases/latest)
-[![macOS 14+](https://img.shields.io/badge/macOS-14%2B-0a0a0c?style=flat-square)](https://github.com/steipete/CodexBar/releases/latest)
-[![Linux desktop](https://img.shields.io/badge/Linux-Qt_6-1793d1?style=flat-square)](Integrations/Linux/README.md)
-[![Homebrew](https://img.shields.io/badge/brew-steipete%2Ftap%2Fcodexbar-orange?style=flat-square)](https://github.com/steipete/homebrew-tap)
-[![AUR](https://img.shields.io/aur/version/codexbar-cli?style=flat-square&color=1793d1)](https://aur.archlinux.org/packages/codexbar-cli)
+[![macOS 14+](https://img.shields.io/badge/macOS-14%2B-0a0a0c?style=flat-square)](#install)
 [![License: MIT](https://img.shields.io/badge/license-MIT-6e5aff?style=flat-square)](LICENSE)
-[![Site](https://img.shields.io/badge/site-codexbar.app-16d3b4?style=flat-square)](https://codexbar.app)
+[![Based on CodexBar](https://img.shields.io/badge/based_on-CodexBar-16d3b4?style=flat-square)](https://github.com/steipete/CodexBar)
 
-<a href="https://codexbar.app"><img src="docs/social.png?v=1436859e75bb3a24" alt="CodexBar — every AI coding limit in your menu bar. 110 providers." width="100%" /></a>
+Sharingan is a tiny macOS 14+ menu bar app that keeps **AI coding-provider limits visible** and shows when each window resets. See the [supported providers](#providers) below. One status item per provider, or Merge Icons mode with a provider switcher. No Dock icon, minimal UI, dynamic bar icons.
 
-Tiny macOS 14+ menu bar app that keeps **AI coding-provider limits visible** and shows when each window resets. See the [supported providers](#providers) below. One status item per provider, or Merge Icons mode with a provider switcher. No Dock icon, minimal UI, dynamic bar icons.
+## Based on CodexBar
 
-Also available as a [Linux desktop app](Integrations/Linux/README.md) with usage and spending windows, separate settings, desktop notifications, and an optional tray icon. On Omarchy, a native bar widget shares the desktop app’s data and follows your theme.
+Sharingan is a fork of **[CodexBar](https://github.com/steipete/CodexBar) by Peter Steinberger**. Nearly all of the
+code, provider integrations, and documentation come from CodexBar; Sharingan rebrands the user-facing app and tracks
+upstream closely. CodexBar is released under the MIT License; Sharingan keeps that license and the original copyright
+notice — see [LICENSE](LICENSE). Please consider supporting the original project.
 
-<img src="docs/codexbar.png" alt="CodexBar menu popover with provider tiles, usage bars, and reset countdowns" width="520" />
+Internally the code still uses CodexBar names (Swift modules and types, the `codexbar` CLI, config paths) to keep
+upstream merges cheap.
+
+<img src="docs/codexbar.png" alt="Menu popover with provider tiles, usage bars, and reset countdowns (screenshot from upstream CodexBar)" width="520" />
 
 ## Why
 
@@ -27,43 +29,36 @@ Also available as a [Linux desktop app](Integrations/Linux/README.md) with usage
 
 ## Install
 
-### macOS app
+### macOS app (build from source)
 
-Requires macOS 14+ (Sonoma). Download from [GitHub Releases](https://github.com/steipete/CodexBar/releases), or install with Homebrew:
+There are no prebuilt Sharingan releases, Homebrew casks, or other packages yet. Build it yourself on macOS 14+
+(Sonoma) with Xcode and Swift 6.2+:
 
 ```bash
-brew install --cask codexbar
+git clone https://github.com/gdpais/Sharingan.git
+cd Sharingan
+./Scripts/package_app.sh   # release build; ad-hoc signing is the default (CODEXBAR_SIGNING=adhoc)
+open Sharingan.app
 ```
 
-### Linux desktop and Omarchy
+`./Scripts/package_app.sh debug` produces a debug build instead. Move `Sharingan.app` to `/Applications` to keep it.
+Ad-hoc-signed rebuilds can trigger repeat Keychain prompts; see [Keychain prompts](docs/keychain-prompts.md).
 
-The Qt 6 desktop app supports Wayland and X11, with an optional Omarchy widget.
-Published desktop archives target x86_64 and ARM64 and require glibc 2.39+,
-Qt 6.4+, and a separately installed CodexBar CLI. Python 3 runs the per-user installer.
+### Things to know
 
-Follow the [Linux installation guide](Integrations/Linux/README.md#install-release-archives)
-for Arch/Omarchy, Fedora, and Debian/Ubuntu runtime packages, verified release
-downloads, and upgrades. It keeps the CLI's resource bundle beside its executable
-and installs a launcher and optional login startup. Open Settings to choose
-providers, then authenticate through the provider's CLI or configure its API key.
-GNOME may need a tray extension; the app's windows work without a tray.
+- **Shares config with CodexBar — don't run both.** Sharingan reads the same provider config
+  (`~/.config/codexbar/config.json`, or legacy `~/.codexbar/config.json`), Keychain items, and caches as CodexBar,
+  so existing provider setup carries over. Menu/display preferences live in Sharingan's own defaults domain
+  (`com.gdpais.sharingan`) and start fresh. Running CodexBar and Sharingan at the same time is not supported.
+- **No automatic updates yet.** Sharingan builds ship without a Sparkle feed and with automatic update checks off;
+  rebuild from source to update. (Owner TODO: set up a Sharingan appcast and Sparkle signing key.)
+- **iCloud sync is unavailable.** It depends on upstream's Apple developer team and is disabled in Sharingan builds.
 
-See the [macOS feature comparison](Integrations/Linux/MAC_COMPARISON.md) for
-supported features and remaining gaps.
+### Linux and CLI
 
-### CLI Tarballs (macOS/Linux)
-Homebrew formula (Linux today):
-```bash
-brew install steipete/tap/codexbar
-```
-Arch Linux AUR package:
-```bash
-yay -S codexbar-cli
-```
-Or download release tarballs from GitHub Releases:
-- macOS: `CodexBarCLI-v<tag>-macos-arm64.tar.gz`, `CodexBarCLI-v<tag>-macos-x86_64.tar.gz`
-- Linux (glibc): `CodexBarCLI-v<tag>-linux-aarch64.tar.gz`, `CodexBarCLI-v<tag>-linux-x86_64.tar.gz`
-- Linux (static musl): `CodexBarCLI-v<tag>-linux-musl-aarch64.tar.gz`, `CodexBarCLI-v<tag>-linux-musl-x86_64.tar.gz`
+The upstream Linux desktop app, Omarchy widget, and CLI sources remain in this repository
+([Linux guide](Integrations/Linux/README.md)), but Sharingan does not publish Linux archives, CLI tarballs, or
+Homebrew/AUR packages. Upstream's published packages install CodexBar, not Sharingan.
 
 ### macOS first run
 - Open Settings → Providers and enable what you use.
@@ -231,19 +226,19 @@ show an incident indicator.
 - Privacy-first: on-device parsing by default; browser cookies are opt-in and reused (no passwords stored).
 
 ## Privacy note
-Wondering if CodexBar scans your disk? It doesn’t crawl your filesystem; it reads a small set of known locations (browser cookies/local storage, provider config files, local JSONL logs) when the related features are enabled. Plain Adaptive refresh never inspects local agent activity. The separate Adaptive (agent-aware) option asks before inspecting the running-process list (including command lines) to identify Codex/Claude and reading bounded known-session metadata. Declining returns to plain Adaptive. When allowed with Agent Sessions hidden, CodexBar retains only the latest activity time and discards session paths and identities. Provider tokens and token-account settings live in the CodexBar config file with restrictive file permissions. See the discussion and audit notes in [issue #12](https://github.com/steipete/CodexBar/issues/12).
+Wondering if Sharingan scans your disk? It doesn’t crawl your filesystem; it reads a small set of known locations (browser cookies/local storage, provider config files, local JSONL logs) when the related features are enabled. Plain Adaptive refresh never inspects local agent activity. The separate Adaptive (agent-aware) option asks before inspecting the running-process list (including command lines) to identify Codex/Claude and reading bounded known-session metadata. Declining returns to plain Adaptive. When allowed with Agent Sessions hidden, Sharingan retains only the latest activity time and discards session paths and identities. Provider tokens and token-account settings live in the shared CodexBar config file (`~/.config/codexbar`) with restrictive file permissions. See the upstream discussion and audit notes in [CodexBar issue #12](https://github.com/steipete/CodexBar/issues/12).
 
 ## macOS permissions (why they’re needed)
 - **Full Disk Access (optional)**: only required to read Safari cookies/local storage for web-based providers. If you don’t grant it, use another supported browser, manual cookies/API keys, OAuth, or CLI/local sources where that provider supports them.
 - **Keychain access (prompted by macOS)**:
   Chromium cookie import needs the browser’s Safe Storage item, and an explicitly enabled Claude OAuth repair may
-  read Claude Code’s own Keychain item. Background CodexBar paths fail or skip instead of requesting authorization;
+  read Claude Code’s own Keychain item. Background Sharingan paths fail or skip instead of requesting authorization;
   a user-initiated import or repair can still show the macOS prompt. **Settings → Advanced → Disable Keychain
-  access** blocks CodexBar-owned Keychain operations and browser decryption, but cannot constrain provider-owned CLIs
-  that CodexBar launches. Manual cookie headers, API keys, and file-backed sources remain alternatives where
+  access** blocks Sharingan-owned Keychain operations and browser decryption, but cannot constrain provider-owned CLIs
+  that Sharingan launches. Manual cookie headers, API keys, and file-backed sources remain alternatives where
   supported. See [Keychain prompts](docs/keychain-prompts.md) for Allow Once vs. Always Allow, recurring grants, and
   safe troubleshooting.
-- **Files & Folders prompts (folder/volume access)**: CodexBar launches provider CLIs and local probes for some providers. If those helpers read a project directory or external drive, macOS may ask CodexBar for that folder/volume (e.g., Desktop or an external volume). This is driven by the helper’s working directory, not background disk scanning.
+- **Files & Folders prompts (folder/volume access)**: Sharingan launches provider CLIs and local probes for some providers. If those helpers read a project directory or external drive, macOS may ask Sharingan for that folder/volume (e.g., Desktop or an external volume). This is driven by the helper’s working directory, not background disk scanning.
 - **What we do not request in the background**: no Screen Recording or Accessibility permissions; user-triggered helper actions may ask macOS for Automation permission to open Terminal. No passwords are stored (browser cookies are reused when you opt in).
 
 ## Docs
@@ -275,8 +270,8 @@ Wondering if CodexBar scans your disk? It doesn’t crawl your filesystem; it re
 Requires macOS 14+ and Swift 6.2+.
 
 ```bash
-./Scripts/package_app.sh        # builds CodexBar.app in-place with ad-hoc signing
-open CodexBar.app
+./Scripts/package_app.sh        # builds Sharingan.app in-place with ad-hoc signing
+open Sharingan.app
 ```
 
 Dev loop:
@@ -287,16 +282,19 @@ make check                           # SwiftFormat + SwiftLint
 make docs-list                       # list docs with frontmatter summaries
 ```
 
-CLI install:
+CLI install (the CLI keeps its `codexbar` name and is bundled inside the app):
 ```bash
-# after installing CodexBar.app in /Applications
+# after copying Sharingan.app to /Applications
 ./bin/install-codexbar-cli.sh
 ```
 
-## Related
+## Related (by CodexBar's author)
 - ✂️ [Trimmy](https://github.com/steipete/Trimmy) — “Paste once, run once.” Flatten multi-line shell snippets so they paste and run.
 - 🧳 [MCPorter](https://mcporter.dev) — TypeScript toolkit + CLI for Model Context Protocol servers.
 - 🧿 [oracle](https://askoracle.dev) — Ask the oracle when you're stuck. Invoke GPT-5 Pro with a custom context and files.
+
+## Community projects
+The projects below were built for upstream CodexBar and its `codexbar` CLI; they are not affiliated with Sharingan.
 
 ## Looking for a Windows version?
 - [Win-CodexBar](https://github.com/Finesssee/Win-CodexBar)
@@ -336,4 +334,5 @@ CLI install:
 Inspired by [ccusage](https://github.com/ryoppippi/ccusage) (MIT), specifically the cost usage tracking.
 
 ## License
-MIT • Peter Steinberger ([steipete](https://twitter.com/steipete))
+MIT — see [LICENSE](LICENSE). Sharingan is based on [CodexBar](https://github.com/steipete/CodexBar) by Peter
+Steinberger ([steipete](https://twitter.com/steipete)); original copyright retained. Fork changes © gdpais.

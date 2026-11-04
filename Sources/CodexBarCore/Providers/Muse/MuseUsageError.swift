@@ -11,7 +11,7 @@ public enum MuseUsageError: LocalizedError, Sendable, Equatable {
     public var errorDescription: String? {
         switch self {
         case .missingCredentials:
-            "Muse Code login not found. Run `muse login`, then refresh CodexBar."
+            "Muse Code login not found. Run `muse login`, then refresh Sharingan."
         case .invalidCredentials:
             "Muse Code login was rejected. Run `muse login` again."
         case .keychainAccessDisabled:
