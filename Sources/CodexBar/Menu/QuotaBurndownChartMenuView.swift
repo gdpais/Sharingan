@@ -98,21 +98,7 @@ struct QuotaBurndownChartMenuView: View {
                             yEnd: .value(L("Usage remaining"), 100.0))
                             .foregroundStyle(Self.runOutColor.opacity(0.08))
                     }
-                    ForEach(selected.model.typicalWeek, id: \.date) { point in
-                        AreaMark(
-                            x: .value("Time", point.date),
-                            yStart: .value(L("Usage remaining"), point.lowRemainingPercent),
-                            yEnd: .value(L("Usage remaining"), point.highRemainingPercent))
-                            .foregroundStyle(self.color.opacity(Self.typicalWeekBandOpacity))
-                    }
-                    ForEach(selected.model.typicalWeek, id: \.date) { point in
-                        LineMark(
-                            x: .value("Time", point.date),
-                            y: .value(L("Usage remaining"), point.medianRemainingPercent),
-                            series: .value("Series", "Typical"))
-                            .foregroundStyle(self.color.opacity(Self.typicalWeekLineOpacity))
-                            .lineStyle(StrokeStyle(lineWidth: 1))
-                    }
+                    self.typicalWeekMarks(selected.model.typicalWeek)
                     ForEach(selected.model.ideal, id: \.date) { point in
                         LineMark(
                             x: .value("Time", point.date),
@@ -209,6 +195,27 @@ struct QuotaBurndownChartMenuView: View {
 
     var hasSeries: Bool {
         !self.series.isEmpty
+    }
+
+    /// The learned typical week as a faint band (middle half of past weeks) with its median, behind the
+    /// observed line.
+    @ChartContentBuilder
+    private func typicalWeekMarks(_ samples: [QuotaBurndownModel.TypicalSample]) -> some ChartContent {
+        ForEach(samples, id: \.date) { point in
+            AreaMark(
+                x: .value("Time", point.date),
+                yStart: .value(L("Usage remaining"), point.lowRemainingPercent),
+                yEnd: .value(L("Usage remaining"), point.highRemainingPercent))
+                .foregroundStyle(self.color.opacity(Self.typicalWeekBandOpacity))
+        }
+        ForEach(samples, id: \.date) { point in
+            LineMark(
+                x: .value("Time", point.date),
+                y: .value(L("Usage remaining"), point.medianRemainingPercent),
+                series: .value("Series", "Typical"))
+                .foregroundStyle(self.color.opacity(Self.typicalWeekLineOpacity))
+                .lineStyle(StrokeStyle(lineWidth: 1))
+        }
     }
 
     private var typicalWeekLegend: some View {
