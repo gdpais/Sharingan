@@ -2,11 +2,11 @@
 # -p blocks inherited functions and startup hooks before validation; it does not elevate privileges.
 set -eu
 
-APP="/Applications/CodexBar.app"
+APP="/Applications/Sharingan.app"
 HELPER="$APP/Contents/Helpers/CodexBarCLI"
 
 if [ ! -x "$HELPER" ]; then
-  /bin/echo "CodexBarCLI helper not found at $HELPER. Please reinstall CodexBar." >&2
+  /bin/echo "CodexBarCLI helper not found at $HELPER. Please reinstall Sharingan." >&2
   exit 1
 fi
 

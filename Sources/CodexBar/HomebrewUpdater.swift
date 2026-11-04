@@ -233,8 +233,11 @@ final class HomebrewUpdaterController: UpdaterProviding {
 extension HomebrewUpdaterController.Dependencies {
     static var live: Self {
         let bundleURL = Bundle.main.bundleURL
+        // Sharingan: the `codexbar` cask is upstream CodexBar; never resolve or upgrade it from a fork bundle.
+        let isUpstreamBundle = Bundle.main.bundleIdentifier == InstallOrigin.upstreamCaskBundleIdentifier
         let cask: @Sendable () throws -> HomebrewCask = {
-            try HomebrewCask.installed(prefix: InstallOrigin.homebrewPrefix(appBundleURL: bundleURL))
+            guard isUpstreamBundle else { throw HomebrewUpdateError.brewNotFound }
+            return try HomebrewCask.installed(prefix: InstallOrigin.homebrewPrefix(appBundleURL: bundleURL))
         }
         return Self(
             installedVersion: { Self.bundleShortVersion(at: bundleURL) ?? AppVersion.shortVersion },
@@ -250,6 +253,7 @@ extension HomebrewUpdaterController.Dependencies {
                 return source
             },
             runUpgrade: { targetVersion in
+                guard isUpstreamBundle else { throw HomebrewUpdateError.brewNotFound }
                 _ = try await Self.upgrade(appBundleURL: bundleURL, targetVersion: targetVersion)
             },
             relaunch: { Self.relaunch(bundleURL: bundleURL) },

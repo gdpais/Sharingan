@@ -45,7 +45,7 @@ grep -Fq 'CODEXBAR_SIGNING=identity ./Scripts/package_app.sh release' "$RELEASE_
 
 TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/codexbar-package-signing.XXXXXX")
 trap 'rm -f "$FUNCTIONS_FILE"; rm -rf "$TEMP_DIR"' EXIT
-APP="$TEMP_DIR/CodexBar.app"
+APP="$TEMP_DIR/Sharingan.app"
 mkdir -p "$APP/Contents/Frameworks/Sparkle.framework"
 
 xattr() {
@@ -86,7 +86,7 @@ import tempfile
 from pathlib import Path
 
 source = Path(sys.argv[1]).read_text()
-start = source.index('BUNDLE_ID="com.steipete.codexbar"')
+start = source.index('BUNDLE_ID="com.gdpais.sharingan"')
 end = source.index('BUILD_TIMESTAMP=', start)
 generation = source[start:end]
 start = source.index('if [[ "$EMBED_PROVISIONING_PROFILE" == "1" ]]; then')
@@ -104,7 +104,7 @@ for team, configuration, signing, profile_present in itertools.product(
 ):
     with tempfile.TemporaryDirectory(prefix='codexbar-entitlement-test-') as directory:
         root = Path(directory)
-        app = root / 'CodexBar.app'
+        app = root / 'Sharingan.app'
         (app / 'Contents').mkdir(parents=True)
         profile = root / 'Scripts/profiles/CodexBar-DeveloperID.provisionprofile'
         if profile_present:
@@ -117,13 +117,16 @@ for team, configuration, signing, profile_present in itertools.product(
         identity_stub = f'security() {{ echo \'  1) {"A" * 40} "{env["APP_IDENTITY"]}"\'; }}'
         result = subprocess.run(['bash', '-eu', '-c', identity_stub + '\n' + helper + '\n' + generation + '\n' + embedding],
                                 env=env, capture_output=True, text=True)
-        cloudkit = team == 'Y5PE65HELJ' and configuration == 'release' and signing == 'identity'
+        # Sharingan's bundle ID never matches the upstream-only iCloud gate, so CloudKit stays off everywhere.
+        cloudkit = False
         if cloudkit and not profile_present:
             assert result.returncode != 0 and 'Missing' in result.stderr, result.stderr
             continue
         assert result.returncode == 0, (team, configuration, signing, profile_present, result.stderr)
-        bundle = 'com.steipete.codexbar' + ('.debug' if configuration == 'debug' else '')
-        expected_group = f'{team}.{bundle}'
+        bundle = 'com.gdpais.sharingan' + ('.debug' if configuration == 'debug' else '')
+        # App groups keep the upstream storage identifier that AppGroupSupport.currentGroupID resolves.
+        group_base = 'com.steipete.codexbar' + ('.debug' if configuration == 'debug' else '')
+        expected_group = f'{team}.{group_base}'
         app_entitlements = plistlib.loads((root / '.build/entitlements/CodexBar.entitlements').read_bytes())
         widget_entitlements = plistlib.loads((root / '.build/entitlements/CodexBarWidget.entitlements').read_bytes())
         assert app_entitlements['com.apple.security.application-groups'] == [expected_group]
@@ -133,7 +136,7 @@ for team, configuration, signing, profile_present in itertools.product(
         assert embedded.exists() == cloudkit
         if cloudkit:
             assert embedded.read_bytes() == profile.read_bytes()
-            assert app_entitlements['com.apple.application-identifier'] == expected_group
+            assert app_entitlements['com.apple.application-identifier'] == f'{team}.{bundle}'
             assert app_entitlements['com.apple.developer.team-identifier'] == team
             assert app_entitlements['com.apple.developer.icloud-services'] == ['CloudKit']
             assert app_entitlements['com.apple.developer.icloud-container-identifiers'] == [f'iCloud.{bundle}']
