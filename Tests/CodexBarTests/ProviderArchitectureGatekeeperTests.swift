@@ -1641,10 +1641,10 @@ struct ProviderArchitectureGatekeeperTests {
             reason: "The monthly cap metric reuses Claude's currency caption instead of duplicating cost formatting."),
         AllowedProviderConstruct(
             path: "Sources/CodexBar/Menu/CostHistoryChartMenuView.swift",
-            anchor: "let projects = provider == .codex ? snapshot.projects : []",
+            anchor: "let sessions = provider == .codex ? snapshot.sessions : []",
             expectedProviderIDs: ["codex"],
-            expectedReferenceCount: 2,
-            expectedReferenceFingerprint: ["codex@0", "codex@1"],
+            expectedReferenceCount: 1,
+            expectedReferenceFingerprint: ["codex@0"],
             reason: "This exact shared renderer maps provider-owned presentation data into the generic UI model."),
         AllowedProviderConstruct(
             path: "Sources/CodexBar/HistoricalUsagePace.swift",
@@ -2369,13 +2369,6 @@ struct ProviderArchitectureGatekeeperTests {
             expectedReferenceCount: 3,
             expectedReferenceFingerprint: ["codex@0", "codex@1", "codex@12"],
             reason: "Codex reset observation follows the local credit projection and excludes remote fleet usage."),
-        AllowedProviderConstruct(
-            path: "Sources/CodexBar/StatusItem/StatusItemController+HostedSubmenus.swift",
-            anchor: "projects: provider == .codex ? tokenSnapshot.projects : [],",
-            expectedProviderIDs: ["codex"],
-            expectedReferenceCount: 1,
-            expectedReferenceFingerprint: ["codex@0"],
-            reason: "This exact app-runtime bridge coordinates provider-owned state through the shared controller."),
         AllowedProviderConstruct(
             path: "Sources/CodexBar/StatusItem/StatusItemController+MemoryPressure.swift",
             anchor: "scope: UsageProvider.codex.rawValue,",
