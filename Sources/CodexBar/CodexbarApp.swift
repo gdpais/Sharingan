@@ -451,6 +451,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         }
     }
 
+    /// Carries portable display preferences over from CodexBar's defaults domain once (read-only on the legacy side).
+    private static func queueLegacyCodexBarPreferencesImportIfNeeded() {
+        guard !TestProcessSafety.isRunning,
+              let bundleIdentifier = Bundle.main.bundleIdentifier,
+              let legacyDomain = LegacyPreferencesDomainImport.legacyDomain(forAppDomain: bundleIdentifier)
+        else { return }
+        LegacyPreferencesDomainImport.queueIfNeeded(
+            into: .standard,
+            legacy: UserDefaults(suiteName: legacyDomain))
+    }
+
     func applicationWillFinishLaunching(_ notification: Notification) {
         MenuBarStatusItemWindowProbe.trace("will-finish-launching")
         AppNotifications.shared.configureUpdateAction { [weak self] in
@@ -484,6 +495,8 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         self.scheduleSettingsApplicationMenuValidation(
             missingItemRetriesRemaining: Self.settingsMenuReadinessRetryCount,
             fallbackVerificationRetriesRemaining: Self.settingsMenuFallbackVerificationRetryCount)
+        // Queue before the coordinator starts so its existing pending-import consumption applies it.
+        Self.queueLegacyCodexBarPreferencesImportIfNeeded()
         self.cloudSyncCoordinator?.start()
         Task { await self.settings?.httpServer.startSaved() }
         Task { @MainActor [weak self] in

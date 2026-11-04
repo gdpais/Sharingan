@@ -655,14 +655,14 @@ Debug builds start the hang watchdog automatically. To diagnose a release build,
 enable it explicitly and restart CodexBar:
 
 ```bash
-defaults write com.steipete.codexbar debugMainThreadHangWatchdog -bool true
+defaults write com.gdpais.sharingan debugMainThreadHangWatchdog -bool true
 ```
 
 Hangs are written to the app log. Hangs over two seconds also request a process
 sample under `~/Library/Logs/CodexBar/`. Disable the release opt-in with:
 
 ```bash
-defaults delete com.steipete.codexbar debugMainThreadHangWatchdog
+defaults delete com.gdpais.sharingan debugMainThreadHangWatchdog
 ```
 
 ## Architecture Notes
