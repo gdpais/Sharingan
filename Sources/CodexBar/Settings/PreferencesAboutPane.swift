@@ -52,9 +52,6 @@ struct AboutPane: View {
                     icon: "arrow.triangle.branch",
                     title: L(AppBrand.upstreamCreditKey),
                     url: AppBrand.upstreamRepositoryURL)
-                AboutLinkRow(icon: "globe", title: L("link_website"), url: "https://codexbar.app")
-                AboutLinkRow(icon: "bird", title: L("link_twitter"), url: "https://twitter.com/steipete")
-                AboutLinkRow(icon: "envelope", title: L("link_email"), url: "mailto:peter@steipete.me")
                 Button {
                     self.selection.showAcknowledgements()
                 } label: {

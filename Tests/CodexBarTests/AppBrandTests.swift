@@ -42,4 +42,19 @@ struct AppBrandTests {
         #expect(source.contains("Text(AppBrand.displayName)"))
         #expect(!source.contains("\"https://github.com/steipete/CodexBar\""))
     }
+
+    @Test
+    func `about pane omits upstream author contact links`() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+            .deletingLastPathComponent().deletingLastPathComponent()
+        let source = try String(
+            contentsOf: root.appendingPathComponent("Sources/CodexBar/Settings/PreferencesAboutPane.swift"),
+            encoding: .utf8)
+        #expect(!source.contains("L(\"link_website\")"))
+        #expect(!source.contains("L(\"link_twitter\")"))
+        #expect(!source.contains("L(\"link_email\")"))
+        #expect(!source.contains("https://codexbar.app"))
+        #expect(!source.contains("twitter.com/steipete"))
+        #expect(!source.contains("peter@steipete.me"))
+    }
 }
