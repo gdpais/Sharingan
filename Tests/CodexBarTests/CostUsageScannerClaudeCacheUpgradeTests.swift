@@ -171,7 +171,7 @@ struct CostUsageScannerClaudeCacheUpgradeTests {
 
         let savedCache = CostUsageClaudeCacheIO.load(provider: provider, cacheRoot: env.cacheRoot)
         let savedMemo = try self.readMemo(at: memoURL)
-        #expect(savedCache.usage.version == 5)
+        #expect(savedCache.usage.version == 6)
         #expect(savedCache.usage.files.count == 1)
         #expect(savedCache.usage.files[path]?.claudeRows?.map(\.output) == [19])
         #expect(savedCache.usage.days == [dayKey: [model: [50, 100, 0, 19, 465_000, 1, 1, 0]]])
@@ -252,7 +252,7 @@ struct CostUsageScannerClaudeCacheUpgradeTests {
             costNanos: 611_593_000,
             costPriced: true)]
         cache.usage.days[dayKey]?[model]?[4] = 611_593_000
-        #expect(cache.usage.version == 5)
+        #expect(cache.usage.version == 6)
         try JSONEncoder().encode(cache).write(to: cacheURL)
         let cacheStamp = try #require(CostUsageClaudeFileStamp.read(at: cacheURL))
         var memo = try self.readMemo(at: memoURL)
@@ -501,7 +501,7 @@ struct CostUsageScannerClaudeCacheUpgradeTests {
         #expect(work.transcriptParses == 1)
         #expect(work.cacheEncodes == 1)
         let savedCache = CostUsageClaudeCacheIO.load(provider: .claude, cacheRoot: env.cacheRoot)
-        #expect(savedCache.usage.version == 5)
+        #expect(savedCache.usage.version == 6)
         #expect(savedCache.usage.files[path]?.claudeRows?.first?.isIncomplete == true)
         let savedMemo = try self.readMemo(at: memoURL)
         #expect(savedMemo.reportSemanticsVersion == CostUsageClaudeReportMemo.reportSemanticsVersion)

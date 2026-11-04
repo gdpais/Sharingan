@@ -1323,7 +1323,7 @@ extension CostHistoryChartMenuView {
         displayCurrencyCode: String? = nil,
         displayCostMultiplier: Double = 1.0) -> RenderFingerprint
     {
-        let projects = provider == .codex ? snapshot.projects : []
+        let projects = provider.supportsLocalProjects ? snapshot.projects : []
         let sessions = provider == .codex ? snapshot.sessions : []
         return RenderFingerprint(
             hidePersonalInfo: hidePersonalInfo,

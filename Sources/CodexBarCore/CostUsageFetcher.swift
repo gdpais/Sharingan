@@ -984,6 +984,16 @@ public struct CostUsageFetcher: Sendable {
                         sessionsRoot: roots.first,
                         environment: options.environment)
                 }
+            } else {
+                // Claude transcripts record working directories; providers without them return no rows.
+                projects = try CostUsageScanner.loadClaudeProjectBreakdowns(
+                    provider: provider,
+                    since: since,
+                    until: now,
+                    now: now,
+                    options: options.scanOptions,
+                    reportContext: options.reportContext,
+                    checkCancellation: checkCancellation)
             }
             let native = LocalTokenScanReport(
                 daily: daily,

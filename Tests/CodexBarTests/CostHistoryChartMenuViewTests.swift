@@ -1054,13 +1054,13 @@ struct CostHistoryChartMenuViewTests {
 
     @Test
     @MainActor
-    func `render fingerprint excludes projects hidden for non-codex providers`() {
+    func `render fingerprint excludes projects hidden for providers without local projects`() {
         let first = Self.fingerprint(
             projects: [Self.makeProject(index: 0, sourceCount: 2)],
-            provider: .claude)
+            provider: .vertexai)
         let changed = Self.fingerprint(
             projects: [Self.makeProject(index: 0, sourceCount: 2, totalCostUSD: 99)],
-            provider: .claude)
+            provider: .vertexai)
 
         #expect(first.projects.isEmpty)
         #expect(first == changed)

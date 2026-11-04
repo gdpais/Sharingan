@@ -2109,6 +2109,8 @@ enum CostUsageScanner {
     struct ClaudeParseResult {
         let rows: [ClaudeUsageRow]
         let parsedBytes: Int64
+        /// First normalized working directory recorded by the parsed transcript lines.
+        var cwd: String?
     }
 
     enum ClaudePathRole: String, Codable, Equatable {
