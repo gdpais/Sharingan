@@ -2761,3 +2761,6 @@
 "Show this Mac's recorded OpenCode usage in Codex history. Off by default; scoped or alternate CODEX_HOME locations always stay excluded." = "Hiển thị mức sử dụng OpenCode được ghi lại trên máy Mac này trong lịch sử Codex. Mặc định tắt; luôn loại trừ các vị trí CODEX_HOME có phạm vi giới hạn hoặc vị trí thay thế.";
 "Auto uses the active saved session, otherwise an API key or browser cookies." = "Tự động sử dụng phiên đã lưu đang hoạt động, nếu không thì sử dụng khóa API hoặc cookie trình duyệt.";
 "Store multiple Command Code subscription sessions." = "Lưu trữ nhiều phiên đăng ký Command Code.";
+"section_history" = "Lịch sử";
+"record_usage_history_title" = "Ghi lại lịch sử sử dụng";
+"record_usage_history_subtitle" = "Ghi lại mức sử dụng cao nhất theo giờ trên máy Mac này cho các nhà cung cấp chưa lưu lịch sử, cùng với 8 tuần mức sử dụng hằng tuần của Codex để dự đoán tốc độ. Cung cấp dữ liệu cho lịch sử gói và biểu đồ tiêu hao.";

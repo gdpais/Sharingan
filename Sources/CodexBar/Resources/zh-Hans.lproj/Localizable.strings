@@ -2752,3 +2752,6 @@
 "Show this Mac's recorded OpenCode usage in Codex history. Off by default; scoped or alternate CODEX_HOME locations always stay excluded." = "在 Codex 历史记录中显示此 Mac 上记录的 OpenCode 用量。默认关闭；始终排除限定范围或其他 CODEX_HOME 位置。";
 "Auto uses the active saved session, otherwise an API key or browser cookies." = "自动使用当前启用的已保存会话，否则使用 API 密钥或浏览器 Cookie。";
 "Store multiple Command Code subscription sessions." = "存储多个 Command Code 订阅会话。";
+"section_history" = "历史记录";
+"record_usage_history_title" = "记录用量历史";
+"record_usage_history_subtitle" = "在此 Mac 上为尚未保存历史记录的提供商记录每小时用量峰值，并记录 8 周的 Codex 每周用量用于节奏预测。为套餐历史和消耗图表提供数据。";

@@ -2762,3 +2762,6 @@
 "Show this Mac's recorded OpenCode usage in Codex history. Off by default; scoped or alternate CODEX_HOME locations always stay excluded." = "Mostra l’ús de l’OpenCode registrat en aquest Mac a l’historial del Codex. Desactivat per defecte; les ubicacions de CODEX_HOME amb àmbit restringit o alternatives sempre en queden excloses.";
 "Auto uses the active saved session, otherwise an API key or browser cookies." = "Auto utilitza la sessió desada activa; si no n’hi ha, una clau API o les galetes del navegador.";
 "Store multiple Command Code subscription sessions." = "Deseu diverses sessions de subscripció de Command Code.";
+"section_history" = "Historial";
+"record_usage_history_title" = "Registra l’historial d’ús";
+"record_usage_history_subtitle" = "Registra els pics d’ús per hora en aquest Mac per als proveïdors que encara no en desen l’historial, a més de 8 setmanes d’ús setmanal de Codex per a les prediccions de ritme. Alimenta l’historial del pla i el gràfic de consum.";

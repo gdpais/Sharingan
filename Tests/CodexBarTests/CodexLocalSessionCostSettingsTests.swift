@@ -28,7 +28,8 @@ struct CodexLocalSessionCostSettingsTests {
         #expect(!fixture.settings.costUsageEnabled)
         #expect(fixture.settings.isCostUsageEffectivelyEnabled(for: .codex))
         #expect(!fixture.settings.isCostUsageEffectivelyEnabled(for: .claude))
-        #expect(toggles.contains(where: { $0.id == "codex-historical-tracking" }))
+        // Usage history recording is a cross-provider setting that lives in the General pane.
+        #expect(!toggles.contains(where: { $0.id == "codex-historical-tracking" }))
         #expect(!toggles.contains(where: { $0.id == "codex-spark-usage-visible" }))
     }
 
