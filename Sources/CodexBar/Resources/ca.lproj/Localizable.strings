@@ -2769,3 +2769,9 @@
 "avg %@ credits/day" = "mitjana %@ crèdits/dia";
 "Average" = "Mitjana";
 "avg %@/day" = "mitjana %@/dia";
+"Typical week" = "Setmana habitual";
+"Model share" = "Quota per model";
+"Share of estimated spend" = "Proporció de la despesa estimada";
+"Project trends" = "Tendències dels projectes";
+"Change compares the last %d days with the %d days before." = "El canvi compara els últims %d dies amb els %d dies anteriors.";
+"New" = "Nou";

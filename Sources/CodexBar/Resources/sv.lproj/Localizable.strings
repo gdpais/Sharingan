@@ -2766,3 +2766,9 @@
 "avg %@ credits/day" = "snitt %@ krediter/dag";
 "Average" = "Genomsnitt";
 "avg %@/day" = "snitt %@/dag";
+"Typical week" = "Typisk vecka";
+"Model share" = "Modellandel";
+"Share of estimated spend" = "Andel av uppskattade utgifter";
+"Project trends" = "Projekttrender";
+"Change compares the last %d days with the %d days before." = "Förändringen jämför de senaste %d dagarna med de %d dagarna före.";
+"New" = "Ny";

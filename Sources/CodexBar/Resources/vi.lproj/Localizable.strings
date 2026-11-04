@@ -2768,3 +2768,9 @@
 "avg %@ credits/day" = "TB %@ tín dụng/ngày";
 "Average" = "Trung bình";
 "avg %@/day" = "trung bình %@/ngày";
+"Typical week" = "Tuần điển hình";
+"Model share" = "Tỷ trọng mô hình";
+"Share of estimated spend" = "Tỷ trọng trong chi tiêu ước tính";
+"Project trends" = "Xu hướng dự án";
+"Change compares the last %d days with the %d days before." = "Mức thay đổi so sánh %d ngày gần nhất với %d ngày trước đó.";
+"New" = "Mới";

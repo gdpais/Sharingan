@@ -2769,3 +2769,9 @@
 "avg %@ credits/day" = "rata-rata %@ kredit/hari";
 "Average" = "Rata-rata";
 "avg %@/day" = "rata-rata %@/hari";
+"Typical week" = "Minggu biasa";
+"Model share" = "Porsi model";
+"Share of estimated spend" = "Porsi dari perkiraan pengeluaran";
+"Project trends" = "Tren proyek";
+"Change compares the last %d days with the %d days before." = "Perubahan membandingkan %d hari terakhir dengan %d hari sebelumnya.";
+"New" = "Baru";

@@ -2759,3 +2759,9 @@
 "avg %@ credits/day" = "平均 %@ 额度/天";
 "Average" = "平均值";
 "avg %@/day" = "日均 %@";
+"Typical week" = "典型周";
+"Model share" = "模型占比";
+"Share of estimated spend" = "占估算支出的比例";
+"Project trends" = "项目趋势";
+"Change compares the last %d days with the %d days before." = "变化比较最近 %d 天与之前 %d 天。";
+"New" = "新增";

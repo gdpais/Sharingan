@@ -2771,3 +2771,9 @@
 "avg %@ credits/day" = "المتوسط %@ من الاعتمادات/يوم";
 "Average" = "المتوسط";
 "avg %@/day" = "المتوسط %@/يوم";
+"Typical week" = "الأسبوع المعتاد";
+"Model share" = "حصة النماذج";
+"Share of estimated spend" = "الحصة من الإنفاق التقديري";
+"Project trends" = "اتجاهات المشاريع";
+"Change compares the last %d days with the %d days before." = "يقارن التغيّر آخر %d يومًا بالـ %d يومًا التي سبقتها.";
+"New" = "جديد";

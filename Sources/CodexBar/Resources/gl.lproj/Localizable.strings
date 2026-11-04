@@ -2766,3 +2766,9 @@
 "avg %@ credits/day" = "media %@ créditos/día";
 "Average" = "Media";
 "avg %@/day" = "media %@/día";
+"Typical week" = "Semana habitual";
+"Model share" = "Cota por modelo";
+"Share of estimated spend" = "Proporción do gasto estimado";
+"Project trends" = "Tendencias dos proxectos";
+"Change compares the last %d days with the %d days before." = "O cambio compara os últimos %d días cos %d días anteriores.";
+"New" = "Novo";

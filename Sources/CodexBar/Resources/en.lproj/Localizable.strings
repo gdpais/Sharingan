@@ -2772,3 +2772,9 @@
 "avg %@ credits/day" = "avg %@ credits/day";
 "Average" = "Average";
 "avg %@/day" = "avg %@/day";
+"Typical week" = "Typical week";
+"Model share" = "Model share";
+"Share of estimated spend" = "Share of estimated spend";
+"Project trends" = "Project trends";
+"Change compares the last %d days with the %d days before." = "Change compares the last %d days with the %d days before.";
+"New" = "New";

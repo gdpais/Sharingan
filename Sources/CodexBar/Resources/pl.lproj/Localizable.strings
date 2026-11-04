@@ -2770,3 +2770,9 @@
 "avg %@ credits/day" = "śr. %@ kredytów/dzień";
 "Average" = "Średnia";
 "avg %@/day" = "śr. %@/dzień";
+"Typical week" = "Typowy tydzień";
+"Model share" = "Udział modeli";
+"Share of estimated spend" = "Udział w szacowanych wydatkach";
+"Project trends" = "Trendy projektów";
+"Change compares the last %d days with the %d days before." = "Zmiana porównuje ostatnie %d dni z %d dniami wcześniej.";
+"New" = "Nowy";

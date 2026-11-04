@@ -2735,3 +2735,9 @@
 "avg %@ credits/day" = "평균 %@ 크레딧/일";
 "Average" = "평균";
 "avg %@/day" = "평균 %@/일";
+"Typical week" = "평소 주간";
+"Model share" = "모델별 비중";
+"Share of estimated spend" = "예상 지출 대비 비중";
+"Project trends" = "프로젝트 추세";
+"Change compares the last %d days with the %d days before." = "변화율은 최근 %d일과 그 이전 %d일을 비교합니다.";
+"New" = "신규";

@@ -2771,3 +2771,9 @@
 "avg %@ credits/day" = "میانگین %@ اعتبار/روز";
 "Average" = "میانگین";
 "avg %@/day" = "میانگین %@/روز";
+"Typical week" = "هفتهٔ معمول";
+"Model share" = "سهم مدل‌ها";
+"Share of estimated spend" = "سهم از برآورد هزینه";
+"Project trends" = "روند پروژه‌ها";
+"Change compares the last %d days with the %d days before." = "تغییر، %d روز اخیر را با %d روز پیش از آن مقایسه می‌کند.";
+"New" = "جدید";

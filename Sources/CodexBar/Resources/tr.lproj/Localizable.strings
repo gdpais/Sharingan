@@ -2770,3 +2770,9 @@
 "avg %@ credits/day" = "ort. %@ kredi/gün";
 "Average" = "Ortalama";
 "avg %@/day" = "ort. %@/gün";
+"Typical week" = "Tipik hafta";
+"Model share" = "Model payı";
+"Share of estimated spend" = "Tahmini harcamadaki pay";
+"Project trends" = "Proje eğilimleri";
+"Change compares the last %d days with the %d days before." = "Değişim, son %d günü önceki %d günle karşılaştırır.";
+"New" = "Yeni";

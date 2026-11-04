@@ -2768,3 +2768,9 @@
 "avg %@ credits/day" = "в среднем %@ кредитов/день";
 "Average" = "Среднее";
 "avg %@/day" = "в среднем %@/день";
+"Typical week" = "Обычная неделя";
+"Model share" = "Доля моделей";
+"Share of estimated spend" = "Доля в предполагаемых расходах";
+"Project trends" = "Динамика проектов";
+"Change compares the last %d days with the %d days before." = "Изменение сравнивает последние %d дн. с %d дн. до них.";
+"New" = "Новый";
