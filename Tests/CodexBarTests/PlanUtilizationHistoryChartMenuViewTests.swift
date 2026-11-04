@@ -66,6 +66,22 @@ struct PlanUtilizationHistoryChartMenuViewTests {
     }
 
     @Test
+    func `session axis labels include the hour while longer windows show only the day`() {
+        // 2026-10-06 15:00 UTC.
+        let date = Date(timeIntervalSince1970: 1_791_298_800)
+        let locale = Locale(identifier: "en_US")
+        let utc = TimeZone(identifier: "UTC") ?? .gmt
+        let session = PlanUtilizationHistoryChartMenuView._axisLabelTextForTesting(
+            date: date, windowMinutes: 300, locale: locale, timeZone: utc)
+        let weekly = PlanUtilizationHistoryChartMenuView._axisLabelTextForTesting(
+            date: date, windowMinutes: 10080, locale: locale, timeZone: utc)
+        #expect(weekly == "Oct 6")
+        #expect(session.hasPrefix("Oct 6"))
+        #expect(session.contains("3"))
+        #expect(session.contains("PM"))
+    }
+
+    @Test
     func `remembered series is restored only while it is still visible`() {
         let now = Date(timeIntervalSince1970: 1_700_000_000)
         let histories = [

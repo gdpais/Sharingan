@@ -622,9 +622,10 @@ struct PlanUtilizationHistoryChartMenuView: View {
         ChartAxisLabelLayout.dateLabel(Text(point.date.formatted(self.axisFormat(windowMinutes: windowMinutes))))
     }
 
+    /// Session windows reset several times a day, so their labels carry the reset hour.
     private nonisolated static func axisFormat(windowMinutes: Int) -> Date.FormatStyle {
         if windowMinutes <= 300 {
-            return .dateTime.month(.abbreviated).day()
+            return .dateTime.month(.abbreviated).day().hour()
         }
         return .dateTime.month(.abbreviated).day()
     }
@@ -737,6 +738,18 @@ struct PlanUtilizationHistoryChartMenuView: View {
             provider: provider,
             referenceDate: referenceDate ?? histories.flatMap(\.entries).map(\.capturedAt).max() ?? Date())
         return self.detailLine(point: model.points.last, windowMinutes: selectedSeries?.history.windowMinutes ?? 0)
+    }
+
+    nonisolated static func _axisLabelTextForTesting(
+        date: Date,
+        windowMinutes: Int,
+        locale: Locale,
+        timeZone: TimeZone) -> String
+    {
+        var style = self.axisFormat(windowMinutes: windowMinutes)
+        style.locale = locale
+        style.timeZone = timeZone
+        return date.formatted(style)
     }
 
     nonisolated static func _emptyStateTextForTesting(title: String?) -> String {
