@@ -111,16 +111,23 @@ private struct ProviderDetailChartContent: View {
                 .lineLimit(1)
             }
             Group {
-                switch self.chart.kind {
-                case .bars:
-                    self.bars
-                case .line:
-                    self.line
+                if ProviderDetailChartLayout.usesSeriesRenderer(for: self.chart) {
+                    ProviderDetailSeriesChartPlot(chart: self.chart, color: self.color)
+                } else {
+                    switch self.chart.kind {
+                    case .bars:
+                        self.bars
+                    case .line:
+                        self.line
+                    }
                 }
             }
             .frame(height: 58)
             .accessibilityElement(children: .combine)
             .accessibilityLabel(self.accessibilityLabel)
+            if self.chart.series.count > 1 {
+                ProviderDetailSeriesChartLegend(names: self.chart.series.map(\.name))
+            }
         }
     }
 
@@ -168,6 +175,9 @@ private struct ProviderDetailChartContent: View {
     }
 
     private var accessibilityLabel: String {
+        guard !ProviderDetailChartLayout.usesSeriesRenderer(for: self.chart) else {
+            return ProviderDetailSeriesChartPlot.accessibilityLabel(for: self.chart)
+        }
         let title = self.chart.title.map { "\($0): " } ?? ""
         let unit = self.chart.unit.map { " \($0)" } ?? ""
         let points = self.chart.points.map { "\($0.label) \($0.value)\(unit)" }.joined(separator: ", ")
