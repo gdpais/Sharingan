@@ -2774,3 +2774,4 @@
 "By hour of week" = "Według godziny tygodnia";
 "%@ of spend on weekends" = "%@ wydatków w weekendy";
 "%@ vs previous %d days" = "%@ wobec poprzednich %d dni";
+"Lasts until %@ at this rate" = "Wystarczy do %@ przy tym tempie";

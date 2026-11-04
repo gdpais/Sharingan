@@ -2775,3 +2775,4 @@
 "By hour of week" = "بر اساس ساعت هفته";
 "%@ of spend on weekends" = "%@ از هزینه در آخر هفته‌ها";
 "%@ vs previous %d days" = "%@ نسبت به %d روز قبل";
+"Lasts until %@ at this rate" = "با این روند تا %@ کافی است";

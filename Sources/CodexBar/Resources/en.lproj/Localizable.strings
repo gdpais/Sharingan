@@ -2776,3 +2776,4 @@
 "By hour of week" = "By hour of week";
 "%@ of spend on weekends" = "%@ of spend on weekends";
 "%@ vs previous %d days" = "%@ vs previous %d days";
+"Lasts until %@ at this rate" = "Lasts until %@ at this rate";

@@ -2749,3 +2749,4 @@
 "By hour of week" = "一週各時段";
 "%@ of spend on weekends" = "週末支出佔 %@";
 "%@ vs previous %d days" = "%@（較前 %d 天）";
+"Lasts until %@ at this rate" = "以此速度可用到 %@";

@@ -2774,3 +2774,4 @@
 "By hour of week" = "Haftanın saatine göre";
 "%@ of spend on weekends" = "Hafta sonu harcama payı: %@";
 "%@ vs previous %d days" = "%@ (önceki %d güne göre)";
+"Lasts until %@ at this rate" = "Bu hızla %@ tarihine kadar yeter";

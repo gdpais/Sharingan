@@ -2772,3 +2772,4 @@
 "By hour of week" = "За годинами тижня";
 "%@ of spend on weekends" = "%@ витрат припадає на вихідні";
 "%@ vs previous %d days" = "%@ порівняно з попередніми %d дн.";
+"Lasts until %@ at this rate" = "Вистачить до %@ за такого темпу";

@@ -2768,3 +2768,4 @@
 "By hour of week" = "Per uur van de week";
 "%@ of spend on weekends" = "%@ van de uitgaven in het weekend";
 "%@ vs previous %d days" = "%@ ten opzichte van de vorige %d dagen";
+"Lasts until %@ at this rate" = "Genoeg tot %@ in dit tempo";

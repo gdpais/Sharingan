@@ -2770,3 +2770,4 @@
 "By hour of week" = "Por hora da semana";
 "%@ of spend on weekends" = "%@ do gasto nas fins de semana";
 "%@ vs previous %d days" = "%@ fronte aos %d días anteriores";
+"Lasts until %@ at this rate" = "Dura ata o %@ a este ritmo";

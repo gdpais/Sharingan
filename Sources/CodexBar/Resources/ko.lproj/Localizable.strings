@@ -2739,3 +2739,4 @@
 "By hour of week" = "요일·시간대별";
 "%@ of spend on weekends" = "주말 지출 비중 %@";
 "%@ vs previous %d days" = "%@ (이전 %d일 대비)";
+"Lasts until %@ at this rate" = "이 속도라면 %@까지 사용 가능";
