@@ -76,14 +76,17 @@ struct UsageBreakdownChartMenuView: View {
                             width: .ratio(ChartBarHoverSelection.barWidthRatio))
                             .foregroundStyle(by: .value(L("Service"), point.service))
                     }
-                    if let peak = model.peakPoint {
-                        let capStart = max(peak.creditsUsed - Self.capHeight(maxValue: model.maxCreditsUsed), 0)
-                        BarMark(
-                            x: .value(L("Day"), peak.date, unit: .day),
-                            yStart: .value(L("Cap start"), capStart),
-                            yEnd: .value(L("Cap end"), peak.creditsUsed),
-                            width: .ratio(ChartBarHoverSelection.barWidthRatio))
-                            .foregroundStyle(Color(nsColor: .systemYellow))
+                    if let average = model.dailyAverage {
+                        RuleMark(y: .value(L("Daily average"), average))
+                            .foregroundStyle(ChartReferenceLine.color)
+                            .lineStyle(ChartReferenceLine.strokeStyle)
+                            .annotation(position: .top, alignment: .leading, spacing: 2) {
+                                Text(String(
+                                    format: L("avg %@ credits/day"),
+                                    average.formatted(.number.precision(.fractionLength(0...2)))))
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
                     }
                 }
                 .chartForegroundStyleScale(domain: model.services, range: model.serviceColors)
@@ -108,7 +111,7 @@ struct UsageBreakdownChartMenuView: View {
                         ? L("No data")
                         : String(
                             format: L("%d days of usage data across %d services"),
-                            model.points.count,
+                            model.selectableDayDates.count,
                             model.services.count))
                 .chartOverlay { proxy in
                     GeometryReader { geo in
@@ -180,16 +183,23 @@ struct UsageBreakdownChartMenuView: View {
         return .empty
     }
 
+    static func _chartSeriesForTesting(breakdown: [OpenAIDashboardDailyBreakdown]) -> [String] {
+        self.makeModel(from: breakdown).services
+    }
+
+    static func _dailyAverageForTesting(breakdown: [OpenAIDashboardDailyBreakdown]) -> Double? {
+        self.makeModel(from: breakdown).dailyAverage
+    }
+
     private struct Model {
         let points: [Point]
         let breakdownByDayKey: [String: OpenAIDashboardDailyBreakdown]
         let dayDates: [(dayKey: String, date: Date)]
         let selectableDayDates: [(dayKey: String, date: Date)]
-        let peakPoint: (date: Date, creditsUsed: Double)?
+        let dailyAverage: Double?
         let services: [String]
         let serviceColors: [Color]
         let axisDates: [Date]
-        let maxCreditsUsed: Double
 
         func color(for service: String) -> Color {
             guard let idx = self.services.firstIndex(of: service), idx < self.serviceColors.count else {
@@ -224,6 +234,11 @@ struct UsageBreakdownChartMenuView: View {
         let sorted = OpenAIDashboardDailyBreakdown.removingSkillUsageServices(from: breakdown)
             .sorted { lhs, rhs in lhs.day < rhs.day }
 
+        // Totals span the whole visible range, so hovering or selecting a day never reshuffles colors.
+        let totals = Self.serviceTotals(from: sorted)
+        let slots = Self.serviceSlots(totals: totals)
+        let otherSeries = Self.otherSeriesName(avoiding: Set(slots.keys))
+
         var points: [Point] = []
         points.reserveCapacity(sorted.count * 2)
 
@@ -236,35 +251,39 @@ struct UsageBreakdownChartMenuView: View {
         var selectableDayDates: [(dayKey: String, date: Date)] = []
         selectableDayDates.reserveCapacity(sorted.count)
 
-        var peak: (date: Date, creditsUsed: Double)?
-        var maxCreditsUsed: Double = 0
+        var plottedDailyTotals: [Double] = []
+        plottedDailyTotals.reserveCapacity(sorted.count)
 
         for day in sorted {
             guard let date = self.dateFromDayKey(day.day) else { continue }
             breakdownByDayKey[day.day] = day
             dayDates.append((dayKey: day.day, date: date))
-            if day.totalCreditsUsed > 0 {
-                if let cur = peak {
-                    if day.totalCreditsUsed > cur.creditsUsed {
-                        peak = (date, day.totalCreditsUsed)
-                    }
-                } else {
-                    peak = (date, day.totalCreditsUsed)
-                }
-                maxCreditsUsed = max(maxCreditsUsed, day.totalCreditsUsed)
-            }
-            var addedSelectable = false
+            var plottedTotal: Double = 0
+            var otherCredits: Double = 0
             for service in day.services where service.creditsUsed > 0 {
-                points.append(Point(date: date, service: service.service, creditsUsed: service.creditsUsed))
-                if !addedSelectable {
-                    selectableDayDates.append((dayKey: day.day, date: date))
-                    addedSelectable = true
+                plottedTotal += service.creditsUsed
+                if slots[service.service] == .other {
+                    otherCredits += service.creditsUsed
+                } else {
+                    points.append(Point(date: date, service: service.service, creditsUsed: service.creditsUsed))
                 }
+            }
+            if otherCredits > 0 {
+                points.append(Point(date: date, service: otherSeries, creditsUsed: otherCredits))
+            }
+            if plottedTotal > 0 {
+                selectableDayDates.append((dayKey: day.day, date: date))
+                plottedDailyTotals.append(plottedTotal)
             }
         }
 
-        let services = Self.serviceOrder(from: sorted)
-        let colors = services.map { Self.colorForService($0) }
+        let ranked = ChartPalette.rankedNames(totals)
+        var services = ranked.filter { slots[$0] != .other }
+        var colors = services.map { ChartPalette.color(for: slots[$0] ?? .other) }
+        if ranked.contains(where: { slots[$0] == .other }) {
+            services.append(otherSeries)
+            colors.append(ChartPalette.otherColor)
+        }
         let axisDates = Self.axisDates(fromSortedDays: sorted)
 
         return Model(
@@ -272,51 +291,48 @@ struct UsageBreakdownChartMenuView: View {
             breakdownByDayKey: breakdownByDayKey,
             dayDates: dayDates,
             selectableDayDates: selectableDayDates,
-            peakPoint: peak,
+            dailyAverage: ChartReferenceLine.dailyAverage(plottedDailyTotals),
             services: services,
             serviceColors: colors,
-            axisDates: axisDates,
-            maxCreditsUsed: maxCreditsUsed)
+            axisDates: axisDates)
     }
 
-    private static func capHeight(maxValue: Double) -> Double {
-        maxValue * 0.05
-    }
-
-    private static func serviceOrder(from breakdown: [OpenAIDashboardDailyBreakdown]) -> [String] {
+    private static func serviceTotals(from breakdown: [OpenAIDashboardDailyBreakdown]) -> [String: Double] {
         var totals: [String: Double] = [:]
         for day in breakdown {
             for service in day.services {
                 totals[service.service, default: 0] += service.creditsUsed
             }
         }
-
         return totals
-            .sorted { lhs, rhs in
-                if lhs.value == rhs.value {
-                    return lhs.key < rhs.key
-                }
-                return lhs.value > rhs.value
-            }
-            .map(\.key)
     }
 
-    private static func colorForService(_ service: String) -> Color {
+    /// CLI keeps the first slot and GitHub code review the second; every other service fills the
+    /// remaining slots by total, and services past the last slot fold into "Other".
+    nonisolated static func serviceSlots(totals: [String: Double]) -> [String: ChartPalette.Slot] {
+        ChartPalette.slotAssignment(
+            for: totals.map { (name: $0.key, total: $0.value) },
+            pinnedSlot: Self.pinnedSlot(for:))
+    }
+
+    private nonisolated static func pinnedSlot(for service: String) -> Int? {
         let lower = service.lowercased()
         if lower == "cli" {
-            return Color(red: 0.26, green: 0.55, blue: 0.96)
+            return 0
         }
         if lower.contains("github"), lower.contains("review") {
-            return Color(red: 0.94, green: 0.53, blue: 0.18)
+            return 1
         }
-        let palette: [Color] = [
-            Color(red: 0.46, green: 0.75, blue: 0.36),
-            Color(red: 0.80, green: 0.45, blue: 0.92),
-            Color(red: 0.26, green: 0.78, blue: 0.86),
-            Color(red: 0.94, green: 0.74, blue: 0.26),
-        ]
-        let idx = abs(service.hashValue) % palette.count
-        return palette[idx]
+        return nil
+    }
+
+    /// The overflow series label, kept distinct from real service names so the chart domain stays unique.
+    private static func otherSeriesName(avoiding names: Set<String>) -> String {
+        var label = L("Other")
+        while names.contains(label) {
+            label += " "
+        }
+        return label
     }
 
     private static func axisDates(fromSortedDays sortedDays: [OpenAIDashboardDailyBreakdown]) -> [Date] {

@@ -2760,3 +2760,5 @@
 "section_history" = "Geschiedenis";
 "record_usage_history_title" = "Gebruiksgeschiedenis vastleggen";
 "record_usage_history_subtitle" = "Legt op deze Mac de gebruikspieken per uur vast voor aanbieders die nog geen geschiedenis bijhouden, plus 8 weken wekelijks Codex-gebruik voor tempovoorspellingen. Voedt de abonnementsgeschiedenis en de burndown-grafiek.";
+"Daily average" = "Daggemiddelde";
+"avg %@ credits/day" = "gem. %@ tegoeden/dag";

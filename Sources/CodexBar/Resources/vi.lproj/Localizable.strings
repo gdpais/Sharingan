@@ -2764,3 +2764,5 @@
 "section_history" = "Lịch sử";
 "record_usage_history_title" = "Ghi lại lịch sử sử dụng";
 "record_usage_history_subtitle" = "Ghi lại mức sử dụng cao nhất theo giờ trên máy Mac này cho các nhà cung cấp chưa lưu lịch sử, cùng với 8 tuần mức sử dụng hằng tuần của Codex để dự đoán tốc độ. Cung cấp dữ liệu cho lịch sử gói và biểu đồ tiêu hao.";
+"Daily average" = "Trung bình hằng ngày";
+"avg %@ credits/day" = "TB %@ tín dụng/ngày";

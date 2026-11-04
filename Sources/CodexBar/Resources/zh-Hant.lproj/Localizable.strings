@@ -2741,3 +2741,5 @@
 "section_history" = "歷史記錄";
 "record_usage_history_title" = "記錄用量歷史";
 "record_usage_history_subtitle" = "在此 Mac 上為尚未保存歷史記錄的供應商記錄每小時用量峰值，並記錄 8 週的 Codex 每週用量以用於節奏預測。為方案歷史與消耗圖表提供資料。";
+"Daily average" = "每日平均";
+"avg %@ credits/day" = "平均 %@ 額度/天";

@@ -2767,3 +2767,5 @@
 "section_history" = "Cronologia";
 "record_usage_history_title" = "Registra la cronologia di utilizzo";
 "record_usage_history_subtitle" = "Registra i picchi di utilizzo orari su questo Mac per i provider che non conservano già una cronologia, oltre a 8 settimane di utilizzo settimanale di Codex per le previsioni di ritmo. Alimenta la cronologia del piano e il grafico di consumo.";
+"Daily average" = "Media giornaliera";
+"avg %@ credits/day" = "media %@ crediti/giorno";

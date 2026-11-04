@@ -2762,3 +2762,5 @@
 "section_history" = "Historik";
 "record_usage_history_title" = "Spela in användningshistorik";
 "record_usage_history_subtitle" = "Sparar timvisa användningstoppar på den här Macen för leverantörer som inte redan sparar historik, samt 8 veckors veckovis Codex-användning för tempoprognoser. Driver planhistoriken och burndown-diagrammet.";
+"Daily average" = "Dagligt genomsnitt";
+"avg %@ credits/day" = "snitt %@ krediter/dag";

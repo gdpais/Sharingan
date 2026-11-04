@@ -2763,3 +2763,5 @@
 "section_history" = "履歴";
 "record_usage_history_title" = "使用量の履歴を記録";
 "record_usage_history_subtitle" = "履歴をまだ保存していないプロバイダについて、1 時間ごとの使用量のピークをこの Mac に記録します。あわせて、ペース予測用に Codex の週間使用量を 8 週間分記録します。プランの履歴とバーンダウンチャートに使用されます。";
+"Daily average" = "1日平均";
+"avg %@ credits/day" = "平均 %@ クレジット/日";

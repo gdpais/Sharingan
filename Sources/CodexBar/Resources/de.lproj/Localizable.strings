@@ -2761,3 +2761,5 @@
 "section_history" = "Verlauf";
 "record_usage_history_title" = "Nutzungsverlauf aufzeichnen";
 "record_usage_history_subtitle" = "Zeichnet stündliche Nutzungsspitzen auf diesem Mac für Anbieter auf, die noch keinen Verlauf speichern, sowie 8 Wochen wöchentlicher Codex-Nutzung für Tempoprognosen. Grundlage für den Planverlauf und das Burndown-Diagramm.";
+"Daily average" = "Tagesdurchschnitt";
+"avg %@ credits/day" = "Ø %@ Credits/Tag";

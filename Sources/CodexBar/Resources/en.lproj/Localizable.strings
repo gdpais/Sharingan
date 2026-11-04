@@ -2768,3 +2768,5 @@
 "section_history" = "History";
 "record_usage_history_title" = "Record usage history";
 "record_usage_history_subtitle" = "Records hourly usage peaks on this Mac for providers that don't already keep history, plus 8 weeks of Codex weekly usage for pace predictions. Powers plan history and the burndown chart.";
+"Daily average" = "Daily average";
+"avg %@ credits/day" = "avg %@ credits/day";
