@@ -171,6 +171,20 @@ enum UpdaterPreferenceSync {
     }
 }
 
+/// Sharingan ships without an appcast until the owner configures their own feed and Sparkle key
+/// (see `TODO(sharingan)` in Scripts/package_app.sh). Without a feed Sparkle stays off, so the
+/// "Check for Updates" menu item and the About pane update controls are hidden.
+enum UpdateFeedConfiguration {
+    static func hasFeed(infoDictionary: [String: Any]?) -> Bool {
+        guard let value = infoDictionary?["SUFeedURL"] as? String,
+              let url = URL(string: value.trimmingCharacters(in: .whitespacesAndNewlines)),
+              url.scheme == "https",
+              url.host?.isEmpty == false
+        else { return false }
+        return true
+    }
+}
+
 /// No-op updater used for debug builds and non-bundled runs to suppress Sparkle dialogs.
 final class DisabledUpdaterController: UpdaterProviding {
     var automaticallyChecksForUpdates: Bool = false
@@ -355,7 +369,9 @@ private func makeUpdaterController() -> UpdaterProviding {
             notifier: HomebrewUpdateNotifier(dependencies: .live))
     }
 
-    guard isDeveloperIDSigned(bundleURL: bundleURL) else {
+    guard UpdateFeedConfiguration.hasFeed(infoDictionary: Bundle.main.infoDictionary),
+          isDeveloperIDSigned(bundleURL: bundleURL)
+    else {
         return DisabledUpdaterController(unavailableReason: "Updates unavailable in this build.")
     }
 
