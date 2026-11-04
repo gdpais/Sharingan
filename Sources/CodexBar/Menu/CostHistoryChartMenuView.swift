@@ -133,6 +133,7 @@ struct CostHistoryChartMenuView: View {
             maxValue: model.maxValue,
             metric: activeMetric,
             costMultiplier: self.costMultiplier)
+        let dailyAverage = Self.dailyAverage(model: model, metric: activeMetric)
         let tokenValues = model.points.compactMap(\.totalTokens)
         let accessibilityTokens = tokenValues.isEmpty ? nil : CheckedSum.integers(tokenValues)
         VStack(alignment: .leading, spacing: Self.outerSpacing) {
@@ -170,14 +171,15 @@ struct CostHistoryChartMenuView: View {
                                     .yAxisString(point.value, metric: activeMetric) : "—")
                         }
                     }
-                    if let peak = Self.peakPoint(model: model) {
-                        let capStart = max(peak.value - Self.capHeight(maxValue: model.maxValue), 0)
-                        BarMark(
-                            x: .value(L("Day"), peak.date, unit: .day),
-                            yStart: .value(L("Cap start"), capStart),
-                            yEnd: .value(L("Cap end"), peak.value),
-                            width: .ratio(ChartBarHoverSelection.barWidthRatio))
-                            .foregroundStyle(Color(nsColor: .systemYellow))
+                    if let average = dailyAverage {
+                        RuleMark(y: .value(L("Average"), average))
+                            .foregroundStyle(Color.secondary)
+                            .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 3]))
+                            .annotation(position: .top, alignment: .trailing, spacing: 2) {
+                                Text(self.averageLabel(average, metric: activeMetric))
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
                     }
                 }
                 .chartYScale(domain: 0...(yTicks.last ?? max(model.maxValue, 1)))
@@ -436,7 +438,6 @@ struct CostHistoryChartMenuView: View {
         let dateKeys: [(key: String, date: Date)]
         let axisDates: [Date]
         let barColor: Color
-        let peakKey: String?
         let maxValue: Double
         let detailViewportRowCount: Int
         let hasDetailOverflow: Bool
@@ -595,8 +596,21 @@ struct CostHistoryChartMenuView: View {
         row.subtitle == nil && row.modeSubtitle == nil ? 14 : rowHeight
     }
 
-    private static func capHeight(maxValue: Double) -> Double {
-        maxValue * 0.05
+    /// Mean of the plotted days that carry a value for the metric; incomplete-only days are excluded.
+    /// Nil with fewer than two such days or a zero total, where a reference line adds nothing.
+    nonisolated static func dailyAverage(_ values: [Double]) -> Double? {
+        let usable = values.filter { $0.isFinite && $0 >= 0 }
+        guard usable.count >= 2 else { return nil }
+        let total = usable.reduce(0, +)
+        guard total > 0 else { return nil }
+        return total / Double(usable.count)
+    }
+
+    private static func dailyAverage(model: Model, metric: ChartMetric) -> Double? {
+        self.dailyAverage(model.points.compactMap { point in
+            let hasValue = metric == .cost ? point.costUSD != nil : point.totalTokens != nil
+            return hasValue ? point.value : nil
+        })
     }
 
     /// Y-axis tick values for the cost chart: 1-2-5 steps from zero to a nice ceiling at or above the
@@ -637,7 +651,6 @@ struct CostHistoryChartMenuView: View {
         var dateKeys: [(key: String, date: Date)] = []
         dateKeys.reserveCapacity(sorted.count)
 
-        var peak: (key: String, value: Double)?
         var maxValue: Double = 0
         for entry in sorted {
             guard let (value, date) = self.chartPointInput(for: entry, provider: provider, metric: metric) else {
@@ -654,13 +667,6 @@ struct CostHistoryChartMenuView: View {
             pointsByKey[entry.date] = point
             entriesByKey[entry.date] = entry
             dateKeys.append((entry.date, date))
-            if let cur = peak {
-                if value > cur.value {
-                    peak = (entry.date, value)
-                }
-            } else {
-                peak = (entry.date, value)
-            }
             maxValue = max(maxValue, value)
         }
 
@@ -680,7 +686,6 @@ struct CostHistoryChartMenuView: View {
             dateKeys: dateKeys,
             axisDates: axisDates,
             barColor: barColor,
-            peakKey: maxValue > 0 ? peak?.key : nil,
             maxValue: maxValue,
             detailViewportRowCount: detailLayout.viewportRowCount,
             hasDetailOverflow: detailLayout.hasOverflow,
@@ -802,11 +807,6 @@ struct CostHistoryChartMenuView: View {
     {
         // Provider-specific by design: only Codex exposes incremental local-history coverage for token scans.
         provider == .codex && metric == .tokens && !historyCoverageIsEstablished
-    }
-
-    private static func peakPoint(model: Model) -> Point? {
-        guard let key = model.peakKey else { return nil }
-        return model.pointsByDateKey[key]
     }
 
     private static func hasModeSubtitle(_ item: CostUsageDailyReport.ModelBreakdown) -> Bool {
@@ -1093,6 +1093,15 @@ struct CostHistoryChartMenuView: View {
         UsageFormatter.tokenCountString(Int(value.rounded()))
     }
 
+    private func averageLabel(_ value: Double, metric: ChartMetric) -> String {
+        switch metric {
+        case .tokens:
+            L("avg %@/day", UsageFormatter.tokenCountString(Int(value.rounded())))
+        case .cost:
+            L("avg %@/day", Self.yAxisCostString(value * self.costMultiplier, currencyCode: self.currencyCode))
+        }
+    }
+
     private func yAxisString(_ value: Double, metric: ChartMetric) -> String {
         switch metric {
         case .tokens:
@@ -1316,6 +1325,14 @@ extension CostHistoryChartMenuView {
 
     static func _yAxisTickValuesForTesting(maxValue: Double, metric: ChartMetric) -> [Double] {
         self.yAxisTickValues(maxValue: maxValue, metric: metric, costMultiplier: 1)
+    }
+
+    static func _dailyAverageForTesting(
+        provider: UsageProvider,
+        daily: [DailyEntry],
+        metric: ChartMetric) -> Double?
+    {
+        self.dailyAverage(model: self.makeModel(provider: provider, daily: daily, metric: metric), metric: metric)
     }
 
     static func _yAxisCostStringForTesting(_ value: Double, currencyCode: String = "USD") -> String {

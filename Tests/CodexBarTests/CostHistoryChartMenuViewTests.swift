@@ -631,6 +631,50 @@ struct CostHistoryChartMenuViewTests {
             metric: .tokens) == [0, 50_000_000, 100_000_000, 150_000_000, 200_000_000])
     }
 
+    @Test
+    func `daily average covers days with values and skips incomplete-only days`() {
+        let daily = [
+            Self.fixtureEntry("2026-06-01", costUSD: 10, totalTokens: 1000),
+            Self.fixtureEntry("2026-06-02", costUSD: 20, totalTokens: nil),
+            CostUsageDailyReport.Entry(
+                date: "2026-06-03",
+                inputTokens: nil,
+                outputTokens: nil,
+                totalTokens: nil,
+                costUSD: nil,
+                modelsUsed: ["fixture-model"],
+                modelBreakdowns: [.init(modelName: "fixture-model", costUSD: nil, incompleteRequestCount: 1)]),
+        ]
+        #expect(CostHistoryChartMenuView._dailyAverageForTesting(provider: .claude, daily: daily, metric: .cost) == 15)
+        // A single token day draws no reference line.
+        #expect(CostHistoryChartMenuView._dailyAverageForTesting(
+            provider: .claude, daily: daily, metric: .tokens) == nil)
+    }
+
+    @Test
+    func `daily average helper needs two usable values and a nonzero total`() {
+        #expect(CostHistoryChartMenuView.dailyAverage([4, 8, 0]) == 4)
+        #expect(CostHistoryChartMenuView.dailyAverage([4]) == nil)
+        #expect(CostHistoryChartMenuView.dailyAverage([0, 0]) == nil)
+        #expect(CostHistoryChartMenuView.dailyAverage([]) == nil)
+        #expect(CostHistoryChartMenuView.dailyAverage([2, .nan, 6]) == 4)
+    }
+
+    private static func fixtureEntry(
+        _ date: String,
+        costUSD: Double?,
+        totalTokens: Int?) -> CostUsageDailyReport.Entry
+    {
+        CostUsageDailyReport.Entry(
+            date: date,
+            inputTokens: nil,
+            outputTokens: nil,
+            totalTokens: totalTokens,
+            costUSD: costUSD,
+            modelsUsed: nil,
+            modelBreakdowns: nil)
+    }
+
     @Test(arguments: [
         (0.0, "$0"),
         (12.56, "$13"),
