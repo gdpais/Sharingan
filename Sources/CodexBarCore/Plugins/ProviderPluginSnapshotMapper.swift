@@ -195,6 +195,18 @@ enum ProviderPluginSnapshotMapper {
         }
         let title = try self.optionalDetailString(chart, property: "title", path: chartPath)
         let unit = try self.optionalDetailString(chart, property: "unit", path: chartPath)
+        let series = try self.detailChartSeries(chart, path: chartPath)
+        let references = try self.detailChartReferences(chart, path: chartPath)
+        if !series.isEmpty, self.isAbsentDetailChartValue(chart.property("points")) {
+            return try self.assembleDetailChart(
+                kind: kind,
+                title: title,
+                unit: unit,
+                points: [],
+                series: series,
+                references: references,
+                path: chartPath)
+        }
         guard let pointsValue = chart.property("points"), pointsValue.isArray else {
             throw ProviderPluginError.invalidSnapshot("\(chartPath).points must be an array")
         }
@@ -211,7 +223,14 @@ enum ProviderPluginSnapshotMapper {
                 label: self.requiredDetailString(point, property: "label", path: pointPath),
                 value: self.requiredFiniteNumber(point, property: "value", path: pointPath))
         }
-        return try ProviderDetailSection.Chart(kind: kind, title: title, unit: unit, points: points)
+        return try self.assembleDetailChart(
+            kind: kind,
+            title: title,
+            unit: unit,
+            points: points,
+            series: series,
+            references: references,
+            path: chartPath)
     }
 
     private static func requiredDetailString(
