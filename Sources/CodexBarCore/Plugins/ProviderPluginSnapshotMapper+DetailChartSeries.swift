@@ -84,6 +84,7 @@ extension ProviderPluginSnapshotMapper {
         return value.isUndefined || value.isNull
     }
 
+    // swiftlint:disable:next function_parameter_count
     static func assembleDetailChart(
         kind: ProviderDetailSection.Chart.Kind,
         title: String?,
