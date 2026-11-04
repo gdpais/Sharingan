@@ -66,7 +66,7 @@ enum KeychainPromptCoordinator {
     private static let promptLock = NSLock()
     private static let log = CodexBarLog.logger(LogCategories.keychainPrompt)
     private static let documentationURL =
-        "https://github.com/steipete/CodexBar/blob/main/docs/keychain-prompts.md"
+        "https://github.com/gdpais/Sharingan/blob/main/docs/keychain-prompts.md"
 
     static func install() {
         KeychainPromptHandler.handler = { context in
