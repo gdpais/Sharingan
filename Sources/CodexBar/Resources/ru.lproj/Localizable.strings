@@ -2773,3 +2773,16 @@
 "%@ of spend on weekends" = "%@ расходов приходится на выходные";
 "%@ vs previous %d days" = "%@ по сравнению с предыдущими %d дн.";
 "Lasts until %@ at this rate" = "Хватит до %@ при таком темпе";
+
+/* Plan fit */
+"Median" = "Медиана";
+"Median %@%%" = "Медиана %@%%";
+"capped %d of %d weeks" = "лимит в %d из %d нед.";
+"capped %d of %d months" = "лимит в %d из %d мес.";
+"capped %d of %d windows" = "лимит в %d из %d периодов";
+"%@ capped sessions per week" = "%@ сеансов с лимитом в неделю";
+"%@ h capped" = "%@ ч на лимите";
+"You may be paying for headroom you don't use." = "Возможно, вы платите за запас, которым не пользуетесь.";
+"You hit the cap often." = "Вы часто упираетесь в лимит.";
+"Your plan fits how you use it." = "План соответствует вашему использованию.";
+"Not enough history for a verdict yet." = "Пока недостаточно истории для оценки.";

@@ -2772,3 +2772,16 @@
 "%@ of spend on weekends" = "週末の支出: %@";
 "%@ vs previous %d days" = "%@（直前の%d日間比）";
 "Lasts until %@ at this rate" = "このペースだと%@まで持ちます";
+
+/* Plan fit */
+"Median" = "中央値";
+"Median %@%%" = "中央値 %@%%";
+"capped %d of %d weeks" = "上限到達 %d/%d週";
+"capped %d of %d months" = "上限到達 %d/%dか月";
+"capped %d of %d windows" = "上限到達 %d/%d期間";
+"%@ capped sessions per week" = "上限到達セッション 週%@回";
+"%@ h capped" = "上限中 %@時間";
+"You may be paying for headroom you don't use." = "使わない余裕分を支払っている可能性があります。";
+"You hit the cap often." = "上限に頻繁に達しています。";
+"Your plan fits how you use it." = "プランは使い方に合っています。";
+"Not enough history for a verdict yet." = "判定に十分な履歴がまだありません。";

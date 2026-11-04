@@ -2771,3 +2771,16 @@
 "%@ of spend on weekends" = "%@ av utgifterna på helger";
 "%@ vs previous %d days" = "%@ jämfört med föregående %d dagar";
 "Lasts until %@ at this rate" = "Räcker till %@ i den här takten";
+
+/* Plan fit */
+"Median" = "Median";
+"Median %@%%" = "Median %@%%";
+"capped %d of %d weeks" = "nådde gränsen %d av %d veckor";
+"capped %d of %d months" = "nådde gränsen %d av %d månader";
+"capped %d of %d windows" = "nådde gränsen %d av %d perioder";
+"%@ capped sessions per week" = "%@ sessioner per vecka vid gränsen";
+"%@ h capped" = "%@ h vid gränsen";
+"You may be paying for headroom you don't use." = "Du kanske betalar för marginal du inte använder.";
+"You hit the cap often." = "Du når ofta gränsen.";
+"Your plan fits how you use it." = "Din plan passar hur du använder den.";
+"Not enough history for a verdict yet." = "Inte tillräckligt med historik för en bedömning än.";

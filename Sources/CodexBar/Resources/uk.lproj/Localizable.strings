@@ -2773,3 +2773,16 @@
 "%@ of spend on weekends" = "%@ витрат припадає на вихідні";
 "%@ vs previous %d days" = "%@ порівняно з попередніми %d дн.";
 "Lasts until %@ at this rate" = "Вистачить до %@ за такого темпу";
+
+/* Plan fit */
+"Median" = "Медіана";
+"Median %@%%" = "Медіана %@%%";
+"capped %d of %d weeks" = "ліміт у %d з %d тиж.";
+"capped %d of %d months" = "ліміт у %d з %d міс.";
+"capped %d of %d windows" = "ліміт у %d з %d періодів";
+"%@ capped sessions per week" = "%@ сесій з лімітом на тиждень";
+"%@ h capped" = "%@ год на ліміті";
+"You may be paying for headroom you don't use." = "Можливо, ви платите за запас, яким не користуєтеся.";
+"You hit the cap often." = "Ви часто впираєтеся в ліміт.";
+"Your plan fits how you use it." = "План відповідає вашому використанню.";
+"Not enough history for a verdict yet." = "Поки недостатньо історії для оцінки.";

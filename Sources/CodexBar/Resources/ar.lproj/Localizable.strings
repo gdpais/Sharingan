@@ -2776,3 +2776,16 @@
 "%@ of spend on weekends" = "%@ من الإنفاق في عطلات نهاية الأسبوع";
 "%@ vs previous %d days" = "%@ مقارنةً بالأيام الـ %d السابقة";
 "Lasts until %@ at this rate" = "يكفي حتى %@ بهذا المعدل";
+
+/* Plan fit */
+"Median" = "الوسيط";
+"Median %@%%" = "الوسيط %@%%";
+"capped %d of %d weeks" = "بلغ الحد في %d من %d أسابيع";
+"capped %d of %d months" = "بلغ الحد في %d من %d أشهر";
+"capped %d of %d windows" = "بلغ الحد في %d من %d فترات";
+"%@ capped sessions per week" = "%@ جلسات بلغت الحد أسبوعيًا";
+"%@ h capped" = "%@ س عند الحد";
+"You may be paying for headroom you don't use." = "قد تدفع مقابل سعة لا تستخدمها.";
+"You hit the cap often." = "تبلغ الحد كثيرًا.";
+"Your plan fits how you use it." = "خطتك تناسب طريقة استخدامك.";
+"Not enough history for a verdict yet." = "لا يوجد سجل كافٍ لإصدار حكم بعد.";

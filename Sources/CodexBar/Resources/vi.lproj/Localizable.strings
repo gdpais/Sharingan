@@ -2773,3 +2773,16 @@
 "%@ of spend on weekends" = "%@ chi tiêu vào cuối tuần";
 "%@ vs previous %d days" = "%@ so với %d ngày trước đó";
 "Lasts until %@ at this rate" = "Đủ dùng đến %@ với tốc độ này";
+
+/* Plan fit */
+"Median" = "Trung vị";
+"Median %@%%" = "Trung vị %@%%";
+"capped %d of %d weeks" = "chạm giới hạn %d/%d tuần";
+"capped %d of %d months" = "chạm giới hạn %d/%d tháng";
+"capped %d of %d windows" = "chạm giới hạn %d/%d kỳ";
+"%@ capped sessions per week" = "%@ phiên chạm giới hạn mỗi tuần";
+"%@ h capped" = "%@ giờ ở giới hạn";
+"You may be paying for headroom you don't use." = "Có thể bạn đang trả tiền cho phần dư không dùng đến.";
+"You hit the cap often." = "Bạn thường xuyên chạm giới hạn.";
+"Your plan fits how you use it." = "Gói của bạn phù hợp với cách bạn sử dụng.";
+"Not enough history for a verdict yet." = "Chưa đủ lịch sử để đánh giá.";
