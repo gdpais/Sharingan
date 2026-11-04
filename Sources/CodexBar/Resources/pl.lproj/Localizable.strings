@@ -2796,3 +2796,9 @@
 "Top model share" = "Udział najlepszego modelu";
 "%@ vs previous period" = "%@ wobec poprzedniego okresu";
 "%@ pts" = "%@ pkt";
+"Typical week" = "Typowy tydzień";
+"Model share" = "Udział modeli";
+"Share of estimated spend" = "Udział w szacowanych wydatkach";
+"Project trends" = "Trendy projektów";
+"Change compares the last %d days with the %d days before." = "Zmiana porównuje ostatnie %d dni z %d dniami wcześniej.";
+"New" = "Nowy";

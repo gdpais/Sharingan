@@ -2797,3 +2797,9 @@
 "Top model share" = "حصة النموذج الأعلى";
 "%@ vs previous period" = "%@ مقارنة بالفترة السابقة";
 "%@ pts" = "%@ نقطة";
+"Typical week" = "الأسبوع المعتاد";
+"Model share" = "حصة النماذج";
+"Share of estimated spend" = "الحصة من الإنفاق التقديري";
+"Project trends" = "اتجاهات المشاريع";
+"Change compares the last %d days with the %d days before." = "يقارن التغيّر آخر %d يومًا بالـ %d يومًا التي سبقتها.";
+"New" = "جديد";

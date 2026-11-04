@@ -2792,3 +2792,9 @@
 "Top model share" = "Part du modèle principal";
 "%@ vs previous period" = "%@ par rapport à la période précédente";
 "%@ pts" = "%@ pts";
+"Typical week" = "Semaine type";
+"Model share" = "Part par modèle";
+"Share of estimated spend" = "Part des dépenses estimées";
+"Project trends" = "Tendances des projets";
+"Change compares the last %d days with the %d days before." = "La variation compare les %d derniers jours aux %d jours précédents.";
+"New" = "Nouveau";

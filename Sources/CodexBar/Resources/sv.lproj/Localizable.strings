@@ -2792,3 +2792,9 @@
 "Top model share" = "Toppmodellens andel";
 "%@ vs previous period" = "%@ jämfört med föregående period";
 "%@ pts" = "%@ p.e.";
+"Typical week" = "Typisk vecka";
+"Model share" = "Modellandel";
+"Share of estimated spend" = "Andel av uppskattade utgifter";
+"Project trends" = "Projekttrender";
+"Change compares the last %d days with the %d days before." = "Förändringen jämför de senaste %d dagarna med de %d dagarna före.";
+"New" = "Ny";

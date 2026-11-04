@@ -2795,3 +2795,9 @@
 "Top model share" = "Pangsa model teratas";
 "%@ vs previous period" = "%@ vs periode sebelumnya";
 "%@ pts" = "%@ poin";
+"Typical week" = "Minggu biasa";
+"Model share" = "Porsi model";
+"Share of estimated spend" = "Porsi dari perkiraan pengeluaran";
+"Project trends" = "Tren proyek";
+"Change compares the last %d days with the %d days before." = "Perubahan membandingkan %d hari terakhir dengan %d hari sebelumnya.";
+"New" = "Baru";

@@ -2790,3 +2790,9 @@
 "Top model share" = "Aandeel van topmodel";
 "%@ vs previous period" = "%@ t.o.v. vorige periode";
 "%@ pts" = "%@ ptn";
+"Typical week" = "Typische week";
+"Model share" = "Modelaandeel";
+"Share of estimated spend" = "Aandeel in de geschatte uitgaven";
+"Project trends" = "Projecttrends";
+"Change compares the last %d days with the %d days before." = "De verandering vergelijkt de laatste %d dagen met de %d dagen daarvoor.";
+"New" = "Nieuw";

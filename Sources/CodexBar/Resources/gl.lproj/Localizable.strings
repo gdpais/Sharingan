@@ -2792,3 +2792,9 @@
 "Top model share" = "Cota do modelo principal";
 "%@ vs previous period" = "%@ fronte ao período anterior";
 "%@ pts" = "%@ pp";
+"Typical week" = "Semana habitual";
+"Model share" = "Cota por modelo";
+"Share of estimated spend" = "Proporción do gasto estimado";
+"Project trends" = "Tendencias dos proxectos";
+"Change compares the last %d days with the %d days before." = "O cambio compara os últimos %d días cos %d días anteriores.";
+"New" = "Novo";

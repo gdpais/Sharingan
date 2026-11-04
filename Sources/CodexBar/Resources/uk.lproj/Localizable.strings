@@ -2794,3 +2794,9 @@
 "Top model share" = "Частка провідної моделі";
 "%@ vs previous period" = "%@ порівняно з попереднім періодом";
 "%@ pts" = "%@ в. п.";
+"Typical week" = "Типовий тиждень";
+"Model share" = "Частка моделей";
+"Share of estimated spend" = "Частка в орієнтовних витратах";
+"Project trends" = "Динаміка проєктів";
+"Change compares the last %d days with the %d days before." = "Зміна порівнює останні %d дн. з %d дн. перед ними.";
+"New" = "Новий";

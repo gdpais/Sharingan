@@ -2793,3 +2793,9 @@
 "Top model share" = "トップモデルのシェア";
 "%@ vs previous period" = "前期間比 %@";
 "%@ pts" = "%@ ポイント";
+"Typical week" = "いつもの週";
+"Model share" = "モデル別シェア";
+"Share of estimated spend" = "推定支出に占める割合";
+"Project trends" = "プロジェクトの推移";
+"Change compares the last %d days with the %d days before." = "変化は直近%d日間とその前の%d日間を比較しています。";
+"New" = "新規";

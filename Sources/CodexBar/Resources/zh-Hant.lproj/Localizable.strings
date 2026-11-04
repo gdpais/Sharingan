@@ -2771,3 +2771,9 @@
 "Top model share" = "首位模型佔比";
 "%@ vs previous period" = "較上期 %@";
 "%@ pts" = "%@ 個百分點";
+"Typical week" = "典型週";
+"Model share" = "模型佔比";
+"Share of estimated spend" = "佔預估支出的比例";
+"Project trends" = "專案趨勢";
+"Change compares the last %d days with the %d days before." = "變化比較最近 %d 天與之前 %d 天。";
+"New" = "新增";

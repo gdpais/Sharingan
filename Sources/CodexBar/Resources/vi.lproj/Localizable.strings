@@ -2794,3 +2794,9 @@
 "Top model share" = "Tỷ trọng mô hình hàng đầu";
 "%@ vs previous period" = "%@ so với kỳ trước";
 "%@ pts" = "%@ điểm";
+"Typical week" = "Tuần điển hình";
+"Model share" = "Tỷ trọng mô hình";
+"Share of estimated spend" = "Tỷ trọng trong chi tiêu ước tính";
+"Project trends" = "Xu hướng dự án";
+"Change compares the last %d days with the %d days before." = "Mức thay đổi so sánh %d ngày gần nhất với %d ngày trước đó.";
+"New" = "Mới";

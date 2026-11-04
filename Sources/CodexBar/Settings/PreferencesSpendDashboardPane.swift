@@ -745,6 +745,7 @@ struct SpendDashboardCurrencySection: View {
                 selection: self.$selectedTrendSection,
                 onSelectDay: self.onSelectDay,
                 onClearSelectedDay: self.onClearSelectedDay)
+            SpendDashboardInsightsPanels(group: self.group, hidePersonalInfo: self.hidePersonalInfo)
             SpendDailyLedger(group: self.group)
         }
         .environment(\.timeZone, self.group.timeZone)

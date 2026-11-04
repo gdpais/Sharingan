@@ -2795,3 +2795,9 @@
 "Top model share" = "ส่วนแบ่งของโมเดลอันดับต้น";
 "%@ vs previous period" = "%@ เทียบกับช่วงก่อนหน้า";
 "%@ pts" = "%@ จุด";
+"Typical week" = "สัปดาห์ปกติ";
+"Model share" = "สัดส่วนโมเดล";
+"Share of estimated spend" = "สัดส่วนของค่าใช้จ่ายโดยประมาณ";
+"Project trends" = "แนวโน้มโครงการ";
+"Change compares the last %d days with the %d days before." = "การเปลี่ยนแปลงเปรียบเทียบ %d วันล่าสุดกับ %d วันก่อนหน้า";
+"New" = "ใหม่";

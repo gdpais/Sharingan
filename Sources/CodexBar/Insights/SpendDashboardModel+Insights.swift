@@ -1,82 +1,169 @@
 import CodexBarCore
 import Foundation
 
-/// Feeds the insight tiles from the dashboard's own window summaries, so the tiles share its day
-/// bucketing, currency conversion and coverage rules instead of re-reading snapshots.
+/// Series for the Usage & Spend insight panels, built once with each currency group.
+struct SpendDashboardInsights: Equatable, Sendable {
+    static let modelShareTopCount = 5
+    static let projectTrendTopCount = 5
+
+    /// Each model's share of priced spend per bucket of the range; smaller models fold into Other.
+    var modelShare: SpendShareOverTime?
+    /// Legend names for model share series, keyed by series ID.
+    var modelNames: [String: String] = [:]
+    /// The top projects' spend over the range, each with the change between the range's two halves.
+    var projectTrends: SpendSeriesTrends?
+    /// The ledger identity of each trend, keyed by `ProjectRow.id`, so labels redact like the Projects list.
+    var projectIdentities: [String: SpendDashboardModel.ProjectRow] = [:]
+}
+
 extension SpendDashboardModel {
-    typealias InsightSummarizer = (ProviderInput, Double, ClosedRange<Date>, Calendar) -> InputSummary
-
-    /// The selected range's per-source days, plus the equal-length period just before it when every
-    /// source's history covers that whole period. `summarize` is the dashboard's window summary
-    /// builder, so the earlier period follows the same validity rules as the range itself.
-    static func insightInputs(
-        _ summaries: [InputSummary],
-        _ bounds: ClosedRange<Date>,
-        _ calendar: Calendar,
-        _ summarize: InsightSummarizer) -> SpendInsightInputs
-    {
-        let dayCount = Self.dayCount(in: bounds, calendar: calendar)
-        guard dayCount > 0, !summaries.isEmpty else { return SpendInsightInputs() }
-        return SpendInsightInputs(
-            period: SpendInsightPeriod(start: bounds.lowerBound, dayCount: dayCount),
-            samples: summaries.flatMap { Self.insightSamples($0) },
-            previousSamples: Self.previousInsightSamples(
-                summaries,
-                bounds: bounds,
-                dayCount: dayCount,
-                calendar: calendar,
-                summarize: summarize))
+    private struct ModelShareInput {
+        var observations: [SpendShareOverTime.Observation] = []
+        var names: [String: String] = [:]
     }
 
-    static func insightSamples(_ summary: InputSummary) -> [SpendInsightSample] {
-        summary.entries.map { windowEntry -> SpendInsightSample in
-            let entry = windowEntry.entry
-            let cost = summary.hasInvalidCostHistory
-                ? nil
-                : Self.validCost(entry.costUSD).map { $0 * summary.costMultiplier }
-            return SpendInsightSample(
-                sourceID: summary.input.id,
-                day: windowEntry.day,
-                cost: cost,
-                totalTokens: entry.hasOnlyIncompleteRequests ? nil : entry.totalTokens,
-                inputTokens: entry.inputTokens,
-                cacheReadTokens: entry.cacheReadTokens,
-                cacheCreationTokens: entry.cacheCreationTokens,
-                outputTokens: entry.outputTokens,
-                reasoningTokens: entry.reasoningTokens,
-                modelCosts: cost == nil ? [] : Self.insightModelCosts(entry, summary: summary))
-        }
+    private struct ProjectTrendInput {
+        var observations: [SpendSeriesTrends.Observation] = []
+        var identities: [String: ProjectRow] = [:]
+        var days: ClosedRange<Date>?
     }
 
-    private static func previousInsightSamples(
-        _ summaries: [InputSummary],
+    /// Model share follows the aggregate sources like the Models list; project trends follow the detail
+    /// sources and per-project daily rows like the Projects list. Both ignore a selected day: they show the range.
+    static func insights(
+        summaries: [InputSummary],
+        detailSummaries: [InputSummary],
         bounds: ClosedRange<Date>,
-        dayCount: Int,
-        calendar: Calendar,
-        summarize: InsightSummarizer) -> [SpendInsightSample]?
+        detailBounds: ClosedRange<Date>,
+        calendar: Calendar) -> SpendDashboardInsights
     {
-        guard let start = calendar.date(byAdding: .day, value: -dayCount, to: bounds.lowerBound),
-              let end = calendar.date(byAdding: .day, value: -1, to: bounds.lowerBound)
-        else { return nil }
-        let previousBounds = calendar.startOfDay(for: start)...calendar.startOfDay(for: end)
-        let previous = summaries.map { summarize($0.input, $0.costMultiplier, previousBounds, calendar) }
-        // A source whose history starts inside the earlier period would turn the comparison into a
-        // floor, so the delta is offered only when every source covers all of it.
-        guard previous.allSatisfy({ $0.coveredInterval == previousBounds }) else { return nil }
-        return previous.flatMap { Self.insightSamples($0) }
+        var insights = SpendDashboardInsights()
+
+        let models = Self.modelShareInput(summaries: summaries)
+        if !models.observations.isEmpty {
+            insights.modelShare = SpendShareOverTime(
+                observations: models.observations,
+                topCount: SpendDashboardInsights.modelShareTopCount,
+                bucket: Self.insightBucket(for: bounds, calendar: calendar),
+                calendar: calendar)
+            insights.modelNames = models.names
+        }
+
+        let projects = Self.projectTrendInput(summaries: detailSummaries, bounds: detailBounds, calendar: calendar)
+        if let days = projects.days, !projects.observations.isEmpty {
+            let trends = SpendSeriesTrends(
+                observations: projects.observations,
+                days: days,
+                bucket: Self.insightBucket(for: days, calendar: calendar),
+                topCount: SpendDashboardInsights.projectTrendTopCount,
+                calendar: calendar)
+            insights.projectTrends = trends
+            for trend in trends.trends {
+                insights.projectIdentities[trend.id] = projects.identities[trend.id]
+            }
+        }
+        return insights
     }
 
-    private static func insightModelCosts(
-        _ entry: CostUsageDailyReport.Entry,
-        summary: InputSummary) -> [SpendInsightSample.ModelCost]
-    {
-        (entry.modelBreakdowns ?? []).compactMap { breakdown -> SpendInsightSample.ModelCost? in
-            let name = breakdown.modelName.trimmingCharacters(in: .whitespacesAndNewlines)
-            guard !name.isEmpty, let cost = Self.validCost(breakdown.costUSD) else { return nil }
-            return SpendInsightSample.ModelCost(
-                id: "\(summary.input.provider.rawValue):\(name)",
-                name: name,
-                cost: cost * summary.costMultiplier)
+    /// The same day, week or month grouping the spend trend chart uses for a range of this length.
+    static func insightBucket(for days: ClosedRange<Date>, calendar: Calendar) -> SpendInsightBucket {
+        let lastDay = calendar.startOfDay(for: days.upperBound)
+        let end = max(days.lowerBound, calendar.date(byAdding: .day, value: 1, to: lastDay) ?? days.upperBound)
+        let unit = SpendTrendChartModel.overviewUnit(in: days.lowerBound...end, calendar: calendar)
+        return switch unit {
+        case .month: .month
+        case .weekOfYear: .week
+        default: .day
         }
+    }
+
+    private static func modelShareInput(summaries: [InputSummary]) -> ModelShareInput {
+        var input = ModelShareInput()
+        var modelNames: [String: String] = [:]
+        var providerNames: [String: String] = [:]
+        for summary in summaries {
+            for windowEntry in summary.entries {
+                for breakdown in windowEntry.entry.modelBreakdowns ?? [] {
+                    let name = breakdown.modelName.trimmingCharacters(in: .whitespacesAndNewlines)
+                    guard !name.isEmpty,
+                          let cost = Self.validCost(breakdown.costUSD).map({ $0 * summary.costMultiplier }),
+                          cost.isFinite,
+                          cost > 0
+                    else { continue }
+                    // Same key as `ModelRow.id`, so one model is one series across sources of a provider.
+                    let id = "\(summary.input.provider.rawValue):\(name)"
+                    input.observations.append(SpendShareOverTime.Observation(
+                        day: windowEntry.day,
+                        seriesID: id,
+                        value: cost))
+                    modelNames[id] = name
+                    providerNames[id] = summary.input.modelProviderName
+                }
+            }
+        }
+        // A model name reported by two providers carries its provider so the legend stays unambiguous.
+        var nameCounts: [String: Int] = [:]
+        for name in modelNames.values {
+            nameCounts[name, default: 0] += 1
+        }
+        for (id, name) in modelNames {
+            let providerName = providerNames[id] ?? ""
+            let isAmbiguous = (nameCounts[name] ?? 0) > 1 && !providerName.isEmpty
+            input.names[id] = isAmbiguous ? "\(name) · \(providerName)" : name
+        }
+        return input
+    }
+
+    /// Mirrors `projectRows`: per source and project identity, only days inside the range and the source's
+    /// covered interval count, and an identity is an independent chat only when every record agrees.
+    private static func projectTrendInput(
+        summaries: [InputSummary],
+        bounds: ClosedRange<Date>,
+        calendar: Calendar) -> ProjectTrendInput
+    {
+        var result = ProjectTrendInput()
+        var observations: [SpendSeriesTrends.Observation] = []
+        var firstCoveredDay: Date?
+        var lastCoveredDay: Date?
+        for summary in summaries {
+            let input = summary.input
+            guard !input.snapshot.projects.isEmpty, let covered = summary.coveredInterval else { continue }
+            firstCoveredDay = min(firstCoveredDay ?? covered.lowerBound, covered.lowerBound)
+            lastCoveredDay = max(lastCoveredDay ?? covered.upperBound, covered.upperBound)
+            for project in input.snapshot.projects {
+                let name = project.name.trimmingCharacters(in: .whitespacesAndNewlines)
+                guard !name.isEmpty else { continue }
+                let id = "\(input.id):\(project.path.map { "path:\($0)" } ?? "name:\(name)")"
+                let existing = result.identities[id]
+                let keepsExistingName = existing.map { !$0.isProjectless || project.isProjectless } ?? false
+                result.identities[id] = ProjectRow(
+                    rank: 0,
+                    provider: input.provider,
+                    providerName: input.modelProviderName,
+                    sourceID: input.id,
+                    projectName: keepsExistingName ? (existing?.projectName ?? name) : name,
+                    path: project.path,
+                    totalTokens: nil,
+                    totalCost: nil,
+                    isProjectless: (existing?.isProjectless ?? true) && project.isProjectless)
+                for entry in project.daily {
+                    guard let day = Self.day(entry.date, provider: input.provider, displayCalendar: calendar),
+                          bounds.contains(day),
+                          covered.contains(day),
+                          let cost = Self.validCost(entry.costUSD).map({ $0 * summary.costMultiplier }),
+                          cost.isFinite,
+                          cost > 0
+                    else { continue }
+                    observations.append(SpendSeriesTrends.Observation(seriesID: id, day: day, value: cost))
+                }
+            }
+        }
+        // Independent chats have their own list; trends cover projects only.
+        let identities = result.identities
+        result.observations = observations.filter { identities[$0.seriesID]?.isProjectless == false }
+        if let firstCoveredDay, let lastCoveredDay, firstCoveredDay <= lastCoveredDay {
+            result.days = firstCoveredDay...lastCoveredDay
+        }
+        return result
     }
 }

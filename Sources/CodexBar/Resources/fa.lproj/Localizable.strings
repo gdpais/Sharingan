@@ -2797,3 +2797,9 @@
 "Top model share" = "سهم مدل برتر";
 "%@ vs previous period" = "%@ نسبت به دوره قبل";
 "%@ pts" = "%@ واحد درصد";
+"Typical week" = "هفتهٔ معمول";
+"Model share" = "سهم مدل‌ها";
+"Share of estimated spend" = "سهم از برآورد هزینه";
+"Project trends" = "روند پروژه‌ها";
+"Change compares the last %d days with the %d days before." = "تغییر، %d روز اخیر را با %d روز پیش از آن مقایسه می‌کند.";
+"New" = "جدید";

@@ -2796,3 +2796,9 @@
 "Top model share" = "En çok harcanan modelin payı";
 "%@ vs previous period" = "Önceki döneme göre %@";
 "%@ pts" = "%@ puan";
+"Typical week" = "Tipik hafta";
+"Model share" = "Model payı";
+"Share of estimated spend" = "Tahmini harcamadaki pay";
+"Project trends" = "Proje eğilimleri";
+"Change compares the last %d days with the %d days before." = "Değişim, son %d günü önceki %d günle karşılaştırır.";
+"New" = "Yeni";
