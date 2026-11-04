@@ -2762,3 +2762,6 @@
 "Show this Mac's recorded OpenCode usage in Codex history. Off by default; scoped or alternate CODEX_HOME locations always stay excluded." = "แสดงการใช้งาน OpenCode ที่บันทึกไว้บน Mac เครื่องนี้ในประวัติ Codex ปิดอยู่ตามค่าเริ่มต้น โดยจะไม่รวมตำแหน่ง CODEX_HOME ที่จำกัดขอบเขตหรือตำแหน่งอื่นเสมอ";
 "Auto uses the active saved session, otherwise an API key or browser cookies." = "อัตโนมัติจะใช้เซสชันที่บันทึกไว้ซึ่งกำลังใช้งาน หากไม่มี จะใช้คีย์ API หรือคุกกี้ของเบราว์เซอร์";
 "Store multiple Command Code subscription sessions." = "จัดเก็บเซสชันการสมัครสมาชิก Command Code หลายรายการ";
+"section_history" = "ประวัติ";
+"record_usage_history_title" = "บันทึกประวัติการใช้งาน";
+"record_usage_history_subtitle" = "บันทึกค่าสูงสุดของการใช้งานรายชั่วโมงไว้ใน Mac เครื่องนี้สำหรับผู้ให้บริการที่ยังไม่ได้เก็บประวัติ รวมถึงการใช้งาน Codex รายสัปดาห์ 8 สัปดาห์สำหรับการคาดการณ์อัตราการใช้ ใช้สำหรับประวัติแผนและแผนภูมิการใช้โควตา";

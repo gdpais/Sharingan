@@ -72,10 +72,6 @@ struct CodexProviderImplementation: ProviderImplementation {
                 }
             })
         let batterySaverBinding = context.binding(\.openAIWebBatterySaverEnabled)
-        let historicalTrackingSubtitle = [
-            L("Stores local Codex usage history (8 weeks) to personalize Pace predictions."),
-            "[\(L("weekly_progress_work_days_title")) = \(L("Automatic"))]",
-        ].joined(separator: " ")
 
         return [
             ProviderSettingsToggleDescriptor(
@@ -88,17 +84,6 @@ struct CodexProviderImplementation: ProviderImplementation {
                     "This provider-specific toggle does not enable cost summaries for other providers.",
                 ].joined(separator: " "),
                 binding: context.binding(\.codexLocalSessionCostLedgerEnabled),
-                statusText: nil,
-                actions: [],
-                isVisible: nil,
-                onChange: nil,
-                onAppDidBecomeActive: nil,
-                onAppearWhenEnabled: nil),
-            ProviderSettingsToggleDescriptor(
-                id: "codex-historical-tracking",
-                title: "Historical tracking",
-                subtitle: historicalTrackingSubtitle,
-                binding: context.binding(\.historicalTrackingEnabled),
                 statusText: nil,
                 actions: [],
                 isVisible: nil,

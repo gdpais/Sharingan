@@ -172,6 +172,8 @@ struct GeneralPane: View {
                 }
             }
 
+            UsageHistorySettingsSection(settings: self.settings)
+
             PreferencesTransferSection(settings: self.settings)
 
             Section {
@@ -196,5 +198,26 @@ struct GeneralPane: View {
         .toggleStyle(.switch)
         .scrollContentBackground(.hidden)
         .background(FocusResigningBackground())
+    }
+}
+
+/// The single control for `historicalTrackingEnabled`. Providers whose history capability is `.alwaysTracked`
+/// (Codex, Claude, Antigravity, OpenCode Go, Pi) record plan history regardless; for every other provider this
+/// gates hourly plan-utilization recording. For Codex it also gates the 8-week weekly history and dashboard
+/// backfill behind learned pace predictions.
+@MainActor
+struct UsageHistorySettingsSection: View {
+    @Bindable var settings: SettingsStore
+
+    var body: some View {
+        Section {
+            Toggle(isOn: self.$settings.historicalTrackingEnabled) {
+                SettingsRowLabel(
+                    L("record_usage_history_title"),
+                    subtitle: L("record_usage_history_subtitle"))
+            }
+        } header: {
+            Text(L("section_history"))
+        }
     }
 }
