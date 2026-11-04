@@ -2735,3 +2735,6 @@
 "avg %@ credits/day" = "평균 %@ 크레딧/일";
 "Average" = "평균";
 "avg %@/day" = "평균 %@/일";
+"Spend by hour of week" = "요일·시간대별 지출";
+"By hour of week" = "요일·시간대별";
+"%@ of spend on weekends" = "주말 지출 비중 %@";

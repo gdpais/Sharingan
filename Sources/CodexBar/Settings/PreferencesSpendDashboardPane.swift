@@ -654,6 +654,7 @@ func spendDashboardProjectRows(
 enum SpendDashboardTrendSection: Hashable, Identifiable {
     case daily
     case hourly
+    case hourOfWeek
 
     var id: Self {
         self
@@ -663,6 +664,7 @@ enum SpendDashboardTrendSection: Hashable, Identifiable {
         switch self {
         case .daily: L("Daily estimated spend")
         case .hourly: L("Hourly estimated spend")
+        case .hourOfWeek: L("Spend by hour of week")
         }
     }
 
@@ -670,6 +672,7 @@ enum SpendDashboardTrendSection: Hashable, Identifiable {
         switch self {
         case .daily: L("Overview")
         case .hourly: L("Hour")
+        case .hourOfWeek: L("By hour of week")
         }
     }
 }

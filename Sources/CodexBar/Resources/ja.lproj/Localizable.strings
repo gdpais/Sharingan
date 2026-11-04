@@ -2767,3 +2767,6 @@
 "avg %@ credits/day" = "平均 %@ クレジット/日";
 "Average" = "平均";
 "avg %@/day" = "平均 %@/日";
+"Spend by hour of week" = "曜日・時間帯別の支出";
+"By hour of week" = "曜日・時間帯別";
+"%@ of spend on weekends" = "週末の支出: %@";

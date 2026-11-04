@@ -2771,3 +2771,6 @@
 "avg %@ credits/day" = "میانگین %@ اعتبار/روز";
 "Average" = "میانگین";
 "avg %@/day" = "میانگین %@/روز";
+"Spend by hour of week" = "هزینه بر اساس ساعت هفته";
+"By hour of week" = "بر اساس ساعت هفته";
+"%@ of spend on weekends" = "%@ از هزینه در آخر هفته‌ها";

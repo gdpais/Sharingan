@@ -2769,3 +2769,6 @@
 "avg %@ credits/day" = "rata-rata %@ kredit/hari";
 "Average" = "Rata-rata";
 "avg %@/day" = "rata-rata %@/hari";
+"Spend by hour of week" = "Pengeluaran per jam dalam seminggu";
+"By hour of week" = "Per jam dalam seminggu";
+"%@ of spend on weekends" = "%@ pengeluaran pada akhir pekan";

@@ -13,33 +13,40 @@ struct SpendDashboardTrendPanel: View {
     @State private var focusedInterval: DateInterval?
 
     var body: some View {
-        let legendProviders = SpendTrendChartModel(
-            group: self.group,
-            section: self.activeSection,
-            day: self.day,
-            overviewInterval: self.focusedInterval).legendProviders(in: self.group)
+        let legendProviders = self.activeSection == .hourOfWeek
+            ? SpendTrendChartModel.hourOfWeekLegendProviders(in: self.group)
+            : SpendTrendChartModel(
+                group: self.group,
+                section: self.activeSection,
+                day: self.day,
+                overviewInterval: self.focusedInterval).legendProviders(in: self.group)
         let sourceID = self.selectedSourceID.flatMap { id in legendProviders.contains { $0.id == id } ? id : nil }
         return SpendDashboardPanel {
             VStack(alignment: .leading, spacing: 14) {
                 HStack(spacing: 12) {
-                    Text(self.activeSection == .hourly ? self.activeSection.title : L("Estimated spend"))
+                    Text(self.activeSection == .daily ? L("Estimated spend") : self.activeSection.title)
                         .font(.headline)
                     Spacer()
                     if !self.hourlyDays.isEmpty {
                         Picker(L("Usage & Spend"), selection: self.$selection) {
                             Text(SpendDashboardTrendSection.daily.pickerTitle).tag(SpendDashboardTrendSection.daily)
                             Text(SpendDashboardTrendSection.hourly.pickerTitle).tag(SpendDashboardTrendSection.hourly)
+                            if self.group.selectedDay == nil {
+                                Text(SpendDashboardTrendSection.hourOfWeek.pickerTitle)
+                                    .tag(SpendDashboardTrendSection.hourOfWeek)
+                            }
                         }
                         .labelsHidden()
                         .pickerStyle(.segmented)
                         .controlSize(.small)
-                        .frame(width: 140)
+                        .frame(width: self.group.selectedDay == nil ? nil : 140)
+                        .fixedSize()
                         .accessibilityIdentifier("spend-dashboard-trend-picker")
                     }
                 }
                 if self.activeSection == .hourly, let day = self.day {
                     self.dayNavigation(day)
-                } else {
+                } else if self.activeSection != .hourOfWeek {
                     HStack {
                         Text(self.scopeText).font(.caption).foregroundStyle(.secondary)
                         Spacer()
@@ -52,18 +59,22 @@ struct SpendDashboardTrendPanel: View {
                         .font(.caption).foregroundStyle(.secondary)
                 }
 
-                SpendTrendChart(
-                    group: self.group,
-                    section: self.activeSection,
-                    day: self.day,
-                    sourceID: sourceID,
-                    overviewInterval: self.focusedInterval,
-                    onSelectDay: { day in
-                        self.focusedDay = self.group.calendar.startOfDay(for: day)
-                        self.selection = .hourly
-                    },
-                    onSelectInterval: { self.focusedInterval = $0 })
-                    .id(self.chartIdentity(sourceID: sourceID))
+                if self.activeSection == .hourOfWeek {
+                    SpendHourOfWeekHeatmap(group: self.group, sourceID: sourceID)
+                } else {
+                    SpendTrendChart(
+                        group: self.group,
+                        section: self.activeSection,
+                        day: self.day,
+                        sourceID: sourceID,
+                        overviewInterval: self.focusedInterval,
+                        onSelectDay: { day in
+                            self.focusedDay = self.group.calendar.startOfDay(for: day)
+                            self.selection = .hourly
+                        },
+                        onSelectInterval: { self.focusedInterval = $0 })
+                        .id(self.chartIdentity(sourceID: sourceID))
+                }
 
                 MenuBarLayoutChipFlowLayout(spacing: 8) {
                     self.legend(providers: legendProviders, selectedSourceID: sourceID)
@@ -95,7 +106,10 @@ struct SpendDashboardTrendPanel: View {
     }
 
     private var activeSection: SpendDashboardTrendSection {
-        self.hourlyDays.isEmpty ? .daily : self.selection
+        if self.hourlyDays.isEmpty { return .daily }
+        // A selected day narrows the hourly points to that day, so the week grid would mislead.
+        if self.selection == .hourOfWeek, self.group.selectedDay != nil { return .hourly }
+        return self.selection
     }
 
     private var hourlyDays: [Date] {
