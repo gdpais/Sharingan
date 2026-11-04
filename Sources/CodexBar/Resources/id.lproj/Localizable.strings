@@ -2769,3 +2769,11 @@
 "avg %@ credits/day" = "rata-rata %@ kredit/hari";
 "Average" = "Rata-rata";
 "avg %@/day" = "rata-rata %@/hari";
+"Plan value" = "Nilai paket";
+"Set a plan price to compare" = "Tetapkan harga paket untuk membandingkan";
+"API-equivalent vs %@ plan" = "Setara API vs paket %@";
+"Cache hit rate" = "Tingkat cache hit";
+"Cost per 1M tokens" = "Biaya per 1 jt token";
+"Top model share" = "Pangsa model teratas";
+"%@ vs previous period" = "%@ vs periode sebelumnya";
+"%@ pts" = "%@ poin";

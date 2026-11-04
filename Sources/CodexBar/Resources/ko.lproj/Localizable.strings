@@ -2735,3 +2735,11 @@
 "avg %@ credits/day" = "평균 %@ 크레딧/일";
 "Average" = "평균";
 "avg %@/day" = "평균 %@/일";
+"Plan value" = "요금제 가치";
+"Set a plan price to compare" = "비교하려면 요금제 가격을 설정하세요";
+"API-equivalent vs %@ plan" = "%@ 요금제 대비 API 환산액";
+"Cache hit rate" = "캐시 적중률";
+"Cost per 1M tokens" = "100만 토큰당 비용";
+"Top model share" = "상위 모델 점유율";
+"%@ vs previous period" = "이전 기간 대비 %@";
+"%@ pts" = "%@ 포인트";

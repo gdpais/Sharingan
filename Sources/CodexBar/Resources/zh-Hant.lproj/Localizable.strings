@@ -2745,3 +2745,11 @@
 "avg %@ credits/day" = "平均 %@ 額度/天";
 "Average" = "平均值";
 "avg %@/day" = "日均 %@";
+"Plan value" = "方案價值";
+"Set a plan price to compare" = "設定方案價格以進行比較";
+"API-equivalent vs %@ plan" = "API 等值金額對比 %@ 方案";
+"Cache hit rate" = "快取命中率";
+"Cost per 1M tokens" = "每百萬 token 費用";
+"Top model share" = "首位模型佔比";
+"%@ vs previous period" = "較上期 %@";
+"%@ pts" = "%@ 個百分點";

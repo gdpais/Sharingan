@@ -2768,3 +2768,11 @@
 "avg %@ credits/day" = "TB %@ tín dụng/ngày";
 "Average" = "Trung bình";
 "avg %@/day" = "trung bình %@/ngày";
+"Plan value" = "Giá trị gói dịch vụ";
+"Set a plan price to compare" = "Đặt giá gói dịch vụ để so sánh";
+"API-equivalent vs %@ plan" = "Tương đương API so với gói dịch vụ %@";
+"Cache hit rate" = "Tỷ lệ trúng bộ nhớ đệm";
+"Cost per 1M tokens" = "Chi phí cho mỗi 1 triệu token";
+"Top model share" = "Tỷ trọng mô hình hàng đầu";
+"%@ vs previous period" = "%@ so với kỳ trước";
+"%@ pts" = "%@ điểm";

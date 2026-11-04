@@ -2771,3 +2771,11 @@
 "avg %@ credits/day" = "میانگین %@ اعتبار/روز";
 "Average" = "میانگین";
 "avg %@/day" = "میانگین %@/روز";
+"Plan value" = "ارزش طرح";
+"Set a plan price to compare" = "برای مقایسه، قیمت طرح را تعیین کنید";
+"API-equivalent vs %@ plan" = "معادل API در برابر طرح %@";
+"Cache hit rate" = "نرخ برخورد کش";
+"Cost per 1M tokens" = "هزینه به ازای هر ۱ میلیون توکن";
+"Top model share" = "سهم مدل برتر";
+"%@ vs previous period" = "%@ نسبت به دوره قبل";
+"%@ pts" = "%@ واحد درصد";

@@ -2765,3 +2765,11 @@
 "avg %@ credits/day" = "Ø %@ Credits/Tag";
 "Average" = "Durchschnitt";
 "avg %@/day" = "Ø %@/Tag";
+"Plan value" = "Tarifwert";
+"Set a plan price to compare" = "Tarifpreis festlegen, um zu vergleichen";
+"API-equivalent vs %@ plan" = "API-Gegenwert vs. %@-Tarif";
+"Cache hit rate" = "Cache-Trefferquote";
+"Cost per 1M tokens" = "Kosten pro 1 Mio. Token";
+"Top model share" = "Anteil des Topmodells";
+"%@ vs previous period" = "%@ ggü. Vorperiode";
+"%@ pts" = "%@ Pkt.";

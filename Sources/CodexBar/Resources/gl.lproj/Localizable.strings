@@ -2766,3 +2766,11 @@
 "avg %@ credits/day" = "media %@ créditos/día";
 "Average" = "Media";
 "avg %@/day" = "media %@/día";
+"Plan value" = "Valor do plan";
+"Set a plan price to compare" = "Define un prezo do plan para comparar";
+"API-equivalent vs %@ plan" = "Equivalente en API fronte a un plan de %@";
+"Cache hit rate" = "Taxa de acertos da caché";
+"Cost per 1M tokens" = "Custo por 1 M de tokens";
+"Top model share" = "Cota do modelo principal";
+"%@ vs previous period" = "%@ fronte ao período anterior";
+"%@ pts" = "%@ pp";

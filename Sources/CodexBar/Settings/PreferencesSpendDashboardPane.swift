@@ -728,6 +728,7 @@ struct SpendDashboardCurrencySection: View {
                     .foregroundStyle(.secondary)
             }
 
+            SpendInsightTilesRow(group: self.group, planMonthlyPrice: nil) // Phase 3: plan price
             SpendDashboardSummary(
                 group: self.group,
                 onClearSelectedDay: self.onClearSelectedDay)

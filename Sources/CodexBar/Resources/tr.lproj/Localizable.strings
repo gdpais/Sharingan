@@ -2770,3 +2770,11 @@
 "avg %@ credits/day" = "ort. %@ kredi/gün";
 "Average" = "Ortalama";
 "avg %@/day" = "ort. %@/gün";
+"Plan value" = "Plan değeri";
+"Set a plan price to compare" = "Karşılaştırmak için plan fiyatı belirleyin";
+"API-equivalent vs %@ plan" = "%@ plana karşı API karşılığı";
+"Cache hit rate" = "Önbellek isabet oranı";
+"Cost per 1M tokens" = "1 milyon token başına maliyet";
+"Top model share" = "En çok harcanan modelin payı";
+"%@ vs previous period" = "Önceki döneme göre %@";
+"%@ pts" = "%@ puan";

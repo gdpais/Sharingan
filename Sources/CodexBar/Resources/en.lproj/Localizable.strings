@@ -2772,3 +2772,11 @@
 "avg %@ credits/day" = "avg %@ credits/day";
 "Average" = "Average";
 "avg %@/day" = "avg %@/day";
+"Plan value" = "Plan value";
+"Set a plan price to compare" = "Set a plan price to compare";
+"API-equivalent vs %@ plan" = "API-equivalent vs %@ plan";
+"Cache hit rate" = "Cache hit rate";
+"Cost per 1M tokens" = "Cost per 1M tokens";
+"Top model share" = "Top model share";
+"%@ vs previous period" = "%@ vs previous period";
+"%@ pts" = "%@ pts";

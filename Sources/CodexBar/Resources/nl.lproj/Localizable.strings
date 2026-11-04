@@ -2764,3 +2764,11 @@
 "avg %@ credits/day" = "gem. %@ tegoeden/dag";
 "Average" = "Gemiddelde";
 "avg %@/day" = "gem. %@/dag";
+"Plan value" = "Abonnementswaarde";
+"Set a plan price to compare" = "Stel een abonnementsprijs in om te vergelijken";
+"API-equivalent vs %@ plan" = "API-equivalent vs. abonnement van %@";
+"Cache hit rate" = "Cache-hitrate";
+"Cost per 1M tokens" = "Kosten per 1 mln. tokens";
+"Top model share" = "Aandeel van topmodel";
+"%@ vs previous period" = "%@ t.o.v. vorige periode";
+"%@ pts" = "%@ ptn";

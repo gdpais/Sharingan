@@ -2771,3 +2771,11 @@
 "avg %@ credits/day" = "المتوسط %@ من الاعتمادات/يوم";
 "Average" = "المتوسط";
 "avg %@/day" = "المتوسط %@/يوم";
+"Plan value" = "قيمة الخطة";
+"Set a plan price to compare" = "حدّد سعر الخطة للمقارنة";
+"API-equivalent vs %@ plan" = "ما يعادل تكلفة API مقابل خطة بسعر %@";
+"Cache hit rate" = "معدل إصابة الذاكرة المؤقتة";
+"Cost per 1M tokens" = "التكلفة لكل مليون رمز";
+"Top model share" = "حصة النموذج الأعلى";
+"%@ vs previous period" = "%@ مقارنة بالفترة السابقة";
+"%@ pts" = "%@ نقطة";

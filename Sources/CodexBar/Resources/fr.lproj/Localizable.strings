@@ -2766,3 +2766,11 @@
 "avg %@ credits/day" = "moy. %@ crédits/jour";
 "Average" = "Moyenne";
 "avg %@/day" = "moy. %@/jour";
+"Plan value" = "Valeur du forfait";
+"Set a plan price to compare" = "Définissez le prix du forfait pour comparer";
+"API-equivalent vs %@ plan" = "Équivalent API face à un forfait de %@";
+"Cache hit rate" = "Taux de réussite du cache";
+"Cost per 1M tokens" = "Coût pour 1 M de jetons";
+"Top model share" = "Part du modèle principal";
+"%@ vs previous period" = "%@ par rapport à la période précédente";
+"%@ pts" = "%@ pts";

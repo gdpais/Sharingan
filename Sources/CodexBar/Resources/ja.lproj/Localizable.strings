@@ -2767,3 +2767,11 @@
 "avg %@ credits/day" = "平均 %@ クレジット/日";
 "Average" = "平均";
 "avg %@/day" = "平均 %@/日";
+"Plan value" = "プランの価値";
+"Set a plan price to compare" = "比較するにはプラン料金を設定してください";
+"API-equivalent vs %@ plan" = "%@ のプランに対する API 換算額";
+"Cache hit rate" = "キャッシュヒット率";
+"Cost per 1M tokens" = "100万トークンあたりのコスト";
+"Top model share" = "トップモデルのシェア";
+"%@ vs previous period" = "前期間比 %@";
+"%@ pts" = "%@ ポイント";

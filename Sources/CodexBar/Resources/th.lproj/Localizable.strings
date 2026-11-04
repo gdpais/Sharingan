@@ -2769,3 +2769,11 @@
 "avg %@ credits/day" = "เฉลี่ย %@ เครดิต/วัน";
 "Average" = "ค่าเฉลี่ย";
 "avg %@/day" = "เฉลี่ย %@/วัน";
+"Plan value" = "มูลค่าแผนบริการ";
+"Set a plan price to compare" = "ตั้งราคาแผนบริการเพื่อเปรียบเทียบ";
+"API-equivalent vs %@ plan" = "มูลค่าเทียบเท่า API เทียบกับแผนบริการ %@";
+"Cache hit rate" = "อัตรา cache hit";
+"Cost per 1M tokens" = "ค่าใช้จ่ายต่อ 1 ล้านโทเค็น";
+"Top model share" = "ส่วนแบ่งของโมเดลอันดับต้น";
+"%@ vs previous period" = "%@ เทียบกับช่วงก่อนหน้า";
+"%@ pts" = "%@ จุด";
