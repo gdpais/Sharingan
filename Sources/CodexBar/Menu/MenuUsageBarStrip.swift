@@ -33,12 +33,9 @@ enum MenuUsageBarMetrics {
     static func scale(values: [Double], roundedHeadroom: Bool = false) -> UsageChartScale {
         let scale = UsageChartScale(values: values)
         guard roundedHeadroom, scale.maximum > 0 else { return scale }
-        let magnitude = pow(10, floor(log10(scale.maximum)))
-        guard magnitude.isFinite, magnitude > 0 else { return scale }
-        let normalized = scale.maximum / magnitude
-        let step = [1.0, 2, 5, 10].first { $0 > normalized } ?? 10
-        let ceiling = step * magnitude
-        return UsageChartScale(values: [ceiling.isFinite ? ceiling : scale.maximum])
+        // Strictly above keeps headroom when the maximum already sits on a 1-2-5 value.
+        let ceiling = ChartNiceScale.niceValue(atLeast: scale.maximum, strictlyAbove: true) ?? scale.maximum
+        return UsageChartScale(values: [ceiling])
     }
 
     static func opacity(

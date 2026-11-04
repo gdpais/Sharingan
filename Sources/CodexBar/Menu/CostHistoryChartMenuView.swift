@@ -129,6 +129,10 @@ struct CostHistoryChartMenuView: View {
         let selectedDateKey = self.selectedDateKey.flatMap { model.pointsByDateKey[$0] == nil ? nil : $0 }
             ?? Self.defaultSelectedDateKey(model: model)
         let incompleteCount = CostUsageIncompleteRequests.sum(self.daily.map(\.incompleteRequestCount))
+        let yTicks = Self.yAxisTickValues(
+            maxValue: model.maxValue,
+            metric: activeMetric,
+            costMultiplier: self.costMultiplier)
         let tokenValues = model.points.compactMap(\.totalTokens)
         let accessibilityTokens = tokenValues.isEmpty ? nil : CheckedSum.integers(tokenValues)
         VStack(alignment: .leading, spacing: Self.outerSpacing) {
@@ -176,12 +180,11 @@ struct CostHistoryChartMenuView: View {
                             .foregroundStyle(Color(nsColor: .systemYellow))
                     }
                 }
+                .chartYScale(domain: 0...(yTicks.last ?? max(model.maxValue, 1)))
                 .chartYAxis {
-                    AxisMarks(
-                        position: .leading,
-                        values: Self.yAxisTickValues(maxValue: model.maxValue, metric: activeMetric))
-                    { value in
-                        AxisGridLine().foregroundStyle(Color.clear)
+                    AxisMarks(position: .leading, values: yTicks) { value in
+                        AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
+                            .foregroundStyle(Color(nsColor: .separatorColor))
                         AxisTick().foregroundStyle(Color.clear)
                         AxisValueLabel(centered: false) {
                             if let raw = value.as(Double.self) {
@@ -596,24 +599,22 @@ struct CostHistoryChartMenuView: View {
         maxValue * 0.05
     }
 
-    /// Y-axis tick values for the cost chart: 0, mid, max when the range is at
-    /// $1 or more; 0 and max for smaller ranges; empty for flat/no data so the
-    /// axis renders no labels.
-    private static func yAxisTickValues(maxCostUSD: Double) -> [Double] {
-        guard maxCostUSD > 0 else { return [] }
-        if maxCostUSD < 1.0 {
-            return [0, maxCostUSD]
-        }
-        return [0, maxCostUSD / 2, maxCostUSD]
+    /// Y-axis tick values for the cost chart: 1-2-5 steps from zero to a nice ceiling at or above the
+    /// maximum, rounded in display currency so labels read as round amounts after conversion. Empty for
+    /// flat/no data so the axis renders no labels.
+    private static func yAxisTickValues(maxCostUSD: Double, costMultiplier: Double = 1) -> [Double] {
+        let multiplier = costMultiplier.isFinite && costMultiplier > 0 ? costMultiplier : 1
+        return ChartNiceScale.ticks(maximum: maxCostUSD * multiplier, minimumStep: 0.01)
+            .map { $0 / multiplier }
     }
 
-    private static func yAxisTickValues(maxValue: Double, metric: ChartMetric) -> [Double] {
+    private static func yAxisTickValues(maxValue: Double, metric: ChartMetric, costMultiplier: Double) -> [Double] {
         switch metric {
         case .tokens:
-            guard maxValue > 0 else { return [] }
-            return maxValue < 2 ? [0, maxValue] : [0, maxValue / 2, maxValue]
+            // Whole-token steps keep labels from repeating after integer rounding.
+            ChartNiceScale.ticks(maximum: maxValue, minimumStep: 1)
         case .cost:
-            return self.yAxisTickValues(maxCostUSD: maxValue)
+            self.yAxisTickValues(maxCostUSD: maxValue, costMultiplier: costMultiplier)
         }
     }
 
@@ -1309,8 +1310,12 @@ extension CostHistoryChartMenuView {
             metric: self.defaultMetric(provider: provider, daily: daily)).axisDates
     }
 
-    static func _yAxisTickValuesForTesting(maxCostUSD: Double) -> [Double] {
-        self.yAxisTickValues(maxCostUSD: maxCostUSD)
+    static func _yAxisTickValuesForTesting(maxCostUSD: Double, costMultiplier: Double = 1) -> [Double] {
+        self.yAxisTickValues(maxCostUSD: maxCostUSD, costMultiplier: costMultiplier)
+    }
+
+    static func _yAxisTickValuesForTesting(maxValue: Double, metric: ChartMetric) -> [Double] {
+        self.yAxisTickValues(maxValue: maxValue, metric: metric, costMultiplier: 1)
     }
 
     static func _yAxisCostStringForTesting(_ value: Double, currencyCode: String = "USD") -> String {

@@ -594,19 +594,41 @@ struct CostHistoryChartMenuViewTests {
 
     @Test
     @MainActor
-    func `y-axis tick values use two ticks for small ranges`() {
+    func `y-axis tick values use nice steps for small ranges`() {
         let ticks = CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 0.50)
-        #expect(ticks == [0, 0.50])
+        #expect(ticks == [0, 0.2, 0.4, 0.6])
+        #expect(CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 0.004) == [0, 0.01])
     }
 
     @Test
     @MainActor
-    func `y-axis tick values use three ticks for ranges at or above one dollar`() {
+    func `y-axis tick values extend to a nice ceiling above the maximum`() {
         let ticks = CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 12.0)
-        #expect(ticks == [0, 6.0, 12.0])
+        #expect(ticks == [0, 5, 10, 15])
 
         let large = CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 1000.0)
         #expect(large == [0, 500.0, 1000.0])
+
+        let uneven = CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 1515.0)
+        #expect(uneven == [0, 500, 1000, 1500, 2000])
+    }
+
+    @Test
+    @MainActor
+    func `y-axis cost ticks round in display currency`() {
+        let ticks = CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 10, costMultiplier: 150)
+        let displayed = ticks.map { ($0 * 150).rounded() }
+        #expect(displayed == [0, 500, 1000, 1500])
+    }
+
+    @Test
+    @MainActor
+    func `y-axis token ticks never step below one token`() {
+        #expect(CostHistoryChartMenuView._yAxisTickValuesForTesting(maxValue: 1, metric: .tokens) == [0, 1])
+        #expect(CostHistoryChartMenuView._yAxisTickValuesForTesting(maxValue: 0, metric: .tokens).isEmpty)
+        #expect(CostHistoryChartMenuView._yAxisTickValuesForTesting(
+            maxValue: 151_000_000,
+            metric: .tokens) == [0, 50_000_000, 100_000_000, 150_000_000, 200_000_000])
     }
 
     @Test(arguments: [
