@@ -102,7 +102,7 @@ public enum BalanceRunwayModel {
     /// Sorted samples sharing the newest sample's unit, so a currency switch never feeds the math.
     static func sortedSamplesInLatestUnit(_ samples: [BalanceHistorySample]) -> [BalanceHistorySample] {
         let sorted = samples
-            .filter { $0.balance.isFinite }
+            .filter(\.balance.isFinite)
             .sorted { $0.capturedAt < $1.capturedAt }
         guard let unit = sorted.last?.currencyCode else { return [] }
         return sorted.filter { $0.currencyCode == unit }

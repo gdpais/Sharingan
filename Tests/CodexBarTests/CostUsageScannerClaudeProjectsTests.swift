@@ -227,7 +227,7 @@ struct CostUsageScannerClaudeProjectsTests {
     {
         CostUsageScanner.ClaudeUsageRow(
             dayKey: range.sinceKey,
-            model: Self.model,
+            model: self.model,
             sessionId: "session-\(id)",
             messageId: "message-\(id)",
             requestId: "request-\(id)",

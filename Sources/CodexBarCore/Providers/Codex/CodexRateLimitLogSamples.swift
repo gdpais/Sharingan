@@ -202,8 +202,8 @@ extension CostUsageScanner {
 
     /// Decodes the `rate_limits` snapshot of one rollout line, or nil for any other line.
     static func codexRateLimitSample(fromLine bytes: Data) -> CodexRateLimitLogSample? {
-        guard let fields = Self.codexRateLimitLineFields(bytes),
-              let observedAt = Self.dateFromTimestamp(fields.timestamp)
+        guard let fields = codexRateLimitLineFields(bytes),
+              let observedAt = dateFromTimestamp(fields.timestamp)
         else { return nil }
         return autoreleasepool {
             guard let rateLimits = (try? JSONSerialization.jsonObject(with: fields.rateLimits)) as? [String: Any]
@@ -225,7 +225,7 @@ extension CostUsageScanner {
 
     static func codexRateLimitWindow(_ value: Any?, observedAt: Date) -> CodexRateLimitLogWindow? {
         guard let window = value as? [String: Any],
-              let usedPercent = Self.codexRateLimitFiniteNumber(window["used_percent"])
+              let usedPercent = codexRateLimitFiniteNumber(window["used_percent"])
         else { return nil }
         let windowMinutes = Self.codexRateLimitFiniteNumber(window["window_minutes"])
             .flatMap { $0 >= 1 && $0 <= Self.codexRateLimitMaxWindowMinutes ? Int($0) : nil }
@@ -245,7 +245,7 @@ extension CostUsageScanner {
 
     /// Current CLI builds log `resets_at` (Unix seconds); older ones logged `resets_in_seconds` from the event.
     private static func codexRateLimitResetDate(_ window: [String: Any], observedAt: Date) -> Date? {
-        if let epochSeconds = Self.codexRateLimitFiniteNumber(window["resets_at"]), epochSeconds > 0 {
+        if let epochSeconds = codexRateLimitFiniteNumber(window["resets_at"]), epochSeconds > 0 {
             return Date(timeIntervalSince1970: epochSeconds)
         }
         if let secondsToReset = Self.codexRateLimitFiniteNumber(window["resets_in_seconds"]), secondsToReset >= 0 {
@@ -313,7 +313,7 @@ extension CostUsageScanner {
            last.primary == sample.primary,
            last.secondary == sample.secondary,
            last.observedAt <= sample.observedAt,
-           Self.codexRateLimitHourBucket(last.observedAt) == Self.codexRateLimitHourBucket(sample.observedAt)
+           codexRateLimitHourBucket(last.observedAt) == codexRateLimitHourBucket(sample.observedAt)
         {
             samples[samples.count - 1] = sample
             return

@@ -312,7 +312,7 @@ struct UsageBreakdownChartMenuView: View {
     nonisolated static func serviceSlots(totals: [String: Double]) -> [String: ChartPalette.Slot] {
         ChartPalette.slotAssignment(
             for: totals.map { (name: $0.key, total: $0.value) },
-            pinnedSlot: Self.pinnedSlot(for:))
+            pinnedSlot: self.pinnedSlot(for:))
     }
 
     private nonisolated static func pinnedSlot(for service: String) -> Int? {

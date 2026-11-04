@@ -123,13 +123,13 @@ struct BalanceHistoryStore: Sendable {
     private static func sanitized(_ buckets: BalanceHistoryBuckets) -> BalanceHistoryBuckets {
         var accounts: [String: [BalanceHistorySample]] = [:]
         for (accountKey, samples) in buckets.accounts where !accountKey.isEmpty {
-            let pruned = BalanceHistory.pruned(samples.filter { $0.balance.isFinite })
+            let pruned = BalanceHistory.pruned(samples.filter(\.balance.isFinite))
             if !pruned.isEmpty {
                 accounts[accountKey] = pruned
             }
         }
         return BalanceHistoryBuckets(
-            unscoped: BalanceHistory.pruned(buckets.unscoped.filter { $0.balance.isFinite }),
+            unscoped: BalanceHistory.pruned(buckets.unscoped.filter(\.balance.isFinite)),
             accounts: accounts)
     }
 
