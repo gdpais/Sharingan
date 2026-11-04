@@ -390,7 +390,7 @@ struct CLICookieRefreshTests {
                     "Permission was denied while refreshing the browser session. Check access and retry.",
                 .rateLimited: "The provider rate limited the refresh. Wait and retry.",
                 .providerUnavailable: "The provider is temporarily unavailable. Retry later.",
-                .parseFailure: "The provider response could not be read. Check for a CodexBar update.",
+                .parseFailure: "The provider response could not be read. Check for a Sharingan update.",
                 .networkFailure: "The provider could not be reached. Check your connection and retry.",
                 .apiFailure: "The provider could not validate the browser session. Retry later.",
             ]
@@ -548,7 +548,7 @@ struct CLICookieRefreshTests {
                 error: ProviderFetchClassifiedError(kind: kind, message: "opaque-test-marker"))
 
             let expected = disabled ?
-                "Chrome cookie decryption is disabled in CodexBar; enable Keychain access and refresh." :
+                "Chrome cookie decryption is disabled in Sharingan; enable Keychain access and refresh." :
                 "Chrome cookie decryption was declined in Keychain; " +
                 "rerun with --allow-keychain-prompt to request Keychain access again."
             #expect(result.message == expected)

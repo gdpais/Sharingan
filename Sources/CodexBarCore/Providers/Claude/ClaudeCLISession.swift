@@ -44,7 +44,7 @@ actor ClaudeCLISession {
             case let .ioFailed(msg): "Claude CLI PTY I/O failed: \(msg)"
             case .timedOut: "Claude CLI session timed out."
             case .processExited: "Claude CLI session exited."
-            case .outputTooLarge: "Claude CLI session produced more output than CodexBar can safely process."
+            case .outputTooLarge: "Claude CLI session produced more output than Sharingan can safely process."
             }
         }
     }

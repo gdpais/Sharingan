@@ -32,7 +32,7 @@ public enum KimiAPIError: LocalizedError, Sendable, Equatable {
             "Failed to parse Kimi usage data: \(message)"
         case .expiredCodeCredential, .invalidCodeCredential:
             "Kimi Code CLI credential is invalid or expired. Run kimi to renew it, or add a Kimi Code API key in " +
-                "Settings > Providers > Kimi (KIMI_CODE_API_KEY). CodexBar does not refresh CLI-owned credentials."
+                "Settings > Providers > Kimi (KIMI_CODE_API_KEY). Sharingan does not refresh CLI-owned credentials."
         }
     }
 }

@@ -406,7 +406,7 @@ public enum ClaudeOAuthCredentialsStore {
                         profileIdentifier: profileIdentifier,
                         clearInvalidCache: clearInvalidCache)
                 case .interactionRequired:
-                    lastError = ClaudeOAuthCredentialsError.readFailed("CodexBar cache requires replacement.")
+                    lastError = ClaudeOAuthCredentialsError.readFailed("Sharingan cache requires replacement.")
                 case .temporarilyUnavailable:
                     cacheTemporarilyUnavailable = true
                     lastError = ClaudeOAuthCredentialsError.readFailed(

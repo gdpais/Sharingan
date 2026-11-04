@@ -42,7 +42,7 @@ struct CLIPluginConfigPreservationTests {
             let payloads = try #require(JSONSerialization.jsonObject(with: output) as? [[String: Any]])
             let error = try #require(payloads.first?["error"] as? [String: Any])
             #expect(error["kind"] as? String == "config")
-            #expect((error["message"] as? String)?.hasPrefix("Failed to decode CodexBar config:") == true)
+            #expect((error["message"] as? String)?.hasPrefix("Failed to decode Sharingan config:") == true)
             #expect(try Data(contentsOf: fixture.configURL) == Data(contents.utf8))
         }
     }
