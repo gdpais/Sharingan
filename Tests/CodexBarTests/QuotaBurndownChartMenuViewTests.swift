@@ -177,4 +177,34 @@ struct QuotaBurndownChartMenuViewTests {
 
         #expect(!view.hasSeries)
     }
+
+    @Test
+    func `weekly burndown ideal follows the work days setting`() throws {
+        let now = Date(timeIntervalSince1970: 1_700_000_000)
+        let history = PlanUtilizationSeriesHistory(
+            name: .weekly,
+            windowMinutes: 10080,
+            entries: [.init(capturedAt: now, usedPercent: 40, resetsAt: now.addingTimeInterval(3 * 86400))])
+
+        let linear = QuotaBurndownChartMenuView(
+            provider: .codex,
+            histories: [history],
+            width: 400,
+            referenceDate: now)
+        let workWeek = QuotaBurndownChartMenuView(
+            provider: .codex,
+            histories: [history],
+            width: 400,
+            workDays: 5,
+            referenceDate: now)
+
+        let linearModel = try #require(linear._seriesModelsForTesting["weekly:10080"])
+        let workWeekModel = try #require(workWeek._seriesModelsForTesting["weekly:10080"])
+        #expect(linearModel.ideal.count == 2)
+        // A 7-day window crosses at least seven local day boundaries.
+        #expect(workWeekModel.ideal.count >= 8)
+        #expect(workWeekModel.ideal.first?.remainingPercent == 100)
+        #expect(workWeekModel.ideal.last?.remainingPercent == 0)
+        #expect(!workWeekModel.projection.isEmpty)
+    }
 }

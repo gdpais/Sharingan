@@ -15,12 +15,15 @@ struct QuotaBurndownChartMenuView: View {
     private let width: CGFloat
     private let color: Color
 
+    private static let runOutColor = Color(nsColor: .systemRed)
+
     @State private var selectedSeriesID: String?
 
     init(
         provider: UsageProvider,
         histories: [PlanUtilizationSeriesHistory],
         width: CGFloat,
+        workDays: Int? = nil,
         referenceDate: Date = Date())
     {
         self.series = PlanUtilizationHistoryChartMenuView.visibleSeries(
@@ -38,7 +41,11 @@ struct QuotaBurndownChartMenuView: View {
                     windowMinutes: history.windowMinutes,
                     resetsAt: reset,
                     resetDescription: nil))
-            guard let model = QuotaBurndownModel(history: history, window: window, now: latest.capturedAt)
+            guard let model = QuotaBurndownModel(
+                history: history,
+                window: window,
+                now: latest.capturedAt,
+                workDays: workDays)
             else { return nil }
             return Series(
                 id: series.id,
@@ -74,6 +81,14 @@ struct QuotaBurndownChartMenuView: View {
 
             if let selected {
                 Chart {
+                    if let runOut = selected.model.runOut {
+                        RectangleMark(
+                            xStart: .value("Time", runOut),
+                            xEnd: .value("Time", selected.model.reset),
+                            yStart: .value(L("Usage remaining"), 0.0),
+                            yEnd: .value(L("Usage remaining"), 100.0))
+                            .foregroundStyle(Self.runOutColor.opacity(0.08))
+                    }
                     ForEach(selected.model.ideal, id: \.date) { point in
                         LineMark(
                             x: .value("Time", point.date),
@@ -82,6 +97,14 @@ struct QuotaBurndownChartMenuView: View {
                             .foregroundStyle(Color(nsColor: .secondaryLabelColor))
                             .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 3]))
                     }
+                    ForEach(selected.model.projection, id: \.date) { point in
+                        LineMark(
+                            x: .value("Time", point.date),
+                            y: .value(L("Usage remaining"), point.remainingPercent),
+                            series: .value("Series", "Projection"))
+                            .foregroundStyle(selected.model.runOut == nil ? self.color : Self.runOutColor)
+                            .lineStyle(StrokeStyle(lineWidth: 1.5, lineCap: .round, dash: [1, 3]))
+                    }
                     ForEach(selected.model.samples, id: \.date) { point in
                         LineMark(
                             x: .value("Time", point.date),
@@ -89,6 +112,16 @@ struct QuotaBurndownChartMenuView: View {
                             series: .value("Series", "Observed"))
                             .foregroundStyle(self.color)
                             .lineStyle(StrokeStyle(lineWidth: 2))
+                    }
+                    RuleMark(x: .value("Time", selected.model.now))
+                        .foregroundStyle(Color(nsColor: .tertiaryLabelColor))
+                        .lineStyle(StrokeStyle(lineWidth: 0.5))
+                    if let runOut = selected.model.runOut {
+                        PointMark(
+                            x: .value("Time", runOut),
+                            y: .value(L("Usage remaining"), 0.0))
+                            .foregroundStyle(Self.runOutColor)
+                            .symbolSize(30)
                     }
                     if let current = selected.model.samples.last {
                         PointMark(
@@ -101,7 +134,11 @@ struct QuotaBurndownChartMenuView: View {
                 .chartXScale(domain: selected.model.start...selected.model.reset)
                 .chartYScale(domain: 0...100)
                 .chartYAxis {
-                    AxisMarks(values: [0, 50, 100])
+                    AxisMarks(values: [0, 50, 100]) { _ in
+                        AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
+                        AxisValueLabel()
+                            .foregroundStyle(Color(nsColor: .secondaryLabelColor))
+                    }
                 }
                 .chartXAxis(.hidden)
                 .chartLegend(.hidden)
@@ -173,6 +210,10 @@ struct QuotaBurndownChartMenuView: View {
 
     var _seriesStartsForTesting: [String: Date] {
         Dictionary(uniqueKeysWithValues: self.series.map { ($0.id, $0.model.start) })
+    }
+
+    var _seriesModelsForTesting: [String: QuotaBurndownModel] {
+        Dictionary(uniqueKeysWithValues: self.series.map { ($0.id, $0.model) })
     }
 
     var _seriesRemainingForTesting: [String: Double] {
