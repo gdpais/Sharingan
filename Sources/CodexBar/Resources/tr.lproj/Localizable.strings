@@ -2768,3 +2768,5 @@
 "record_usage_history_subtitle" = "Henüz geçmiş tutmayan sağlayıcılar için saatlik kullanım zirvelerini bu Mac’te kaydeder; ayrıca hız tahminleri için 8 haftalık Codex haftalık kullanımını kaydeder. Plan geçmişini ve tüketim grafiğini besler.";
 "Daily average" = "Günlük ortalama";
 "avg %@ credits/day" = "ort. %@ kredi/gün";
+"Average" = "Ortalama";
+"avg %@/day" = "ort. %@/gün";

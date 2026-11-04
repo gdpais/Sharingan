@@ -2764,3 +2764,5 @@
 "record_usage_history_subtitle" = "Rexistra os picos de uso por hora neste Mac para os provedores que aínda non gardan historial, ademais de 8 semanas de uso semanal de Codex para as predicións de ritmo. Alimenta o historial do plan e o gráfico de consumo.";
 "Daily average" = "Media diaria";
 "avg %@ credits/day" = "media %@ créditos/día";
+"Average" = "Media";
+"avg %@/day" = "media %@/día";

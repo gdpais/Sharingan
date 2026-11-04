@@ -66,6 +66,46 @@ struct PlanUtilizationHistoryChartMenuViewTests {
     }
 
     @Test
+    func `session axis labels include the hour while longer windows show only the day`() {
+        // 2026-10-06 15:00 UTC.
+        let date = Date(timeIntervalSince1970: 1_791_298_800)
+        let locale = Locale(identifier: "en_US")
+        let utc = TimeZone(identifier: "UTC") ?? .gmt
+        let session = PlanUtilizationHistoryChartMenuView._axisLabelTextForTesting(
+            date: date, windowMinutes: 300, locale: locale, timeZone: utc)
+        let weekly = PlanUtilizationHistoryChartMenuView._axisLabelTextForTesting(
+            date: date, windowMinutes: 10080, locale: locale, timeZone: utc)
+        #expect(weekly == "Oct 6")
+        #expect(session.hasPrefix("Oct 6"))
+        #expect(session.contains("3"))
+        #expect(session.contains("PM"))
+    }
+
+    @Test
+    func `remembered series is restored only while it is still visible`() {
+        let now = Date(timeIntervalSince1970: 1_700_000_000)
+        let histories = [
+            PlanUtilizationSeriesHistory(
+                name: .session,
+                windowMinutes: 300,
+                entries: [.init(capturedAt: now, usedPercent: 20, resetsAt: nil)]),
+            PlanUtilizationSeriesHistory(
+                name: .weekly,
+                windowMinutes: 10080,
+                entries: [.init(capturedAt: now, usedPercent: 40, resetsAt: nil)]),
+        ]
+        let visible = PlanUtilizationHistoryChartMenuView.visibleSeries(
+            histories: histories,
+            provider: .ollama,
+            snapshot: nil)
+        #expect(visible.map(\.id) == ["session:300", "weekly:10080"])
+        #expect(PlanUtilizationHistoryChartMenuView.restoredSeriesID("weekly:10080", visibleSeries: visible)
+            == "weekly:10080")
+        #expect(PlanUtilizationHistoryChartMenuView.restoredSeriesID("monthly:43200", visibleSeries: visible) == nil)
+        #expect(PlanUtilizationHistoryChartMenuView.restoredSeriesID(nil, visibleSeries: visible) == nil)
+    }
+
+    @Test
     func `ollama monthly history retains a currently reported weekly lane`() throws {
         let snapshot = try OllamaUsageParser.parse(html: """
         <div><span>Monthly usage</span><span>$7.50 of $60 used</span></div>

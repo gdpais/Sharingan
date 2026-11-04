@@ -2767,3 +2767,5 @@
 "record_usage_history_subtitle" = "Registra els pics d’ús per hora en aquest Mac per als proveïdors que encara no en desen l’historial, a més de 8 setmanes d’ús setmanal de Codex per a les prediccions de ritme. Alimenta l’historial del pla i el gràfic de consum.";
 "Daily average" = "Mitjana diària";
 "avg %@ credits/day" = "mitjana %@ crèdits/dia";
+"Average" = "Mitjana";
+"avg %@/day" = "mitjana %@/dia";

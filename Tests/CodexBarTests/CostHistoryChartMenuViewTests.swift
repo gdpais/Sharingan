@@ -523,7 +523,7 @@ struct CostHistoryChartMenuViewTests {
 
     @Test
     @MainActor
-    func `axis dates span first to last for multi-day data`() {
+    func `axis dates label Mondays for ranges longer than a week`() {
         let daily = [
             CostUsageDailyReport.Entry(
                 date: "2026-05-21",
@@ -544,11 +544,46 @@ struct CostHistoryChartMenuViewTests {
         ]
         let dates = CostHistoryChartMenuView._axisDatesForTesting(provider: .codex, daily: daily)
         let cal = Calendar.current
-        #expect(dates.count == 2)
-        #expect(cal.component(.month, from: dates[0]) == 5)
-        #expect(cal.component(.day, from: dates[0]) == 21)
-        #expect(cal.component(.month, from: dates[1]) == 6)
-        #expect(cal.component(.day, from: dates[1]) == 17)
+        // 2026-05-21 is a Thursday; the labeled Mondays fall inside the range.
+        #expect(dates.map { cal.component(.month, from: $0) } == [5, 6, 6, 6])
+        #expect(dates.map { cal.component(.day, from: $0) } == [25, 1, 8, 15])
+        #expect(dates.allSatisfy { cal.component(.weekday, from: $0) == 2 })
+    }
+
+    @Test
+    @MainActor
+    func `axis dates label every Monday of a thirty day range`() {
+        let daily = (1...30).map { day in
+            Self.fixtureEntry(String(format: "2026-06-%02d", day), costUSD: Double(day), totalTokens: nil)
+        }
+        let dates = CostHistoryChartMenuView._axisDatesForTesting(provider: .claude, daily: daily)
+        let cal = Calendar.current
+        #expect(dates.map { cal.component(.day, from: $0) } == [1, 8, 15, 22, 29])
+        #expect(dates.allSatisfy { cal.component(.weekday, from: $0) == 2 })
+    }
+
+    @Test
+    @MainActor
+    func `axis dates thin Mondays on long ranges and keep endpoints within a week`() {
+        let start = Calendar.current.date(from: DateComponents(year: 2026, month: 6, day: 1)) ?? Date()
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.calendar = Calendar(identifier: .gregorian)
+        formatter.dateFormat = "yyyy-MM-dd"
+        let longRange = (0..<90).compactMap { offset in
+            Calendar.current.date(byAdding: .day, value: offset, to: start).map {
+                Self.fixtureEntry(formatter.string(from: $0), costUSD: 1, totalTokens: nil)
+            }
+        }
+        let thinned = CostHistoryChartMenuView._axisDatesForTesting(provider: .claude, daily: longRange)
+        #expect(thinned.count == 5)
+        #expect(thinned.allSatisfy { Calendar.current.component(.weekday, from: $0) == 2 })
+
+        let week = (1...7).map { day in
+            Self.fixtureEntry(String(format: "2026-06-%02d", day), costUSD: 1, totalTokens: nil)
+        }
+        let endpoints = CostHistoryChartMenuView._axisDatesForTesting(provider: .claude, daily: week)
+        #expect(endpoints.map { Calendar.current.component(.day, from: $0) } == [1, 7])
     }
 
     @Test
@@ -594,19 +629,85 @@ struct CostHistoryChartMenuViewTests {
 
     @Test
     @MainActor
-    func `y-axis tick values use two ticks for small ranges`() {
+    func `y-axis tick values use nice steps for small ranges`() {
         let ticks = CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 0.50)
-        #expect(ticks == [0, 0.50])
+        #expect(ticks == [0, 0.2, 0.4, 0.6])
+        #expect(CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 0.004) == [0, 0.01])
     }
 
     @Test
     @MainActor
-    func `y-axis tick values use three ticks for ranges at or above one dollar`() {
+    func `y-axis tick values extend to a nice ceiling above the maximum`() {
         let ticks = CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 12.0)
-        #expect(ticks == [0, 6.0, 12.0])
+        #expect(ticks == [0, 5, 10, 15])
 
         let large = CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 1000.0)
         #expect(large == [0, 500.0, 1000.0])
+
+        let uneven = CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 1515.0)
+        #expect(uneven == [0, 500, 1000, 1500, 2000])
+    }
+
+    @Test
+    @MainActor
+    func `y-axis cost ticks round in display currency`() {
+        let ticks = CostHistoryChartMenuView._yAxisTickValuesForTesting(maxCostUSD: 10, costMultiplier: 150)
+        let displayed = ticks.map { ($0 * 150).rounded() }
+        #expect(displayed == [0, 500, 1000, 1500])
+    }
+
+    @Test
+    @MainActor
+    func `y-axis token ticks never step below one token`() {
+        #expect(CostHistoryChartMenuView._yAxisTickValuesForTesting(maxValue: 1, metric: .tokens) == [0, 1])
+        #expect(CostHistoryChartMenuView._yAxisTickValuesForTesting(maxValue: 0, metric: .tokens).isEmpty)
+        #expect(CostHistoryChartMenuView._yAxisTickValuesForTesting(
+            maxValue: 151_000_000,
+            metric: .tokens) == [0, 50_000_000, 100_000_000, 150_000_000, 200_000_000])
+    }
+
+    @Test
+    func `daily average covers days with values and skips incomplete-only days`() {
+        let daily = [
+            Self.fixtureEntry("2026-06-01", costUSD: 10, totalTokens: 1000),
+            Self.fixtureEntry("2026-06-02", costUSD: 20, totalTokens: nil),
+            CostUsageDailyReport.Entry(
+                date: "2026-06-03",
+                inputTokens: nil,
+                outputTokens: nil,
+                totalTokens: nil,
+                costUSD: nil,
+                modelsUsed: ["fixture-model"],
+                modelBreakdowns: [.init(modelName: "fixture-model", costUSD: nil, incompleteRequestCount: 1)]),
+        ]
+        #expect(CostHistoryChartMenuView._dailyAverageForTesting(provider: .claude, daily: daily, metric: .cost) == 15)
+        // A single token day draws no reference line.
+        #expect(CostHistoryChartMenuView._dailyAverageForTesting(
+            provider: .claude, daily: daily, metric: .tokens) == nil)
+    }
+
+    @Test
+    func `daily average helper needs two usable values and a nonzero total`() {
+        #expect(CostHistoryChartMenuView.dailyAverage([4, 8, 0]) == 4)
+        #expect(CostHistoryChartMenuView.dailyAverage([4]) == nil)
+        #expect(CostHistoryChartMenuView.dailyAverage([0, 0]) == nil)
+        #expect(CostHistoryChartMenuView.dailyAverage([]) == nil)
+        #expect(CostHistoryChartMenuView.dailyAverage([2, .nan, 6]) == 4)
+    }
+
+    private static func fixtureEntry(
+        _ date: String,
+        costUSD: Double?,
+        totalTokens: Int?) -> CostUsageDailyReport.Entry
+    {
+        CostUsageDailyReport.Entry(
+            date: date,
+            inputTokens: nil,
+            outputTokens: nil,
+            totalTokens: totalTokens,
+            costUSD: costUSD,
+            modelsUsed: nil,
+            modelBreakdowns: nil)
     }
 
     @Test(arguments: [

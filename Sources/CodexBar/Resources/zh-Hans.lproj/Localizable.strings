@@ -2757,3 +2757,5 @@
 "record_usage_history_subtitle" = "在此 Mac 上为尚未保存历史记录的提供商记录每小时用量峰值，并记录 8 周的 Codex 每周用量用于节奏预测。为套餐历史和消耗图表提供数据。";
 "Daily average" = "每日平均";
 "avg %@ credits/day" = "平均 %@ 额度/天";
+"Average" = "平均值";
+"avg %@/day" = "日均 %@";

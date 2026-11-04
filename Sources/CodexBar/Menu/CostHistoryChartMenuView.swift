@@ -8,7 +8,7 @@ import SwiftUI
 struct CostHistoryChartMenuView: View {
     typealias DailyEntry = CostUsageDailyReport.Entry
 
-    enum ChartMetric: CaseIterable, Hashable {
+    enum ChartMetric: String, CaseIterable, Hashable {
         case tokens
         case cost
 
@@ -97,6 +97,7 @@ struct CostHistoryChartMenuView: View {
         sessions: [CostUsageSessionBreakdown] = [],
         hidePersonalInfo: Bool,
         width: CGFloat,
+        initialMetric: ChartMetric? = nil,
         onMetricChanged: (@MainActor (ChartMetric) -> Void)? = nil,
         onBrowseSessions: (@MainActor (String?) -> Void)? = nil)
     {
@@ -113,7 +114,10 @@ struct CostHistoryChartMenuView: View {
         self.width = width
         self.onMetricChanged = onMetricChanged
         self.onBrowseSessions = onBrowseSessions
-        self._metric = State(initialValue: Self.defaultMetric(provider: provider, daily: daily))
+        self._metric = State(initialValue: Self.initialMetric(
+            preferred: initialMetric,
+            provider: provider,
+            daily: daily))
     }
 
     var body: some View {
@@ -129,6 +133,11 @@ struct CostHistoryChartMenuView: View {
         let selectedDateKey = self.selectedDateKey.flatMap { model.pointsByDateKey[$0] == nil ? nil : $0 }
             ?? Self.defaultSelectedDateKey(model: model)
         let incompleteCount = CostUsageIncompleteRequests.sum(self.daily.map(\.incompleteRequestCount))
+        let yTicks = Self.yAxisTickValues(
+            maxValue: model.maxValue,
+            metric: activeMetric,
+            costMultiplier: self.costMultiplier)
+        let dailyAverage = Self.dailyAverage(model: model, metric: activeMetric)
         let tokenValues = model.points.compactMap(\.totalTokens)
         let accessibilityTokens = tokenValues.isEmpty ? nil : CheckedSum.integers(tokenValues)
         VStack(alignment: .leading, spacing: Self.outerSpacing) {
@@ -166,22 +175,22 @@ struct CostHistoryChartMenuView: View {
                                     .yAxisString(point.value, metric: activeMetric) : "—")
                         }
                     }
-                    if let peak = Self.peakPoint(model: model) {
-                        let capStart = max(peak.value - Self.capHeight(maxValue: model.maxValue), 0)
-                        BarMark(
-                            x: .value(L("Day"), peak.date, unit: .day),
-                            yStart: .value(L("Cap start"), capStart),
-                            yEnd: .value(L("Cap end"), peak.value),
-                            width: .ratio(ChartBarHoverSelection.barWidthRatio))
-                            .foregroundStyle(Color(nsColor: .systemYellow))
+                    if let average = dailyAverage {
+                        RuleMark(y: .value(L("Average"), average))
+                            .foregroundStyle(Color.secondary)
+                            .lineStyle(StrokeStyle(lineWidth: 1, dash: [4, 3]))
+                            .annotation(position: .top, alignment: .trailing, spacing: 2) {
+                                Text(self.averageLabel(average, metric: activeMetric))
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                            }
                     }
                 }
+                .chartYScale(domain: 0...(yTicks.last ?? max(model.maxValue, 1)))
                 .chartYAxis {
-                    AxisMarks(
-                        position: .leading,
-                        values: Self.yAxisTickValues(maxValue: model.maxValue, metric: activeMetric))
-                    { value in
-                        AxisGridLine().foregroundStyle(Color.clear)
+                    AxisMarks(position: .leading, values: yTicks) { value in
+                        AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
+                            .foregroundStyle(Color(nsColor: .separatorColor))
                         AxisTick().foregroundStyle(Color.clear)
                         AxisValueLabel(centered: false) {
                             if let raw = value.as(Double.self) {
@@ -408,7 +417,8 @@ struct CostHistoryChartMenuView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, Self.verticalPadding)
         .frame(minWidth: self.width, maxWidth: .infinity, alignment: .top)
-        .onChange(of: activeMetric) { _, newMetric in
+        // Report picker changes only: a data-driven fallback must not overwrite the remembered choice.
+        .onChange(of: self.metric) { _, newMetric in
             self.onMetricChanged?(newMetric)
         }
     }
@@ -433,7 +443,6 @@ struct CostHistoryChartMenuView: View {
         let dateKeys: [(key: String, date: Date)]
         let axisDates: [Date]
         let barColor: Color
-        let peakKey: String?
         let maxValue: Double
         let detailViewportRowCount: Int
         let hasDetailOverflow: Bool
@@ -442,6 +451,7 @@ struct CostHistoryChartMenuView: View {
 
     private static let selectionBandColor = Color(nsColor: .labelColor).opacity(0.1)
     static let maxVisibleDetailLines = 4
+    private static let maxWeekAxisLabels = 5
     private static let detailPrimaryLineHeight: CGFloat = 16
     private static let detailTitleLineHeight: CGFloat = 16
     private static let detailSubtitleLineHeight: CGFloat = 13
@@ -592,28 +602,39 @@ struct CostHistoryChartMenuView: View {
         row.subtitle == nil && row.modeSubtitle == nil ? 14 : rowHeight
     }
 
-    private static func capHeight(maxValue: Double) -> Double {
-        maxValue * 0.05
+    /// Mean of the plotted days that carry a value for the metric; incomplete-only days are excluded.
+    /// Nil with fewer than two such days or a zero total, where a reference line adds nothing.
+    nonisolated static func dailyAverage(_ values: [Double]) -> Double? {
+        let usable = values.filter { $0.isFinite && $0 >= 0 }
+        guard usable.count >= 2 else { return nil }
+        let total = usable.reduce(0, +)
+        guard total > 0 else { return nil }
+        return total / Double(usable.count)
     }
 
-    /// Y-axis tick values for the cost chart: 0, mid, max when the range is at
-    /// $1 or more; 0 and max for smaller ranges; empty for flat/no data so the
-    /// axis renders no labels.
-    private static func yAxisTickValues(maxCostUSD: Double) -> [Double] {
-        guard maxCostUSD > 0 else { return [] }
-        if maxCostUSD < 1.0 {
-            return [0, maxCostUSD]
-        }
-        return [0, maxCostUSD / 2, maxCostUSD]
+    private static func dailyAverage(model: Model, metric: ChartMetric) -> Double? {
+        self.dailyAverage(model.points.compactMap { point in
+            let hasValue = metric == .cost ? point.costUSD != nil : point.totalTokens != nil
+            return hasValue ? point.value : nil
+        })
     }
 
-    private static func yAxisTickValues(maxValue: Double, metric: ChartMetric) -> [Double] {
+    /// Y-axis tick values for the cost chart: 1-2-5 steps from zero to a nice ceiling at or above the
+    /// maximum, rounded in display currency so labels read as round amounts after conversion. Empty for
+    /// flat/no data so the axis renders no labels.
+    private static func yAxisTickValues(maxCostUSD: Double, costMultiplier: Double = 1) -> [Double] {
+        let multiplier = costMultiplier.isFinite && costMultiplier > 0 ? costMultiplier : 1
+        return ChartNiceScale.ticks(maximum: maxCostUSD * multiplier, minimumStep: 0.01)
+            .map { $0 / multiplier }
+    }
+
+    private static func yAxisTickValues(maxValue: Double, metric: ChartMetric, costMultiplier: Double) -> [Double] {
         switch metric {
         case .tokens:
-            guard maxValue > 0 else { return [] }
-            return maxValue < 2 ? [0, maxValue] : [0, maxValue / 2, maxValue]
+            // Whole-token steps keep labels from repeating after integer rounding.
+            ChartNiceScale.ticks(maximum: maxValue, minimumStep: 1)
         case .cost:
-            return self.yAxisTickValues(maxCostUSD: maxValue)
+            self.yAxisTickValues(maxCostUSD: maxValue, costMultiplier: costMultiplier)
         }
     }
 
@@ -636,7 +657,6 @@ struct CostHistoryChartMenuView: View {
         var dateKeys: [(key: String, date: Date)] = []
         dateKeys.reserveCapacity(sorted.count)
 
-        var peak: (key: String, value: Double)?
         var maxValue: Double = 0
         for entry in sorted {
             guard let (value, date) = self.chartPointInput(for: entry, provider: provider, metric: metric) else {
@@ -653,23 +673,12 @@ struct CostHistoryChartMenuView: View {
             pointsByKey[entry.date] = point
             entriesByKey[entry.date] = entry
             dateKeys.append((entry.date, date))
-            if let cur = peak {
-                if value > cur.value {
-                    peak = (entry.date, value)
-                }
-            } else {
-                peak = (entry.date, value)
-            }
             maxValue = max(maxValue, value)
         }
 
-        let axisDates: [Date] = {
-            guard let first = dateKeys.first?.date, let last = dateKeys.last?.date else { return [] }
-            if Calendar.current.isDate(first, inSameDayAs: last) {
-                return [first]
-            }
-            return [first, last]
-        }()
+        let axisDates = self.axisDates(
+            dates: dateKeys.map(\.date),
+            calendar: self.gregorianCalendar(timeZone: Calendar.autoupdatingCurrent.timeZone))
 
         let barColor = Self.barColor(for: provider)
         return Model(
@@ -679,11 +688,37 @@ struct CostHistoryChartMenuView: View {
             dateKeys: dateKeys,
             axisDates: axisDates,
             barColor: barColor,
-            peakKey: maxValue > 0 ? peak?.key : nil,
             maxValue: maxValue,
             detailViewportRowCount: detailLayout.viewportRowCount,
             hasDetailOverflow: detailLayout.hasOverflow,
             detailRowHeight: detailLayout.rowHeight)
+    }
+
+    /// X-axis label dates. Ranges longer than a week label each Monday, the ISO 8601 week start, chosen
+    /// over the locale's `firstWeekday` so every user sees the same week boundaries; long ranges thin to
+    /// every n-th Monday so at most `maxWeekAxisLabels` labels share the axis. Shorter ranges keep the
+    /// first and last dates.
+    private static func axisDates(dates: [Date], calendar: Calendar) -> [Date] {
+        guard let first = dates.first, let last = dates.last else { return [] }
+        if calendar.isDate(first, inSameDayAs: last) {
+            return [first]
+        }
+        let start = calendar.startOfDay(for: first)
+        let end = calendar.startOfDay(for: last)
+        let daySpan = calendar.dateComponents([.day], from: start, to: end).day ?? 0
+        guard daySpan + 1 > 7 else { return [first, last] }
+
+        let mondayWeekday = 2
+        let offsetToMonday = (mondayWeekday - calendar.component(.weekday, from: start) + 7) % 7
+        var mondays: [Date] = []
+        var cursor = calendar.date(byAdding: .day, value: offsetToMonday, to: start)
+        while let monday = cursor, monday <= end {
+            mondays.append(monday)
+            cursor = calendar.date(byAdding: .day, value: 7, to: monday)
+        }
+        guard !mondays.isEmpty else { return [first, last] }
+        let labelStride = max(1, Int((Double(mondays.count) / Double(self.maxWeekAxisLabels)).rounded(.up)))
+        return mondays.enumerated().compactMap { $0.offset.isMultiple(of: labelStride) ? $0.element : nil }
     }
 
     private static func barColor(for provider: UsageProvider) -> Color {
@@ -794,6 +829,18 @@ struct CostHistoryChartMenuView: View {
         return available.first ?? .cost
     }
 
+    /// A remembered metric wins while the data can still chart it; otherwise the provider default applies.
+    private static func initialMetric(
+        preferred: ChartMetric?,
+        provider: UsageProvider,
+        daily: [DailyEntry]) -> ChartMetric
+    {
+        if let preferred, self.availableMetrics(provider: provider, daily: daily).contains(preferred) {
+            return preferred
+        }
+        return self.defaultMetric(provider: provider, daily: daily)
+    }
+
     private static func showsHistoryRefreshing(
         provider: UsageProvider,
         metric: ChartMetric,
@@ -801,11 +848,6 @@ struct CostHistoryChartMenuView: View {
     {
         // Provider-specific by design: only Codex exposes incremental local-history coverage for token scans.
         provider == .codex && metric == .tokens && !historyCoverageIsEstablished
-    }
-
-    private static func peakPoint(model: Model) -> Point? {
-        guard let key = model.peakKey else { return nil }
-        return model.pointsByDateKey[key]
     }
 
     private static func hasModeSubtitle(_ item: CostUsageDailyReport.ModelBreakdown) -> Bool {
@@ -1092,6 +1134,15 @@ struct CostHistoryChartMenuView: View {
         UsageFormatter.tokenCountString(Int(value.rounded()))
     }
 
+    private func averageLabel(_ value: Double, metric: ChartMetric) -> String {
+        switch metric {
+        case .tokens:
+            L("avg %@/day", UsageFormatter.tokenCountString(Int(value.rounded())))
+        case .cost:
+            L("avg %@/day", Self.yAxisCostString(value * self.costMultiplier, currencyCode: self.currencyCode))
+        }
+    }
+
     private func yAxisString(_ value: Double, metric: ChartMetric) -> String {
         switch metric {
         case .tokens:
@@ -1309,8 +1360,20 @@ extension CostHistoryChartMenuView {
             metric: self.defaultMetric(provider: provider, daily: daily)).axisDates
     }
 
-    static func _yAxisTickValuesForTesting(maxCostUSD: Double) -> [Double] {
-        self.yAxisTickValues(maxCostUSD: maxCostUSD)
+    static func _yAxisTickValuesForTesting(maxCostUSD: Double, costMultiplier: Double = 1) -> [Double] {
+        self.yAxisTickValues(maxCostUSD: maxCostUSD, costMultiplier: costMultiplier)
+    }
+
+    static func _yAxisTickValuesForTesting(maxValue: Double, metric: ChartMetric) -> [Double] {
+        self.yAxisTickValues(maxValue: maxValue, metric: metric, costMultiplier: 1)
+    }
+
+    static func _dailyAverageForTesting(
+        provider: UsageProvider,
+        daily: [DailyEntry],
+        metric: ChartMetric) -> Double?
+    {
+        self.dailyAverage(model: self.makeModel(provider: provider, daily: daily, metric: metric), metric: metric)
     }
 
     static func _yAxisCostStringForTesting(_ value: Double, currencyCode: String = "USD") -> String {
@@ -1330,6 +1393,14 @@ extension CostHistoryChartMenuView {
 
     static func _defaultMetricForTesting(provider: UsageProvider, daily: [DailyEntry]) -> ChartMetric {
         self.defaultMetric(provider: provider, daily: daily)
+    }
+
+    static func _initialMetricForTesting(
+        preferred: ChartMetric?,
+        provider: UsageProvider,
+        daily: [DailyEntry]) -> ChartMetric
+    {
+        self.initialMetric(preferred: preferred, provider: provider, daily: daily)
     }
 
     static func _chartValuesForTesting(

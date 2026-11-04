@@ -2767,3 +2767,5 @@
 "record_usage_history_subtitle" = "Merekam puncak penggunaan per jam di Mac ini untuk penyedia yang belum menyimpan riwayat, ditambah 8 minggu penggunaan mingguan Codex untuk prediksi laju. Menjadi dasar riwayat paket dan grafik burndown.";
 "Daily average" = "Rata-rata harian";
 "avg %@ credits/day" = "rata-rata %@ kredit/hari";
+"Average" = "Rata-rata";
+"avg %@/day" = "rata-rata %@/hari";
