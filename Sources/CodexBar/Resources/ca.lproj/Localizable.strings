@@ -2801,3 +2801,18 @@
 "Project trends" = "Tendències dels projectes";
 "Change compares the last %d days with the %d days before." = "El canvi compara els últims %d dies amb els %d dies anteriors.";
 "New" = "Nou";
+
+/* Chart preferences */
+"Charts" = "Gràfics";
+"Charts never show more days than the History window." = "Els gràfics mai no mostren més dies que la finestra d'historial.";
+"Stack by model" = "Apila per model";
+"Splits each day by its two largest models." = "Divideix cada dia pels seus dos models més grans.";
+"Average line" = "Línia de mitjana";
+"Chart style" = "Estil del gràfic";
+"Bars" = "Barres";
+"Line" = "Línia";
+"Palette" = "Paleta";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Apta per a daltonisme substitueix els colors d'accent dels proveïdors als gràfics d'una sola sèrie. Monocrom fa servir grisos a tot arreu, inclosos els mapes de calor.";
+"Provider accents" = "Colors d'accent dels proveïdors";
+"Colorblind-safe" = "Apta per a daltonisme";
+"Monochrome" = "Monocrom";

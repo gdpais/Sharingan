@@ -2798,3 +2798,18 @@
 "Project trends" = "Tendencias dos proxectos";
 "Change compares the last %d days with the %d days before." = "O cambio compara os últimos %d días cos %d días anteriores.";
 "New" = "Novo";
+
+/* Chart preferences */
+"Charts" = "Gráficos";
+"Charts never show more days than the History window." = "Os gráficos nunca amosan máis días cá xanela do historial.";
+"Stack by model" = "Apilar por modelo";
+"Splits each day by its two largest models." = "Divide cada día segundo os seus dous modelos principais.";
+"Average line" = "Liña de media";
+"Chart style" = "Estilo do gráfico";
+"Bars" = "Barras";
+"Line" = "Liña";
+"Palette" = "Paleta";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Apta para daltonismo substitúe as cores de acento dos provedores nos gráficos dunha soa serie. Monocromo usa grises en todas partes, incluídos os mapas de calor.";
+"Provider accents" = "Cores de acento dos provedores";
+"Colorblind-safe" = "Apta para daltonismo";
+"Monochrome" = "Monocromo";

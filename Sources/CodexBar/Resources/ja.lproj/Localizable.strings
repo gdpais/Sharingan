@@ -2799,3 +2799,18 @@
 "Project trends" = "プロジェクトの推移";
 "Change compares the last %d days with the %d days before." = "変化は直近%d日間とその前の%d日間を比較しています。";
 "New" = "新規";
+
+/* Chart preferences */
+"Charts" = "グラフ";
+"Charts never show more days than the History window." = "グラフに履歴期間より多くの日数が表示されることはありません。";
+"Stack by model" = "モデル別に積み上げる";
+"Splits each day by its two largest models." = "各日を上位2つのモデルで分けて表示します。";
+"Average line" = "平均線";
+"Chart style" = "グラフのスタイル";
+"Bars" = "棒グラフ";
+"Line" = "折れ線グラフ";
+"Palette" = "カラーパレット";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "色覚多様性対応では、単一系列のグラフでもプロバイダのアクセントカラーの代わりに検証済みの配色を使います。モノクロでは、ヒートマップを含むすべてにグレーを使います。";
+"Provider accents" = "プロバイダのアクセントカラー";
+"Colorblind-safe" = "色覚多様性対応";
+"Monochrome" = "モノクロ";

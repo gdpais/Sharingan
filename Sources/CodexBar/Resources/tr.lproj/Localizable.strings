@@ -2802,3 +2802,18 @@
 "Project trends" = "Proje eğilimleri";
 "Change compares the last %d days with the %d days before." = "Değişim, son %d günü önceki %d günle karşılaştırır.";
 "New" = "Yeni";
+
+/* Chart preferences */
+"Charts" = "Grafikler";
+"Charts never show more days than the History window." = "Grafikler hiçbir zaman geçmiş penceresinden daha fazla gün göstermez.";
+"Stack by model" = "Modele göre yığ";
+"Splits each day by its two largest models." = "Her günü en büyük iki modeline göre böler.";
+"Average line" = "Ortalama çizgisi";
+"Chart style" = "Grafik stili";
+"Bars" = "Çubuklar";
+"Line" = "Çizgi";
+"Palette" = "Palet";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Renk körlüğüne uygun mod, tek serili grafiklerde sağlayıcı vurgu renklerinin yerine doğrulanmış renkleri kullanır. Tek renkli mod, ısı haritaları dahil her yerde gri tonları kullanır.";
+"Provider accents" = "Sağlayıcı vurgu renkleri";
+"Colorblind-safe" = "Renk körlüğüne uygun";
+"Monochrome" = "Tek renkli";

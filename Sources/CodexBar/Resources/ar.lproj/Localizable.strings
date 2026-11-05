@@ -2803,3 +2803,18 @@
 "Project trends" = "اتجاهات المشاريع";
 "Change compares the last %d days with the %d days before." = "يقارن التغيّر آخر %d يومًا بالـ %d يومًا التي سبقتها.";
 "New" = "جديد";
+
+/* Chart preferences */
+"Charts" = "الرسوم البيانية";
+"Charts never show more days than the History window." = "لا تعرض الرسوم البيانية أبدًا أيامًا أكثر من نافذة التاريخ.";
+"Stack by model" = "التكديس حسب النموذج";
+"Splits each day by its two largest models." = "يقسّم كل يوم حسب أكبر نموذجين فيه.";
+"Average line" = "خط المتوسط";
+"Chart style" = "نمط الرسم البياني";
+"Bars" = "أعمدة";
+"Line" = "خط";
+"Palette" = "لوحة الألوان";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "يستبدل الوضع الآمن لعمى الألوان ألوان تمييز المزوّدين في الرسوم البيانية ذات السلسلة الواحدة. ويستخدم الوضع أحادي اللون درجات الرمادي في كل مكان، بما في ذلك الخرائط الحرارية.";
+"Provider accents" = "ألوان تمييز المزوّدين";
+"Colorblind-safe" = "آمن لعمى الألوان";
+"Monochrome" = "أحادي اللون";

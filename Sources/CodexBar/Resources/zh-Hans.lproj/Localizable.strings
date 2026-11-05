@@ -2791,3 +2791,18 @@
 "Project trends" = "项目趋势";
 "Change compares the last %d days with the %d days before." = "变化比较最近 %d 天与之前 %d 天。";
 "New" = "新增";
+
+/* Chart preferences */
+"Charts" = "图表";
+"Charts never show more days than the History window." = "图表显示的天数不会超过历史窗口。";
+"Stack by model" = "按模型堆叠";
+"Splits each day by its two largest models." = "按当天用量最大的两个模型拆分每一天。";
+"Average line" = "平均线";
+"Chart style" = "图表样式";
+"Bars" = "柱状";
+"Line" = "折线";
+"Palette" = "配色";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "色盲友好模式在单系列图表中也用经过验证的配色替代提供商强调色。单色模式在所有地方使用灰色，包括热力图。";
+"Provider accents" = "提供商强调色";
+"Colorblind-safe" = "色盲友好";
+"Monochrome" = "单色";

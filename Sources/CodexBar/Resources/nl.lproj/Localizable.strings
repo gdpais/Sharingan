@@ -2796,3 +2796,18 @@
 "Project trends" = "Projecttrends";
 "Change compares the last %d days with the %d days before." = "De verandering vergelijkt de laatste %d dagen met de %d dagen daarvoor.";
 "New" = "Nieuw";
+
+/* Chart preferences */
+"Charts" = "Grafieken";
+"Charts never show more days than the History window." = "Grafieken tonen nooit meer dagen dan het geschiedenisvenster.";
+"Stack by model" = "Stapelen per model";
+"Splits each day by its two largest models." = "Verdeelt elke dag over de twee grootste modellen.";
+"Average line" = "Gemiddeldelijn";
+"Chart style" = "Grafiekstijl";
+"Bars" = "Staven";
+"Line" = "Lijn";
+"Palette" = "Palet";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Kleurenblindvriendelijk vervangt de accentkleuren van aanbieders in grafieken met één reeks. Monochroom gebruikt overal grijstinten, ook in heatmaps.";
+"Provider accents" = "Accentkleuren van aanbieders";
+"Colorblind-safe" = "Kleurenblindvriendelijk";
+"Monochrome" = "Monochroom";

@@ -2801,3 +2801,18 @@
 "Project trends" = "Tren proyek";
 "Change compares the last %d days with the %d days before." = "Perubahan membandingkan %d hari terakhir dengan %d hari sebelumnya.";
 "New" = "Baru";
+
+/* Chart preferences */
+"Charts" = "Grafik";
+"Charts never show more days than the History window." = "Grafik tidak pernah menampilkan lebih banyak hari daripada jendela riwayat.";
+"Stack by model" = "Tumpuk menurut model";
+"Splits each day by its two largest models." = "Membagi setiap hari menurut dua model terbesarnya.";
+"Average line" = "Garis rata-rata";
+"Chart style" = "Gaya grafik";
+"Bars" = "Batang";
+"Line" = "Garis";
+"Palette" = "Palet";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Ramah buta warna mengganti warna aksen penyedia pada grafik satu seri. Monokrom memakai abu-abu di mana saja, termasuk peta panas.";
+"Provider accents" = "Warna aksen penyedia";
+"Colorblind-safe" = "Ramah buta warna";
+"Monochrome" = "Monokrom";

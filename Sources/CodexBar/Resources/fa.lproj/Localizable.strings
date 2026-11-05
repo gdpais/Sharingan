@@ -2803,3 +2803,18 @@
 "Project trends" = "روند پروژه‌ها";
 "Change compares the last %d days with the %d days before." = "تغییر، %d روز اخیر را با %d روز پیش از آن مقایسه می‌کند.";
 "New" = "جدید";
+
+/* Chart preferences */
+"Charts" = "نمودارها";
+"Charts never show more days than the History window." = "نمودارها هرگز بیش از روزهای پنجره تاریخچه را نشان نمی‌دهند.";
+"Stack by model" = "انباشت بر اساس مدل";
+"Splits each day by its two largest models." = "هر روز را بر اساس دو مدل بزرگ‌ترش تقسیم می‌کند.";
+"Average line" = "خط میانگین";
+"Chart style" = "سبک نمودار";
+"Bars" = "ستونی";
+"Line" = "خطی";
+"Palette" = "پالت رنگ";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "حالت مناسب کوررنگی، رنگ‌های تأکید ارائه‌دهندگان را در نمودارهای تک‌سری جایگزین می‌کند. حالت تک‌رنگ همه‌جا از خاکستری استفاده می‌کند، از جمله در نقشه‌های حرارتی.";
+"Provider accents" = "رنگ‌های تأکید ارائه‌دهندگان";
+"Colorblind-safe" = "مناسب کوررنگی";
+"Monochrome" = "تک‌رنگ";

@@ -2800,3 +2800,18 @@
 "Project trends" = "Динамика проектов";
 "Change compares the last %d days with the %d days before." = "Изменение сравнивает последние %d дн. с %d дн. до них.";
 "New" = "Новый";
+
+/* Chart preferences */
+"Charts" = "Графики";
+"Charts never show more days than the History window." = "Графики никогда не показывают больше дней, чем окно истории.";
+"Stack by model" = "Накопление по моделям";
+"Splits each day by its two largest models." = "Делит каждый день по двум крупнейшим моделям.";
+"Average line" = "Линия среднего";
+"Chart style" = "Стиль графика";
+"Bars" = "Столбцы";
+"Line" = "Линия";
+"Palette" = "Палитра";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Режим для дальтоников заменяет акцентные цвета провайдеров на графиках с одним рядом. Монохромный режим везде использует оттенки серого, включая тепловые карты.";
+"Provider accents" = "Акцентные цвета провайдеров";
+"Colorblind-safe" = "Для дальтоников";
+"Monochrome" = "Монохромная";

@@ -2797,3 +2797,18 @@
 "Project trends" = "Projekttrends";
 "Change compares the last %d days with the %d days before." = "Die Veränderung vergleicht die letzten %d Tage mit den %d Tagen davor.";
 "New" = "Neu";
+
+/* Chart preferences */
+"Charts" = "Diagramme";
+"Charts never show more days than the History window." = "Diagramme zeigen nie mehr Tage als das Verlaufsfenster.";
+"Stack by model" = "Nach Modell stapeln";
+"Splits each day by its two largest models." = "Teilt jeden Tag nach seinen zwei größten Modellen auf.";
+"Average line" = "Durchschnittslinie";
+"Chart style" = "Diagrammstil";
+"Bars" = "Balken";
+"Line" = "Linie";
+"Palette" = "Farbpalette";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Farbenblind-sicher ersetzt die Akzentfarben der Anbieter in Diagrammen mit nur einer Datenreihe. Monochrom verwendet überall Grautöne, auch in Heatmaps.";
+"Provider accents" = "Akzentfarben der Anbieter";
+"Colorblind-safe" = "Farbenblind-sicher";
+"Monochrome" = "Monochrom";

@@ -2798,3 +2798,18 @@
 "Project trends" = "Projekttrender";
 "Change compares the last %d days with the %d days before." = "Förändringen jämför de senaste %d dagarna med de %d dagarna före.";
 "New" = "Ny";
+
+/* Chart preferences */
+"Charts" = "Diagram";
+"Charts never show more days than the History window." = "Diagram visar aldrig fler dagar än historikfönstret.";
+"Stack by model" = "Stapla per modell";
+"Splits each day by its two largest models." = "Delar upp varje dag efter dess två största modeller.";
+"Average line" = "Medelvärdeslinje";
+"Chart style" = "Diagramstil";
+"Bars" = "Staplar";
+"Line" = "Linje";
+"Palette" = "Palett";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Färgblindsvänlig ersätter leverantörernas accentfärger i diagram med en serie. Monokrom använder gråtoner överallt, även i värmekartor.";
+"Provider accents" = "Leverantörernas accentfärger";
+"Colorblind-safe" = "Färgblindsvänlig";
+"Monochrome" = "Monokrom";

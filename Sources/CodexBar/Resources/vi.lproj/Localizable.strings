@@ -2800,3 +2800,18 @@
 "Project trends" = "Xu hướng dự án";
 "Change compares the last %d days with the %d days before." = "Mức thay đổi so sánh %d ngày gần nhất với %d ngày trước đó.";
 "New" = "Mới";
+
+/* Chart preferences */
+"Charts" = "Biểu đồ";
+"Charts never show more days than the History window." = "Biểu đồ không bao giờ hiển thị nhiều ngày hơn cửa sổ lịch sử.";
+"Stack by model" = "Xếp chồng theo mô hình";
+"Splits each day by its two largest models." = "Chia mỗi ngày theo hai mô hình lớn nhất của ngày đó.";
+"Average line" = "Đường trung bình";
+"Chart style" = "Kiểu biểu đồ";
+"Bars" = "Cột";
+"Line" = "Đường";
+"Palette" = "Bảng màu";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Chế độ thân thiện với người mù màu thay màu nhấn của nhà cung cấp trong biểu đồ một chuỗi. Chế độ đơn sắc dùng màu xám ở mọi nơi, kể cả bản đồ nhiệt.";
+"Provider accents" = "Màu nhấn của nhà cung cấp";
+"Colorblind-safe" = "Thân thiện với người mù màu";
+"Monochrome" = "Đơn sắc";

@@ -1,17 +1,38 @@
+import CodexBarCore
 import SwiftUI
 
 struct SpendActivityPalette {
     let colorScheme: ColorScheme
     var contrast: ColorSchemeContrast = .standard
+    /// Accents and colorblind-safe keep the green ramp, a single-hue ramp read by lightness alone;
+    /// monochrome swaps in grays at the same lightness steps.
+    var mode: ChartPaletteMode = ChartPaletteSetting.activeMode
 
     func color(forLevel level: Int) -> Color {
-        let colors: [UInt32] = switch (self.colorScheme, self.contrast) {
+        Self.rgb(self.levelHexes[min(max(level, 0), 4)])
+    }
+
+    /// The five level colors, empty cell first.
+    var levelHexes: [UInt32] {
+        if self.mode == .monochrome {
+            return self.monochromeLevelHexes
+        }
+        return switch (self.colorScheme, self.contrast) {
         case (.dark, .increased): [0x484C52, 0x469960, 0x58B872, 0x7DDF96, 0xADF0BC]
         case (.dark, _): [0x30353A, 0x347D4E, 0x43985D, 0x58B872, 0x7DDF96]
         case (_, .increased): [0xE1E5E9, 0x519C66, 0x34804C, 0x24693B, 0x17552E]
         default: [0xEBEDF0, 0x9BE9A8, 0x40C463, 0x30A14E, 0x216E39]
         }
-        return Self.rgb(colors[min(max(level, 0), 4)])
+    }
+
+    /// Neutral grays about 12–14 L* apart, keeping each empty-cell color so "no activity" reads the same.
+    private var monochromeLevelHexes: [UInt32] {
+        switch (self.colorScheme, self.contrast) {
+        case (.dark, .increased): [0x484C52, 0x848484, 0xA3A3A3, 0xC6C6C6, 0xE8E8E8]
+        case (.dark, _): [0x30353A, 0x5E5E5E, 0x818181, 0xA6A6A6, 0xD1D1D1]
+        case (_, .increased): [0xE1E5E9, 0x969696, 0x777777, 0x5C5C5C, 0x424242]
+        default: [0xEBEDF0, 0xC6C6C6, 0xA0A0A0, 0x7C7C7C, 0x555555]
+        }
     }
 
     var unavailableFill: Color {

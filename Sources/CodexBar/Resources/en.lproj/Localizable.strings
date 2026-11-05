@@ -2804,3 +2804,18 @@
 "Project trends" = "Project trends";
 "Change compares the last %d days with the %d days before." = "Change compares the last %d days with the %d days before.";
 "New" = "New";
+
+/* Chart preferences */
+"Charts" = "Charts";
+"Charts never show more days than the History window." = "Charts never show more days than the History window.";
+"Stack by model" = "Stack by model";
+"Splits each day by its two largest models." = "Splits each day by its two largest models.";
+"Average line" = "Average line";
+"Chart style" = "Chart style";
+"Bars" = "Bars";
+"Line" = "Line";
+"Palette" = "Palette";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included.";
+"Provider accents" = "Provider accents";
+"Colorblind-safe" = "Colorblind-safe";
+"Monochrome" = "Monochrome";
