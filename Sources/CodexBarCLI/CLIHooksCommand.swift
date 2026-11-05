@@ -180,7 +180,7 @@ extension CodexBarCLI {
         case .quotaReset:
             usagePercent = 0
             status = nil
-        case .usageUpdated:
+        case .usageUpdated, .budgetReached:
             usagePercent = nil
             status = nil
         case .providerUnavailable:
