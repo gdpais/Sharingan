@@ -107,12 +107,23 @@ final class BalanceHistoryRecorder {
 }
 
 extension UsageStore {
-    /// The app's recorder, or nil where balance history must not touch the user's files (tests, previews).
+    /// The app's recorder, or nil while "Record usage history" is off or where balance history must not
+    /// touch the user's files (tests, previews). Off means nothing is recorded, loaded or shown.
     var balanceHistoryRecorder: BalanceHistoryRecorder? {
-        guard self.startupBehavior.automaticallyStartsBackgroundWork,
-              BalanceHistoryRecorder.isAvailableInProcess
+        guard Self.balanceHistoryIsEnabled(
+            historicalTrackingEnabled: self.settings.historicalTrackingEnabled,
+            automaticallyStartsBackgroundWork: self.startupBehavior.automaticallyStartsBackgroundWork)
         else { return nil }
         return BalanceHistoryRecorder.live
+    }
+
+    /// Balance history is local usage history, so it follows the same opt-in toggle as plan history.
+    nonisolated static func balanceHistoryIsEnabled(
+        historicalTrackingEnabled: Bool,
+        automaticallyStartsBackgroundWork: Bool,
+        isAvailableInProcess: Bool = BalanceHistoryRecorder.isAvailableInProcess) -> Bool
+    {
+        historicalTrackingEnabled && automaticallyStartsBackgroundWork && isAvailableInProcess
     }
 
     /// Records the prepaid balance of a freshly published snapshot.
@@ -155,8 +166,8 @@ extension UsageStore {
         return snapshot.flatMap { Self.planUtilizationIdentityAccountKey(provider: provider, snapshot: $0) }
     }
 
-    /// Runway chart for the provider's current account, or nil when there is no balance on the card or
-    /// not enough declining history for an estimate.
+    /// Runway chart for the provider's current account, or nil while "Record usage history" is off, when
+    /// there is no balance on the card, or without enough declining history for an estimate.
     func balanceRunwayChartModel(for provider: UsageProvider, now: Date = Date()) -> BalanceRunwayChartModel? {
         guard let recorder = self.balanceHistoryRecorder,
               let snapshot = self.snapshot(for: provider.instanceID),
