@@ -182,4 +182,23 @@ struct BalanceHistoryStoreTests {
     func `test processes never reach the shared recorder`() {
         #expect(!BalanceHistoryRecorder.isAvailableInProcess)
     }
+
+    @Test
+    func `balance history follows the record usage history toggle`() {
+        #expect(UsageStore.balanceHistoryIsEnabled(
+            historicalTrackingEnabled: true,
+            automaticallyStartsBackgroundWork: true,
+            isAvailableInProcess: true))
+        #expect(!UsageStore.balanceHistoryIsEnabled(
+            historicalTrackingEnabled: false,
+            automaticallyStartsBackgroundWork: true,
+            isAvailableInProcess: true))
+        #expect(!UsageStore.balanceHistoryIsEnabled(
+            historicalTrackingEnabled: true,
+            automaticallyStartsBackgroundWork: false,
+            isAvailableInProcess: true))
+        #expect(!UsageStore.balanceHistoryIsEnabled(
+            historicalTrackingEnabled: true,
+            automaticallyStartsBackgroundWork: true))
+    }
 }
