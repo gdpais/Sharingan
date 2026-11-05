@@ -74,6 +74,9 @@ struct ProviderDetailSeriesChartPlot: View {
                 series: .value(L("Series"), segment.series))
                 .foregroundStyle(self.seriesColor(segment.series, count: layout.series.count))
                 .lineStyle(StrokeStyle(lineWidth: 2, lineCap: .round, lineJoin: .round))
+                // Dots like the single-series line renderer, so a one-point series is still visible.
+                .symbol(.circle)
+                .symbolSize(9)
         }
     }
 
