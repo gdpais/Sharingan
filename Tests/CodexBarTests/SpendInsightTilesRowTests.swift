@@ -11,6 +11,7 @@ struct SpendInsightTilesRowTests {
         #expect(covered.insightInputs.period == SpendInsightPeriod(start: Self.day("2026-07-10"), dayCount: 7))
         #expect(covered.insightInputs.samples.map(\.day) == [Self.day("2026-07-16")])
         #expect(covered.insightInputs.samples.first?.cost == 2)
+        #expect(covered.insightInputs.samples.first?.costCoversTokens == true)
         #expect(covered.insightInputs.previousSamples?.map(\.day) == [Self.day("2026-07-08")])
 
         let tiles = SpendInsightTiles(inputs: covered.insightInputs, calendar: covered.calendar, planMonthlyPrice: nil)
@@ -25,6 +26,34 @@ struct SpendInsightTilesRowTests {
         let short = try #require(Self.group(historyDays: 7))
         #expect(short.insightInputs.samples.count == 1)
         #expect(short.insightInputs.previousSamples == nil)
+    }
+
+    @Test
+    func `menu builds skip the insight tile inputs`() throws {
+        let menu = try #require(Self.group(historyDays: 30, includesInsightTiles: false))
+        #expect(menu.insightInputs == SpendInsightInputs())
+        #expect(menu.totalCost == 2)
+    }
+
+    @Test
+    func `days with unpriced tokens stay out of cost per million tokens`() throws {
+        let partlyPriced = CostUsageDailyReport.Entry(
+            date: "2026-07-16",
+            inputTokens: 2_000_000,
+            outputTokens: 0,
+            totalTokens: 2_000_000,
+            costUSD: 2,
+            modelsUsed: ["test-model", "unpriced-model"],
+            modelBreakdowns: [
+                .init(modelName: "test-model", costUSD: 2, totalTokens: 1_000_000),
+                .init(modelName: "unpriced-model", costUSD: nil, totalTokens: 1_000_000),
+            ])
+        let group = try #require(Self.group(historyDays: 30, daily: [partlyPriced]))
+        #expect(group.insightInputs.samples.map(\.costCoversTokens) == [false])
+
+        let tiles = SpendInsightTiles(inputs: group.insightInputs, calendar: group.calendar, planMonthlyPrice: nil)
+        #expect(tiles.apiEquivalentCost == 2)
+        #expect(tiles.costPerMillionTokens == nil)
     }
 
     @Test
@@ -94,7 +123,11 @@ extension SpendInsightTilesRowTests {
         return self.calendar.date(from: DateComponents(year: parts[0], month: parts[1], day: parts[2]))!
     }
 
-    private static func group(historyDays: Int) -> SpendDashboardModel.CurrencyGroup? {
+    private static func group(
+        historyDays: Int,
+        daily: [CostUsageDailyReport.Entry]? = nil,
+        includesInsightTiles: Bool = true) -> SpendDashboardModel.CurrencyGroup?
+    {
         let snapshot = CostUsageTokenSnapshot(
             sessionTokens: nil,
             sessionCostUSD: nil,
@@ -102,10 +135,15 @@ extension SpendInsightTilesRowTests {
             last30DaysCostUSD: nil,
             currencyCode: "USD",
             historyDays: historyDays,
-            daily: [Self.entry(day: "2026-07-16", cost: 2), Self.entry(day: "2026-07-08", cost: 1)],
+            daily: daily ?? [Self.entry(day: "2026-07-16", cost: 2), Self.entry(day: "2026-07-08", cost: 1)],
             updatedAt: self.now)
         let input = SpendDashboardModel.ProviderInput(provider: .claude, displayName: "Claude", snapshot: snapshot)
-        return SpendDashboardModel.build(inputs: [input], requestedDays: 7, now: self.now, calendar: self.calendar)
+        return SpendDashboardModel.build(
+            inputs: [input],
+            requestedDays: 7,
+            now: self.now,
+            calendar: self.calendar,
+            includesInsightTiles: includesInsightTiles)
             .groups.first
     }
 

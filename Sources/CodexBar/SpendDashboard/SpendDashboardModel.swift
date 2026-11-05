@@ -419,7 +419,8 @@ struct SpendDashboardModel: Equatable, Sendable {
         preferredCurrencyCode: String = "auto",
         hiddenSourceIDs: Set<String> = [],
         hideNativeCodexWhenOpenCodexPresent: Bool = false,
-        selectedDay: Date? = nil) -> Self
+        selectedDay: Date? = nil,
+        includesInsightTiles: Bool = false) -> Self
     {
         let calculationCalendar = Self.gregorianCalendar(timeZone: calendar.timeZone)
         let availableSources = inputs
@@ -479,7 +480,8 @@ struct SpendDashboardModel: Equatable, Sendable {
                     days: days,
                     calendar: calculationCalendar,
                     bounds: bounds,
-                    selectedDay: selectedDay.map { calculationCalendar.startOfDay(for: $0) })
+                    selectedDay: selectedDay.map { calculationCalendar.startOfDay(for: $0) },
+                    includesInsightTiles: includesInsightTiles)
             }
             .sorted { $0.currencyCode < $1.currencyCode }
         return Self(
@@ -596,7 +598,8 @@ struct SpendDashboardModel: Equatable, Sendable {
         days: Int,
         calendar: Calendar,
         bounds: ClosedRange<Date>,
-        selectedDay: Date?) -> CurrencyGroup
+        selectedDay: Date?,
+        includesInsightTiles: Bool) -> CurrencyGroup
     {
         let summaries = inputs.filter { aggregateIDs.contains($0.input.id) }.map { classified in
             Self.inputSummary(
@@ -720,7 +723,10 @@ struct SpendDashboardModel: Equatable, Sendable {
             timeZone: calendar.timeZone)
         group.retainedDetailUpdatedAt = inputs.compactMap { $0.input.retainedDetailSnapshot?.updatedAt }.min()
         group.detailsExcludedFromTotals = inputs.contains { !aggregateIDs.contains($0.input.id) }
-        group.insightInputs = Self.insightInputs(summaries, bounds, calendar, Self.inputSummary)
+        // The previous-period pass costs a full summary per source; menu callers never show the tiles.
+        if includesInsightTiles {
+            group.insightInputs = Self.insightInputs(summaries, bounds, calendar, Self.inputSummary)
+        }
         group.insights = Self.insights(
             summaries: summaries,
             detailSummaries: detailSummaries,
