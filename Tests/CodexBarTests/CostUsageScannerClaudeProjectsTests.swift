@@ -142,6 +142,56 @@ struct CostUsageScannerClaudeProjectsTests {
     }
 
     @Test
+    func `Pi rows merged into the Claude total join the unknown project`() async throws {
+        let env = try CostUsageTestEnvironment()
+        defer { env.cleanup() }
+        let day = try env.makeLocalNoon(year: 2026, month: 9, day: 14)
+        _ = try env.writeClaudeProjectFile(
+            relativePath: "-synthetic-claude-projects-alpha/session.jsonl",
+            contents: env.jsonl([
+                Self.assistant(env: env, day: day, id: "alpha-1", cwd: Self.alpha, input: 100, output: 10),
+            ]))
+        let piRow: [String: Any] = [
+            "type": "message",
+            "id": "pi-claude",
+            "timestamp": env.isoString(for: day),
+            "message": [
+                "role": "assistant",
+                "provider": "anthropic",
+                "model": Self.model,
+                "usage": ["input": 20, "output": 5, "totalTokens": 25],
+            ],
+        ]
+        _ = try env.writePiSessionFile(relativePath: "pi-claude.jsonl", contents: env.jsonl([piRow]))
+        let ompSessionsRoot = env.root.appendingPathComponent("empty-omp", isDirectory: true)
+        try FileManager.default.createDirectory(at: ompSessionsRoot, withIntermediateDirectories: true)
+        let environment = ["HOME": env.root.path]
+        let piOptions = PiSessionCostScanner.Options(
+            piSessionsRoot: env.piSessionsRoot,
+            ompSessionsRoot: ompSessionsRoot,
+            cacheRoot: env.cacheRoot,
+            calendar: .current,
+            refreshMinIntervalSeconds: 0,
+            environment: environment)
+
+        let snapshot = try await CostUsageFetcher.loadTokenSnapshot(
+            provider: .claude,
+            environment: environment,
+            now: day,
+            historyDays: 1,
+            allowPricingRefresh: false,
+            refreshPricingInBackground: false,
+            includePiSessions: true,
+            scannerOptions: Self.options(env: env),
+            piScannerOptions: piOptions)
+
+        #expect(snapshot.last30DaysTokens == 135)
+        #expect(snapshot.projects.map(\.path) == [Self.alpha, nil])
+        #expect(snapshot.projects.map(\.totalTokens) == [110, 25])
+        #expect(snapshot.projects.compactMap(\.totalTokens).reduce(0, +) == snapshot.last30DaysTokens)
+    }
+
+    @Test
     func `caches from before working directories rebuild instead of loading`() throws {
         let env = try CostUsageTestEnvironment()
         defer { env.cleanup() }
