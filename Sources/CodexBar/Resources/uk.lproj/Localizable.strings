@@ -2800,3 +2800,6 @@
 "Project trends" = "Динаміка проєктів";
 "Change compares the last %d days with the %d days before." = "Зміна порівнює останні %d дн. з %d дн. перед ними.";
 "New" = "Новий";
+"quota_warning_add_threshold" = "Додати поріг";
+"quota_warning_remove_threshold" = "Видалити найнижчий поріг";
+"quota_warning_lane_follows_weekly" = "Лише тижневі маркери, без сповіщень";

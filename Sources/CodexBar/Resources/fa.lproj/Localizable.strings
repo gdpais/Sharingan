@@ -2803,3 +2803,6 @@
 "Project trends" = "روند پروژه‌ها";
 "Change compares the last %d days with the %d days before." = "تغییر، %d روز اخیر را با %d روز پیش از آن مقایسه می‌کند.";
 "New" = "جدید";
+"quota_warning_add_threshold" = "افزودن آستانه";
+"quota_warning_remove_threshold" = "حذف پایین‌ترین آستانه";
+"quota_warning_lane_follows_weekly" = "فقط نشانگرهای هفتگی، بدون اعلان";

@@ -1278,7 +1278,7 @@ extension UsageMenuCardView.Model {
                 detailIsPaceDerived: tertiaryPaceDetail?.isPaceDerived ?? false,
                 paceOnTop: tertiaryPaceDetail?.paceOnTop ?? true,
                 warningMarkerPercents: Self.warningMarkerPercents(
-                    thresholds: input.quotaWarningThresholds[.weekly],
+                    thresholds: input.markerThresholds(forLane: QuotaWarningLaneID.tertiary),
                     showUsed: input.usageBarsShowUsed)))
         }
         metrics.append(contentsOf: Self.extraRateWindowMetrics(

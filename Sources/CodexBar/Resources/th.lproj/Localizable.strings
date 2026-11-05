@@ -2801,3 +2801,6 @@
 "Project trends" = "แนวโน้มโครงการ";
 "Change compares the last %d days with the %d days before." = "การเปลี่ยนแปลงเปรียบเทียบ %d วันล่าสุดกับ %d วันก่อนหน้า";
 "New" = "ใหม่";
+"quota_warning_add_threshold" = "เพิ่มเกณฑ์";
+"quota_warning_remove_threshold" = "ลบเกณฑ์ต่ำสุด";
+"quota_warning_lane_follows_weekly" = "เฉพาะเครื่องหมายรายสัปดาห์ ไม่มีการแจ้งเตือน";

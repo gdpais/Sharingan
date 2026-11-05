@@ -2801,3 +2801,6 @@
 "Project trends" = "Tren proyek";
 "Change compares the last %d days with the %d days before." = "Perubahan membandingkan %d hari terakhir dengan %d hari sebelumnya.";
 "New" = "Baru";
+"quota_warning_add_threshold" = "Tambah ambang";
+"quota_warning_remove_threshold" = "Hapus ambang terendah";
+"quota_warning_lane_follows_weekly" = "Hanya penanda mingguan, tanpa notifikasi";

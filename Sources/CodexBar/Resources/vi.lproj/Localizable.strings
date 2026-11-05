@@ -2800,3 +2800,6 @@
 "Project trends" = "Xu hướng dự án";
 "Change compares the last %d days with the %d days before." = "Mức thay đổi so sánh %d ngày gần nhất với %d ngày trước đó.";
 "New" = "Mới";
+"quota_warning_add_threshold" = "Thêm ngưỡng";
+"quota_warning_remove_threshold" = "Xóa ngưỡng thấp nhất";
+"quota_warning_lane_follows_weekly" = "Chỉ dấu hàng tuần, không thông báo";

@@ -2777,3 +2777,6 @@
 "Project trends" = "專案趨勢";
 "Change compares the last %d days with the %d days before." = "變化比較最近 %d 天與之前 %d 天。";
 "New" = "新增";
+"quota_warning_add_threshold" = "新增門檻";
+"quota_warning_remove_threshold" = "移除最低門檻";
+"quota_warning_lane_follows_weekly" = "僅顯示每週標記，不傳送通知";

@@ -2804,3 +2804,6 @@
 "Project trends" = "Project trends";
 "Change compares the last %d days with the %d days before." = "Change compares the last %d days with the %d days before.";
 "New" = "New";
+"quota_warning_add_threshold" = "Add threshold";
+"quota_warning_remove_threshold" = "Remove lowest threshold";
+"quota_warning_lane_follows_weekly" = "Weekly markers only, no notifications";
