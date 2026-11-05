@@ -55,6 +55,22 @@ struct SpendDashboardInsightsTests {
     }
 
     @Test
+    func `menu builds skip the insight panels`() throws {
+        let input = Self.input(
+            daily: [Self.entry(day: "2026-07-15", models: [("fixture-large", 3), ("fixture-small", 1)])],
+            projects: Self.projects())
+
+        let menu = try Self.group(inputs: [input], includesInsightTiles: false)
+        let window = try Self.group(inputs: [input])
+
+        #expect(menu.insights == SpendDashboardInsights())
+        // The rest of the group, including the Projects list, is still built for the menu.
+        #expect(menu.projects.map(\.id) == ["codex-a:path:/fixtures/chat", Self.alphaID, Self.betaID])
+        #expect(window.insights.modelShare != nil)
+        #expect(window.insights.projectTrends != nil)
+    }
+
+    @Test
     func `a source with a shorter history has no change against the longer range`() throws {
         let recent = Self.input(
             id: "codex-b",
@@ -232,14 +248,16 @@ struct SpendDashboardInsightsTests {
 
     private static func group(
         inputs: [SpendDashboardModel.ProviderInput],
-        selectedDay: Date? = nil) throws -> SpendDashboardModel.CurrencyGroup
+        selectedDay: Date? = nil,
+        includesInsightTiles: Bool = true) throws -> SpendDashboardModel.CurrencyGroup
     {
         let model = SpendDashboardModel.build(
             inputs: inputs,
             requestedDays: 30,
             now: self.now,
             calendar: self.calendar,
-            selectedDay: selectedDay)
+            selectedDay: selectedDay,
+            includesInsightTiles: includesInsightTiles)
         return try #require(model.groups.first)
     }
 }
