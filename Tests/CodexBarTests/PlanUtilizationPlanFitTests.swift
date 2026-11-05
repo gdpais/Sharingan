@@ -18,10 +18,19 @@ struct PlanUtilizationPlanFitTests {
     func `bars widen with the slots but stay between the minimum and maximum`() {
         let plotWidth = PlanFitChartLayout.plotWidth(menuWidth: 310)
         #expect(plotWidth == 186)
-        #expect(PlanFitChartLayout.barWidth(slotCount: 30, plotWidth: plotWidth, minimum: 6) == 6)
         #expect(PlanFitChartLayout.barWidth(slotCount: 12, plotWidth: plotWidth, minimum: 6) == 9)
         #expect(PlanFitChartLayout.barWidth(slotCount: 8, plotWidth: plotWidth, minimum: 6) == 14)
         #expect(PlanFitChartLayout.barWidth(slotCount: 1, plotWidth: plotWidth, minimum: 6) == 14)
+    }
+
+    @Test
+    func `a full history keeps a gap between bars below the minimum width`() {
+        let plotWidth = PlanFitChartLayout.plotWidth(menuWidth: 310)
+        // 30 slots of 6.2 points: the 6-point minimum would leave bars almost touching.
+        let full = PlanFitChartLayout.barWidth(slotCount: 30, plotWidth: plotWidth, minimum: 6)
+        #expect(full == 5)
+        #expect(plotWidth / 30 - full >= PlanFitChartLayout.minimumBarGap)
+        #expect(PlanFitChartLayout.barWidth(slotCount: 30, plotWidth: 1, minimum: 6) == 1)
     }
 
     @Test

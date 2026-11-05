@@ -26,6 +26,8 @@ enum PlanFitChartLayout {
     static let minimumSlots = 8
     static let maxBarWidth: CGFloat = 14
     static let barSlotRatio: CGFloat = 0.6
+    /// Narrowest gap between neighbouring bars, so a full history never reads as one solid block.
+    static let minimumBarGap: CGFloat = 1
     /// Matches the chart view's horizontal padding.
     static let horizontalPadding: CGFloat = 16
     /// Room the leading 0/50/100% labels take from the plot.
@@ -53,9 +55,12 @@ enum PlanFitChartLayout {
         return max(1, menuWidth - reserved)
     }
 
+    /// Bars take `barSlotRatio` of their slot, between `minimum` and `maxBarWidth`, but always leave
+    /// `minimumBarGap` to the next bar: a full chart's slots are narrower than the minimum plus a gap.
     static func barWidth(slotCount: Int, plotWidth: CGFloat, minimum: CGFloat) -> CGFloat {
         let slotWidth = plotWidth / CGFloat(max(1, slotCount))
-        return min(self.maxBarWidth, max(minimum, (slotWidth * self.barSlotRatio).rounded()))
+        let preferred = min(self.maxBarWidth, max(minimum, (slotWidth * self.barSlotRatio).rounded()))
+        return max(1, min(preferred, (slotWidth - self.minimumBarGap).rounded(.down)))
     }
 
     /// Session (and observation) labels carry the hour, so they are wider than day labels.
