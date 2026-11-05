@@ -11,6 +11,8 @@ struct WidgetTileLane: Identifiable, Equatable {
     var resetsAt: Date?
     var resetDescription: String?
     var isHeadlineCandidate = true
+    /// The user's severity bands for this lane, shared with the menu through Core.
+    var severityBands: QuotaSeverityBands = .standard
 }
 
 /// How a tile splits its quota lanes: one headline lane plus the rest.
@@ -92,6 +94,10 @@ extension WidgetTileLane {
     static func lanes(for entry: WidgetSnapshot.ProviderEntry, limit: Int? = nil) -> [WidgetTileLane] {
         var lanes = WidgetUsageRow.rows(for: entry, limit: limit, applyBindingCap: false)
             .map(WidgetTileLane.init(row:))
+        let severityBands = entry.severityBands ?? .standard
+        for index in lanes.indices {
+            lanes[index].severityBands = severityBands.bands(forLaneID: lanes[index].id)
+        }
         if let provider = entry.provider.firstPartyProvider {
             let binding = ProviderDescriptorRegistry.descriptor(for: provider).presentation.primaryBindingQuotaLanes
             if !binding.isEmpty {
