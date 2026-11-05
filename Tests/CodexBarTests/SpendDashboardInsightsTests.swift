@@ -55,6 +55,23 @@ struct SpendDashboardInsightsTests {
     }
 
     @Test
+    func `a source with a shorter history has no change against the longer range`() throws {
+        let recent = Self.input(
+            id: "codex-b",
+            historyDays: 10,
+            projects: [Self.project(name: "gamma", path: "/fixtures/gamma", days: [("2026-07-15", 6)])])
+
+        let group = try Self.group(inputs: [Self.input(projects: Self.projects()), recent])
+        let trends = try #require(group.insights.projectTrends)
+        let changes = Dictionary(uniqueKeysWithValues: trends.trends.map { ($0.id, $0.change) })
+
+        // Gamma's source began scanning inside the earlier half, so "New" would be a guess.
+        #expect(trends.comparisonDayCount == 15)
+        #expect(changes["codex-b:path:/fixtures/gamma"] == .unavailable)
+        #expect(changes[Self.alphaID] == .percent(0.5))
+    }
+
+    @Test
     func `trend labels redact with the projects list numbering`() throws {
         try CodexBarLocalizationOverride.$appLanguage.withValue("en") {
             let group = try Self.group(inputs: [Self.input(projects: Self.projects())])
@@ -194,6 +211,7 @@ struct SpendDashboardInsightsTests {
         id: String = "codex-a",
         provider: UsageProvider = .codex,
         displayName: String = "Codex",
+        historyDays: Int = 30,
         daily: [CostUsageDailyReport.Entry] = [],
         projects: [CostUsageProjectBreakdown] = []) -> SpendDashboardModel.ProviderInput
     {
@@ -206,7 +224,7 @@ struct SpendDashboardInsightsTests {
                 sessionCostUSD: nil,
                 last30DaysTokens: nil,
                 last30DaysCostUSD: nil,
-                historyDays: 30,
+                historyDays: historyDays,
                 daily: daily.isEmpty ? [self.entry(day: "2026-07-15", cost: 10)] : daily,
                 projects: projects,
                 updatedAt: self.now))

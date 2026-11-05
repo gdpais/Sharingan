@@ -4,7 +4,8 @@ import Foundation
 ///
 /// The change compares the most recent half of the days with the half before it, so it needs no data outside
 /// the range. With an odd day count the oldest day only appears in the lines. Non-finite, non-positive and
-/// out-of-range observations are ignored.
+/// out-of-range observations are ignored. A series whose `coverage` misses any day of the comparison has no
+/// change, because days its source never scanned would otherwise read as zero spend.
 public struct SpendSeriesTrends: Equatable, Sendable {
     public struct Observation: Equatable, Sendable {
         public let seriesID: String
@@ -62,7 +63,8 @@ public struct SpendSeriesTrends: Equatable, Sendable {
         days range: ClosedRange<Date>,
         bucket: SpendInsightBucket,
         topCount: Int,
-        calendar: Calendar)
+        calendar: Calendar,
+        coverage: [String: ClosedRange<Date>] = [:])
     {
         let days = Self.days(in: range, calendar: calendar)
         let dayIndex = Dictionary(
@@ -71,10 +73,12 @@ public struct SpendSeriesTrends: Equatable, Sendable {
 
         var dailyBySeries: [String: [Double]] = [:]
         for observation in observations where observation.value.isFinite && observation.value > 0 {
-            guard let index = dayIndex[calendar.startOfDay(for: observation.day)] else { continue }
-            var daily = dailyBySeries[observation.seriesID] ?? Array(repeating: 0, count: days.count)
-            daily[index] += observation.value
-            dailyBySeries[observation.seriesID] = daily
+            // Callers usually pass day starts already; only other times need the calendar.
+            guard let index = dayIndex[observation.day] ?? dayIndex[calendar.startOfDay(for: observation.day)]
+            else { continue }
+            // Mutate in place: copying the row out and back would copy it once per observation.
+            dailyBySeries[observation.seriesID, default: Array(repeating: 0, count: days.count)][index] +=
+                observation.value
         }
 
         var totals: [String: Double] = [:]
@@ -95,6 +99,8 @@ public struct SpendSeriesTrends: Equatable, Sendable {
         let half = days.count / 2
         let recentRange = (days.count - half)..<days.count
         let previousRange = (days.count - 2 * half)..<(days.count - half)
+        // Every day the change reads: the earlier half's first day through the range's last day.
+        let comparisonSpan: ClosedRange<Date>? = half > 0 ? days[previousRange.lowerBound]...days[days.count - 1] : nil
 
         var bucketStarts: [Date] = []
         var bucketIndexByDay: [Int] = []
@@ -115,13 +121,17 @@ public struct SpendSeriesTrends: Equatable, Sendable {
             }
             let recent = recentRange.reduce(0.0) { $0 + daily[$1] }
             let previous = previousRange.reduce(0.0) { $0 + daily[$1] }
+            var isComparable = false
+            if let comparisonSpan {
+                isComparable = Self.covers(coverage[id], span: comparisonSpan, calendar: calendar)
+            }
             trends.append(Trend(
                 id: id,
                 rank: offset + 1,
                 total: totals[id] ?? 0,
                 recentTotal: recent,
                 previousTotal: previous,
-                change: half > 0 ? CodexModelsComparison.make(current: recent, previous: previous) : .unavailable,
+                change: isComparable ? CodexModelsComparison.make(current: recent, previous: previous) : .unavailable,
                 points: zip(bucketStarts, bucketTotals).map { Point(bucketStart: $0, value: $1) }))
         }
 
@@ -130,6 +140,13 @@ public struct SpendSeriesTrends: Equatable, Sendable {
         self.comparisonDayCount = half
         self.trends = trends
         self.omittedSeriesCount = ranked.count - kept.count
+    }
+
+    /// Whether `coverage` includes every day of `span`; a series without coverage spans the range.
+    private static func covers(_ coverage: ClosedRange<Date>?, span: ClosedRange<Date>, calendar: Calendar) -> Bool {
+        guard let coverage else { return true }
+        return calendar.startOfDay(for: coverage.lowerBound) <= span.lowerBound
+            && calendar.startOfDay(for: coverage.upperBound) >= span.upperBound
     }
 
     /// Day starts from the range's first day through its last day, inclusive.
