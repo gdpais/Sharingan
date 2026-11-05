@@ -2800,3 +2800,11 @@
 "Project trends" = "Динамика проектов";
 "Change compares the last %d days with the %d days before." = "Изменение сравнивает последние %d дн. с %d дн. до них.";
 "New" = "Новый";
+
+/* Card layout */
+"Card layout" = "Макет карточки";
+"Usage rows" = "Строки использования";
+"Plan fit" = "Соответствие тарифа";
+"Drawn inside usage rows." = "Отображается внутри строк использования.";
+"Menu links" = "Ссылки в меню";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Упорядочьте разделы карточки меню этого провайдера, настройте их видимость и выберите график. Разделы и графики без данных остаются скрытыми.";

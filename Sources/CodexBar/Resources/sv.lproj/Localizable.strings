@@ -2798,3 +2798,11 @@
 "Project trends" = "Projekttrender";
 "Change compares the last %d days with the %d days before." = "Förändringen jämför de senaste %d dagarna med de %d dagarna före.";
 "New" = "Ny";
+
+/* Card layout */
+"Card layout" = "Kortlayout";
+"Usage rows" = "Användningsrader";
+"Plan fit" = "Planpassning";
+"Drawn inside usage rows." = "Visas inuti användningsraderna.";
+"Menu links" = "Menylänkar";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordna och visa avsnitten på den här leverantörens menykort och välj dess diagram. Avsnitt och diagram utan data förblir dolda.";

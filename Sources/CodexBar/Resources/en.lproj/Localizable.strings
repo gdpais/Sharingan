@@ -2804,3 +2804,11 @@
 "Project trends" = "Project trends";
 "Change compares the last %d days with the %d days before." = "Change compares the last %d days with the %d days before.";
 "New" = "New";
+
+/* Card layout */
+"Card layout" = "Card layout";
+"Usage rows" = "Usage rows";
+"Plan fit" = "Plan fit";
+"Drawn inside usage rows." = "Drawn inside usage rows.";
+"Menu links" = "Menu links";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden.";

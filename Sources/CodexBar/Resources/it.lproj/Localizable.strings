@@ -2803,3 +2803,11 @@
 "Project trends" = "Andamento dei progetti";
 "Change compares the last %d days with the %d days before." = "La variazione confronta gli ultimi %d giorni con i %d giorni precedenti.";
 "New" = "Nuovo";
+
+/* Card layout */
+"Card layout" = "Layout della scheda";
+"Usage rows" = "Righe di utilizzo";
+"Plan fit" = "Adeguatezza del piano";
+"Drawn inside usage rows." = "Mostrato all’interno delle righe di utilizzo.";
+"Menu links" = "Link del menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordina e mostra le sezioni della scheda del menu di questo provider e scegli il suo grafico. Le sezioni e i grafici senza dati restano nascosti.";

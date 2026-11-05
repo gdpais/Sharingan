@@ -2798,3 +2798,11 @@
 "Project trends" = "Tendances des projets";
 "Change compares the last %d days with the %d days before." = "La variation compare les %d derniers jours aux %d jours précédents.";
 "New" = "Nouveau";
+
+/* Card layout */
+"Card layout" = "Disposition de la carte";
+"Usage rows" = "Lignes d’utilisation";
+"Plan fit" = "Adéquation du forfait";
+"Drawn inside usage rows." = "Affiché dans les lignes d’utilisation.";
+"Menu links" = "Liens du menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordonnez et affichez les sections de la carte de menu de ce fournisseur, et choisissez son graphique. Les sections et graphiques sans données restent masqués.";

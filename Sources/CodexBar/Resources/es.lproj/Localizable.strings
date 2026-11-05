@@ -2797,3 +2797,11 @@
 "Project trends" = "Tendencias de proyectos";
 "Change compares the last %d days with the %d days before." = "El cambio compara los últimos %d días con los %d días anteriores.";
 "New" = "Nuevo";
+
+/* Card layout */
+"Card layout" = "Diseño de la tarjeta";
+"Usage rows" = "Filas de uso";
+"Plan fit" = "Ajuste del plan";
+"Drawn inside usage rows." = "Se muestra dentro de las filas de uso.";
+"Menu links" = "Enlaces del menú";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordena y muestra las secciones de la tarjeta del menú de este proveedor y elige su gráfico. Las secciones y los gráficos sin datos permanecen ocultos.";

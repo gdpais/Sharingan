@@ -2801,3 +2801,11 @@
 "Project trends" = "Tendències dels projectes";
 "Change compares the last %d days with the %d days before." = "El canvi compara els últims %d dies amb els %d dies anteriors.";
 "New" = "Nou";
+
+/* Card layout */
+"Card layout" = "Disseny de la targeta";
+"Usage rows" = "Files d'ús";
+"Plan fit" = "Adequació del pla";
+"Drawn inside usage rows." = "Es mostra dins de les files d'ús.";
+"Menu links" = "Enllaços del menú";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordeneu i mostreu les seccions de la targeta del menú d'aquest proveïdor i trieu-ne el gràfic. Les seccions i els gràfics sense dades queden ocults.";

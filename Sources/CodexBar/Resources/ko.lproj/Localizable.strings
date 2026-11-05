@@ -2767,3 +2767,11 @@
 "Project trends" = "프로젝트 추세";
 "Change compares the last %d days with the %d days before." = "변화율은 최근 %d일과 그 이전 %d일을 비교합니다.";
 "New" = "신규";
+
+/* Card layout */
+"Card layout" = "카드 레이아웃";
+"Usage rows" = "사용량 행";
+"Plan fit" = "요금제 적합도";
+"Drawn inside usage rows." = "사용량 행 안에 표시됩니다.";
+"Menu links" = "메뉴 링크";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "이 제공업체의 메뉴 카드 섹션 순서와 표시 여부를 정하고 차트를 선택합니다. 데이터가 없는 섹션과 차트는 숨겨진 상태로 유지됩니다.";

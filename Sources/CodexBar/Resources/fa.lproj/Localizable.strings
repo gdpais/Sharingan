@@ -2803,3 +2803,11 @@
 "Project trends" = "روند پروژه‌ها";
 "Change compares the last %d days with the %d days before." = "تغییر، %d روز اخیر را با %d روز پیش از آن مقایسه می‌کند.";
 "New" = "جدید";
+
+/* Card layout */
+"Card layout" = "چیدمان کارت";
+"Usage rows" = "ردیف‌های استفاده";
+"Plan fit" = "تناسب طرح";
+"Drawn inside usage rows." = "درون ردیف‌های استفاده نمایش داده می‌شود.";
+"Menu links" = "پیوندهای منو";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "بخش‌های کارت منوی این ارائه‌دهنده را مرتب کنید، نمایش دهید یا پنهان کنید و نمودار آن را انتخاب کنید. بخش‌ها و نمودارهای بدون داده پنهان می‌مانند.";
