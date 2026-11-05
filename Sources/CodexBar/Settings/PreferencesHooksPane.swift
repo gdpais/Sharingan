@@ -41,6 +41,8 @@ struct HooksPane: View {
             } header: {
                 Text(L("hooks_rules_header"))
             }
+
+            BudgetHookRulesSection(settings: self.settings)
         }
         .formStyle(.grouped)
     }
@@ -79,7 +81,7 @@ struct HookRuleRow: View {
                     .controlSize(.mini)
 
                 Picker(L("hooks_event"), selection: self.$rule.event) {
-                    ForEach(HookEventType.allCases, id: \.self) { event in
+                    ForEach(HookEventType.sharedConfigCases, id: \.self) { event in
                         Text(event.rawValue).tag(event)
                     }
                 }
