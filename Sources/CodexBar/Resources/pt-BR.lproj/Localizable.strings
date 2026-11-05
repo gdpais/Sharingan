@@ -2767,3 +2767,46 @@
 "avg %@ credits/day" = "média %@ créditos/dia";
 "Average" = "Média";
 "avg %@/day" = "média %@/dia";
+"Spend by hour of week" = "Gasto por hora da semana";
+"By hour of week" = "Por hora da semana";
+"%@ of spend on weekends" = "%@ do gasto nos fins de semana";
+"%@ vs previous %d days" = "%@ em relação aos %d dias anteriores";
+"Lasts until %@ at this rate" = "Dura até %@ neste ritmo";
+
+/* Plan fit */
+"Median" = "Mediana";
+"Median %@%%" = "Mediana %@%%";
+"capped %d of %d weeks" = "no limite em %d de %d semanas";
+"capped %d of %d months" = "no limite em %d de %d meses";
+"capped %d of %d windows" = "no limite em %d de %d períodos";
+"%@ capped sessions per week" = "%@ sessões no limite por semana";
+"%@ h capped" = "%@ h no limite";
+"You may be paying for headroom you don't use." = "Você pode estar pagando por uma folga que não usa.";
+"You hit the cap often." = "Você atinge o limite com frequência.";
+"Your plan fits how you use it." = "Seu plano combina com o seu uso.";
+"Not enough history for a verdict yet." = "Ainda não há histórico suficiente para uma avaliação.";
+"Plan value" = "Valor do plano";
+"Set a plan price to compare" = "Defina o preço do plano para comparar";
+"API-equivalent vs %@ plan" = "Equivalente em API vs. plano de %@";
+"Cache hit rate" = "Taxa de acerto do cache";
+"Cost per 1M tokens" = "Custo por 1 mi de tokens";
+"Top model share" = "Participação do modelo principal";
+"%@ vs previous period" = "%@ vs. período anterior";
+"%@ pts" = "%@ p.p.";
+"Typical week" = "Semana típica";
+"Model share" = "Participação por modelo";
+"Share of estimated spend" = "Participação nos gastos estimados";
+"Project trends" = "Tendências dos projetos";
+"Change compares the last %d days with the %d days before." = "A variação compara os últimos %d dias com os %d dias anteriores.";
+"New" = "Novo";
+"quota_warning_add_threshold" = "Adicionar limite";
+"quota_warning_remove_threshold" = "Remover o limite mais baixo";
+"quota_warning_lane_follows_weekly" = "Somente marcadores semanais, sem notificações";
+
+/* Card layout */
+"Card layout" = "Layout do cartão";
+"Usage rows" = "Linhas de uso";
+"Plan fit" = "Adequação do plano";
+"Drawn inside usage rows." = "Exibido dentro das linhas de uso.";
+"Menu links" = "Links do menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordene e mostre as seções do cartão do menu deste provedor e escolha o gráfico. Seções e gráficos sem dados continuam ocultos.";

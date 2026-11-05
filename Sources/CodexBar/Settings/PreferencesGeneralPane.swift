@@ -204,7 +204,8 @@ struct GeneralPane: View {
 /// The single control for `historicalTrackingEnabled`. Providers whose history capability is `.alwaysTracked`
 /// (Codex, Claude, Antigravity, OpenCode Go, Pi) record plan history regardless; for every other provider this
 /// gates hourly plan-utilization recording. For Codex it also gates the 8-week weekly history and dashboard
-/// backfill behind learned pace predictions.
+/// backfill behind learned pace predictions. For every provider it gates the hourly balance history behind
+/// the balance runway row.
 @MainActor
 struct UsageHistorySettingsSection: View {
     @Bindable var settings: SettingsStore

@@ -114,4 +114,5 @@ struct SettingsDefaultsState {
     var iCloudSyncSnapshotsEnabled: Bool
     var iCloudSyncShowFleetAccounts: Bool
     var iCloudSyncDeviceID: String
+    var menuCardLayoutsRaw: [String: String] = [:]
 }

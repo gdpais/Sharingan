@@ -2764,3 +2764,46 @@
 "avg %@ credits/day" = "gem. %@ tegoeden/dag";
 "Average" = "Gemiddelde";
 "avg %@/day" = "gem. %@/dag";
+"Spend by hour of week" = "Uitgaven per uur van de week";
+"By hour of week" = "Per uur van de week";
+"%@ of spend on weekends" = "%@ van de uitgaven in het weekend";
+"%@ vs previous %d days" = "%@ ten opzichte van de vorige %d dagen";
+"Lasts until %@ at this rate" = "Genoeg tot %@ in dit tempo";
+
+/* Plan fit */
+"Median" = "Mediaan";
+"Median %@%%" = "Mediaan %@%%";
+"capped %d of %d weeks" = "limiet bereikt in %d van %d weken";
+"capped %d of %d months" = "limiet bereikt in %d van %d maanden";
+"capped %d of %d windows" = "limiet bereikt in %d van %d perioden";
+"%@ capped sessions per week" = "%@ sessies per week op de limiet";
+"%@ h capped" = "%@ u op de limiet";
+"You may be paying for headroom you don't use." = "Mogelijk betaal je voor ruimte die je niet gebruikt.";
+"You hit the cap often." = "Je bereikt vaak de limiet.";
+"Your plan fits how you use it." = "Je plan past bij hoe je het gebruikt.";
+"Not enough history for a verdict yet." = "Nog niet genoeg geschiedenis voor een oordeel.";
+"Plan value" = "Abonnementswaarde";
+"Set a plan price to compare" = "Stel een abonnementsprijs in om te vergelijken";
+"API-equivalent vs %@ plan" = "API-equivalent vs. abonnement van %@";
+"Cache hit rate" = "Cache-hitrate";
+"Cost per 1M tokens" = "Kosten per 1 mln. tokens";
+"Top model share" = "Aandeel van topmodel";
+"%@ vs previous period" = "%@ t.o.v. vorige periode";
+"%@ pts" = "%@ ptn";
+"Typical week" = "Typische week";
+"Model share" = "Modelaandeel";
+"Share of estimated spend" = "Aandeel in de geschatte uitgaven";
+"Project trends" = "Projecttrends";
+"Change compares the last %d days with the %d days before." = "De verandering vergelijkt de laatste %d dagen met de %d dagen daarvoor.";
+"New" = "Nieuw";
+"quota_warning_add_threshold" = "Drempel toevoegen";
+"quota_warning_remove_threshold" = "Laagste drempel verwijderen";
+"quota_warning_lane_follows_weekly" = "Alleen wekelijkse markeringen, geen meldingen";
+
+/* Card layout */
+"Card layout" = "Kaartindeling";
+"Usage rows" = "Gebruiksrijen";
+"Plan fit" = "Abonnementspassing";
+"Drawn inside usage rows." = "Wordt binnen de gebruiksrijen getoond.";
+"Menu links" = "Menulinks";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Orden en toon de secties van de menukaart van deze provider en kies de grafiek. Secties en grafieken zonder gegevens blijven verborgen.";

@@ -295,7 +295,8 @@ struct AccountsOverviewTile: View {
                         WidgetFormat.percent(displayed))))
                         .font(.caption2.weight(.semibold))
                         .monospacedDigit()
-                        .foregroundStyle(QuotaSeverity.isLow(remaining: remaining) ? Color.red : Color.primary)
+                        .foregroundStyle(QuotaSeverity.isLow(remaining: remaining, bands: quota.severityBands)
+                            ? Color.red : Color.primary)
                         .lineLimit(1)
                         .fixedSize(horizontal: true, vertical: false)
                 } else {

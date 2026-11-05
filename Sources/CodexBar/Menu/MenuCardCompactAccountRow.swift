@@ -144,20 +144,14 @@ struct MenuCardCompactAccountRowView: View {
 
     private var severityColor: Color {
         guard !self.isHighlighted else { return MenuHighlightStyle.selectionText }
-        switch self.model.severity {
-        case .critical: return Color(nsColor: .systemRed)
-        case .warning: return Color(nsColor: .systemOrange)
-        case .healthy, .none: return self.progressColor
-        }
+        guard let level = self.model.severity?.level else { return self.progressColor }
+        return QuotaSeverityPalette.color(for: level, normal: self.progressColor)
     }
 
     private var percentColor: Color {
         guard !self.isHighlighted else { return MenuHighlightStyle.selectionText }
-        switch self.model.severity {
-        case .critical: return Color(nsColor: .systemRed)
-        case .warning: return Color(nsColor: .systemOrange)
-        case .healthy, .none: return MenuHighlightStyle.normalSecondaryText
-        }
+        guard let level = self.model.severity?.level else { return MenuHighlightStyle.normalSecondaryText }
+        return QuotaSeverityPalette.color(for: level, normal: MenuHighlightStyle.normalSecondaryText)
     }
 }
 

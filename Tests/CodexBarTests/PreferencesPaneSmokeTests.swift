@@ -271,9 +271,11 @@ struct PreferencesPaneSmokeTests {
         let settings = Self.makeSettingsStore(suite: suite)
 
         #expect(QuotaWarningThresholdEditorText.filteredIntegerText("9a8b7") == "98")
-        #expect(QuotaWarningThresholdEditorText.resolvedThresholds(upperText: "", lowerText: "12") == [50, 12])
+        // A cleared field drops out of the list instead of snapping back to a default.
+        #expect(QuotaWarningThresholdEditorText.resolvedThresholds(texts: ["", "12"]) == [12])
+        #expect(QuotaWarningThresholdEditorText.resolvedThresholds(texts: ["", ""]) == [50, 20])
 
-        let typedThresholds = QuotaWarningThresholdEditorText.resolvedThresholds(upperText: "75", lowerText: "15")
+        let typedThresholds = QuotaWarningThresholdEditorText.resolvedThresholds(texts: ["75", "15"])
         settings.setQuotaWarningThresholds(.session, thresholds: typedThresholds)
 
         #expect(settings.quotaWarningThresholds(.session) == [75, 15])
@@ -296,25 +298,27 @@ struct PreferencesPaneSmokeTests {
     func `quota warning compact draft commits only changed text`() {
         var draft = QuotaWarningThresholdEditorText.Draft(thresholds: [80, 50, 20])
 
-        draft.setText("80", for: .upper)
+        draft.setText("80", at: 0)
         #expect(draft.isDirty == false)
 
-        draft.setText("7a5", for: .upper)
+        draft.setText("7a5", at: 0)
         #expect(draft.isDirty == true)
-        #expect(draft.takeResolvedThresholds() == [75, 50])
+        // Editing one field keeps every other threshold, including the third.
+        #expect(draft.takeResolvedThresholds() == [75, 50, 20])
         #expect(draft.isDirty == false)
-        #expect(draft.text(for: .upper) == "75")
-        #expect(draft.text(for: .lower) == "50")
+        #expect(draft.text(at: 0) == "75")
+        #expect(draft.text(at: 1) == "50")
+        #expect(draft.text(at: 2) == "20")
     }
 
     @Test
     func `quota warning compact draft treats reverted text as unchanged`() {
         var draft = QuotaWarningThresholdEditorText.Draft(thresholds: [80, 50, 20])
 
-        draft.setText("79", for: .upper)
+        draft.setText("79", at: 0)
         #expect(draft.isDirty == true)
 
-        draft.setText("80", for: .upper)
+        draft.setText("80", at: 0)
         #expect(draft.isDirty == false)
         #expect(draft.takeResolvedThresholds() == nil)
     }

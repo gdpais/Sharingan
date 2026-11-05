@@ -311,6 +311,7 @@ extension UsageStore {
                 shouldUpdatePreferredAccountKey: shouldUpdatePreferredAccountKey,
                 shouldAdoptUnscopedHistory: shouldAdoptUnscopedHistory,
                 providerBuckets: &providerBuckets)
+            self.startCodexLogQuotaBackfillIfNeeded(provider: provider, accountKey: accountKey)
             var histories = providerBuckets.histories(for: accountKey)
             let originalHistories = histories
             var samplesToPersist = samples

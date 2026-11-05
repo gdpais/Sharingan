@@ -150,6 +150,7 @@ run_portable_checks() {
   bash "${ROOT_DIR}/Scripts/test_make_lint.sh"
   python3 "${ROOT_DIR}/Scripts/acknowledgements.py"
   python3 "${ROOT_DIR}/Scripts/test_acknowledgements.py"
+  python3 "${ROOT_DIR}/Scripts/test_sharingan_resolve_strings_appends.py"
   check_package_resolved
   check_codex_parser_hash
   check_provider_manifests

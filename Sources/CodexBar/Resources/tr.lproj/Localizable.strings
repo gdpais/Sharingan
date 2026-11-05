@@ -2770,3 +2770,46 @@
 "avg %@ credits/day" = "ort. %@ kredi/gün";
 "Average" = "Ortalama";
 "avg %@/day" = "ort. %@/gün";
+"Spend by hour of week" = "Haftanın saatine göre harcama";
+"By hour of week" = "Haftanın saatine göre";
+"%@ of spend on weekends" = "Hafta sonu harcama payı: %@";
+"%@ vs previous %d days" = "%@ (önceki %d güne göre)";
+"Lasts until %@ at this rate" = "Bu hızla %@ tarihine kadar yeter";
+
+/* Plan fit */
+"Median" = "Medyan";
+"Median %@%%" = "Medyan %@%%";
+"capped %d of %d weeks" = "%d/%d haftada sınırda";
+"capped %d of %d months" = "%d/%d ayda sınırda";
+"capped %d of %d windows" = "%d/%d dönemde sınırda";
+"%@ capped sessions per week" = "haftada %@ oturum sınırda";
+"%@ h capped" = "%@ sa sınırda";
+"You may be paying for headroom you don't use." = "Kullanmadığınız bir pay için ödeme yapıyor olabilirsiniz.";
+"You hit the cap often." = "Sınıra sık sık ulaşıyorsunuz.";
+"Your plan fits how you use it." = "Planınız kullanımınıza uygun.";
+"Not enough history for a verdict yet." = "Değerlendirme için henüz yeterli geçmiş yok.";
+"Plan value" = "Plan değeri";
+"Set a plan price to compare" = "Karşılaştırmak için plan fiyatı belirleyin";
+"API-equivalent vs %@ plan" = "%@ plana karşı API karşılığı";
+"Cache hit rate" = "Önbellek isabet oranı";
+"Cost per 1M tokens" = "1 milyon token başına maliyet";
+"Top model share" = "En çok harcanan modelin payı";
+"%@ vs previous period" = "Önceki döneme göre %@";
+"%@ pts" = "%@ puan";
+"Typical week" = "Tipik hafta";
+"Model share" = "Model payı";
+"Share of estimated spend" = "Tahmini harcamadaki pay";
+"Project trends" = "Proje eğilimleri";
+"Change compares the last %d days with the %d days before." = "Değişim, son %d günü önceki %d günle karşılaştırır.";
+"New" = "Yeni";
+"quota_warning_add_threshold" = "Eşik ekle";
+"quota_warning_remove_threshold" = "En düşük eşiği kaldır";
+"quota_warning_lane_follows_weekly" = "Yalnızca haftalık işaretler, bildirim yok";
+
+/* Card layout */
+"Card layout" = "Kart düzeni";
+"Usage rows" = "Kullanım satırları";
+"Plan fit" = "Plan uygunluğu";
+"Drawn inside usage rows." = "Kullanım satırlarının içinde gösterilir.";
+"Menu links" = "Menü bağlantıları";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Bu sağlayıcının menü kartı bölümlerini sıralayın, gösterin ve grafiğini seçin. Verisi olmayan bölümler ve grafikler gizli kalır.";

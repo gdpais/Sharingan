@@ -2766,3 +2766,46 @@
 "avg %@ credits/day" = "snitt %@ krediter/dag";
 "Average" = "Genomsnitt";
 "avg %@/day" = "snitt %@/dag";
+"Spend by hour of week" = "Utgifter per veckotimme";
+"By hour of week" = "Per veckotimme";
+"%@ of spend on weekends" = "%@ av utgifterna på helger";
+"%@ vs previous %d days" = "%@ jämfört med föregående %d dagar";
+"Lasts until %@ at this rate" = "Räcker till %@ i den här takten";
+
+/* Plan fit */
+"Median" = "Median";
+"Median %@%%" = "Median %@%%";
+"capped %d of %d weeks" = "nådde gränsen %d av %d veckor";
+"capped %d of %d months" = "nådde gränsen %d av %d månader";
+"capped %d of %d windows" = "nådde gränsen %d av %d perioder";
+"%@ capped sessions per week" = "%@ sessioner per vecka vid gränsen";
+"%@ h capped" = "%@ h vid gränsen";
+"You may be paying for headroom you don't use." = "Du kanske betalar för marginal du inte använder.";
+"You hit the cap often." = "Du når ofta gränsen.";
+"Your plan fits how you use it." = "Din plan passar hur du använder den.";
+"Not enough history for a verdict yet." = "Inte tillräckligt med historik för en bedömning än.";
+"Plan value" = "Abonnemangsvärde";
+"Set a plan price to compare" = "Ange ett abonnemangspris för att jämföra";
+"API-equivalent vs %@ plan" = "API-motsvarighet mot abonnemang för %@";
+"Cache hit rate" = "Andel cacheträffar";
+"Cost per 1M tokens" = "Kostnad per 1 milj. token";
+"Top model share" = "Toppmodellens andel";
+"%@ vs previous period" = "%@ jämfört med föregående period";
+"%@ pts" = "%@ p.e.";
+"Typical week" = "Typisk vecka";
+"Model share" = "Modellandel";
+"Share of estimated spend" = "Andel av uppskattade utgifter";
+"Project trends" = "Projekttrender";
+"Change compares the last %d days with the %d days before." = "Förändringen jämför de senaste %d dagarna med de %d dagarna före.";
+"New" = "Ny";
+"quota_warning_add_threshold" = "Lägg till tröskel";
+"quota_warning_remove_threshold" = "Ta bort lägsta tröskeln";
+"quota_warning_lane_follows_weekly" = "Endast veckomarkörer, inga notiser";
+
+/* Card layout */
+"Card layout" = "Kortlayout";
+"Usage rows" = "Användningsrader";
+"Plan fit" = "Planpassning";
+"Drawn inside usage rows." = "Visas inuti användningsraderna.";
+"Menu links" = "Menylänkar";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordna och visa avsnitten på den här leverantörens menykort och välj dess diagram. Avsnitt och diagram utan data förblir dolda.";

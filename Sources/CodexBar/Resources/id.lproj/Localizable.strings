@@ -2769,3 +2769,46 @@
 "avg %@ credits/day" = "rata-rata %@ kredit/hari";
 "Average" = "Rata-rata";
 "avg %@/day" = "rata-rata %@/hari";
+"Spend by hour of week" = "Pengeluaran per jam dalam seminggu";
+"By hour of week" = "Per jam dalam seminggu";
+"%@ of spend on weekends" = "%@ pengeluaran pada akhir pekan";
+"%@ vs previous %d days" = "%@ dibanding %d hari sebelumnya";
+"Lasts until %@ at this rate" = "Cukup hingga %@ dengan laju ini";
+
+/* Plan fit */
+"Median" = "Median";
+"Median %@%%" = "Median %@%%";
+"capped %d of %d weeks" = "mencapai batas %d dari %d minggu";
+"capped %d of %d months" = "mencapai batas %d dari %d bulan";
+"capped %d of %d windows" = "mencapai batas %d dari %d periode";
+"%@ capped sessions per week" = "%@ sesi mencapai batas per minggu";
+"%@ h capped" = "%@ jam di batas";
+"You may be paying for headroom you don't use." = "Anda mungkin membayar kapasitas yang tidak Anda gunakan.";
+"You hit the cap often." = "Anda sering mencapai batas.";
+"Your plan fits how you use it." = "Paket Anda sesuai dengan cara Anda menggunakannya.";
+"Not enough history for a verdict yet." = "Riwayat belum cukup untuk memberi penilaian.";
+"Plan value" = "Nilai paket";
+"Set a plan price to compare" = "Tetapkan harga paket untuk membandingkan";
+"API-equivalent vs %@ plan" = "Setara API vs paket %@";
+"Cache hit rate" = "Tingkat cache hit";
+"Cost per 1M tokens" = "Biaya per 1 jt token";
+"Top model share" = "Pangsa model teratas";
+"%@ vs previous period" = "%@ vs periode sebelumnya";
+"%@ pts" = "%@ poin";
+"Typical week" = "Minggu biasa";
+"Model share" = "Porsi model";
+"Share of estimated spend" = "Porsi dari perkiraan pengeluaran";
+"Project trends" = "Tren proyek";
+"Change compares the last %d days with the %d days before." = "Perubahan membandingkan %d hari terakhir dengan %d hari sebelumnya.";
+"New" = "Baru";
+"quota_warning_add_threshold" = "Tambah ambang";
+"quota_warning_remove_threshold" = "Hapus ambang terendah";
+"quota_warning_lane_follows_weekly" = "Hanya penanda mingguan, tanpa notifikasi";
+
+/* Card layout */
+"Card layout" = "Tata letak kartu";
+"Usage rows" = "Baris penggunaan";
+"Plan fit" = "Kecocokan paket";
+"Drawn inside usage rows." = "Ditampilkan di dalam baris penggunaan.";
+"Menu links" = "Tautan menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Atur urutan dan tampilkan bagian kartu menu penyedia ini, lalu pilih grafiknya. Bagian dan grafik tanpa data tetap disembunyikan.";

@@ -2768,3 +2768,46 @@
 "avg %@ credits/day" = "у середньому %@ кредитів/день";
 "Average" = "Середнє";
 "avg %@/day" = "у середньому %@/день";
+"Spend by hour of week" = "Витрати за годинами тижня";
+"By hour of week" = "За годинами тижня";
+"%@ of spend on weekends" = "%@ витрат припадає на вихідні";
+"%@ vs previous %d days" = "%@ порівняно з попередніми %d дн.";
+"Lasts until %@ at this rate" = "Вистачить до %@ за такого темпу";
+
+/* Plan fit */
+"Median" = "Медіана";
+"Median %@%%" = "Медіана %@%%";
+"capped %d of %d weeks" = "ліміт у %d з %d тиж.";
+"capped %d of %d months" = "ліміт у %d з %d міс.";
+"capped %d of %d windows" = "ліміт у %d з %d періодів";
+"%@ capped sessions per week" = "%@ сесій з лімітом на тиждень";
+"%@ h capped" = "%@ год на ліміті";
+"You may be paying for headroom you don't use." = "Можливо, ви платите за запас, яким не користуєтеся.";
+"You hit the cap often." = "Ви часто впираєтеся в ліміт.";
+"Your plan fits how you use it." = "План відповідає вашому використанню.";
+"Not enough history for a verdict yet." = "Поки недостатньо історії для оцінки.";
+"Plan value" = "Цінність плану";
+"Set a plan price to compare" = "Укажіть ціну плану для порівняння";
+"API-equivalent vs %@ plan" = "Еквівалент API проти плану за %@";
+"Cache hit rate" = "Частка влучань у кеш";
+"Cost per 1M tokens" = "Вартість за 1 млн токенів";
+"Top model share" = "Частка провідної моделі";
+"%@ vs previous period" = "%@ порівняно з попереднім періодом";
+"%@ pts" = "%@ в. п.";
+"Typical week" = "Типовий тиждень";
+"Model share" = "Частка моделей";
+"Share of estimated spend" = "Частка в орієнтовних витратах";
+"Project trends" = "Динаміка проєктів";
+"Change compares the last %d days with the %d days before." = "Зміна порівнює останні %d дн. з %d дн. перед ними.";
+"New" = "Новий";
+"quota_warning_add_threshold" = "Додати поріг";
+"quota_warning_remove_threshold" = "Видалити найнижчий поріг";
+"quota_warning_lane_follows_weekly" = "Лише тижневі маркери, без сповіщень";
+
+/* Card layout */
+"Card layout" = "Макет картки";
+"Usage rows" = "Рядки використання";
+"Plan fit" = "Відповідність плану";
+"Drawn inside usage rows." = "Відображається всередині рядків використання.";
+"Menu links" = "Посилання в меню";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Упорядкуйте розділи картки меню цього постачальника, налаштуйте їх видимість і виберіть графік. Розділи та графіки без даних залишаються прихованими.";

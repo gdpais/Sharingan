@@ -64,7 +64,7 @@ public struct UsagePace: Sendable {
         workDays: Int? = nil,
         calendar: Calendar = .current) -> UsagePace?
     {
-        guard let timing = Self.paceTiming(
+        guard let timing = paceTiming(
             window: window,
             now: now,
             defaultWindowMinutes: defaultWindowMinutes,
@@ -230,7 +230,7 @@ public struct UsagePace: Sendable {
         workDays: Int? = nil,
         calendar: Calendar = .current) -> Projection?
     {
-        guard let pace = Self.weekly(
+        guard let pace = weekly(
             window: window,
             now: now,
             defaultWindowMinutes: defaultWindowMinutes,
@@ -342,7 +342,7 @@ public struct UsagePace: Sendable {
     /// Work days only apply to 7-day windows and to 2...6 work days; anything else paces linearly.
     private static func effectiveWorkDays(_ workDays: Int?, duration: TimeInterval) -> Int? {
         guard let workDays, workDays >= 2, workDays < 7,
-              abs(duration - Self.weeklyWindowSeconds) < 0.5
+              abs(duration - weeklyWindowSeconds) < 0.5
         else { return nil }
         return workDays
     }
@@ -433,7 +433,7 @@ public struct UsagePace: Sendable {
         calendar: Calendar) -> TimeInterval?
     {
         guard requiredWorkSeconds > 0 else { return 0 }
-        guard let slices = Self.daySlices(from: now, to: resetsAt, workDays: workDays, calendar: calendar)
+        guard let slices = daySlices(from: now, to: resetsAt, workDays: workDays, calendar: calendar)
         else { return nil }
 
         var remaining = requiredWorkSeconds

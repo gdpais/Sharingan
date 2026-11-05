@@ -8,7 +8,7 @@ struct ChartNiceScaleTests {
         #expect(ChartNiceScale.ticks(maximum: 1000) == [0, 500, 1000])
         #expect(ChartNiceScale.ticks(maximum: 7.3) == [0, 2, 4, 6, 8])
         #expect(ChartNiceScale.ticks(maximum: 12) == [0, 5, 10, 15])
-        for maximum in [0.07, 0.5, 3, 12, 99, 1515, 49_000, 151_000_000] {
+        for maximum in [0.07, 0.5, 3, 12, 99, 1515, 49000, 151_000_000] {
             let ticks = ChartNiceScale.ticks(maximum: maximum)
             #expect((3...5).contains(ticks.count))
             #expect((ticks.last ?? 0) >= maximum)

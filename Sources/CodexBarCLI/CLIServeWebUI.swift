@@ -43,5 +43,7 @@ enum CLIServeWebUI {
         encoder.outputFormatting = [.sortedKeys, .withoutEscapingSlashes]
         let json = (try? encoder.encode(icons)).flatMap { String(bytes: $0, encoding: .utf8) } ?? "{}"
         return html.replacingOccurrences(of: "__PROVIDER_ICON_URLS__", with: json)
+            .replacingOccurrences(of: "/*__INSIGHTS_STYLE__*/", with: insightsStyle)
+            .replacingOccurrences(of: "/*__INSIGHTS_SCRIPT__*/", with: insightsScript)
     }()
 }

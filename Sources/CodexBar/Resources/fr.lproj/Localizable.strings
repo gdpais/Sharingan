@@ -2766,3 +2766,46 @@
 "avg %@ credits/day" = "moy. %@ crédits/jour";
 "Average" = "Moyenne";
 "avg %@/day" = "moy. %@/jour";
+"Spend by hour of week" = "Dépenses par heure de la semaine";
+"By hour of week" = "Par heure de la semaine";
+"%@ of spend on weekends" = "%@ des dépenses le week-end";
+"%@ vs previous %d days" = "%@ par rapport aux %d jours précédents";
+"Lasts until %@ at this rate" = "Dure jusqu'au %@ à ce rythme";
+
+/* Plan fit */
+"Median" = "Médiane";
+"Median %@%%" = "Médiane %@%%";
+"capped %d of %d weeks" = "plafond atteint %d semaines sur %d";
+"capped %d of %d months" = "plafond atteint %d mois sur %d";
+"capped %d of %d windows" = "plafond atteint %d périodes sur %d";
+"%@ capped sessions per week" = "%@ séances plafonnées par semaine";
+"%@ h capped" = "%@ h au plafond";
+"You may be paying for headroom you don't use." = "Vous payez peut-être une marge que vous n'utilisez pas.";
+"You hit the cap often." = "Vous atteignez souvent le plafond.";
+"Your plan fits how you use it." = "Votre forfait correspond à votre usage.";
+"Not enough history for a verdict yet." = "Pas encore assez d'historique pour un verdict.";
+"Plan value" = "Valeur du forfait";
+"Set a plan price to compare" = "Définissez le prix du forfait pour comparer";
+"API-equivalent vs %@ plan" = "Équivalent API face à un forfait de %@";
+"Cache hit rate" = "Taux de réussite du cache";
+"Cost per 1M tokens" = "Coût pour 1 M de jetons";
+"Top model share" = "Part du modèle principal";
+"%@ vs previous period" = "%@ par rapport à la période précédente";
+"%@ pts" = "%@ pts";
+"Typical week" = "Semaine type";
+"Model share" = "Part par modèle";
+"Share of estimated spend" = "Part des dépenses estimées";
+"Project trends" = "Tendances des projets";
+"Change compares the last %d days with the %d days before." = "La variation compare les %d derniers jours aux %d jours précédents.";
+"New" = "Nouveau";
+"quota_warning_add_threshold" = "Ajouter un seuil";
+"quota_warning_remove_threshold" = "Supprimer le seuil le plus bas";
+"quota_warning_lane_follows_weekly" = "Marqueurs hebdomadaires uniquement, sans notifications";
+
+/* Card layout */
+"Card layout" = "Disposition de la carte";
+"Usage rows" = "Lignes d’utilisation";
+"Plan fit" = "Adéquation du forfait";
+"Drawn inside usage rows." = "Affiché dans les lignes d’utilisation.";
+"Menu links" = "Liens du menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordonnez et affichez les sections de la carte de menu de ce fournisseur, et choisissez son graphique. Les sections et graphiques sans données restent masqués.";

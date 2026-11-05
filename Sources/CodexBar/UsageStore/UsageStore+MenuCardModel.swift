@@ -45,6 +45,7 @@ extension UsageStore {
     {
         UsageMenuCardView.Model.make(self.menuCardInput(for: provider, context: context, now: now))
             .applyingUsageItemVisibility(hiddenItemIDs: self.settings.hiddenUsageItemIDs(for: provider))
+            .applyingCardLayout(self.menuCardLayoutContext(for: provider, context: context, now: now))
     }
 
     func menuCardInput(
@@ -167,6 +168,7 @@ extension UsageStore {
                 .session: self.quotaWarningMarkerThresholds(provider: provider, window: .session),
                 .weekly: self.quotaWarningMarkerThresholds(provider: provider, window: .weekly),
             ],
+            quotaWarningLaneThresholds: self.settings.quotaWarningLaneMarkerThresholds(provider: provider),
             workDaysPerWeek: self.settings.weeklyProgressWorkDays,
             workdayTickAppearance: self.settings.workdayTickAppearance,
             paceVisible: self.settings.paceVisible,

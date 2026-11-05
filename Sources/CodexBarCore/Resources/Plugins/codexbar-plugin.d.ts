@@ -103,11 +103,39 @@ interface CodexBarDetailRow {
   usageValue?: number | null;
 }
 
+interface CodexBarDetailChartPoint {
+  label: string;
+  /** Finite; values below zero draw at the baseline. */
+  value: number;
+}
+
+interface CodexBarDetailChartSeries {
+  /** Legend name. */
+  name: string;
+  /** Series that share a stack id draw stacked (bars, or areas in line charts); others draw on their own. */
+  stack?: string | null;
+  /** At most 120 points. Series align by label, so each label may appear once per series. */
+  points: CodexBarDetailChartPoint[];
+}
+
+interface CodexBarDetailChartReference {
+  /** Finite y value of a horizontal reference line. */
+  value: number;
+  label?: string | null;
+  /** Defaults to "dashed". */
+  style?: "solid" | "dashed" | null;
+}
+
 interface CodexBarDetailChart {
   kind: "bars" | "line";
   title?: string | null;
   unit?: string | null;
-  points: Array<{ label: string; value: number }>;
+  /** Single-series data, at most 120 points. Required unless `series` has an entry; then it is an optional fallback for hosts without series support. */
+  points?: CodexBarDetailChartPoint[];
+  /** At most 8 series sharing at most 120 distinct labels. */
+  series?: CodexBarDetailChartSeries[] | null;
+  /** At most 4 horizontal reference lines. */
+  references?: CodexBarDetailChartReference[] | null;
 }
 
 interface CodexBarDetailSection {

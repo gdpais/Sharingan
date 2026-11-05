@@ -2768,3 +2768,46 @@
 "avg %@ credits/day" = "в среднем %@ кредитов/день";
 "Average" = "Среднее";
 "avg %@/day" = "в среднем %@/день";
+"Spend by hour of week" = "Расходы по часам недели";
+"By hour of week" = "По часам недели";
+"%@ of spend on weekends" = "%@ расходов приходится на выходные";
+"%@ vs previous %d days" = "%@ по сравнению с предыдущими %d дн.";
+"Lasts until %@ at this rate" = "Хватит до %@ при таком темпе";
+
+/* Plan fit */
+"Median" = "Медиана";
+"Median %@%%" = "Медиана %@%%";
+"capped %d of %d weeks" = "лимит в %d из %d нед.";
+"capped %d of %d months" = "лимит в %d из %d мес.";
+"capped %d of %d windows" = "лимит в %d из %d периодов";
+"%@ capped sessions per week" = "%@ сеансов с лимитом в неделю";
+"%@ h capped" = "%@ ч на лимите";
+"You may be paying for headroom you don't use." = "Возможно, вы платите за запас, которым не пользуетесь.";
+"You hit the cap often." = "Вы часто упираетесь в лимит.";
+"Your plan fits how you use it." = "План соответствует вашему использованию.";
+"Not enough history for a verdict yet." = "Пока недостаточно истории для оценки.";
+"Plan value" = "Ценность плана";
+"Set a plan price to compare" = "Укажите цену плана для сравнения";
+"API-equivalent vs %@ plan" = "Эквивалент API против плана за %@";
+"Cache hit rate" = "Доля попаданий в кэш";
+"Cost per 1M tokens" = "Стоимость за 1 млн токенов";
+"Top model share" = "Доля топ-модели";
+"%@ vs previous period" = "%@ к предыдущему периоду";
+"%@ pts" = "%@ п. п.";
+"Typical week" = "Обычная неделя";
+"Model share" = "Доля моделей";
+"Share of estimated spend" = "Доля в предполагаемых расходах";
+"Project trends" = "Динамика проектов";
+"Change compares the last %d days with the %d days before." = "Изменение сравнивает последние %d дн. с %d дн. до них.";
+"New" = "Новый";
+"quota_warning_add_threshold" = "Добавить порог";
+"quota_warning_remove_threshold" = "Удалить самый низкий порог";
+"quota_warning_lane_follows_weekly" = "Только недельные маркеры, без уведомлений";
+
+/* Card layout */
+"Card layout" = "Макет карточки";
+"Usage rows" = "Строки использования";
+"Plan fit" = "Соответствие тарифа";
+"Drawn inside usage rows." = "Отображается внутри строк использования.";
+"Menu links" = "Ссылки в меню";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Упорядочьте разделы карточки меню этого провайдера, настройте их видимость и выберите график. Разделы и графики без данных остаются скрытыми.";

@@ -2759,3 +2759,46 @@
 "avg %@ credits/day" = "平均 %@ 额度/天";
 "Average" = "平均值";
 "avg %@/day" = "日均 %@";
+"Spend by hour of week" = "一周各时段支出";
+"By hour of week" = "一周各时段";
+"%@ of spend on weekends" = "周末支出占 %@";
+"%@ vs previous %d days" = "%@（较前 %d 天）";
+"Lasts until %@ at this rate" = "按此速度可用到 %@";
+
+/* Plan fit */
+"Median" = "中位数";
+"Median %@%%" = "中位数 %@%%";
+"capped %d of %d weeks" = "%d/%d 周达到上限";
+"capped %d of %d months" = "%d/%d 个月达到上限";
+"capped %d of %d windows" = "%d/%d 个周期达到上限";
+"%@ capped sessions per week" = "每周 %@ 个会话达到上限";
+"%@ h capped" = "处于上限 %@ 小时";
+"You may be paying for headroom you don't use." = "你可能在为用不到的余量付费。";
+"You hit the cap often." = "你经常达到上限。";
+"Your plan fits how you use it." = "你的套餐符合你的使用方式。";
+"Not enough history for a verdict yet." = "历史记录还不足以给出结论。";
+"Plan value" = "套餐价值";
+"Set a plan price to compare" = "设置套餐价格以进行比较";
+"API-equivalent vs %@ plan" = "API 等价金额对比 %@ 套餐";
+"Cache hit rate" = "缓存命中率";
+"Cost per 1M tokens" = "每百万 token 费用";
+"Top model share" = "首位模型占比";
+"%@ vs previous period" = "较上期 %@";
+"%@ pts" = "%@ 个百分点";
+"Typical week" = "典型周";
+"Model share" = "模型占比";
+"Share of estimated spend" = "占估算支出的比例";
+"Project trends" = "项目趋势";
+"Change compares the last %d days with the %d days before." = "变化比较最近 %d 天与之前 %d 天。";
+"New" = "新增";
+"quota_warning_add_threshold" = "添加阈值";
+"quota_warning_remove_threshold" = "移除最低阈值";
+"quota_warning_lane_follows_weekly" = "仅显示每周标记，不发送通知";
+
+/* Card layout */
+"Card layout" = "卡片布局";
+"Usage rows" = "用量行";
+"Plan fit" = "套餐适配度";
+"Drawn inside usage rows." = "显示在用量行内。";
+"Menu links" = "菜单链接";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "调整此提供商菜单卡片各部分的顺序和显示，并选择其图表。没有数据的部分和图表会保持隐藏。";

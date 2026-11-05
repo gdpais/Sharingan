@@ -2770,3 +2770,46 @@
 "avg %@ credits/day" = "śr. %@ kredytów/dzień";
 "Average" = "Średnia";
 "avg %@/day" = "śr. %@/dzień";
+"Spend by hour of week" = "Wydatki według godziny tygodnia";
+"By hour of week" = "Według godziny tygodnia";
+"%@ of spend on weekends" = "%@ wydatków w weekendy";
+"%@ vs previous %d days" = "%@ wobec poprzednich %d dni";
+"Lasts until %@ at this rate" = "Wystarczy do %@ przy tym tempie";
+
+/* Plan fit */
+"Median" = "Mediana";
+"Median %@%%" = "Mediana %@%%";
+"capped %d of %d weeks" = "limit osiągnięty w %d z %d tygodni";
+"capped %d of %d months" = "limit osiągnięty w %d z %d miesięcy";
+"capped %d of %d windows" = "limit osiągnięty w %d z %d okresów";
+"%@ capped sessions per week" = "%@ sesji z limitem na tydzień";
+"%@ h capped" = "%@ godz. na limicie";
+"You may be paying for headroom you don't use." = "Możliwe, że płacisz za zapas, którego nie wykorzystujesz.";
+"You hit the cap often." = "Często osiągasz limit.";
+"Your plan fits how you use it." = "Twój plan pasuje do sposobu korzystania.";
+"Not enough history for a verdict yet." = "Za mało historii, aby ocenić.";
+"Plan value" = "Wartość planu";
+"Set a plan price to compare" = "Ustaw cenę planu, aby porównać";
+"API-equivalent vs %@ plan" = "Równowartość API wobec planu za %@";
+"Cache hit rate" = "Współczynnik trafień pamięci podręcznej";
+"Cost per 1M tokens" = "Koszt za 1 mln tokenów";
+"Top model share" = "Udział najlepszego modelu";
+"%@ vs previous period" = "%@ wobec poprzedniego okresu";
+"%@ pts" = "%@ pkt";
+"Typical week" = "Typowy tydzień";
+"Model share" = "Udział modeli";
+"Share of estimated spend" = "Udział w szacowanych wydatkach";
+"Project trends" = "Trendy projektów";
+"Change compares the last %d days with the %d days before." = "Zmiana porównuje ostatnie %d dni z %d dniami wcześniej.";
+"New" = "Nowy";
+"quota_warning_add_threshold" = "Dodaj próg";
+"quota_warning_remove_threshold" = "Usuń najniższy próg";
+"quota_warning_lane_follows_weekly" = "Tylko znaczniki tygodniowe, bez powiadomień";
+
+/* Card layout */
+"Card layout" = "Układ karty";
+"Usage rows" = "Wiersze użycia";
+"Plan fit" = "Dopasowanie planu";
+"Drawn inside usage rows." = "Wyświetlane w wierszach użycia.";
+"Menu links" = "Linki w menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ustal kolejność i widoczność sekcji karty menu tego dostawcy oraz wybierz jej wykres. Sekcje i wykresy bez danych pozostają ukryte.";

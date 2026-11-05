@@ -2767,3 +2767,46 @@
 "avg %@ credits/day" = "平均 %@ クレジット/日";
 "Average" = "平均";
 "avg %@/day" = "平均 %@/日";
+"Spend by hour of week" = "曜日・時間帯別の支出";
+"By hour of week" = "曜日・時間帯別";
+"%@ of spend on weekends" = "週末の支出: %@";
+"%@ vs previous %d days" = "%@（直前の%d日間比）";
+"Lasts until %@ at this rate" = "このペースだと%@まで持ちます";
+
+/* Plan fit */
+"Median" = "中央値";
+"Median %@%%" = "中央値 %@%%";
+"capped %d of %d weeks" = "上限到達 %d/%d週";
+"capped %d of %d months" = "上限到達 %d/%dか月";
+"capped %d of %d windows" = "上限到達 %d/%d期間";
+"%@ capped sessions per week" = "上限到達セッション 週%@回";
+"%@ h capped" = "上限中 %@時間";
+"You may be paying for headroom you don't use." = "使わない余裕分を支払っている可能性があります。";
+"You hit the cap often." = "上限に頻繁に達しています。";
+"Your plan fits how you use it." = "プランは使い方に合っています。";
+"Not enough history for a verdict yet." = "判定に十分な履歴がまだありません。";
+"Plan value" = "プランの価値";
+"Set a plan price to compare" = "比較するにはプラン料金を設定してください";
+"API-equivalent vs %@ plan" = "%@ のプランに対する API 換算額";
+"Cache hit rate" = "キャッシュヒット率";
+"Cost per 1M tokens" = "100万トークンあたりのコスト";
+"Top model share" = "トップモデルのシェア";
+"%@ vs previous period" = "前期間比 %@";
+"%@ pts" = "%@ ポイント";
+"Typical week" = "いつもの週";
+"Model share" = "モデル別シェア";
+"Share of estimated spend" = "推定支出に占める割合";
+"Project trends" = "プロジェクトの推移";
+"Change compares the last %d days with the %d days before." = "変化は直近%d日間とその前の%d日間を比較しています。";
+"New" = "新規";
+"quota_warning_add_threshold" = "しきい値を追加";
+"quota_warning_remove_threshold" = "最も低いしきい値を削除";
+"quota_warning_lane_follows_weekly" = "週間マーカーのみ、通知なし";
+
+/* Card layout */
+"Card layout" = "カードのレイアウト";
+"Usage rows" = "使用量の行";
+"Plan fit" = "プラン適合度";
+"Drawn inside usage rows." = "使用量の行の中に表示されます。";
+"Menu links" = "メニューのリンク";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "このプロバイダーのメニューカードのセクションを並べ替えて表示を切り替え、グラフを選択します。データのないセクションやグラフは非表示のままです。";

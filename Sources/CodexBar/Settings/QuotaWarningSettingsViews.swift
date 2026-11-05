@@ -67,6 +67,9 @@ struct ProviderQuotaWarningSettingsView: View {
             Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
                 self.windowRow(.session)
                 self.windowRow(.weekly)
+                if let lane = self.tertiaryLane {
+                    self.laneRow(lane)
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .listRowSeparator(.hidden)
@@ -219,6 +222,126 @@ struct ProviderQuotaWarningSettingsView: View {
     }
 }
 
+// MARK: - Further lanes
+
+/// A quota lane beyond session and weekly that takes its own warning override.
+struct QuotaWarningLaneRowTarget: Equatable {
+    let id: String
+    let title: String
+}
+
+extension ProviderQuotaWarningSettingsView {
+    /// The provider's third window, when its descriptor reports one. Without an override it keeps
+    /// today's behavior: weekly markers and no notifications.
+    var tertiaryLane: QuotaWarningLaneRowTarget? {
+        let metadata = ProviderDescriptorRegistry.descriptor(for: self.provider).metadata
+        guard metadata.supportsOpus else { return nil }
+        return QuotaWarningLaneRowTarget(id: QuotaWarningLaneID.tertiary, title: L(metadata.opusLabel ?? "Monthly"))
+    }
+
+    private func laneRow(_ lane: QuotaWarningLaneRowTarget) -> some View {
+        GridRow(alignment: .firstTextBaseline) {
+            Text(lane.title)
+                .font(.subheadline.weight(.semibold))
+                .fixedSize(horizontal: true, vertical: false)
+                .frame(minHeight: Self.windowRowMinHeight, alignment: .center)
+                .gridColumnAlignment(.leading)
+
+            Picker(lane.title, selection: self.laneOverrideModeBinding(for: lane.id)) {
+                Text(L("quota_warning_global")).tag(ProviderQuotaWarningOverrideMode.global)
+                Text(L("Custom")).tag(ProviderQuotaWarningOverrideMode.custom)
+                Text(L("quota_warning_off")).tag(ProviderQuotaWarningOverrideMode.off)
+            }
+            .labelsHidden()
+            .pickerStyle(.segmented)
+            .controlSize(.small)
+            .fixedSize()
+            .frame(minHeight: Self.windowRowMinHeight, alignment: .center)
+            .gridColumnAlignment(.leading)
+
+            self.laneDetail(lane)
+                .frame(minHeight: Self.windowRowMinHeight, alignment: .leading)
+                .gridColumnAlignment(.leading)
+        }
+    }
+
+    @ViewBuilder
+    private func laneDetail(_ lane: QuotaWarningLaneRowTarget) -> some View {
+        switch self.laneOverrideMode(for: lane.id) {
+        case .custom:
+            QuotaWarningThresholdField(
+                title: "",
+                subtitle: "",
+                accessibilityContext: lane.title,
+                shouldCommitOnDisappear: {
+                    self.laneOverrideMode(for: lane.id) != .global
+                },
+                thresholds: {
+                    self.settings.resolvedQuotaWarningThresholds(
+                        provider: self.provider.instanceID,
+                        window: .weekly,
+                        laneID: lane.id)
+                },
+                setThresholds: {
+                    self.settings.setQuotaWarningLaneThresholdsIfOverridden(
+                        provider: self.provider,
+                        laneID: lane.id,
+                        thresholds: $0)
+                },
+                fieldWidth: Self.thresholdFieldWidth,
+                controlFont: .subheadline)
+                .fixedSize(horizontal: true, vertical: false)
+        case .off:
+            EmptyView()
+        case .global:
+            Text(L("quota_warning_lane_follows_weekly"))
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+        }
+    }
+
+    func laneOverrideMode(for laneID: String) -> ProviderQuotaWarningOverrideMode {
+        guard self.settings.hasQuotaWarningLaneOverride(provider: self.provider, laneID: laneID) else {
+            return .global
+        }
+        return self.settings.quotaWarningEnabled(provider: self.provider, window: .weekly, laneID: laneID)
+            ? .custom : .off
+    }
+
+    func laneOverrideModeBinding(for laneID: String) -> Binding<ProviderQuotaWarningOverrideMode> {
+        Binding(
+            get: { self.laneOverrideMode(for: laneID) },
+            set: { mode in
+                let currentMode = self.laneOverrideMode(for: laneID)
+                guard mode != currentMode else { return }
+                let explicit = self.settings.explicitQuotaWarningLaneThresholds(
+                    provider: self.provider,
+                    laneID: laneID)
+
+                switch mode {
+                case .custom:
+                    self.settings.setQuotaWarningLaneOverride(
+                        provider: self.provider,
+                        laneID: laneID,
+                        thresholds: explicit,
+                        enabled: true)
+                case .off:
+                    self.settings.setQuotaWarningLaneOverride(
+                        provider: self.provider,
+                        laneID: laneID,
+                        thresholds: currentMode == .custom ? explicit : nil,
+                        enabled: false)
+                case .global:
+                    self.settings.setQuotaWarningLaneOverride(
+                        provider: self.provider,
+                        laneID: laneID,
+                        thresholds: nil,
+                        enabled: nil)
+                }
+            })
+    }
+}
+
 enum ProviderQuotaWarningOverrideMode: Hashable {
     case global
     case custom
@@ -299,7 +422,7 @@ private struct QuotaWarningThresholdField: View {
     var titleFont: Font = .footnote.weight(.semibold)
 
     @State private var draft = QuotaWarningThresholdEditorText.Draft()
-    @FocusState private var focusedField: QuotaWarningThresholdEditorText.Field?
+    @FocusState private var focusedField: Int?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 7) {
@@ -331,12 +454,26 @@ private struct QuotaWarningThresholdField: View {
         .background(self.focusMonitor)
     }
 
+    /// The labelled warning and critical fields and the add/remove buttons share the first line; further
+    /// thresholds wrap to a second line so a long list never widens the settings row.
     private var horizontalEditor: some View {
-        HStack(alignment: .firstTextBaseline, spacing: 10) {
-            self.titleView
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(alignment: .firstTextBaseline, spacing: 10) {
+                self.titleView
 
-            self.upperField
-            self.lowerField
+                ForEach(0..<min(self.draft.count, QuotaWarningThresholdEditorText.firstLineCount), id: \.self) {
+                    self.thresholdInput(at: $0)
+                }
+                self.editButtons
+            }
+            if self.draft.count > QuotaWarningThresholdEditorText.firstLineCount {
+                HStack(alignment: .firstTextBaseline, spacing: 10) {
+                    ForEach(QuotaWarningThresholdEditorText.firstLineCount..<self.draft.count, id: \.self) {
+                        self.thresholdInput(at: $0)
+                    }
+                }
+                .padding(.leading, self.title.isEmpty ? 0 : 120)
+            }
         }
         .fixedSize(horizontal: true, vertical: false)
     }
@@ -350,45 +487,31 @@ private struct QuotaWarningThresholdField: View {
         }
     }
 
-    private var upperField: some View {
-        self.thresholdInput(
-            label: L("quota_warning_warning"),
-            placeholder: "50",
-            text: self.thresholdTextBinding(.upper),
-            field: .upper)
-    }
+    private func thresholdInput(at index: Int) -> some View {
+        let label = QuotaWarningThresholdEditorText.label(at: index)
+        let fieldLabel = label ?? L("quota_warning_warn_at")
+        return HStack(alignment: .firstTextBaseline, spacing: 5) {
+            if let label {
+                Text(label)
+                    .font(self.controlFont)
+                    .foregroundStyle(.secondary)
+            }
 
-    private var lowerField: some View {
-        self.thresholdInput(
-            label: L("quota_warning_critical"),
-            placeholder: "20",
-            text: self.thresholdTextBinding(.lower),
-            field: .lower)
-    }
-
-    private func thresholdInput(
-        label: String,
-        placeholder: String,
-        text: Binding<String>,
-        field: QuotaWarningThresholdEditorText.Field) -> some View
-    {
-        HStack(alignment: .firstTextBaseline, spacing: 5) {
-            Text(label)
-                .font(self.controlFont)
-                .foregroundStyle(.secondary)
-
-            TextField(label, text: text, prompt: Text(verbatim: placeholder))
+            TextField(
+                fieldLabel,
+                text: self.thresholdTextBinding(at: index),
+                prompt: Text(verbatim: QuotaWarningThresholdEditorText.placeholder(at: index)))
                 .labelsHidden()
                 .textFieldStyle(.roundedBorder)
                 .font(self.controlFont)
                 .multilineTextAlignment(.trailing)
                 .frame(width: self.fieldWidth)
-                .focused(self.$focusedField, equals: field)
+                .focused(self.$focusedField, equals: index)
                 .onSubmit {
                     self.commit()
                     self.focusedField = nil
                 }
-                .accessibilityLabel(Text(self.accessibilityLabel(for: label)))
+                .accessibilityLabel(Text(self.accessibilityLabel(for: fieldLabel)))
 
             Text(verbatim: "%")
                 .font(self.controlFont)
@@ -396,10 +519,36 @@ private struct QuotaWarningThresholdField: View {
         }
     }
 
-    private func thresholdTextBinding(_ field: QuotaWarningThresholdEditorText.Field) -> Binding<String> {
+    private var editButtons: some View {
+        HStack(spacing: 2) {
+            Button {
+                self.draft.addThreshold()
+                self.commit()
+            } label: {
+                Image(systemName: "plus")
+            }
+            .disabled(!self.draft.canAddThreshold)
+            .help(L("quota_warning_add_threshold"))
+            .accessibilityLabel(Text(self.accessibilityLabel(for: L("quota_warning_add_threshold"))))
+
+            Button {
+                self.draft.removeLastThreshold()
+                self.commit()
+            } label: {
+                Image(systemName: "minus")
+            }
+            .disabled(!self.draft.canRemoveThreshold)
+            .help(L("quota_warning_remove_threshold"))
+            .accessibilityLabel(Text(self.accessibilityLabel(for: L("quota_warning_remove_threshold"))))
+        }
+        .buttonStyle(.borderless)
+        .font(self.controlFont)
+    }
+
+    private func thresholdTextBinding(at index: Int) -> Binding<String> {
         Binding(
-            get: { self.draft.text(for: field) },
-            set: { self.draft.setText($0, for: field) })
+            get: { self.draft.text(at: index) },
+            set: { self.draft.setText($0, at: index) })
     }
 
     private func commit() {
@@ -534,71 +683,106 @@ extension NSView {
 }
 #endif
 
+/// Editing model behind the threshold fields: one text per threshold, highest first. An untouched draft
+/// never writes, so a config's list (of any length) survives a visit to the settings unchanged.
 enum QuotaWarningThresholdEditorText {
-    enum Field: Hashable {
-        case upper
-        case lower
-    }
+    /// Thresholds that share the first line with the add/remove buttons; the rest wrap below.
+    static let firstLineCount = 2
 
     struct Draft {
-        private(set) var upperText: String
-        private(set) var lowerText: String
-        private let initialUpperText: String
-        private let initialLowerText: String
+        private(set) var texts: [String]
+        private let initialTexts: [String]
 
         var isDirty: Bool {
-            self.upperText != self.initialUpperText || self.lowerText != self.initialLowerText
+            self.texts != self.initialTexts
+        }
+
+        var count: Int {
+            self.texts.count
+        }
+
+        /// Adding stops at the editor cap, or when no whole percent is left to offer. A longer list loaded
+        /// from the config stays intact; it just cannot grow here.
+        var canAddThreshold: Bool {
+            self.texts.count < QuotaWarningThresholds.editorMaximumCount && self.suggestedAddition != nil
+        }
+
+        var canRemoveThreshold: Bool {
+            self.texts.count > 1
         }
 
         init(thresholds: [Int] = QuotaWarningThresholds.defaults) {
-            let pair = QuotaWarningThresholdEditorText.displayText(from: thresholds)
-            let upperText = pair.upper.map(String.init) ?? ""
-            let lowerText = pair.lower.map(String.init) ?? ""
-            self.upperText = upperText
-            self.lowerText = lowerText
-            self.initialUpperText = upperText
-            self.initialLowerText = lowerText
+            let texts = QuotaWarningThresholds.sanitized(thresholds).map { String($0) }
+            self.texts = texts
+            self.initialTexts = texts
         }
 
-        func text(for field: Field) -> String {
-            switch field {
-            case .upper: self.upperText
-            case .lower: self.lowerText
-            }
+        func text(at index: Int) -> String {
+            self.texts.indices.contains(index) ? self.texts[index] : ""
         }
 
-        mutating func setText(_ value: String, for field: Field) {
+        mutating func setText(_ value: String, at index: Int) {
+            guard self.texts.indices.contains(index) else { return }
             let filtered = QuotaWarningThresholdEditorText.filteredIntegerText(value)
-            guard self.text(for: field) != filtered else { return }
-            switch field {
-            case .upper: self.upperText = filtered
-            case .lower: self.lowerText = filtered
-            }
+            guard self.texts[index] != filtered else { return }
+            self.texts[index] = filtered
+        }
+
+        /// Appends a suggested value; the next commit sorts it into place.
+        mutating func addThreshold() {
+            guard self.canAddThreshold, let value = self.suggestedAddition else { return }
+            self.texts.append(String(value))
+        }
+
+        mutating func removeThreshold(at index: Int) {
+            guard self.canRemoveThreshold, self.texts.indices.contains(index) else { return }
+            self.texts.remove(at: index)
+        }
+
+        /// Drops the lowest threshold, the one the editor shows last.
+        mutating func removeLastThreshold() {
+            self.removeThreshold(at: self.texts.count - 1)
         }
 
         mutating func update(from thresholds: [Int]) {
             self = Draft(thresholds: thresholds)
         }
 
+        /// The sorted, de-duplicated list to save, or nil when nothing changed.
         mutating func takeResolvedThresholds() -> [Int]? {
             guard self.isDirty else { return nil }
-            let thresholds = QuotaWarningThresholdEditorText.resolvedThresholds(
-                upperText: self.upperText,
-                lowerText: self.lowerText)
+            let thresholds = QuotaWarningThresholdEditorText.resolvedThresholds(texts: self.texts)
             self.update(from: thresholds)
             return thresholds
         }
+
+        private var suggestedAddition: Int? {
+            QuotaWarningThresholds.suggestedAddition(
+                to: QuotaWarningThresholdEditorText.resolvedThresholds(texts: self.texts))
+        }
     }
 
-    static func displayText(from thresholds: [Int]) -> (upper: Int?, lower: Int?) {
-        let sanitized = QuotaWarningThresholds.sanitized(thresholds)
-        return (sanitized.first, sanitized.dropFirst().first)
+    /// The first threshold starts the warning band and the second the critical band; further thresholds
+    /// only add notifications and carry no label.
+    static func label(at index: Int) -> String? {
+        switch index {
+        case 0: L("quota_warning_warning")
+        case 1: L("quota_warning_critical")
+        default: nil
+        }
     }
 
-    static func resolvedThresholds(upperText: String, lowerText: String) -> [Int] {
-        QuotaWarningThresholds.resolved(
-            upper: self.integer(from: upperText),
-            lower: self.integer(from: lowerText))
+    static func placeholder(at index: Int) -> String {
+        switch index {
+        case 0: "50"
+        case 1: "20"
+        default: ""
+        }
+    }
+
+    /// Blank fields drop out; a list left with no values falls back to the defaults.
+    static func resolvedThresholds(texts: [String]) -> [Int] {
+        QuotaWarningThresholds.resolved(entries: texts.map { self.integer(from: $0) })
     }
 
     static func filteredIntegerText(_ text: String) -> String {

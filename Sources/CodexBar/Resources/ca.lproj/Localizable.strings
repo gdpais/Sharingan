@@ -2769,3 +2769,46 @@
 "avg %@ credits/day" = "mitjana %@ crèdits/dia";
 "Average" = "Mitjana";
 "avg %@/day" = "mitjana %@/dia";
+"Spend by hour of week" = "Despesa per hora de la setmana";
+"By hour of week" = "Per hora de la setmana";
+"%@ of spend on weekends" = "%@ de la despesa en caps de setmana";
+"%@ vs previous %d days" = "%@ respecte als %d dies anteriors";
+"Lasts until %@ at this rate" = "Dura fins al %@ a aquest ritme";
+
+/* Plan fit */
+"Median" = "Mediana";
+"Median %@%%" = "Mediana %@%%";
+"capped %d of %d weeks" = "al límit %d de %d setmanes";
+"capped %d of %d months" = "al límit %d de %d mesos";
+"capped %d of %d windows" = "al límit %d de %d períodes";
+"%@ capped sessions per week" = "%@ sessions al límit per setmana";
+"%@ h capped" = "%@ h al límit";
+"You may be paying for headroom you don't use." = "Potser pagues per un marge que no fas servir.";
+"You hit the cap often." = "Arribes sovint al límit.";
+"Your plan fits how you use it." = "El teu pla s'ajusta a com l'utilitzes.";
+"Not enough history for a verdict yet." = "Encara no hi ha prou historial per a un veredicte.";
+"Plan value" = "Valor del pla";
+"Set a plan price to compare" = "Definiu un preu del pla per comparar";
+"API-equivalent vs %@ plan" = "Equivalent d'API davant d'un pla de %@";
+"Cache hit rate" = "Taxa d'encerts de memòria cau";
+"Cost per 1M tokens" = "Cost per 1 M de tokens";
+"Top model share" = "Quota del model principal";
+"%@ vs previous period" = "%@ respecte al període anterior";
+"%@ pts" = "%@ pp";
+"Typical week" = "Setmana habitual";
+"Model share" = "Quota per model";
+"Share of estimated spend" = "Proporció de la despesa estimada";
+"Project trends" = "Tendències dels projectes";
+"Change compares the last %d days with the %d days before." = "El canvi compara els últims %d dies amb els %d dies anteriors.";
+"New" = "Nou";
+"quota_warning_add_threshold" = "Afegeix un llindar";
+"quota_warning_remove_threshold" = "Elimina el llindar més baix";
+"quota_warning_lane_follows_weekly" = "Només marcadors setmanals, sense notificacions";
+
+/* Card layout */
+"Card layout" = "Disseny de la targeta";
+"Usage rows" = "Files d'ús";
+"Plan fit" = "Adequació del pla";
+"Drawn inside usage rows." = "Es mostra dins de les files d'ús.";
+"Menu links" = "Enllaços del menú";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordeneu i mostreu les seccions de la targeta del menú d'aquest proveïdor i trieu-ne el gràfic. Les seccions i els gràfics sense dades queden ocults.";

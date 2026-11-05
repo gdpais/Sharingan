@@ -2768,3 +2768,46 @@
 "avg %@ credits/day" = "TB %@ tín dụng/ngày";
 "Average" = "Trung bình";
 "avg %@/day" = "trung bình %@/ngày";
+"Spend by hour of week" = "Chi tiêu theo giờ trong tuần";
+"By hour of week" = "Theo giờ trong tuần";
+"%@ of spend on weekends" = "%@ chi tiêu vào cuối tuần";
+"%@ vs previous %d days" = "%@ so với %d ngày trước đó";
+"Lasts until %@ at this rate" = "Đủ dùng đến %@ với tốc độ này";
+
+/* Plan fit */
+"Median" = "Trung vị";
+"Median %@%%" = "Trung vị %@%%";
+"capped %d of %d weeks" = "chạm giới hạn %d/%d tuần";
+"capped %d of %d months" = "chạm giới hạn %d/%d tháng";
+"capped %d of %d windows" = "chạm giới hạn %d/%d kỳ";
+"%@ capped sessions per week" = "%@ phiên chạm giới hạn mỗi tuần";
+"%@ h capped" = "%@ giờ ở giới hạn";
+"You may be paying for headroom you don't use." = "Có thể bạn đang trả tiền cho phần dư không dùng đến.";
+"You hit the cap often." = "Bạn thường xuyên chạm giới hạn.";
+"Your plan fits how you use it." = "Gói của bạn phù hợp với cách bạn sử dụng.";
+"Not enough history for a verdict yet." = "Chưa đủ lịch sử để đánh giá.";
+"Plan value" = "Giá trị gói dịch vụ";
+"Set a plan price to compare" = "Đặt giá gói dịch vụ để so sánh";
+"API-equivalent vs %@ plan" = "Tương đương API so với gói dịch vụ %@";
+"Cache hit rate" = "Tỷ lệ trúng bộ nhớ đệm";
+"Cost per 1M tokens" = "Chi phí cho mỗi 1 triệu token";
+"Top model share" = "Tỷ trọng mô hình hàng đầu";
+"%@ vs previous period" = "%@ so với kỳ trước";
+"%@ pts" = "%@ điểm";
+"Typical week" = "Tuần điển hình";
+"Model share" = "Tỷ trọng mô hình";
+"Share of estimated spend" = "Tỷ trọng trong chi tiêu ước tính";
+"Project trends" = "Xu hướng dự án";
+"Change compares the last %d days with the %d days before." = "Mức thay đổi so sánh %d ngày gần nhất với %d ngày trước đó.";
+"New" = "Mới";
+"quota_warning_add_threshold" = "Thêm ngưỡng";
+"quota_warning_remove_threshold" = "Xóa ngưỡng thấp nhất";
+"quota_warning_lane_follows_weekly" = "Chỉ dấu hàng tuần, không thông báo";
+
+/* Card layout */
+"Card layout" = "Bố cục thẻ";
+"Usage rows" = "Các hàng sử dụng";
+"Plan fit" = "Mức phù hợp của gói";
+"Drawn inside usage rows." = "Hiển thị bên trong các hàng sử dụng.";
+"Menu links" = "Liên kết trong menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Sắp xếp và hiển thị các mục trong thẻ menu của nhà cung cấp này, rồi chọn biểu đồ. Các mục và biểu đồ không có dữ liệu sẽ vẫn bị ẩn.";

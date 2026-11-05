@@ -2771,3 +2771,46 @@
 "avg %@ credits/day" = "المتوسط %@ من الاعتمادات/يوم";
 "Average" = "المتوسط";
 "avg %@/day" = "المتوسط %@/يوم";
+"Spend by hour of week" = "الإنفاق حسب ساعة الأسبوع";
+"By hour of week" = "حسب ساعة الأسبوع";
+"%@ of spend on weekends" = "%@ من الإنفاق في عطلات نهاية الأسبوع";
+"%@ vs previous %d days" = "%@ مقارنةً بالأيام الـ %d السابقة";
+"Lasts until %@ at this rate" = "يكفي حتى %@ بهذا المعدل";
+
+/* Plan fit */
+"Median" = "الوسيط";
+"Median %@%%" = "الوسيط %@%%";
+"capped %d of %d weeks" = "بلغ الحد في %d من %d أسابيع";
+"capped %d of %d months" = "بلغ الحد في %d من %d أشهر";
+"capped %d of %d windows" = "بلغ الحد في %d من %d فترات";
+"%@ capped sessions per week" = "%@ جلسات بلغت الحد أسبوعيًا";
+"%@ h capped" = "%@ س عند الحد";
+"You may be paying for headroom you don't use." = "قد تدفع مقابل سعة لا تستخدمها.";
+"You hit the cap often." = "تبلغ الحد كثيرًا.";
+"Your plan fits how you use it." = "خطتك تناسب طريقة استخدامك.";
+"Not enough history for a verdict yet." = "لا يوجد سجل كافٍ لإصدار حكم بعد.";
+"Plan value" = "قيمة الخطة";
+"Set a plan price to compare" = "حدّد سعر الخطة للمقارنة";
+"API-equivalent vs %@ plan" = "ما يعادل تكلفة API مقابل خطة بسعر %@";
+"Cache hit rate" = "معدل إصابة الذاكرة المؤقتة";
+"Cost per 1M tokens" = "التكلفة لكل مليون رمز";
+"Top model share" = "حصة النموذج الأعلى";
+"%@ vs previous period" = "%@ مقارنة بالفترة السابقة";
+"%@ pts" = "%@ نقطة";
+"Typical week" = "الأسبوع المعتاد";
+"Model share" = "حصة النماذج";
+"Share of estimated spend" = "الحصة من الإنفاق التقديري";
+"Project trends" = "اتجاهات المشاريع";
+"Change compares the last %d days with the %d days before." = "يقارن التغيّر آخر %d يومًا بالـ %d يومًا التي سبقتها.";
+"New" = "جديد";
+"quota_warning_add_threshold" = "إضافة حد";
+"quota_warning_remove_threshold" = "إزالة أدنى حد";
+"quota_warning_lane_follows_weekly" = "علامات أسبوعية فقط، بلا إشعارات";
+
+/* Card layout */
+"Card layout" = "تخطيط البطاقة";
+"Usage rows" = "صفوف الاستخدام";
+"Plan fit" = "ملاءمة الخطة";
+"Drawn inside usage rows." = "تُعرض داخل صفوف الاستخدام.";
+"Menu links" = "روابط القائمة";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "رتّب أقسام بطاقة القائمة لهذا المزوّد وأظهرها أو أخفِها، واختر الرسم البياني الخاص بها. تبقى الأقسام والرسوم البيانية التي لا تتوفر لها بيانات مخفية.";

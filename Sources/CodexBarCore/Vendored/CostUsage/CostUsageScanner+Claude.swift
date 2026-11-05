@@ -129,6 +129,7 @@ extension CostUsageScanner {
         let pathRole = Self.claudePathRole(fileURL: fileURL)
         var keyedRows: [ClaudeRowKey: ClaudeUsageRow] = [:]
         var unkeyedRows: [ClaudeUsageRow] = []
+        var firstCWD: String?
 
         let maxLineBytes = 512 * 1024
         // Keep the full line so usage at the tail isn't dropped on large tool outputs.
@@ -167,6 +168,9 @@ extension CostUsageScanner {
                             let isVertex = Self.isVertexAIUsageEntry(
                                 obj: obj, message: message, scanMetadata: couldContainMetadata)
                             if isVertex != (providerFilter == .vertexAIOnly) { return }
+                        }
+                        if firstCWD == nil {
+                            firstCWD = Self.normalizedCodexProjectPath(obj["cwd"] as? String)
                         }
 
                         guard let tsText = obj["timestamp"] as? String,
@@ -255,7 +259,7 @@ extension CostUsageScanner {
         }
 
         let rows = Self.orderedClaudeRows(keyed: keyedRows, unkeyed: unkeyedRows)
-        return ClaudeParseResult(rows: rows, parsedBytes: parsedBytes)
+        return ClaudeParseResult(rows: rows, parsedBytes: parsedBytes, cwd: firstCWD)
     }
 
     private static func claudeOneHourCacheCreationTokens(usage: ClaudeJSONObject, total: Int) -> Int {
@@ -379,6 +383,41 @@ extension CostUsageScanner {
         for key in winners.keys.sorted() {
             guard let winner = winners[key] else { continue }
             rows.append(files[winner.file].rows[winner.row])
+        }
+        return rows
+    }
+
+    /// The same winners, in the same order, as `reconciledClaudeRows`, paired with the transcript that owns each one.
+    /// Project attribution reads the winning transcript's working directory.
+    static func reconciledClaudeRowSources(cache: CostUsageCache) -> [(path: String, row: ClaudeUsageRow)] {
+        var rows: [(path: String, row: ClaudeUsageRow)] = []
+        var winners: [ClaudeRowKey: ClaudeRowReference] = [:]
+        let files: [(path: String, rows: [ClaudeUsageRow])] = cache.files.keys.sorted().compactMap { path in
+            guard let fileRows = cache.files[path]?.claudeRows else { return nil }
+            return (path, fileRows)
+        }
+
+        for (fileIndex, file) in files.enumerated() {
+            for (rowIndex, row) in file.rows.enumerated() {
+                guard let canonicalKey = Self.claudeCanonicalRowKey(row) else {
+                    rows.append((path: file.path, row: row))
+                    continue
+                }
+                if let existing = winners[canonicalKey],
+                   !Self.claudeRowWins(
+                       lhs: (path: file.path, row: row),
+                       rhs: (path: files[existing.file].path, row: files[existing.file].rows[existing.row]))
+                {
+                    continue
+                }
+                winners[canonicalKey] = (fileIndex, rowIndex)
+            }
+        }
+
+        rows.reserveCapacity(rows.count + winners.count)
+        for key in winners.keys.sorted() {
+            guard let winner = winners[key] else { continue }
+            rows.append((path: files[winner.file].path, row: files[winner.file].rows[winner.row]))
         }
         return rows
     }
@@ -590,6 +629,8 @@ extension CostUsageScanner {
         let changedPaths: Set<String>
         let pricingResolver: CostUsagePricing.ClaudeResolver
         let checkCancellation: CancellationCheck?
+        /// Resolves transcript working directories to project roots; nil skips resolution.
+        let projectPathResolver: CodexCanonicalProjectPathResolver?
     }
 
     private static func processClaudeFile(
@@ -633,13 +674,18 @@ extension CostUsageScanner {
             checkCancellation: state.checkCancellation)
         let rows = startOffset > 0 ? Self.mergeClaudeRows(existing: cached?.claudeRows ?? [], delta: parsed.rows)
             : parsed.rows
-        let usage = CostUsageFileUsage(
+        var usage = CostUsageFileUsage(
             mtimeUnixMs: stamp.mtimeUnixMs,
             size: stamp.size,
             days: [:],
             parsedBytes: parsed.parsedBytes,
             codexCostCacheComplete: true,
             claudeRows: rows)
+        Self.recordClaudeProjectPath(
+            into: &usage,
+            parsedCWD: parsed.cwd,
+            previous: startOffset > 0 ? cached : nil,
+            resolver: state.projectPathResolver)
         state.cache.files[path] = usage
         state.sourceFileIDs[path] = stamp.fileID
     }
@@ -792,7 +838,8 @@ extension CostUsageScanner {
                 forceFullScan: forceFullScan,
                 changedPaths: changedPaths,
                 pricingResolver: pricingResolver,
-                checkCancellation: checkCancellation)
+                checkCancellation: checkCancellation,
+                projectPathResolver: provider.supportsLocalProjects ? CodexCanonicalProjectPathResolver() : nil)
 
             for path in sourceInventory.keys.sorted() {
                 guard let stamp = sourceInventory[path] else { continue }

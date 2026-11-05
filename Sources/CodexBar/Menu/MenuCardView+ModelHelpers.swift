@@ -365,7 +365,8 @@ extension UsageMenuCardView.Model {
             self.throughput != nil ||
             self.limitResetCredits != nil ||
             self.cloudCredits != nil ||
-            self.placeholder != nil
+            self.placeholder != nil ||
+            self.cardLayout.insightChart != nil
     }
 
     /// The cloud-credit row only needs a divider when another usage row is drawn before it.
@@ -392,7 +393,8 @@ extension UsageMenuCardView.Model {
             self.openAIAPIUsage == nil &&
             self.limitResetCredits == nil &&
             self.cloudCredits == nil &&
-            self.placeholder == nil
+            self.placeholder == nil &&
+            self.cardLayout.insightChart == nil
     }
 
     var usesStackedDetailLayout: Bool {
@@ -426,6 +428,7 @@ extension UsageMenuCardView.Model {
     private func hasCompatibleTrackedLayout(with candidate: Self, includeMetrics: Bool) -> Bool {
         guard self.provider == candidate.provider,
               self.accountIdentityFingerprint == candidate.accountIdentityFingerprint,
+              self.cardLayout.heightFingerprint == candidate.cardLayout.heightFingerprint,
               !includeMetrics || self.metrics.count == candidate.metrics.count,
               self.usageNotes == candidate.usageNotes,
               self.throughput?.summaryLine == candidate.throughput?.summaryLine,

@@ -435,6 +435,50 @@ may return `{empty: true}` with optional identity. This creates no artificial ra
 validated. An empty object, an empty `identity` object, or metadata such as confidence and subscription dates without
 displayable usage or identity remains invalid unless `empty: true` is explicitly declared.
 
+### Chart series and reference lines
+
+A detail `chart` can also carry several named `series` and horizontal `references`. The chart spec has no version
+field: these fields are recognised by presence, and a chart without them draws exactly as before.
+
+```js
+chart: {
+  kind: "bars", // bars | line
+  title: "Daily tokens",
+  unit: "tokens",
+  series: [
+    { name: "Input", stack: "tokens", points: [{ label: "Mon", value: 1200 }, { label: "Tue", value: 900 }] },
+    { name: "Output", stack: "tokens", points: [{ label: "Mon", value: 300 }, { label: "Tue", value: 450 }] },
+    { name: "Retries", points: [{ label: "Mon", value: 40 }, { label: "Tue", value: 0 }] },
+  ],
+  references: [
+    { value: 2000, label: "Daily cap", style: "solid" },
+    { value: 1400, label: "Typical day" }, // style defaults to "dashed"
+  ],
+  // Optional fallback for app versions that predate series.
+  points: [{ label: "Mon", value: 1500 }, { label: "Tue", value: 1350 }],
+}
+```
+
+- `series`: at most 8 entries, each with a required `name`, an optional `stack` id, and at most 120 `points`. Series
+  align by point label: the x axis lists each distinct label once, in first-appearance order, with at most 120 distinct
+  labels across all series. A label may appear only once within a series; a series may skip labels that others have.
+- `stack`: series with the same stack id draw stacked, in series order from the bottom. In a bar chart each stack, and
+  each series without a stack, gets its own bar inside the label's slot. In a line chart stacked series draw as
+  stacked areas and the other series as lines overlaid on top.
+- `references`: at most 4 horizontal lines `{ value, label?, style? }`. `value` must be finite; `style` is `"solid"` or
+  `"dashed"` (the default). The y scale always extends to the highest reference line.
+- `points` is required unless `series` has at least one entry. With series present it is optional and only drawn by app
+  versions that predate series; those versions ignore `series` and `references` but still require `points`, so send
+  both when a plugin must keep working there.
+- Values below zero draw at the baseline. Non-numbers, NaN, infinities, entries past the limits above, a label repeated
+  within one series, and any other `style` fail the whole fetch. Unknown keys inside a chart, series, or reference are
+  ignored, as they are for other chart keys.
+
+The menu keeps the chart's fixed height. Series take the shared chart palette's colors in series order (a single series
+keeps the plugin's tint), reference lines and their labels use secondary label colors, and a legend appears below the
+chart when it has more than one series. CLI text output lists a chart's `points`, then each series point as
+`Title · Series · Label` and each reference line as `Title · Reference · Label`.
+
 ## External hooks
 
 Installed user plugins appear in the existing Hooks provider picker. Rules can select the manifest ID or match any

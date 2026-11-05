@@ -2772,3 +2772,46 @@
 "avg %@ credits/day" = "avg %@ credits/day";
 "Average" = "Average";
 "avg %@/day" = "avg %@/day";
+"Spend by hour of week" = "Spend by hour of week";
+"By hour of week" = "By hour of week";
+"%@ of spend on weekends" = "%@ of spend on weekends";
+"%@ vs previous %d days" = "%@ vs previous %d days";
+"Lasts until %@ at this rate" = "Lasts until %@ at this rate";
+
+/* Plan fit */
+"Median" = "Median";
+"Median %@%%" = "Median %@%%";
+"capped %d of %d weeks" = "capped %d of %d weeks";
+"capped %d of %d months" = "capped %d of %d months";
+"capped %d of %d windows" = "capped %d of %d windows";
+"%@ capped sessions per week" = "%@ capped sessions per week";
+"%@ h capped" = "%@ h capped";
+"You may be paying for headroom you don't use." = "You may be paying for headroom you don't use.";
+"You hit the cap often." = "You hit the cap often.";
+"Your plan fits how you use it." = "Your plan fits how you use it.";
+"Not enough history for a verdict yet." = "Not enough history for a verdict yet.";
+"Plan value" = "Plan value";
+"Set a plan price to compare" = "Set a plan price to compare";
+"API-equivalent vs %@ plan" = "API-equivalent vs %@ plan";
+"Cache hit rate" = "Cache hit rate";
+"Cost per 1M tokens" = "Cost per 1M tokens";
+"Top model share" = "Top model share";
+"%@ vs previous period" = "%@ vs previous period";
+"%@ pts" = "%@ pts";
+"Typical week" = "Typical week";
+"Model share" = "Model share";
+"Share of estimated spend" = "Share of estimated spend";
+"Project trends" = "Project trends";
+"Change compares the last %d days with the %d days before." = "Change compares the last %d days with the %d days before.";
+"New" = "New";
+"quota_warning_add_threshold" = "Add threshold";
+"quota_warning_remove_threshold" = "Remove lowest threshold";
+"quota_warning_lane_follows_weekly" = "Weekly markers only, no notifications";
+
+/* Card layout */
+"Card layout" = "Card layout";
+"Usage rows" = "Usage rows";
+"Plan fit" = "Plan fit";
+"Drawn inside usage rows." = "Drawn inside usage rows.";
+"Menu links" = "Menu links";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden.";

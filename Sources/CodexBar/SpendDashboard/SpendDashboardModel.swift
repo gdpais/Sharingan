@@ -1,3 +1,4 @@
+// swiftlint:disable file_length
 import CodexBarCore
 import Foundation
 
@@ -282,6 +283,8 @@ struct SpendDashboardModel: Equatable, Sendable {
         let projects: [ProjectRow]
         var retainedDetailUpdatedAt: Date?
         var detailsExcludedFromTotals = false
+        var insightInputs = SpendInsightInputs()
+        var insights = SpendDashboardInsights()
         let selectedDay: Date?
         let hourlyPoints: [HourlyPoint]
         private let hourlyDaysMemo = SpendHourlyDaysMemo()
@@ -416,7 +419,8 @@ struct SpendDashboardModel: Equatable, Sendable {
         preferredCurrencyCode: String = "auto",
         hiddenSourceIDs: Set<String> = [],
         hideNativeCodexWhenOpenCodexPresent: Bool = false,
-        selectedDay: Date? = nil) -> Self
+        selectedDay: Date? = nil,
+        includesInsightTiles: Bool = false) -> Self
     {
         let calculationCalendar = Self.gregorianCalendar(timeZone: calendar.timeZone)
         let availableSources = inputs
@@ -476,7 +480,8 @@ struct SpendDashboardModel: Equatable, Sendable {
                     days: days,
                     calendar: calculationCalendar,
                     bounds: bounds,
-                    selectedDay: selectedDay.map { calculationCalendar.startOfDay(for: $0) })
+                    selectedDay: selectedDay.map { calculationCalendar.startOfDay(for: $0) },
+                    includesInsightTiles: includesInsightTiles)
             }
             .sorted { $0.currencyCode < $1.currencyCode }
         return Self(
@@ -593,7 +598,8 @@ struct SpendDashboardModel: Equatable, Sendable {
         days: Int,
         calendar: Calendar,
         bounds: ClosedRange<Date>,
-        selectedDay: Date?) -> CurrencyGroup
+        selectedDay: Date?,
+        includesInsightTiles: Bool) -> CurrencyGroup
     {
         let summaries = inputs.filter { aggregateIDs.contains($0.input.id) }.map { classified in
             Self.inputSummary(
@@ -717,6 +723,17 @@ struct SpendDashboardModel: Equatable, Sendable {
             timeZone: calendar.timeZone)
         group.retainedDetailUpdatedAt = inputs.compactMap { $0.input.retainedDetailSnapshot?.updatedAt }.min()
         group.detailsExcludedFromTotals = inputs.contains { !aggregateIDs.contains($0.input.id) }
+        // The previous-period pass costs a full summary per source; menu callers never show the tiles
+        // or the insight panels.
+        if includesInsightTiles {
+            group.insightInputs = Self.insightInputs(summaries, bounds, calendar, Self.inputSummary)
+            group.insights = Self.insights(
+                summaries: summaries,
+                detailSummaries: detailSummaries,
+                bounds: bounds,
+                detailBounds: detailBounds,
+                calendar: calendar)
+        }
         return group
     }
 
@@ -1400,7 +1417,7 @@ struct SpendDashboardModel: Equatable, Sendable {
         return last - first + 1
     }
 
-    private static func day(
+    static func day(
         _ rawValue: String,
         provider: UsageProvider,
         displayCalendar: Calendar) -> Date?

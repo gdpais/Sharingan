@@ -2771,3 +2771,46 @@
 "avg %@ credits/day" = "میانگین %@ اعتبار/روز";
 "Average" = "میانگین";
 "avg %@/day" = "میانگین %@/روز";
+"Spend by hour of week" = "هزینه بر اساس ساعت هفته";
+"By hour of week" = "بر اساس ساعت هفته";
+"%@ of spend on weekends" = "%@ از هزینه در آخر هفته‌ها";
+"%@ vs previous %d days" = "%@ نسبت به %d روز قبل";
+"Lasts until %@ at this rate" = "با این روند تا %@ کافی است";
+
+/* Plan fit */
+"Median" = "میانه";
+"Median %@%%" = "میانه %@%%";
+"capped %d of %d weeks" = "رسیدن به سقف در %d از %d هفته";
+"capped %d of %d months" = "رسیدن به سقف در %d از %d ماه";
+"capped %d of %d windows" = "رسیدن به سقف در %d از %d بازه";
+"%@ capped sessions per week" = "%@ جلسه در هفته به سقف رسید";
+"%@ h capped" = "%@ ساعت در سقف";
+"You may be paying for headroom you don't use." = "شاید برای ظرفیتی پول می‌پردازید که از آن استفاده نمی‌کنید.";
+"You hit the cap often." = "اغلب به سقف می‌رسید.";
+"Your plan fits how you use it." = "طرح شما با نحوه استفاده‌تان سازگار است.";
+"Not enough history for a verdict yet." = "هنوز سابقه کافی برای ارزیابی وجود ندارد.";
+"Plan value" = "ارزش طرح";
+"Set a plan price to compare" = "برای مقایسه، قیمت طرح را تعیین کنید";
+"API-equivalent vs %@ plan" = "معادل API در برابر طرح %@";
+"Cache hit rate" = "نرخ برخورد کش";
+"Cost per 1M tokens" = "هزینه به ازای هر ۱ میلیون توکن";
+"Top model share" = "سهم مدل برتر";
+"%@ vs previous period" = "%@ نسبت به دوره قبل";
+"%@ pts" = "%@ واحد درصد";
+"Typical week" = "هفتهٔ معمول";
+"Model share" = "سهم مدل‌ها";
+"Share of estimated spend" = "سهم از برآورد هزینه";
+"Project trends" = "روند پروژه‌ها";
+"Change compares the last %d days with the %d days before." = "تغییر، %d روز اخیر را با %d روز پیش از آن مقایسه می‌کند.";
+"New" = "جدید";
+"quota_warning_add_threshold" = "افزودن آستانه";
+"quota_warning_remove_threshold" = "حذف پایین‌ترین آستانه";
+"quota_warning_lane_follows_weekly" = "فقط نشانگرهای هفتگی، بدون اعلان";
+
+/* Card layout */
+"Card layout" = "چیدمان کارت";
+"Usage rows" = "ردیف‌های استفاده";
+"Plan fit" = "تناسب طرح";
+"Drawn inside usage rows." = "درون ردیف‌های استفاده نمایش داده می‌شود.";
+"Menu links" = "پیوندهای منو";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "بخش‌های کارت منوی این ارائه‌دهنده را مرتب کنید، نمایش دهید یا پنهان کنید و نمودار آن را انتخاب کنید. بخش‌ها و نمودارهای بدون داده پنهان می‌مانند.";

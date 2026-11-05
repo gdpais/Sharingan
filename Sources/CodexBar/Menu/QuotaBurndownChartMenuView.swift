@@ -16,6 +16,8 @@ struct QuotaBurndownChartMenuView: View {
     private let color: Color
 
     private static let runOutColor = Color(nsColor: .systemRed)
+    private static let typicalWeekBandOpacity = 0.14
+    private static let typicalWeekLineOpacity = 0.4
 
     @State private var selectedSeriesID: String?
 
@@ -24,6 +26,7 @@ struct QuotaBurndownChartMenuView: View {
         histories: [PlanUtilizationSeriesHistory],
         width: CGFloat,
         workDays: Int? = nil,
+        typicalWeeks: [TypicalWeekCurve.Week] = [],
         referenceDate: Date = Date())
     {
         self.series = PlanUtilizationHistoryChartMenuView.visibleSeries(
@@ -41,11 +44,17 @@ struct QuotaBurndownChartMenuView: View {
                     windowMinutes: history.windowMinutes,
                     resetsAt: reset,
                     resetDescription: nil))
+            // Learned weeks describe a weekly window only; the curve itself rejects any other window length.
+            let typicalWeekMinutes = window.windowMinutes ?? history.windowMinutes
+            let typicalWeek = history.name == .weekly
+                ? TypicalWeekCurve(weeks: typicalWeeks, windowMinutes: typicalWeekMinutes, currentResetsAt: reset)
+                : nil
             guard let model = QuotaBurndownModel(
                 history: history,
                 window: window,
                 now: latest.capturedAt,
-                workDays: workDays)
+                workDays: workDays,
+                typicalWeek: typicalWeek)
             else { return nil }
             return Series(
                 id: series.id,
@@ -89,6 +98,7 @@ struct QuotaBurndownChartMenuView: View {
                             yEnd: .value(L("Usage remaining"), 100.0))
                             .foregroundStyle(Self.runOutColor.opacity(0.08))
                     }
+                    self.typicalWeekMarks(selected.model.typicalWeek)
                     ForEach(selected.model.ideal, id: \.date) { point in
                         LineMark(
                             x: .value("Time", point.date),
@@ -154,9 +164,16 @@ struct QuotaBurndownChartMenuView: View {
                 .foregroundStyle(.secondary)
 
                 if let remaining = selected.model.samples.last?.remainingPercent {
-                    Text("\(remaining.formatted(.number.precision(.fractionLength(0))))% \(L("Usage remaining"))")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    // The legend shares this row so the band never changes the menu item's measured height.
+                    HStack(spacing: 8) {
+                        Text("\(remaining.formatted(.number.precision(.fractionLength(0))))% \(L("Usage remaining"))")
+                        Spacer(minLength: 8)
+                        if !selected.model.typicalWeek.isEmpty {
+                            self.typicalWeekLegend
+                        }
+                    }
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                 }
                 Text(selected.lastKnownUsageMessage)
                     .font(.caption)
@@ -178,6 +195,38 @@ struct QuotaBurndownChartMenuView: View {
 
     var hasSeries: Bool {
         !self.series.isEmpty
+    }
+
+    /// The learned typical week as a faint band (middle half of past weeks) with its median, behind the
+    /// observed line.
+    @ChartContentBuilder
+    private func typicalWeekMarks(_ samples: [QuotaBurndownModel.TypicalSample]) -> some ChartContent {
+        ForEach(samples, id: \.date) { point in
+            AreaMark(
+                x: .value("Time", point.date),
+                yStart: .value(L("Usage remaining"), point.lowRemainingPercent),
+                yEnd: .value(L("Usage remaining"), point.highRemainingPercent))
+                .foregroundStyle(self.color.opacity(Self.typicalWeekBandOpacity))
+        }
+        ForEach(samples, id: \.date) { point in
+            LineMark(
+                x: .value("Time", point.date),
+                y: .value(L("Usage remaining"), point.medianRemainingPercent),
+                series: .value("Series", "Typical"))
+                .foregroundStyle(self.color.opacity(Self.typicalWeekLineOpacity))
+                .lineStyle(StrokeStyle(lineWidth: 1))
+        }
+    }
+
+    private var typicalWeekLegend: some View {
+        HStack(spacing: 4) {
+            RoundedRectangle(cornerRadius: 2)
+                .fill(self.color.opacity(Self.typicalWeekBandOpacity * 2))
+                .frame(width: 12, height: 8)
+                .accessibilityHidden(true)
+            Text(L("Typical week"))
+        }
+        .accessibilityElement(children: .combine)
     }
 
     private func axisLabel(
@@ -214,6 +263,10 @@ struct QuotaBurndownChartMenuView: View {
 
     var _seriesModelsForTesting: [String: QuotaBurndownModel] {
         Dictionary(uniqueKeysWithValues: self.series.map { ($0.id, $0.model) })
+    }
+
+    var _seriesTypicalWeekForTesting: [String: [QuotaBurndownModel.TypicalSample]] {
+        Dictionary(uniqueKeysWithValues: self.series.map { ($0.id, $0.model.typicalWeek) })
     }
 
     var _seriesRemainingForTesting: [String: Double] {

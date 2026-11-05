@@ -13,6 +13,14 @@ extension CodexConsumerProjection.RateLane {
     }
 }
 
+extension UsageMenuCardView.Model.Input {
+    /// Marker thresholds for a further lane: its own override when it has one, else the weekly markers
+    /// those lanes have always shared.
+    func markerThresholds(forLane laneID: String) -> [Int]? {
+        self.quotaWarningLaneThresholds[laneID] ?? self.quotaWarningThresholds[.weekly]
+    }
+}
+
 extension UsageMenuCardView.Model {
     static func warningMarkerPercents(thresholds: [Int]?, showUsed: Bool) -> [Double] {
         guard let thresholds, !thresholds.isEmpty else { return [] }

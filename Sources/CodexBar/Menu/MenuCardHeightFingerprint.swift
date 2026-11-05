@@ -36,6 +36,7 @@ extension UsageMenuCardView.Model {
             "providerCost=\(self.providerCost?.heightFingerprint ?? "")",
             "tokenUsage=\(self.tokenUsage?.heightFingerprint ?? "")",
             "openaiAPI=\(self.openAIAPIUsage == nil ? "0" : "1")",
+            "cardLayout=\(self.cardLayout.heightFingerprint)",
         ] + additional)
     }
 
@@ -64,6 +65,7 @@ extension [ProviderDetailSection] {
                         MenuCardHeightFingerprint.field("title", chart.title),
                         MenuCardHeightFingerprint.field("unit", chart.unit),
                         "points=\(chart.points.count)",
+                        "series=\(chart.series.count)",
                     ])
                 } ?? "chart=nil",
             ])

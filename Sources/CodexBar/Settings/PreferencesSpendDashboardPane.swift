@@ -654,6 +654,7 @@ func spendDashboardProjectRows(
 enum SpendDashboardTrendSection: Hashable, Identifiable {
     case daily
     case hourly
+    case hourOfWeek
 
     var id: Self {
         self
@@ -663,6 +664,7 @@ enum SpendDashboardTrendSection: Hashable, Identifiable {
         switch self {
         case .daily: L("Daily estimated spend")
         case .hourly: L("Hourly estimated spend")
+        case .hourOfWeek: L("Spend by hour of week")
         }
     }
 
@@ -670,6 +672,7 @@ enum SpendDashboardTrendSection: Hashable, Identifiable {
         switch self {
         case .daily: L("Overview")
         case .hourly: L("Hour")
+        case .hourOfWeek: L("By hour of week")
         }
     }
 }
@@ -728,6 +731,7 @@ struct SpendDashboardCurrencySection: View {
                     .foregroundStyle(.secondary)
             }
 
+            SpendInsightTilesRow(group: self.group, planMonthlyPrice: nil) // Phase 3: plan price
             SpendDashboardSummary(
                 group: self.group,
                 onClearSelectedDay: self.onClearSelectedDay)
@@ -741,6 +745,7 @@ struct SpendDashboardCurrencySection: View {
                 selection: self.$selectedTrendSection,
                 onSelectDay: self.onSelectDay,
                 onClearSelectedDay: self.onClearSelectedDay)
+            SpendDashboardInsightsPanels(group: self.group, hidePersonalInfo: self.hidePersonalInfo)
             SpendDailyLedger(group: self.group)
         }
         .environment(\.timeZone, self.group.timeZone)

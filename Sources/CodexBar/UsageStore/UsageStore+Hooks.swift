@@ -63,6 +63,7 @@ extension UsageStore {
         snapshot: UsageSnapshot,
         rateKey: String? = nil)
     {
+        self.recordBalanceHistorySample(provider: provider, snapshot: snapshot)
         guard self.hasQuotaHookRule(event: .usageUpdated, provider: provider) else { return }
         let event = HookEvent.usageUpdated(
             provider: provider.rawValue,

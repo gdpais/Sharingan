@@ -984,6 +984,16 @@ public struct CostUsageFetcher: Sendable {
                         sessionsRoot: roots.first,
                         environment: options.environment)
                 }
+            } else {
+                // Claude transcripts record working directories; providers without them return no rows.
+                projects = try CostUsageScanner.loadClaudeProjectBreakdowns(
+                    provider: provider,
+                    since: since,
+                    until: now,
+                    now: now,
+                    options: options.scanOptions,
+                    reportContext: options.reportContext,
+                    checkCancellation: checkCancellation)
             }
             let native = LocalTokenScanReport(
                 daily: daily,
@@ -1018,6 +1028,9 @@ public struct CostUsageFetcher: Sendable {
                         projects.append(project)
                         sessions = []
                     }
+                } else if !projects.isEmpty, let project = Self.unknownProjectBreakdown(from: piScanResult.report) {
+                    // Pi rows have no transcript working directory; keep project rows partitioning the merged total.
+                    projects = Self.mergedProjectBreakdowns(projects + [project])
                 }
                 // The scanner can restore a previous cache scope after an incomplete root
                 // transition; carry the scope that the returned report actually represents.

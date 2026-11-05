@@ -30,6 +30,9 @@ public struct WidgetSnapshot: Codable, Sendable {
         public let quotaOwnerKey: String?
         public let balanceText: String?
         public let details: [ProviderDetailSection]?
+        /// Severity bands from the user's warning thresholds. Nil (older snapshots, untouched settings)
+        /// keeps the standard bands.
+        public var severityBands: QuotaSeverityBandSet?
 
         public init(
             instanceID: ProviderInstanceID,

@@ -61,6 +61,7 @@ struct PlanUtilizationHistoryChartMenuView: View {
         let pointsByIndex: [Int: Point]
         let barColor: Color
         let trackColor: Color
+        let fit: PlanFitChartParts
     }
 
     private let provider: UsageProvider
@@ -89,9 +90,9 @@ struct PlanUtilizationHistoryChartMenuView: View {
             snapshot: snapshot)
         self.visibleSeries = visibleSeries
         self.modelsBySeriesID = Dictionary(uniqueKeysWithValues: visibleSeries.map {
-            ($0.id, Self.makeModel(history: $0.history, provider: provider, referenceDate: referenceDate))
+            ($0.id, Self.makeModel(history: $0.history, provider: provider, referenceDate: referenceDate, width: width))
         })
-        self.emptyModel = Self.makeModel(history: nil, provider: provider, referenceDate: referenceDate)
+        self.emptyModel = Self.makeModel(history: nil, provider: provider, referenceDate: referenceDate, width: width)
         self.width = width
         self.onSeriesChanged = onSeriesChanged
         self._selectedSeriesID = State(initialValue: Self.restoredSeriesID(
@@ -130,11 +131,11 @@ struct PlanUtilizationHistoryChartMenuView: View {
                         .foregroundStyle(.secondary)
                 }
                 .frame(maxWidth: .infinity)
-                .frame(height: Layout.emptyStateHeight)
+                .frame(height: Layout.emptyStateHeight + self.planFitFooterHeight)
             } else {
                 self.utilizationChart(model: model)
-                    .chartYAxis(.hidden)
-                    .chartYScale(domain: 0...100)
+                    .chartYAxis { Self.percentAxisMarks() }
+                    .chartYScale(domain: 0...PlanFitChartLayout.yDomainTop)
                     .chartXAxis {
                         AxisMarks(values: model.axisIndexes) { value in
                             AxisGridLine().foregroundStyle(Color.clear)
@@ -168,12 +169,7 @@ struct PlanUtilizationHistoryChartMenuView: View {
                         }
                     }
 
-                Text(self.detailLine(model: model, windowMinutes: effectiveSelectedSeries?.history.windowMinutes ?? 0))
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-                    .truncationMode(.tail)
-                    .frame(height: Layout.detailHeight, alignment: .leading)
+                self.chartFooter(model: model, windowMinutes: effectiveSelectedSeries?.history.windowMinutes ?? 0)
             }
         }
         .padding(.horizontal, 16)
@@ -310,7 +306,8 @@ struct PlanUtilizationHistoryChartMenuView: View {
     private nonisolated static func makeModel(
         history: PlanUtilizationSeriesHistory?,
         provider: UsageProvider,
-        referenceDate: Date) -> Model
+        referenceDate: Date,
+        width: CGFloat) -> Model
     {
         var points = history.map { self.seriesPoints(history: $0, referenceDate: referenceDate) } ?? []
         if points.count > Layout.maxPoints {
@@ -331,15 +328,18 @@ struct PlanUtilizationHistoryChartMenuView: View {
         let color = ProviderAccentPalette.color(for: provider)
         let barColor = Color(red: color.red, green: color.green, blue: color.blue)
         let trackColor = MenuHighlightStyle.progressTrack(false)
+        let fit = self.planFitParts(
+            history: history, points: points, accent: color, referenceDate: referenceDate, width: width)
 
         return Model(
             points: points,
-            axisIndexes: self.axisIndexes(points: points, windowMinutes: history?.windowMinutes ?? 0),
-            xDomain: self.xDomain(points: points),
+            axisIndexes: self.axisIndexes(points: points, windowMinutes: history?.windowMinutes ?? 0, fit: fit),
+            xDomain: self.xDomain(points: points, slotCount: fit.slotCount),
             pointsByID: pointsByID,
             pointsByIndex: pointsByIndex,
             barColor: barColor,
-            trackColor: trackColor)
+            trackColor: trackColor,
+            fit: fit)
     }
 
     private nonisolated static func seriesPoints(
@@ -545,14 +545,21 @@ struct PlanUtilizationHistoryChartMenuView: View {
         return Date(timeIntervalSince1970: (bucketIndex + 1) * bucketSeconds)
     }
 
-    private nonisolated static func xDomain(points: [Point]) -> ClosedRange<Double>? {
+    private nonisolated static func xDomain(points: [Point], slotCount: Int) -> ClosedRange<Double>? {
         guard !points.isEmpty else { return nil }
-        return -0.5...(Double(Layout.maxPoints) - 0.5)
+        // Fitted to the windows on hand; a short history sits at the trailing edge, next to now.
+        let upperBound = Double(points.count) - 0.5
+        let lowerBound = upperBound - Double(max(slotCount, points.count))
+        return lowerBound...upperBound
     }
 
-    private nonisolated static func axisIndexes(points: [Point], windowMinutes: Int) -> [Double] {
+    private nonisolated static func axisIndexes(
+        points: [Point],
+        windowMinutes: Int,
+        fit: PlanFitChartParts) -> [Double]
+    {
         let candidateIndexes = self.axisCandidateIndexes(points: points, windowMinutes: windowMinutes)
-        return self.proportionalAxisIndexes(points: points, candidateIndexes: candidateIndexes)
+        return self.proportionalAxisIndexes(points: points, candidateIndexes: candidateIndexes, fit: fit)
     }
 
     private nonisolated static func axisCandidateIndexes(points: [Point], windowMinutes: Int) -> [Int] {
@@ -578,12 +585,17 @@ struct PlanUtilizationHistoryChartMenuView: View {
         return rawIndexes
     }
 
-    private nonisolated static func proportionalAxisIndexes(points: [Point], candidateIndexes: [Int]) -> [Double] {
+    private nonisolated static func proportionalAxisIndexes(
+        points: [Point],
+        candidateIndexes: [Int],
+        fit: PlanFitChartParts) -> [Double]
+    {
         guard !points.isEmpty, !candidateIndexes.isEmpty else { return [] }
 
-        let occupiedFraction = Double(points.count) / Double(Layout.maxPoints)
+        let occupiedFraction = Double(points.count) / Double(max(1, fit.slotCount))
         let proportionalBudget = Int(ceil(Double(Layout.maxAxisLabels) * occupiedFraction))
-        let labelBudget = max(1, min(Layout.maxAxisLabels, proportionalBudget, candidateIndexes.count))
+        let labelBudget = max(1, min(
+            Layout.maxAxisLabels, proportionalBudget, fit.axisLabelWidthBudget, candidateIndexes.count))
 
         if labelBudget == 1 {
             return [Double(candidateIndexes[0])]
@@ -603,11 +615,15 @@ struct PlanUtilizationHistoryChartMenuView: View {
         {
             selectedIndexes.removeLast()
         }
+        selectedIndexes = PlanFitChartLayout.spacedIndexes(
+            selectedIndexes, minimumSpacing: fit.axisLabelMinimumSpacing)
 
         if points.count == Layout.maxPoints,
            let lastVisibleIndex = points.last?.index,
            !selectedIndexes.contains(lastVisibleIndex)
         {
+            selectedIndexes = PlanFitChartLayout.indexes(
+                selectedIndexes, makingRoomFor: lastVisibleIndex, minimumSpacing: fit.axisLabelMinimumSpacing)
             selectedIndexes.append(lastVisibleIndex)
         }
 
@@ -699,14 +715,16 @@ struct PlanUtilizationHistoryChartMenuView: View {
         histories: [PlanUtilizationSeriesHistory],
         provider: UsageProvider,
         snapshot: UsageSnapshot? = nil,
-        referenceDate: Date? = nil) -> ModelSnapshot
+        referenceDate: Date? = nil,
+        width: CGFloat = 310) -> ModelSnapshot
     {
         let visibleSeries = self.visibleSeries(histories: histories, provider: provider, snapshot: snapshot)
         let selectedSeries = visibleSeries.first(where: { $0.id == selectedSeriesRawValue }) ?? visibleSeries.first
         let model = self.makeModel(
             history: selectedSeries?.history,
             provider: provider,
-            referenceDate: referenceDate ?? histories.flatMap(\.entries).map(\.capturedAt).max() ?? Date())
+            referenceDate: referenceDate ?? histories.flatMap(\.entries).map(\.capturedAt).max() ?? Date(),
+            width: width)
         return ModelSnapshot(
             pointCount: model.points.count,
             axisIndexes: model.axisIndexes,
@@ -736,8 +754,13 @@ struct PlanUtilizationHistoryChartMenuView: View {
         let model = self.makeModel(
             history: selectedSeries?.history,
             provider: provider,
-            referenceDate: referenceDate ?? histories.flatMap(\.entries).map(\.capturedAt).max() ?? Date())
-        return self.detailLine(point: model.points.last, windowMinutes: selectedSeries?.history.windowMinutes ?? 0)
+            referenceDate: referenceDate ?? histories.flatMap(\.entries).map(\.capturedAt).max() ?? Date(),
+            width: 310)
+        let window = model.points.last.flatMap { model.fit.windowsByID[$0.id] }
+        return self.detailLine(
+            point: model.points.last,
+            windowMinutes: selectedSeries?.history.windowMinutes ?? 0,
+            window: window)
     }
 
     nonisolated static func _axisLabelTextForTesting(
@@ -783,15 +806,11 @@ struct PlanUtilizationHistoryChartMenuView: View {
                 x: self.xValue(for: point.index),
                 yStart: .value(L("Capacity Start"), 0),
                 yEnd: .value(L("Capacity End"), 100),
-                width: .fixed(Layout.barWidth))
+                width: .fixed(model.fit.barWidth))
                 .foregroundStyle(model.trackColor)
-            BarMark(
-                x: self.xValue(for: point.index),
-                yStart: .value(L("Utilization Start"), 0),
-                yEnd: .value(L("Utilization End"), point.usedPercent),
-                width: .fixed(Layout.barWidth))
-                .foregroundStyle(model.barColor)
+            self.utilizationBar(point: point, model: model)
         }
+        self.planFitRules(model: model)
         if let selected = self.selectedPoint(model: model) {
             RuleMark(x: self.xValue(for: selected.index))
                 .foregroundStyle(Color(nsColor: .tertiaryLabelColor))
@@ -806,7 +825,8 @@ struct PlanUtilizationHistoryChartMenuView: View {
 
     private func detailLine(model: Model, windowMinutes: Int) -> String {
         let activePoint = self.selectedPoint(model: model) ?? model.points.last
-        return Self.detailLine(point: activePoint, windowMinutes: windowMinutes)
+        let window = activePoint.flatMap { model.fit.windowsByID[$0.id] }
+        return Self.detailLine(point: activePoint, windowMinutes: windowMinutes, window: window)
     }
 
     private func updateSelection(
@@ -853,7 +873,7 @@ struct PlanUtilizationHistoryChartMenuView: View {
         {
             guard ChartBarHoverSelection.accepts(
                 distanceFromBarCenter: abs(location.x - (plotFrame.origin.x + barX)),
-                barHalfWidth: Layout.barWidth / 2,
+                barHalfWidth: model.fit.barWidth / 2,
                 selectableCount: model.points.count)
             else { return }
         }
@@ -865,7 +885,11 @@ struct PlanUtilizationHistoryChartMenuView: View {
 }
 
 extension PlanUtilizationHistoryChartMenuView {
-    private nonisolated static func detailLine(point: Point?, windowMinutes: Int) -> String {
+    private nonisolated static func detailLine(
+        point: Point?,
+        windowMinutes: Int,
+        window: PlanFit.Window? = nil) -> String
+    {
         guard let point else {
             return "-"
         }
@@ -877,7 +901,9 @@ extension PlanUtilizationHistoryChartMenuView {
             return "\(dateLabel): -"
         }
         let usedText = used.formatted(.number.precision(.fractionLength(0...1)))
-        return L("%@: %@%% used", dateLabel, usedText)
+        let usedLine = L("%@: %@%% used", dateLabel, usedText)
+        guard let window, window.isCapped else { return usedLine }
+        return "\(usedLine) · \(PlanFitPresentation.cappedHoursText(window.cappedHours))"
     }
 
     private nonisolated static func detailDateLabel(for date: Date, windowMinutes: Int) -> String {
@@ -896,4 +922,235 @@ extension PlanUtilizationHistoryChartMenuView {
         }
         return rendered
     }
+}
+
+// MARK: - Plan fit
+
+extension PlanUtilizationHistoryChartMenuView {
+    private var showsPlanFit: Bool {
+        self.visibleSeries.contains { $0.history.windowMinutes > 0 && !$0.history.name.isQuotaObservation }
+    }
+
+    /// The summary and verdict lines are reserved for every series so the measured menu height stays fixed.
+    private var planFitFooterHeight: CGFloat {
+        self.showsPlanFit ? 2 * (PlanFitChartLayout.footerSpacing + PlanFitChartLayout.footerLineHeight) : 0
+    }
+
+    private func chartFooter(model: Model, windowMinutes: Int) -> some View {
+        VStack(alignment: .leading, spacing: PlanFitChartLayout.footerSpacing) {
+            Text(self.detailLine(model: model, windowMinutes: windowMinutes))
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(1)
+                .truncationMode(.tail)
+                .frame(height: Layout.detailHeight, alignment: .leading)
+            if self.showsPlanFit {
+                Text(model.fit.summary.flatMap { PlanFitPresentation.summaryLine($0) } ?? "")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .truncationMode(.tail)
+                    .frame(height: PlanFitChartLayout.footerLineHeight, alignment: .leading)
+                Text(model.fit.summary.map { PlanFitPresentation.verdictLine($0.verdict) } ?? "")
+                    .font(.caption)
+                    .foregroundStyle(.primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+                    .truncationMode(.tail)
+                    .frame(height: PlanFitChartLayout.footerLineHeight, alignment: .leading)
+            }
+        }
+    }
+
+    private static func percentAxisMarks() -> some AxisContent {
+        AxisMarks(position: .leading, values: PlanFitChartLayout.yAxisTicks) { value in
+            AxisGridLine(stroke: StrokeStyle(lineWidth: 0.5))
+                .foregroundStyle(Color(nsColor: .separatorColor))
+            AxisTick().foregroundStyle(Color.clear)
+            AxisValueLabel(centered: false) {
+                if let raw = value.as(Double.self) {
+                    Text(PlanFitPresentation.percentAxisLabel(raw))
+                        .font(.caption2)
+                        .foregroundStyle(Color(nsColor: .tertiaryLabelColor))
+                }
+            }
+        }
+    }
+
+    /// Capped windows take the capped color; the window still in progress is drawn lighter, as "so far".
+    @ChartContentBuilder
+    private func utilizationBar(point: Point, model: Model) -> some ChartContent {
+        let bar = BarMark(
+            x: self.xValue(for: point.index),
+            yStart: .value(L("Utilization Start"), 0),
+            yEnd: .value(L("Utilization End"), point.usedPercent),
+            width: .fixed(model.fit.barWidth))
+            .foregroundStyle(Self.barColor(for: point, model: model))
+        if let label = model.fit.cappedLabelsByIndex[point.index] {
+            bar.annotation(position: .top, alignment: .center, spacing: 1) {
+                Text(label)
+                    .font(.caption2)
+                    .foregroundStyle(Color(nsColor: .secondaryLabelColor))
+            }
+        } else {
+            bar
+        }
+    }
+
+    /// A solid rule at the cap and a dashed reference rule at the median peak.
+    @ChartContentBuilder
+    private func planFitRules(model: Model) -> some ChartContent {
+        RuleMark(y: .value(L("Limit"), PlanFit.cappedPercent))
+            .foregroundStyle(Color(nsColor: .secondaryLabelColor))
+            .lineStyle(StrokeStyle(lineWidth: 1))
+        if let median = model.fit.summary?.medianPeakPercent {
+            RuleMark(y: .value(L("Median"), median))
+                .foregroundStyle(ChartReferenceLine.color)
+                .lineStyle(ChartReferenceLine.strokeStyle)
+                .annotation(position: .top, alignment: .leading, spacing: 2) {
+                    Text(PlanFitPresentation.medianText(median))
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
+        }
+    }
+
+    private static func barColor(for point: Point, model: Model) -> Color {
+        guard let window = model.fit.windowsByID[point.id] else { return model.barColor }
+        let color = window.isCapped ? model.fit.cappedColor : model.barColor
+        return window.isCurrent ? color.opacity(PlanFitChartLayout.currentWindowOpacity) : color
+    }
+
+    private nonisolated static func planFitParts(
+        history: PlanUtilizationSeriesHistory?,
+        points: [Point],
+        accent: ProviderColor,
+        referenceDate: Date,
+        width: CGFloat) -> PlanFitChartParts
+    {
+        let windowMinutes = history?.windowMinutes ?? 0
+        let inputs = history.map { self.planFitWindowInputs(history: $0, points: points) } ?? []
+        var summary: PlanFit.Summary?
+        if let history, history.windowMinutes > 0, !history.name.isQuotaObservation {
+            summary = PlanFit.summary(
+                windows: inputs.map(\.input),
+                windowMinutes: history.windowMinutes,
+                now: referenceDate)
+        }
+        var windowsByID: [Date: PlanFit.Window] = [:]
+        for (input, window) in zip(inputs, summary?.windows ?? []) {
+            windowsByID[input.id] = window
+        }
+
+        let plotWidth = PlanFitChartLayout.plotWidth(menuWidth: width)
+        let slotCount = PlanFitChartLayout.slotCount(pointCount: points.count)
+        var cappedHoursByIndex: [Int: Double] = [:]
+        for point in points {
+            if let window = windowsByID[point.id], window.isCapped {
+                cappedHoursByIndex[point.index] = window.cappedHours
+            }
+        }
+        var cappedLabelsByIndex: [Int: String] = [:]
+        let labeledIndexes = PlanFitChartLayout.labeledCappedIndexes(
+            Array(cappedHoursByIndex.keys),
+            slotWidth: plotWidth / CGFloat(slotCount))
+        for index in labeledIndexes {
+            if let hours = cappedHoursByIndex[index] {
+                cappedLabelsByIndex[index] = PlanFitPresentation.cappedBarLabel(hours: hours)
+            }
+        }
+
+        let labelWidth = PlanFitChartLayout.axisLabelWidth(windowMinutes: windowMinutes)
+        return PlanFitChartParts(
+            slotCount: slotCount,
+            barWidth: PlanFitChartLayout.barWidth(slotCount: slotCount, plotWidth: plotWidth, minimum: Layout.barWidth),
+            cappedColor: ChartPalette.color(for: PlanFitPresentation.cappedSlot(accent: accent)),
+            summary: summary,
+            windowsByID: windowsByID,
+            cappedLabelsByIndex: cappedLabelsByIndex,
+            axisLabelWidthBudget: PlanFitChartLayout.axisLabelWidthBudget(
+                plotWidth: plotWidth,
+                labelWidth: labelWidth),
+            axisLabelMinimumSpacing: PlanFitChartLayout.axisLabelMinimumSpacing(
+                slotCount: slotCount,
+                plotWidth: plotWidth,
+                labelWidth: labelWidth))
+    }
+
+    private struct PlanFitWindowInput {
+        /// The chart point id, which is the window's period boundary.
+        let id: Date
+        let input: PlanFit.WindowInput
+    }
+
+    /// Groups the history's captures into the chart's observed windows, reusing the bars' period boundaries.
+    private nonisolated static func planFitWindowInputs(
+        history: PlanUtilizationSeriesHistory,
+        points: [Point]) -> [PlanFitWindowInput]
+    {
+        guard history.windowMinutes > 0, !history.name.isQuotaObservation else { return [] }
+        let observedPoints = points.filter(\.isObserved)
+        let observedIDs = Set(observedPoints.map(\.id))
+        guard !observedIDs.isEmpty else { return [] }
+        let lattice = self.resetBoundaryLattice(entries: history.entries, windowMinutes: history.windowMinutes)
+        var capturesByID: [Date: [PlanFit.Capture]] = [:]
+        for entry in history.entries {
+            let candidate = self.observedPointCandidate(
+                for: entry,
+                windowMinutes: history.windowMinutes,
+                resetBoundaryLattice: lattice)
+            guard observedIDs.contains(candidate.effectiveBoundaryDate) else { continue }
+            capturesByID[candidate.effectiveBoundaryDate, default: []].append(PlanFit.Capture(
+                capturedAt: entry.capturedAt,
+                usedPercent: candidate.usedPercent))
+        }
+        return observedPoints.map { point in
+            PlanFitWindowInput(
+                id: point.id,
+                input: PlanFit.WindowInput(resetsAt: point.date, captures: capturesByID[point.id] ?? []))
+        }
+    }
+
+    #if DEBUG
+    struct PlanFitSnapshot: Equatable {
+        let slotCount: Int
+        let barWidth: CGFloat
+        let xDomain: ClosedRange<Double>?
+        let cappedIndexes: [Int]
+        let currentIndexes: [Int]
+        let cappedLabels: [Int: String]
+        let summary: PlanFit.Summary?
+        let summaryLine: String?
+        let verdictLine: String?
+    }
+
+    nonisolated static func _planFitSnapshotForTesting(
+        selectedSeriesRawValue: String? = nil,
+        histories: [PlanUtilizationSeriesHistory],
+        provider: UsageProvider,
+        snapshot: UsageSnapshot? = nil,
+        referenceDate: Date,
+        width: CGFloat = 310) -> PlanFitSnapshot
+    {
+        let visibleSeries = self.visibleSeries(histories: histories, provider: provider, snapshot: snapshot)
+        let selectedSeries = visibleSeries.first(where: { $0.id == selectedSeriesRawValue }) ?? visibleSeries.first
+        let model = self.makeModel(
+            history: selectedSeries?.history,
+            provider: provider,
+            referenceDate: referenceDate,
+            width: width)
+        let fit = model.fit
+        return PlanFitSnapshot(
+            slotCount: fit.slotCount,
+            barWidth: fit.barWidth,
+            xDomain: model.xDomain,
+            cappedIndexes: model.points.filter { fit.windowsByID[$0.id]?.isCapped == true }.map(\.index),
+            currentIndexes: model.points.filter { fit.windowsByID[$0.id]?.isCurrent == true }.map(\.index),
+            cappedLabels: fit.cappedLabelsByIndex,
+            summary: fit.summary,
+            summaryLine: fit.summary.flatMap { PlanFitPresentation.summaryLine($0) },
+            verdictLine: fit.summary.map { PlanFitPresentation.verdictLine($0.verdict) })
+    }
+    #endif
 }

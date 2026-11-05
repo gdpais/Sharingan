@@ -134,6 +134,7 @@ enum ChartReferenceLine {
     static var strokeStyle: StrokeStyle {
         StrokeStyle(lineWidth: 1, dash: [4, 3])
     }
+
     /// A label color, never a series color, so the rule reads as a reference rather than data.
     static let color = Color(nsColor: .secondaryLabelColor)
 

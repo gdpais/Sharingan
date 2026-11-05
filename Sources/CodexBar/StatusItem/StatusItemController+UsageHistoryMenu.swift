@@ -55,7 +55,8 @@ extension StatusItemController {
                 provider: provider,
                 histories: histories,
                 width: width,
-                workDays: self.settings.weeklyProgressWorkDays)
+                workDays: self.settings.weeklyProgressWorkDays,
+                typicalWeeks: self.store.typicalWeekInputs(for: provider))
             if burndownView.hasSeries {
                 self.appendUsageHistoryChart(burndownView, to: submenu, provider: provider, width: width)
                 submenu.addItem(.separator())
