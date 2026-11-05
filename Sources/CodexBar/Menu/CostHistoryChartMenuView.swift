@@ -80,6 +80,8 @@ struct CostHistoryChartMenuView: View {
     private let sessions: [CostUsageSessionBreakdown]
     /// Source-currency cost of the previous period of equal length; nil hides the delta.
     private let previousPeriodCostUSD: Double?
+    /// The provider's monthly budget; nil hides the budget reference and month-to-date line.
+    let budget: CostHistoryBudget?
     private let stackByModel: Bool
     private let hidePersonalInfo: Bool
     private let width: CGFloat
@@ -100,6 +102,7 @@ struct CostHistoryChartMenuView: View {
         projects: [CostUsageProjectBreakdown] = [],
         sessions: [CostUsageSessionBreakdown] = [],
         previousPeriodCostUSD: Double? = nil,
+        budget: CostHistoryBudget? = nil,
         stackByModel: Bool = true,
         hidePersonalInfo: Bool,
         width: CGFloat,
@@ -118,6 +121,7 @@ struct CostHistoryChartMenuView: View {
         self.projects = projects
         self.sessions = sessions
         self.previousPeriodCostUSD = previousPeriodCostUSD
+        self.budget = budget
         self.stackByModel = stackByModel
         self.hidePersonalInfo = hidePersonalInfo
         self.width = width
@@ -147,7 +151,7 @@ struct CostHistoryChartMenuView: View {
             ?? Self.defaultSelectedDateKey(model: model)
         let incompleteCount = CostUsageIncompleteRequests.sum(self.daily.map(\.incompleteRequestCount))
         let yTicks = Self.yAxisTickValues(
-            maxValue: model.maxValue,
+            maxValue: Self.budgetScaleMaximum(model.maxValue, budget: self.budget, metric: activeMetric),
             metric: activeMetric,
             costMultiplier: self.costMultiplier)
         let dailyAverage = Self.dailyAverage(model: model, metric: activeMetric)
@@ -202,6 +206,7 @@ struct CostHistoryChartMenuView: View {
                                     .foregroundStyle(.secondary)
                             }
                     }
+                    Self.budgetReference(self.budget, metric: activeMetric)
                 }
                 .chartYScale(domain: 0...(yTicks.last ?? max(model.maxValue, 1)))
                 .chartYAxis {
@@ -402,6 +407,10 @@ struct CostHistoryChartMenuView: View {
                             .truncationMode(.tail)
                     }
                 }
+            }
+
+            if let budget = self.budget {
+                CostHistoryBudgetLine(budget: budget)
             }
 
             if !self.projects.isEmpty {
@@ -1254,6 +1263,7 @@ extension CostHistoryChartMenuView {
         let daily: [VisibleDailyFingerprint]
         let projects: [VisibleProjectFingerprint]
         let sessions: [VisibleSessionFingerprint]
+        var budget: CostHistoryBudget?
     }
 
     struct VisibleDailyFingerprint: Equatable {

@@ -294,12 +294,17 @@ extension StatusItemController {
             return .text("none")
         }
         let displayConversion = self.costHistoryDisplayConversion(for: snapshot)
-        return .costHistory(CostHistoryChartMenuView.renderFingerprint(
+        var fingerprint = CostHistoryChartMenuView.renderFingerprint(
             from: snapshot,
             provider: provider,
             hidePersonalInfo: self.settings.hidePersonalInfo,
             displayCurrencyCode: displayConversion.currencyCode,
-            displayCostMultiplier: displayConversion.multiplier))
+            displayCostMultiplier: displayConversion.multiplier)
+        fingerprint.budget = self.store.costHistoryBudget(
+            for: provider,
+            displayCurrencyCode: displayConversion.currencyCode,
+            sourceToDisplay: displayConversion.multiplier)
+        return .costHistory(fingerprint)
     }
 
     /// Resolves the user's preferred display currency for cost-history values, falling back to
@@ -449,6 +454,10 @@ extension StatusItemController {
             windowLabel: tokenSnapshot.historyLabel,
             projects: provider.supportsLocalProjects ? tokenSnapshot.projects : [],
             sessions: tokenSnapshot.sessions,
+            budget: self.store.costHistoryBudget(
+                for: provider,
+                displayCurrencyCode: displayConversion.currencyCode,
+                sourceToDisplay: displayConversion.multiplier),
             hidePersonalInfo: self.settings.hidePersonalInfo,
             width: width,
             initialMetric: self.settings.costHistoryChartMetric(for: provider),
