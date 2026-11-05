@@ -58,19 +58,19 @@ struct ChartPreferencesSettingsSection: View {
         }
     }
 
-    static func rangeLabel(_ range: ChartPreferences.RangeOption) -> String {
+    nonisolated static func rangeLabel(_ range: ChartPreferences.RangeOption) -> String {
         guard let days = range.days else { return L("cost_history_window_title") }
         return String(format: L("Last %d days"), days)
     }
 
-    static func styleLabel(_ style: ChartPreferences.Style) -> String {
+    nonisolated static func styleLabel(_ style: ChartPreferences.Style) -> String {
         switch style {
         case .bars: L("Bars")
         case .line: L("Line")
         }
     }
 
-    static func paletteLabel(_ mode: ChartPaletteMode) -> String {
+    nonisolated static func paletteLabel(_ mode: ChartPaletteMode) -> String {
         switch mode {
         case .accents: L("Provider accents")
         case .colorblindSafe: L("Colorblind-safe")

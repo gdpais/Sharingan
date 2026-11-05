@@ -25,11 +25,12 @@ struct SpendActivityPalette {
         }
     }
 
-    /// Neutral grays about 12–14 L* apart, keeping each empty-cell color so "no activity" reads the same.
+    /// Neutral grays about 12–15 L* apart, keeping each empty-cell color so "no activity" reads the same.
+    /// Dark levels keep 3:1 against the dark window background, like the green ramp.
     private var monochromeLevelHexes: [UInt32] {
         switch (self.colorScheme, self.contrast) {
-        case (.dark, .increased): [0x484C52, 0x848484, 0xA3A3A3, 0xC6C6C6, 0xE8E8E8]
-        case (.dark, _): [0x30353A, 0x5E5E5E, 0x818181, 0xA6A6A6, 0xD1D1D1]
+        case (.dark, .increased): [0x484C52, 0x868686, 0xA6A6A6, 0xC6C6C6, 0xE8E8E8]
+        case (.dark, _): [0x30353A, 0x707070, 0x8E8E8E, 0xADADAD, 0xD6D6D6]
         case (_, .increased): [0xE1E5E9, 0x969696, 0x777777, 0x5C5C5C, 0x424242]
         default: [0xEBEDF0, 0xC6C6C6, 0xA0A0A0, 0x7C7C7C, 0x555555]
         }
