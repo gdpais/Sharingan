@@ -48,6 +48,29 @@ of display mode. This preference does not change the API payload, identity polic
 The same control works for Linux servers and older cached snapshots without a host fill hint or remaining percentage;
 **Follow server** still defaults to remaining, deriving it from consumption when needed. The control adds no external assets.
 
+### Insights sections
+
+Below the provider cards the page renders the snapshot's optional [`insights`](#insights) block, using plain SVG
+with no external scripts or styles. Series colors follow the app's chart palette in slot order (light and dark),
+axes use 1-2-5 ticks, and every bar, heatmap cell and project row can be hovered or reached with the keyboard to show
+its values. The sections, in order:
+
+1. **Tiles**: estimated spend, cache hit rate, cost per 1M tokens and top model share over the last 30 days, each
+   with a trend line and, when history covers the previous 30 days, the change against it. **Plan value** appears
+   only when a plan price is configured; this build has no plan-price setting, so it is omitted.
+2. **Cost by model**: one chart per provider, daily spend stacked by that provider's top five models plus Other.
+   Providers are never mixed in one chart.
+3. **Model share over time**: each model's share of daily spend across providers; models past the top five fold
+   into Other.
+4. **Spend by weekday and hour**: a 7 × 24 heatmap of hourly spend in the server's time zone.
+5. **Project trends**: the top five Codex and Claude projects, each with a trend line, its total and the change
+   between the range's two halves (`—` when a project's history does not cover the whole comparison).
+
+Plan fit is not included: its plan-utilization history is stored by the macOS app, not by the CLI. The page keeps
+working when a snapshot has no `insights` block, including snapshots from older servers. The config-only shell and
+the per-provider snapshots used for progressive loading do not replace a cached block; the next full snapshot does.
+Signing out clears the sections with the rest of the page.
+
 The UI does not change the transport threat model: `codexbar serve` is plain HTTP. Off-loopback, a token typed into the page transits the network in cleartext like every other request unless a TLS-terminating reverse proxy protects the connection.
 
 ## One-shot command semantics
@@ -414,3 +437,79 @@ A managed Codex entry in redacted mode (other account fields use the same shapes
   - `updatedAt`: Account snapshot update timestamp, or `null`.
 - `providers[].accountsError`: Whole-adapter diagnostic when account collection fails; `accounts` is then absent and
   the ambient provider data remains available.
+
+## Insights
+
+`insights` is an additive schema-v1 block computed from the same local cost scans as `providers[].cost`, with the
+Core insight models the Usage & Spend window uses. It covers the last 30 local days ending on the generation day and
+USD sources only. The block is omitted when no source has usable cost history, and each member is omitted when it
+has no data, so snapshots without local cost history keep their previous shape. `--identity` applies: project
+names, project paths and the named time zone appear only with full identity; otherwise projects are numbered
+placeholders.
+
+```json
+"insights": {
+  "currencyCode": "USD",
+  "timeZone": "Europe/Lisbon",
+  "range": { "start": "2026-10-07", "end": "2026-11-05", "days": 30 },
+  "bucket": "day",
+  "costByModel": [{
+    "provider": "claude", "providerName": "Claude",
+    "models": ["claude-opus-4", "claude-sonnet-4"], "hasOther": true,
+    "days": [{ "date": "2026-11-04", "total": 3.2, "segments": [
+      { "rank": 0, "isOther": false, "value": 2 },
+      { "rank": 1, "isOther": false, "value": 1 },
+      { "isOther": true, "value": 0.2 }
+    ] }]
+  }],
+  "tiles": {
+    "trendBucketCount": 12,
+    "apiEquivalentCost": 61.25,
+    "cacheHitRate": { "value": 0.62, "trend": [0.58, null, 0.64] },
+    "costPerMillionTokens": { "value": 4.12, "trend": [4.4, 3.9, 4.1] },
+    "topModelShare": { "value": 0.48, "trend": [0.41, 0.5, 0.47], "modelName": "claude-opus-4", "provider": "claude" }
+  },
+  "heatmap": {
+    "weekdays": [2, 3, 4, 5, 6, 7, 1], "totalCost": 61.25, "maxCost": 5, "weekendShare": 0.12,
+    "busiest": { "weekday": 4, "hour": 14, "cost": 5, "share": 0.08, "level": 4 },
+    "cells": [{ "weekday": 4, "hour": 14, "cost": 5, "share": 0.08, "level": 4 }]
+  },
+  "modelShare": {
+    "bucket": "day", "total": 61.25,
+    "series": [{ "id": "claude:claude-opus-4", "name": "claude-opus-4", "provider": "claude", "rank": 0,
+      "total": 30, "share": 0.49, "isOther": false, "foldedCount": 0 }],
+    "points": [{ "date": "2026-11-04", "series": "claude:claude-opus-4", "value": 2, "share": 0.63,
+      "shareStart": 0, "shareEnd": 0.63 }]
+  },
+  "projectTrends": {
+    "bucket": "day", "start": "2026-10-07", "end": "2026-11-05", "comparisonDays": 15, "omittedCount": 2,
+    "maxValue": 4,
+    "projects": [{ "rank": 1, "label": "Project 1", "provider": "claude", "providerName": "Claude", "total": 20,
+      "recentTotal": 12, "previousTotal": 8, "change": "percent", "changeFraction": 0.5,
+      "points": [{ "date": "2026-11-04", "value": 3 }] }]
+  }
+}
+```
+
+- `currencyCode`: Always `USD`; sources in other currencies do not take part.
+- `timeZone`: Time zone identifier of the day keys and heatmap hours; full identity only.
+- `range`: First and last local day (`yyyy-MM-dd`) and the day count.
+- `bucket`: Grouping of the model share chart: `day`, `week` or `month`.
+- `costByModel[]`: Per provider, the top five models by spend (`models`, rank 0 first) and each day's total with
+  bottom-to-top `segments`. A segment carries `rank` into `models`, or `isOther: true` for spend no top model
+  claims. A day without a model breakdown has no segments.
+- `tiles`: `apiEquivalentCost` (known spend over the range) and optional `cacheHitRate` (cache reads over all prompt
+  tokens), `costPerMillionTokens` (fully priced days only), `topModelShare` (with `modelName` and `provider`) and
+  `planValue` (only with a plan price). Each tile has `value`, optional `previousValue` and `delta` for the previous
+  30 days when every source's history covers them, and `trend` with `trendBucketCount` values (`null` for buckets
+  without data).
+- `heatmap`: Spend by `Calendar` weekday (1 is Sunday) and hour. `weekdays` lists display order; `cells` lists only
+  cells with spend, each with its `share` of the total and a `level` from 1 to 4; `busiest` and `weekendShare` are
+  omitted without spend.
+- `modelShare`: `series` ranked by spend, with the folded remainder as `id: "other"`; `points` give each series'
+  value, `share` and stacked `shareStart`/`shareEnd` per bucket. A model name two providers share carries the
+  provider name in `name`.
+- `projectTrends`: The top five Codex and Claude projects (independent chats excluded). `change` is `percent`
+  (with `changeFraction`), `new`, `ended`, `unchanged` or `unavailable`; it compares the last `comparisonDays` days
+  with the ones before and is `unavailable` unless the project's source covers all of them. `path` appears with full
+  identity only.
