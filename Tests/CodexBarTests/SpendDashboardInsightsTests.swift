@@ -72,6 +72,20 @@ struct SpendDashboardInsightsTests {
     }
 
     @Test
+    func `insights build on first use and only once`() {
+        var buildCount = 0
+        let memo = SpendDashboardInsightsMemo {
+            buildCount += 1
+            return SpendDashboardInsights()
+        }
+
+        #expect(buildCount == 0)
+        _ = memo.value
+        _ = memo.value
+        #expect(buildCount == 1)
+    }
+
+    @Test
     func `trend labels redact with the projects list numbering`() throws {
         try CodexBarLocalizationOverride.$appLanguage.withValue("en") {
             let group = try Self.group(inputs: [Self.input(projects: Self.projects())])
