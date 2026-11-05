@@ -189,16 +189,18 @@ struct CodexLogQuotaBackfillTests {
     }
 
     @Test
-    func `attribution without a workspace id requires a single creator`() {
+    func `attribution without a workspace id skips logs that name a creator`() {
         let first = Self.sample(minutes: 5, session: 10, weekly: 30, creator: "acct-a")
         let second = Self.sample(minutes: 30, session: 90, weekly: 80, creator: "acct-b")
         let unknown = Self.sample(minutes: 50, session: 20, weekly: 31)
 
+        // The one named creator may be a previous account, so nothing in these logs can be attributed.
         let single = UsageStore.codexLogQuotaBackfillAttribution(
             [first, unknown],
             accountWorkspaceID: nil,
             knownCreatorAccountIDHashes: [])
-        #expect(single.samples == [first, unknown])
+        #expect(single.samples.isEmpty)
+        #expect(single.creatorAccountIDHashes == [UsageStore.codexLogQuotaBackfillAccountIDHash("acct-a")])
 
         let anonymous = UsageStore.codexLogQuotaBackfillAttribution(
             [unknown],
