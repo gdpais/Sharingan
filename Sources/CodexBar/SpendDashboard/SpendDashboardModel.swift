@@ -723,16 +723,17 @@ struct SpendDashboardModel: Equatable, Sendable {
             timeZone: calendar.timeZone)
         group.retainedDetailUpdatedAt = inputs.compactMap { $0.input.retainedDetailSnapshot?.updatedAt }.min()
         group.detailsExcludedFromTotals = inputs.contains { !aggregateIDs.contains($0.input.id) }
-        // The previous-period pass costs a full summary per source; menu callers never show the tiles.
+        // The previous-period pass costs a full summary per source; menu callers never show the tiles
+        // or the insight panels.
         if includesInsightTiles {
             group.insightInputs = Self.insightInputs(summaries, bounds, calendar, Self.inputSummary)
+            group.insights = Self.insights(
+                summaries: summaries,
+                detailSummaries: detailSummaries,
+                bounds: bounds,
+                detailBounds: detailBounds,
+                calendar: calendar)
         }
-        group.insights = Self.insights(
-            summaries: summaries,
-            detailSummaries: detailSummaries,
-            bounds: bounds,
-            detailBounds: detailBounds,
-            calendar: calendar)
         return group
     }
 

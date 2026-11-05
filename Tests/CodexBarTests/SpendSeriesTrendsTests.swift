@@ -74,6 +74,37 @@ struct SpendSeriesTrendsTests {
     }
 
     @Test
+    func `a series whose source missed part of the comparison has no change`() {
+        let observations = [
+            Self.observation("full", day: 0, value: 1),
+            Self.observation("full", day: 3, value: 2),
+            Self.observation("late", day: 3, value: 2),
+            Self.observation("stale", day: 0, value: 2),
+            Self.observation("stale", day: 2, value: 1),
+        ]
+
+        let trends = SpendSeriesTrends(
+            observations: observations,
+            days: Self.day(0)...Self.day(3),
+            bucket: .day,
+            topCount: 5,
+            calendar: Self.calendar,
+            coverage: [
+                "full": Self.day(0)...Self.day(3),
+                "late": Self.day(2)...Self.day(3),
+                "stale": Self.day(0)...Self.day(2),
+            ])
+        let changes = Dictionary(uniqueKeysWithValues: trends.trends.map { ($0.id, $0.change) })
+
+        #expect(changes["full"] == .percent(1))
+        // Started scanning inside the earlier half, so its spend there is unknown, not zero.
+        #expect(changes["late"] == .unavailable)
+        // Not scanned through the last day, so the recent half is a floor.
+        #expect(changes["stale"] == .unavailable)
+        #expect(trends.trends.first { $0.id == "late" }?.total == 2)
+    }
+
+    @Test
     func `weekly buckets sum their days and out of range values are ignored`() {
         let observations = [
             Self.observation("a", day: 0, value: 1),
