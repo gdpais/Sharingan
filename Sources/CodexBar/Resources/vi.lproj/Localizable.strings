@@ -2800,3 +2800,26 @@
 "Project trends" = "Xu hướng dự án";
 "Change compares the last %d days with the %d days before." = "Mức thay đổi so sánh %d ngày gần nhất với %d ngày trước đó.";
 "New" = "Mới";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Giá trị gói dịch vụ · %@";
+"API-equivalent vs %@ in plans" = "Tương đương API so với các gói dịch vụ %@";
+"Plan & budget" = "Gói dịch vụ và ngân sách";
+"Plan price" = "Giá gói dịch vụ";
+"plan_price_subtitle" = "Giá thuê bao hằng tháng. Giá trị gói dịch vụ so sánh giá này với chi tiêu tương đương API.";
+"monthly_budget_subtitle" = "So sánh với chi tiêu ước tính từ đầu tháng trong biểu đồ chi phí, cảnh báo và hook.";
+"Currency" = "Tiền tệ";
+"plan_budget_footer" = "Số liệu của riêng bạn, được lưu cùng nhà cung cấp này trong tệp cấu hình dùng chung. Để trống một ô để tắt.";
+"plan_budget_invalid_amount" = "Nhập số tiền lớn hơn 0.";
+"Month to date %@ of %@ budget" = "Từ đầu tháng %1$@ trên ngân sách %2$@";
+"Month to date at least %@ of %@ budget" = "Từ đầu tháng ít nhất %1$@ trên ngân sách %2$@";
+"budget %@/day" = "ngân sách %@/ngày";
+"budget_notifications_title" = "Cảnh báo ngân sách";
+"budget_notifications_subtitle" = "Thông báo khi chi tiêu ước tính từ đầu tháng đạt 80% và 100% ngân sách hằng tháng của nhà cung cấp.";
+"budget_notifications_no_budget" = "Đặt ngân sách hằng tháng trong cài đặt của nhà cung cấp để nhận cảnh báo ngân sách.";
+"budget_notification_title_warning" = "Ngân sách %1$@ ở mức %2$@";
+"budget_notification_title_reached" = "Đã đạt ngân sách %@";
+"budget_notification_body" = "Chi tiêu ước tính tháng này: %1$@ trên ngân sách %2$@ của bạn.";
+"budget_hooks_header" = "Hook ngân sách";
+"budget_hooks_add_rule" = "Thêm hook ngân sách";
+"budget_hooks_footer" = "Chạy một lệnh khi chi tiêu ước tính từ đầu tháng đạt 80% hoặc 100% ngân sách hằng tháng của nhà cung cấp. Tuân theo công tắc hook ở trên. Được lưu trong tùy chọn ứng dụng trên máy Mac này, không phải trong tệp cấu hình dùng chung.";

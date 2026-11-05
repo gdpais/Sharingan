@@ -2803,3 +2803,26 @@
 "Project trends" = "روند پروژه‌ها";
 "Change compares the last %d days with the %d days before." = "تغییر، %d روز اخیر را با %d روز پیش از آن مقایسه می‌کند.";
 "New" = "جدید";
+
+/* Plan price and budgets */
+"Plan value · %@" = "ارزش طرح · %@";
+"API-equivalent vs %@ in plans" = "معادل API در برابر طرح‌هایی به مبلغ %@";
+"Plan & budget" = "طرح و بودجه";
+"Plan price" = "قیمت طرح";
+"plan_price_subtitle" = "قیمت ماهانه اشتراک. ارزش طرح آن را با هزینه معادل API مقایسه می‌کند.";
+"monthly_budget_subtitle" = "با هزینه تخمینی از ابتدای ماه در نمودار هزینه، هشدارها و قلاب‌ها مقایسه می‌شود.";
+"Currency" = "ارز";
+"plan_budget_footer" = "اعداد خودتان، ذخیره‌شده همراه این ارائه‌دهنده در فایل پیکربندی مشترک. برای خاموش کردن، فیلد را خالی بگذارید.";
+"plan_budget_invalid_amount" = "مبلغی بیشتر از صفر وارد کنید.";
+"Month to date %@ of %@ budget" = "از ابتدای ماه %1$@ از بودجه %2$@";
+"Month to date at least %@ of %@ budget" = "از ابتدای ماه دست‌کم %1$@ از بودجه %2$@";
+"budget %@/day" = "بودجه %@/روز";
+"budget_notifications_title" = "هشدارهای بودجه";
+"budget_notifications_subtitle" = "وقتی هزینه تخمینی از ابتدای ماه به ۸۰٪ و ۱۰۰٪ بودجه ماهانه یک ارائه‌دهنده برسد، اعلان می‌دهد.";
+"budget_notifications_no_budget" = "برای دریافت هشدارهای بودجه، در تنظیمات یک ارائه‌دهنده بودجه ماهانه تعیین کنید.";
+"budget_notification_title_warning" = "بودجه %1$@ در %2$@";
+"budget_notification_title_reached" = "بودجه %@ به پایان رسید";
+"budget_notification_body" = "هزینه تخمینی این ماه: %1$@ از بودجه %2$@ شما.";
+"budget_hooks_header" = "قلاب‌های بودجه";
+"budget_hooks_add_rule" = "افزودن قلاب بودجه";
+"budget_hooks_footer" = "وقتی هزینه تخمینی از ابتدای ماه به ۸۰٪ یا ۱۰۰٪ بودجه ماهانه یک ارائه‌دهنده برسد، یک دستور اجرا می‌کند. از کلید قلاب‌ها در بالا پیروی می‌کند. در تنظیمات برنامه روی این Mac ذخیره می‌شود، نه در فایل پیکربندی مشترک.";

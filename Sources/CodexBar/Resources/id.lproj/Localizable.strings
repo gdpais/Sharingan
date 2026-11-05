@@ -2801,3 +2801,26 @@
 "Project trends" = "Tren proyek";
 "Change compares the last %d days with the %d days before." = "Perubahan membandingkan %d hari terakhir dengan %d hari sebelumnya.";
 "New" = "Baru";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Nilai paket · %@";
+"API-equivalent vs %@ in plans" = "Setara API vs paket senilai %@";
+"Plan & budget" = "Paket & anggaran";
+"Plan price" = "Harga paket";
+"plan_price_subtitle" = "Harga langganan bulanan. Nilai paket membandingkannya dengan pengeluaran setara API.";
+"monthly_budget_subtitle" = "Dibandingkan dengan perkiraan pengeluaran bulan berjalan di grafik biaya, peringatan, dan hook.";
+"Currency" = "Mata uang";
+"plan_budget_footer" = "Angka Anda sendiri, disimpan bersama penyedia ini di file konfigurasi bersama. Kosongkan kolom untuk menonaktifkannya.";
+"plan_budget_invalid_amount" = "Masukkan jumlah lebih dari nol.";
+"Month to date %@ of %@ budget" = "Bulan berjalan %1$@ dari anggaran %2$@";
+"Month to date at least %@ of %@ budget" = "Bulan berjalan minimal %1$@ dari anggaran %2$@";
+"budget %@/day" = "anggaran %@/hari";
+"budget_notifications_title" = "Peringatan anggaran";
+"budget_notifications_subtitle" = "Memberi tahu saat perkiraan pengeluaran bulan berjalan mencapai 80% dan 100% dari anggaran bulanan penyedia.";
+"budget_notifications_no_budget" = "Tetapkan anggaran bulanan di pengaturan penyedia untuk mendapatkan peringatan anggaran.";
+"budget_notification_title_warning" = "Anggaran %1$@ di %2$@";
+"budget_notification_title_reached" = "Anggaran %@ tercapai";
+"budget_notification_body" = "Perkiraan pengeluaran bulan ini: %1$@ dari anggaran %2$@ Anda.";
+"budget_hooks_header" = "Hook anggaran";
+"budget_hooks_add_rule" = "Tambah hook anggaran";
+"budget_hooks_footer" = "Menjalankan perintah saat perkiraan pengeluaran bulan berjalan mencapai 80% atau 100% dari anggaran bulanan penyedia. Mengikuti sakelar hook di atas. Disimpan di preferensi aplikasi di Mac ini, bukan di file konfigurasi bersama.";

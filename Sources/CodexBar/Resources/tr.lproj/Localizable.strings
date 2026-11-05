@@ -2802,3 +2802,26 @@
 "Project trends" = "Proje eğilimleri";
 "Change compares the last %d days with the %d days before." = "Değişim, son %d günü önceki %d günle karşılaştırır.";
 "New" = "Yeni";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Plan değeri · %@";
+"API-equivalent vs %@ in plans" = "%@ tutarındaki planlara karşı API karşılığı";
+"Plan & budget" = "Plan ve bütçe";
+"Plan price" = "Plan fiyatı";
+"plan_price_subtitle" = "Aylık abonelik fiyatı. Plan değeri bunu API karşılığı harcamayla karşılaştırır.";
+"monthly_budget_subtitle" = "Maliyet grafiğinde, uyarılarda ve kancalarda ay başından bu yana tahmini harcamayla karşılaştırılır.";
+"Currency" = "Para birimi";
+"plan_budget_footer" = "Kendi rakamlarınız; bu sağlayıcıyla birlikte paylaşılan yapılandırma dosyasına kaydedilir. Kapatmak için alanı boş bırakın.";
+"plan_budget_invalid_amount" = "Sıfırdan büyük bir tutar girin.";
+"Month to date %@ of %@ budget" = "Ay başından bu yana %1$@ / %2$@ bütçe";
+"Month to date at least %@ of %@ budget" = "Ay başından bu yana en az %1$@ / %2$@ bütçe";
+"budget %@/day" = "bütçe %@/gün";
+"budget_notifications_title" = "Bütçe uyarıları";
+"budget_notifications_subtitle" = "Ay başından bu yana tahmini harcama bir sağlayıcının aylık bütçesinin yüzde 80'ine ve yüzde 100'üne ulaştığında bildirir.";
+"budget_notifications_no_budget" = "Bütçe uyarıları almak için bir sağlayıcının ayarlarında aylık bütçe belirleyin.";
+"budget_notification_title_warning" = "%1$@ bütçesi %2$@ seviyesinde";
+"budget_notification_title_reached" = "%@ bütçesine ulaşıldı";
+"budget_notification_body" = "Bu ayki tahmini harcama: %2$@ bütçenizin %1$@ kadarı.";
+"budget_hooks_header" = "Bütçe kancaları";
+"budget_hooks_add_rule" = "Bütçe kancası ekle";
+"budget_hooks_footer" = "Ay başından bu yana tahmini harcama bir sağlayıcının aylık bütçesinin yüzde 80'ine veya yüzde 100'üne ulaştığında bir komut çalıştırır. Yukarıdaki kanca anahtarını izler. Paylaşılan yapılandırma dosyasına değil, bu Mac'teki uygulama tercihlerine kaydedilir.";

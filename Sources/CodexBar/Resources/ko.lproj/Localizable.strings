@@ -2767,3 +2767,26 @@
 "Project trends" = "프로젝트 추세";
 "Change compares the last %d days with the %d days before." = "변화율은 최근 %d일과 그 이전 %d일을 비교합니다.";
 "New" = "신규";
+
+/* Plan price and budgets */
+"Plan value · %@" = "요금제 가치 · %@";
+"API-equivalent vs %@ in plans" = "%@ 요금제들 대비 API 환산액";
+"Plan & budget" = "요금제 및 예산";
+"Plan price" = "요금제 가격";
+"plan_price_subtitle" = "월 구독 가격입니다. 요금제 가치는 이를 API 환산 지출과 비교합니다.";
+"monthly_budget_subtitle" = "비용 차트, 알림, 훅에서 이번 달 예상 지출과 비교합니다.";
+"Currency" = "통화";
+"plan_budget_footer" = "직접 입력한 값으로, 이 공급자와 함께 공유 설정 파일에 저장됩니다. 끄려면 칸을 비워 두세요.";
+"plan_budget_invalid_amount" = "0보다 큰 금액을 입력하세요.";
+"Month to date %@ of %@ budget" = "이번 달 %1$@ / 예산 %2$@";
+"Month to date at least %@ of %@ budget" = "이번 달 최소 %1$@ / 예산 %2$@";
+"budget %@/day" = "예산 %@/일";
+"budget_notifications_title" = "예산 알림";
+"budget_notifications_subtitle" = "이번 달 예상 지출이 공급자 월 예산의 80%와 100%에 도달하면 알려줍니다.";
+"budget_notifications_no_budget" = "예산 알림을 받으려면 공급자 설정에서 월 예산을 설정하세요.";
+"budget_notification_title_warning" = "%1$@ 예산 %2$@ 도달";
+"budget_notification_title_reached" = "%@ 예산 도달";
+"budget_notification_body" = "이번 달 예상 지출: 예산 %2$@ 중 %1$@.";
+"budget_hooks_header" = "예산 훅";
+"budget_hooks_add_rule" = "예산 훅 추가";
+"budget_hooks_footer" = "이번 달 예상 지출이 공급자 월 예산의 80% 또는 100%에 도달하면 명령을 실행합니다. 위의 훅 스위치를 따릅니다. 공유 설정 파일이 아닌 이 Mac의 앱 환경설정에 저장됩니다.";

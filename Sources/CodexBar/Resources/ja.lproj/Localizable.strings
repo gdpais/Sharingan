@@ -2799,3 +2799,26 @@
 "Project trends" = "プロジェクトの推移";
 "Change compares the last %d days with the %d days before." = "変化は直近%d日間とその前の%d日間を比較しています。";
 "New" = "新規";
+
+/* Plan price and budgets */
+"Plan value · %@" = "プランの価値 · %@";
+"API-equivalent vs %@ in plans" = "%@ のプランに対する API 換算額";
+"Plan & budget" = "プランと予算";
+"Plan price" = "プラン料金";
+"plan_price_subtitle" = "サブスクリプションの月額料金。プランの価値はこれを API 換算の支出と比較します。";
+"monthly_budget_subtitle" = "コストグラフ、アラート、フックで今月の推定支出と比較されます。";
+"Currency" = "通貨";
+"plan_budget_footer" = "あなた自身の数値で、このプロバイダーとともに共有設定ファイルに保存されます。オフにするには欄を空にしてください。";
+"plan_budget_invalid_amount" = "0 より大きい金額を入力してください。";
+"Month to date %@ of %@ budget" = "今月 %1$@ / 予算 %2$@";
+"Month to date at least %@ of %@ budget" = "今月 %1$@ 以上 / 予算 %2$@";
+"budget %@/day" = "予算 %@/日";
+"budget_notifications_title" = "予算アラート";
+"budget_notifications_subtitle" = "今月の推定支出がプロバイダーの月間予算の 80% と 100% に達したときに通知します。";
+"budget_notifications_no_budget" = "予算アラートを受け取るには、プロバイダーの設定で月間予算を設定してください。";
+"budget_notification_title_warning" = "%1$@ の予算が %2$@ に到達";
+"budget_notification_title_reached" = "%@ の予算に到達";
+"budget_notification_body" = "今月の推定支出: 予算 %2$@ のうち %1$@。";
+"budget_hooks_header" = "予算フック";
+"budget_hooks_add_rule" = "予算フックを追加";
+"budget_hooks_footer" = "今月の推定支出がプロバイダーの月間予算の 80% または 100% に達したときにコマンドを実行します。上のフックのスイッチに従います。共有設定ファイルではなく、この Mac のアプリ設定に保存されます。";

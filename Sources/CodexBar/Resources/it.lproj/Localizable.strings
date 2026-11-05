@@ -2803,3 +2803,26 @@
 "Project trends" = "Andamento dei progetti";
 "Change compares the last %d days with the %d days before." = "La variazione confronta gli ultimi %d giorni con i %d giorni precedenti.";
 "New" = "Nuovo";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Valore del piano · %@";
+"API-equivalent vs %@ in plans" = "Equivalente API rispetto a piani da %@";
+"Plan & budget" = "Piano e budget";
+"Plan price" = "Prezzo del piano";
+"plan_price_subtitle" = "Prezzo mensile dell'abbonamento. Il valore del piano lo confronta con la spesa equivalente API.";
+"monthly_budget_subtitle" = "Confrontato con la spesa stimata del mese in corso nel grafico dei costi, negli avvisi e negli hook.";
+"Currency" = "Valuta";
+"plan_budget_footer" = "I tuoi numeri, salvati con questo provider nel file di configurazione condiviso. Lascia un campo vuoto per disattivarlo.";
+"plan_budget_invalid_amount" = "Inserisci un importo maggiore di zero.";
+"Month to date %@ of %@ budget" = "Mese in corso: %1$@ su un budget di %2$@";
+"Month to date at least %@ of %@ budget" = "Mese in corso: almeno %1$@ su un budget di %2$@";
+"budget %@/day" = "budget %@/giorno";
+"budget_notifications_title" = "Avvisi di budget";
+"budget_notifications_subtitle" = "Avvisa quando la spesa stimata del mese in corso raggiunge l'80% e il 100% del budget mensile di un provider.";
+"budget_notifications_no_budget" = "Imposta un budget mensile nelle impostazioni di un provider per ricevere avvisi di budget.";
+"budget_notification_title_warning" = "Budget %1$@ al %2$@";
+"budget_notification_title_reached" = "Budget %@ raggiunto";
+"budget_notification_body" = "Spesa stimata questo mese: %1$@ del tuo budget di %2$@.";
+"budget_hooks_header" = "Hook di budget";
+"budget_hooks_add_rule" = "Aggiungi hook di budget";
+"budget_hooks_footer" = "Esegue un comando quando la spesa stimata del mese in corso raggiunge l'80% o il 100% del budget mensile di un provider. Segue l'interruttore degli hook qui sopra. Salvato nelle preferenze dell'app su questo Mac, non nel file di configurazione condiviso.";

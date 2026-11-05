@@ -2798,3 +2798,26 @@
 "Project trends" = "Tendances des projets";
 "Change compares the last %d days with the %d days before." = "La variation compare les %d derniers jours aux %d jours précédents.";
 "New" = "Nouveau";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Valeur du forfait · %@";
+"API-equivalent vs %@ in plans" = "Équivalent API face à des forfaits de %@";
+"Plan & budget" = "Forfait et budget";
+"Plan price" = "Prix du forfait";
+"plan_price_subtitle" = "Prix mensuel de l'abonnement. La valeur du forfait le compare aux dépenses équivalentes API.";
+"monthly_budget_subtitle" = "Comparé aux dépenses estimées depuis le début du mois dans le graphique des coûts, les alertes et les hooks.";
+"Currency" = "Devise";
+"plan_budget_footer" = "Vos propres chiffres, enregistrés avec ce fournisseur dans le fichier de configuration partagé. Laissez un champ vide pour le désactiver.";
+"plan_budget_invalid_amount" = "Saisissez un montant supérieur à zéro.";
+"Month to date %@ of %@ budget" = "Depuis le début du mois : %1$@ sur un budget de %2$@";
+"Month to date at least %@ of %@ budget" = "Depuis le début du mois : au moins %1$@ sur un budget de %2$@";
+"budget %@/day" = "budget %@/jour";
+"budget_notifications_title" = "Alertes de budget";
+"budget_notifications_subtitle" = "Avertit lorsque les dépenses estimées depuis le début du mois atteignent 80 % et 100 % du budget mensuel d'un fournisseur.";
+"budget_notifications_no_budget" = "Définissez un budget mensuel dans les réglages d'un fournisseur pour recevoir des alertes de budget.";
+"budget_notification_title_warning" = "Budget %1$@ à %2$@";
+"budget_notification_title_reached" = "Budget %@ atteint";
+"budget_notification_body" = "Dépenses estimées ce mois-ci : %1$@ sur votre budget de %2$@.";
+"budget_hooks_header" = "Hooks de budget";
+"budget_hooks_add_rule" = "Ajouter un hook de budget";
+"budget_hooks_footer" = "Exécute une commande lorsque les dépenses estimées depuis le début du mois atteignent 80 % ou 100 % du budget mensuel d'un fournisseur. Suit l'interrupteur des hooks ci-dessus. Enregistré dans les préférences de l'app sur ce Mac, pas dans le fichier de configuration partagé.";
