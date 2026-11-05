@@ -792,7 +792,13 @@ public struct CostUsageFetcher: Sendable {
             scanOptions: scanOptions,
             environment: environment,
             piOptions: piOptions,
-            reportContext: reportContext)
+            reportContext: reportContext,
+            previousPeriod: CostUsagePreviousPeriodRequest(
+                historyDays: clampedHistoryDays,
+                since: since,
+                now: now,
+                calendar: options.calendar,
+                reportContext: reportContext))
         let scanResult = try await Self.loadLocalTokenScanResult(
             provider: provider,
             since: since,
@@ -830,7 +836,7 @@ public struct CostUsageFetcher: Sendable {
                 reportContext: reportContext)
         }
 
-        let snapshot = Self.tokenSnapshot(
+        var snapshot = Self.tokenSnapshot(
             from: scanResult.inclusive.daily,
             now: now,
             historyDays: clampedHistoryDays,
@@ -843,6 +849,7 @@ public struct CostUsageFetcher: Sendable {
             sessions: scanResult.inclusive.sessions,
             detailsAreComplete: scanResult.inclusive.detailsAreComplete,
             updatedAt: scanResult.inclusive.staleSnapshotUpdatedAt)
+        snapshot.previousPeriodDaily = scanResult.previousPeriodDaily
         // Provider-specific by design: native projections exist for the two transcript families.
         let accounting: PiSnapshotAccounting? = if let scope = scanResult.piScope {
             .includesPi(scope: scope, native: Self.tokenSnapshot(
@@ -874,6 +881,7 @@ public struct CostUsageFetcher: Sendable {
     }
 
     private struct LocalTokenScanResult: Sendable {
+        let previousPeriodDaily: [CostUsageDailyReport.Entry]?
         let inclusive: LocalTokenScanReport
         let native: LocalTokenScanReport
         let piScope: String?
@@ -887,6 +895,7 @@ public struct CostUsageFetcher: Sendable {
         @ProcessEnvironment private(set) var environment: [String: String]
         let piOptions: PiSessionCostScanner.Options
         let reportContext: CostUsageReportContext?
+        let previousPeriod: CostUsagePreviousPeriodRequest?
     }
 
     private static func unavailableLocalSnapshot(
@@ -924,13 +933,14 @@ public struct CostUsageFetcher: Sendable {
         // These synchronous scans can run for minutes on large archives. The dedicated queue keeps
         // them off the cooperative pool and bridges task cancellation into scanner-level checks.
         return try await CostUsageScanExecutor.run { checkCancellation in
-            var daily = try CostUsageScanner.loadDailyReportCancellable(
+            var daily = try CostUsageScanner.loadDailyReportRetainingPreviousPeriod(
                 provider: provider,
                 since: since,
                 until: now,
                 now: now,
                 options: options.scanOptions,
                 reportContext: options.reportContext,
+                retainSince: options.previousPeriod?.since,
                 checkCancellation: checkCancellation)
             try checkCancellation()
 
@@ -958,6 +968,7 @@ public struct CostUsageFetcher: Sendable {
             var staleSnapshotUpdatedAt: Date?
             var detailsAreComplete = true
             var historyCoverageIsEstablished = provider != .codex
+            var previousPeriodDaily: [CostUsageDailyReport.Entry]?
             if provider == .codex {
                 let roots = CostUsageScanner.codexSessionsRoots(options: options.scanOptions)
                 let rootsFingerprint = CostUsageScanner.codexRootsFingerprint(options: options.scanOptions)
@@ -984,6 +995,10 @@ public struct CostUsageFetcher: Sendable {
                         sessionsRoot: roots.first,
                         environment: options.environment)
                 }
+                if historyCoverageIsEstablished, let request = options.previousPeriod {
+                    previousPeriodDaily = Self.codexPreviousPeriodDaily(
+                        view: view, request: request, options: options.scanOptions, rootsFingerprint: rootsFingerprint)
+                }
             } else {
                 // Claude transcripts record working directories; providers without them return no rows.
                 projects = try CostUsageScanner.loadClaudeProjectBreakdowns(
@@ -994,6 +1009,11 @@ public struct CostUsageFetcher: Sendable {
                     options: options.scanOptions,
                     reportContext: options.reportContext,
                     checkCancellation: checkCancellation)
+                previousPeriodDaily = Self.claudePreviousPeriodDaily(
+                    provider: provider,
+                    request: options.previousPeriod,
+                    options: options.scanOptions,
+                    reportContext: options.reportContext)
             }
             let native = LocalTokenScanReport(
                 daily: daily,
@@ -1035,11 +1055,14 @@ public struct CostUsageFetcher: Sendable {
                 daily = CostUsageDailyReport.merged(
                     [daily, piScanResult.report],
                     calendar: options.scanOptions.calendar)
+                // Pi rows cover the History window only, so a window they add to has nothing to compare with.
+                if !piScanResult.report.data.isEmpty { previousPeriodDaily = nil }
             }
             if provider == .codex {
                 projects = Self.mergedProjectBreakdowns(projects)
             }
             return LocalTokenScanResult(
+                previousPeriodDaily: previousPeriodDaily,
                 inclusive: LocalTokenScanReport(
                     daily: daily,
                     projects: projects,
