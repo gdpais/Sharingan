@@ -187,8 +187,8 @@ struct UsageMenuCardView: View {
         /// Provider-owned titles remain stable when the displayed sections are localized or redacted.
         var providerDetailRawTitles: [String?] = []
         var throughput: ProviderThroughputSection?
-        let openAIAPIUsage: OpenAIAPIUsageSnapshot?
-        let inlineUsageDashboard: InlineUsageDashboardModel?
+        var openAIAPIUsage: OpenAIAPIUsageSnapshot?
+        var inlineUsageDashboard: InlineUsageDashboardModel?
         var creditsText: String?
         var creditsRemaining: Double?
         var creditsShowProgress = true
@@ -198,9 +198,11 @@ struct UsageMenuCardView: View {
         var limitResetCredits: LimitResetCreditsPresentation?
         var cloudCredits: ProviderCostSection?
         var providerCost: ProviderCostSection?
-        let tokenUsage: TokenUsageSection?
-        let placeholder: String?
+        var tokenUsage: TokenUsageSection?
+        var placeholder: String?
         let progressColor: Color
+        /// The provider's card layout as applied by `applyingCardLayout`; `standard` is today's card.
+        var cardLayout = MenuCardLayoutPresentation.standard
     }
 
     let model: Model
@@ -230,7 +232,12 @@ struct UsageMenuCardView: View {
                     .padding(.bottom, Self.dividerBottomPadding(for: liveModel))
             }
 
-            if !liveModel.usesStackedDetailLayout {
+            if let order = liveModel.cardLayout.arrangedOrder {
+                MenuCardArrangedSectionsView(
+                    model: liveModel,
+                    layoutModel: self.layoutModel ?? self.model,
+                    order: order)
+            } else if !liveModel.usesStackedDetailLayout {
                 if liveModel.showsChartSwitch, let throughput = liveModel.throughput,
                    let dashboard = liveModel.inlineUsageDashboard
                 {
@@ -243,6 +250,7 @@ struct UsageMenuCardView: View {
                 } else if let throughput = liveModel.throughput {
                     ProviderThroughputContent(section: throughput, color: liveModel.progressColor)
                 }
+                MenuCardInsightChartSlot(model: liveModel)
                 if let dashboard = liveModel.inlineUsageDashboard {
                     InlineUsageDashboardContent(model: dashboard, showsChart: !liveModel.showsChartSwitch)
                 } else if !liveModel.usageNotes.isEmpty {
@@ -508,7 +516,7 @@ private struct CopyIconButton: View {
 
 /// Shared token-cost block (header, Today/window/metered/comparison lines, hint, error) used by
 /// both the inline card body and the standalone cost section; only the value-line font differs.
-private struct TokenUsageSectionContent: View {
+struct TokenUsageSectionContent: View {
     let provider: UsageProvider
     let tokenUsage: UsageMenuCardView.Model.TokenUsageSection
     let showsCodexHint: Bool
@@ -614,7 +622,7 @@ struct UsageMenuCardHeaderSectionView: View {
     }
 }
 
-private struct UsageMenuCardUsageContentView: View {
+struct UsageMenuCardUsageContentView: View {
     let model: UsageMenuCardView.Model
     let layoutModel: UsageMenuCardView.Model
     let showBottomDivider: Bool
@@ -655,6 +663,19 @@ private struct UsageMenuCardUsageContentView: View {
     }
 
     var body: some View {
+        if let order = self.model.cardLayout.arrangedOrder, !self.compactMetrics {
+            MenuCardArrangedSectionsView(
+                model: self.model,
+                layoutModel: self.layoutModel,
+                order: order,
+                includesStandaloneSections: false,
+                showBottomDivider: self.showBottomDivider)
+        } else {
+            self.standardBody
+        }
+    }
+
+    private var standardBody: some View {
         VStack(alignment: .leading, spacing: 12) {
             if let split = self.doubaoSplitMetrics {
                 if !split.coding.isEmpty {
@@ -711,6 +732,7 @@ private struct UsageMenuCardUsageContentView: View {
         } else if let throughput = self.model.throughput {
             ProviderThroughputContent(section: throughput, color: self.model.progressColor)
         }
+        MenuCardInsightChartSlot(model: self.model)
         if let dashboard = self.model.inlineUsageDashboard {
             InlineUsageDashboardContent(model: dashboard, showsChart: !self.model.showsChartSwitch)
             if self.model.quotaSubscriptionNotes.isEmpty, !self.model.subscriptionNotes.isEmpty {
@@ -801,7 +823,7 @@ struct UsageMenuCardCreditsSectionView: View {
     }
 }
 
-private struct CreditsBarContent: View {
+struct CreditsBarContent: View {
     let creditsText: String
     let showsProgress: Bool
     var progressPercent: Double?, scaleText: String?
