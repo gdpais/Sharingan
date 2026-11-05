@@ -224,8 +224,8 @@ extension UsageStore {
             return self.preservedWidgetEntryForCurrentMetric(entry)
         }
         return WidgetSnapshot(
-            entries: entries,
-            accounts: self.makeWidgetAccountEntries(now: now),
+            entries: entries.map { self.widgetEntryWithSeverityBands($0) },
+            accounts: self.makeWidgetAccountEntries(now: now).map { self.widgetAccountWithSeverityBands($0) },
             accountOverflowCounts: self.widgetAccountOverflowCounts(),
             enabledProviders: enabledProviders,
             usageBarsShowUsed: self.settings.usageBarsShowUsed,

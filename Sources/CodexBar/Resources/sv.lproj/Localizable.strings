@@ -2798,3 +2798,6 @@
 "Project trends" = "Projekttrender";
 "Change compares the last %d days with the %d days before." = "Förändringen jämför de senaste %d dagarna med de %d dagarna före.";
 "New" = "Ny";
+"quota_warning_add_threshold" = "Lägg till tröskel";
+"quota_warning_remove_threshold" = "Ta bort lägsta tröskeln";
+"quota_warning_lane_follows_weekly" = "Endast veckomarkörer, inga notiser";

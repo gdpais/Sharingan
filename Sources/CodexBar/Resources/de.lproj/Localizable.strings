@@ -2797,3 +2797,6 @@
 "Project trends" = "Projekttrends";
 "Change compares the last %d days with the %d days before." = "Die Veränderung vergleicht die letzten %d Tage mit den %d Tagen davor.";
 "New" = "Neu";
+"quota_warning_add_threshold" = "Schwelle hinzufügen";
+"quota_warning_remove_threshold" = "Niedrigste Schwelle entfernen";
+"quota_warning_lane_follows_weekly" = "Nur wöchentliche Markierungen, keine Mitteilungen";

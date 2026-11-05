@@ -2796,3 +2796,6 @@
 "Project trends" = "Projecttrends";
 "Change compares the last %d days with the %d days before." = "De verandering vergelijkt de laatste %d dagen met de %d dagen daarvoor.";
 "New" = "Nieuw";
+"quota_warning_add_threshold" = "Drempel toevoegen";
+"quota_warning_remove_threshold" = "Laagste drempel verwijderen";
+"quota_warning_lane_follows_weekly" = "Alleen wekelijkse markeringen, geen meldingen";

@@ -208,7 +208,7 @@ struct UsageTile<Header: View>: View {
                 caption: Text(WidgetLaneCopy.caption(title: lane.title, showUsed: self.showsUsed)),
                 detail: self.resetText(lane),
                 barPercent: displayed ?? 0,
-                isLow: QuotaSeverity.isLow(remaining: lane.remainingPercent),
+                isLow: QuotaSeverity.isLow(remaining: lane.remainingPercent, bands: lane.severityBands),
                 color: color,
                 numberSize: self.size.heroNumberSize,
                 spreads: spreads,
@@ -247,7 +247,8 @@ struct UsageTile<Header: View>: View {
                     showUsed: self.showsUsed),
                 remainingPercent: lane.remainingPercent,
                 color: color,
-                showsBar: self.size.showsSecondaryBars)
+                showsBar: self.size.showsSecondaryBars,
+                severityBands: lane.severityBands)
         }
         if plan.overflowCount > 0 {
             Text(W("+%@ more", String(describing: plan.overflowCount)))

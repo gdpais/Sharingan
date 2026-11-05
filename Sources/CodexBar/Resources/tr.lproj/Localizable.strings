@@ -2802,3 +2802,6 @@
 "Project trends" = "Proje eğilimleri";
 "Change compares the last %d days with the %d days before." = "Değişim, son %d günü önceki %d günle karşılaştırır.";
 "New" = "Yeni";
+"quota_warning_add_threshold" = "Eşik ekle";
+"quota_warning_remove_threshold" = "En düşük eşiği kaldır";
+"quota_warning_lane_follows_weekly" = "Yalnızca haftalık işaretler, bildirim yok";

@@ -2767,3 +2767,6 @@
 "Project trends" = "프로젝트 추세";
 "Change compares the last %d days with the %d days before." = "변화율은 최근 %d일과 그 이전 %d일을 비교합니다.";
 "New" = "신규";
+"quota_warning_add_threshold" = "임계값 추가";
+"quota_warning_remove_threshold" = "가장 낮은 임계값 제거";
+"quota_warning_lane_follows_weekly" = "주간 표시기만, 알림 없음";

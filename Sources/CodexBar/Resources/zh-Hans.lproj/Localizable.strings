@@ -2791,3 +2791,6 @@
 "Project trends" = "项目趋势";
 "Change compares the last %d days with the %d days before." = "变化比较最近 %d 天与之前 %d 天。";
 "New" = "新增";
+"quota_warning_add_threshold" = "添加阈值";
+"quota_warning_remove_threshold" = "移除最低阈值";
+"quota_warning_lane_follows_weekly" = "仅显示每周标记，不发送通知";

@@ -167,6 +167,7 @@ extension UsageStore {
                 .session: self.quotaWarningMarkerThresholds(provider: provider, window: .session),
                 .weekly: self.quotaWarningMarkerThresholds(provider: provider, window: .weekly),
             ],
+            quotaWarningLaneThresholds: self.settings.quotaWarningLaneMarkerThresholds(provider: provider),
             workDaysPerWeek: self.settings.weeklyProgressWorkDays,
             workdayTickAppearance: self.settings.workdayTickAppearance,
             paceVisible: self.settings.paceVisible,

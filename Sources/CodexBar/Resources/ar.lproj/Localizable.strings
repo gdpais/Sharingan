@@ -2803,3 +2803,6 @@
 "Project trends" = "اتجاهات المشاريع";
 "Change compares the last %d days with the %d days before." = "يقارن التغيّر آخر %d يومًا بالـ %d يومًا التي سبقتها.";
 "New" = "جديد";
+"quota_warning_add_threshold" = "إضافة حد";
+"quota_warning_remove_threshold" = "إزالة أدنى حد";
+"quota_warning_lane_follows_weekly" = "علامات أسبوعية فقط، بلا إشعارات";

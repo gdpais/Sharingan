@@ -2799,3 +2799,6 @@
 "Project trends" = "プロジェクトの推移";
 "Change compares the last %d days with the %d days before." = "変化は直近%d日間とその前の%d日間を比較しています。";
 "New" = "新規";
+"quota_warning_add_threshold" = "しきい値を追加";
+"quota_warning_remove_threshold" = "最も低いしきい値を削除";
+"quota_warning_lane_follows_weekly" = "週間マーカーのみ、通知なし";

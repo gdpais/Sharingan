@@ -2802,3 +2802,6 @@
 "Project trends" = "Trendy projektów";
 "Change compares the last %d days with the %d days before." = "Zmiana porównuje ostatnie %d dni z %d dniami wcześniej.";
 "New" = "Nowy";
+"quota_warning_add_threshold" = "Dodaj próg";
+"quota_warning_remove_threshold" = "Usuń najniższy próg";
+"quota_warning_lane_follows_weekly" = "Tylko znaczniki tygodniowe, bez powiadomień";

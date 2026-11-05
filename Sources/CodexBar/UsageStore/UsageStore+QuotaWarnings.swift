@@ -92,7 +92,11 @@ extension UsageStore {
             (.weekly, secondaryWindow, nil, secondaryWindowDisplayLabel),
         ] + extraWindows.map { (.weekly, $0.window, $0.id, $0.title) }
         if notificationsEnabled {
-            for (window, rateWindow, windowID, label) in windows {
+            let laneWindows = self.configuredQuotaWarningLanes(
+                provider: provider,
+                snapshot: snapshot,
+                excluding: Set(extraWindows.map(\.id)))
+            for (window, rateWindow, windowID, label) in windows + laneWindows {
                 self.handleQuotaWarningTransition(
                     provider: provider,
                     window: window,
@@ -105,6 +109,7 @@ extension UsageStore {
             // A missing extras payload is not authoritative; prune only when another extra window remains.
             if !extraWindows.isEmpty, self.settings.quotaWarningEnabled(provider: provider, window: .weekly) {
                 let activeIDs = Set(extraWindows.map(\.id))
+                    .union(self.settings.quotaWarningLaneOverrideIDs(provider: provider))
                 self.quotaWarningState = self.quotaWarningState.filter { key, _ in
                     key.provider != provider.instanceID || key.window != .weekly ||
                         key.accountDiscriminator != accountContext.discriminator ||
@@ -149,8 +154,12 @@ extension UsageStore {
             window: window,
             accountDiscriminator: accountContext.discriminator,
             windowID: windowID)
-        guard self.settings.quotaWarningEnabled(provider: provider, window: window) else {
-            self.clearQuotaWarningState(provider: provider, window: window)
+        guard self.settings.quotaWarningEnabled(provider: provider, window: window, laneID: windowID) else {
+            if let windowID, self.settings.hasQuotaWarningLaneOverride(provider: provider, laneID: windowID) {
+                self.quotaWarningState.removeValue(forKey: key)
+            } else {
+                self.clearQuotaWarningState(provider: provider, window: window)
+            }
             return
         }
         guard let rateWindow else {
@@ -161,7 +170,10 @@ extension UsageStore {
         guard provider != .claude || window != .session || Self.isSessionWindow(rateWindow) else { return }
         guard !rateWindow.isSyntheticPlaceholder else { return }
 
-        let thresholds = self.settings.resolvedQuotaWarningThresholds(provider: provider.instanceID, window: window)
+        let thresholds = self.settings.resolvedQuotaWarningThresholds(
+            provider: provider.instanceID,
+            window: window,
+            laneID: windowID)
         let currentRemaining = rateWindow.remainingPercent
         if provider == .claude, key.accountDiscriminator == "claude-account:unknown",
            self.quotaWarningState[key] == nil, let account = self.lastClaudeQuotaWarningAccount
@@ -220,9 +232,33 @@ extension UsageStore {
     }
 
     private func clearQuotaWarningState(provider: UsageProvider, window: QuotaWarningWindow) {
+        // Lanes with their own override keep their state; only their own switch clears it.
+        let overriddenLanes = Set(self.settings.quotaWarningLaneOverrideIDs(provider: provider))
         self.quotaWarningState = self.quotaWarningState.filter {
             $0.key.provider != provider.instanceID || $0.key.window != window
+                || $0.key.windowID.map { overriddenLanes.contains($0) } == true
         }
+    }
+
+    /// Overridden lanes the fixed lanes above do not cover: the provider's third window, or a
+    /// provider-reported extra window named by its id. Opt-in, so nothing new warns until the user
+    /// gives a lane its own setting; such lanes share the weekly state lane, keyed apart by lane id.
+    private func configuredQuotaWarningLanes(
+        provider: UsageProvider,
+        snapshot: UsageSnapshot,
+        excluding coveredIDs: Set<String>) -> [(QuotaWarningWindow, RateWindow?, String?, String?)]
+    {
+        self.settings.quotaWarningLaneOverrideIDs(provider: provider)
+            .filter { !coveredIDs.contains($0) }
+            .compactMap { laneID -> (QuotaWarningWindow, RateWindow?, String?, String?)? in
+                if laneID == QuotaWarningLaneID.tertiary {
+                    let label = ProviderDefaults.metadata[provider]?.opusLabel.map { L($0) }
+                    return (.weekly, snapshot.tertiary, laneID, label)
+                }
+                guard let named = snapshot.extraRateWindows?.first(where: { $0.id == laneID && $0.usageKnown })
+                else { return nil }
+                return (.weekly, named.window, laneID, named.title)
+            }
     }
 
     func warningAccountDisplayName(provider: UsageProvider, snapshot: UsageSnapshot) -> String? {

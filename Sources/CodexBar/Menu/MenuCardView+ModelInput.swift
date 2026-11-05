@@ -44,6 +44,8 @@ extension UsageMenuCardView.Model {
         let weeklyPace: UsagePace?
         let sessionEquivalentForecast: SessionEquivalentForecast?
         let quotaWarningThresholds: [QuotaWarningWindow: [Int]]
+        /// Marker thresholds for lanes with their own warning override, keyed by lane id.
+        let quotaWarningLaneThresholds: [String: [Int]]
         let workDaysPerWeek: Int?
         let workdayTickAppearance: WorkdayTickAppearance
         let paceVisible: Bool
@@ -93,6 +95,7 @@ extension UsageMenuCardView.Model {
             weeklyPace: UsagePace? = nil,
             sessionEquivalentForecast: SessionEquivalentForecast? = nil,
             quotaWarningThresholds: [QuotaWarningWindow: [Int]] = [:],
+            quotaWarningLaneThresholds: [String: [Int]] = [:],
             workDaysPerWeek: Int? = nil,
             workdayTickAppearance: WorkdayTickAppearance = .subtle,
             paceVisible: Bool = true,
@@ -141,6 +144,7 @@ extension UsageMenuCardView.Model {
             self.weeklyPace = weeklyPace
             self.sessionEquivalentForecast = sessionEquivalentForecast
             self.quotaWarningThresholds = quotaWarningThresholds
+            self.quotaWarningLaneThresholds = quotaWarningLaneThresholds
             self.workDaysPerWeek = workDaysPerWeek
             self.workdayTickAppearance = workdayTickAppearance
             self.paceVisible = paceVisible

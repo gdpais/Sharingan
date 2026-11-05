@@ -2798,3 +2798,6 @@
 "Project trends" = "Tendances des projets";
 "Change compares the last %d days with the %d days before." = "La variation compare les %d derniers jours aux %d jours précédents.";
 "New" = "Nouveau";
+"quota_warning_add_threshold" = "Ajouter un seuil";
+"quota_warning_remove_threshold" = "Supprimer le seuil le plus bas";
+"quota_warning_lane_follows_weekly" = "Marqueurs hebdomadaires uniquement, sans notifications";

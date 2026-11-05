@@ -88,9 +88,6 @@ enum WidgetLayout {
 
     /// The single-metric tile has no lanes to fit around, so its figure runs larger.
     static let compactMetricNumberSize: CGFloat = 36
-
-    /// Remaining percentage at or below which a lane is called out in red.
-    static let lowQuotaThreshold: Double = 10
 }
 
 // MARK: - Provider monograms
@@ -284,6 +281,7 @@ struct QuotaLaneView: View {
     let remainingPercent: Double?
     let color: Color
     var showsBar: Bool = true
+    var severityBands: QuotaSeverityBands = .standard
 
     var body: some View {
         VStack(alignment: .leading, spacing: 3) {
@@ -297,7 +295,8 @@ struct QuotaLaneView: View {
                 Text(WidgetFormat.percent(self.percent))
                     .font(.caption.weight(.semibold))
                     .monospacedDigit()
-                    .foregroundStyle(QuotaSeverity.isLow(remaining: self.remainingPercent) ? Color.red : Color.primary)
+                    .foregroundStyle(QuotaSeverity.isLow(remaining: self.remainingPercent, bands: self.severityBands)
+                        ? Color.red : Color.primary)
                     .lineLimit(1)
             }
             if self.showsBar {
@@ -307,10 +306,18 @@ struct QuotaLaneView: View {
     }
 }
 
+/// The widget's reading of the shared Core severity mapping (`QuotaSeverityBands`), so tiles follow the
+/// user's warning thresholds like the menu does. The widget keeps its own colors: critical and exhausted
+/// lanes are called out in red, warning stays neutral. The standard bands keep the 10%-left callout.
 enum QuotaSeverity {
-    static func isLow(remaining: Double?) -> Bool {
-        guard let remaining else { return false }
-        return remaining <= WidgetLayout.lowQuotaThreshold
+    static func level(remaining: Double?, bands: QuotaSeverityBands = .standard) -> QuotaSeverityLevel? {
+        guard let remaining else { return nil }
+        return bands.level(remainingPercent: remaining)
+    }
+
+    static func isLow(remaining: Double?, bands: QuotaSeverityBands = .standard) -> Bool {
+        guard let level = self.level(remaining: remaining, bands: bands) else { return false }
+        return level >= .critical
     }
 }
 

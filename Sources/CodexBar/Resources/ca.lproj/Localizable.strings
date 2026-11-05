@@ -2801,3 +2801,6 @@
 "Project trends" = "Tendències dels projectes";
 "Change compares the last %d days with the %d days before." = "El canvi compara els últims %d dies amb els %d dies anteriors.";
 "New" = "Nou";
+"quota_warning_add_threshold" = "Afegeix un llindar";
+"quota_warning_remove_threshold" = "Elimina el llindar més baix";
+"quota_warning_lane_follows_weekly" = "Només marcadors setmanals, sense notificacions";

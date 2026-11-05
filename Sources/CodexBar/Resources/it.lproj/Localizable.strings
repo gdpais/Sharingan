@@ -2803,3 +2803,6 @@
 "Project trends" = "Andamento dei progetti";
 "Change compares the last %d days with the %d days before." = "La variazione confronta gli ultimi %d giorni con i %d giorni precedenti.";
 "New" = "Nuovo";
+"quota_warning_add_threshold" = "Aggiungi soglia";
+"quota_warning_remove_threshold" = "Rimuovi la soglia più bassa";
+"quota_warning_lane_follows_weekly" = "Solo indicatori settimanali, nessuna notifica";
