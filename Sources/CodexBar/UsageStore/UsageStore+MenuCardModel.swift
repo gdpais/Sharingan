@@ -45,6 +45,7 @@ extension UsageStore {
     {
         UsageMenuCardView.Model.make(self.menuCardInput(for: provider, context: context, now: now))
             .applyingUsageItemVisibility(hiddenItemIDs: self.settings.hiddenUsageItemIDs(for: provider))
+            .applyingCardLayout(self.menuCardLayoutContext(for: provider, context: context, now: now))
     }
 
     func menuCardInput(

@@ -2807,3 +2807,11 @@
 "quota_warning_add_threshold" = "Add threshold";
 "quota_warning_remove_threshold" = "Remove lowest threshold";
 "quota_warning_lane_follows_weekly" = "Weekly markers only, no notifications";
+
+/* Card layout */
+"Card layout" = "Card layout";
+"Usage rows" = "Usage rows";
+"Plan fit" = "Plan fit";
+"Drawn inside usage rows." = "Drawn inside usage rows.";
+"Menu links" = "Menu links";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden.";

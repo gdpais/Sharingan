@@ -2802,3 +2802,11 @@
 "quota_warning_add_threshold" = "Adicionar limite";
 "quota_warning_remove_threshold" = "Remover o limite mais baixo";
 "quota_warning_lane_follows_weekly" = "Somente marcadores semanais, sem notificações";
+
+/* Card layout */
+"Card layout" = "Layout do cartão";
+"Usage rows" = "Linhas de uso";
+"Plan fit" = "Adequação do plano";
+"Drawn inside usage rows." = "Exibido dentro das linhas de uso.";
+"Menu links" = "Links do menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordene e mostre as seções do cartão do menu deste provedor e escolha o gráfico. Seções e gráficos sem dados continuam ocultos.";

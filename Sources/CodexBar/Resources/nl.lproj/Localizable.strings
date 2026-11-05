@@ -2799,3 +2799,11 @@
 "quota_warning_add_threshold" = "Drempel toevoegen";
 "quota_warning_remove_threshold" = "Laagste drempel verwijderen";
 "quota_warning_lane_follows_weekly" = "Alleen wekelijkse markeringen, geen meldingen";
+
+/* Card layout */
+"Card layout" = "Kaartindeling";
+"Usage rows" = "Gebruiksrijen";
+"Plan fit" = "Abonnementspassing";
+"Drawn inside usage rows." = "Wordt binnen de gebruiksrijen getoond.";
+"Menu links" = "Menulinks";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Orden en toon de secties van de menukaart van deze provider en kies de grafiek. Secties en grafieken zonder gegevens blijven verborgen.";

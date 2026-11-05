@@ -2806,3 +2806,11 @@
 "quota_warning_add_threshold" = "افزودن آستانه";
 "quota_warning_remove_threshold" = "حذف پایین‌ترین آستانه";
 "quota_warning_lane_follows_weekly" = "فقط نشانگرهای هفتگی، بدون اعلان";
+
+/* Card layout */
+"Card layout" = "چیدمان کارت";
+"Usage rows" = "ردیف‌های استفاده";
+"Plan fit" = "تناسب طرح";
+"Drawn inside usage rows." = "درون ردیف‌های استفاده نمایش داده می‌شود.";
+"Menu links" = "پیوندهای منو";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "بخش‌های کارت منوی این ارائه‌دهنده را مرتب کنید، نمایش دهید یا پنهان کنید و نمودار آن را انتخاب کنید. بخش‌ها و نمودارهای بدون داده پنهان می‌مانند.";

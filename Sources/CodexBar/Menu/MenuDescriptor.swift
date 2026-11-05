@@ -262,7 +262,8 @@ struct MenuDescriptor {
             let resetStyle = settings.resetTimeDisplayStyle
             let labels = Self.rateWindowLabels(provider: provider, metadata: meta, snapshot: snap)
             let presentation = ProviderDescriptorRegistry.descriptor(for: provider).presentation
-            let paceVisible = settings.paceVisible && ProviderDescriptorRegistry.descriptor(for: provider).pace
+            let paceVisible = settings.paceVisible && settings.menuCardLayout(for: provider).isVisible(.pace)
+                && ProviderDescriptorRegistry.descriptor(for: provider).pace
                 .allowsPace(dataConfidence: snap.dataConfidence)
             if let primary = snap.primary?.measured {
                 Self.appendRateWindow(
@@ -600,10 +601,12 @@ struct MenuDescriptor {
                 .appendActionMenuEntries(context: actionContext, entries: &entries)
         }
 
-        if metadata?.dashboardURL != nil {
+        // The card builder can hide these links per provider; both stay visible by default.
+        let menuLinks = targetProvider.map { store.settings.menuCardLayout(for: $0) } ?? .default
+        if metadata?.dashboardURL != nil, menuLinks.showsMenuItem(.usageDashboard) {
             entries.append(.action(L("Usage Dashboard"), .dashboard))
         }
-        if metadata?.statusPageURL != nil || metadata?.statusLinkURL != nil {
+        if metadata?.statusPageURL != nil || metadata?.statusLinkURL != nil, menuLinks.showsMenuItem(.statusPage) {
             entries.append(.action(L("Status Page"), .statusPage))
         }
         if store.settings.providerChangelogLinksEnabled, metadata?.changelogURL != nil {

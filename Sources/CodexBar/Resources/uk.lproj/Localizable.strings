@@ -2803,3 +2803,11 @@
 "quota_warning_add_threshold" = "Додати поріг";
 "quota_warning_remove_threshold" = "Видалити найнижчий поріг";
 "quota_warning_lane_follows_weekly" = "Лише тижневі маркери, без сповіщень";
+
+/* Card layout */
+"Card layout" = "Макет картки";
+"Usage rows" = "Рядки використання";
+"Plan fit" = "Відповідність плану";
+"Drawn inside usage rows." = "Відображається всередині рядків використання.";
+"Menu links" = "Посилання в меню";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Упорядкуйте розділи картки меню цього постачальника, налаштуйте їх видимість і виберіть графік. Розділи та графіки без даних залишаються прихованими.";

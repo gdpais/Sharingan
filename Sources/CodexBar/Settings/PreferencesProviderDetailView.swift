@@ -207,6 +207,8 @@ struct ProviderDetailView<SupplementaryContent: View>: View {
                     items: self.usageItems)
             }
 
+            ProviderCardLayoutSettingsView(provider: self.provider, store: self.store)
+
             if self.accountUsageOverview == nil, let errorDisplay {
                 Section {
                     ProviderErrorView(

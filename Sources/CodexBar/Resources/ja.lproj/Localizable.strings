@@ -2802,3 +2802,11 @@
 "quota_warning_add_threshold" = "しきい値を追加";
 "quota_warning_remove_threshold" = "最も低いしきい値を削除";
 "quota_warning_lane_follows_weekly" = "週間マーカーのみ、通知なし";
+
+/* Card layout */
+"Card layout" = "カードのレイアウト";
+"Usage rows" = "使用量の行";
+"Plan fit" = "プラン適合度";
+"Drawn inside usage rows." = "使用量の行の中に表示されます。";
+"Menu links" = "メニューのリンク";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "このプロバイダーのメニューカードのセクションを並べ替えて表示を切り替え、グラフを選択します。データのないセクションやグラフは非表示のままです。";

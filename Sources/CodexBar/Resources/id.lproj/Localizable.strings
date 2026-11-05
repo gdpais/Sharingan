@@ -2804,3 +2804,11 @@
 "quota_warning_add_threshold" = "Tambah ambang";
 "quota_warning_remove_threshold" = "Hapus ambang terendah";
 "quota_warning_lane_follows_weekly" = "Hanya penanda mingguan, tanpa notifikasi";
+
+/* Card layout */
+"Card layout" = "Tata letak kartu";
+"Usage rows" = "Baris penggunaan";
+"Plan fit" = "Kecocokan paket";
+"Drawn inside usage rows." = "Ditampilkan di dalam baris penggunaan.";
+"Menu links" = "Tautan menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Atur urutan dan tampilkan bagian kartu menu penyedia ini, lalu pilih grafiknya. Bagian dan grafik tanpa data tetap disembunyikan.";

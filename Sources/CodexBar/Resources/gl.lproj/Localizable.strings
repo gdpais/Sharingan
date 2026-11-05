@@ -2801,3 +2801,11 @@
 "quota_warning_add_threshold" = "Engadir limiar";
 "quota_warning_remove_threshold" = "Quitar o limiar máis baixo";
 "quota_warning_lane_follows_weekly" = "Só marcadores semanais, sen notificacións";
+
+/* Card layout */
+"Card layout" = "Deseño da tarxeta";
+"Usage rows" = "Filas de uso";
+"Plan fit" = "Axuste do plan";
+"Drawn inside usage rows." = "Móstrase dentro das filas de uso.";
+"Menu links" = "Ligazóns do menú";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordena e mostra as seccións da tarxeta do menú deste provedor e escolle o seu gráfico. As seccións e os gráficos sen datos permanecen ocultos.";

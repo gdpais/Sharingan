@@ -2801,3 +2801,11 @@
 "quota_warning_add_threshold" = "Lägg till tröskel";
 "quota_warning_remove_threshold" = "Ta bort lägsta tröskeln";
 "quota_warning_lane_follows_weekly" = "Endast veckomarkörer, inga notiser";
+
+/* Card layout */
+"Card layout" = "Kortlayout";
+"Usage rows" = "Användningsrader";
+"Plan fit" = "Planpassning";
+"Drawn inside usage rows." = "Visas inuti användningsraderna.";
+"Menu links" = "Menylänkar";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordna och visa avsnitten på den här leverantörens menykort och välj dess diagram. Avsnitt och diagram utan data förblir dolda.";
