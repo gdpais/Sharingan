@@ -175,6 +175,7 @@ sources and setup guide. The [provider ID list](provider-ids.md) is generated fr
   - The default loopback bind rejects non-loopback `Host` headers; a configured non-loopback `--host` additionally accepts its own name. No CORS, TLS, or daemon mode.
   - Endpoints: `GET /` (web UI), `GET /health`, `GET /usage`, `GET /usage?provider=<id|both|all>`, `GET /cost`, `GET /cost?provider=<id|both|all>`, `GET /dashboard/v1/snapshot` (plus `provider=<id>` and `detail=<full|shell>`).
   - `GET /dashboard/v1/snapshot` requires `Authorization: Bearer YOUR_TOKEN`; responses (and all `401`s) carry `Cache-Control: no-store`. The token is never accepted via query string. See `docs/dashboard-api.md` for the payload contract.
+  - Dashboard snapshots (and `codexbar dashboard`) add an optional `insights` block from local cost history: cost by model, insight tiles, a weekday × hour heatmap, model share over time and project trends. The web UI renders them below the provider cards; see [insights](dashboard-api.md#insights).
   - `GET /health` returns `{"status":"ok"}` plus a `version` field with the running build (e.g. `"0.37.2"`) when resolvable; clients can compare it against `codexbar --version` to detect a `serve` process still running an older binary after an update.
   - Codex usage responses include every visible Codex account, matching the menu bar switcher.
 - `codexbar cache clear` clears local CodexBar caches.
@@ -288,7 +289,7 @@ The saved app reporting period applies by default. `--period month-to-date|all` 
 - `historyCoverageIsEstablished`: `true` when the displayed Codex history covers the requested window, including an established same-scope snapshot retained while a newer bounded scan catches up; `false` when only incomplete history is available.
 - Cursor only: `meteredCostUSD` — what Cursor's plan actually deducts over the full requested window, alongside the API-rate estimate in `totals.totalCost`.
 - `daily[]`: `date`, `inputTokens`, `outputTokens`, `cacheReadTokens`, `cacheCreationTokens`, `totalTokens`, `totalCost`, `modelsUsed`, `modelBreakdowns[]` (`modelName`, `cost`)
-- Codex only: `projects[]`: `name`, `path`, `totalTokens`, `totalCost`, `daily[]`, `modelBreakdowns[]`, `sources[]`
+- Codex and Claude: `projects[]`: `name`, `path`, `totalTokens`, `totalCost`, `daily[]`, `modelBreakdowns[]`, `sources[]`
 - `totals`: `inputTokens`, `outputTokens`, `cacheReadTokens`, `cacheCreationTokens`, `totalTokens`, `totalCost`. These totals, `daily[]`, and `projects[]` retain the full requested window described by `historyDays`.
 - Claude/Vertex preliminary proxy records without final usage are excluded from totals. A positive optional `incompleteRequestCount` appears on the provider, `totals`, affected `daily[]`, and affected `modelBreakdowns[]`; complete-only payloads keep their previous shape. Known amounts remain partial subtotals, while incomplete-only amounts stay unavailable. Text output and the web dashboard mark these subtotals **Incomplete**. Usage & Spend exports include the same optional count on affected currency groups, providers, and model rows.
 - `error`: structured provider error when a fetch fails (for example Cursor requested while its cookie source is Off).
