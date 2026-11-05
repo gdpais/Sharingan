@@ -294,12 +294,15 @@ extension StatusItemController {
             return .text("none")
         }
         let displayConversion = self.costHistoryDisplayConversion(for: snapshot)
-        return .costHistory(CostHistoryChartMenuView.renderFingerprint(
+        var fingerprint = CostHistoryChartMenuView.renderFingerprint(
             from: snapshot,
             provider: provider,
             hidePersonalInfo: self.settings.hidePersonalInfo,
             displayCurrencyCode: displayConversion.currencyCode,
-            displayCostMultiplier: displayConversion.multiplier))
+            displayCostMultiplier: displayConversion.multiplier)
+        fingerprint.previousPeriodCostBitPattern = self.costHistoryPreviousPeriodCost(for: snapshot).map(\.bitPattern)
+        fingerprint.chartPreferences = self.settings.chartPreferences
+        return .costHistory(fingerprint)
     }
 
     /// Resolves the user's preferred display currency for cost-history values, falling back to
@@ -438,17 +441,27 @@ extension StatusItemController {
         }
 
         let displayConversion = self.costHistoryDisplayConversion(for: tokenSnapshot)
+        let chartPreferences = self.settings.chartPreferences
+        let historyDays = tokenSnapshot.displayHistoryDays(calendar: self.settings.costUsageBucketCalendar)
         let chartView = CostHistoryChartMenuView(
             provider: provider,
             daily: tokenSnapshot.daily,
             totalCostUSD: tokenSnapshot.last30DaysCostUSD,
             currencyCode: displayConversion.currencyCode,
             costMultiplier: displayConversion.multiplier,
-            historyDays: tokenSnapshot.displayHistoryDays(calendar: self.settings.costUsageBucketCalendar),
+            historyDays: historyDays,
             historyCoverageIsEstablished: tokenSnapshot.historyCoverageIsEstablished,
             windowLabel: tokenSnapshot.historyLabel,
             projects: provider.supportsLocalProjects ? tokenSnapshot.projects : [],
             sessions: tokenSnapshot.sessions,
+            previousPeriodCostUSD: self.costHistoryPreviousPeriodCost(for: tokenSnapshot),
+            stackByModel: chartPreferences.stackByModel,
+            chartPreferences: chartPreferences,
+            chartDaily: CostHistoryChartMenuView.plottedDaily(
+                tokenSnapshot,
+                preferences: chartPreferences,
+                historyDays: historyDays,
+                calendar: self.settings.costUsageBucketCalendar),
             hidePersonalInfo: self.settings.hidePersonalInfo,
             width: width,
             initialMetric: self.settings.costHistoryChartMetric(for: provider),

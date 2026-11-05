@@ -134,6 +134,32 @@ public enum CostHistoryModelStack {
         return segments
     }
 
+    /// The models that get their own series for every metric, so switching between cost and tokens
+    /// never swaps palette slots: ranked by cost, then tokens, then name ascending. A model counts
+    /// when either metric has a positive total, so token-only histories still rank by tokens.
+    public static func stableTopModels(
+        _ entries: [CostUsageDailyReport.Entry],
+        limit: Int = CostHistoryModelStack.maxStackedModels) -> [String]
+    {
+        let costs = self.modelTotals(entries, metric: .cost)
+        let tokens = self.modelTotals(entries, metric: .tokens)
+        let names = Set(costs.keys).union(tokens.keys).filter { (costs[$0] ?? 0) > 0 || (tokens[$0] ?? 0) > 0 }
+        let ranked = names.sorted { lhs, rhs in
+            let lhsCost = costs[lhs] ?? 0
+            let rhsCost = costs[rhs] ?? 0
+            if lhsCost != rhsCost {
+                return lhsCost > rhsCost
+            }
+            let lhsTokens = tokens[lhs] ?? 0
+            let rhsTokens = tokens[rhs] ?? 0
+            if lhsTokens != rhsTokens {
+                return lhsTokens > rhsTokens
+            }
+            return lhs < rhs
+        }
+        return Array(ranked.prefix(max(0, limit)))
+    }
+
     /// Stacks each bar against the top models of the whole range, so hovering or selecting a day
     /// never reshuffles series. Nil when no model has a positive total or no day carries a
     /// breakdown, so the chart keeps its single-color bars.
@@ -141,8 +167,18 @@ public enum CostHistoryModelStack {
         _ bars: [(entry: CostUsageDailyReport.Entry, total: Double)],
         metric: Metric) -> Stack?
     {
-        let models = self.topModels(bars.map(\.entry), metric: metric)
-        guard !models.isEmpty else { return nil }
+        self.stack(bars, metric: metric, models: self.topModels(bars.map(\.entry), metric: metric))
+    }
+
+    /// Stacks against an existing ranking (see `stableTopModels`). A ranked model without a value in
+    /// this metric keeps its rank and draws nothing; nil when none of them has a value.
+    public static func stack(
+        _ bars: [(entry: CostUsageDailyReport.Entry, total: Double)],
+        metric: Metric,
+        models: [String]) -> Stack?
+    {
+        let totals = self.modelTotals(bars.map(\.entry), metric: metric)
+        guard models.contains(where: { (totals[$0] ?? 0) > 0 }) else { return nil }
         var segmentsByDayKey: [String: [Segment]] = [:]
         for bar in bars {
             let segments = self.segments(for: bar.entry, total: bar.total, topModels: models, metric: metric)
