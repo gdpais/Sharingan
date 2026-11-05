@@ -78,6 +78,18 @@ struct SpendInsightTilesTests {
     }
 
     @Test
+    func `cost per million tokens skips days whose spend covers only part of their tokens`() throws {
+        let tiles = Self.tiles(samples: [
+            Self.sample(day: 0, cost: 3, total: 1_000_000),
+            Self.sample(day: 1, cost: 1, total: 4_000_000, costCoversTokens: false),
+        ])
+        let tile = try #require(tiles.costPerMillionTokens)
+        #expect(tile.value == 3)
+        #expect(tile.trend[0] == 3)
+        #expect(tiles.apiEquivalentCost == 4)
+    }
+
+    @Test
     func `top model share divides by all spend including unattributed spend`() throws {
         let tiles = Self.tiles(samples: [
             Self.sample(day: 0, cost: 10, models: [("claude:model-a", "model-a", 6), ("claude:model-b", "model-b", 2)]),
@@ -353,7 +365,8 @@ extension SpendInsightTilesTests {
         output: Int? = nil,
         reasoning: Int? = nil,
         total: Int? = nil,
-        models: [(id: String, name: String, cost: Double)] = []) -> SpendInsightSample
+        models: [(id: String, name: String, cost: Double)] = [],
+        costCoversTokens: Bool = true) -> SpendInsightSample
     {
         SpendInsightSample(
             sourceID: source,
@@ -365,6 +378,7 @@ extension SpendInsightTilesTests {
             cacheCreationTokens: cacheWrite,
             outputTokens: output,
             reasoningTokens: reasoning,
-            modelCosts: models.map { SpendInsightSample.ModelCost(id: $0.id, name: $0.name, cost: $0.cost) })
+            modelCosts: models.map { SpendInsightSample.ModelCost(id: $0.id, name: $0.name, cost: $0.cost) },
+            costCoversTokens: costCoversTokens)
     }
 }

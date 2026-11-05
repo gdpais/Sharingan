@@ -33,6 +33,9 @@ public struct SpendInsightSample: Sendable, Equatable {
     public let outputTokens: Int?
     public let reasoningTokens: Int?
     public let modelCosts: [ModelCost]
+    /// `false` when some of the day's tokens have no price, so `cost` covers only part of
+    /// `totalTokens`. Such days still count as spend but stay out of cost per 1M tokens.
+    public let costCoversTokens: Bool
 
     public init(
         sourceID: String,
@@ -44,7 +47,8 @@ public struct SpendInsightSample: Sendable, Equatable {
         cacheCreationTokens: Int? = nil,
         outputTokens: Int? = nil,
         reasoningTokens: Int? = nil,
-        modelCosts: [ModelCost] = [])
+        modelCosts: [ModelCost] = [],
+        costCoversTokens: Bool = true)
     {
         self.sourceID = sourceID
         self.day = day
@@ -56,6 +60,7 @@ public struct SpendInsightSample: Sendable, Equatable {
         self.outputTokens = Self.nonnegative(outputTokens)
         self.reasoningTokens = Self.nonnegative(reasoningTokens)
         self.modelCosts = modelCosts.filter { Self.validCost($0.cost) != nil }
+        self.costCoversTokens = costCoversTokens
     }
 
     private static func validCost(_ value: Double?) -> Double? {
@@ -165,7 +170,7 @@ public struct SpendInsightPromptSplit: Sendable, Equatable {
 /// - Cache hit rate: cache reads divided by all prompt tokens (uncached input, cache writes and cache
 ///   reads; see `SpendInsightPromptSplit`). Only sources that report cache reads take part.
 /// - Cost per 1M tokens: spend divided by all tokens (cache reads included) times one million, over
-///   samples that report both spend and tokens.
+///   samples that report both spend and tokens and price all of their tokens.
 /// - Top model share: the top-spending model's spend divided by all spend on days that report spend,
 ///   including spend no model claims.
 ///
@@ -376,7 +381,7 @@ extension SpendInsightTiles {
                 }
                 // Model rows can only claim spend the day reports; never let them exceed it.
                 self.shareSpend += max(cost, attributed)
-                if let tokens = sample.totalTokens {
+                if let tokens = sample.totalTokens, sample.costCoversTokens {
                     self.pairedCost += cost
                     let addition = self.pairedTokens.addingReportingOverflow(tokens)
                     self.pairedTokensOverflowed = self.pairedTokensOverflowed || addition.overflow

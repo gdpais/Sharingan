@@ -44,7 +44,20 @@ extension SpendDashboardModel {
                 cacheCreationTokens: entry.cacheCreationTokens,
                 outputTokens: entry.outputTokens,
                 reasoningTokens: entry.reasoningTokens,
-                modelCosts: cost == nil ? [] : Self.insightModelCosts(entry, summary: summary))
+                modelCosts: cost == nil ? [] : Self.insightModelCosts(entry, summary: summary),
+                costCoversTokens: Self.insightCostCoversTokens(entry))
+        }
+    }
+
+    /// Unpriced, unmetered or incomplete requests keep their tokens but add no spend, so the day's
+    /// cost would understate cost per 1M tokens.
+    private static func insightCostCoversTokens(_ entry: CostUsageDailyReport.Entry) -> Bool {
+        guard entry.coverageCounts.unpriced == 0,
+              entry.coverageCounts.unmetered == 0,
+              entry.incompleteRequestCount == 0
+        else { return false }
+        return !(entry.modelBreakdowns ?? []).contains { breakdown in
+            Self.validCost(breakdown.costUSD) == nil && (breakdown.totalTokens ?? 0) > 0
         }
     }
 

@@ -11,6 +11,7 @@ struct SpendInsightTilesRowTests {
         #expect(covered.insightInputs.period == SpendInsightPeriod(start: Self.day("2026-07-10"), dayCount: 7))
         #expect(covered.insightInputs.samples.map(\.day) == [Self.day("2026-07-16")])
         #expect(covered.insightInputs.samples.first?.cost == 2)
+        #expect(covered.insightInputs.samples.first?.costCoversTokens == true)
         #expect(covered.insightInputs.previousSamples?.map(\.day) == [Self.day("2026-07-08")])
 
         let tiles = SpendInsightTiles(inputs: covered.insightInputs, calendar: covered.calendar, planMonthlyPrice: nil)
@@ -32,6 +33,27 @@ struct SpendInsightTilesRowTests {
         let menu = try #require(Self.group(historyDays: 30, includesInsightTiles: false))
         #expect(menu.insightInputs == SpendInsightInputs())
         #expect(menu.totalCost == 2)
+    }
+
+    @Test
+    func `days with unpriced tokens stay out of cost per million tokens`() throws {
+        let partlyPriced = CostUsageDailyReport.Entry(
+            date: "2026-07-16",
+            inputTokens: 2_000_000,
+            outputTokens: 0,
+            totalTokens: 2_000_000,
+            costUSD: 2,
+            modelsUsed: ["test-model", "unpriced-model"],
+            modelBreakdowns: [
+                .init(modelName: "test-model", costUSD: 2, totalTokens: 1_000_000),
+                .init(modelName: "unpriced-model", costUSD: nil, totalTokens: 1_000_000),
+            ])
+        let group = try #require(Self.group(historyDays: 30, daily: [partlyPriced]))
+        #expect(group.insightInputs.samples.map(\.costCoversTokens) == [false])
+
+        let tiles = SpendInsightTiles(inputs: group.insightInputs, calendar: group.calendar, planMonthlyPrice: nil)
+        #expect(tiles.apiEquivalentCost == 2)
+        #expect(tiles.costPerMillionTokens == nil)
     }
 
     @Test
