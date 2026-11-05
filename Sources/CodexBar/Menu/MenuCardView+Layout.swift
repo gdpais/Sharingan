@@ -228,22 +228,30 @@ enum MenuCardArrangement {
         includesStandaloneSections: Bool) -> [MenuCardSectionKind]
     {
         order.filter { kind in
-            switch kind {
-            case .usage:
-                self.usageRowsModel(model).hasCardUsageBlock
-            case .pace:
-                false
-            case .chart:
-                model.throughput != nil || model.cardLayout.insightChart != nil ||
-                    model.inlineUsageDashboard?.points.isEmpty == false
-            case .credits:
-                includesStandaloneSections && model.creditsText != nil
-            case .extraUsage:
-                includesStandaloneSections && model.providerCost != nil
-            case .cost:
-                model.inlineUsageDashboard?.hasNonChartContent == true ||
-                    (includesStandaloneSections && model.tokenUsage != nil)
-            }
+            self.hasContent(kind, model: model, includesStandaloneSections: includesStandaloneSections)
+        }
+    }
+
+    static func hasContent(
+        _ kind: MenuCardSectionKind,
+        model: UsageMenuCardView.Model,
+        includesStandaloneSections: Bool) -> Bool
+    {
+        switch kind {
+        case .usage:
+            self.usageRowsModel(model).hasCardUsageBlock
+        case .pace:
+            false
+        case .chart:
+            model.throughput != nil || model.cardLayout.insightChart != nil ||
+                model.inlineUsageDashboard?.points.isEmpty == false
+        case .credits:
+            includesStandaloneSections && model.creditsText != nil
+        case .extraUsage:
+            includesStandaloneSections && model.providerCost != nil
+        case .cost:
+            model.inlineUsageDashboard?.hasNonChartContent == true ||
+                (includesStandaloneSections && model.tokenUsage != nil)
         }
     }
 
