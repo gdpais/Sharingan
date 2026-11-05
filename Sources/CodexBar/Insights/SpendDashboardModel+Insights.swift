@@ -16,38 +16,6 @@ struct SpendDashboardInsights: Equatable, Sendable {
     var projectIdentities: [String: SpendDashboardModel.ProjectRow] = [:]
 }
 
-/// Builds the insight series on first use, so dashboard models built for the menu, which never draws them,
-/// skip the work. Group copies share a memo; its inputs are immutable and cache state does not affect equality.
-final class SpendDashboardInsightsMemo: @unchecked Sendable, Equatable {
-    private let lock = NSLock()
-    private let build: () -> SpendDashboardInsights
-    private var cached: SpendDashboardInsights?
-
-    init(build: @escaping () -> SpendDashboardInsights = { SpendDashboardInsights() }) {
-        self.build = build
-    }
-
-    static func == (_: SpendDashboardInsightsMemo, _: SpendDashboardInsightsMemo) -> Bool {
-        true
-    }
-
-    var value: SpendDashboardInsights {
-        self.lock.withLock {
-            if let cached = self.cached { return cached }
-            let insights = self.build()
-            self.cached = insights
-            return insights
-        }
-    }
-}
-
-extension SpendDashboardModel.CurrencyGroup {
-    /// Model share and project trends for the Usage & Spend window, built when first read.
-    var insights: SpendDashboardInsights {
-        self.insightsMemo.value
-    }
-}
-
 extension SpendDashboardModel {
     private struct ModelShareInput {
         var observations: [SpendShareOverTime.Observation] = []
