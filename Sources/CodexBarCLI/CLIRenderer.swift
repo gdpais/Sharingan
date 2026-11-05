@@ -571,6 +571,9 @@ enum CLIRenderer {
                         value: "\(point.value.formatted())\(unit)",
                         useColor: useColor))
                 }
+                for line in self.chartSeriesTextLines(chart) {
+                    lines.append(self.labelValueLine(line.label, value: line.value, useColor: useColor))
+                }
             }
         }
     }

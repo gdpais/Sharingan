@@ -20,6 +20,8 @@ struct DashboardSnapshotPayload: Encodable {
     let staleAfterSeconds: Int
     let host: DashboardHostPayload
     let providers: [DashboardProviderPayload]
+    /// Additive schema-v1 insight charts; omitted when no local cost history supports them.
+    var insights: DashboardInsightsPayload?
 }
 
 struct DashboardHostPayload: Encodable {
