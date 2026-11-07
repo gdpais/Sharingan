@@ -30,6 +30,9 @@ public struct WidgetSnapshot: Codable, Sendable {
         public let quotaOwnerKey: String?
         public let balanceText: String?
         public let details: [ProviderDetailSection]?
+        /// Days of cost history the app keeps for this provider; `dailyUsage` spans at most this many. Optional
+        /// so snapshots written before it existed still decode.
+        public let dailyUsageHistoryDays: Int?
 
         public init(
             instanceID: ProviderInstanceID,
@@ -45,7 +48,8 @@ public struct WidgetSnapshot: Codable, Sendable {
             providerCost: ProviderCostSnapshot? = nil,
             quotaOwnerKey: String? = nil,
             balanceText: String? = nil,
-            details: [ProviderDetailSection]? = nil)
+            details: [ProviderDetailSection]? = nil,
+            dailyUsageHistoryDays: Int? = nil)
         {
             self.provider = instanceID
             self.updatedAt = updatedAt
@@ -61,6 +65,7 @@ public struct WidgetSnapshot: Codable, Sendable {
             self.quotaOwnerKey = quotaOwnerKey
             self.balanceText = balanceText
             self.details = details
+            self.dailyUsageHistoryDays = dailyUsageHistoryDays
         }
 
         public init(
@@ -77,7 +82,8 @@ public struct WidgetSnapshot: Codable, Sendable {
             providerCost: ProviderCostSnapshot? = nil,
             quotaOwnerKey: String? = nil,
             balanceText: String? = nil,
-            details: [ProviderDetailSection]? = nil)
+            details: [ProviderDetailSection]? = nil,
+            dailyUsageHistoryDays: Int? = nil)
         {
             self.init(
                 instanceID: provider.instanceID,
@@ -93,7 +99,8 @@ public struct WidgetSnapshot: Codable, Sendable {
                 providerCost: providerCost,
                 quotaOwnerKey: quotaOwnerKey,
                 balanceText: balanceText,
-                details: details)
+                details: details,
+                dailyUsageHistoryDays: dailyUsageHistoryDays)
         }
     }
 
