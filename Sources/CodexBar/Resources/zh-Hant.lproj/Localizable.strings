@@ -2826,3 +2826,12 @@
 "Provider accents" = "供應商強調色";
 "Colorblind-safe" = "色盲友善";
 "Monochrome" = "單色";
+/* Widget options */
+"Match app" = "跟隨 App";
+"Used" = "已用";
+"Last 7 days" = "近 7 天";
+"Last 90 days" = "近 90 天";
+"All providers" = "所有提供者";
+"Name" = "名稱";
+"Switcher" = "切換器";
+"Choose which providers the switcher shows and their order." = "選擇切換器顯示哪些提供者及其順序。";

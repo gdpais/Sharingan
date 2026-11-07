@@ -36,7 +36,8 @@ Persistence must finish before requesting a timeline reload. Tests opt in with a
 - Keep data shape in sync with `WidgetSnapshot` in the main app.
 
 ## Widget types
-- **CodexBar Switcher** (`CodexBarSwitcherWidget`): static provider switcher widget, small/medium/large.
+- **CodexBar Switcher** (`CodexBarSwitcherWidget`): provider switcher widget, small/medium/large. Optional
+  **Providers** (Default or All providers) and **Sort by** (Default, Usage or Name) settings.
 - **CodexBar Usage** (`CodexBarUsageWidget`): configurable provider usage widget, small/medium/large.
 - **CodexBar Account Usage** (`CodexBarAccountUsageWidget`): pins one saved account’s quota windows, small/medium/large.
 - **CodexBar Accounts** (`CodexBarAccountsWidget`): quota-only overview for one provider, medium/large.
@@ -97,15 +98,28 @@ JSON compatibility does not prove installed WidgetKit upgrade/rollback behavior.
    separately from synthetic rendering fixtures, with personal information hidden.
 
 ## Provider picker support
-The configurable provider widgets currently expose:
-Codex, Claude, Gemini, Alibaba, Alibaba Token Plan, Qwen Cloud, Antigravity, Cursor, z.ai / GLM,
-Copilot, Devin, MiniMax, Kilo, OpenCode, OpenCode Go, Mistral, Kimi Code, DeepSeek, OpenRouter, and Pi.
+The **Provider** picker of the Usage, History, Accounts, Metric and Account Usage widgets lists every enabled
+provider with an entry in the latest saved snapshot, sorted by display name. Before the app has published any
+provider it offers the original set: Codex, Claude, Gemini, Alibaba, Alibaba Token Plan, Qwen Cloud,
+Antigravity, Cursor, z.ai / GLM, Copilot, Devin, MiniMax, Kilo, OpenCode, OpenCode Go, Mistral, Kimi Code,
+DeepSeek, OpenRouter, and Pi. `ProviderChoice` is a compile-time catalog of every built-in provider; saved
+widgets keep their stored raw values, so no widget needs reconfiguring.
+
+`ProviderSelectionIntent` also carries display options. Each defaults to the earlier output:
+- **Metric**: Match app (the app's used/remaining setting), Remaining, or Used. Usage and Accounts.
+- **Window**: Automatic (the most constrained lane), Session, Weekly, or Monthly picks the headline lane by
+  its duration. A provider without that window keeps the automatic headline. Usage and Accounts.
+- **Range**: Match app (the app's cost history setting), Last 7, 30, or 90 days. History and the large Usage
+  tile. Missing days inside the app's history draw as zero; days before it are left out, so 90 days needs a
+  cost history range of at least 90 days.
+
+The Switcher's **Default** provider set is the original set above, in the app's order. **All providers** adds
+every enabled provider. The selected provider is still shared by all Switchers; only a Switcher with the
+default provider set repairs a stored selection it does not list.
 
 DeepSeek shows its credit balance without a quota bar because it reports no quota denominator.
 OpenRouter shows its remaining credits alongside a configured API-key limit, or as the headline when
 the key is uncapped. The Metric widget's **Credits left** choice shows the same balance for both providers.
-
-Providers without a `ProviderChoice` case can still be present in the app snapshot, but they are not selectable from the widget configuration UI yet.
 
 Burn-down provider choices are filtered from the enabled providers in the latest saved snapshot. A quota
 qualifies when it has a finite usage percentage, a positive `windowMinutes`, a reset date, and is not a

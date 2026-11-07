@@ -2849,3 +2849,12 @@
 "Provider accents" = "Акцентные цвета провайдеров";
 "Colorblind-safe" = "Для дальтоников";
 "Monochrome" = "Монохромная";
+/* Widget options */
+"Match app" = "Как в приложении";
+"Used" = "Использовано";
+"Last 7 days" = "Последние 7 дней";
+"Last 90 days" = "Последние 90 дней";
+"All providers" = "Все провайдеры";
+"Name" = "Название";
+"Switcher" = "Коммутатор";
+"Choose which providers the switcher shows and their order." = "Выберите, каких провайдеров показывает коммутатор и в каком порядке.";

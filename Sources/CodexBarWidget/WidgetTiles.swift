@@ -65,6 +65,7 @@ enum WidgetTileSize {
 /// `WidgetTileSize` rather than a separate near-duplicate view.
 struct UsageTile<Header: View>: View {
     @Environment(\.widgetUsageShowsUsed) private var showsUsed
+    @Environment(\.widgetUsageOptions) private var options
     let entry: WidgetSnapshot.ProviderEntry
     let size: WidgetTileSize
     @ViewBuilder let header: () -> Header
@@ -73,13 +74,18 @@ struct UsageTile<Header: View>: View {
         let color = WidgetColors.color(for: self.entry.provider)
         // The provider's compact row cap curates what a tile may LIST; it must not decide which
         // lane is binding. Headline and overflow are computed against the full set.
-        let allLanes = WidgetTileLane.lanes(for: self.entry)
+        // A configured headline window only changes which lane may headline; listing stays the provider's.
+        let allLanes = WidgetHeadlineWindow.apply(
+            self.options.window,
+            to: WidgetTileLane.lanes(for: self.entry),
+            entry: self.entry)
         let displayLanes = self.laneLimit == nil
             ? allLanes
             : WidgetTileLane.lanes(for: self.entry, limit: self.laneLimit)
+        let history = WidgetHistoryRange.series(for: self.entry, range: self.options.historyRange, now: Date())
         let hasChart = self.size.showsChart(
             laneCount: allLanes.count,
-            hasHistory: !self.entry.dailyUsage.isEmpty)
+            hasHistory: !history.points.isEmpty)
         let fallback = allLanes.contains(where: \.isHeadlineCandidate) ? nil : WidgetFallbackHero.make(for: self.entry)
         let metrics = WidgetMetricRows.rows(
             for: self.entry,
@@ -148,9 +154,10 @@ struct UsageTile<Header: View>: View {
                     self.metrics(metrics)
                     if hasChart {
                         UsageHistoryChart(
-                            points: self.entry.dailyUsage,
+                            points: history.points,
                             color: color,
-                            currencyCode: self.entry.tokenUsage?.currencyCode)
+                            currencyCode: self.entry.tokenUsage?.currencyCode,
+                            dayCount: history.dayCount)
                             .frame(minHeight: 66, maxHeight: .infinity)
                     } else {
                         Spacer(minLength: 0)

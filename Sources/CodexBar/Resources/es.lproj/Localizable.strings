@@ -2846,3 +2846,12 @@
 "Provider accents" = "Colores de acento de los proveedores";
 "Colorblind-safe" = "Apta para daltonismo";
 "Monochrome" = "Monocromo";
+/* Widget options */
+"Match app" = "Igual que la app";
+"Used" = "Usado";
+"Last 7 days" = "Últimos 7 días";
+"Last 90 days" = "Últimos 90 días";
+"All providers" = "Todos los proveedores";
+"Name" = "Nombre";
+"Switcher" = "Conmutador";
+"Choose which providers the switcher shows and their order." = "Elige qué proveedores muestra el conmutador y en qué orden.";

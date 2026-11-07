@@ -2840,3 +2840,12 @@
 "Provider accents" = "提供商强调色";
 "Colorblind-safe" = "色盲友好";
 "Monochrome" = "单色";
+/* Widget options */
+"Match app" = "跟随应用";
+"Used" = "已使用";
+"Last 7 days" = "近 7 天";
+"Last 90 days" = "近 90 天";
+"All providers" = "所有提供商";
+"Name" = "名称";
+"Switcher" = "切换器";
+"Choose which providers the switcher shows and their order." = "选择切换器显示哪些提供商以及它们的顺序。";

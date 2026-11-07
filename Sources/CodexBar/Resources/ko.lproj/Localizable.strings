@@ -2816,3 +2816,12 @@
 "Provider accents" = "제공자 강조 색상";
 "Colorblind-safe" = "색각 이상 친화";
 "Monochrome" = "흑백";
+/* Widget options */
+"Match app" = "앱 설정 따르기";
+"Used" = "사용됨";
+"Last 7 days" = "지난 7일";
+"Last 90 days" = "지난 90일";
+"All providers" = "모든 공급자";
+"Name" = "이름";
+"Switcher" = "스위처";
+"Choose which providers the switcher shows and their order." = "스위처에 표시할 공급자와 순서를 선택합니다.";

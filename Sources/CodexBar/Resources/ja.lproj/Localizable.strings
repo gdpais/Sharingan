@@ -2848,3 +2848,12 @@
 "Provider accents" = "プロバイダのアクセントカラー";
 "Colorblind-safe" = "色覚多様性対応";
 "Monochrome" = "モノクロ";
+/* Widget options */
+"Match app" = "アプリに合わせる";
+"Used" = "使用済み";
+"Last 7 days" = "過去7日間";
+"Last 90 days" = "過去90日間";
+"All providers" = "すべてのプロバイダ";
+"Name" = "名前";
+"Switcher" = "スイッチャー";
+"Choose which providers the switcher shows and their order." = "スイッチャーに表示するプロバイダとその順序を選択します。";

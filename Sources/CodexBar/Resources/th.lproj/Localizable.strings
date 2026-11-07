@@ -2850,3 +2850,12 @@
 "Provider accents" = "สีเน้นของผู้ให้บริการ";
 "Colorblind-safe" = "เหมาะสำหรับผู้ที่มีภาวะตาบอดสี";
 "Monochrome" = "ขาวดำ";
+/* Widget options */
+"Match app" = "ตามแอป";
+"Used" = "ใช้แล้ว";
+"Last 7 days" = "7 วันที่ผ่านมา";
+"Last 90 days" = "90 วันที่ผ่านมา";
+"All providers" = "ผู้ให้บริการทั้งหมด";
+"Name" = "ชื่อ";
+"Switcher" = "สวิตช์";
+"Choose which providers the switcher shows and their order." = "เลือกผู้ให้บริการที่สวิตช์แสดงและลำดับการแสดง";

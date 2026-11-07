@@ -2850,3 +2850,12 @@
 "Provider accents" = "Warna aksen penyedia";
 "Colorblind-safe" = "Ramah buta warna";
 "Monochrome" = "Monokrom";
+/* Widget options */
+"Match app" = "Ikuti aplikasi";
+"Used" = "Terpakai";
+"Last 7 days" = "7 hari terakhir";
+"Last 90 days" = "90 hari terakhir";
+"All providers" = "Semua penyedia";
+"Name" = "Nama";
+"Switcher" = "Pengalih";
+"Choose which providers the switcher shows and their order." = "Pilih penyedia yang ditampilkan pengalih dan urutannya.";

@@ -2852,3 +2852,12 @@
 "Provider accents" = "Colori accento dei provider";
 "Colorblind-safe" = "Adatta al daltonismo";
 "Monochrome" = "Monocromatica";
+/* Widget options */
+"Match app" = "Come nell'app";
+"Used" = "Utilizzato";
+"Last 7 days" = "Ultimi 7 giorni";
+"Last 90 days" = "Ultimi 90 giorni";
+"All providers" = "Tutti i provider";
+"Name" = "Nome";
+"Switcher" = "Commutatore";
+"Choose which providers the switcher shows and their order." = "Scegli quali provider mostra il commutatore e in quale ordine.";

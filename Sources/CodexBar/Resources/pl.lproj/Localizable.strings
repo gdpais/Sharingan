@@ -2851,3 +2851,12 @@
 "Provider accents" = "Kolory akcentu dostawców";
 "Colorblind-safe" = "Przyjazna daltonistom";
 "Monochrome" = "Monochromatyczna";
+/* Widget options */
+"Match app" = "Jak w aplikacji";
+"Used" = "Wykorzystano";
+"Last 7 days" = "Ostatnie 7 dni";
+"Last 90 days" = "Ostatnie 90 dni";
+"All providers" = "Wszyscy dostawcy";
+"Name" = "Nazwa";
+"Switcher" = "Przełącznik";
+"Choose which providers the switcher shows and their order." = "Wybierz, których dostawców pokazuje przełącznik i w jakiej kolejności.";

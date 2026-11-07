@@ -2849,3 +2849,12 @@
 "Provider accents" = "Акцентні кольори провайдерів";
 "Colorblind-safe" = "Для людей з дальтонізмом";
 "Monochrome" = "Монохромна";
+/* Widget options */
+"Match app" = "Як у застосунку";
+"Used" = "Використано";
+"Last 7 days" = "Останні 7 днів";
+"Last 90 days" = "Останні 90 днів";
+"All providers" = "Усі провайдери";
+"Name" = "Назва";
+"Switcher" = "Перемикач";
+"Choose which providers the switcher shows and their order." = "Виберіть, яких провайдерів показує перемикач і в якому порядку.";

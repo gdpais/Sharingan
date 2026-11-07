@@ -2852,3 +2852,12 @@
 "Provider accents" = "رنگ‌های تأکید ارائه‌دهندگان";
 "Colorblind-safe" = "مناسب کوررنگی";
 "Monochrome" = "تک‌رنگ";
+/* Widget options */
+"Match app" = "مطابق برنامه";
+"Used" = "مصرف‌شده";
+"Last 7 days" = "۷ روز آخر";
+"Last 90 days" = "۹۰ روز آخر";
+"All providers" = "همه ارائه‌دهندگان";
+"Name" = "نام";
+"Switcher" = "سوئیچر";
+"Choose which providers the switcher shows and their order." = "انتخاب کنید سوئیچر کدام ارائه‌دهندگان را و به چه ترتیبی نشان دهد.";

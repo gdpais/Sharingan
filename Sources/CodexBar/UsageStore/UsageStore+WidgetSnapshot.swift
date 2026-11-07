@@ -337,7 +337,8 @@ extension UsageStore {
             providerCost: providerCost,
             quotaOwnerKey: snapshot != nil ? claudeQuotaOwnerKey : preservedClaudeUsage?.quotaOwnerKey,
             balanceText: balanceText,
-            details: snapshot.flatMap { $0.details.isEmpty ? nil : $0.details })
+            details: snapshot.flatMap { $0.details.isEmpty ? nil : $0.details },
+            dailyUsageHistoryDays: tokenSnapshot?.historyDays)
     }
 
     private func claudeWidgetQuotaOwnerKey() -> String {

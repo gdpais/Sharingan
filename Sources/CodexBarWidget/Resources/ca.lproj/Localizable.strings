@@ -39,7 +39,9 @@
 "Activity" = "Activitat";
 "Add-on credits" = "Complement Crèdits";
 "Agent" = "Agent";
+"All providers" = "Tots els proveïdors";
 "Amp Free" = "Amp Gratuït";
+"Automatic" = "Automàtic";
 "Balance" = "Saldo";
 "Base" = "Base";
 "Billing" = "Facturació";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Proveïdor de consum de quotes";
 "Chat" = "Xatejar";
 "Choose an account" = "Trieu un compte";
+"Choose which providers the switcher shows and their order." = "Tria quins proveïdors mostra el commutador i en quin ordre.";
 "Claude and GPT" = "Claude i GPT";
 "Code 7-day" = "Codi Quota de 7 dies";
 "Code review" = "Revisió de codi";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "tokens diari gratuït";
 "Daily refresh" = "Actualització diària";
 "Daily usage" = "Ús diari";
+"Default" = "Per defecte";
 "Deployment" = "Desplegament";
 "Edit predictions" = "Edita les prediccions";
 "Enable a provider in CodexBar → Settings → Providers." = "Activeu un proveïdor a Sharingan → Configuració → Proveïdors.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo Pass";
 "Last %d days" = "Últims %d dies";
 "Last 30 days" = "Últims 30 dies";
+"Last 7 days" = "Últims 7 dies";
+"Last 90 days" = "Últims 90 dies";
+"Match app" = "Com a l'app";
 "Memory" = "Ús de memòria";
 "Metric" = "Mètrica";
 "Model quota" = "Model Quota";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Pressupost mensual";
 "Monthly credits" = "Crèdits mensual";
 "Monthly quota" = "Quota mensual";
+"Name" = "Nom";
 "No data" = "Sense dades";
 "Not reported by %@" = "No informat per %@";
 "On-demand" = "Ús sota demanda";
@@ -119,11 +127,14 @@
 "Provider" = "Proveïdor";
 "Provider %@" = "Proveïdor %@";
 "Provider + Metric" = "Proveïdor + Mètrica";
+"Providers" = "Proveïdors";
 "Purchased" = "Comprat";
 "Quota" = "Quota";
 "Ran out" = "S'ha esgotat la quota";
+"Range" = "Interval";
 "Rate limit" = "Límit de sol·licituds";
 "Refill" = "Omplir";
+"Remaining" = "Restant";
 "Remaining budget compared with an ideal steady burn rate." = "Pressupost restant en comparació amb una taxa de combustió constant ideal.";
 "Requests" = "Sol·licituds";
 "Reset: %@" = "Restableix: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Sessió i ús setmanal amb Crèdits i costos.";
 "Shared pool" = "Quota compartida";
 "Sonnet" = "Sonnet";
+"Sort by" = "Ordena per";
 "Spend" = "Despesa";
 "Standard" = "Estàndard";
 "Status" = "Estat";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Canvia de proveïdor";
 "Switch the provider shown in the widget." = "Canvia el proveïdor que es mostra al widget.";
 "Switch to %@" = "Canvia a %@";
+"Switcher" = "Commutador";
 "Team budget" = "Pressupost de l'equip";
 "Third Party" = "Tercera part";
 "Third quota" = "Tercera quota";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Límits d'ús i restabliment del compte enrere per a un compte desat.";
 "Usage widget with a provider switcher." = "Giny d'ús amb un commutador de proveïdors.";
 "Usage window" = "Finestra d'ús";
+"Used" = "Utilitzat";
 "Voices" = "Veus";
 "Weekly" = "Setmanal";
 "Weekly (7-day)" = "Setmanal (7 dies)";

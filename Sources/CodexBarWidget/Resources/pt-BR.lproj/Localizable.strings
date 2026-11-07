@@ -39,7 +39,9 @@
 "Activity" = "Atividade";
 "Add-on credits" = "Complemento Créditos";
 "Agent" = "Agente";
+"All providers" = "Todos os provedores";
 "Amp Free" = "Amp Grátis";
+"Automatic" = "Automático";
 "Balance" = "Saldo";
 "Base" = "base";
 "Billing" = "Faturamento";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Provedor de burndown Cota";
 "Chat" = "Bate-papo";
 "Choose an account" = "Escolha uma conta";
+"Choose which providers the switcher shows and their order." = "Escolha quais provedores o comutador mostra e em que ordem.";
 "Claude and GPT" = "Claude e GPT";
 "Code 7-day" = "Código Cota de 7 dias";
 "Code review" = "Revisão de código";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "tokens diário grátis";
 "Daily refresh" = "Atualização diária";
 "Daily usage" = "Uso diário";
+"Default" = "Padrão";
 "Deployment" = "Implantação";
 "Edit predictions" = "Editar previsões";
 "Enable a provider in CodexBar → Settings → Providers." = "Ative um provedor em Sharingan → Ajustes → Provedores.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Passe Kilo";
 "Last %d days" = "Últimos %d dias";
 "Last 30 days" = "Últimos 30 dias";
+"Last 7 days" = "Últimos 7 dias";
+"Last 90 days" = "Últimos 90 dias";
+"Match app" = "Igual ao app";
 "Memory" = "Uso de memória";
 "Metric" = "Métrica";
 "Model quota" = "Modelo Cota";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Orçamento mensal";
 "Monthly credits" = "Mensal Créditos";
 "Monthly quota" = "Mensal Cota";
+"Name" = "Nome";
 "No data" = "Sem dados";
 "Not reported by %@" = "Não relatado por %@";
 "On-demand" = "Uso sob demanda";
@@ -119,11 +127,14 @@
 "Provider" = "Provedor";
 "Provider %@" = "Provedor %@";
 "Provider + Metric" = "Provedor + Métrica";
+"Providers" = "Provedores";
 "Purchased" = "Comprado";
 "Quota" = "Cota";
 "Ran out" = "Cota esgotado";
+"Range" = "Intervalo";
 "Rate limit" = "Limite de taxa";
 "Refill" = "Reabastecer";
+"Remaining" = "Restante";
 "Remaining budget compared with an ideal steady burn rate." = "Orçamento restante comparado com uma taxa de consumo constante ideal.";
 "Requests" = "Requisições";
 "Reset: %@" = "Redefinir: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Sessão e uso semanal com Créditos e custos.";
 "Shared pool" = "Cota compartilhada";
 "Sonnet" = "Sonnet";
+"Sort by" = "Ordenar por";
 "Spend" = "Gastos";
 "Standard" = "Padrão";
 "Status" = "Estado";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Mudar de provedor";
 "Switch the provider shown in the widget." = "Mude o provedor mostrado no widget.";
 "Switch to %@" = "Mudar para %@";
+"Switcher" = "Comutador";
 "Team budget" = "Orçamento da equipe";
 "Third Party" = "Terceiro";
 "Third quota" = "Terceiro Cota";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Limites de uso e redefinição de contagens regressivas para uma conta salva.";
 "Usage widget with a provider switcher." = "Widget de uso com alternador de provedor.";
 "Usage window" = "Janela de uso";
+"Used" = "Usado";
 "Voices" = "Vozes";
 "Weekly" = "Semanal";
 "Weekly (7-day)" = "Semanalmente (7 dias)";

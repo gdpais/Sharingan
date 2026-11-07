@@ -2848,3 +2848,12 @@
 "Provider accents" = "Cores de destaque dos provedores";
 "Colorblind-safe" = "Adequada para daltonismo";
 "Monochrome" = "Monocromática";
+/* Widget options */
+"Match app" = "Igual ao app";
+"Used" = "Usado";
+"Last 7 days" = "Últimos 7 dias";
+"Last 90 days" = "Últimos 90 dias";
+"All providers" = "Todos os provedores";
+"Name" = "Nome";
+"Switcher" = "Comutador";
+"Choose which providers the switcher shows and their order." = "Escolha quais provedores o comutador mostra e em que ordem.";

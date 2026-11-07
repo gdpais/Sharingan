@@ -2847,3 +2847,12 @@
 "Provider accents" = "Couleurs d'accentuation des fournisseurs";
 "Colorblind-safe" = "Adaptée au daltonisme";
 "Monochrome" = "Monochrome";
+/* Widget options */
+"Match app" = "Comme l'app";
+"Used" = "Utilisé";
+"Last 7 days" = "7 derniers jours";
+"Last 90 days" = "90 derniers jours";
+"All providers" = "Tous les fournisseurs";
+"Name" = "Nom";
+"Switcher" = "Commutateur";
+"Choose which providers the switcher shows and their order." = "Choisissez les fournisseurs affichés par le commutateur et leur ordre.";

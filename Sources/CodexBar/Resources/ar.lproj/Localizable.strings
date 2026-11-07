@@ -2852,3 +2852,12 @@
 "Provider accents" = "ألوان تمييز المزوّدين";
 "Colorblind-safe" = "آمن لعمى الألوان";
 "Monochrome" = "أحادي اللون";
+/* Widget options */
+"Match app" = "مطابقة التطبيق";
+"Used" = "المستخدم";
+"Last 7 days" = "آخر 7 أيام";
+"Last 90 days" = "آخر 90 يوما";
+"All providers" = "كل مقدمي الخدمات";
+"Name" = "الاسم";
+"Switcher" = "المبدّل";
+"Choose which providers the switcher shows and their order." = "اختر مقدمي الخدمات الذين يعرضهم المبدّل وترتيبهم.";

@@ -2850,3 +2850,12 @@
 "Provider accents" = "Colors d'accent dels proveïdors";
 "Colorblind-safe" = "Apta per a daltonisme";
 "Monochrome" = "Monocrom";
+/* Widget options */
+"Match app" = "Com a l'app";
+"Used" = "Utilitzat";
+"Last 7 days" = "Últims 7 dies";
+"Last 90 days" = "Últims 90 dies";
+"All providers" = "Tots els proveïdors";
+"Name" = "Nom";
+"Switcher" = "Commutador";
+"Choose which providers the switcher shows and their order." = "Tria quins proveïdors mostra el commutador i en quin ordre.";

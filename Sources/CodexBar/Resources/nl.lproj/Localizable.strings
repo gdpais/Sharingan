@@ -2845,3 +2845,12 @@
 "Provider accents" = "Accentkleuren van aanbieders";
 "Colorblind-safe" = "Kleurenblindvriendelijk";
 "Monochrome" = "Monochroom";
+/* Widget options */
+"Match app" = "Zoals in de app";
+"Used" = "Gebruikt";
+"Last 7 days" = "Laatste 7 dagen";
+"Last 90 days" = "Laatste 90 dagen";
+"All providers" = "Alle aanbieders";
+"Name" = "Naam";
+"Switcher" = "Schakelaar";
+"Choose which providers the switcher shows and their order." = "Kies welke aanbieders de schakelaar toont en in welke volgorde.";

@@ -19,8 +19,9 @@ struct CodexBarSwitcherWidget: Widget {
     private let kind = "CodexBarSwitcherWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(
+        AppIntentConfiguration(
             kind: self.kind,
+            intent: SwitcherSelectionIntent.self,
             provider: CodexBarSwitcherTimelineProvider())
         { entry in
             CodexBarSwitcherWidgetView(entry: entry)

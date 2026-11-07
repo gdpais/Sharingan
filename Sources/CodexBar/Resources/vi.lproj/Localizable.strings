@@ -2849,3 +2849,12 @@
 "Provider accents" = "Màu nhấn của nhà cung cấp";
 "Colorblind-safe" = "Thân thiện với người mù màu";
 "Monochrome" = "Đơn sắc";
+/* Widget options */
+"Match app" = "Theo ứng dụng";
+"Used" = "Đã dùng";
+"Last 7 days" = "7 ngày qua";
+"Last 90 days" = "90 ngày qua";
+"All providers" = "Tất cả nhà cung cấp";
+"Name" = "Tên";
+"Switcher" = "Bộ chuyển đổi";
+"Choose which providers the switcher shows and their order." = "Chọn các nhà cung cấp mà bộ chuyển đổi hiển thị và thứ tự của chúng.";

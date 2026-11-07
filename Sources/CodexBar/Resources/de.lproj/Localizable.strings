@@ -2846,3 +2846,12 @@
 "Provider accents" = "Akzentfarben der Anbieter";
 "Colorblind-safe" = "Farbenblind-sicher";
 "Monochrome" = "Monochrom";
+/* Widget options */
+"Match app" = "Wie in der App";
+"Used" = "Verbraucht";
+"Last 7 days" = "Letzte 7 Tage";
+"Last 90 days" = "Letzte 90 Tage";
+"All providers" = "Alle Anbieter";
+"Name" = "Name";
+"Switcher" = "Umschalter";
+"Choose which providers the switcher shows and their order." = "Wähle, welche Anbieter der Umschalter zeigt und in welcher Reihenfolge.";

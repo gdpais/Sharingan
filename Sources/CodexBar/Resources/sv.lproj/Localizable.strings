@@ -2847,3 +2847,12 @@
 "Provider accents" = "Leverantörernas accentfärger";
 "Colorblind-safe" = "Färgblindsvänlig";
 "Monochrome" = "Monokrom";
+/* Widget options */
+"Match app" = "Som i appen";
+"Used" = "Använt";
+"Last 7 days" = "Senaste 7 dagarna";
+"Last 90 days" = "Senaste 90 dagarna";
+"All providers" = "Alla leverantörer";
+"Name" = "Namn";
+"Switcher" = "Växlare";
+"Choose which providers the switcher shows and their order." = "Välj vilka leverantörer växlaren visar och i vilken ordning.";

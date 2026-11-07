@@ -39,7 +39,9 @@
 "Activity" = "Hoạt động";
 "Add-on credits" = "Tiện ích bổ sung Tín dụng";
 "Agent" = "đại lý";
+"All providers" = "Tất cả nhà cung cấp";
 "Amp Free" = "Amp miễn phí";
+"Automatic" = "Tự động";
 "Balance" = "Số dư";
 "Base" = "Căn cứ";
 "Billing" = "Thanh toán";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Nhà cung cấp dịch vụ đốt cháy Hạn mức";
 "Chat" = "Trò chuyện";
 "Choose an account" = "Chọn một tài khoản";
+"Choose which providers the switcher shows and their order." = "Chọn các nhà cung cấp mà bộ chuyển đổi hiển thị và thứ tự của chúng.";
 "Claude and GPT" = "Claude và GPT";
 "Code 7-day" = "Mã 7 ngày Hạn mức";
 "Code review" = "Xem xét mã";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "mã thông báo miễn phí hàng ngày";
 "Daily refresh" = "Làm mới hàng ngày";
 "Daily usage" = "sử dụng hàng ngày";
+"Default" = "Mặc định";
 "Deployment" = "Triển khai";
 "Edit predictions" = "Chỉnh sửa dự đoán";
 "Enable a provider in CodexBar → Settings → Providers." = "Bật một nhà cung cấp trong Sharingan → Cài đặt → Nhà cung cấp.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Thẻ Kilo";
 "Last %d days" = "%d ngày cuối cùng";
 "Last 30 days" = "30 ngày qua";
+"Last 7 days" = "7 ngày qua";
+"Last 90 days" = "90 ngày qua";
+"Match app" = "Theo ứng dụng";
 "Memory" = "Sử dụng bộ nhớ";
 "Metric" = "Chỉ số";
 "Model quota" = "Mẫu Hạn mức";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Ngân sách hàng tháng";
 "Monthly credits" = "Tín dụng hàng tháng";
 "Monthly quota" = "Hạn mức hàng tháng";
+"Name" = "Tên";
 "No data" = "Không có dữ liệu";
 "Not reported by %@" = "Không được báo cáo bởi %@";
 "On-demand" = "Sử dụng theo yêu cầu";
@@ -119,11 +127,14 @@
 "Provider" = "Nhà cung cấp";
 "Provider %@" = "Nhà cung cấp %@";
 "Provider + Metric" = "Nhà cung cấp + Chỉ số";
+"Providers" = "Nhà cung cấp";
 "Purchased" = "Đã mua";
 "Quota" = "Hạn mức";
 "Ran out" = "Hạn mức đã cạn kiệt";
+"Range" = "Khoảng thời gian";
 "Rate limit" = "Giới hạn tỷ lệ";
 "Refill" = "Nạp tiền";
+"Remaining" = "Còn lại";
 "Remaining budget compared with an ideal steady burn rate." = "Ngân sách còn lại so với tốc độ đốt ổn định lý tưởng.";
 "Requests" = "Yêu cầu";
 "Reset: %@" = "Đặt lại: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Phiên và mức sử dụng hàng tuần với Tín dụng và chi phí.";
 "Shared pool" = "Hạn mức dùng chung";
 "Sonnet" = "Sonnet";
+"Sort by" = "Sắp xếp theo";
 "Spend" = "Chi phí";
 "Standard" = "Tiêu chuẩn";
 "Status" = "Trạng thái";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Chuyển đổi nhà cung cấp";
 "Switch the provider shown in the widget." = "Chuyển đổi nhà cung cấp được hiển thị trong widget.";
 "Switch to %@" = "Chuyển sang %@";
+"Switcher" = "Bộ chuyển đổi";
 "Team budget" = "Ngân sách nhóm";
 "Third Party" = "Bên thứ ba";
 "Third quota" = "Hạn mức thứ ba";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Giới hạn sử dụng và đặt lại đếm ngược cho một tài khoản đã lưu.";
 "Usage widget with a provider switcher." = "Tiện ích sử dụng với trình chuyển đổi nhà cung cấp.";
 "Usage window" = "Cửa sổ sử dụng";
+"Used" = "Đã dùng";
 "Voices" = "Tiếng nói";
 "Weekly" = "Hàng tuần";
 "Weekly (7-day)" = "Hàng tuần (7 ngày)";
