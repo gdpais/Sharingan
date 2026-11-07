@@ -36,6 +36,7 @@ struct SettingsDefaultsState {
     var highlightMenuCardsOnHover: Bool
     var menuBarShowsBrandIconWithPercent: Bool
     var menuBarHidesCritters: Bool
+    var menuBarShowsTomoeIcon: Bool = false
     var menuBarColorPace: Bool
     var menuBarPaceReservePositive: Bool
     var menuBarColorByProvider: Bool

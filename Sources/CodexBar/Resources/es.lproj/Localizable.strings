@@ -2855,3 +2855,4 @@
 "Name" = "Nombre";
 "Switcher" = "Conmutador";
 "Choose which providers the switcher shows and their order." = "Elige qué proveedores muestra el conmutador y en qué orden.";
+"menu_bar_style_tomoe" = "Tomoe";

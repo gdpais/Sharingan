@@ -2856,3 +2856,4 @@
 "Name" = "Nom";
 "Switcher" = "Commutateur";
 "Choose which providers the switcher shows and their order." = "Choisissez les fournisseurs affichés par le commutateur et leur ordre.";
+"menu_bar_style_tomoe" = "Tomoe";

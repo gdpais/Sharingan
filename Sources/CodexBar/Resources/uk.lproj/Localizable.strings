@@ -2858,3 +2858,4 @@
 "Name" = "Назва";
 "Switcher" = "Перемикач";
 "Choose which providers the switcher shows and their order." = "Виберіть, яких провайдерів показує перемикач і в якому порядку.";
+"menu_bar_style_tomoe" = "Томое";

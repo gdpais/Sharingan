@@ -2825,3 +2825,4 @@
 "Name" = "이름";
 "Switcher" = "스위처";
 "Choose which providers the switcher shows and their order." = "스위처에 표시할 공급자와 순서를 선택합니다.";
+"menu_bar_style_tomoe" = "토모에";

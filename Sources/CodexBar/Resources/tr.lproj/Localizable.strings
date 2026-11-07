@@ -2860,3 +2860,4 @@
 "Name" = "Ad";
 "Switcher" = "Değiştirici";
 "Choose which providers the switcher shows and their order." = "Değiştiricinin hangi sağlayıcıları hangi sırayla göstereceğini seçin.";
+"menu_bar_style_tomoe" = "Tomoe";

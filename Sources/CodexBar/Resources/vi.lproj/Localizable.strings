@@ -2858,3 +2858,4 @@
 "Name" = "Tên";
 "Switcher" = "Bộ chuyển đổi";
 "Choose which providers the switcher shows and their order." = "Chọn các nhà cung cấp mà bộ chuyển đổi hiển thị và thứ tự của chúng.";
+"menu_bar_style_tomoe" = "Tomoe";

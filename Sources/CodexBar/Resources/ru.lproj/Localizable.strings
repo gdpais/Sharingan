@@ -2858,3 +2858,4 @@
 "Name" = "Название";
 "Switcher" = "Коммутатор";
 "Choose which providers the switcher shows and their order." = "Выберите, каких провайдеров показывает коммутатор и в каком порядке.";
+"menu_bar_style_tomoe" = "Томоэ";

@@ -2860,3 +2860,4 @@
 "Name" = "Nazwa";
 "Switcher" = "Przełącznik";
 "Choose which providers the switcher shows and their order." = "Wybierz, których dostawców pokazuje przełącznik i w jakiej kolejności.";
+"menu_bar_style_tomoe" = "Tomoe";
