@@ -39,7 +39,9 @@
 "Activity" = "Aktivität";
 "Add-on credits" = "Add-on Credits";
 "Agent" = "Agent";
+"All providers" = "Alle Anbieter";
 "Amp Free" = "Amp Kostenlos";
+"Automatic" = "Automatisch";
 "Balance" = "Guthaben";
 "Base" = "Basis";
 "Billing" = "Abrechnung";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Kontingent Burn-Down-Anbieter";
 "Chat" = "Chatten";
 "Choose an account" = "Wählen Sie ein Konto";
+"Choose which providers the switcher shows and their order." = "Wähle, welche Anbieter der Umschalter zeigt und in welcher Reihenfolge.";
 "Claude and GPT" = "Claude und GPT";
 "Code 7-day" = "Code 7-Tage-Kontingent";
 "Code review" = "Codeüberprüfung";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "Täglich kostenlos Token";
 "Daily refresh" = "Tägliche Aktualisierung";
 "Daily usage" = "Täglicher Gebrauch";
+"Default" = "Standard";
 "Deployment" = "Einsatz";
 "Edit predictions" = "Vorhersagen bearbeiten";
 "Enable a provider in CodexBar → Settings → Providers." = "Aktiviere einen Anbieter in Sharingan → Einstellungen → Anbieter.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo Pass";
 "Last %d days" = "Letzte %d Tage";
 "Last 30 days" = "Letzte 30 Tage";
+"Last 7 days" = "Letzte 7 Tage";
+"Last 90 days" = "Letzte 90 Tage";
+"Match app" = "Wie in der App";
 "Memory" = "Speichernutzung";
 "Metric" = "Kennzahl";
 "Model quota" = "Modell Kontingent";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Monatsbudget";
 "Monthly credits" = "Monatlich Credits";
 "Monthly quota" = "Monatlich Kontingent";
+"Name" = "Name";
 "No data" = "Keine Daten";
 "Not reported by %@" = "Nicht gemeldet von %@";
 "On-demand" = "On-Demand-Nutzung";
@@ -119,11 +127,14 @@
 "Provider" = "Anbieter";
 "Provider %@" = "Anbieter %@";
 "Provider + Metric" = "Anbieter + Kennzahl";
+"Providers" = "Anbieter";
 "Purchased" = "Gekauft";
 "Quota" = "Kontingent";
 "Ran out" = "Kontingent erschöpft";
+"Range" = "Zeitraum";
 "Rate limit" = "Ratenbegrenzung";
 "Refill" = "Nachfüllen";
+"Remaining" = "Übrig";
 "Remaining budget compared with an ideal steady burn rate." = "Verbleibendes Budget im Vergleich zu einer idealen konstanten Brennrate.";
 "Requests" = "Anfragen";
 "Reset: %@" = "Zurücksetzen: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Sitzungs- und wöchentliche Nutzung mit Credits und Kosten.";
 "Shared pool" = "Gemeinsames Kontingent";
 "Sonnet" = "Sonnet";
+"Sort by" = "Sortieren nach";
 "Spend" = "Ausgaben";
 "Standard" = "Standard";
 "Status" = "Status";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Anbieter wechseln";
 "Switch the provider shown in the widget." = "Wechseln Sie den im Widget angezeigten Anbieter.";
 "Switch to %@" = "Wechseln Sie zu %@";
+"Switcher" = "Umschalter";
 "Team budget" = "Teambudget";
 "Third Party" = "Dritter";
 "Third quota" = "Dritter Kontingent";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Nutzungsbeschränkungen und Reset-Countdowns für ein gespeichertes Konto.";
 "Usage widget with a provider switcher." = "Nutzungs-Widget mit Anbieterwechsel.";
 "Usage window" = "Nutzungsfenster";
+"Used" = "Verbraucht";
 "Voices" = "Stimmen";
 "Weekly" = "Wöchentlich";
 "Weekly (7-day)" = "Wöchentlich (7 Tage)";

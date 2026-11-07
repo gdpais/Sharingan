@@ -5,7 +5,8 @@ import SwiftUI
 
 /// Colors and labels for a cost history chart stacked by model (`CostHistoryModelStack`): the
 /// stacked models take the first `ChartPalette` slots by rank and the folded rest takes the
-/// neutral "Other" gray.
+/// neutral "Other" gray. Models are ranked once for every metric, so switching between cost and
+/// tokens never swaps their colors.
 struct CostHistoryStackPresentation {
     struct BarSegment: Identifiable {
         let id: String
@@ -14,6 +15,7 @@ struct CostHistoryStackPresentation {
         let end: Double
         let title: String
         let color: Color
+        let series: CostHistoryModelStack.Series
     }
 
     struct LegendItem: Identifiable {
@@ -30,14 +32,28 @@ struct CostHistoryStackPresentation {
     /// Plotted dates whose bar is drawn as segments instead of a single bar.
     let stackedDates: Set<Date>
     let stackedDayKeys: Set<String>
+    let paletteMode: ChartPaletteMode
+    /// The single-bar color for plotted days without a model breakdown, or nil to keep the provider color.
+    /// The validated palettes reuse their first slot for the top model, so those days take "Other" there
+    /// instead of reading as that model's spend.
+    let unattributedBarColor: Color?
 
-    /// Nil when nothing stacks, so the chart keeps its single-color bars.
+    /// Nil when nothing stacks, so the chart keeps its single-color bars. `rankedModels` (see
+    /// `CostHistoryModelStack.stableTopModels`) keeps one ranking across metrics; without it the
+    /// models rank by `metric`.
     init?(
         bars: [(entry: CostUsageDailyReport.Entry, total: Double, date: Date)],
-        metric: CostHistoryModelStack.Metric)
+        metric: CostHistoryModelStack.Metric,
+        rankedModels: [String]? = nil,
+        paletteMode: ChartPaletteMode = .accents)
     {
         let stackInput = bars.map { (entry: $0.entry, total: $0.total) }
-        guard let stack = CostHistoryModelStack.stack(stackInput, metric: metric) else { return nil }
+        let stack: CostHistoryModelStack.Stack? = if let rankedModels {
+            CostHistoryModelStack.stack(stackInput, metric: metric, models: rankedModels)
+        } else {
+            CostHistoryModelStack.stack(stackInput, metric: metric)
+        }
+        guard let stack else { return nil }
         let titles = stack.models.map(UsageFormatter.modelDisplayName)
 
         var segments: [BarSegment] = []
@@ -56,7 +72,8 @@ struct CostHistoryStackPresentation {
                     start: segment.start,
                     end: segment.end,
                     title: Self.title(for: segment.series, titles: titles),
-                    color: Self.color(for: segment.series)))
+                    color: Self.color(for: segment.series, mode: paletteMode),
+                    series: segment.series))
             }
         }
 
@@ -65,14 +82,16 @@ struct CostHistoryStackPresentation {
             legendItems.append(LegendItem(
                 id: "model-\(rank)",
                 title: title,
-                color: Self.color(for: .model(rank)),
+                color: Self.color(for: .model(rank), mode: paletteMode),
                 isOther: false))
         }
-        if seriesInUse.contains(.other) {
+        let hasUnattributedValue = bars.contains { stack.segmentsByDayKey[$0.entry.date] == nil && $0.total > 0 }
+        let paintsUnattributedAsOther = paletteMode != .accents && hasUnattributedValue
+        if seriesInUse.contains(.other) || paintsUnattributedAsOther {
             legendItems.append(LegendItem(
                 id: "other",
                 title: Self.title(for: .other, titles: titles),
-                color: Self.color(for: .other),
+                color: Self.color(for: .other, mode: paletteMode),
                 isOther: true))
         }
 
@@ -81,21 +100,37 @@ struct CostHistoryStackPresentation {
         self.legendItems = legendItems
         self.stackedDates = stackedDates
         self.stackedDayKeys = stackedDayKeys
+        self.paletteMode = paletteMode
+        self.unattributedBarColor = paintsUnattributedAsOther ? Self.color(for: .other, mode: paletteMode) : nil
     }
 
     /// The legend color for a model row: its stacked series, or "Other" when it folds.
     func accentColor(forModel name: String) -> Color {
         guard let rank = self.models.firstIndex(of: CostHistoryModelStack.seriesName(name)) else {
-            return Self.color(for: .other)
+            return Self.color(for: .other, mode: self.paletteMode)
         }
-        return Self.color(for: .model(rank))
+        return Self.color(for: .model(rank), mode: self.paletteMode)
     }
 
+    /// Series colors in the provider-accent palette (today's colors).
     static func color(for series: CostHistoryModelStack.Series) -> Color {
+        self.color(for: series, mode: .accents)
+    }
+
+    static func color(for series: CostHistoryModelStack.Series, mode: ChartPaletteMode) -> Color {
         switch series {
-        case let .model(rank): ChartPalette.color(for: .index(rank))
-        case .other: ChartPalette.otherColor
+        case let .model(rank): ChartPalette.color(for: .index(rank), mode: mode)
+        case .other: ChartPalette.otherColor(mode: mode)
         }
+    }
+
+    /// Series in bottom-to-top stacking order: the ranked models, then "Other".
+    var seriesOrder: [CostHistoryModelStack.Series] {
+        self.models.indices.map { CostHistoryModelStack.Series.model($0) } + [.other]
+    }
+
+    func title(for series: CostHistoryModelStack.Series) -> String {
+        Self.title(for: series, titles: self.models.map(UsageFormatter.modelDisplayName))
     }
 
     private static func title(for series: CostHistoryModelStack.Series, titles: [String]) -> String {
@@ -148,17 +183,23 @@ extension CostHistoryChartMenuView {
         }
     }
 
-    /// Model stack for one metric over the plotted days; nil when nothing stacks.
+    /// Model stack for one metric over the plotted days; nil when nothing stacks. Models rank once
+    /// over all plotted days (`stableTopModels`), so both metrics give a model the same color.
     static func stackPresentation(
         provider: UsageProvider,
         sortedDaily: [DailyEntry],
-        metric: ChartMetric) -> CostHistoryStackPresentation?
+        metric: ChartMetric,
+        paletteMode: ChartPaletteMode = .accents) -> CostHistoryStackPresentation?
     {
         let bars = sortedDaily.compactMap { entry -> (entry: DailyEntry, total: Double, date: Date)? in
             guard let input = self.chartPointInput(for: entry, provider: provider, metric: metric) else { return nil }
             return (entry: entry, total: input.value, date: input.date)
         }
-        return CostHistoryStackPresentation(bars: bars, metric: self.stackMetric(metric))
+        return CostHistoryStackPresentation(
+            bars: bars,
+            metric: self.stackMetric(metric),
+            rankedModels: CostHistoryModelStack.stableTopModels(sortedDaily),
+            paletteMode: paletteMode)
     }
 
     /// The legend row is reserved when any metric stacks, so switching metrics never changes the
@@ -190,8 +231,10 @@ extension CostHistoryChartMenuView {
                   previousPeriodTotal: previousPeriodCostUSD,
                   days: historyDays)
         else { return nil }
-        let percent = delta.formatted(
-            .percent.precision(.fractionLength(0)).sign(strategy: .always(includingZero: false)))
+        let percent = delta.formatted(.percent
+            .precision(.fractionLength(0))
+            .sign(strategy: .always(includingZero: false))
+            .locale(codexBarLocalizedLocale()))
         return L("%@ vs previous %d days", percent, historyDays)
     }
 

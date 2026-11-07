@@ -158,6 +158,27 @@ struct QuotaWarningLaneTests {
     // MARK: - Settings
 
     @Test
+    func `the saved config keeps lane overrides at the provider level`() throws {
+        let settings = self.makeSettings("lane-storage")
+        settings.setQuotaWarningLaneOverride(
+            provider: .gemini,
+            laneID: QuotaWarningLaneID.tertiary,
+            thresholds: [70, 40],
+            enabled: true)
+
+        let data = try settings.configStore.encodedData(for: settings.config)
+        let saved = try #require(JSONSerialization.jsonObject(with: data) as? [String: Any])
+        let providers = try #require(saved["providers"] as? [[String: Any]])
+        let gemini = try #require(providers.first { $0["id"] as? String == UsageProvider.gemini.rawValue })
+        #expect(gemini["quotaWarningWindows"] != nil)
+        #expect((gemini["quotaWarnings"] as? [String: Any])?["windows"] == nil)
+
+        let reloaded = try CodexBarConfig.decode(from: data)
+        #expect(reloaded.providerConfig(for: UsageProvider.gemini.instanceID)?.quotaWarnings?
+            .windows?[QuotaWarningLaneID.tertiary]?.thresholds == [70, 40])
+    }
+
+    @Test
     func `lane overrides persist and clear back to the weekly settings`() {
         let settings = self.makeSettings("lane-persistence")
         let lane = QuotaWarningLaneID.tertiary

@@ -311,13 +311,16 @@ extension UsageMenuCardView.Model {
         let tokenHistoryTitle = legacyMonth ? L("30d tokens") : String(format: L("%@ tokens"), period)
         let requestHistoryTitle = legacyMonth ? L("30d requests") : String(format: L("%@ requests"), period)
         let accessibilityCostLabel = legacyMonth ? L("30d cost") : L("%@ cost", period)
-        let points = Self.inlineCostHistoryPoints(
-            days: Self.inlineCostHistoryDays(
-                snapshot: snapshot,
-                historyDays: historyDays,
-                calendar: calendar),
-            displayCurrencyCode: displayCurrencyCode,
-            convertedValue: convertedValue)
+        let stripDays = Self.inlineCostHistoryDays(
+            snapshot: snapshot,
+            historyDays: historyDays,
+            calendar: calendar)
+        let points = CostHistoryStripDays.labelingWeeks(
+            Self.inlineCostHistoryPoints(
+                days: CostHistoryStripDays.fitting(stripDays),
+                displayCurrencyCode: displayCurrencyCode,
+                convertedValue: convertedValue),
+            days: stripDays)
         let latest = CostUsageTokenSnapshot.latestEntry(in: snapshot.daily)
         let usesLatestPrimary = tokenCost.primaryValue == .latestDaily
         let primaryCostUSD = usesLatestPrimary ? latest?.costUSD : snapshot.sessionCostUSD
@@ -506,14 +509,17 @@ extension UsageMenuCardView.Model {
                 Self.tokenWindowLine(label: Self.costHistoryWindowLabel(days: $0.days), tokens: $0.totalTokens)
             })
         }
-        let points = Self.inlineCostHistoryPoints(
-            days: Self.inlineCostHistoryDays(
-                snapshot: snapshot,
-                historyDays: historyDays,
-                calendar: calendar),
-            displayCurrencyCode: "USD",
-            convertedValue: { $0 },
-            tokensOnly: true)
+        let stripDays = Self.inlineCostHistoryDays(
+            snapshot: snapshot,
+            historyDays: historyDays,
+            calendar: calendar)
+        let points = CostHistoryStripDays.labelingWeeks(
+            Self.inlineCostHistoryPoints(
+                days: CostHistoryStripDays.fitting(stripDays),
+                displayCurrencyCode: "USD",
+                convertedValue: { $0 },
+                tokensOnly: true),
+            days: stripDays)
         let name = ProviderDescriptorRegistry.descriptor(for: provider).metadata.displayName
         return InlineUsageDashboardModel(
             accessibilityLabel: L("%@: %@", name, L("Token history")),

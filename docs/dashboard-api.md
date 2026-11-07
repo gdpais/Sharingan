@@ -56,8 +56,9 @@ axes use 1-2-5 ticks, and every bar, heatmap cell and project row can be hovered
 its values. The sections, in order:
 
 1. **Tiles**: estimated spend, cache hit rate, cost per 1M tokens and top model share over the last 30 days, each
-   with a trend line and, when history covers the previous 30 days, the change against it. **Plan value** appears
-   only when a plan price is configured; this build has no plan-price setting, so it is omitted.
+   with a trend line and, when history covers the previous 30 days, the change against it (the dashboard scans 30
+   days, so it shows no change yet). **Plan value** needs a plan price; the dashboard does not pass the app's
+   per-provider plan prices yet, so it is omitted.
 2. **Cost by model**: one chart per provider, daily spend stacked by that provider's top five models plus Other.
    Providers are never mixed in one chart.
 3. **Model share over time**: each model's share of daily spend across providers; models past the top five fold

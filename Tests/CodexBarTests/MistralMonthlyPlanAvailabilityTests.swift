@@ -9,7 +9,7 @@ struct MistralMonthlyPlanAvailabilityTests {
         let layout = MenuBarLayout(lines: [[.icon]])
         let options = MenuBarPercentWindowPreference.available(for: .mistral, layout: layout)
         #expect(options.map(\.id) == ["automatic", "monthlyPlan"])
-        for style in [MenuBarIconStyle.critters, .bars, .iconAndPercent] {
+        for style in MenuBarIconStyle.allCases {
             #expect(MenuBarPercentWindowPreference.isVisible(
                 iconStyle: style, layout: layout, provider: .mistral))
         }

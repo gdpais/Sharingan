@@ -23,6 +23,7 @@
 		D1B3B06F03A2F05251AC0B42 /* BurnDownWidgetProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99BBE05D3817388F9649AD0 /* BurnDownWidgetProvider.swift */; };
 		DA83EC1B33AD5AE43FAE16D3 /* CodexBarAccountUsageWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = E09EE9A805DF69C250848E39 /* CodexBarAccountUsageWidget.swift */; };
 		FB60A7A0640B8D1B32A925F7 /* WidgetTiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B6A8350FD0147A03637A88E /* WidgetTiles.swift */; };
+		D64340D2ABAC438C5ADA183A /* WidgetUsageOptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C677CE41F9B5BCFC2A755866 /* WidgetUsageOptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		F3AEAC3959EE7A8CF962EF27 /* vi */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = vi; path = vi.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F660CA270A83A7FB48F37E28 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F6F266867F255030458E505E /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C677CE41F9B5BCFC2A755866 /* WidgetUsageOptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WidgetUsageOptions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 				73AC2E28F780BB0CE6B6A42E /* WidgetDesignSystem.swift */,
 				4D122E6214A1AA991810D7AB /* WidgetTilePlan.swift */,
 				5B6A8350FD0147A03637A88E /* WidgetTiles.swift */,
+				C677CE41F9B5BCFC2A755866 /* WidgetUsageOptions.swift */,
 				037FC525BF6C59732CE6EA62 /* Resources */,
 			);
 			name = CodexBarWidget;
@@ -251,6 +254,7 @@
 				5034CBBD03D8421698E0A343 /* WidgetDesignSystem.swift in Sources */,
 				272038F061362C98F89CA872 /* WidgetTilePlan.swift in Sources */,
 				FB60A7A0640B8D1B32A925F7 /* WidgetTiles.swift in Sources */,
+				D64340D2ABAC438C5ADA183A /* WidgetUsageOptions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

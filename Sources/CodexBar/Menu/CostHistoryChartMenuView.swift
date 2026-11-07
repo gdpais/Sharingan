@@ -80,7 +80,12 @@ struct CostHistoryChartMenuView: View {
     private let sessions: [CostUsageSessionBreakdown]
     /// Source-currency cost of the previous period of equal length; nil hides the delta.
     private let previousPeriodCostUSD: Double?
+    /// The provider's monthly budget; nil hides the budget reference and month-to-date line.
+    let budget: CostHistoryBudget?
     private let stackByModel: Bool
+    let chartPreferences: ChartPreferences
+    /// The days the chart plots (`ChartPreferences.range`); `daily` still backs the totals under it.
+    private let chartDaily: [DailyEntry]
     private let hidePersonalInfo: Bool
     private let width: CGFloat
     private let onMetricChanged: (@MainActor (ChartMetric) -> Void)?
@@ -100,7 +105,10 @@ struct CostHistoryChartMenuView: View {
         projects: [CostUsageProjectBreakdown] = [],
         sessions: [CostUsageSessionBreakdown] = [],
         previousPeriodCostUSD: Double? = nil,
+        budget: CostHistoryBudget? = nil,
         stackByModel: Bool = true,
+        chartPreferences: ChartPreferences = .standard,
+        chartDaily: [DailyEntry]? = nil,
         hidePersonalInfo: Bool,
         width: CGFloat,
         initialMetric: ChartMetric? = nil,
@@ -118,7 +126,10 @@ struct CostHistoryChartMenuView: View {
         self.projects = projects
         self.sessions = sessions
         self.previousPeriodCostUSD = previousPeriodCostUSD
+        self.budget = budget
         self.stackByModel = stackByModel
+        self.chartPreferences = chartPreferences
+        self.chartDaily = chartDaily ?? daily
         self.hidePersonalInfo = hidePersonalInfo
         self.width = width
         self.onMetricChanged = onMetricChanged
@@ -130,15 +141,16 @@ struct CostHistoryChartMenuView: View {
     }
 
     var body: some View {
-        let availableMetrics = Self.availableMetrics(provider: self.provider, daily: self.daily)
+        let availableMetrics = Self.availableMetrics(provider: self.provider, daily: self.chartDaily)
         let activeMetric = availableMetrics.contains(self.metric)
             ? self.metric
-            : Self.defaultMetric(provider: self.provider, daily: self.daily)
+            : Self.defaultMetric(provider: self.provider, daily: self.chartDaily)
         let model = Self.makeModel(
             provider: self.provider,
-            daily: self.daily,
+            daily: self.chartDaily,
             metric: activeMetric,
-            stackByModel: self.stackByModel)
+            stackByModel: self.stackByModel,
+            paletteMode: self.chartPreferences.paletteMode)
         let showsHistoryRefreshing = Self.showsHistoryRefreshing(
             provider: self.provider,
             metric: activeMetric,
@@ -147,10 +159,15 @@ struct CostHistoryChartMenuView: View {
             ?? Self.defaultSelectedDateKey(model: model)
         let incompleteCount = CostUsageIncompleteRequests.sum(self.daily.map(\.incompleteRequestCount))
         let yTicks = Self.yAxisTickValues(
-            maxValue: model.maxValue,
+            maxValue: Self.budgetScaleMaximum(model.maxValue, budget: self.budget, metric: activeMetric),
             metric: activeMetric,
             costMultiplier: self.costMultiplier)
-        let dailyAverage = Self.dailyAverage(model: model, metric: activeMetric)
+        let dailyAverage = self.chartPreferences.showsAverageLine
+            ? Self.dailyAverage(model: model, metric: activeMetric) : nil
+        let plotted = model.points.compactMap { point -> CostHistoryPlotPoint? in
+            let hasValue = activeMetric == .cost ? point.costUSD != nil : point.totalTokens != nil
+            return hasValue ? CostHistoryPlotPoint(date: point.date, value: point.value) : nil
+        }
         let tokenValues = model.points.compactMap(\.totalTokens)
         let accessibilityTokens = tokenValues.isEmpty ? nil : CheckedSum.integers(tokenValues)
         VStack(alignment: .leading, spacing: Self.outerSpacing) {
@@ -168,18 +185,14 @@ struct CostHistoryChartMenuView: View {
 
                 Chart {
                     Self.weekendShading(model.weekendIntervals)
-                    if let stack = model.stack {
-                        Self.stackedBars(stack.segments, metricTitle: activeMetric.title)
-                    }
+                    Self.seriesMarks(
+                        plotted,
+                        stack: model.stack,
+                        style: self.chartPreferences.style,
+                        color: model.barColor,
+                        metricTitle: activeMetric.title)
                     ForEach(model.points) { point in
                         let hasValue = activeMetric == .cost ? point.costUSD != nil : point.totalTokens != nil
-                        if hasValue, !model.stackedDates.contains(point.date) {
-                            BarMark(
-                                x: .value(L("Day"), point.date, unit: .day),
-                                y: .value(activeMetric.title, point.value),
-                                width: .ratio(ChartBarHoverSelection.barWidthRatio))
-                                .foregroundStyle(model.barColor)
-                        }
                         if point.incompleteRequestCount > 0 {
                             PointMark(
                                 x: .value(L("Day"), point.date, unit: .day),
@@ -202,6 +215,7 @@ struct CostHistoryChartMenuView: View {
                                     .foregroundStyle(.secondary)
                             }
                     }
+                    Self.budgetReference(self.budget, metric: activeMetric)
                 }
                 .chartYScale(domain: 0...(yTicks.last ?? max(model.maxValue, 1)))
                 .chartYAxis {
@@ -402,6 +416,10 @@ struct CostHistoryChartMenuView: View {
                             .truncationMode(.tail)
                     }
                 }
+            }
+
+            if let budget = self.budget {
+                CostHistoryBudgetLine(budget: budget)
             }
 
             if !self.projects.isEmpty {
@@ -678,7 +696,8 @@ struct CostHistoryChartMenuView: View {
         provider: UsageProvider,
         daily: [DailyEntry],
         metric: ChartMetric,
-        stackByModel: Bool = true) -> Model
+        stackByModel: Bool = true,
+        paletteMode: ChartPaletteMode = .accents) -> Model
     {
         let sorted = daily.sorted { lhs, rhs in lhs.date < rhs.date }
         let detailLayout = self.detailLayout(provider: provider, daily: sorted)
@@ -717,8 +736,10 @@ struct CostHistoryChartMenuView: View {
             dates: dateKeys.map(\.date),
             calendar: self.gregorianCalendar(timeZone: Calendar.autoupdatingCurrent.timeZone))
 
-        let barColor = Self.barColor(for: provider)
-        let stack = stackByModel ? self.stackPresentation(provider: provider, sortedDaily: sorted, metric: metric) : nil
+        let stack = stackByModel ? self.stackPresentation(
+            provider: provider, sortedDaily: sorted, metric: metric, paletteMode: paletteMode) : nil
+        let barColor = stack?.unattributedBarColor
+            ?? ChartPalette.singleSeriesColor(accent: Self.barColor(for: provider), mode: paletteMode)
         let weekendIntervals: [DateInterval] = if let first = dateKeys.first?.date, let last = dateKeys.last?.date {
             CostHistoryModelStack.weekendIntervals(from: first, through: last, calendar: .autoupdatingCurrent)
         } else {
@@ -1254,6 +1275,9 @@ extension CostHistoryChartMenuView {
         let daily: [VisibleDailyFingerprint]
         let projects: [VisibleProjectFingerprint]
         let sessions: [VisibleSessionFingerprint]
+        var previousPeriodCostBitPattern: UInt64?
+        var chartPreferences = ChartPreferences.standard
+        var budget: CostHistoryBudget?
     }
 
     struct VisibleDailyFingerprint: Equatable {

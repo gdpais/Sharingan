@@ -111,6 +111,8 @@ struct MenuPane: View {
 
             CostSummarySettingsSection(settings: self.settings, store: self.store)
 
+            ChartPreferencesSettingsSection(settings: self.settings)
+
             AgentSessionsSettingsSection(settings: self.settings)
         }
         .formStyle(.grouped)

@@ -43,13 +43,37 @@ struct CostHistoryChartStackingTests {
     }
 
     @Test
-    func `token metric stacks by tokens`() throws {
-        let stack = try #require(CostHistoryChartMenuView._stackForTesting(
+    func `token metric keeps the cost ranking so colors do not swap`() throws {
+        let cost = try #require(CostHistoryChartMenuView._stackForTesting(
+            provider: .claude,
+            daily: Self.threeModelDays,
+            metric: .cost))
+        let tokens = try #require(CostHistoryChartMenuView._stackForTesting(
             provider: .claude,
             daily: Self.threeModelDays,
             metric: .tokens))
-        // Gamma is the cheapest model but the chattiest one.
-        #expect(stack.models == ["fixture-gamma", "fixture-alpha"])
+        // Gamma is the chattiest model but the cheapest, so it folds into "Other" for both metrics.
+        #expect(tokens.models == ["fixture-alpha", "fixture-beta"])
+        #expect(tokens.models == cost.models)
+        for model in ["fixture-alpha", "fixture-beta", "fixture-gamma"] {
+            #expect(tokens.accentColor(forModel: model) == cost.accentColor(forModel: model))
+        }
+        #expect(tokens.legendItems.map(\.color) == cost.legendItems.map(\.color))
+    }
+
+    @Test
+    func `stable ranking falls back to tokens when no model has a cost`() {
+        let entries = [
+            Self.entry("2026-06-05", cost: nil, tokens: 300, models: [
+                Model(modelName: "fixture-beta", costUSD: nil, totalTokens: 200),
+                Model(modelName: "fixture-alpha", costUSD: nil, totalTokens: 100),
+                Model(modelName: "fixture-idle", costUSD: nil, totalTokens: 0),
+            ]),
+        ]
+        #expect(CostHistoryModelStack.stableTopModels(entries) == ["fixture-beta", "fixture-alpha"])
+        #expect(CostHistoryModelStack.stableTopModels(Self.threeModelDays) == ["fixture-alpha", "fixture-beta"])
+        #expect(CostHistoryModelStack.stableTopModels(Self.threeModelDays, limit: 3)
+            == ["fixture-alpha", "fixture-beta", "fixture-gamma"])
     }
 
     @Test
@@ -181,6 +205,135 @@ struct CostHistoryChartStackingTests {
         }
     }
 
+    @Test
+    func `previous period delta formats its percent for the app language`() throws {
+        try CodexBarLocalizationOverride.$appLanguage.withValue("de") {
+            let text = try #require(CostHistoryChartMenuView.previousPeriodDeltaText(
+                currentCostUSD: 112,
+                previousPeriodCostUSD: 100,
+                historyDays: 30,
+                incompleteCount: 0))
+            let german = 0.12.formatted(.percent
+                .precision(.fractionLength(0))
+                .sign(strategy: .always(includingZero: false))
+                .locale(Locale(identifier: "de")))
+            #expect(text.contains(german))
+            #expect(!text.contains("+12%"))
+        }
+    }
+
+    // MARK: - Preferences
+
+    @Test
+    func `chart style and average line keep the measured height`() {
+        let bars = Self.renderedHeight(daily: Self.threeModelDays, initialMetric: .cost)
+        for preferences in [
+            ChartPreferences(style: .line),
+            ChartPreferences(showsAverageLine: false, style: .line),
+            ChartPreferences(showsAverageLine: false),
+            ChartPreferences(paletteMode: .monochrome),
+        ] {
+            #expect(Self.renderedHeight(
+                daily: Self.threeModelDays,
+                initialMetric: .cost,
+                preferences: preferences) == bars)
+        }
+    }
+
+    @Test
+    func `stacked areas cover every plotted day up to its total`() throws {
+        let stack = try #require(CostHistoryChartMenuView._stackForTesting(
+            provider: .claude,
+            daily: Self.threeModelDays,
+            metric: .cost))
+        let values = CostHistoryChartMenuView._chartValuesForTesting(
+            provider: .claude,
+            daily: Self.threeModelDays,
+            metric: .cost)
+        let dates = Array(Set(stack.segments.map(\.date))).sorted()
+        // The breakdown-free day comes last in the fixture.
+        let lastStackedDate = try #require(dates.last)
+        let lastDate = try #require(Calendar.current.date(byAdding: .day, value: 1, to: lastStackedDate))
+        let points = zip(dates + [lastDate], values).map { CostHistoryPlotPoint(date: $0, value: $1) }
+        let bands = CostHistoryChartMenuView.areaBands(points: points, stack: stack)
+
+        #expect(Set(bands.map(\.seriesID)) == ["model-0", "model-1", "other"])
+        for point in points {
+            let day = bands.filter { $0.date == point.date }
+            #expect(day.count == 3)
+            #expect(day.map(\.end).max() == point.value)
+            #expect(day.first?.start == 0)
+        }
+        // A day without a breakdown has no attributable model, so all of it is "Other".
+        let unattributed = bands.filter { $0.date == lastDate }
+        #expect(unattributed.first { $0.seriesID == "other" }.map { $0.end - $0.start } == 3)
+    }
+
+    @Test
+    func `palette modes recolor the stack and keep its order`() throws {
+        let daily = Self.threeModelDays.sorted { $0.date < $1.date }
+        let accents = try #require(CostHistoryChartMenuView.stackPresentation(
+            provider: .claude,
+            sortedDaily: daily,
+            metric: .cost))
+        let monochrome = try #require(CostHistoryChartMenuView.stackPresentation(
+            provider: .claude,
+            sortedDaily: daily,
+            metric: .cost,
+            paletteMode: .monochrome))
+        #expect(monochrome.models == accents.models)
+        #expect(monochrome.legendItems.map(\.title) == accents.legendItems.map(\.title))
+        #expect(monochrome.legendItems.map(\.color) == [
+            ChartPalette.color(for: .index(0), mode: .monochrome),
+            ChartPalette.color(for: .index(1), mode: .monochrome),
+            ChartPalette.otherColor(mode: .monochrome),
+        ])
+        #expect(accents.legendItems.map(\.color) == [
+            ChartPalette.color(for: .index(0)),
+            ChartPalette.color(for: .index(1)),
+            ChartPalette.otherColor,
+        ])
+    }
+
+    @Test
+    func `validated palettes paint days without a breakdown as other, not as the top model`() throws {
+        let daily = Self.threeModelDays.sorted { $0.date < $1.date }
+        let accents = try #require(CostHistoryChartMenuView.stackPresentation(
+            provider: .claude,
+            sortedDaily: daily,
+            metric: .cost))
+        #expect(accents.unattributedBarColor == nil)
+        for mode in [ChartPaletteMode.colorblindSafe, .monochrome] {
+            let stack = try #require(CostHistoryChartMenuView.stackPresentation(
+                provider: .claude,
+                sortedDaily: daily,
+                metric: .cost,
+                paletteMode: mode))
+            #expect(stack.unattributedBarColor == ChartPalette.otherColor(mode: mode))
+            #expect(stack.unattributedBarColor != ChartPalette.color(for: .index(0), mode: mode))
+        }
+
+        // Two models cover every broken-down day, so only the unattributed day can put "Other" in the legend.
+        let twoModels = [
+            Self.entry("2026-06-05", cost: 9, tokens: 300, models: [
+                Model(modelName: "fixture-alpha", costUSD: 6, totalTokens: 200),
+                Model(modelName: "fixture-beta", costUSD: 3, totalTokens: 100),
+            ]),
+            Self.entry("2026-06-06", cost: 3, tokens: 300, models: nil),
+        ]
+        let monochrome = try #require(CostHistoryChartMenuView.stackPresentation(
+            provider: .claude,
+            sortedDaily: twoModels,
+            metric: .cost,
+            paletteMode: .monochrome))
+        #expect(monochrome.legendItems.map(\.isOther) == [false, false, true])
+        let plain = try #require(CostHistoryChartMenuView.stackPresentation(
+            provider: .claude,
+            sortedDaily: twoModels,
+            metric: .cost))
+        #expect(plain.legendItems.map(\.isOther) == [false, false])
+    }
+
     // MARK: - Fixtures
 
     /// Alpha leads on cost, beta follows, gamma has the most tokens; the third day has no breakdown.
@@ -218,13 +371,15 @@ struct CostHistoryChartStackingTests {
     private static func renderedHeight(
         daily: [CostUsageDailyReport.Entry],
         initialMetric: CostHistoryChartMenuView.ChartMetric,
-        stackByModel: Bool = true) -> CGFloat
+        stackByModel: Bool = true,
+        preferences: ChartPreferences = .standard) -> CGFloat
     {
         let hosting = MenuHostingView(rootView: CostHistoryChartMenuView(
             provider: .claude,
             daily: daily,
             totalCostUSD: nil,
-            stackByModel: stackByModel,
+            stackByModel: stackByModel && preferences.stackByModel,
+            chartPreferences: preferences,
             hidePersonalInfo: false,
             width: 320,
             initialMetric: initialMetric))

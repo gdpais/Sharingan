@@ -3,7 +3,9 @@ import Foundation
 /// The quota/provider state changes CodexBar can run external commands for.
 ///
 /// Raw values are the stable event names used in config, env vars, and the JSON
-/// payload. `cost_threshold_reached` is intentionally not part of v1.
+/// payload. `cost_threshold_reached` is intentionally not part of v1: local costs are
+/// estimates, not bills. `budget_reached` compares those estimates with a budget the
+/// user entered, so its payload names every amount as estimated.
 public enum HookEventType: String, Codable, Sendable, CaseIterable {
     case quotaLow = "quota_low"
     case quotaReached = "quota_reached"
@@ -13,6 +15,8 @@ public enum HookEventType: String, Codable, Sendable, CaseIterable {
     case providerUnavailable = "provider_unavailable"
     case providerRecovered = "provider_recovered"
     case refreshFailed = "refresh_failed"
+    /// Estimated month-to-date spend reached 80% or 100% of the user's monthly budget.
+    case budgetReached = "budget_reached"
 
     /// Events that can repeat on every refresh while a condition persists, so they
     /// get the rate-limiter backstop. Quota events dedupe upstream and must not be
@@ -22,7 +26,7 @@ public enum HookEventType: String, Codable, Sendable, CaseIterable {
         switch self {
         case .usageUpdated, .providerUnavailable, .refreshFailed:
             true
-        case .quotaLow, .quotaReached, .quotaReset, .providerRecovered:
+        case .quotaLow, .quotaReached, .quotaReset, .providerRecovered, .budgetReached:
             false
         }
     }
@@ -49,6 +53,18 @@ public struct HookEvent: Codable, Sendable, Equatable {
     public let secondaryWindowMinutes: Int?
     public let secondaryResetAt: Date?
     public let status: String?
+    /// `budget_reached` only: estimated month-to-date spend and the budget it is compared with,
+    /// both in `currency`. Local costs are API-rate estimates, never billing receipts.
+    public let estimatedCost: Double?
+    public let budget: Double?
+    public let estimatedBudgetFraction: Double?
+    /// The budget fraction that was reached (0.8 or 1).
+    public let budgetThreshold: Double?
+    public let currency: String?
+    /// The calendar month as `yyyy-MM`.
+    public let budgetMonth: String?
+    /// `true` when history does not cover the whole month yet, so `estimatedCost` is a floor.
+    public let estimatedCostIsPartial: Bool?
     public let timestamp: Date
 
     public init(
@@ -65,6 +81,13 @@ public struct HookEvent: Codable, Sendable, Equatable {
         secondaryWindowMinutes: Int? = nil,
         secondaryResetAt: Date? = nil,
         status: String? = nil,
+        estimatedCost: Double? = nil,
+        budget: Double? = nil,
+        estimatedBudgetFraction: Double? = nil,
+        budgetThreshold: Double? = nil,
+        currency: String? = nil,
+        budgetMonth: String? = nil,
+        estimatedCostIsPartial: Bool? = nil,
         timestamp: Date)
     {
         self.event = event
@@ -80,6 +103,13 @@ public struct HookEvent: Codable, Sendable, Equatable {
         self.secondaryWindowMinutes = secondaryWindowMinutes
         self.secondaryResetAt = secondaryResetAt
         self.status = status
+        self.estimatedCost = estimatedCost
+        self.budget = budget
+        self.estimatedBudgetFraction = estimatedBudgetFraction
+        self.budgetThreshold = budgetThreshold
+        self.currency = currency
+        self.budgetMonth = budgetMonth
+        self.estimatedCostIsPartial = estimatedCostIsPartial
         self.timestamp = timestamp
     }
 
@@ -104,6 +134,7 @@ public struct HookEvent: Codable, Sendable, Equatable {
         }
         if let secondaryResetAt { env["CODEXBAR_SECONDARY_RESET_AT"] = Self.iso8601String(secondaryResetAt) }
         if let status { env["CODEXBAR_STATUS"] = status }
+        env.merge(self.budgetEnvironmentVariables()) { current, _ in current }
         return env
     }
 
@@ -121,7 +152,7 @@ public struct HookEvent: Codable, Sendable, Equatable {
         return formatter.string(from: date)
     }
 
-    private static func number(_ value: Double) -> String {
+    static func number(_ value: Double) -> String {
         // Trim a trailing ".0" so integers read cleanly, keep fractions intact.
         if value == value.rounded(), abs(value) < 1e15 {
             return String(Int64(value))

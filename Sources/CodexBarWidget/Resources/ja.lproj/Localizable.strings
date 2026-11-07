@@ -39,7 +39,9 @@
 "Activity" = "アクティビティ";
 "Add-on credits" = "アドオン クレジット";
 "Agent" = "エージェント";
+"All providers" = "すべてのプロバイダ";
 "Amp Free" = "Amp 無料";
+"Automatic" = "自動";
 "Balance" = "残高";
 "Base" = "ベース";
 "Billing" = "請求";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "クォータ バーンダウン プロバイダー";
 "Chat" = "チャット";
 "Choose an account" = "アカウントを選択してください";
+"Choose which providers the switcher shows and their order." = "スイッチャーに表示するプロバイダとその順序を選択します。";
 "Claude and GPT" = "Claude および GPT";
 "Code 7-day" = "コード 7 日間 クォータ";
 "Code review" = "コードレビュー";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "毎日無料 トークン";
 "Daily refresh" = "毎日のリフレッシュ";
 "Daily usage" = "毎日の使用量";
+"Default" = "デフォルト";
 "Deployment" = "デプロイメント";
 "Edit predictions" = "予測の編集";
 "Enable a provider in CodexBar → Settings → Providers." = "Sharingan → 設定 → プロバイダーでプロバイダーを有効にしてください。";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo パス";
 "Last %d days" = "過去%d日間";
 "Last 30 days" = "過去30日間";
+"Last 7 days" = "過去7日間";
+"Last 90 days" = "過去90日間";
+"Match app" = "アプリに合わせる";
 "Memory" = "メモリ使用量";
 "Metric" = "指標";
 "Model quota" = "モデル クォータ";
@@ -99,6 +106,7 @@
 "Monthly budget" = "月々の予算";
 "Monthly credits" = "月刊 クレジット";
 "Monthly quota" = "月刊 クォータ";
+"Name" = "名前";
 "No data" = "データなし";
 "Not reported by %@" = "%@ では報告されていません";
 "On-demand" = "オンデマンドでの使用";
@@ -119,11 +127,14 @@
 "Provider" = "プロバイダ";
 "Provider %@" = "プロバイダー %@";
 "Provider + Metric" = "プロバイダー + 指標";
+"Providers" = "プロバイダ";
 "Purchased" = "購入済み";
 "Quota" = "クォータ";
 "Ran out" = "クォータ が枯渇しました";
+"Range" = "期間";
 "Rate limit" = "レート制限";
 "Refill" = "リフィル";
+"Remaining" = "残り";
 "Remaining budget compared with an ideal steady burn rate." = "理想的な安定した燃焼速度と比較した残りの予算。";
 "Requests" = "リクエスト";
 "Reset: %@" = "リセット: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "セッションと週間の使用量、クレジット、費用を表示します。";
 "Shared pool" = "共有プール";
 "Sonnet" = "Sonnet";
+"Sort by" = "並べ替え";
 "Spend" = "支出";
 "Standard" = "標準";
 "Status" = "ステータス";
@@ -155,6 +167,7 @@
 "Switch Provider" = "プロバイダーの切り替え";
 "Switch the provider shown in the widget." = "ウィジェットに表示されるプロバイダーを切り替えます。";
 "Switch to %@" = "%@に切り替える";
+"Switcher" = "スイッチャー";
 "Team budget" = "チームの予算";
 "Third Party" = "サードパーティ";
 "Third quota" = "3 番目の クォータ";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "保存された 1 つのアカウントの使用制限とカウントダウンのリセット。";
 "Usage widget with a provider switcher." = "プロバイダースイッチャーを使用した使用状況ウィジェット。";
 "Usage window" = "利用窓口";
+"Used" = "使用済み";
 "Voices" = "声";
 "Weekly" = "週間";
 "Weekly (7-day)" = "毎週（7日間）";
