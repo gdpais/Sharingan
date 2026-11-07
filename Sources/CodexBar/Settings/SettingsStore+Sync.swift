@@ -60,7 +60,9 @@ extension SettingsStore {
             preferredCurrencyCode: self.preferredCurrencyCode,
             providersSortedAlphabetically: self.providersSortedAlphabetically,
             refreshFrequency: self.refreshFrequency.rawValue,
-            refreshAllProvidersOnMenuOpen: self.refreshAllProvidersOnMenuOpen)
+            refreshAllProvidersOnMenuOpen: self.refreshAllProvidersOnMenuOpen,
+            menuBarLayout: self.syncedMenuBarLayout,
+            menuCardLayouts: self.syncedMenuCardLayouts)
     }
 
     func applySyncedPreferences(_ preferences: SyncedPreferences) {
@@ -104,6 +106,7 @@ extension SettingsStore {
             self.refreshFrequency = refreshFrequency
         }
         self.refreshAllProvidersOnMenuOpen = preferences.refreshAllProvidersOnMenuOpen
+        self.applySyncedLayouts(from: preferences)
     }
 
     func canEnableProviderFromSync(_ provider: UsageProvider, localConfig: ProviderConfig) -> Bool {
