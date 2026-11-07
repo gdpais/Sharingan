@@ -329,6 +329,9 @@ public struct SyncedPreferences: Codable, Sendable {
     public var providersSortedAlphabetically: Bool
     public var refreshFrequency: String
     public var refreshAllProvidersOnMenuOpen: Bool
+    /// Optional so a payload from an older sender, which predates synced layouts, leaves the layouts alone.
+    public var menuBarLayout: SyncedMenuBarLayout?
+    public var menuCardLayouts: SyncedMenuCardLayouts?
 
     public init(
         statusChecksEnabled: Bool,
@@ -362,7 +365,9 @@ public struct SyncedPreferences: Codable, Sendable {
         preferredCurrencyCode: String,
         providersSortedAlphabetically: Bool,
         refreshFrequency: String,
-        refreshAllProvidersOnMenuOpen: Bool)
+        refreshAllProvidersOnMenuOpen: Bool,
+        menuBarLayout: SyncedMenuBarLayout? = nil,
+        menuCardLayouts: SyncedMenuCardLayouts? = nil)
     {
         self.statusChecksEnabled = statusChecksEnabled
         self.sessionQuotaNotificationsEnabled = sessionQuotaNotificationsEnabled
@@ -396,6 +401,8 @@ public struct SyncedPreferences: Codable, Sendable {
         self.providersSortedAlphabetically = providersSortedAlphabetically
         self.refreshFrequency = refreshFrequency
         self.refreshAllProvidersOnMenuOpen = refreshAllProvidersOnMenuOpen
+        self.menuBarLayout = menuBarLayout
+        self.menuCardLayouts = menuCardLayouts
     }
 }
 

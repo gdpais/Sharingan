@@ -17,6 +17,14 @@ public struct PreferencesDocument: Codable, Sendable {
     public static let defaultsDomain = AppDefaultsDomain.release
     private var version = 1
     private var preferences: [String: ProviderConfigExtensionValue] = [:]
+    /// Structured sections sit beside `preferences`, never inside it: older readers reject unknown keys in
+    /// `preferences` but skip unknown top-level keys, so a document with sections still imports there, without
+    /// them. A missing section leaves that part of the receiving Mac alone. A new section follows the same
+    /// pattern: an optional top-level value with its own format, which builds that do not know it skip.
+    public var menuBarLayout: SyncedMenuBarLayout?
+    public var menuCardLayouts: SyncedMenuCardLayouts?
+    /// The `SyncedPreferences` properties that travel as the sections above.
+    private static let sectionKeys: Set<String> = ["menuBarLayout", "menuCardLayouts"]
 
     private static let boolKeys = Set([
         "statusChecksEnabled", "sessionQuotaNotificationsEnabled", "quotaWarningNotificationsEnabled",
@@ -58,7 +66,7 @@ public struct PreferencesDocument: Codable, Sendable {
     public init() {}
 
     public var isEmpty: Bool {
-        self.preferences.isEmpty
+        self.preferences.isEmpty && self.menuBarLayout == nil && self.menuCardLayouts == nil
     }
 
     public init(data: Data) throws {
@@ -86,6 +94,9 @@ public struct PreferencesDocument: Codable, Sendable {
     public func merging(_ incoming: Self) -> Self {
         var result = self
         result.preferences.merge(incoming.importingPreferences) { _, new in new }
+        result.menuBarLayout = incoming.menuBarLayout.map { self.menuBarLayout?.merging($0) ?? $0 }
+            ?? self.menuBarLayout
+        result.menuCardLayouts = incoming.menuCardLayouts ?? self.menuCardLayouts
         return result
     }
 
@@ -105,6 +116,8 @@ public struct PreferencesDocument: Codable, Sendable {
             let data = try JSONSerialization.data(withJSONObject: value, options: .fragmentsAllowed)
             self.preferences[key] = try JSONDecoder().decode(ProviderConfigExtensionValue.self, from: data)
         }
+        self.menuBarLayout = SyncedMenuBarLayout(defaults: defaults)
+        self.menuCardLayouts = SyncedMenuCardLayouts(defaults: defaults)
         if let pending = defaults.data(forKey: Self.pendingImportKey) {
             self = try self.merging(Self(data: pending))
         }
@@ -119,13 +132,23 @@ public struct PreferencesDocument: Codable, Sendable {
             "weeklyProgressWorkDays", "paceVisible", "workdayTickAppearance", "unifiedIconSource",
         ])
         values.merge(self.importingPreferences.filter { keys.contains($0.key) }) { _, new in new }
-        return try JSONDecoder().decode(SyncedPreferences.self, from: JSONEncoder().encode(values))
+        var result = try JSONDecoder().decode(SyncedPreferences.self, from: JSONEncoder().encode(values))
+        // Sections apply only when the document has them; nil leaves the current layouts alone.
+        result.menuBarLayout = self.menuBarLayout
+        result.menuCardLayouts = self.menuCardLayouts
+        return result
     }
 
     public mutating func include(_ synced: SyncedPreferences) throws {
-        try self.preferences.merge(JSONDecoder().decode(
-            [String: ProviderConfigExtensionValue].self, from: JSONEncoder().encode(synced))) { _, new in new }
+        var values = try JSONDecoder().decode(
+            [String: ProviderConfigExtensionValue].self, from: JSONEncoder().encode(synced))
+        for key in Self.sectionKeys {
+            values.removeValue(forKey: key)
+        }
+        self.preferences.merge(values) { _, new in new }
         if synced.weeklyProgressWorkDays == nil { self.preferences["weeklyProgressWorkDays"] = .null }
+        self.menuBarLayout = synced.menuBarLayout ?? self.menuBarLayout
+        self.menuCardLayouts = synced.menuCardLayouts ?? self.menuCardLayouts
     }
 
     public func queueImport(in defaults: UserDefaults) throws {
@@ -166,5 +189,7 @@ public struct PreferencesDocument: Codable, Sendable {
             }
             guard valid else { throw Error.invalid("Invalid or non-portable preference: \(key)") }
         }
+        try self.menuBarLayout?.validate()
+        try self.menuCardLayouts?.validate()
     }
 }
