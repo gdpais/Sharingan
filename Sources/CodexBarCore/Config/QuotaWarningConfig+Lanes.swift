@@ -50,6 +50,61 @@ extension QuotaWarningConfig {
     }
 }
 
+// MARK: - Storage
+
+/// Where lane overrides live in the shared config.
+///
+/// In memory, and in the sync payload, they are `QuotaWarningConfig.windows`. On disk they are the provider-level
+/// key `quotaWarningWindows`: builds that predate lanes (upstream CodexBar reads the same config) keep unknown
+/// provider keys and write them back unchanged, but they drop an unknown key nested inside `quotaWarnings`.
+extension QuotaWarningConfig {
+    static let laneStorageKey = "quotaWarningWindows"
+
+    /// The part stored under `quotaWarnings`. Lane overrides go to the provider level, so a config that held
+    /// nothing else stores no `quotaWarnings` at all.
+    var storedWithoutLanes: QuotaWarningConfig? {
+        guard self.windows != nil else { return self }
+        var stored = self
+        stored.windows = nil
+        return stored.session == nil && stored.weekly == nil ? nil : stored
+    }
+}
+
+extension ProviderConfig {
+    /// `quotaWarnings` as written to disk, without its lane overrides.
+    var storedQuotaWarnings: QuotaWarningConfig? {
+        self.quotaWarnings?.storedWithoutLanes
+    }
+
+    /// Extension values as written to disk: the lane overrides join them under their provider-level key.
+    var storedExtensionValues: [String: ProviderConfigExtensionValue] {
+        guard let lanes = self.quotaWarnings?.windows, !lanes.isEmpty else { return self.extensionValues }
+        var copy = self
+        copy.setExtensionValue(lanes, forKey: QuotaWarningConfig.laneStorageKey)
+        return copy.extensionValues
+    }
+
+    /// Moves lane overrides read from the provider-level key into `quotaWarnings.windows`.
+    ///
+    /// Configs written before the key existed nest them in `quotaWarnings.windows`; those are still read, the
+    /// provider-level key wins when both exist, and the next save writes only the provider-level key. A value that
+    /// does not parse stays an opaque extension value, like any unknown key.
+    mutating func adoptStoredQuotaWarningLanes() {
+        let key = QuotaWarningConfig.laneStorageKey
+        guard self.extensionValues[key] != nil,
+              let stored: [String: QuotaWarningWindowConfig] = self.extensionValue(forKey: key)
+        else { return }
+        self.extensionValues[key] = nil
+        let lanes = stored.isEmpty ? nil : stored
+        if var warnings = self.quotaWarnings {
+            warnings.windows = lanes
+            self.quotaWarnings = warnings
+        } else if let lanes {
+            self.quotaWarnings = QuotaWarningConfig(windows: lanes)
+        }
+    }
+}
+
 extension QuotaWarningThresholds {
     /// How many thresholds the editor lets a user build up. A config may hold more; the editor still shows
     /// and keeps every one of them and only stops offering to add.
