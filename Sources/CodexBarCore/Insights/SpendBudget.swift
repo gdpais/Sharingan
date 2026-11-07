@@ -106,14 +106,11 @@ public struct SpendBudgetStatus: Sendable, Equatable {
             isComplete: reachesMonthStart && !coverage.isPartial && !hasUnpricedDay)
     }
 
-    /// Unpriced or incomplete requests, or a model row with tokens and no cost: the same signals the Spend
-    /// dashboard reads as a lower-bound cost. Unmetered requests cost nothing by design, so they do not count.
+    /// Unpriced or incomplete requests: the signals the Spend dashboard reads as a lower-bound cost. Model rows
+    /// without a cost do not count on their own, since vendor-metered providers (OpenAI API) report the day's
+    /// complete cost with unpriced model rows. Unmetered requests cost nothing by design, so they do not count.
     static func hasUnpricedRequests(_ entry: CostUsageDailyReport.Entry) -> Bool {
-        if entry.coverageCounts.unpriced > 0 || entry.incompleteRequestCount > 0 { return true }
-        return (entry.modelBreakdowns ?? []).contains { breakdown in
-            let priced = breakdown.costUSD.map { $0.isFinite && $0 >= 0 } ?? false
-            return !priced && (breakdown.totalTokens ?? 0) > 0
-        }
+        entry.coverageCounts.unpriced > 0 || entry.incompleteRequestCount > 0
     }
 
     /// Month-to-date status from a cost snapshot. The snapshot covers `historyDays` days ending on its

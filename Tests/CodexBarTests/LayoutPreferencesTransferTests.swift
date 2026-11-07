@@ -130,7 +130,7 @@ struct LayoutPreferencesTransferTests {
         #expect(settings.syncedMenuCardLayouts == cardsBefore)
     }
 
-    @Test(arguments: LayoutTransferFixtures.invalidSections)
+    @Test(arguments: LayoutTransferFixtures.unreadableSections)
     func `an unreadable menu bar layout is skipped and reported while the rest imports`(_ section: String) throws {
         let settings = self.store("invalid")
         try self.customize(settings)
@@ -145,17 +145,31 @@ struct LayoutPreferencesTransferTests {
         #expect(settings.syncedMenuBarLayout == before)
     }
 
+    @Test(arguments: LayoutTransferFixtures.malformedSections)
+    func `a malformed menu bar layout section rejects the document before anything changes`(_ section: String) throws {
+        let settings = self.store("malformed")
+        try self.customize(settings)
+        let before = settings.syncedMenuBarLayout
+        let json = #"{"version":1,"preferences":{"hidePersonalInfo":true},"menuBarLayout":"# + section + "}"
+        let data = Data(json.utf8)
+
+        // Reading the file fails, so the Settings import never starts.
+        #expect(throws: (any Error).self) { try PreferencesDocument(data: data) }
+        #expect(!settings.hidePersonalInfo)
+        #expect(settings.syncedMenuBarLayout == before)
+    }
+
     @Test
     func `an invalid preference outside the layout still rejects the import before anything changes`() throws {
         let settings = self.store("invalid-other")
         try self.customize(settings)
         let before = settings.syncedMenuBarLayout
         let json = #"{"version":1,"preferences":{"hidePersonalInfo":true,"mergeIcons":"yes"},"#
-            + #""menuBarLayout":"# + LayoutTransferFixtures.invalidSections[0] + "}"
+            + #""menuBarLayout":"# + LayoutTransferFixtures.unreadableSections[0] + "}"
+        // Decoded without the reading checks, so the import itself has to reject it.
+        let document = try JSONDecoder().decode(PreferencesDocument.self, from: Data(json.utf8))
 
-        #expect(throws: (any Error).self) {
-            try settings.importPreferences(PreferencesDocument(data: Data(json.utf8)))
-        }
+        #expect(throws: (any Error).self) { try settings.importPreferences(document) }
         #expect(!settings.hidePersonalInfo)
         #expect(settings.syncedMenuBarLayout == before)
     }
@@ -396,7 +410,8 @@ enum LayoutTransferFixtures {
             + #""thenToken":\#(thenToken),"elseToken":{"hidden":{}}}"#
     }
 
-    static let invalidSections: [String] = [
+    /// Well-formed sections that this build cannot apply: skipped on import, the rest of the document applies.
+    static let unreadableSections: [String] = [
         // A token this build does not know.
         #"{"format":1,"layout":{"lines":[[{"sparkles":{}}]]}}"#,
         // A placed rule missing from the library.
@@ -408,6 +423,10 @@ enum LayoutTransferFixtures {
         // Two rules with one identity.
         #"{"format":1,"conditionals":["# + rule(thenToken: #"{"icon":{}}"#) + ","
             + rule(thenToken: #"{"icon":{}}"#) + "]}",
+    ]
+
+    /// Sections whose shape is wrong: reading the document rejects all of it.
+    static let malformedSections: [String] = [
         // An override for something that cannot be a provider.
         #"{"format":1,"overrides":{"Not Valid":{"lines":[[{"icon":{}}]]}}}"#,
         // A size the editor does not offer.

@@ -65,18 +65,19 @@ struct SpendBudgetTests {
         let partlyPricedStatus = try #require(make(daily + [partlyPriced], monthStart, false))
         #expect(!partlyPricedStatus.isComplete)
         #expect(partlyPricedStatus.monthToDateCost == 8)
-        let unpricedModel = CostUsageDailyReport.Entry(
+        let vendorMetered = CostUsageDailyReport.Entry(
             date: "2026-11-12",
             inputTokens: 900,
             outputTokens: 0,
             totalTokens: 900,
             costUSD: 3,
-            modelsUsed: ["fixture-priced", "fixture-unknown"],
+            modelsUsed: ["fixture-alpha", "fixture-beta"],
             modelBreakdowns: [
-                CostUsageDailyReport.ModelBreakdown(modelName: "fixture-priced", costUSD: 3, totalTokens: 400),
-                CostUsageDailyReport.ModelBreakdown(modelName: "fixture-unknown", costUSD: nil, totalTokens: 500),
+                CostUsageDailyReport.ModelBreakdown(modelName: "fixture-alpha", costUSD: nil, totalTokens: 400),
+                CostUsageDailyReport.ModelBreakdown(modelName: "fixture-beta", costUSD: nil, totalTokens: 500),
             ])
-        #expect(try #require(make(daily + [unpricedModel], monthStart, false)).isComplete == false)
+        // Vendor-metered days (OpenAI API) carry the day's full cost with unpriced model rows: still exact.
+        #expect(try #require(make(daily + [vendorMetered], monthStart, false)).isComplete)
 
         #expect(SpendBudgetStatus.make(daily: daily, budget: 0, now: now, calendar: Self.utc) == nil)
         let noRate = SpendBudgetStatus.make(daily: daily, budget: 50, now: now, calendar: Self.utc, costMultiplier: 0)
