@@ -2802,3 +2802,13 @@
 "Project trends" = "Proje eğilimleri";
 "Change compares the last %d days with the %d days before." = "Değişim, son %d günü önceki %d günle karşılaştırır.";
 "New" = "Yeni";
+
+/* Widget options */
+"Match app" = "Uygulamayla aynı";
+"Used" = "Kullanılan";
+"Last 7 days" = "Son 7 gün";
+"Last 90 days" = "Son 90 gün";
+"All providers" = "Tüm sağlayıcılar";
+"Name" = "Ad";
+"Switcher" = "Değiştirici";
+"Choose which providers the switcher shows and their order." = "Değiştiricinin hangi sağlayıcıları hangi sırayla göstereceğini seçin.";

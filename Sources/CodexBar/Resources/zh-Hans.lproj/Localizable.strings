@@ -2791,3 +2791,13 @@
 "Project trends" = "项目趋势";
 "Change compares the last %d days with the %d days before." = "变化比较最近 %d 天与之前 %d 天。";
 "New" = "新增";
+
+/* Widget options */
+"Match app" = "跟随应用";
+"Used" = "已使用";
+"Last 7 days" = "近 7 天";
+"Last 90 days" = "近 90 天";
+"All providers" = "所有提供商";
+"Name" = "名称";
+"Switcher" = "切换器";
+"Choose which providers the switcher shows and their order." = "选择切换器显示哪些提供商以及它们的顺序。";

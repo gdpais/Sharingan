@@ -39,7 +39,9 @@
 "Activity" = "Activiteit";
 "Add-on credits" = "Aanvulling Kredieten";
 "Agent" = "Agent";
+"All providers" = "Alle aanbieders";
 "Amp Free" = "Amp Gratis";
+"Automatic" = "Automatisch";
 "Balance" = "Saldo";
 "Base" = "Basis";
 "Billing" = "Facturering";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Quotum burn-down-aanbieder";
 "Chat" = "Chatten";
 "Choose an account" = "Kies een account";
+"Choose which providers the switcher shows and their order." = "Kies welke aanbieders de schakelaar toont en in welke volgorde.";
 "Claude and GPT" = "Claude en GPT";
 "Code 7-day" = "Codeer 7-daags Quotum";
 "Code review" = "Codebeoordeling";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "Dagelijks gratis tokens";
 "Daily refresh" = "Dagelijks vernieuwen";
 "Daily usage" = "Dagelijks gebruik";
+"Default" = "Standaard";
 "Deployment" = "Inzet";
 "Edit predictions" = "Voorspellingen bewerken";
 "Enable a provider in CodexBar → Settings → Providers." = "Schakel een provider in via Sharingan → Instellingen → Providers.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo-pas";
 "Last %d days" = "Afgelopen %d dagen";
 "Last 30 days" = "Laatste 30 dagen";
+"Last 7 days" = "Laatste 7 dagen";
+"Last 90 days" = "Laatste 90 dagen";
+"Match app" = "Zoals in de app";
 "Memory" = "Geheugengebruik";
 "Metric" = "Metriek";
 "Model quota" = "ModelQuotum";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Maandelijks budget";
 "Monthly credits" = "Maandelijks Kredieten";
 "Monthly quota" = "Maandelijks Quotum";
+"Name" = "Naam";
 "No data" = "Geen gegevens";
 "Not reported by %@" = "Niet gerapporteerd door %@";
 "On-demand" = "On-demand gebruik";
@@ -119,11 +127,14 @@
 "Provider" = "Aanbieder";
 "Provider %@" = "Aanbieder %@";
 "Provider + Metric" = "Aanbieder + Metriek";
+"Providers" = "Aanbieders";
 "Purchased" = "Gekocht";
 "Quota" = "Quotum";
 "Ran out" = "Quotum is uitgeput";
+"Range" = "Periode";
 "Rate limit" = "Verzoeksnelheidslimiet";
 "Refill" = "Bijvullen";
+"Remaining" = "Resterend";
 "Remaining budget compared with an ideal steady burn rate." = "Resterend budget vergeleken met een ideale stabiele brandsnelheid.";
 "Requests" = "Verzoeken";
 "Reset: %@" = "Resetten: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Sessie en wekelijks gebruik met Kredieten en kosten.";
 "Shared pool" = "Gedeeld quotum";
 "Sonnet" = "Sonnet";
+"Sort by" = "Sorteren op";
 "Spend" = "Uitgaven";
 "Standard" = "Standaard";
 "Status" = "Status";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Van aanbieder wisselen";
 "Switch the provider shown in the widget." = "Wijzig de provider die in de widget wordt weergegeven.";
 "Switch to %@" = "Schakel over naar %@";
+"Switcher" = "Schakelaar";
 "Team budget" = "Teambudget";
 "Third Party" = "Derde partij";
 "Third quota" = "Derde Quotum";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Gebruikslimieten en reset-countdowns voor één opgeslagen account.";
 "Usage widget with a provider switcher." = "Gebruikswidget met een providerwisselaar.";
 "Usage window" = "Gebruiksvenster";
+"Used" = "Gebruikt";
 "Voices" = "Stemmen";
 "Weekly" = "Wekelijks";
 "Weekly (7-day)" = "Wekelijks (7 dagen)";

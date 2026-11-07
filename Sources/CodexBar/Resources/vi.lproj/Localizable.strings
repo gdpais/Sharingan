@@ -2800,3 +2800,13 @@
 "Project trends" = "Xu hướng dự án";
 "Change compares the last %d days with the %d days before." = "Mức thay đổi so sánh %d ngày gần nhất với %d ngày trước đó.";
 "New" = "Mới";
+
+/* Widget options */
+"Match app" = "Theo ứng dụng";
+"Used" = "Đã dùng";
+"Last 7 days" = "7 ngày qua";
+"Last 90 days" = "90 ngày qua";
+"All providers" = "Tất cả nhà cung cấp";
+"Name" = "Tên";
+"Switcher" = "Bộ chuyển đổi";
+"Choose which providers the switcher shows and their order." = "Chọn các nhà cung cấp mà bộ chuyển đổi hiển thị và thứ tự của chúng.";

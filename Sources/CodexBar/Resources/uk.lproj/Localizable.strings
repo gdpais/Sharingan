@@ -2800,3 +2800,13 @@
 "Project trends" = "Динаміка проєктів";
 "Change compares the last %d days with the %d days before." = "Зміна порівнює останні %d дн. з %d дн. перед ними.";
 "New" = "Новий";
+
+/* Widget options */
+"Match app" = "Як у застосунку";
+"Used" = "Використано";
+"Last 7 days" = "Останні 7 днів";
+"Last 90 days" = "Останні 90 днів";
+"All providers" = "Усі провайдери";
+"Name" = "Назва";
+"Switcher" = "Перемикач";
+"Choose which providers the switcher shows and their order." = "Виберіть, яких провайдерів показує перемикач і в якому порядку.";

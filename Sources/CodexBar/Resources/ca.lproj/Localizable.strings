@@ -2801,3 +2801,13 @@
 "Project trends" = "Tendències dels projectes";
 "Change compares the last %d days with the %d days before." = "El canvi compara els últims %d dies amb els %d dies anteriors.";
 "New" = "Nou";
+
+/* Widget options */
+"Match app" = "Com a l'app";
+"Used" = "Utilitzat";
+"Last 7 days" = "Últims 7 dies";
+"Last 90 days" = "Últims 90 dies";
+"All providers" = "Tots els proveïdors";
+"Name" = "Nom";
+"Switcher" = "Commutador";
+"Choose which providers the switcher shows and their order." = "Tria quins proveïdors mostra el commutador i en quin ordre.";

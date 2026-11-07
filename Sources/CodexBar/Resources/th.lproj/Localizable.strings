@@ -2801,3 +2801,13 @@
 "Project trends" = "แนวโน้มโครงการ";
 "Change compares the last %d days with the %d days before." = "การเปลี่ยนแปลงเปรียบเทียบ %d วันล่าสุดกับ %d วันก่อนหน้า";
 "New" = "ใหม่";
+
+/* Widget options */
+"Match app" = "ตามแอป";
+"Used" = "ใช้แล้ว";
+"Last 7 days" = "7 วันที่ผ่านมา";
+"Last 90 days" = "90 วันที่ผ่านมา";
+"All providers" = "ผู้ให้บริการทั้งหมด";
+"Name" = "ชื่อ";
+"Switcher" = "สวิตช์";
+"Choose which providers the switcher shows and their order." = "เลือกผู้ให้บริการที่สวิตช์แสดงและลำดับการแสดง";

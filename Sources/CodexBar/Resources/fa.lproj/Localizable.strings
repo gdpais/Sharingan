@@ -2803,3 +2803,13 @@
 "Project trends" = "روند پروژه‌ها";
 "Change compares the last %d days with the %d days before." = "تغییر، %d روز اخیر را با %d روز پیش از آن مقایسه می‌کند.";
 "New" = "جدید";
+
+/* Widget options */
+"Match app" = "مطابق برنامه";
+"Used" = "مصرف‌شده";
+"Last 7 days" = "۷ روز آخر";
+"Last 90 days" = "۹۰ روز آخر";
+"All providers" = "همه ارائه‌دهندگان";
+"Name" = "نام";
+"Switcher" = "سوئیچر";
+"Choose which providers the switcher shows and their order." = "انتخاب کنید سوئیچر کدام ارائه‌دهندگان را و به چه ترتیبی نشان دهد.";

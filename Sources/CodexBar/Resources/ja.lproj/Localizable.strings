@@ -2799,3 +2799,13 @@
 "Project trends" = "プロジェクトの推移";
 "Change compares the last %d days with the %d days before." = "変化は直近%d日間とその前の%d日間を比較しています。";
 "New" = "新規";
+
+/* Widget options */
+"Match app" = "アプリに合わせる";
+"Used" = "使用済み";
+"Last 7 days" = "過去7日間";
+"Last 90 days" = "過去90日間";
+"All providers" = "すべてのプロバイダ";
+"Name" = "名前";
+"Switcher" = "スイッチャー";
+"Choose which providers the switcher shows and their order." = "スイッチャーに表示するプロバイダとその順序を選択します。";

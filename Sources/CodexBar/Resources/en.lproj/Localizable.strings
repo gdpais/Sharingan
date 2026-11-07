@@ -2804,3 +2804,13 @@
 "Project trends" = "Project trends";
 "Change compares the last %d days with the %d days before." = "Change compares the last %d days with the %d days before.";
 "New" = "New";
+
+/* Widget options */
+"Match app" = "Match app";
+"Used" = "Used";
+"Last 7 days" = "Last 7 days";
+"Last 90 days" = "Last 90 days";
+"All providers" = "All providers";
+"Name" = "Name";
+"Switcher" = "Switcher";
+"Choose which providers the switcher shows and their order." = "Choose which providers the switcher shows and their order.";

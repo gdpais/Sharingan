@@ -2799,3 +2799,13 @@
 "Project trends" = "Tendências dos projetos";
 "Change compares the last %d days with the %d days before." = "A variação compara os últimos %d dias com os %d dias anteriores.";
 "New" = "Novo";
+
+/* Widget options */
+"Match app" = "Igual ao app";
+"Used" = "Usado";
+"Last 7 days" = "Últimos 7 dias";
+"Last 90 days" = "Últimos 90 dias";
+"All providers" = "Todos os provedores";
+"Name" = "Nome";
+"Switcher" = "Comutador";
+"Choose which providers the switcher shows and their order." = "Escolha quais provedores o comutador mostra e em que ordem.";

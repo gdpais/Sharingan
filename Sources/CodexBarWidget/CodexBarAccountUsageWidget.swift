@@ -25,7 +25,7 @@ struct AccountUsageSelectionIntent: AppIntent, WidgetConfigurationIntent {
     static let description = IntentDescription("Select the provider and account to display in the widget.")
 
     /// Provider-specific by design: keep the same initial provider as the established Usage widget intent.
-    @Parameter(title: "Provider", default: .codex)
+    @Parameter(title: "Provider", default: .codex, optionsProvider: WidgetProviderOptions())
     var provider: ProviderChoice
 
     @Parameter(title: "Account")
@@ -222,7 +222,9 @@ struct WidgetAccountsOverview {
                 && ($0.usage == nil || $0.usage?.provider == provider)
         }
         let candidates: [Row] = accounts.map { account in
-            let lanes = account.usage.map { WidgetTileLane.lanes(for: $0) } ?? []
+            let lanes = account.usage.map { usage in
+                WidgetHeadlineWindow.apply(entry.options.window, to: WidgetTileLane.lanes(for: usage), entry: usage)
+            } ?? []
             let quota = WidgetTilePlan.make(
                 lanes: lanes.filter { $0.remainingPercent?.isFinite != false }, maxSecondaryLanes: 0).hero
             return Row(account: account, quota: quota)
@@ -279,7 +281,7 @@ struct AccountsOverviewTile: View {
 
     private func accountRow(_ row: WidgetAccountsOverview.Row) -> some View {
         let remaining = row.quota?.remainingPercent
-        let showsUsed = self.entry.snapshot.usageBarsShowUsed
+        let showsUsed = self.entry.options.showsUsed(in: self.entry.snapshot)
         let displayed = WidgetUsageDisplay.percent(fromRemaining: remaining, showUsed: showsUsed)
         return VStack(alignment: .leading, spacing: 3) {
             HStack(spacing: 6) {

@@ -2777,3 +2777,13 @@
 "Project trends" = "專案趨勢";
 "Change compares the last %d days with the %d days before." = "變化比較最近 %d 天與之前 %d 天。";
 "New" = "新增";
+
+/* Widget options */
+"Match app" = "跟隨 App";
+"Used" = "已用";
+"Last 7 days" = "近 7 天";
+"Last 90 days" = "近 90 天";
+"All providers" = "所有提供者";
+"Name" = "名稱";
+"Switcher" = "切換器";
+"Choose which providers the switcher shows and their order." = "選擇切換器顯示哪些提供者及其順序。";

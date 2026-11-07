@@ -2767,3 +2767,13 @@
 "Project trends" = "프로젝트 추세";
 "Change compares the last %d days with the %d days before." = "변화율은 최근 %d일과 그 이전 %d일을 비교합니다.";
 "New" = "신규";
+
+/* Widget options */
+"Match app" = "앱 설정 따르기";
+"Used" = "사용됨";
+"Last 7 days" = "지난 7일";
+"Last 90 days" = "지난 90일";
+"All providers" = "모든 공급자";
+"Name" = "이름";
+"Switcher" = "스위처";
+"Choose which providers the switcher shows and their order." = "스위처에 표시할 공급자와 순서를 선택합니다.";
