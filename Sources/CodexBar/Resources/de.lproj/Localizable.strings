@@ -2797,6 +2797,29 @@
 "Project trends" = "Projekttrends";
 "Change compares the last %d days with the %d days before." = "Die Veränderung vergleicht die letzten %d Tage mit den %d Tagen davor.";
 "New" = "Neu";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Tarifwert · %@";
+"API-equivalent vs %@ in plans" = "API-Gegenwert vs. Tarife für %@";
+"Plan & budget" = "Tarif & Budget";
+"Plan price" = "Tarifpreis";
+"plan_price_subtitle" = "Monatlicher Abopreis. Der Tarifwert vergleicht ihn mit den API-äquivalenten Ausgaben.";
+"monthly_budget_subtitle" = "Wird mit den geschätzten Ausgaben seit Monatsbeginn verglichen – im Kostendiagramm, in Warnungen und in Hooks.";
+"Currency" = "Währung";
+"plan_budget_footer" = "Deine eigenen Zahlen, gespeichert bei diesem Anbieter in der gemeinsamen Konfigurationsdatei. Lass ein Feld leer, um es auszuschalten.";
+"plan_budget_invalid_amount" = "Gib einen Betrag größer als null ein.";
+"Month to date %@ of %@ budget" = "Seit Monatsbeginn %1$@ von %2$@ Budget";
+"Month to date at least %@ of %@ budget" = "Seit Monatsbeginn mindestens %1$@ von %2$@ Budget";
+"budget %@/day" = "Budget %@/Tag";
+"budget_notifications_title" = "Budgetwarnungen";
+"budget_notifications_subtitle" = "Benachrichtigt, wenn die geschätzten Ausgaben seit Monatsbeginn 80 % und 100 % des Monatsbudgets eines Anbieters erreichen.";
+"budget_notifications_no_budget" = "Lege in den Einstellungen eines Anbieters ein Monatsbudget fest, um Budgetwarnungen zu erhalten.";
+"budget_notification_title_warning" = "%1$@-Budget bei %2$@";
+"budget_notification_title_reached" = "%@-Budget erreicht";
+"budget_notification_body" = "Geschätzte Ausgaben in diesem Monat: %1$@ von deinem Budget von %2$@.";
+"budget_hooks_header" = "Budget-Hooks";
+"budget_hooks_add_rule" = "Budget-Hook hinzufügen";
+"budget_hooks_footer" = "Führt einen Befehl aus, wenn die geschätzten Ausgaben seit Monatsbeginn 80 % oder 100 % des Monatsbudgets eines Anbieters erreichen. Folgt dem Hooks-Schalter oben. Wird in den App-Einstellungen dieses Macs gespeichert, nicht in der gemeinsamen Konfigurationsdatei.";
 "quota_warning_add_threshold" = "Schwelle hinzufügen";
 "quota_warning_remove_threshold" = "Niedrigste Schwelle entfernen";
 "quota_warning_lane_follows_weekly" = "Nur wöchentliche Markierungen, keine Mitteilungen";

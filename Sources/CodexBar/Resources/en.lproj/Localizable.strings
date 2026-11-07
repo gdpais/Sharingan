@@ -2804,6 +2804,29 @@
 "Project trends" = "Project trends";
 "Change compares the last %d days with the %d days before." = "Change compares the last %d days with the %d days before.";
 "New" = "New";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Plan value · %@";
+"API-equivalent vs %@ in plans" = "API-equivalent vs %@ in plans";
+"Plan & budget" = "Plan & budget";
+"Plan price" = "Plan price";
+"plan_price_subtitle" = "Monthly subscription price. Plan value compares it with API-equivalent spend.";
+"monthly_budget_subtitle" = "Compared with estimated month-to-date spend in the cost chart, alerts and hooks.";
+"Currency" = "Currency";
+"plan_budget_footer" = "Your own numbers, saved with this provider in the shared config file. Leave a field empty to turn it off.";
+"plan_budget_invalid_amount" = "Enter an amount greater than zero.";
+"Month to date %@ of %@ budget" = "Month to date %1$@ of %2$@ budget";
+"Month to date at least %@ of %@ budget" = "Month to date at least %1$@ of %2$@ budget";
+"budget %@/day" = "budget %@/day";
+"budget_notifications_title" = "Budget alerts";
+"budget_notifications_subtitle" = "Notifies when estimated month-to-date spend reaches 80% and 100% of a provider's monthly budget.";
+"budget_notifications_no_budget" = "Set a monthly budget in a provider's settings to get budget alerts.";
+"budget_notification_title_warning" = "%1$@ budget at %2$@";
+"budget_notification_title_reached" = "%@ budget reached";
+"budget_notification_body" = "Estimated spend this month: %1$@ of your %2$@ budget.";
+"budget_hooks_header" = "Budget hooks";
+"budget_hooks_add_rule" = "Add budget hook";
+"budget_hooks_footer" = "Runs a command when estimated month-to-date spend reaches 80% or 100% of a provider's monthly budget. Follows the hooks switch above. Saved in this Mac's app preferences, not in the shared config file.";
 "quota_warning_add_threshold" = "Add threshold";
 "quota_warning_remove_threshold" = "Remove lowest threshold";
 "quota_warning_lane_follows_weekly" = "Weekly markers only, no notifications";

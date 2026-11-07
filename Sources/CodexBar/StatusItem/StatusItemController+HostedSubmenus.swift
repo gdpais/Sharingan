@@ -302,6 +302,10 @@ extension StatusItemController {
             displayCostMultiplier: displayConversion.multiplier)
         fingerprint.previousPeriodCostBitPattern = self.costHistoryPreviousPeriodCost(for: snapshot).map(\.bitPattern)
         fingerprint.chartPreferences = self.settings.chartPreferences
+        fingerprint.budget = self.store.costHistoryBudget(
+            for: provider,
+            displayCurrencyCode: displayConversion.currencyCode,
+            sourceToDisplay: displayConversion.multiplier)
         return .costHistory(fingerprint)
     }
 
@@ -455,6 +459,10 @@ extension StatusItemController {
             projects: provider.supportsLocalProjects ? tokenSnapshot.projects : [],
             sessions: tokenSnapshot.sessions,
             previousPeriodCostUSD: self.costHistoryPreviousPeriodCost(for: tokenSnapshot),
+            budget: self.store.costHistoryBudget(
+                for: provider,
+                displayCurrencyCode: displayConversion.currencyCode,
+                sourceToDisplay: displayConversion.multiplier),
             stackByModel: chartPreferences.stackByModel,
             chartPreferences: chartPreferences,
             chartDaily: CostHistoryChartMenuView.plottedDaily(

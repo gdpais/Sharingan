@@ -2798,6 +2798,29 @@
 "Project trends" = "Tendencias dos proxectos";
 "Change compares the last %d days with the %d days before." = "O cambio compara os últimos %d días cos %d días anteriores.";
 "New" = "Novo";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Valor do plan · %@";
+"API-equivalent vs %@ in plans" = "Equivalente en API fronte a plans de %@";
+"Plan & budget" = "Plan e orzamento";
+"Plan price" = "Prezo do plan";
+"plan_price_subtitle" = "Prezo mensual da subscrición. O valor do plan compárao co gasto equivalente en API.";
+"monthly_budget_subtitle" = "Compárase co gasto estimado do mes en curso no gráfico de custos, nos avisos e nos ganchos.";
+"Currency" = "Moeda";
+"plan_budget_footer" = "As túas propias cifras, gardadas con este provedor no ficheiro de configuración compartido. Deixa un campo baleiro para desactivalo.";
+"plan_budget_invalid_amount" = "Introduce un importe maior ca cero.";
+"Month to date %@ of %@ budget" = "Mes en curso: %1$@ dun orzamento de %2$@";
+"Month to date at least %@ of %@ budget" = "Mes en curso: polo menos %1$@ dun orzamento de %2$@";
+"budget %@/day" = "orzamento %@/día";
+"budget_notifications_title" = "Avisos de orzamento";
+"budget_notifications_subtitle" = "Avisa cando o gasto estimado do mes en curso chega ao 80% e ao 100% do orzamento mensual dun provedor.";
+"budget_notifications_no_budget" = "Define un orzamento mensual na configuración dun provedor para recibir avisos de orzamento.";
+"budget_notification_title_warning" = "Orzamento de %1$@ ao %2$@";
+"budget_notification_title_reached" = "Orzamento de %@ alcanzado";
+"budget_notification_body" = "Gasto estimado este mes: %1$@ do teu orzamento de %2$@.";
+"budget_hooks_header" = "Ganchos de orzamento";
+"budget_hooks_add_rule" = "Engadir gancho de orzamento";
+"budget_hooks_footer" = "Executa un comando cando o gasto estimado do mes en curso chega ao 80% ou ao 100% do orzamento mensual dun provedor. Segue o interruptor de ganchos de arriba. Gárdase nas preferencias da app deste Mac, non no ficheiro de configuración compartido.";
 "quota_warning_add_threshold" = "Engadir limiar";
 "quota_warning_remove_threshold" = "Quitar o limiar máis baixo";
 "quota_warning_lane_follows_weekly" = "Só marcadores semanais, sen notificacións";
