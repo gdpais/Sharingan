@@ -358,6 +358,19 @@ enum WidgetSwitcherProviders {
         }
     }
 
+    /// Whether a Switcher writes its own first provider back as the selection every Switcher shares. Only the
+    /// default membership does, and only for a stored provider no Switcher can show, so a provider picked in an
+    /// All providers Switcher stays picked while a default Switcher sits beside it.
+    static func repairsStoredSelection(
+        _ stored: ProviderInstanceID?,
+        include: WidgetSwitcherIncludeChoice,
+        in snapshot: WidgetSnapshot) -> Bool
+    {
+        guard include == .automatic else { return false }
+        guard let stored else { return true }
+        return !self.allProviders(in: snapshot).contains { $0.instanceID == stored }
+    }
+
     /// `automatic` keeps the app's order. `usage` puts the provider with the least quota left first; providers
     /// without a quota follow in their original order.
     static func ordered(
