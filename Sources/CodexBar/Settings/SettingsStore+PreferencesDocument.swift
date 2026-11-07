@@ -24,6 +24,7 @@ extension SettingsStore {
 
     func importPreferences(_ document: PreferencesDocument) throws {
         try document.validate()
+        try self.validateLayoutImport(document)
         let synced = try document.applying(to: self.syncedPreferences)
         // Use the normal setters. CloudKit alone owns its incoming-record echo-suppression baseline.
         let consent = self.adaptiveActivityScanConsent
@@ -63,7 +64,7 @@ extension SettingsStore {
         self.userDefaults.synchronize()
         guard let data = self.userDefaults.data(forKey: PreferencesDocument.pendingImportKey) else { return }
         do {
-            try self.importPreferences(PreferencesDocument(data: data))
+            try self.importPendingPreferences(PreferencesDocument(data: data))
             if self.userDefaults.data(forKey: PreferencesDocument.pendingImportKey) == data {
                 self.userDefaults.removeObject(forKey: PreferencesDocument.pendingImportKey)
                 self.userDefaults.synchronize()
