@@ -2809,3 +2809,4 @@
 "Drawn inside usage rows." = "Visas inuti användningsraderna.";
 "Menu links" = "Menylänkar";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordna och visa avsnitten på den här leverantörens menykort och välj dess diagram. Avsnitt och diagram utan data förblir dolda.";
+"menu_bar_style_tomoe" = "Tomoe";

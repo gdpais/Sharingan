@@ -2810,3 +2810,4 @@
 "Drawn inside usage rows." = "Exibido dentro das linhas de uso.";
 "Menu links" = "Links do menu";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordene e mostre as seções do cartão do menu deste provedor e escolha o gráfico. Seções e gráficos sem dados continuam ocultos.";
+"menu_bar_style_tomoe" = "Tomoe";

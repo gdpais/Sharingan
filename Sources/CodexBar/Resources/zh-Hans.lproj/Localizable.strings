@@ -2802,3 +2802,4 @@
 "Drawn inside usage rows." = "显示在用量行内。";
 "Menu links" = "菜单链接";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "调整此提供商菜单卡片各部分的顺序和显示，并选择其图表。没有数据的部分和图表会保持隐藏。";
+"menu_bar_style_tomoe" = "勾玉";

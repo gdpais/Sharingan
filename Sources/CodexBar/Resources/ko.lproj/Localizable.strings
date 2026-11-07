@@ -2778,3 +2778,4 @@
 "Drawn inside usage rows." = "사용량 행 안에 표시됩니다.";
 "Menu links" = "메뉴 링크";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "이 제공업체의 메뉴 카드 섹션 순서와 표시 여부를 정하고 차트를 선택합니다. 데이터가 없는 섹션과 차트는 숨겨진 상태로 유지됩니다.";
+"menu_bar_style_tomoe" = "토모에";

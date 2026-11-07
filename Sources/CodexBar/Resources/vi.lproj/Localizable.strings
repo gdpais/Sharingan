@@ -2811,3 +2811,4 @@
 "Drawn inside usage rows." = "Hiển thị bên trong các hàng sử dụng.";
 "Menu links" = "Liên kết trong menu";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Sắp xếp và hiển thị các mục trong thẻ menu của nhà cung cấp này, rồi chọn biểu đồ. Các mục và biểu đồ không có dữ liệu sẽ vẫn bị ẩn.";
+"menu_bar_style_tomoe" = "Tomoe";

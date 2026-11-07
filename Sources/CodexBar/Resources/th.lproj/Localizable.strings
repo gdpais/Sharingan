@@ -2812,3 +2812,4 @@
 "Drawn inside usage rows." = "แสดงอยู่ภายในแถวการใช้งาน";
 "Menu links" = "ลิงก์ในเมนู";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "จัดลำดับและแสดงส่วนต่างๆ ของการ์ดเมนูของผู้ให้บริการนี้ แล้วเลือกแผนภูมิ ส่วนและแผนภูมิที่ไม่มีข้อมูลจะยังคงซ่อนอยู่";
+"menu_bar_style_tomoe" = "โทโมเอะ";

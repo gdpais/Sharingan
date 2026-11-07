@@ -2810,3 +2810,4 @@
 "Drawn inside usage rows." = "使用量の行の中に表示されます。";
 "Menu links" = "メニューのリンク";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "このプロバイダーのメニューカードのセクションを並べ替えて表示を切り替え、グラフを選択します。データのないセクションやグラフは非表示のままです。";
+"menu_bar_style_tomoe" = "巴";

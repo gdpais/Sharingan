@@ -2811,3 +2811,4 @@
 "Drawn inside usage rows." = "Отображается внутри строк использования.";
 "Menu links" = "Ссылки в меню";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Упорядочьте разделы карточки меню этого провайдера, настройте их видимость и выберите график. Разделы и графики без данных остаются скрытыми.";
+"menu_bar_style_tomoe" = "Томоэ";

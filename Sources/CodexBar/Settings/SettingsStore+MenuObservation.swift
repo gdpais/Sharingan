@@ -33,6 +33,7 @@ extension SettingsStore {
         _ = self.highlightMenuCardsOnHover
         _ = self.menuBarShowsBrandIconWithPercent
         _ = self.menuBarHidesCritters
+        _ = self.menuBarShowsTomoeIcon
         _ = self.menuBarColorPace
         _ = self.menuBarPaceReservePositive
         _ = self.menuBarColorByProvider

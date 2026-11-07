@@ -2812,3 +2812,4 @@
 "Drawn inside usage rows." = "Ditampilkan di dalam baris penggunaan.";
 "Menu links" = "Tautan menu";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Atur urutan dan tampilkan bagian kartu menu penyedia ini, lalu pilih grafiknya. Bagian dan grafik tanpa data tetap disembunyikan.";
+"menu_bar_style_tomoe" = "Tomoe";

@@ -2814,3 +2814,4 @@
 "Drawn inside usage rows." = "تُعرض داخل صفوف الاستخدام.";
 "Menu links" = "روابط القائمة";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "رتّب أقسام بطاقة القائمة لهذا المزوّد وأظهرها أو أخفِها، واختر الرسم البياني الخاص بها. تبقى الأقسام والرسوم البيانية التي لا تتوفر لها بيانات مخفية.";
+"menu_bar_style_tomoe" = "توموي";

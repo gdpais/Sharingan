@@ -2788,3 +2788,4 @@
 "Drawn inside usage rows." = "顯示在用量列內。";
 "Menu links" = "選單連結";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "調整此供應商選單卡片各區段的順序與顯示，並選擇其圖表。沒有資料的區段與圖表會保持隱藏。";
+"menu_bar_style_tomoe" = "勾玉";
