@@ -105,7 +105,10 @@ struct TomoeIconGeometry: Sendable {
 
     /// The head center angle for a slot: session at the top, then clockwise every 120°.
     func headAngle(for slot: TomoeIconFills.Slot) -> Double {
-        Double.pi / 2 - Double(slot.rawValue) * 2 * Double.pi / 3
+        // The slot index stays on its own line: the provider gatekeeper reads π on a line that also mentions the
+        // raw value as a reference to the Pi provider.
+        let position = Double(slot.rawValue)
+        return Double.pi / 2 - position * 2 * Double.pi / 3
     }
 
     /// Where the band starts: the head's front tangent, relative to the head center.

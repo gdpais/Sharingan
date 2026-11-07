@@ -419,9 +419,11 @@ struct CodexBarSwitcherTimelineProvider: AppIntentTimelineProvider {
         let providers = Self.supportedProviders(from: snapshot, include: include, order: order)
         let stored = WidgetSelectionStore.loadSelectedProvider()
         let selected = providers.first { $0.instanceID == stored } ?? providers.first ?? .codex
-        // Every Switcher shares the stored selection. Only the default membership may repair it, so a
-        // customised Switcher never moves the provider that another Switcher shows.
-        if selected.instanceID != stored, include == .automatic {
+        // Every Switcher shares the stored selection. Only a default Switcher repairs it, and only when no
+        // Switcher can show the stored provider, so neither kind undoes a pick made in the other.
+        if selected.instanceID != stored,
+           WidgetSwitcherProviders.repairsStoredSelection(stored, include: include, in: snapshot)
+        {
             WidgetSelectionStore.saveSelectedProvider(selected)
         }
         return CodexBarSwitcherEntry(

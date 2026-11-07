@@ -115,7 +115,8 @@ widgets keep their stored raw values, so no widget needs reconfiguring.
 
 The Switcher's **Default** provider set is the original set above, in the app's order. **All providers** adds
 every enabled provider. The selected provider is still shared by all Switchers; only a Switcher with the
-default provider set repairs a stored selection it does not list.
+default provider set repairs a stored selection, and only one that no Switcher can show, so a provider picked in
+an **All providers** Switcher stays picked beside a default one.
 
 DeepSeek shows its credit balance without a quota bar because it reports no quota denominator.
 OpenRouter shows its remaining credits alongside a configured API-key limit, or as the headline when

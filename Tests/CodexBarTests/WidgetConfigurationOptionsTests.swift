@@ -275,6 +275,26 @@ struct WidgetConfigurationOptionsTests {
     }
 
     @Test
+    func `a default switcher keeps a provider picked in an all providers switcher`() {
+        let snapshot = WidgetSnapshot(
+            entries: [Self.entry(provider: .codex, used: 50), Self.entry(provider: .kiro, used: 20)],
+            enabledProviders: [.codex, .kiro, .claude],
+            generatedAt: Self.now)
+        // Kiro is outside the default set, so only an All providers Switcher can have stored it.
+        #expect(!CodexBarSwitcherTimelineProvider.supportedProviders(from: snapshot).contains(.kiro))
+        #expect(!WidgetSwitcherProviders.repairsStoredSelection(.kiro, include: .automatic, in: snapshot))
+        #expect(!WidgetSwitcherProviders.repairsStoredSelection(.codex, include: .automatic, in: snapshot))
+        // A stored provider no Switcher can show, or none at all, is still repaired, by the default Switcher only.
+        #expect(WidgetSwitcherProviders.repairsStoredSelection(.gemini, include: .automatic, in: snapshot))
+        #expect(WidgetSwitcherProviders.repairsStoredSelection(nil, include: .automatic, in: snapshot))
+        #expect(!WidgetSwitcherProviders.repairsStoredSelection(.gemini, include: .all, in: snapshot))
+        #expect(!WidgetSwitcherProviders.repairsStoredSelection(nil, include: .all, in: snapshot))
+        // Before the app publishes anything, the default Switcher repairs a stale selection as it always did.
+        let empty = WidgetPreviewData.emptySnapshot()
+        #expect(WidgetSwitcherProviders.repairsStoredSelection(.claude, include: .automatic, in: empty))
+    }
+
+    @Test
     func `switcher with every provider falls back to the original list when nothing is enabled`() {
         let snapshot = WidgetPreviewData.emptySnapshot()
         #expect(CodexBarSwitcherTimelineProvider.supportedProviders(from: snapshot, include: .all, order: .name)
