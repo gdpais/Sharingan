@@ -2812,3 +2812,18 @@
 "Drawn inside usage rows." = "Ditampilkan di dalam baris penggunaan.";
 "Menu links" = "Tautan menu";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Atur urutan dan tampilkan bagian kartu menu penyedia ini, lalu pilih grafiknya. Bagian dan grafik tanpa data tetap disembunyikan.";
+
+/* Chart preferences */
+"Charts" = "Grafik";
+"Charts never show more days than the History window." = "Grafik tidak pernah menampilkan lebih banyak hari daripada jendela riwayat.";
+"Stack by model" = "Tumpuk menurut model";
+"Splits each day by its two largest models." = "Membagi setiap hari menurut dua model terbesarnya.";
+"Average line" = "Garis rata-rata";
+"Chart style" = "Gaya grafik";
+"Bars" = "Batang";
+"Line" = "Garis";
+"Palette" = "Palet";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Ramah buta warna mengganti warna aksen penyedia pada grafik satu seri. Monokrom memakai abu-abu di mana saja, termasuk peta panas.";
+"Provider accents" = "Warna aksen penyedia";
+"Colorblind-safe" = "Ramah buta warna";
+"Monochrome" = "Monokrom";

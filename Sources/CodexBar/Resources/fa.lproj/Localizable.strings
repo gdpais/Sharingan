@@ -2814,3 +2814,18 @@
 "Drawn inside usage rows." = "درون ردیف‌های استفاده نمایش داده می‌شود.";
 "Menu links" = "پیوندهای منو";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "بخش‌های کارت منوی این ارائه‌دهنده را مرتب کنید، نمایش دهید یا پنهان کنید و نمودار آن را انتخاب کنید. بخش‌ها و نمودارهای بدون داده پنهان می‌مانند.";
+
+/* Chart preferences */
+"Charts" = "نمودارها";
+"Charts never show more days than the History window." = "نمودارها هرگز بیش از روزهای پنجره تاریخچه را نشان نمی‌دهند.";
+"Stack by model" = "انباشت بر اساس مدل";
+"Splits each day by its two largest models." = "هر روز را بر اساس دو مدل بزرگ‌ترش تقسیم می‌کند.";
+"Average line" = "خط میانگین";
+"Chart style" = "سبک نمودار";
+"Bars" = "ستونی";
+"Line" = "خطی";
+"Palette" = "پالت رنگ";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "حالت مناسب کوررنگی، رنگ‌های تأکید ارائه‌دهندگان را در نمودارهای تک‌سری جایگزین می‌کند. حالت تک‌رنگ همه‌جا از خاکستری استفاده می‌کند، از جمله در نقشه‌های حرارتی.";
+"Provider accents" = "رنگ‌های تأکید ارائه‌دهندگان";
+"Colorblind-safe" = "مناسب کوررنگی";
+"Monochrome" = "تک‌رنگ";

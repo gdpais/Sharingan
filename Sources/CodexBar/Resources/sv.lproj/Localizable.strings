@@ -2809,3 +2809,18 @@
 "Drawn inside usage rows." = "Visas inuti användningsraderna.";
 "Menu links" = "Menylänkar";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordna och visa avsnitten på den här leverantörens menykort och välj dess diagram. Avsnitt och diagram utan data förblir dolda.";
+
+/* Chart preferences */
+"Charts" = "Diagram";
+"Charts never show more days than the History window." = "Diagram visar aldrig fler dagar än historikfönstret.";
+"Stack by model" = "Stapla per modell";
+"Splits each day by its two largest models." = "Delar upp varje dag efter dess två största modeller.";
+"Average line" = "Medelvärdeslinje";
+"Chart style" = "Diagramstil";
+"Bars" = "Staplar";
+"Line" = "Linje";
+"Palette" = "Palett";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Färgblindsvänlig ersätter leverantörernas accentfärger i diagram med en serie. Monokrom använder gråtoner överallt, även i värmekartor.";
+"Provider accents" = "Leverantörernas accentfärger";
+"Colorblind-safe" = "Färgblindsvänlig";
+"Monochrome" = "Monokrom";

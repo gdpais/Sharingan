@@ -312,10 +312,10 @@ extension UsageMenuCardView.Model {
         let requestHistoryTitle = legacyMonth ? L("30d requests") : String(format: L("%@ requests"), period)
         let accessibilityCostLabel = legacyMonth ? L("30d cost") : L("%@ cost", period)
         let points = Self.inlineCostHistoryPoints(
-            days: Self.inlineCostHistoryDays(
+            days: CostHistoryStripDays.fitting(Self.inlineCostHistoryDays(
                 snapshot: snapshot,
                 historyDays: historyDays,
-                calendar: calendar),
+                calendar: calendar)),
             displayCurrencyCode: displayCurrencyCode,
             convertedValue: convertedValue)
         let latest = CostUsageTokenSnapshot.latestEntry(in: snapshot.daily)
@@ -507,10 +507,10 @@ extension UsageMenuCardView.Model {
             })
         }
         let points = Self.inlineCostHistoryPoints(
-            days: Self.inlineCostHistoryDays(
+            days: CostHistoryStripDays.fitting(Self.inlineCostHistoryDays(
                 snapshot: snapshot,
                 historyDays: historyDays,
-                calendar: calendar),
+                calendar: calendar)),
             displayCurrencyCode: "USD",
             convertedValue: { $0 },
             tokensOnly: true)

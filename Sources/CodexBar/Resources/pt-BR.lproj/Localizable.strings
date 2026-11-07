@@ -2810,3 +2810,18 @@
 "Drawn inside usage rows." = "Exibido dentro das linhas de uso.";
 "Menu links" = "Links do menu";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordene e mostre as seções do cartão do menu deste provedor e escolha o gráfico. Seções e gráficos sem dados continuam ocultos.";
+
+/* Chart preferences */
+"Charts" = "Gráficos";
+"Charts never show more days than the History window." = "Os gráficos nunca mostram mais dias do que a janela do histórico.";
+"Stack by model" = "Empilhar por modelo";
+"Splits each day by its two largest models." = "Divide cada dia pelos dois maiores modelos.";
+"Average line" = "Linha de média";
+"Chart style" = "Estilo do gráfico";
+"Bars" = "Barras";
+"Line" = "Linha";
+"Palette" = "Paleta";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Adequada para daltonismo substitui as cores de destaque dos provedores em gráficos de uma única série. Monocromática usa tons de cinza em todos os lugares, inclusive nos mapas de calor.";
+"Provider accents" = "Cores de destaque dos provedores";
+"Colorblind-safe" = "Adequada para daltonismo";
+"Monochrome" = "Monocromática";

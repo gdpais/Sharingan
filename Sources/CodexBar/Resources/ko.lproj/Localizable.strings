@@ -2778,3 +2778,18 @@
 "Drawn inside usage rows." = "사용량 행 안에 표시됩니다.";
 "Menu links" = "메뉴 링크";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "이 제공업체의 메뉴 카드 섹션 순서와 표시 여부를 정하고 차트를 선택합니다. 데이터가 없는 섹션과 차트는 숨겨진 상태로 유지됩니다.";
+
+/* Chart preferences */
+"Charts" = "차트";
+"Charts never show more days than the History window." = "차트는 기록 범위보다 많은 날을 표시하지 않습니다.";
+"Stack by model" = "모델별로 쌓기";
+"Splits each day by its two largest models." = "각 날을 가장 큰 모델 두 개로 나눕니다.";
+"Average line" = "평균선";
+"Chart style" = "차트 스타일";
+"Bars" = "막대";
+"Line" = "선";
+"Palette" = "팔레트";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "색각 이상 친화 모드는 단일 계열 차트에서도 제공자 강조 색상 대신 검증된 색상을 사용합니다. 흑백 모드는 히트맵을 포함한 모든 곳에 회색을 사용합니다.";
+"Provider accents" = "제공자 강조 색상";
+"Colorblind-safe" = "색각 이상 친화";
+"Monochrome" = "흑백";

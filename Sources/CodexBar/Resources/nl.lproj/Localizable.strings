@@ -2807,3 +2807,18 @@
 "Drawn inside usage rows." = "Wordt binnen de gebruiksrijen getoond.";
 "Menu links" = "Menulinks";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Orden en toon de secties van de menukaart van deze provider en kies de grafiek. Secties en grafieken zonder gegevens blijven verborgen.";
+
+/* Chart preferences */
+"Charts" = "Grafieken";
+"Charts never show more days than the History window." = "Grafieken tonen nooit meer dagen dan het geschiedenisvenster.";
+"Stack by model" = "Stapelen per model";
+"Splits each day by its two largest models." = "Verdeelt elke dag over de twee grootste modellen.";
+"Average line" = "Gemiddeldelijn";
+"Chart style" = "Grafiekstijl";
+"Bars" = "Staven";
+"Line" = "Lijn";
+"Palette" = "Palet";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Kleurenblindvriendelijk vervangt de accentkleuren van aanbieders in grafieken met één reeks. Monochroom gebruikt overal grijstinten, ook in heatmaps.";
+"Provider accents" = "Accentkleuren van aanbieders";
+"Colorblind-safe" = "Kleurenblindvriendelijk";
+"Monochrome" = "Monochroom";

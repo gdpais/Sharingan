@@ -2811,3 +2811,18 @@
 "Drawn inside usage rows." = "Відображається всередині рядків використання.";
 "Menu links" = "Посилання в меню";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Упорядкуйте розділи картки меню цього постачальника, налаштуйте їх видимість і виберіть графік. Розділи та графіки без даних залишаються прихованими.";
+
+/* Chart preferences */
+"Charts" = "Графіки";
+"Charts never show more days than the History window." = "Графіки ніколи не показують більше днів, ніж вікно історії.";
+"Stack by model" = "Накопичувати за моделями";
+"Splits each day by its two largest models." = "Ділить кожен день за двома найбільшими моделями.";
+"Average line" = "Лінія середнього";
+"Chart style" = "Стиль графіка";
+"Bars" = "Стовпці";
+"Line" = "Лінія";
+"Palette" = "Палітра";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Режим для людей з дальтонізмом замінює акцентні кольори провайдерів на графіках з одним рядом. Монохромний режим усюди використовує відтінки сірого, зокрема на теплових картах.";
+"Provider accents" = "Акцентні кольори провайдерів";
+"Colorblind-safe" = "Для людей з дальтонізмом";
+"Monochrome" = "Монохромна";

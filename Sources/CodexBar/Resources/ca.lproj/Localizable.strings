@@ -2812,3 +2812,18 @@
 "Drawn inside usage rows." = "Es mostra dins de les files d'ús.";
 "Menu links" = "Enllaços del menú";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordeneu i mostreu les seccions de la targeta del menú d'aquest proveïdor i trieu-ne el gràfic. Les seccions i els gràfics sense dades queden ocults.";
+
+/* Chart preferences */
+"Charts" = "Gràfics";
+"Charts never show more days than the History window." = "Els gràfics mai no mostren més dies que la finestra d'historial.";
+"Stack by model" = "Apila per model";
+"Splits each day by its two largest models." = "Divideix cada dia pels seus dos models més grans.";
+"Average line" = "Línia de mitjana";
+"Chart style" = "Estil del gràfic";
+"Bars" = "Barres";
+"Line" = "Línia";
+"Palette" = "Paleta";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Apta per a daltonisme substitueix els colors d'accent dels proveïdors als gràfics d'una sola sèrie. Monocrom fa servir grisos a tot arreu, inclosos els mapes de calor.";
+"Provider accents" = "Colors d'accent dels proveïdors";
+"Colorblind-safe" = "Apta per a daltonisme";
+"Monochrome" = "Monocrom";

@@ -2815,3 +2815,18 @@
 "Drawn inside usage rows." = "Drawn inside usage rows.";
 "Menu links" = "Menu links";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden.";
+
+/* Chart preferences */
+"Charts" = "Charts";
+"Charts never show more days than the History window." = "Charts never show more days than the History window.";
+"Stack by model" = "Stack by model";
+"Splits each day by its two largest models." = "Splits each day by its two largest models.";
+"Average line" = "Average line";
+"Chart style" = "Chart style";
+"Bars" = "Bars";
+"Line" = "Line";
+"Palette" = "Palette";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included.";
+"Provider accents" = "Provider accents";
+"Colorblind-safe" = "Colorblind-safe";
+"Monochrome" = "Monochrome";

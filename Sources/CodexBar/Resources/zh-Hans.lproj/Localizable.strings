@@ -2802,3 +2802,18 @@
 "Drawn inside usage rows." = "显示在用量行内。";
 "Menu links" = "菜单链接";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "调整此提供商菜单卡片各部分的顺序和显示，并选择其图表。没有数据的部分和图表会保持隐藏。";
+
+/* Chart preferences */
+"Charts" = "图表";
+"Charts never show more days than the History window." = "图表显示的天数不会超过历史窗口。";
+"Stack by model" = "按模型堆叠";
+"Splits each day by its two largest models." = "按当天用量最大的两个模型拆分每一天。";
+"Average line" = "平均线";
+"Chart style" = "图表样式";
+"Bars" = "柱状";
+"Line" = "折线";
+"Palette" = "配色";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "色盲友好模式在单系列图表中也用经过验证的配色替代提供商强调色。单色模式在所有地方使用灰色，包括热力图。";
+"Provider accents" = "提供商强调色";
+"Colorblind-safe" = "色盲友好";
+"Monochrome" = "单色";
