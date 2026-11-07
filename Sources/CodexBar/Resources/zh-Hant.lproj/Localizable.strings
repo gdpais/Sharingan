@@ -2800,3 +2800,14 @@
 "budget_hooks_header" = "預算掛鉤";
 "budget_hooks_add_rule" = "新增預算掛鉤";
 "budget_hooks_footer" = "當本月至今的估算支出達到提供者每月預算的 80% 或 100% 時執行指令。遵循上方的掛鉤開關。儲存在這台 Mac 的 App 偏好設定中，而非共用設定檔中。";
+"quota_warning_add_threshold" = "新增門檻";
+"quota_warning_remove_threshold" = "移除最低門檻";
+"quota_warning_lane_follows_weekly" = "僅顯示每週標記，不傳送通知";
+
+/* Card layout */
+"Card layout" = "卡片版面";
+"Usage rows" = "用量列";
+"Plan fit" = "方案適合度";
+"Drawn inside usage rows." = "顯示在用量列內。";
+"Menu links" = "選單連結";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "調整此供應商選單卡片各區段的順序與顯示，並選擇其圖表。沒有資料的區段與圖表會保持隱藏。";

@@ -577,6 +577,8 @@ extension CLIServeWebUI {
             transition: none;
           }
         }
+
+        /*__INSIGHTS_STYLE__*/
       </style>
     </head>
     <body>
@@ -620,6 +622,7 @@ extension CLIServeWebUI {
         </section>
 
         <section id="providers" aria-live="polite"></section>
+        <section id="insights" class="insights" aria-label="Insights"></section>
       </main>
 
       <script>
@@ -647,6 +650,7 @@ extension CLIServeWebUI {
           error: document.getElementById("error"),
           errorMessage: document.getElementById("error-message"),
           generated: document.getElementById("generated"),
+          insights: document.getElementById("insights"),
           providers: document.getElementById("providers"),
           retry: document.getElementById("retry"),
           signOut: document.getElementById("sign-out"),
@@ -1075,6 +1079,7 @@ extension CLIServeWebUI {
           elements.signOut.classList.toggle("visible", Boolean(storedToken()));
 
           renderProviders(snapshot);
+          renderInsights(snapshot.insights);
           updateFreshness();
         }
 
@@ -1118,6 +1123,7 @@ extension CLIServeWebUI {
           state.fillGeneration += 1;
           state.snapshot = null;
           elements.providers.replaceChildren();
+          elements.insights.replaceChildren();
           elements.error.classList.remove("visible");
           elements.auth.classList.add("visible");
           elements.generated.textContent = "Authorization required";
@@ -1231,7 +1237,8 @@ extension CLIServeWebUI {
               ? { ...cached, name: provider.name, enabled: provider.enabled, display: provider.display }
               : { ...provider, _pending: true };
           });
-          state.snapshot = { ...shell, providers };
+          // Shell rows carry no insights; keep the cached block until the next full snapshot replaces it.
+          state.snapshot = { ...shell, providers, insights: state.snapshot?.insights };
           renderSnapshot(state.snapshot, cachedRows.size > 0);
 
           await Promise.allSettled(
@@ -1307,6 +1314,8 @@ extension CLIServeWebUI {
             scheduleRefresh();
           }
         }
+
+        /*__INSIGHTS_SCRIPT__*/
 
         elements.usageDisplay.value = state.usageDisplay;
         elements.usageDisplay.addEventListener("change", changeUsageDisplay);

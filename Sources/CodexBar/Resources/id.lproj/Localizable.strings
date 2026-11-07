@@ -2824,3 +2824,14 @@
 "budget_hooks_header" = "Hook anggaran";
 "budget_hooks_add_rule" = "Tambah hook anggaran";
 "budget_hooks_footer" = "Menjalankan perintah saat perkiraan pengeluaran bulan berjalan mencapai 80% atau 100% dari anggaran bulanan penyedia. Mengikuti sakelar hook di atas. Disimpan di preferensi aplikasi di Mac ini, bukan di file konfigurasi bersama.";
+"quota_warning_add_threshold" = "Tambah ambang";
+"quota_warning_remove_threshold" = "Hapus ambang terendah";
+"quota_warning_lane_follows_weekly" = "Hanya penanda mingguan, tanpa notifikasi";
+
+/* Card layout */
+"Card layout" = "Tata letak kartu";
+"Usage rows" = "Baris penggunaan";
+"Plan fit" = "Kecocokan paket";
+"Drawn inside usage rows." = "Ditampilkan di dalam baris penggunaan.";
+"Menu links" = "Tautan menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Atur urutan dan tampilkan bagian kartu menu penyedia ini, lalu pilih grafiknya. Bagian dan grafik tanpa data tetap disembunyikan.";

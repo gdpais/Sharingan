@@ -2826,3 +2826,14 @@
 "budget_hooks_header" = "Hook di budget";
 "budget_hooks_add_rule" = "Aggiungi hook di budget";
 "budget_hooks_footer" = "Esegue un comando quando la spesa stimata del mese in corso raggiunge l'80% o il 100% del budget mensile di un provider. Segue l'interruttore degli hook qui sopra. Salvato nelle preferenze dell'app su questo Mac, non nel file di configurazione condiviso.";
+"quota_warning_add_threshold" = "Aggiungi soglia";
+"quota_warning_remove_threshold" = "Rimuovi la soglia più bassa";
+"quota_warning_lane_follows_weekly" = "Solo indicatori settimanali, nessuna notifica";
+
+/* Card layout */
+"Card layout" = "Layout della scheda";
+"Usage rows" = "Righe di utilizzo";
+"Plan fit" = "Adeguatezza del piano";
+"Drawn inside usage rows." = "Mostrato all’interno delle righe di utilizzo.";
+"Menu links" = "Link del menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordina e mostra le sezioni della scheda del menu di questo provider e scegli il suo grafico. Le sezioni e i grafici senza dati restano nascosti.";

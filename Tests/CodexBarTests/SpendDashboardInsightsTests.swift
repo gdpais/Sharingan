@@ -55,6 +55,39 @@ struct SpendDashboardInsightsTests {
     }
 
     @Test
+    func `menu builds skip the insight panels`() throws {
+        let input = Self.input(
+            daily: [Self.entry(day: "2026-07-15", models: [("fixture-large", 3), ("fixture-small", 1)])],
+            projects: Self.projects())
+
+        let menu = try Self.group(inputs: [input], includesInsightTiles: false)
+        let window = try Self.group(inputs: [input])
+
+        #expect(menu.insights == SpendDashboardInsights())
+        // The rest of the group, including the Projects list, is still built for the menu.
+        #expect(menu.projects.map(\.id) == ["codex-a:path:/fixtures/chat", Self.alphaID, Self.betaID])
+        #expect(window.insights.modelShare != nil)
+        #expect(window.insights.projectTrends != nil)
+    }
+
+    @Test
+    func `a source with a shorter history has no change against the longer range`() throws {
+        let recent = Self.input(
+            id: "codex-b",
+            historyDays: 10,
+            projects: [Self.project(name: "gamma", path: "/fixtures/gamma", days: [("2026-07-15", 6)])])
+
+        let group = try Self.group(inputs: [Self.input(projects: Self.projects()), recent])
+        let trends = try #require(group.insights.projectTrends)
+        let changes = Dictionary(uniqueKeysWithValues: trends.trends.map { ($0.id, $0.change) })
+
+        // Gamma's source began scanning inside the earlier half, so "New" would be a guess.
+        #expect(trends.comparisonDayCount == 15)
+        #expect(changes["codex-b:path:/fixtures/gamma"] == .unavailable)
+        #expect(changes[Self.alphaID] == .percent(0.5))
+    }
+
+    @Test
     func `trend labels redact with the projects list numbering`() throws {
         try CodexBarLocalizationOverride.$appLanguage.withValue("en") {
             let group = try Self.group(inputs: [Self.input(projects: Self.projects())])
@@ -194,6 +227,7 @@ struct SpendDashboardInsightsTests {
         id: String = "codex-a",
         provider: UsageProvider = .codex,
         displayName: String = "Codex",
+        historyDays: Int = 30,
         daily: [CostUsageDailyReport.Entry] = [],
         projects: [CostUsageProjectBreakdown] = []) -> SpendDashboardModel.ProviderInput
     {
@@ -206,7 +240,7 @@ struct SpendDashboardInsightsTests {
                 sessionCostUSD: nil,
                 last30DaysTokens: nil,
                 last30DaysCostUSD: nil,
-                historyDays: 30,
+                historyDays: historyDays,
                 daily: daily.isEmpty ? [self.entry(day: "2026-07-15", cost: 10)] : daily,
                 projects: projects,
                 updatedAt: self.now))
@@ -214,14 +248,16 @@ struct SpendDashboardInsightsTests {
 
     private static func group(
         inputs: [SpendDashboardModel.ProviderInput],
-        selectedDay: Date? = nil) throws -> SpendDashboardModel.CurrencyGroup
+        selectedDay: Date? = nil,
+        includesInsightTiles: Bool = true) throws -> SpendDashboardModel.CurrencyGroup
     {
         let model = SpendDashboardModel.build(
             inputs: inputs,
             requestedDays: 30,
             now: self.now,
             calendar: self.calendar,
-            selectedDay: selectedDay)
+            selectedDay: selectedDay,
+            includesInsightTiles: includesInsightTiles)
         return try #require(model.groups.first)
     }
 }

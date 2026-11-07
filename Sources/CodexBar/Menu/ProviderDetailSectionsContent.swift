@@ -21,9 +21,9 @@ struct ProviderDetailSectionsContent: View {
 
     private static func progressColor(_ severity: ProviderDetailSection.Row.Severity?, fallback: Color) -> Color {
         switch severity {
-        case .normal: Color(nsColor: .systemGreen)
-        case .warning: Color(nsColor: .systemOrange)
-        case .critical: Color(nsColor: .systemRed)
+        case .normal: QuotaSeverityPalette.healthyColor
+        case .warning: QuotaSeverityPalette.warningColor
+        case .critical: QuotaSeverityPalette.criticalColor
         case nil: fallback
         }
     }

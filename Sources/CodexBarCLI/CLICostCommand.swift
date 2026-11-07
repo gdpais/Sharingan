@@ -676,7 +676,7 @@ extension CodexBarCLI {
         let daily = snapshot?.daily.map(Self.costDailyPayload(from:)) ?? []
         let summary = snapshot.map { $0.summary(forLastDays: $0.historyDays, calendar: calendar) }
         let last30Days = snapshot.map { Self.last30DaysTotals(from: $0, calendar: calendar) }
-        let projects = provider == .codex
+        let projects = provider.supportsLocalProjects
             ? snapshot?.projects.map { project in
                 CostProjectPayload(
                     name: project.name,
@@ -719,7 +719,8 @@ extension CodexBarCLI {
             incompleteRequestCount: snapshot
                 .map { CostUsageIncompleteRequests.sum($0.daily.map(\.incompleteRequestCount)) },
             reportingPeriod: snapshot.map { ($0.reportingPeriod ?? .rolling(days: $0.historyDays)).rawValue },
-            historyLabel: snapshot?.periodLabel)
+            historyLabel: snapshot?.periodLabel,
+            insightSource: snapshot.map { DashboardCostInsightSource(provider: provider, snapshot: $0) })
     }
 
     static func makeOpenCodexCostPayload(
@@ -1008,6 +1009,31 @@ struct CostPayload: Encodable, Sendable {
     let error: ProviderErrorPayload?
 
     let incompleteRequestCount: Int?
+    /// Core history for dashboard insights; deliberately absent from `CodingKeys`, so it is never encoded.
+    let insightSource: DashboardCostInsightSource?
+
+    private enum CodingKeys: String, CodingKey {
+        case provider
+        case source
+        case updatedAt
+        case currencyCode
+        case sessionTokens
+        case sessionCostUSD
+        case historyDays
+        case reportingPeriod
+        case historyLabel
+        case historyCoverageIsEstablished
+        case last30DaysTokens
+        case last30DaysCostUSD
+        case meteredCostUSD
+        case daily
+        case projects
+        case totals
+        case provenance
+        case coverage
+        case error
+        case incompleteRequestCount
+    }
 
     init(
         provider: String,
@@ -1029,9 +1055,11 @@ struct CostPayload: Encodable, Sendable {
         error: ProviderErrorPayload?,
         incompleteRequestCount: Int? = nil,
         reportingPeriod: String? = nil,
-        historyLabel: String? = nil)
+        historyLabel: String? = nil,
+        insightSource: DashboardCostInsightSource? = nil)
     {
         self.incompleteRequestCount = incompleteRequestCount.flatMap { $0 > 0 ? $0 : nil }
+        self.insightSource = insightSource
         self.provider = provider
         self.source = source
         self.updatedAt = updatedAt

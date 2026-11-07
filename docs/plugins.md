@@ -476,7 +476,8 @@ chart: {
 
 The menu keeps the chart's fixed height. Series take the shared chart palette's colors in series order (a single series
 keeps the plugin's tint), reference lines and their labels use secondary label colors, and a legend appears below the
-chart when it has more than one series. CLI text output still lists only a chart's `points`.
+chart when it has more than one series. CLI text output lists a chart's `points`, then each series point as
+`Title · Series · Label` and each reference line as `Title · Reference · Label`.
 
 ## External hooks
 

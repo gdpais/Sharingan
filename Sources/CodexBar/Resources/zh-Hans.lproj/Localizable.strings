@@ -2814,3 +2814,14 @@
 "budget_hooks_header" = "预算钩子";
 "budget_hooks_add_rule" = "添加预算钩子";
 "budget_hooks_footer" = "当本月迄今的估算支出达到提供商每月预算的 80% 或 100% 时运行命令。遵循上方的钩子开关。保存在这台 Mac 的应用偏好设置中，而不是共享配置文件中。";
+"quota_warning_add_threshold" = "添加阈值";
+"quota_warning_remove_threshold" = "移除最低阈值";
+"quota_warning_lane_follows_weekly" = "仅显示每周标记，不发送通知";
+
+/* Card layout */
+"Card layout" = "卡片布局";
+"Usage rows" = "用量行";
+"Plan fit" = "套餐适配度";
+"Drawn inside usage rows." = "显示在用量行内。";
+"Menu links" = "菜单链接";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "调整此提供商菜单卡片各部分的顺序和显示，并选择其图表。没有数据的部分和图表会保持隐藏。";

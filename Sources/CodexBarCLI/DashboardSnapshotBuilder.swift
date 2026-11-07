@@ -67,7 +67,11 @@ enum DashboardSnapshotBuilder {
                 codexBarVersion: codexBarVersion,
                 refreshIntervalSeconds: refreshSeconds,
                 usageBarsShowUsed: usageBarsShowUsed),
-            providers: providers)
+            providers: providers,
+            insights: DashboardInsightsBuilder.makeInsights(
+                costPayloads: costPayloads,
+                identityMode: identityMode,
+                generatedAt: generatedAt))
     }
 
     static func makeShellSnapshot(

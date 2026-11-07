@@ -2826,3 +2826,14 @@
 "budget_hooks_header" = "خطافات الميزانية";
 "budget_hooks_add_rule" = "إضافة خطاف ميزانية";
 "budget_hooks_footer" = "يشغّل أمرًا عندما يبلغ الإنفاق المقدَّر منذ بداية الشهر 80% أو 100% من الميزانية الشهرية للمزوّد. يتبع مفتاح الخطافات أعلاه. يُحفظ في تفضيلات التطبيق على هذا الـ Mac، وليس في ملف الإعدادات المشترك.";
+"quota_warning_add_threshold" = "إضافة حد";
+"quota_warning_remove_threshold" = "إزالة أدنى حد";
+"quota_warning_lane_follows_weekly" = "علامات أسبوعية فقط، بلا إشعارات";
+
+/* Card layout */
+"Card layout" = "تخطيط البطاقة";
+"Usage rows" = "صفوف الاستخدام";
+"Plan fit" = "ملاءمة الخطة";
+"Drawn inside usage rows." = "تُعرض داخل صفوف الاستخدام.";
+"Menu links" = "روابط القائمة";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "رتّب أقسام بطاقة القائمة لهذا المزوّد وأظهرها أو أخفِها، واختر الرسم البياني الخاص بها. تبقى الأقسام والرسوم البيانية التي لا تتوفر لها بيانات مخفية.";

@@ -2825,3 +2825,14 @@
 "budget_hooks_header" = "Bütçe kancaları";
 "budget_hooks_add_rule" = "Bütçe kancası ekle";
 "budget_hooks_footer" = "Ay başından bu yana tahmini harcama bir sağlayıcının aylık bütçesinin yüzde 80'ine veya yüzde 100'üne ulaştığında bir komut çalıştırır. Yukarıdaki kanca anahtarını izler. Paylaşılan yapılandırma dosyasına değil, bu Mac'teki uygulama tercihlerine kaydedilir.";
+"quota_warning_add_threshold" = "Eşik ekle";
+"quota_warning_remove_threshold" = "En düşük eşiği kaldır";
+"quota_warning_lane_follows_weekly" = "Yalnızca haftalık işaretler, bildirim yok";
+
+/* Card layout */
+"Card layout" = "Kart düzeni";
+"Usage rows" = "Kullanım satırları";
+"Plan fit" = "Plan uygunluğu";
+"Drawn inside usage rows." = "Kullanım satırlarının içinde gösterilir.";
+"Menu links" = "Menü bağlantıları";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Bu sağlayıcının menü kartı bölümlerini sıralayın, gösterin ve grafiğini seçin. Verisi olmayan bölümler ve grafikler gizli kalır.";

@@ -2823,3 +2823,14 @@
 "budget_hooks_header" = "Хуки бюджета";
 "budget_hooks_add_rule" = "Добавить хук бюджета";
 "budget_hooks_footer" = "Запускает команду, когда оценка расходов с начала месяца достигает 80% или 100% месячного бюджета провайдера. Подчиняется переключателю хуков выше. Сохраняется в настройках приложения на этом Mac, а не в общем файле конфигурации.";
+"quota_warning_add_threshold" = "Добавить порог";
+"quota_warning_remove_threshold" = "Удалить самый низкий порог";
+"quota_warning_lane_follows_weekly" = "Только недельные маркеры, без уведомлений";
+
+/* Card layout */
+"Card layout" = "Макет карточки";
+"Usage rows" = "Строки использования";
+"Plan fit" = "Соответствие тарифа";
+"Drawn inside usage rows." = "Отображается внутри строк использования.";
+"Menu links" = "Ссылки в меню";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Упорядочьте разделы карточки меню этого провайдера, настройте их видимость и выберите график. Разделы и графики без данных остаются скрытыми.";

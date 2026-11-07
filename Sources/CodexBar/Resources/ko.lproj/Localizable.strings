@@ -2790,3 +2790,14 @@
 "budget_hooks_header" = "예산 훅";
 "budget_hooks_add_rule" = "예산 훅 추가";
 "budget_hooks_footer" = "이번 달 예상 지출이 공급자 월 예산의 80% 또는 100%에 도달하면 명령을 실행합니다. 위의 훅 스위치를 따릅니다. 공유 설정 파일이 아닌 이 Mac의 앱 환경설정에 저장됩니다.";
+"quota_warning_add_threshold" = "임계값 추가";
+"quota_warning_remove_threshold" = "가장 낮은 임계값 제거";
+"quota_warning_lane_follows_weekly" = "주간 표시기만, 알림 없음";
+
+/* Card layout */
+"Card layout" = "카드 레이아웃";
+"Usage rows" = "사용량 행";
+"Plan fit" = "요금제 적합도";
+"Drawn inside usage rows." = "사용량 행 안에 표시됩니다.";
+"Menu links" = "메뉴 링크";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "이 제공업체의 메뉴 카드 섹션 순서와 표시 여부를 정하고 차트를 선택합니다. 데이터가 없는 섹션과 차트는 숨겨진 상태로 유지됩니다.";

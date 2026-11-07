@@ -171,8 +171,11 @@ function imageReferences(repoRoot, imageHash) {
   ]) {
     index = replaceTagAttribute(index, "meta", (attrs) => attrs[attribute] === name, "content", imageURL, name);
   }
+  const readmeSource = fs.readFileSync(path.join(repoRoot, "README.md"), "utf8");
+  // Sharingan's README carries no social card (the card advertises upstream CodexBar), so only keep one in sync.
+  if (!/<img\b[^>]*\ssrc\s*=\s*["']?docs\/social\.png/i.test(readmeSource)) return { "docs/index.html": index };
   const readme = replaceTagAttribute(
-    fs.readFileSync(path.join(repoRoot, "README.md"), "utf8"),
+    readmeSource,
     "img",
     (attrs) => /^docs\/social\.png(?:[?#]|$)/.test(attrs.src ?? ""),
     "src",

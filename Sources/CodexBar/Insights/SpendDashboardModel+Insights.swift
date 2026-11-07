@@ -25,6 +25,8 @@ extension SpendDashboardModel {
     private struct ProjectTrendInput {
         var observations: [SpendSeriesTrends.Observation] = []
         var identities: [String: ProjectRow] = [:]
+        /// Days each series' source scanned, so a shorter history is not compared against zeros.
+        var coverage: [String: ClosedRange<Date>] = [:]
         var days: ClosedRange<Date>?
     }
 
@@ -56,7 +58,8 @@ extension SpendDashboardModel {
                 days: days,
                 bucket: Self.insightBucket(for: days, calendar: calendar),
                 topCount: SpendDashboardInsights.projectTrendTopCount,
-                calendar: calendar)
+                calendar: calendar,
+                coverage: projects.coverage)
             insights.projectTrends = trends
             for trend in trends.trends {
                 insights.projectIdentities[trend.id] = projects.identities[trend.id]
@@ -134,6 +137,7 @@ extension SpendDashboardModel {
                 let name = project.name.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !name.isEmpty else { continue }
                 let id = "\(input.id):\(project.path.map { "path:\($0)" } ?? "name:\(name)")"
+                result.coverage[id] = covered
                 let existing = result.identities[id]
                 let keepsExistingName = existing.map { !$0.isProjectless || project.isProjectless } ?? false
                 result.identities[id] = ProjectRow(

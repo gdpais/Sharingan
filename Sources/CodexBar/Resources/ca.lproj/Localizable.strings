@@ -2824,3 +2824,14 @@
 "budget_hooks_header" = "Hooks de pressupost";
 "budget_hooks_add_rule" = "Afegeix un hook de pressupost";
 "budget_hooks_footer" = "Executa una ordre quan la despesa estimada del mes en curs arriba al 80% o al 100% del pressupost mensual d'un proveïdor. Segueix l'interruptor de hooks de dalt. Es desa a les preferències de l'app d'aquest Mac, no al fitxer de configuració compartit.";
+"quota_warning_add_threshold" = "Afegeix un llindar";
+"quota_warning_remove_threshold" = "Elimina el llindar més baix";
+"quota_warning_lane_follows_weekly" = "Només marcadors setmanals, sense notificacions";
+
+/* Card layout */
+"Card layout" = "Disseny de la targeta";
+"Usage rows" = "Files d'ús";
+"Plan fit" = "Adequació del pla";
+"Drawn inside usage rows." = "Es mostra dins de les files d'ús.";
+"Menu links" = "Enllaços del menú";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordeneu i mostreu les seccions de la targeta del menú d'aquest proveïdor i trieu-ne el gràfic. Les seccions i els gràfics sense dades queden ocults.";

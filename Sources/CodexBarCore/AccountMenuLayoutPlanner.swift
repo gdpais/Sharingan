@@ -11,8 +11,6 @@ public enum AccountMenuLayoutPlanner {
     /// Compact layout only engages once a provider has this many account rows;
     /// below that the classic stacked cards still fit on screen.
     public static let compactLayoutMinimumAccountCount = 4
-    public static let criticalHeadroomPercent: Double = 10
-    public static let warningHeadroomPercent: Double = 50
     /// Folding fewer healthy rows than this behind a summary row would not save
     /// meaningful menu height.
     public static let minimumCollapsedHealthyRowCount = 2
@@ -43,6 +41,7 @@ public enum AccountMenuLayoutPlanner {
         /// Lowest remaining percent across the account's usage windows; nil when
         /// the account reported no usable windows (for example an error row).
         public let headroomPercent: Double?
+        /// Most severe window, each window classified by its own lane's bands.
         public let severity: Severity?
         /// Constrained windows, or the least remaining window for a healthy account.
         /// Keep reset metadata attached to its own quota until the app formats it.
@@ -71,7 +70,8 @@ public enum AccountMenuLayoutPlanner {
         accounts: [ProviderAccountUsageSnapshot],
         expandedAccountIDs: Set<ProviderAccountIdentity> = [],
         healthyTailExpanded: Bool = false,
-        hiddenMetricIDs: Set<String> = []) -> Plan
+        hiddenMetricIDs: Set<String> = [],
+        severityBands: QuotaSeverityBandSet = .standard) -> Plan
     {
         guard accounts.count >= self.compactLayoutMinimumAccountCount else {
             return Plan(rows: accounts.map { .card($0.id) }, usesCompactLayout: false)
@@ -80,7 +80,10 @@ public enum AccountMenuLayoutPlanner {
         var rows: [Row] = accounts.filter(\.isActive).map { .card($0.id) }
 
         let inactive = accounts.filter { !$0.isActive }
-        let compactRows = self.sortedCompactRows(for: inactive, hiddenMetricIDs: hiddenMetricIDs)
+        let compactRows = self.sortedCompactRows(
+            for: inactive,
+            hiddenMetricIDs: hiddenMetricIDs,
+            severityBands: severityBands)
 
         let collapsible = healthyTailExpanded
             ? []
@@ -106,14 +109,22 @@ public enum AccountMenuLayoutPlanner {
         return Plan(rows: rows, usesCompactLayout: true)
     }
 
+    /// Severity of a single headroom figure under the standard bands.
     public static func severity(forHeadroom headroom: Double) -> Severity {
-        if headroom <= self.criticalHeadroomPercent {
-            return .critical
-        }
-        if headroom <= self.warningHeadroomPercent {
-            return .warning
-        }
-        return .healthy
+        Severity(level: QuotaSeverityBands.standard.level(remainingPercent: headroom))
+    }
+
+    /// Severity of the most constrained window, each window classified by its own lane's bands
+    /// (the user's warning thresholds); nil when there are no windows.
+    public static func severity(
+        of windows: [WindowDetail],
+        severityBands: QuotaSeverityBandSet = .standard) -> Severity?
+    {
+        windows.map { self.level(of: $0, severityBands: severityBands) }.max().map(Severity.init(level:))
+    }
+
+    private static func level(of window: WindowDetail, severityBands: QuotaSeverityBandSet) -> QuotaSeverityLevel {
+        severityBands.bands(forLaneID: window.metricID).level(remainingPercent: window.window.remainingPercent)
     }
 
     /// Lowest remaining percent across the account's real usage windows.
@@ -123,14 +134,16 @@ public enum AccountMenuLayoutPlanner {
 
     private static func sortedCompactRows(
         for accounts: [ProviderAccountUsageSnapshot],
-        hiddenMetricIDs: Set<String>) -> [CompactRow]
+        hiddenMetricIDs: Set<String>,
+        severityBands: QuotaSeverityBandSet) -> [CompactRow]
     {
-        let bestCandidateID = self.bestCandidateID(in: accounts)
+        let bestCandidateID = self.bestCandidateID(in: accounts, severityBands: severityBands)
         let unsorted = accounts.map { account in
             self.compactRow(
                 for: account,
                 isBestCandidate: account.id == bestCandidateID,
-                hiddenMetricIDs: hiddenMetricIDs)
+                hiddenMetricIDs: hiddenMetricIDs,
+                severityBands: severityBands)
         }
         return unsorted.enumerated()
             .sorted { lhs, rhs in
@@ -144,13 +157,14 @@ public enum AccountMenuLayoutPlanner {
     private static func compactRow(
         for account: ProviderAccountUsageSnapshot,
         isBestCandidate: Bool,
-        hiddenMetricIDs: Set<String>) -> CompactRow
+        hiddenMetricIDs: Set<String>,
+        severityBands: QuotaSeverityBandSet) -> CompactRow
     {
         let windows = self.labeledWindows(for: account)
             .sorted { $0.window.remainingPercent < $1.window.remainingPercent }
         let headroom = windows.first?.window.remainingPercent
         let visibleWindows = windows.filter { !hiddenMetricIDs.contains($0.metricID) }
-        let constrained = visibleWindows.filter { $0.window.remainingPercent <= self.warningHeadroomPercent }
+        let constrained = visibleWindows.filter { self.level(of: $0, severityBands: severityBands) >= .warning }
         let details = constrained.isEmpty
             ? visibleWindows.prefix(1)
             : constrained.prefix(self.constraintDetailWindowLimit)
@@ -158,7 +172,7 @@ public enum AccountMenuLayoutPlanner {
             accountID: account.id,
             label: account.displayLabel,
             headroomPercent: headroom,
-            severity: headroom.map(self.severity(forHeadroom:)),
+            severity: self.severity(of: windows, severityBands: severityBands),
             windowDetails: Array(details),
             lastKnownUsageCapturedAt: account.usesLastKnownUsage ? account.snapshot?.updatedAt : nil,
             hasError: account.error != nil,
@@ -167,13 +181,14 @@ public enum AccountMenuLayoutPlanner {
     }
 
     private static func bestCandidateID(
-        in accounts: [ProviderAccountUsageSnapshot]) -> ProviderAccountIdentity?
+        in accounts: [ProviderAccountUsageSnapshot],
+        severityBands: QuotaSeverityBandSet) -> ProviderAccountIdentity?
     {
         accounts
             .compactMap { account -> (id: ProviderAccountIdentity, headroom: Double)? in
                 guard account.canActivate, account.error == nil, !account.usesLastKnownUsage,
                       let headroom = self.headroomPercent(for: account),
-                      self.severity(forHeadroom: headroom) == .healthy
+                      self.severity(of: self.labeledWindows(for: account), severityBands: severityBands) == .healthy
                 else { return nil }
                 return (account.id, headroom)
             }
@@ -247,5 +262,31 @@ public enum AccountMenuLayoutPlanner {
         guard title.hasSuffix(" only") else { return title }
         let trimmed = String(title.dropLast(" only".count))
         return trimmed.isEmpty ? title : trimmed
+    }
+}
+
+extension AccountMenuLayoutPlanner.Severity {
+    /// Row severity for a shared severity level; an exhausted window reads as critical.
+    public init(level: QuotaSeverityLevel) {
+        switch level {
+        case .normal:
+            self = .healthy
+        case .warning:
+            self = .warning
+        case .critical, .exhausted:
+            self = .critical
+        }
+    }
+
+    /// The shared severity level this row severity stands for, for palette lookups.
+    public var level: QuotaSeverityLevel {
+        switch self {
+        case .healthy:
+            .normal
+        case .warning:
+            .warning
+        case .critical:
+            .critical
+        }
     }
 }

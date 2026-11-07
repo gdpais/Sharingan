@@ -439,13 +439,17 @@ public struct QuotaWarningWindowConfig: Codable, Sendable, Equatable {
 public struct QuotaWarningConfig: Codable, Sendable, Equatable {
     public var session: QuotaWarningWindowConfig?
     public var weekly: QuotaWarningWindowConfig?
+    /// Overrides for further quota lanes, keyed by lane id (see `QuotaWarningLaneID`).
+    public var windows: [String: QuotaWarningWindowConfig]?
 
     public init(
         session: QuotaWarningWindowConfig? = nil,
-        weekly: QuotaWarningWindowConfig? = nil)
+        weekly: QuotaWarningWindowConfig? = nil,
+        windows: [String: QuotaWarningWindowConfig]? = nil)
     {
         self.session = session
         self.weekly = weekly
+        self.windows = windows
     }
 
     public func thresholds(for window: QuotaWarningWindow, global: [Int]) -> [Int] {
@@ -476,7 +480,7 @@ public struct QuotaWarningConfig: Codable, Sendable, Equatable {
     }
 
     public var isEmpty: Bool {
-        self.session?.hasOverride != true && self.weekly?.hasOverride != true
+        self.session?.hasOverride != true && self.weekly?.hasOverride != true && self.laneOverrideIDs.isEmpty
     }
 }
 

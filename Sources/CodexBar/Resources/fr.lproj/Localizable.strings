@@ -2821,3 +2821,14 @@
 "budget_hooks_header" = "Hooks de budget";
 "budget_hooks_add_rule" = "Ajouter un hook de budget";
 "budget_hooks_footer" = "Exécute une commande lorsque les dépenses estimées depuis le début du mois atteignent 80 % ou 100 % du budget mensuel d'un fournisseur. Suit l'interrupteur des hooks ci-dessus. Enregistré dans les préférences de l'app sur ce Mac, pas dans le fichier de configuration partagé.";
+"quota_warning_add_threshold" = "Ajouter un seuil";
+"quota_warning_remove_threshold" = "Supprimer le seuil le plus bas";
+"quota_warning_lane_follows_weekly" = "Marqueurs hebdomadaires uniquement, sans notifications";
+
+/* Card layout */
+"Card layout" = "Disposition de la carte";
+"Usage rows" = "Lignes d’utilisation";
+"Plan fit" = "Adéquation du forfait";
+"Drawn inside usage rows." = "Affiché dans les lignes d’utilisation.";
+"Menu links" = "Liens du menu";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordonnez et affichez les sections de la carte de menu de ce fournisseur, et choisissez son graphique. Les sections et graphiques sans données restent masqués.";

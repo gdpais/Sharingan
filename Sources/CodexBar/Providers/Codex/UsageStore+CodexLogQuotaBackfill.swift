@@ -11,8 +11,8 @@ import Foundation
 /// Codex account is configured (no token accounts, no adjacent multi-account evidence) and merges into the account key
 /// the live sample just resolved. Rollouts created by a different ChatGPT account than the configured workspace are
 /// skipped; once logs name any foreign account, rollouts without a creator are skipped too. Without a known workspace
-/// ID, logs naming more than one creator are not attributed at all. Creator IDs are remembered (hashed) so a later
-/// incremental pass keeps that veto.
+/// ID, a named creator cannot be matched to the configured account, so logs are attributed only while no rollout names
+/// a creator. Creator IDs are remembered (hashed) so a later incremental pass keeps that veto.
 extension UsageStore {
     struct CodexLogQuotaBackfillState: Codable, Equatable, Sendable {
         /// Start of the last complete pass; rollouts modified before it were already read.
@@ -156,7 +156,8 @@ extension UsageStore {
                 return hashesByCreator[creator] == accountHash
             }
         } else {
-            attributable = creatorHashes.count <= 1 ? samples : []
+            // Even a single named creator may be an account the user signed out of before configuring this one.
+            attributable = creatorHashes.isEmpty ? samples : []
         }
         return CodexLogQuotaBackfillAttribution(samples: attributable, creatorAccountIDHashes: creatorHashes)
     }

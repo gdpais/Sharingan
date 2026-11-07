@@ -2824,3 +2824,14 @@
 "budget_hooks_header" = "ฮุกงบประมาณ";
 "budget_hooks_add_rule" = "เพิ่มฮุกงบประมาณ";
 "budget_hooks_footer" = "เรียกใช้คำสั่งเมื่อค่าใช้จ่ายโดยประมาณตั้งแต่ต้นเดือนถึง 80% หรือ 100% ของงบประมาณรายเดือนของผู้ให้บริการ ทำงานตามสวิตช์ฮุกด้านบน บันทึกไว้ในการตั้งค่าแอปบน Mac เครื่องนี้ ไม่ใช่ในไฟล์การตั้งค่าที่ใช้ร่วมกัน";
+"quota_warning_add_threshold" = "เพิ่มเกณฑ์";
+"quota_warning_remove_threshold" = "ลบเกณฑ์ต่ำสุด";
+"quota_warning_lane_follows_weekly" = "เฉพาะเครื่องหมายรายสัปดาห์ ไม่มีการแจ้งเตือน";
+
+/* Card layout */
+"Card layout" = "เค้าโครงการ์ด";
+"Usage rows" = "แถวการใช้งาน";
+"Plan fit" = "ความเหมาะสมของแพ็กเกจ";
+"Drawn inside usage rows." = "แสดงอยู่ภายในแถวการใช้งาน";
+"Menu links" = "ลิงก์ในเมนู";
+"Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "จัดลำดับและแสดงส่วนต่างๆ ของการ์ดเมนูของผู้ให้บริการนี้ แล้วเลือกแผนภูมิ ส่วนและแผนภูมิที่ไม่มีข้อมูลจะยังคงซ่อนอยู่";
