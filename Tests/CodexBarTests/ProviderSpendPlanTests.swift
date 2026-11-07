@@ -88,6 +88,37 @@ struct ProviderSpendPlanTests {
         #expect(try encoder.encode(provider.fetchIdentityConfig) == identity)
     }
 
+    // MARK: - Sync
+
+    @Test
+    func `sync carries the plan to another Mac and a cleared plan clears it there`() throws {
+        var sender = ProviderConfig(id: .claude, enabled: true)
+        sender.spendPlan = ProviderSpendPlan(planMonthlyPrice: 100, monthlyBudget: 40.5, currencyCode: "EUR")
+        let payload = try CanonicalSyncJSON.decode(
+            ProviderIntentPayload.self,
+            from: CanonicalSyncJSON.string(ProviderIntentPayload(config: sender)))
+        let received = try payload.applying(to: ProviderConfig(id: .claude), secretFields: [:]) { _, _ in true }
+        #expect(received.spendPlan == sender.spendPlan)
+
+        // A Mac that knows the field always reports it, so clearing the plan propagates.
+        let cleared = ProviderIntentPayload(config: ProviderConfig(id: .claude, enabled: true))
+        #expect(cleared.spendPlan == ProviderSpendPlan())
+        let receivedClear = try cleared.applying(to: received, secretFields: [:]) { _, _ in true }
+        #expect(receivedClear.spendPlan == nil)
+    }
+
+    @Test
+    func `sync from a Mac that predates plans keeps the local plan`() throws {
+        var local = ProviderConfig(id: .claude)
+        local.spendPlan = ProviderSpendPlan(monthlyBudget: 40, currencyCode: "USD")
+        let legacy = try CanonicalSyncJSON.decode(
+            ProviderIntentPayload.self,
+            from: #"{"schemaVersion":1,"provider":"claude"}"#)
+        #expect(legacy.spendPlan == nil)
+        let applied = try legacy.applying(to: local, secretFields: [:]) { _, _ in true }
+        #expect(applied.spendPlan == local.spendPlan)
+    }
+
     // MARK: - Amounts
 
     @Test

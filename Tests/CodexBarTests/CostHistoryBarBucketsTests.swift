@@ -80,7 +80,49 @@ struct CostHistoryBarBucketsTests {
         #expect(strip.first?.incompleteRequestCount == 0)
     }
 
+    @Test
+    func `weekly strip bars name every day they sum`() throws {
+        let english = Locale(identifier: "en_US")
+        let fits = Self.days(CostHistoryBarBuckets.maximumDailyBars, from: "2026-01-05").map(Self.tuple)
+        let daily = Self.points(fits)
+        #expect(CostHistoryStripDays.labelingWeeks(daily, days: fits, locale: english) == daily)
+
+        // 2026-01-05 is a Monday, so the first bar sums a whole week and the last one only 2027-01-04.
+        let year = Self.days(365, from: "2026-01-05").map(Self.tuple)
+        let weekly = Self.points(CostHistoryStripDays.fitting(year))
+        let labeled = CostHistoryStripDays.labelingWeeks(weekly, days: year, locale: english)
+        #expect(labeled.map(\.id) == weekly.map(\.id))
+        #expect(labeled.map(\.value) == weekly.map(\.value))
+
+        let formatter = DateIntervalFormatter()
+        formatter.locale = english
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateTemplate = "yMMMd"
+        let firstWeek = try formatter.string(
+            from: #require(Self.date("2026-01-05", calendar: Self.utcCalendar)),
+            to: #require(Self.date("2026-01-11", calendar: Self.utcCalendar)))
+        let first = try #require(labeled.first)
+        #expect(first.hoverDetail?.dateLabel == firstWeek)
+        #expect(first.accessibilityValue.contains(firstWeek))
+        #expect(labeled.last?.hoverDetail?.dateLabel == "2027-01-04")
+    }
+
     // MARK: - Fixtures
+
+    private static func points(_ days: [CostHistoryStripDays.Day]) -> [InlineUsageDashboardModel.Point] {
+        days.map { day in
+            InlineUsageDashboardModel.Point(
+                id: day.date,
+                label: day.date,
+                value: day.costUSD,
+                accessibilityValue: day.date,
+                hoverDetail: InlineUsageDashboardModel.HoverDetail(
+                    dateLabel: day.date,
+                    cost: day.costUSD,
+                    tokenCount: day.totalTokens,
+                    currencyCode: "USD"))
+        }
+    }
 
     private static var utcCalendar: Calendar {
         var calendar = Calendar(identifier: .gregorian)

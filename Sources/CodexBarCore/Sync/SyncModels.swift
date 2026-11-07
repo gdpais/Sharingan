@@ -49,6 +49,8 @@ public struct ProviderIntentPayload: Codable, Sendable {
     public var kiloEnabledOrganizationIDs: [String]?
     public var deepseekProfileID: String?
     public var deepseekProfileScope: String?
+    /// Three-state like accentColor: nil means an older sender, an empty plan clears the receiver's plan.
+    public var spendPlan: ProviderSpendPlan?
 
     public init(config: ProviderConfig, schemaVersion: Int = CodexBarSyncSchema.currentVersion) {
         self.schemaVersion = schemaVersion
@@ -72,6 +74,7 @@ public struct ProviderIntentPayload: Codable, Sendable {
         self.kiloEnabledOrganizationIDs = config.kiloEnabledOrganizationIDs
         self.deepseekProfileID = config.deepseekProfileID
         self.deepseekProfileScope = config.deepseekProfileScope
+        self.spendPlan = config.spendPlan ?? ProviderSpendPlan()
     }
 
     public func applying(
@@ -116,6 +119,9 @@ public struct ProviderIntentPayload: Codable, Sendable {
         result.kiloEnabledOrganizationIDs = self.kiloEnabledOrganizationIDs
         result.deepseekProfileID = self.deepseekProfileID
         result.deepseekProfileScope = self.deepseekProfileScope
+        if let spendPlan = self.spendPlan {
+            result.spendPlan = spendPlan
+        }
 
         if let value = secretFields[ProviderIntentSecretField.apiKey.rawValue] {
             result.apiKey = value.isEmpty ? nil : value
