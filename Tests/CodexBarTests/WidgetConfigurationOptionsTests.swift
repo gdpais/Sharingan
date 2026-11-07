@@ -149,6 +149,15 @@ struct WidgetConfigurationOptionsTests {
     }
 
     @Test
+    func `window option keeps the provider's binding lane over a model-scoped lane of the same window`() {
+        // Claude binds the overall weekly lane; its tertiary lane is the model-scoped weekly lane.
+        let entry = Self.windowedEntry(provider: .claude, tertiaryUsed: 95, tertiaryMinutes: 10080)
+        let lanes = WidgetHeadlineWindow.apply(.weekly, to: WidgetTileLane.lanes(for: entry), entry: entry)
+        #expect(WidgetTilePlan.make(lanes: lanes, maxSecondaryLanes: 2).hero?.id == "secondary")
+        #expect(lanes.first { $0.id == "tertiary" }?.isHeadlineCandidate == false)
+    }
+
+    @Test
     func `lane windows come from durations or from lane IDs without durations`() {
         let entry = Self.windowedEntry()
         #expect(WidgetHeadlineWindow.cadence(of: "primary", entry: entry) == .session)
@@ -313,7 +322,12 @@ struct WidgetConfigurationOptionsTests {
             secondary: nil)
     }
 
-    private static func windowedEntry(includesMonthly: Bool = true) -> WidgetSnapshot.ProviderEntry {
+    private static func windowedEntry(
+        provider: UsageProvider = .gemini,
+        includesMonthly: Bool = true,
+        tertiaryUsed: Double = 50,
+        tertiaryMinutes: Int = 43200) -> WidgetSnapshot.ProviderEntry
+    {
         func row(_ id: String, used: Double, minutes: Int) -> WidgetSnapshot.WidgetUsageRowSnapshot {
             WidgetSnapshot.WidgetUsageRowSnapshot(
                 id: id,
@@ -323,10 +337,10 @@ struct WidgetConfigurationOptionsTests {
         }
         var rows = [row("primary", used: 20, minutes: 300), row("secondary", used: 90, minutes: 10080)]
         if includesMonthly {
-            rows.append(row("tertiary", used: 50, minutes: 43200))
+            rows.append(row("tertiary", used: tertiaryUsed, minutes: tertiaryMinutes))
         }
         return WidgetSnapshot.ProviderEntry(
-            provider: .gemini,
+            provider: provider,
             updatedAt: self.now,
             primary: nil,
             secondary: nil,

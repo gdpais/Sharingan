@@ -103,6 +103,12 @@ struct MenuBarLayoutImport: Equatable {
     static func invalid() -> PreferencesDocument.Error {
         .invalid("Invalid or non-portable preference: menuBarLayout")
     }
+
+    /// Thrown after an interactive import applied everything except a menu bar layout this build cannot read.
+    static func skipped() -> PreferencesDocument.Error {
+        .invalid("Imported everything except menuBarLayout, which this version cannot read; the current menu bar "
+            + "layout is unchanged")
+    }
 }
 
 // MARK: - Settings

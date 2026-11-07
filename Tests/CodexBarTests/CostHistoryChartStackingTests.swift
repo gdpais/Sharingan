@@ -295,6 +295,45 @@ struct CostHistoryChartStackingTests {
         ])
     }
 
+    @Test
+    func `validated palettes paint days without a breakdown as other, not as the top model`() throws {
+        let daily = Self.threeModelDays.sorted { $0.date < $1.date }
+        let accents = try #require(CostHistoryChartMenuView.stackPresentation(
+            provider: .claude,
+            sortedDaily: daily,
+            metric: .cost))
+        #expect(accents.unattributedBarColor == nil)
+        for mode in [ChartPaletteMode.colorblindSafe, .monochrome] {
+            let stack = try #require(CostHistoryChartMenuView.stackPresentation(
+                provider: .claude,
+                sortedDaily: daily,
+                metric: .cost,
+                paletteMode: mode))
+            #expect(stack.unattributedBarColor == ChartPalette.otherColor(mode: mode))
+            #expect(stack.unattributedBarColor != ChartPalette.color(for: .index(0), mode: mode))
+        }
+
+        // Two models cover every broken-down day, so only the unattributed day can put "Other" in the legend.
+        let twoModels = [
+            Self.entry("2026-06-05", cost: 9, tokens: 300, models: [
+                Model(modelName: "fixture-alpha", costUSD: 6, totalTokens: 200),
+                Model(modelName: "fixture-beta", costUSD: 3, totalTokens: 100),
+            ]),
+            Self.entry("2026-06-06", cost: 3, tokens: 300, models: nil),
+        ]
+        let monochrome = try #require(CostHistoryChartMenuView.stackPresentation(
+            provider: .claude,
+            sortedDaily: twoModels,
+            metric: .cost,
+            paletteMode: .monochrome))
+        #expect(monochrome.legendItems.map(\.isOther) == [false, false, true])
+        let plain = try #require(CostHistoryChartMenuView.stackPresentation(
+            provider: .claude,
+            sortedDaily: twoModels,
+            metric: .cost))
+        #expect(plain.legendItems.map(\.isOther) == [false, false])
+    }
+
     // MARK: - Fixtures
 
     /// Alpha leads on cost, beta follows, gamma has the most tokens; the third day has no breakdown.

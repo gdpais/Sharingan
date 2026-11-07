@@ -51,6 +51,33 @@ struct SpendBudgetTests {
         let unpriced = try #require(make(daily + [Self.entry("2026-11-11", cost: nil, tokens: 500)], monthStart, false))
         #expect(!unpriced.isComplete)
         #expect(unpriced.monthToDateCost == 5)
+
+        // A priced day with requests the catalog could not price is a floor too.
+        let partlyPriced = CostUsageDailyReport.Entry(
+            date: "2026-11-12",
+            inputTokens: 900,
+            outputTokens: 0,
+            totalTokens: 900,
+            costUSD: 3,
+            modelsUsed: nil,
+            modelBreakdowns: nil,
+            unpricedRequestCount: 2)
+        let partlyPricedStatus = try #require(make(daily + [partlyPriced], monthStart, false))
+        #expect(!partlyPricedStatus.isComplete)
+        #expect(partlyPricedStatus.monthToDateCost == 8)
+        let unpricedModel = CostUsageDailyReport.Entry(
+            date: "2026-11-12",
+            inputTokens: 900,
+            outputTokens: 0,
+            totalTokens: 900,
+            costUSD: 3,
+            modelsUsed: ["fixture-priced", "fixture-unknown"],
+            modelBreakdowns: [
+                CostUsageDailyReport.ModelBreakdown(modelName: "fixture-priced", costUSD: 3, totalTokens: 400),
+                CostUsageDailyReport.ModelBreakdown(modelName: "fixture-unknown", costUSD: nil, totalTokens: 500),
+            ])
+        #expect(try #require(make(daily + [unpricedModel], monthStart, false)).isComplete == false)
+
         #expect(SpendBudgetStatus.make(daily: daily, budget: 0, now: now, calendar: Self.utc) == nil)
         let noRate = SpendBudgetStatus.make(daily: daily, budget: 50, now: now, calendar: Self.utc, costMultiplier: 0)
         #expect(noRate == nil)

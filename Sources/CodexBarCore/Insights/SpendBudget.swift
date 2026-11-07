@@ -89,6 +89,10 @@ public struct SpendBudgetStatus: Sendable, Equatable {
             else { continue }
             if let cost = entry.costUSD, cost.isFinite, cost >= 0 {
                 total += cost * costMultiplier
+                // A priced day can still hold requests the catalog could not price; its cost is then a floor.
+                if Self.hasUnpricedRequests(entry) {
+                    hasUnpricedDay = true
+                }
             } else if (entry.totalTokens ?? 0) > 0 || entry.incompleteRequestCount > 0 {
                 hasUnpricedDay = true
             }
@@ -100,6 +104,16 @@ public struct SpendBudgetStatus: Sendable, Equatable {
             budget: budget,
             monthToDateCost: total,
             isComplete: reachesMonthStart && !coverage.isPartial && !hasUnpricedDay)
+    }
+
+    /// Unpriced or incomplete requests, or a model row with tokens and no cost: the same signals the Spend
+    /// dashboard reads as a lower-bound cost. Unmetered requests cost nothing by design, so they do not count.
+    static func hasUnpricedRequests(_ entry: CostUsageDailyReport.Entry) -> Bool {
+        if entry.coverageCounts.unpriced > 0 || entry.incompleteRequestCount > 0 { return true }
+        return (entry.modelBreakdowns ?? []).contains { breakdown in
+            let priced = breakdown.costUSD.map { $0.isFinite && $0 >= 0 } ?? false
+            return !priced && (breakdown.totalTokens ?? 0) > 0
+        }
     }
 
     /// Month-to-date status from a cost snapshot. The snapshot covers `historyDays` days ending on its

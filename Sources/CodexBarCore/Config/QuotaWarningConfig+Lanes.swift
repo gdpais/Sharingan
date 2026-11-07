@@ -86,16 +86,21 @@ extension ProviderConfig {
 
     /// Moves lane overrides read from the provider-level key into `quotaWarnings.windows`.
     ///
-    /// Configs written before the key existed nest them in `quotaWarnings.windows`; those are still read, the
-    /// provider-level key wins when both exist, and the next save writes only the provider-level key. A value that
-    /// does not parse stays an opaque extension value, like any unknown key.
+    /// Configs written before the key existed nest them in `quotaWarnings.windows`; those are still read, and the
+    /// next save writes only the provider-level key. A value that does not parse stays an opaque extension value,
+    /// like any unknown key.
+    ///
+    /// This build never writes the nested form, so nested lanes next to the provider-level key were written later,
+    /// by an older build that kept the key as an opaque value. Those edits are newer and win lane by lane.
     mutating func adoptStoredQuotaWarningLanes() {
         let key = QuotaWarningConfig.laneStorageKey
         guard self.extensionValues[key] != nil,
               let stored: [String: QuotaWarningWindowConfig] = self.extensionValue(forKey: key)
         else { return }
         self.extensionValues[key] = nil
-        let lanes = stored.isEmpty ? nil : stored
+        let nested = self.quotaWarnings?.windows ?? [:]
+        let merged = stored.merging(nested) { _, newer in newer }
+        let lanes = merged.isEmpty ? nil : merged
         if var warnings = self.quotaWarnings {
             warnings.windows = lanes
             self.quotaWarnings = warnings

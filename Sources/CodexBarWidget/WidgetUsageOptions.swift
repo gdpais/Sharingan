@@ -166,9 +166,14 @@ enum WidgetHeadlineWindow {
             lane.remainingPercent != nil && self.cadence(of: lane.id, entry: entry) == cadence
         }.map(\.id))
         guard !matching.isEmpty else { return lanes }
+        // Keep the provider's binding-lane rule inside the chosen window: a model-scoped lane (Claude's
+        // Opus/Sonnet weekly) must not outrank the overall lane of the same window. Other lanes of the window
+        // headline only when the provider designated none of them.
+        let designated = matching.intersection(lanes.filter(\.isHeadlineCandidate).map(\.id))
+        let headline = designated.isEmpty ? matching : designated
         return lanes.map { lane in
             var lane = lane
-            lane.isHeadlineCandidate = matching.contains(lane.id)
+            lane.isHeadlineCandidate = headline.contains(lane.id)
             return lane
         }
     }

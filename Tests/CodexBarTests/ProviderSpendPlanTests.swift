@@ -165,6 +165,17 @@ struct ProviderSpendPlanTests {
         #expect(SpendPlanAmountText.parse("-20", locale: english) == .invalid)
         #expect(SpendPlanAmountText.parse("2000000", locale: english) == .invalid)
         #expect(SpendPlanAmountText.parse("19,99", locale: german) == .amount(19.99))
+        // Amounts are kept to cents, so the text shown after a save parses back to the stored amount.
+        #expect(SpendPlanAmountText.parse("19.999", locale: english) == .amount(20))
+        #expect(SpendPlanAmountText.parse("0.004", locale: english) == .invalid)
+        for text in ["19.999", "12.345", "0.015"] {
+            guard case let .amount(amount) = SpendPlanAmountText.parse(text, locale: english) else {
+                Issue.record("\(text) did not parse")
+                continue
+            }
+            #expect(SpendPlanAmountText.parse(SpendPlanAmountText.text(for: amount, locale: english), locale: english)
+                == .amount(amount))
+        }
         #expect(SpendPlanAmountText.text(for: 1200.5, locale: english) == "1200.5")
         #expect(SpendPlanAmountText.text(for: 19.99, locale: german) == "19,99")
         #expect(SpendPlanAmountText.text(for: nil, locale: english).isEmpty)

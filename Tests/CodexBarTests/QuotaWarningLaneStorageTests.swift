@@ -65,13 +65,21 @@ struct QuotaWarningLaneStorageTests {
     }
 
     @Test
-    func `the provider level key wins over a nested copy`() throws {
+    func `nested lanes written by an older build win lane by lane over the provider level key`() throws {
+        // This build never writes the nested form, so a nested lane next to the key is a later edit.
         let both = Data("""
         {"id":"gemini","quotaWarnings":{"windows":{"tertiary":{"thresholds":[70]}}},\
-        "quotaWarningWindows":{"tertiary":{"thresholds":[30,10],"enabled":true}}}
+        "quotaWarningWindows":{"tertiary":{"thresholds":[30,10],"enabled":true},"fixture-extra":{"thresholds":[50]}}}
         """.utf8)
         let decoded = try JSONDecoder().decode(ProviderConfig.self, from: both)
-        #expect(decoded.quotaWarnings?.windows == Self.lanes)
+        #expect(decoded.quotaWarnings?.windows == [
+            "tertiary": QuotaWarningWindowConfig(thresholds: [70]),
+            "fixture-extra": QuotaWarningWindowConfig(thresholds: [50]),
+        ])
+
+        let record = try Self.record(JSONEncoder().encode(decoded))
+        #expect((record["quotaWarnings"] as? [String: Any])?["windows"] == nil)
+        #expect((record["quotaWarningWindows"] as? [String: Any])?.keys.sorted() == ["fixture-extra", "tertiary"])
     }
 
     @Test

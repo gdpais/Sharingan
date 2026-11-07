@@ -33,6 +33,10 @@ struct CostHistoryStackPresentation {
     let stackedDates: Set<Date>
     let stackedDayKeys: Set<String>
     let paletteMode: ChartPaletteMode
+    /// The single-bar color for plotted days without a model breakdown, or nil to keep the provider color.
+    /// The validated palettes reuse their first slot for the top model, so those days take "Other" there
+    /// instead of reading as that model's spend.
+    let unattributedBarColor: Color?
 
     /// Nil when nothing stacks, so the chart keeps its single-color bars. `rankedModels` (see
     /// `CostHistoryModelStack.stableTopModels`) keeps one ranking across metrics; without it the
@@ -81,7 +85,9 @@ struct CostHistoryStackPresentation {
                 color: Self.color(for: .model(rank), mode: paletteMode),
                 isOther: false))
         }
-        if seriesInUse.contains(.other) {
+        let hasUnattributedValue = bars.contains { stack.segmentsByDayKey[$0.entry.date] == nil && $0.total > 0 }
+        let paintsUnattributedAsOther = paletteMode != .accents && hasUnattributedValue
+        if seriesInUse.contains(.other) || paintsUnattributedAsOther {
             legendItems.append(LegendItem(
                 id: "other",
                 title: Self.title(for: .other, titles: titles),
@@ -95,6 +101,7 @@ struct CostHistoryStackPresentation {
         self.stackedDates = stackedDates
         self.stackedDayKeys = stackedDayKeys
         self.paletteMode = paletteMode
+        self.unattributedBarColor = paintsUnattributedAsOther ? Self.color(for: .other, mode: paletteMode) : nil
     }
 
     /// The legend color for a model row: its stacked series, or "Other" when it folds.

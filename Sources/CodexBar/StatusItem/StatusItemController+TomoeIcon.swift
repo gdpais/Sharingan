@@ -56,11 +56,15 @@ extension StatusItemController {
         stale: Bool) -> NSImage?
     {
         guard self.usesTomoeMenuBarIcon else { return nil }
+        // Without a primary or secondary window the first lane is the switcher fallback, which may already be
+        // the tertiary window, so the tertiary lane is not added a second time.
+        let lanesAreFallback = snapshot?.primary == nil && snapshot?.secondary == nil
         let fills = Self.resolvedTomoeIconFills(
             lanes: lanes,
             windows: (primary: snapshot?.primary, secondary: snapshot?.secondary),
             snapshot: snapshot,
-            showUsed: self.settings.usageBarsShowUsed)
+            showUsed: self.settings.usageBarsShowUsed,
+            includesTertiary: !lanesAreFallback)
         return IconRenderer.makeTomoeIcon(fills: fills, stale: stale)
     }
 
@@ -75,12 +79,19 @@ extension StatusItemController {
         lanes: (primary: Double?, secondary: Double?),
         windows: (primary: RateWindow?, secondary: RateWindow?),
         snapshot: UsageSnapshot?,
-        showUsed: Bool) -> TomoeIconFills
+        showUsed: Bool,
+        includesTertiary: Bool = true) -> TomoeIconFills
     {
-        TomoeIconFills.assigning([
+        // Some providers promote the tertiary window into the first two lanes (Perplexity's display order);
+        // it then fills one tomoe, not two.
+        let tertiaryIsShown = snapshot?.tertiary.map { $0 == windows.primary || $0 == windows.secondary } ?? false
+        let tertiary = includesTertiary && !tertiaryIsShown
+            ? self.tomoeTertiaryLane(snapshot: snapshot, showUsed: showUsed)
+            : nil
+        return TomoeIconFills.assigning([
             lanes.primary.map { TomoeIconFills.Lane(percent: $0, windowMinutes: windows.primary?.windowMinutes) },
             lanes.secondary.map { TomoeIconFills.Lane(percent: $0, windowMinutes: windows.secondary?.windowMinutes) },
-            self.tomoeTertiaryLane(snapshot: snapshot, showUsed: showUsed),
+            tertiary,
         ])
     }
 

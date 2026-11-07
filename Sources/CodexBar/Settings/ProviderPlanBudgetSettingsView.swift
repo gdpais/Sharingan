@@ -216,8 +216,11 @@ enum SpendPlanAmountText {
     static func parse(_ text: String, locale: Locale = codexBarLocalizedLocale()) -> Parsed {
         let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return .empty }
+        // Saved at the field's own precision (cents), so the text shown after a save parses back to the stored
+        // amount instead of drifting on the next commit.
         guard let value = ProviderSpendPlan.parseAmount(trimmed, decimalSeparator: locale.decimalSeparator ?? "."),
-              let amount = ProviderSpendPlan.validAmount(value)
+              value.isFinite,
+              let amount = ProviderSpendPlan.validAmount((value * 100).rounded() / 100)
         else { return .invalid }
         return .amount(amount)
     }

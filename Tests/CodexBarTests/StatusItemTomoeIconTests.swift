@@ -60,4 +60,27 @@ struct StatusItemTomoeIconTests {
         #expect(!render())
         #expect(button.image?.tiffRepresentation == meter.tiffRepresentation)
     }
+
+    @Test
+    func `a tertiary window already drawn by the first two lanes fills one tomoe`() {
+        let session = RateWindow(usedPercent: 20, windowMinutes: 300, resetsAt: nil, resetDescription: nil)
+        // No window length, so position alone would place it, once per lane it appears in.
+        let monthly = RateWindow(usedPercent: 70, windowMinutes: nil, resetsAt: nil, resetDescription: nil)
+        let snapshot = UsageSnapshot(primary: session, secondary: nil, tertiary: monthly, updatedAt: Date())
+        // Perplexity's display order promotes the tertiary window into the second lane.
+        let fills = StatusItemController.resolvedTomoeIconFills(
+            lanes: (primary: 80, secondary: 30),
+            windows: (primary: session, secondary: monthly),
+            snapshot: snapshot,
+            showUsed: false)
+        #expect(fills == TomoeIconFills(sessionPercent: 80, weeklyPercent: 30, monthlyPercent: nil))
+
+        let fallback = StatusItemController.resolvedTomoeIconFills(
+            lanes: (primary: 30, secondary: nil),
+            windows: (primary: nil, secondary: nil),
+            snapshot: UsageSnapshot(primary: nil, secondary: nil, tertiary: monthly, updatedAt: Date()),
+            showUsed: false,
+            includesTertiary: false)
+        #expect(fallback == TomoeIconFills(sessionPercent: 30, weeklyPercent: nil, monthlyPercent: nil))
+    }
 }

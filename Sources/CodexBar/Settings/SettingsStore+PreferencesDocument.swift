@@ -22,9 +22,28 @@ extension SettingsStore {
         return document
     }
 
+    /// Applies a document the user picked. A menu bar layout this build cannot read (for example one with a token
+    /// a newer build added) does not block the rest: everything else applies, the current layout stays, and the
+    /// import then throws `MenuBarLayoutImport.skipped()` so the user learns the layout was left out.
     func importPreferences(_ document: PreferencesDocument) throws {
+        var document = document
+        var skippedLayout = false
+        do {
+            try document.menuBarLayout?.validate()
+            try self.validateLayoutImport(document)
+        } catch {
+            CodexBarLog.logger(LogCategories.settings).error("Skipped an imported menu bar layout: \(error)")
+            document.menuBarLayout = nil
+            skippedLayout = true
+        }
         try document.validate()
-        try self.validateLayoutImport(document)
+        try self.applyImportedPreferences(document)
+        if skippedLayout {
+            throw MenuBarLayoutImport.skipped()
+        }
+    }
+
+    private func applyImportedPreferences(_ document: PreferencesDocument) throws {
         let synced = try document.applying(to: self.syncedPreferences)
         // Use the normal setters. CloudKit alone owns its incoming-record echo-suppression baseline.
         let consent = self.adaptiveActivityScanConsent

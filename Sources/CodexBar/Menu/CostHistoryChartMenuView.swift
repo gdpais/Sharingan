@@ -736,9 +736,10 @@ struct CostHistoryChartMenuView: View {
             dates: dateKeys.map(\.date),
             calendar: self.gregorianCalendar(timeZone: Calendar.autoupdatingCurrent.timeZone))
 
-        let barColor = ChartPalette.singleSeriesColor(accent: Self.barColor(for: provider), mode: paletteMode)
         let stack = stackByModel ? self.stackPresentation(
             provider: provider, sortedDaily: sorted, metric: metric, paletteMode: paletteMode) : nil
+        let barColor = stack?.unattributedBarColor
+            ?? ChartPalette.singleSeriesColor(accent: Self.barColor(for: provider), mode: paletteMode)
         let weekendIntervals: [DateInterval] = if let first = dateKeys.first?.date, let last = dateKeys.last?.date {
             CostHistoryModelStack.weekendIntervals(from: first, through: last, calendar: .autoupdatingCurrent)
         } else {

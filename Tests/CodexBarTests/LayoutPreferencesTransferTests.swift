@@ -131,11 +131,27 @@ struct LayoutPreferencesTransferTests {
     }
 
     @Test(arguments: LayoutTransferFixtures.invalidSections)
-    func `invalid menu bar layouts are rejected before anything changes`(_ section: String) throws {
+    func `an unreadable menu bar layout is skipped and reported while the rest imports`(_ section: String) throws {
         let settings = self.store("invalid")
         try self.customize(settings)
         let before = settings.syncedMenuBarLayout
         let json = #"{"version":1,"preferences":{"hidePersonalInfo":true},"menuBarLayout":"# + section + "}"
+
+        // A newer build can add a token without raising the format, so the layout alone is left out.
+        #expect(throws: (any Error).self) {
+            try settings.importPreferences(PreferencesDocument(data: Data(json.utf8)))
+        }
+        #expect(settings.hidePersonalInfo)
+        #expect(settings.syncedMenuBarLayout == before)
+    }
+
+    @Test
+    func `an invalid preference outside the layout still rejects the import before anything changes`() throws {
+        let settings = self.store("invalid-other")
+        try self.customize(settings)
+        let before = settings.syncedMenuBarLayout
+        let json = #"{"version":1,"preferences":{"hidePersonalInfo":true,"mergeIcons":"yes"},"#
+            + #""menuBarLayout":"# + LayoutTransferFixtures.invalidSections[0] + "}"
 
         #expect(throws: (any Error).self) {
             try settings.importPreferences(PreferencesDocument(data: Data(json.utf8)))
