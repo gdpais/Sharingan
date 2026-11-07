@@ -8,10 +8,6 @@ struct SpendInsightTilesRow: View {
     /// Each provider's plan price and budget (see `ProviderSpendPlan`); plan value reads the prices.
     @Environment(\.spendPlans) private var spendPlans
 
-    init(group: SpendDashboardModel.CurrencyGroup) {
-        self.group = group
-    }
-
     var body: some View {
         let pricing = SpendInsightTileItem.planPricing(group: self.group, spendPlans: self.spendPlans)
         let items = SpendInsightTileItem.items(
