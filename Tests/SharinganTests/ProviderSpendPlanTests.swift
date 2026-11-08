@@ -1,13 +1,13 @@
-import SharinganCore
 import Foundation
+import SharinganCore
 import Testing
 @testable import Sharingan
 
 struct ProviderSpendPlanTests {
-    // MARK: - Shared config
+    // MARK: - Config
 
     @Test
-    func `spend plans round trip through the shared config`() throws {
+    func `spend plans round trip through the config`() throws {
         var provider = ProviderConfig(id: .claude, enabled: true)
         provider.spendPlan = ProviderSpendPlan(planMonthlyPrice: 200, monthlyBudget: 49.5, currencyCode: "EUR")
         let data = try SharinganConfig(providers: [provider]).encodedData()
@@ -223,18 +223,5 @@ struct SpendPlanSettingsTests {
         #expect(settings.spendBudgetAlertState(for: .codex) == nil)
         settings.setSpendBudgetAlertState(nil, for: .claude)
         #expect(settings.spendBudgetAlertState(for: .claude) == nil)
-    }
-
-    @Test
-    func `budget hook rules stay out of the shared config`() {
-        let settings = testSettingsStore(suiteName: "SpendPlanSettingsTests-hooks")
-        settings.spendBudgetHookRules = [
-            HookRule(id: "budget", event: .budgetReached, provider: "claude", executable: "/usr/bin/true"),
-            HookRule(id: "quota", event: .quotaLow, executable: "/usr/bin/true"),
-        ]
-        #expect(settings.spendBudgetHookRules.map(\.id) == ["budget"])
-        #expect(settings.configSnapshot.hooks == nil)
-        settings.spendBudgetHookRules = []
-        #expect(settings.spendBudgetHookRules.isEmpty)
     }
 }

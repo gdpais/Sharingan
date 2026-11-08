@@ -2807,7 +2807,7 @@
 "plan_price_subtitle" = "Prix mensuel de l'abonnement. La valeur du forfait le compare aux dépenses équivalentes API.";
 "monthly_budget_subtitle" = "Comparé aux dépenses estimées depuis le début du mois dans le graphique des coûts, les alertes et les hooks.";
 "Currency" = "Devise";
-"plan_budget_footer" = "Vos propres chiffres, enregistrés avec ce fournisseur dans le fichier de configuration partagé. Laissez un champ vide pour le désactiver.";
+"plan_budget_footer" = "Vos propres chiffres, enregistrés avec ce fournisseur dans le fichier de configuration. Laissez un champ vide pour le désactiver.";
 "plan_budget_invalid_amount" = "Saisissez un montant supérieur à zéro.";
 "Month to date %@ of %@ budget" = "Depuis le début du mois : %1$@ sur un budget de %2$@";
 "Month to date at least %@ of %@ budget" = "Depuis le début du mois : au moins %1$@ sur un budget de %2$@";
@@ -2818,9 +2818,6 @@
 "budget_notification_title_warning" = "Budget %1$@ à %2$@";
 "budget_notification_title_reached" = "Budget %@ atteint";
 "budget_notification_body" = "Dépenses estimées ce mois-ci : %1$@ sur votre budget de %2$@.";
-"budget_hooks_header" = "Hooks de budget";
-"budget_hooks_add_rule" = "Ajouter un hook de budget";
-"budget_hooks_footer" = "Exécute une commande lorsque les dépenses estimées depuis le début du mois atteignent 80 % ou 100 % du budget mensuel d'un fournisseur. Suit l'interrupteur des hooks ci-dessus. Enregistré dans les préférences de l'app sur ce Mac, pas dans le fichier de configuration partagé.";
 "quota_warning_add_threshold" = "Ajouter un seuil";
 "quota_warning_remove_threshold" = "Supprimer le seuil le plus bas";
 "quota_warning_lane_follows_weekly" = "Marqueurs hebdomadaires uniquement, sans notifications";

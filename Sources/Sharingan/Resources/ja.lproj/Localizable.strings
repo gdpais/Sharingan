@@ -2808,7 +2808,7 @@
 "plan_price_subtitle" = "サブスクリプションの月額料金。プランの価値はこれを API 換算の支出と比較します。";
 "monthly_budget_subtitle" = "コストグラフ、アラート、フックで今月の推定支出と比較されます。";
 "Currency" = "通貨";
-"plan_budget_footer" = "あなた自身の数値で、このプロバイダーとともに共有設定ファイルに保存されます。オフにするには欄を空にしてください。";
+"plan_budget_footer" = "あなた自身の数値で、このプロバイダーとともに設定ファイルに保存されます。オフにするには欄を空にしてください。";
 "plan_budget_invalid_amount" = "0 より大きい金額を入力してください。";
 "Month to date %@ of %@ budget" = "今月 %1$@ / 予算 %2$@";
 "Month to date at least %@ of %@ budget" = "今月 %1$@ 以上 / 予算 %2$@";
@@ -2819,9 +2819,6 @@
 "budget_notification_title_warning" = "%1$@ の予算が %2$@ に到達";
 "budget_notification_title_reached" = "%@ の予算に到達";
 "budget_notification_body" = "今月の推定支出: 予算 %2$@ のうち %1$@。";
-"budget_hooks_header" = "予算フック";
-"budget_hooks_add_rule" = "予算フックを追加";
-"budget_hooks_footer" = "今月の推定支出がプロバイダーの月間予算の 80% または 100% に達したときにコマンドを実行します。上のフックのスイッチに従います。共有設定ファイルではなく、この Mac のアプリ設定に保存されます。";
 "quota_warning_add_threshold" = "しきい値を追加";
 "quota_warning_remove_threshold" = "最も低いしきい値を削除";
 "quota_warning_lane_follows_weekly" = "週間マーカーのみ、通知なし";

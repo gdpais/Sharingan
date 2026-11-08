@@ -2807,7 +2807,7 @@
 "plan_price_subtitle" = "Abonnemangets månadspris. Abonnemangsvärdet jämför det med API-motsvarande utgifter.";
 "monthly_budget_subtitle" = "Jämförs med uppskattade utgifter hittills i månaden i kostnadsdiagrammet, aviseringar och hooks.";
 "Currency" = "Valuta";
-"plan_budget_footer" = "Dina egna siffror, sparade med den här leverantören i den delade konfigurationsfilen. Lämna ett fält tomt för att stänga av det.";
+"plan_budget_footer" = "Dina egna siffror, sparade med den här leverantören i konfigurationsfilen. Lämna ett fält tomt för att stänga av det.";
 "plan_budget_invalid_amount" = "Ange ett belopp större än noll.";
 "Month to date %@ of %@ budget" = "Hittills i månaden %1$@ av %2$@ budget";
 "Month to date at least %@ of %@ budget" = "Hittills i månaden minst %1$@ av %2$@ budget";
@@ -2818,9 +2818,6 @@
 "budget_notification_title_warning" = "%1$@-budget på %2$@";
 "budget_notification_title_reached" = "%@-budget nådd";
 "budget_notification_body" = "Uppskattade utgifter den här månaden: %1$@ av din budget på %2$@.";
-"budget_hooks_header" = "Budget-hooks";
-"budget_hooks_add_rule" = "Lägg till budget-hook";
-"budget_hooks_footer" = "Kör ett kommando när uppskattade utgifter hittills i månaden når 80 % eller 100 % av en leverantörs månadsbudget. Följer hooks-reglaget ovan. Sparas i appens inställningar på den här Macen, inte i den delade konfigurationsfilen.";
 "quota_warning_add_threshold" = "Lägg till tröskel";
 "quota_warning_remove_threshold" = "Ta bort lägsta tröskeln";
 "quota_warning_lane_follows_weekly" = "Endast veckomarkörer, inga notiser";

@@ -1,6 +1,6 @@
 import AppIntents
-import SharinganCore
 import Foundation
+import SharinganCore
 import SwiftUI
 import WidgetKit
 

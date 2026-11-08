@@ -2810,7 +2810,7 @@
 "plan_price_subtitle" = "Preu mensual de la subscripció. El valor del pla el compara amb la despesa equivalent d'API.";
 "monthly_budget_subtitle" = "Es compara amb la despesa estimada del mes en curs al gràfic de costos, els avisos i els hooks.";
 "Currency" = "Moneda";
-"plan_budget_footer" = "Les teves pròpies xifres, desades amb aquest proveïdor al fitxer de configuració compartit. Deixa un camp buit per desactivar-lo.";
+"plan_budget_footer" = "Les teves pròpies xifres, desades amb aquest proveïdor al fitxer de configuració. Deixa un camp buit per desactivar-lo.";
 "plan_budget_invalid_amount" = "Introdueix un import superior a zero.";
 "Month to date %@ of %@ budget" = "Mes en curs: %1$@ d'un pressupost de %2$@";
 "Month to date at least %@ of %@ budget" = "Mes en curs: almenys %1$@ d'un pressupost de %2$@";
@@ -2821,9 +2821,6 @@
 "budget_notification_title_warning" = "Pressupost de %1$@ al %2$@";
 "budget_notification_title_reached" = "Pressupost de %@ assolit";
 "budget_notification_body" = "Despesa estimada aquest mes: %1$@ d'un pressupost de %2$@.";
-"budget_hooks_header" = "Hooks de pressupost";
-"budget_hooks_add_rule" = "Afegeix un hook de pressupost";
-"budget_hooks_footer" = "Executa una ordre quan la despesa estimada del mes en curs arriba al 80% o al 100% del pressupost mensual d'un proveïdor. Segueix l'interruptor de hooks de dalt. Es desa a les preferències de l'app d'aquest Mac, no al fitxer de configuració compartit.";
 "quota_warning_add_threshold" = "Afegeix un llindar";
 "quota_warning_remove_threshold" = "Elimina el llindar més baix";
 "quota_warning_lane_follows_weekly" = "Només marcadors setmanals, sense notificacions";

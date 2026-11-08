@@ -1,17 +1,14 @@
-import SharinganCore
 import Foundation
+import SharinganCore
 
 /// Plan prices, monthly budgets and what reads them.
 ///
-/// The amounts live in the shared config as the provider extension key `spendPlan` (see
-/// `ProviderSpendPlan`): readers that do not know the key keep it untouched, so the numbers survive
-/// rewrites by other config writers and never make the file unreadable. Budget alert state and budget
-/// hook rules stay in this app's own defaults: alert state is per-Mac bookkeeping, and a hook rule for
-/// an event older config readers do not know would make the shared file fail to decode for them.
+/// The amounts live in Sharingan's config as the provider key `spendPlan` (see `ProviderSpendPlan`).
+/// Budget alert state stays in this app's defaults: it is per-Mac bookkeeping. `budget_reached` hook
+/// rules are ordinary rules under `hooks.events`.
 extension SettingsStore {
     private static let spendBudgetNotificationsEnabledKey = "spendBudgetNotificationsEnabled"
     private static let spendBudgetAlertStatesKey = "spendBudgetAlertStates"
-    private static let spendBudgetHookRulesKey = "spendBudgetHookRules"
 
     // MARK: - Amounts
 
@@ -70,25 +67,5 @@ extension SettingsStore {
               let states = try? JSONDecoder().decode([String: SpendBudgetAlertState].self, from: data)
         else { return [:] }
         return states
-    }
-
-    // MARK: - Budget hooks
-
-    /// `budget_reached` rules. They run only while hooks are enabled, like every other rule.
-    var spendBudgetHookRules: [HookRule] {
-        get {
-            guard let data = self.userDefaults.data(forKey: Self.spendBudgetHookRulesKey),
-                  let rules = try? JSONDecoder().decode([HookRule].self, from: data)
-            else { return [] }
-            return rules.filter { $0.event == .budgetReached }
-        }
-        set {
-            let rules = Array(newValue.filter { $0.event == .budgetReached }.prefix(HooksConfig.maximumRuleCount))
-            if rules.isEmpty {
-                self.userDefaults.removeObject(forKey: Self.spendBudgetHookRulesKey)
-            } else if let data = try? JSONEncoder().encode(rules) {
-                self.userDefaults.set(data, forKey: Self.spendBudgetHookRulesKey)
-            }
-        }
     }
 }

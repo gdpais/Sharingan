@@ -655,11 +655,12 @@ struct UsagePaceTests {
         #expect(UsagePace.expectedCurve(windowStart: start, resetsAt: reset, workDays: 7, calendar: calendar)
             == linear)
         let sessionReset = start.addingTimeInterval(5 * 3600)
-        #expect(UsagePace.expectedCurve(
+        let sessionCurve = UsagePace.expectedCurve(
             windowStart: start,
             resetsAt: sessionReset,
             workDays: 5,
-            calendar: calendar) == [
+            calendar: calendar)
+        #expect(sessionCurve == [
             UsagePace.CurvePoint(date: start, usedPercent: 0),
             UsagePace.CurvePoint(date: sessionReset, usedPercent: 100),
         ])

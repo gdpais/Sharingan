@@ -144,13 +144,10 @@ There is still no generic cost-threshold hook: local costs are API-rate estimate
 instead compares that estimate with a monthly budget you entered yourself (see `spendPlan` under
 [Provider fields](#provider-fields)), and every amount in its payload says so in its name.
 
-- **Opt-in like every hook.** Add rules under Settings > Hooks > Budget hooks. They run only while `hooks.enabled` is
-  on and the rule itself is enabled, with the same executable, argument, timeout, and environment rules as above.
-  A rule can be scoped to one provider or match any provider.
-- **Stored outside this file.** Budget hook rules are saved in the app's own preferences, not in `hooks.events`.
-  Readers of the shared config that predate the event (including upstream CodexBar) reject unknown event names,
-  which would make the whole file unreadable for them; the Hooks rule editor therefore does not offer
-  `budget_reached`. `sharingan hooks test` only sees rules in this file.
+- **Opt-in like every hook.** Add a rule with event `budget_reached` under `hooks.events` (or Settings > Hooks).
+  It runs only while `hooks.enabled` is on and the rule itself is enabled, with the same executable, argument,
+  timeout, and environment rules as above. A rule can be scoped to one provider or match any provider.
+  `sharingan hooks test budget_reached` sends a sample event at the 80% threshold of a 50 USD budget.
 - **When it fires.** After the app publishes new cost history for a provider with a budget, once per threshold
   (0.8 and 1) per calendar month in the cost time zone. A refresh that crosses both reports only `1`. Changing the
   budget amount or currency starts the month over. Events are not rate limited; the per-month record dedupes them.
@@ -205,8 +202,7 @@ All provider fields are optional unless noted.
   spend with; `monthlyBudget` drives the cost chart's budget line, budget alerts, and
   [budget hooks](#budget-hooks); `currencyCode` is the ISO 4217 code of both (absent means the provider's cost
   currency, else USD). Each amount must be greater than `0` and at most `1000000`; an object with no valid amount
-  reads as absent. Absent by default, which leaves every surface unchanged. Readers that do not know the key keep
-  it unchanged when they rewrite the file. Example:
+  reads as absent. Absent by default, which leaves every surface unchanged. Example:
   `"spendPlan": {"planMonthlyPrice": 200, "monthlyBudget": 50, "currencyCode": "USD"}`.
 
 ## Manual cookies

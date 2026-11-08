@@ -2811,7 +2811,7 @@
 "plan_price_subtitle" = "Miesięczna cena subskrypcji. Wartość planu porównuje ją z wydatkami w równowartości API.";
 "monthly_budget_subtitle" = "Porównywany z szacowanymi wydatkami od początku miesiąca na wykresie kosztów, w alertach i hakach.";
 "Currency" = "Waluta";
-"plan_budget_footer" = "Twoje własne liczby, zapisane przy tym dostawcy we wspólnym pliku konfiguracji. Zostaw pole puste, aby je wyłączyć.";
+"plan_budget_footer" = "Twoje własne liczby, zapisane przy tym dostawcy w pliku konfiguracji. Zostaw pole puste, aby je wyłączyć.";
 "plan_budget_invalid_amount" = "Wpisz kwotę większą od zera.";
 "Month to date %@ of %@ budget" = "Od początku miesiąca %1$@ z budżetu %2$@";
 "Month to date at least %@ of %@ budget" = "Od początku miesiąca co najmniej %1$@ z budżetu %2$@";
@@ -2822,9 +2822,6 @@
 "budget_notification_title_warning" = "Budżet %1$@ na poziomie %2$@";
 "budget_notification_title_reached" = "Osiągnięto budżet %@";
 "budget_notification_body" = "Szacowane wydatki w tym miesiącu: %1$@ z Twojego budżetu %2$@.";
-"budget_hooks_header" = "Haki budżetu";
-"budget_hooks_add_rule" = "Dodaj hak budżetu";
-"budget_hooks_footer" = "Uruchamia polecenie, gdy szacowane wydatki od początku miesiąca osiągną 80% lub 100% miesięcznego budżetu dostawcy. Działa zgodnie z przełącznikiem haków powyżej. Zapisywane w preferencjach aplikacji na tym Macu, a nie we wspólnym pliku konfiguracji.";
 "quota_warning_add_threshold" = "Dodaj próg";
 "quota_warning_remove_threshold" = "Usuń najniższy próg";
 "quota_warning_lane_follows_weekly" = "Tylko znaczniki tygodniowe, bez powiadomień";

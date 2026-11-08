@@ -10,7 +10,8 @@ import XCTest
 /// table-backed menu keeps a reused row's measured height, so an in-place payload swap into a row of another height
 /// left empty space or clipped cards. Each phase records menu, table and row geometry with item identity, asserts
 /// that no row keeps a stale height, and captures the menu window. Opt-in via `SHARINGAN_MENU_SWAP_PROOF_DIR`;
-/// `SHARINGAN_MENU_SWAP_COST=1` adds cost sections and `SHARINGAN_MENU_SWAP_POPUP=1` opens from a window popUp instead of
+/// `SHARINGAN_MENU_SWAP_COST=1` adds cost sections and `SHARINGAN_MENU_SWAP_POPUP=1` opens from a window popUp instead
+/// of
 /// the status item.
 /// Synthetic accounts only; no provider transport, credential or Keychain access.
 @MainActor

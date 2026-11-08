@@ -2808,7 +2808,7 @@
 "plan_price_subtitle" = "Preço mensal da assinatura. O valor do plano o compara com o gasto equivalente em API.";
 "monthly_budget_subtitle" = "Comparado com o gasto estimado do mês até agora no gráfico de custos, nos alertas e nos hooks.";
 "Currency" = "Moeda";
-"plan_budget_footer" = "Seus próprios números, salvos com este provedor no arquivo de configuração compartilhado. Deixe um campo vazio para desativá-lo.";
+"plan_budget_footer" = "Seus próprios números, salvos com este provedor no arquivo de configuração. Deixe um campo vazio para desativá-lo.";
 "plan_budget_invalid_amount" = "Digite um valor maior que zero.";
 "Month to date %@ of %@ budget" = "Mês até agora: %1$@ de um orçamento de %2$@";
 "Month to date at least %@ of %@ budget" = "Mês até agora: pelo menos %1$@ de um orçamento de %2$@";
@@ -2819,9 +2819,6 @@
 "budget_notification_title_warning" = "Orçamento de %1$@ em %2$@";
 "budget_notification_title_reached" = "Orçamento de %@ atingido";
 "budget_notification_body" = "Gasto estimado neste mês: %1$@ do seu orçamento de %2$@.";
-"budget_hooks_header" = "Hooks de orçamento";
-"budget_hooks_add_rule" = "Adicionar hook de orçamento";
-"budget_hooks_footer" = "Executa um comando quando o gasto estimado do mês até agora atinge 80% ou 100% do orçamento mensal de um provedor. Segue a chave de hooks acima. Salvo nas preferências do app neste Mac, não no arquivo de configuração compartilhado.";
 "quota_warning_add_threshold" = "Adicionar limite";
 "quota_warning_remove_threshold" = "Remover o limite mais baixo";
 "quota_warning_lane_follows_weekly" = "Somente marcadores semanais, sem notificações";

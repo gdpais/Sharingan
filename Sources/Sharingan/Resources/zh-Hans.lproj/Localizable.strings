@@ -2800,7 +2800,7 @@
 "plan_price_subtitle" = "每月订阅价格。套餐价值会将其与 API 等价支出进行比较。";
 "monthly_budget_subtitle" = "在成本图表、提醒和钩子中与本月迄今的估算支出进行比较。";
 "Currency" = "货币";
-"plan_budget_footer" = "你自己的数字，与此提供商一起保存在共享配置文件中。留空即可关闭。";
+"plan_budget_footer" = "你自己的数字，与此提供商一起保存在配置文件中。留空即可关闭。";
 "plan_budget_invalid_amount" = "请输入大于零的金额。";
 "Month to date %@ of %@ budget" = "本月迄今 %1$@，预算 %2$@";
 "Month to date at least %@ of %@ budget" = "本月迄今至少 %1$@，预算 %2$@";
@@ -2811,9 +2811,6 @@
 "budget_notification_title_warning" = "%1$@ 预算已达 %2$@";
 "budget_notification_title_reached" = "%@ 预算已用完";
 "budget_notification_body" = "本月估算支出：%1$@，预算 %2$@。";
-"budget_hooks_header" = "预算钩子";
-"budget_hooks_add_rule" = "添加预算钩子";
-"budget_hooks_footer" = "当本月迄今的估算支出达到提供商每月预算的 80% 或 100% 时运行命令。遵循上方的钩子开关。保存在这台 Mac 的应用偏好设置中，而不是共享配置文件中。";
 "quota_warning_add_threshold" = "添加阈值";
 "quota_warning_remove_threshold" = "移除最低阈值";
 "quota_warning_lane_follows_weekly" = "仅显示每周标记，不发送通知";

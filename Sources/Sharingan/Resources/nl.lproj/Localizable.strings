@@ -2805,7 +2805,7 @@
 "plan_price_subtitle" = "Maandelijkse abonnementsprijs. De abonnementswaarde vergelijkt die met de API-equivalente uitgaven.";
 "monthly_budget_subtitle" = "Vergeleken met de geschatte uitgaven van deze maand in de kostengrafiek, meldingen en hooks.";
 "Currency" = "Valuta";
-"plan_budget_footer" = "Je eigen cijfers, opgeslagen bij deze provider in het gedeelde configuratiebestand. Laat een veld leeg om het uit te zetten.";
+"plan_budget_footer" = "Je eigen cijfers, opgeslagen bij deze provider in het configuratiebestand. Laat een veld leeg om het uit te zetten.";
 "plan_budget_invalid_amount" = "Voer een bedrag groter dan nul in.";
 "Month to date %@ of %@ budget" = "Deze maand %1$@ van %2$@ budget";
 "Month to date at least %@ of %@ budget" = "Deze maand minstens %1$@ van %2$@ budget";
@@ -2816,9 +2816,6 @@
 "budget_notification_title_warning" = "%1$@-budget op %2$@";
 "budget_notification_title_reached" = "%@-budget bereikt";
 "budget_notification_body" = "Geschatte uitgaven deze maand: %1$@ van je budget van %2$@.";
-"budget_hooks_header" = "Budgethooks";
-"budget_hooks_add_rule" = "Budgethook toevoegen";
-"budget_hooks_footer" = "Voert een opdracht uit wanneer de geschatte uitgaven van deze maand 80% of 100% van het maandbudget van een provider bereiken. Volgt de hooks-schakelaar hierboven. Opgeslagen in de appvoorkeuren op deze Mac, niet in het gedeelde configuratiebestand.";
 "quota_warning_add_threshold" = "Drempel toevoegen";
 "quota_warning_remove_threshold" = "Laagste drempel verwijderen";
 "quota_warning_lane_follows_weekly" = "Alleen wekelijkse markeringen, geen meldingen";

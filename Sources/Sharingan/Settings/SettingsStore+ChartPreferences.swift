@@ -1,5 +1,5 @@
-import SharinganCore
 import Foundation
+import SharinganCore
 
 /// Global chart preferences (range, stacking, average line, style and palette), stored as one
 /// `[String: String]` defaults dictionary outside the synced config, like the remembered chart selections.

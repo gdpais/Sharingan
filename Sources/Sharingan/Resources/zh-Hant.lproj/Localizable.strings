@@ -2786,7 +2786,7 @@
 "plan_price_subtitle" = "每月訂閱價格。方案價值會將其與 API 等值支出比較。";
 "monthly_budget_subtitle" = "在成本圖表、提醒與掛鉤中與本月至今的估算支出比較。";
 "Currency" = "貨幣";
-"plan_budget_footer" = "你自己的數字，與此提供者一起儲存在共用設定檔中。留空即可關閉。";
+"plan_budget_footer" = "你自己的數字，與此提供者一起儲存在設定檔中。留空即可關閉。";
 "plan_budget_invalid_amount" = "請輸入大於零的金額。";
 "Month to date %@ of %@ budget" = "本月至今 %1$@，預算 %2$@";
 "Month to date at least %@ of %@ budget" = "本月至今至少 %1$@，預算 %2$@";
@@ -2797,9 +2797,6 @@
 "budget_notification_title_warning" = "%1$@ 預算已達 %2$@";
 "budget_notification_title_reached" = "%@ 預算已用完";
 "budget_notification_body" = "本月估算支出：%1$@，預算 %2$@。";
-"budget_hooks_header" = "預算掛鉤";
-"budget_hooks_add_rule" = "新增預算掛鉤";
-"budget_hooks_footer" = "當本月至今的估算支出達到提供者每月預算的 80% 或 100% 時執行指令。遵循上方的掛鉤開關。儲存在這台 Mac 的 App 偏好設定中，而非共用設定檔中。";
 "quota_warning_add_threshold" = "新增門檻";
 "quota_warning_remove_threshold" = "移除最低門檻";
 "quota_warning_lane_follows_weekly" = "僅顯示每週標記，不傳送通知";

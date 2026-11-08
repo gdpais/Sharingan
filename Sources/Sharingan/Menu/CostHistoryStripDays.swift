@@ -1,5 +1,5 @@
-import SharinganCore
 import Foundation
+import SharinganCore
 
 /// Fits the in-card spend strip into the card: daily bars while they fit, weekly sums beyond
 /// `CostHistoryBarBuckets.maximumDailyBars`, so a 365-day History window draws 53 bars, not 365.

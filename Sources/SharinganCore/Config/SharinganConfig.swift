@@ -439,8 +439,7 @@ public struct QuotaWarningWindowConfig: Codable, Sendable, Equatable {
 public struct QuotaWarningConfig: Codable, Sendable, Equatable {
     public var session: QuotaWarningWindowConfig?
     public var weekly: QuotaWarningWindowConfig?
-    /// Overrides for further quota lanes, keyed by lane id (see `QuotaWarningLaneID`). A provider config stores
-    /// them at its own level as `quotaWarningWindows` (see `QuotaWarningConfig+Lanes.swift`).
+    /// Overrides for further quota lanes, keyed by lane id (see `QuotaWarningLaneID`).
     public var windows: [String: QuotaWarningWindowConfig]?
 
     public init(

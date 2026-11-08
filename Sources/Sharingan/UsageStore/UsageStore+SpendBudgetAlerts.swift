@@ -1,5 +1,5 @@
-import SharinganCore
 import Foundation
+import SharinganCore
 
 /// Notification copy for a budget threshold, kept apart from posting so it can be tested.
 enum SpendBudgetNotificationLogic {
@@ -52,13 +52,24 @@ extension UsageStore {
         guard let sourceToBudget = CurrencyExchange.shared.convert(
             amount: 1,
             from: snapshot.currencyCode,
-            to: currencyCode),
-            let status = SpendBudgetStatus.make(
-                snapshot: snapshot,
-                budget: budget,
-                now: now,
-                calendar: self.settings.costUsageBucketCalendar,
-                costMultiplier: sourceToBudget)
+            to: currencyCode)
+        else {
+            // Without a rate the budget line and alerts stay off; say why instead of failing silently.
+            SharinganLog.logger(LogCategories.app).warning(
+                "Spend budget skipped: no exchange rate",
+                metadata: [
+                    "provider": provider.rawValue,
+                    "from": snapshot.currencyCode,
+                    "to": currencyCode,
+                ])
+            return nil
+        }
+        guard let status = SpendBudgetStatus.make(
+            snapshot: snapshot,
+            budget: budget,
+            now: now,
+            calendar: self.settings.costUsageBucketCalendar,
+            costMultiplier: sourceToBudget)
         else { return nil }
         return (status, currencyCode, sourceToBudget)
     }
@@ -106,29 +117,14 @@ extension UsageStore {
                 body: copy.body,
                 soundEnabled: self.settings.quotaWarningSoundEnabled)
         }
-        self.dispatchSpendBudgetHook(
+        // Budget events carry no account; the per-month alert state dedupes them instead of the rate limiter.
+        self.dispatchHookEvent(
             HookEvent.budgetReached(
                 provider: provider.rawValue,
                 status: resolved.status,
                 threshold: Double(percent) / 100,
                 currencyCode: resolved.currencyCode,
-                timestamp: now))
-    }
-
-    /// Runs the budget hook rules from this app's preferences, behind the shared hooks switch.
-    private func dispatchSpendBudgetHook(_ event: HookEvent) {
-        guard self.settings.config.hooks?.enabled == true else { return }
-        let rules = self.settings.spendBudgetHookRules.filter { $0.matches(event) }
-        guard !rules.isEmpty else { return }
-        let config = HooksConfig(enabled: true, events: rules)
-        let limiter = self.hookRateLimiter
-        let environment = self.environmentBase
-        Task.detached(priority: .utility) {
-            await HookRunner.dispatch(
-                event: event,
-                config: config,
-                rateLimiter: limiter,
-                baseEnvironment: environment)
-        }
+                timestamp: now),
+            accountDiscriminator: nil)
     }
 }

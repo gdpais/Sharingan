@@ -1,5 +1,5 @@
-import SharinganCore
 import Foundation
+import SharinganCore
 
 // MARK: - Menu bar layout check
 

@@ -262,9 +262,7 @@ struct SpendBudgetTests {
     }
 
     @Test
-    func `budget rules match budget events and stay out of the shared config editor`() {
-        #expect(!HookEventType.sharedConfigCases.contains(.budgetReached))
-        #expect(HookEventType.sharedConfigCases.count == HookEventType.allCases.count - 1)
+    func `budget rules match budget events`() {
         #expect(!HookEventType.budgetReached.isRateLimited)
 
         let event = HookEvent.budgetReached(

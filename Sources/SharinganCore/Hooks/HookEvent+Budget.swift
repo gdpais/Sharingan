@@ -1,14 +1,5 @@
 import Foundation
 
-extension HookEventType {
-    /// Events whose rules can live in the shared config file. `budget_reached` rules stay in the app's
-    /// own preferences: readers of the shared config that predate the event reject unknown event names,
-    /// which would make the whole file unreadable for them.
-    public static var sharedConfigCases: [HookEventType] {
-        self.allCases.filter { $0 != .budgetReached }
-    }
-}
-
 extension HookEvent {
     /// `budget_reached` for one provider's monthly budget. Amounts are in the budget's currency; the
     /// spend side is a local estimate, never a bill, which every field name says.

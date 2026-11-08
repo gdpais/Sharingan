@@ -1,5 +1,5 @@
-import SharinganCore
 import Foundation
+import SharinganCore
 
 extension StatusItemController {
     /// Cost of the window before the History window for the cost history submenu, or nil when the

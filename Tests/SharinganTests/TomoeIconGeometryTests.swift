@@ -1,6 +1,6 @@
-import SharinganCore
 import CoreGraphics
 import Foundation
+import SharinganCore
 import Testing
 @testable import Sharingan
 

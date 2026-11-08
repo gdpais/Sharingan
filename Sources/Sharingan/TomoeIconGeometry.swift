@@ -1,6 +1,6 @@
-import SharinganCore
 import CoreGraphics
 import Foundation
+import SharinganCore
 
 /// Pure geometry for the Tomoe menu bar icon: a ring, a center dot and three comma-shaped tomoe at 120°.
 ///

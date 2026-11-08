@@ -158,7 +158,7 @@ struct QuotaWarningLaneTests {
     // MARK: - Settings
 
     @Test
-    func `the saved config keeps lane overrides at the provider level`() throws {
+    func `the saved config nests lane overrides in quota warnings`() throws {
         let settings = self.makeSettings("lane-storage")
         settings.setQuotaWarningLaneOverride(
             provider: .gemini,
@@ -170,8 +170,8 @@ struct QuotaWarningLaneTests {
         let saved = try #require(JSONSerialization.jsonObject(with: data) as? [String: Any])
         let providers = try #require(saved["providers"] as? [[String: Any]])
         let gemini = try #require(providers.first { $0["id"] as? String == UsageProvider.gemini.rawValue })
-        #expect(gemini["quotaWarningWindows"] != nil)
-        #expect((gemini["quotaWarnings"] as? [String: Any])?["windows"] == nil)
+        #expect(gemini["quotaWarningWindows"] == nil)
+        #expect((gemini["quotaWarnings"] as? [String: Any])?["windows"] != nil)
 
         let reloaded = try SharinganConfig.decode(from: data)
         #expect(reloaded.providerConfig(for: UsageProvider.gemini.instanceID)?.quotaWarnings?

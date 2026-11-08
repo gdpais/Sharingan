@@ -3,9 +3,7 @@ import Foundation
 /// The user's own numbers for one provider: what its plan costs per month and how much a month's spend may
 /// reach. Both are optional and absent by default, which keeps every surface as it was.
 ///
-/// Stored in the shared config as the provider extension key `spendPlan`. Readers that do not know the key
-/// keep it as an opaque provider value and write it back unchanged, so a config carrying it stays readable
-/// everywhere and the numbers survive rewrites by those readers.
+/// Stored in Sharingan's config as the provider key `spendPlan`.
 public struct ProviderSpendPlan: Codable, Sendable, Equatable {
     /// Largest amount the editor accepts, matching the menu bar's cost thresholds.
     public static let maximumAmount = 1_000_000.0
