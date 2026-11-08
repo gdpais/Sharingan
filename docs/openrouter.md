@@ -43,7 +43,7 @@ printf '%s' "$OPENROUTER_API_KEY" | codexbar config set-api-key --provider openr
 
 A key exported in a terminal is not automatically available to an already-running GUI app. The command above saves
 it to CodexBar's resolved config file with owner-only permissions; the app watches that file for changes. The default
-is `~/.config/codexbar/config.json`, with legacy `~/.codexbar/config.json` and configured path overrides also supported.
+is `~/.config/sharingan/config.json`, with legacy `~/.sharingan/config.json` and configured path overrides also supported.
 
 ## Data Source
 

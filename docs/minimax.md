@@ -14,7 +14,7 @@ falls back across the provider's supported web requests when needed.
 ## Data sources
 
 1) **Coding Plan API token**
-   - Set in Preferences → Providers → MiniMax (stored in `~/.codexbar/config.json`), `MINIMAX_CODING_API_KEY`,
+   - Set in Preferences → Providers → MiniMax (stored in `~/.sharingan/config.json`), `MINIMAX_CODING_API_KEY`,
      or `MINIMAX_API_KEY`.
    - When both environment variables are present, `MINIMAX_CODING_API_KEY` wins so a standard `sk-api-*` key does
      not mask a coding-plan `sk-cp-*` key.
@@ -32,7 +32,7 @@ falls back across the provider's supported web requests when needed.
      tokens. These raw-storage reads do not decrypt cookies or request Keychain access.
 
 4) **Manual session cookie header** (optional web-path override)
-   - Stored in `~/.codexbar/config.json` via Preferences → Providers → MiniMax (Cookie source → Manual).
+   - Stored in `~/.sharingan/config.json` via Preferences → Providers → MiniMax (Cookie source → Manual).
    - Accepts a raw `Cookie:` header or a full "Copy as cURL" string.
    - Low-level no-settings runtime can read `MINIMAX_COOKIE` or `MINIMAX_COOKIE_HEADER`.
 

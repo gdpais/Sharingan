@@ -55,7 +55,7 @@ The bundled plugin runs on QuickJS and JavaScriptCore and tolerates both a direc
 
 ## Token accounts
 
-Manus supports multiple accounts via the standard token-account mechanism. Add entries to `~/.codexbar/config.json` (`tokenAccounts`) with the full `Cookie:` header (containing `session_id=...`), then switch between accounts from the menu.
+Manus supports multiple accounts via the standard token-account mechanism. Add entries to `~/.sharingan/config.json` (`tokenAccounts`) with the full `Cookie:` header (containing `session_id=...`), then switch between accounts from the menu.
 
 ## CLI
 

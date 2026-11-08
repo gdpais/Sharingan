@@ -125,7 +125,7 @@ for team, configuration, signing, profile_present in itertools.product(
         assert result.returncode == 0, (team, configuration, signing, profile_present, result.stderr)
         bundle = 'com.gdpais.sharingan' + ('.debug' if configuration == 'debug' else '')
         # App groups keep the upstream storage identifier that AppGroupSupport.currentGroupID resolves.
-        group_base = 'com.steipete.codexbar' + ('.debug' if configuration == 'debug' else '')
+        group_base = 'com.gdpais.sharingan' + ('.debug' if configuration == 'debug' else '')
         expected_group = f'{team}.{group_base}'
         app_entitlements = plistlib.loads((root / '.build/entitlements/CodexBar.entitlements').read_bytes())
         widget_entitlements = plistlib.loads((root / '.build/entitlements/CodexBarWidget.entitlements').read_bytes())
@@ -198,7 +198,7 @@ with tempfile.TemporaryDirectory(prefix='codexbar-identity-test-') as directory:
         app_entitlements = plistlib.loads(app_path.read_bytes())
         widget_entitlements = plistlib.loads((app_path.parent / 'CodexBarWidget.entitlements').read_bytes())
         suffix = '.debug' if configuration == 'debug' else ''
-        expected_group = [f'{expected_team}.com.steipete.codexbar{suffix}']
+        expected_group = [f'{expected_team}.com.gdpais.sharingan{suffix}']
         expected_app = {'com.apple.security.application-groups': expected_group}
         if lldb == '1':
             expected_app['com.apple.security.get-task-allow'] = True

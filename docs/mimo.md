@@ -73,7 +73,7 @@ Your MiMo login is stale. Sign out and back in on the MiMo site, then refresh Co
 
 When the platform.xiaomimimo.com cookie path is unavailable — Chrome session cookies expire on Chrome relaunch, Chrome Safe Storage keychain access blocked, no SSO login from this machine, etc. — and you drive MiMo inference through a local wrapper such as `cc-mimo` (Claude Code CLI with `ANTHROPIC_BASE_URL=https://token-plan-sgp.xiaomimimo.com/anthropic`), CodexBar can surface **local token accounting** from that wrapper’s session jsonl as graceful degradation — the MiMo card shows lifetime/weekly token sums instead of `login required`.
 
-This fallback is **implicit opt-in**: it only activates when `~/.codexbar/mimo-local-usage.json` exists. Users who do not run a local wrapper see no change.
+This fallback is **implicit opt-in**: it only activates when `~/.sharingan/mimo-local-usage.json` exists. Users who do not run a local wrapper see no change.
 
 ### Setup (optional)
 
@@ -84,7 +84,7 @@ This fallback is **implicit opt-in**: it only activates when `~/.codexbar/mimo-l
    chmod +x ~/.local/bin/mimo-usage
    ```
 
-2. Run `mimo-usage --update` once to populate `~/.codexbar/mimo-local-usage.json`. The tracker scans `~/.claude-envs/mimo/.claude/projects/**/*.jsonl` (default path for a `cc-mimo`-style wrapper) and aggregates input, output, cache-read, and cache-creation tokens per time window (today / this week / all time).
+2. Run `mimo-usage --update` once to populate `~/.sharingan/mimo-local-usage.json`. The tracker scans `~/.claude-envs/mimo/.claude/projects/**/*.jsonl` (default path for a `cc-mimo`-style wrapper) and aggregates input, output, cache-read, and cache-creation tokens per time window (today / this week / all time).
 
    Invalid session records are skipped so valid usage can still refresh the cache.
 
@@ -107,4 +107,4 @@ exit $_exit
 
 - **Local accounting only** — this is not real platform quota. The Xiaomi platform may rate-limit your account before your local counter reflects it.
 - Override the session root with `MIMO_CLAUDE_HOME` and the cache path with `MIMO_LOCAL_USAGE_PATH` when a wrapper uses non-default locations.
-- Cache schema (`~/.codexbar/mimo-local-usage.json`) is internal; do not rely on the JSON shape for external tooling.
+- Cache schema (`~/.sharingan/mimo-local-usage.json`) is internal; do not rely on the JSON shape for external tooling.

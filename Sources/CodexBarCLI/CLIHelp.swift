@@ -4,14 +4,14 @@ import Foundation
 extension CodexBarCLI {
     static func codexAccountsHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar codex-accounts list [--json] [--pretty]
-          codexbar codex-accounts promote <exact-uuid-or-email> [--json] [--pretty]
+          sharingan codex-accounts list [--json] [--pretty]
+          sharingan codex-accounts promote <exact-uuid-or-email> [--json] [--pretty]
 
         Description:
-          macOS only. List CodexBar managed accounts without credential contents.
+          macOS only. List Sharingan managed accounts without credential contents.
           Promote explicitly replaces system Codex authentication after preserving its account.
           Ambiguous emails require an exact UUID. Concurrent account changes fail without overwriting.
           Existing Codex processes may retain their current account; restart them to use the promoted account.
@@ -20,11 +20,11 @@ extension CodexBarCLI {
 
     static func pluginsHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar plugins list
-          codexbar plugins fetch <id> [--json] [--pretty]
+          sharingan plugins list
+          sharingan plugins fetch <id> [--json] [--pretty]
 
         Description:
           Discover local .js and .ts provider plugins. Fetch requires a recorded approval binding.
@@ -36,10 +36,10 @@ extension CodexBarCLI {
 
     static func cardsHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar cards [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
+          sharingan cards [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
                         [--provider \(ProviderHelp.list)]
                         [--account <label>] [--account-index <index>] [--all-accounts]
                         [--no-credits] [--no-color] [--status] [--source <auto|web|cli|oauth|api>]
@@ -48,7 +48,7 @@ extension CodexBarCLI {
 
         Description:
           Print a one-shot usage snapshot as a responsive card grid in the terminal.
-          Honors enabled providers from config and reuses the same fetch flags as codexbar usage.
+          Honors enabled providers from config and reuses the same fetch flags as sharingan usage.
           Failed providers are summarized in a footer instead of error cards.
           Enabled claude-swap lists with 2+ accounts—or one account when `claudeSwapShowSingleAccount`
           is enabled—replace Claude cards unless an account or explicit non-auto `--source` CLI flag is selected.
@@ -65,20 +65,20 @@ extension CodexBarCLI {
           --json-output   Emit machine-readable logs (JSONL) to stderr
 
         Examples:
-          codexbar cards
-          codexbar cards --provider codex
-          codexbar cards --provider all --status
-          codexbar cards --brief
-          codexbar cards --no-color
+          sharingan cards
+          sharingan cards --provider codex
+          sharingan cards --provider all --status
+          sharingan cards --brief
+          sharingan cards --no-color
         """
     }
 
     static func usageHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar usage [--format text|json|toon]
+          sharingan usage [--format text|json|toon]
                        [--json]
                        [--json-only]
                        [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
@@ -98,7 +98,7 @@ extension CodexBarCLI {
           - Claude: claude.ai API.
           - Kilo: app.kilo.ai API.
             Auto falls back to Kilo CLI when API credentials are missing or unauthorized.
-          Token accounts are loaded from the resolved CodexBar config file.
+          Token accounts are loaded from the resolved Sharingan config file.
           Use --account or --account-index to select a specific token account.
           Use --all-accounts to fetch every token account, or every visible Codex account for Codex.
           Account selection requires a single provider.
@@ -112,23 +112,23 @@ extension CodexBarCLI {
           --json-output   Emit machine-readable logs (JSONL) to stderr
 
         Examples:
-          codexbar usage
-          codexbar usage --provider claude
-          codexbar usage --provider gemini
-          codexbar usage --format json --provider all --pretty
-          codexbar usage --provider all --json
-          codexbar usage --status
-          codexbar usage --provider codex --source web --format json --pretty
-          codexbar usage --format toon --provider claude
+          sharingan usage
+          sharingan usage --provider claude
+          sharingan usage --provider gemini
+          sharingan usage --format json --provider all --pretty
+          sharingan usage --provider all --json
+          sharingan usage --status
+          sharingan usage --provider codex --source web --format json --pretty
+          sharingan usage --format toon --provider claude
         """
     }
 
     static func costHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar cost [--format text|json]
+          sharingan cost [--format text|json]
                        [--json]
                        [--json-only]
                        [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
@@ -155,24 +155,24 @@ extension CodexBarCLI {
           These modes accept --days 1...365, not --period, --summary-only, grouping or breakdown.
 
         Examples:
-          codexbar cost
-          codexbar cost --provider codex --group-by project
-          codexbar cost --provider codex --group-by session
-          codexbar cost --provider claude --format json --pretty
-          codexbar cost --provider antigravity --format json
-          codexbar cost --provider muse --format json
-          codexbar cost --provider codex --remote build-host --format json
-          codexbar cost --provider codex --identified-only --format json --remote build-host
+          sharingan cost
+          sharingan cost --provider codex --group-by project
+          sharingan cost --provider codex --group-by session
+          sharingan cost --provider claude --format json --pretty
+          sharingan cost --provider antigravity --format json
+          sharingan cost --provider muse --format json
+          sharingan cost --provider codex --remote build-host --format json
+          sharingan cost --provider codex --identified-only --format json --remote build-host
         """
     }
 
     static func sessionsHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar sessions [--json|--json-v2] [--pretty]
-          codexbar sessions focus <id>
+          sharingan sessions [--json|--json-v2] [--pretty]
+          sharingan sessions focus <id>
 
         Description:
           List live local Codex, Claude Code, pi, and OMP agent sessions.
@@ -182,19 +182,19 @@ extension CodexBarCLI {
           Focus activates the owning terminal or desktop app on macOS.
 
         Examples:
-          codexbar sessions
-          codexbar sessions --json
-          codexbar sessions --json-v2
-          codexbar sessions focus 019f3497-73bf-7df3-a173-4f67d968914a
+          sharingan sessions
+          sharingan sessions --json
+          sharingan sessions --json-v2
+          sharingan sessions focus 019f3497-73bf-7df3-a173-4f67d968914a
         """
     }
 
     static func dashboardHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar dashboard [--pretty] [--timeout <seconds>] [--output <path>]
+          sharingan dashboard [--pretty] [--timeout <seconds>] [--output <path>]
                              [--identity <redacted|full>]
                              [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>]
                              [-v|--verbose]
@@ -218,19 +218,19 @@ extension CodexBarCLI {
           --json-output   Emit machine-readable logs (JSONL) to stderr
 
         Examples:
-          codexbar dashboard
-          codexbar dashboard --pretty
-          codexbar dashboard --timeout 60
-          codexbar dashboard --output /var/www/dashboard/snapshot.json
+          sharingan dashboard
+          sharingan dashboard --pretty
+          sharingan dashboard --timeout 60
+          sharingan dashboard --output /var/www/dashboard/snapshot.json
         """
     }
 
     static func serveHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar serve [--host <host>] [--port <port>] [--refresh-interval <seconds>]
+          sharingan serve [--host <host>] [--port <port>] [--refresh-interval <seconds>]
                          [--request-timeout <seconds>]
                          [--dashboard-token <token>] [--allow-plain-http]
                          [--identity <redacted|full>] [--all-accounts]
@@ -265,7 +265,7 @@ extension CodexBarCLI {
         Endpoints:
           GET /                    Built-in web dashboard
           GET /health
-          GET /accounts             Discover CodexBar-managed accounts
+          GET /accounts             Discover Sharingan-managed accounts
           GET /accounts/<id>        Fetch one account by opaque ID
           GET /usage
           GET /usage?provider=claude
@@ -275,10 +275,10 @@ extension CodexBarCLI {
           GET /dashboard/v1/snapshot
 
         Examples:
-          codexbar serve
-          codexbar serve --port 8080 --refresh-interval 60 --request-timeout 30
-          CODEXBAR_DASHBOARD_TOKEN=YOUR_TOKEN codexbar serve
-          CODEXBAR_DASHBOARD_TOKEN=... codexbar serve --host 0.0.0.0 --allow-plain-http
+          sharingan serve
+          sharingan serve --port 8080 --refresh-interval 60 --request-timeout 30
+          CODEXBAR_DASHBOARD_TOKEN=YOUR_TOKEN sharingan serve
+          CODEXBAR_DASHBOARD_TOKEN=... sharingan serve --host 0.0.0.0 --allow-plain-http
           curl http://127.0.0.1:8080/usage?provider=all
           curl http://127.0.0.1:8080/accounts
           curl -H "Authorization: Bearer $CODEXBAR_DASHBOARD_TOKEN" \\
@@ -288,41 +288,41 @@ extension CodexBarCLI {
 
     static func configHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar config validate [--format text|json]
+          sharingan config validate [--format text|json]
                                  [--json]
                                  [--json-only]
                                  [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>]
                                  [-v|--verbose]
                                  [--pretty]
-          codexbar config dump [--show-secrets] [--format text|json]
+          sharingan config dump [--show-secrets] [--format text|json]
                              [--json]
                              [--json-only]
                              [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>]
                              [-v|--verbose]
                              [--pretty]
-          codexbar config preferences export [--file <preferences.json>]
-          codexbar config preferences import --file <preferences.json> [--json]
-          codexbar config login --provider copilot [--json]
-          codexbar config providers [--format text|json] [--json] [--json-only] [--pretty]
-          codexbar config enable --provider <name> [--format text|json] [--json] [--json-only] [--pretty]
-          codexbar config disable --provider <name> [--format text|json] [--json] [--json-only] [--pretty]
-          codexbar config set-source --provider <name> --source auto|web|cli|oauth|api
+          sharingan config preferences export [--file <preferences.json>]
+          sharingan config preferences import --file <preferences.json> [--json]
+          sharingan config login --provider copilot [--json]
+          sharingan config providers [--format text|json] [--json] [--json-only] [--pretty]
+          sharingan config enable --provider <name> [--format text|json] [--json] [--json-only] [--pretty]
+          sharingan config disable --provider <name> [--format text|json] [--json] [--json-only] [--pretty]
+          sharingan config set-source --provider <name> --source auto|web|cli|oauth|api
                                    [--format text|json] [--json] [--json-only] [--pretty]
-          codexbar config set-api-key --provider <name> (--api-key <key>|--stdin)
+          sharingan config set-api-key --provider <name> (--api-key <key>|--stdin)
                                     [--label <label>] [--usage-scope team]
                                     [--organization-id <org>] [--workspace-id <project>]
                                     [--no-enable]
                                     [--format text|json] [--json] [--json-only] [--pretty]
-          codexbar config set-cookie --provider <name> (--cookie <header>|--stdin) [--no-enable]
+          sharingan config set-cookie --provider <name> (--cookie <header>|--stdin) [--no-enable]
                                    [--format text|json] [--json] [--json-only] [--pretty]
-          codexbar config clear-credential --provider <name> [--api-key] [--cookie]
+          sharingan config clear-credential --provider <name> [--api-key] [--cookie]
                                          [--format text|json] [--json] [--json-only] [--pretty]
 
         Description:
-          Validate or print the CodexBar config file (default: validate).
+          Validate or print the Sharingan config file (default: validate).
           dump prints normalized config JSON with stored credentials redacted by default
           (use --show-secrets to reveal raw values).
           preferences transfers allowlisted UI settings on macOS; import applies in the running app or next launch.
@@ -339,26 +339,26 @@ extension CodexBarCLI {
           Enablement, data and cookie sources, and token accounts are unchanged.
 
         Examples:
-          codexbar config validate --format json --pretty
-          codexbar config dump --pretty
-          codexbar config providers
-          codexbar config enable --provider grok
-          codexbar config disable --provider cursor
-          codexbar config set-source --provider claude --source cli
-          printf '%s' "$ELEVENLABS_API_KEY" | codexbar config set-api-key --provider elevenlabs --stdin
-          printf '%s' "$Z_AI_API_KEY" | codexbar config set-api-key --provider zai --stdin \\
+          sharingan config validate --format json --pretty
+          sharingan config dump --pretty
+          sharingan config providers
+          sharingan config enable --provider grok
+          sharingan config disable --provider cursor
+          sharingan config set-source --provider claude --source cli
+          printf '%s' "$ELEVENLABS_API_KEY" | sharingan config set-api-key --provider elevenlabs --stdin
+          printf '%s' "$Z_AI_API_KEY" | sharingan config set-api-key --provider zai --stdin \\
             --label Team --usage-scope team --organization-id org_... --workspace-id proj_...
-          pbpaste | codexbar config set-cookie --provider claude --stdin
-          codexbar config clear-credential --provider claude --cookie
+          pbpaste | sharingan config set-cookie --provider claude --stdin
+          sharingan config clear-credential --provider claude --cookie
         """
     }
 
     static func cacheHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar cache clear <--cookies|--cost|--all>
+          sharingan cache clear <--cookies|--cost|--all>
                               [--provider <name>]
                               [--format text|json]
                               [--json]
@@ -373,24 +373,24 @@ extension CodexBarCLI {
           Optionally specify --provider with --cookies to clear cookies for a single provider only.
 
         Examples:
-          codexbar cache clear --cookies
-          codexbar cache clear --cookies --provider claude
-          codexbar cache clear --cost
-          codexbar cache clear --all
-          codexbar cache clear --all --format json --pretty
+          sharingan cache clear --cookies
+          sharingan cache clear --cookies --provider claude
+          sharingan cache clear --cost
+          sharingan cache clear --all
+          sharingan cache clear --all --format json --pretty
         """
     }
 
     static func hooksHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar hooks list [--format text|json] [--pretty]
-          codexbar hooks enable
-          codexbar hooks disable
-          codexbar hooks test <event> --provider <name>
-          codexbar hooks watch [--interval <seconds>] [--provider <name>]
+          sharingan hooks list [--format text|json] [--pretty]
+          sharingan hooks enable
+          sharingan hooks disable
+          sharingan hooks test <event> --provider <name>
+          sharingan hooks watch [--interval <seconds>] [--provider <name>]
 
         Description:
           Run external commands when quota/provider events occur. Rules are stored in the
@@ -408,21 +408,21 @@ extension CodexBarCLI {
           baselines and event rate limits survive between polls. Default interval 300s, minimum 60s.
 
         Examples:
-          codexbar hooks list
-          codexbar hooks enable
-          codexbar hooks test quota_reached --provider codex
-          codexbar hooks test quota_low --provider claude
-          codexbar hooks watch --interval 600
-          codexbar hooks watch --provider codex
+          sharingan hooks list
+          sharingan hooks enable
+          sharingan hooks test quota_reached --provider codex
+          sharingan hooks test quota_low --provider claude
+          sharingan hooks watch --interval 600
+          sharingan hooks watch --provider codex
         """
     }
 
     static func diagnoseHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar diagnose --provider <name|all> --format json
+          sharingan diagnose --provider <name|all> --format json
                            [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>]
                            [-v|--verbose]
                            [--redact] [--output <path>]
@@ -434,19 +434,19 @@ extension CodexBarCLI {
           account IDs, org IDs, raw responses, and billing-history records.
 
         Examples:
-          codexbar diagnose --provider minimax --format json --redact --output diagnostic.json
-          codexbar diagnose --provider minimax --format json --pretty
-          codexbar diagnose --provider claude --format json --pretty
-          codexbar diagnose --provider all --format json
+          sharingan diagnose --provider minimax --format json --redact --output diagnostic.json
+          sharingan diagnose --provider minimax --format json --pretty
+          sharingan diagnose --provider claude --format json --pretty
+          sharingan diagnose --provider all --format json
         """
     }
 
     static func cookieHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar cookie refresh <--provider <name>|--all>
+          sharingan cookie refresh <--provider <name>|--all>
                                  [--allow-keychain-prompt]
                                  [--format text|json]
                                  [--json]
@@ -461,18 +461,18 @@ extension CodexBarCLI {
           explicit interactive retry flag is supplied. Cookie values are never shown.
 
         Examples:
-          codexbar cookie refresh --provider opencodego --allow-keychain-prompt
-          codexbar cookie refresh --all --allow-keychain-prompt
-          codexbar cookie refresh --provider opencodego --allow-keychain-prompt --format json --pretty
+          sharingan cookie refresh --provider opencodego --allow-keychain-prompt
+          sharingan cookie refresh --all --allow-keychain-prompt
+          sharingan cookie refresh --provider opencodego --allow-keychain-prompt --format json --pretty
         """
     }
 
     static func guardHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar guard --provider \(ProviderHelp.concreteList)
+          sharingan guard --provider \(ProviderHelp.concreteList)
                         [--min-remaining <percent>] [--window session|weekly]
                         [--timeout <seconds>] [--json] [--pretty] [--fail-open]
                         [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
@@ -496,20 +496,20 @@ extension CodexBarCLI {
           --json-output   Emit machine-readable logs (JSONL) to stderr
 
         Examples:
-          codexbar guard --provider claude
-          codexbar guard --provider codex --min-remaining 20
-          codexbar guard --provider claude --window weekly --min-remaining 5
-          codexbar guard --provider claude --json
-          codexbar guard --provider codex --fail-open
+          sharingan guard --provider claude
+          sharingan guard --provider codex --min-remaining 20
+          sharingan guard --provider claude --window weekly --min-remaining 5
+          sharingan guard --provider claude --json
+          sharingan guard --provider codex --fail-open
         """
     }
 
     static func rootHelp(version: String) -> String {
         """
-        CodexBar \(version)
+        Sharingan \(version)
 
         Usage:
-          codexbar [--format text|json|toon]
+          sharingan [--format text|json|toon]
                   [--json]
                   [--json-only]
                   [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
@@ -517,43 +517,43 @@ extension CodexBarCLI {
                   [--account <label>] [--account-index <index>] [--all-accounts]
                   [--no-credits] [--no-color] [--pretty] [--status] [--source <auto|web|cli|oauth|api>]
                   [--web-timeout <seconds>] [--web-debug-dump-html] [--antigravity-plan-debug] [--augment-debug]
-          codexbar cards [--provider \(ProviderHelp.list)] [--brief] [--no-color] [--status]
-          codexbar cost [--format text|json]
+          sharingan cards [--provider \(ProviderHelp.list)] [--brief] [--no-color] [--status]
+          sharingan cost [--format text|json]
                        [--json]
                        [--json-only]
                        [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
                        [--provider \(ProviderHelp.list)] [--no-color] [--pretty] [--refresh] [--breakdown]
                        [--provider-native-only]
                        [--period month-to-date|all] [--days <days>] [--group-by project|session]
-          codexbar sessions [--json|--json-v2] [--pretty]
-          codexbar sessions focus <id>
-          codexbar codex-accounts <list|promote> [--json] [--pretty]
-          codexbar dashboard [--pretty] [--timeout <seconds>] [--output <path>]
-          codexbar serve [--host <host>] [--port <port>] [--refresh-interval <seconds>]
+          sharingan sessions [--json|--json-v2] [--pretty]
+          sharingan sessions focus <id>
+          sharingan codex-accounts <list|promote> [--json] [--pretty]
+          sharingan dashboard [--pretty] [--timeout <seconds>] [--output <path>]
+          sharingan serve [--host <host>] [--port <port>] [--refresh-interval <seconds>]
                        [--request-timeout <seconds>]
                        [--dashboard-token <token>] [--allow-plain-http]
                        [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>] [-v|--verbose]
-          codexbar config <validate|dump|providers> [--format text|json]
+          sharingan config <validate|dump|providers> [--format text|json]
                                         [--json]
                                         [--json-only]
                                         [--json-output] [--log-level <trace|verbose|debug|info|warning|error|critical>]
                                         [-v|--verbose]
                                         [--pretty]
-          codexbar config enable --provider <name>
-          codexbar config disable --provider <name>
-          codexbar config set-source --provider <name> --source auto|web|cli|oauth|api
-          codexbar config set-api-key --provider <name> (--api-key <key>|--stdin)
-          codexbar config set-api-key --provider zai --stdin --usage-scope team
+          sharingan config enable --provider <name>
+          sharingan config disable --provider <name>
+          sharingan config set-source --provider <name> --source auto|web|cli|oauth|api
+          sharingan config set-api-key --provider <name> (--api-key <key>|--stdin)
+          sharingan config set-api-key --provider zai --stdin --usage-scope team
                                    --organization-id <org> --workspace-id <project>
-          codexbar config set-cookie --provider <name> (--cookie <header>|--stdin)
-          codexbar config clear-credential --provider <name> [--api-key] [--cookie]
-          codexbar hooks <list|enable|disable> [--format text|json] [--pretty]
-          codexbar hooks test <event> --provider <name>
-          codexbar plugins <list|fetch <id>> [--json] [--pretty]
-          codexbar cache clear <--cookies|--cost|--all> [--provider <name>]
-          codexbar cookie refresh <--provider <name>|--all> [--allow-keychain-prompt]
-          codexbar diagnose --provider <name|all> --format json [--redact] [--output <path>] [--pretty]
-          codexbar guard --provider <name> [--min-remaining <percent>] [--window session|weekly] [--json]
+          sharingan config set-cookie --provider <name> (--cookie <header>|--stdin)
+          sharingan config clear-credential --provider <name> [--api-key] [--cookie]
+          sharingan hooks <list|enable|disable> [--format text|json] [--pretty]
+          sharingan hooks test <event> --provider <name>
+          sharingan plugins <list|fetch <id>> [--json] [--pretty]
+          sharingan cache clear <--cookies|--cost|--all> [--provider <name>]
+          sharingan cookie refresh <--provider <name>|--all> [--allow-keychain-prompt]
+          sharingan diagnose --provider <name|all> --format json [--redact] [--output <path>] [--pretty]
+          sharingan guard --provider <name> [--min-remaining <percent>] [--window session|weekly] [--json]
 
         Global flags:
           -h, --help      Show help
@@ -564,28 +564,28 @@ extension CodexBarCLI {
           --json-output   Emit machine-readable logs (JSONL) to stderr
 
         Examples:
-          codexbar
-          codexbar --format json --provider all --pretty
-          codexbar --format toon --provider claude
-          codexbar --provider all --json
-          codexbar --provider gemini
-          codexbar cards --provider all --status
-          codexbar cards --brief
-          codexbar cost --provider claude --format json --pretty
-          codexbar sessions --json
-          codexbar dashboard --pretty
-          codexbar serve --port 8080
-          codexbar config validate --format json --pretty
-          codexbar config enable --provider grok
-          codexbar config set-api-key --provider elevenlabs --stdin
-          codexbar hooks test quota_reached --provider codex
-          codexbar plugins list
-          codexbar cache clear --cookies
-          codexbar cookie refresh --provider opencodego --allow-keychain-prompt
-          codexbar diagnose --provider minimax --format json --redact --output diagnostic.json
-          codexbar diagnose --provider minimax --format json --pretty
-          codexbar diagnose --provider all --format json
-          codexbar guard --provider claude --min-remaining 20
+          sharingan
+          sharingan --format json --provider all --pretty
+          sharingan --format toon --provider claude
+          sharingan --provider all --json
+          sharingan --provider gemini
+          sharingan cards --provider all --status
+          sharingan cards --brief
+          sharingan cost --provider claude --format json --pretty
+          sharingan sessions --json
+          sharingan dashboard --pretty
+          sharingan serve --port 8080
+          sharingan config validate --format json --pretty
+          sharingan config enable --provider grok
+          sharingan config set-api-key --provider elevenlabs --stdin
+          sharingan hooks test quota_reached --provider codex
+          sharingan plugins list
+          sharingan cache clear --cookies
+          sharingan cookie refresh --provider opencodego --allow-keychain-prompt
+          sharingan diagnose --provider minimax --format json --redact --output diagnostic.json
+          sharingan diagnose --provider minimax --format json --pretty
+          sharingan diagnose --provider all --format json
+          sharingan guard --provider claude --min-remaining 20
         """
     }
 }

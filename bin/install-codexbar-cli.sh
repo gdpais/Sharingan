@@ -16,11 +16,11 @@ on run argv
   set helperPath to item 1 of argv
   set installCommand to "set -eu" & linefeed & ¬
     "/bin/mkdir -p /usr/local/bin /opt/homebrew/bin" & linefeed & ¬
-    "/bin/ln -sf " & quoted form of helperPath & " /usr/local/bin/codexbar" & linefeed & ¬
-    "/bin/ln -sf " & quoted form of helperPath & " /opt/homebrew/bin/codexbar"
+    "/bin/ln -sf " & quoted form of helperPath & " /usr/local/bin/sharingan" & linefeed & ¬
+    "/bin/ln -sf " & quoted form of helperPath & " /opt/homebrew/bin/sharingan"
 
   do shell script installCommand with administrator privileges
 end run
 APPLESCRIPT
 
-/bin/echo "CodexBar CLI installed. Try: codexbar usage"
+/bin/echo "Sharingan CLI installed. Try: sharingan usage"

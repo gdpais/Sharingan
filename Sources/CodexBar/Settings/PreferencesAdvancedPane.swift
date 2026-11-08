@@ -88,9 +88,10 @@ extension AdvancedPane {
             return
         }
 
+        // Sharingan installs its own `sharingan` command so it never replaces CodexBar's `codexbar` symlink.
         let destinations = [
-            "/usr/local/bin/codexbar",
-            "/opt/homebrew/bin/codexbar",
+            "/usr/local/bin/\(AppIdentity.cliCommandName)",
+            "/opt/homebrew/bin/\(AppIdentity.cliCommandName)",
         ]
 
         var installed: [String] = []

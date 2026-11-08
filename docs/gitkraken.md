@@ -26,7 +26,7 @@ header into **API organization ID**. Replace expired tokens manually; no OAuth c
 | Organization ID (optional) | `workspaceID` | `GITKRAKEN_ORG_ID` |
 
 Configured values override environment values. The masked token field saves plaintext in the resolved
-CodexBar config file, normally `~/.config/codexbar/config.json`; it does not use Keychain.
+CodexBar config file, normally `~/.config/sharingan/config.json`; it does not use Keychain.
 Shell exports do not normally reach Finder-launched apps. See [CLI configuration](cli-configuration.md).
 
 ## Usage

@@ -34,7 +34,7 @@ struct ClaudeOAuthCredentialsStoreNeverPromptCacheTests {
     }
 
     private func withTestState<T>(_ operation: (TestState) throws -> T) throws -> T {
-        let service = "com.steipete.codexbar.cache.tests.\(UUID().uuidString)"
+        let service = "com.gdpais.sharingan.cache.tests.\(UUID().uuidString)"
         let pendingStore = ClaudeOAuthCredentialsStore.PendingCacheClearMemoryStore()
         let recorder = ClaudeOAuthCredentialsStore.OAuthCacheOperationRecorder()
         let fingerprintStore = ClaudeOAuthCredentialsStore.ClaudeKeychainFingerprintStore()

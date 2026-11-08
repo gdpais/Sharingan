@@ -5,7 +5,7 @@ extension Notification.Name {
     static let codexbarDebugBlinkNow = Notification.Name("codexbarDebugBlinkNow")
     #if DEBUG
     static let codexbarDebugSimulateMemoryPressure =
-        Notification.Name("com.steipete.codexbar.debug.simulateMemoryPressure")
+        Notification.Name("\(AppIdentity.reverseDNS).debug.simulateMemoryPressure")
     #endif
     static let codexbarSessionLimitReset = Notification.Name("codexbarSessionLimitReset")
     static let codexbarWeeklyLimitReset = Notification.Name("codexbarWeeklyLimitReset")

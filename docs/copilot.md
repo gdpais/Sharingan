@@ -21,14 +21,14 @@ the app, without opening a browser or prompting for Keychain access. See [CLI co
    - Token polling:
      - `POST https://github.com/login/oauth/access_token`
    - Optional enterprise host:
-     - set Copilot `enterpriseHost` in `~/.codexbar/config.json` or the provider settings UI
+     - set Copilot `enterpriseHost` in `~/.sharingan/config.json` or the provider settings UI
      - CodexBar normalizes values such as `https://octocorp.ghe.com/login` to `octocorp.ghe.com`
      - device flow uses `https://<enterpriseHost>/login/...`
      - identity lookup uses `https://api.<enterpriseHost>/user`, matching the usage API host
      - default HTTPS ports and trailing host dots normalize to the same issuer; nondefault ports remain distinct
    - Scope: `read:user`.
    - Token stored in config:
-     - `~/.codexbar/config.json` → `providers[].apiKey` for `copilot`
+     - `~/.sharingan/config.json` → `providers[].apiKey` for `copilot`
      - token accounts use `providers[].tokenAccounts`
      - Legacy token matching honors a resolved stable GitHub user ID; display-label fallback is used only when token identity is unavailable and no verified match exists.
      - Enterprise accounts match by API host and numeric user ID. They never adopt a public or unidentified legacy account merely because its login or label matches. The configured host still controls requests; stored account identifiers do not select an endpoint.

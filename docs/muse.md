@@ -70,7 +70,7 @@ Setup, in **Settings → Providers → Muse Code**:
 
 Automatic mode tries later browser sessions when the first session is expired or belongs to another account. Sessions with a blank email go last, after every session whose email matches the login, because their membership check costs one more request. The fallback makes at most five web requests per refresh; Manual uses only the pasted session. If membership is unavailable or no session can be verified within that budget, CodexBar keeps the login response and shows no browser-team quota.
 
-In `~/.codexbar/config.json`, the team ID is the Muse entry's `workspaceID`:
+In `~/.sharingan/config.json`, the team ID is the Muse entry's `workspaceID`:
 
 ```json
 { "id": "muse", "cookieSource": "auto", "workspaceID": "<DEV_META_AI_TEAM_ID>" }

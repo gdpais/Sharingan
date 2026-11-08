@@ -15,7 +15,7 @@ The bundled TypeScript plugin owns quota fetching and parsing on both QuickJS an
 registration, endpoint validation, and the standard virtual-key/Base URL settings. There is no native fetch fallback.
 
 Configure it in Settings -> Providers -> Bifrost, or add this provider entry to the `providers` array in
-`~/.codexbar/config.json`:
+`~/.sharingan/config.json`:
 
 ```json
 {

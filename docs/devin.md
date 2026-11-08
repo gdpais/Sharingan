@@ -68,7 +68,7 @@ Environment overrides:
 ## CLI (macOS and Linux)
 
 Automatic Chromium session import is macOS-only. For manual auth on either platform, configure
-`~/.config/codexbar/config.json` (or your existing legacy config):
+`~/.config/sharingan/config.json` (or your existing legacy config):
 
 ```json
 {

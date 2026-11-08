@@ -75,7 +75,7 @@ public enum AlibabaCodingPlanSettingsError: LocalizedError, Sendable {
         switch self {
         case .missingToken:
             return "Alibaba Coding Plan API key not found. " +
-                "Set apiKey in ~/.codexbar/config.json, ALIBABA_CODING_PLAN_API_KEY, " +
+                "Set apiKey in ~/.config/sharingan/config.json, ALIBABA_CODING_PLAN_API_KEY, " +
                 "ALIBABA_QWEN_API_KEY, or DASHSCOPE_API_KEY."
         case let .missingCookie(details):
             let base = "No Alibaba Coding Plan session cookies found in browsers. " +

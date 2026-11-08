@@ -208,7 +208,7 @@ response fields, and errors.
 
 ### Advanced profile-home accounts
 - Managed Codex accounts remain the default multi-account path.
-- Advanced users can add existing Codex homes to `~/.codexbar/config.json` with
+- Advanced users can add existing Codex homes to `~/.sharingan/config.json` with
   `providers[].codexProfileHomePaths`.
 - Each configured path must be absolute or start with `~/`, and point at a Codex home that contains `auth.json`.
 - CodexBar reads identity from the configured home, exposes it in the Codex account switcher, and scopes

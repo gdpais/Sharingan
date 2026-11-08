@@ -307,7 +307,7 @@ struct CLIServeRouterTests {
         let root = CodexBarCLI.rootHelp(version: "0.0.0")
 
         #expect(serve.contains("--request-timeout <seconds>"))
-        #expect(serve.contains("codexbar serve --port 8080 --refresh-interval 60 --request-timeout 30"))
+        #expect(serve.contains("sharingan serve --port 8080 --refresh-interval 60 --request-timeout 30"))
         #expect(serve.contains("GET /accounts"))
         #expect(serve.contains("GET /accounts/<id>"))
         #expect(serve.contains("Account IDs are stable opaque identifiers"))

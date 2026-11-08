@@ -9,7 +9,7 @@ read_when:
 # Local provider plugins
 
 CodexBar can load one local JavaScript or TypeScript file as a provider. Put a `.js` or `.ts` file in
-`~/.config/codexbar/providers/`, or choose **Settings → Plugins → Install…**. Each file declares its complete authority
+`~/.config/sharingan/providers/`, or choose **Settings → Plugins → Install…**. Each file declares its complete authority
 and settings schema in a manifest, fetches through CodexBar's sandboxed host API, and returns a generic usage snapshot.
 
 Plugins are local files only. CodexBar has no plugin catalog, does not download plugin code or assets, and does not

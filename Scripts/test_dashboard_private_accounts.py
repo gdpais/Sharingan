@@ -23,7 +23,7 @@ def verify(binary, root):
             "accessToken": "synthetic-access", "refreshToken": "synthetic-refresh",
             "idToken": jwt({"alg": "none"}) + "." + jwt(identity) + ".synthetic",
         }}))
-    app = root / "Library/Application Support/CodexBar"
+    app = root / "Library/Application Support/Sharingan"
     app.mkdir(parents=True)
     managed_id = "9e122a52-b3db-4a7e-a7a7-c3b8fc9d01e9"
     (app / "managed-codex-accounts.json").write_text(json.dumps({"version": 3, "accounts": [{
@@ -60,7 +60,7 @@ for line in sys.stdin:
     stub.chmod(0o755)
     environment = {
         "HOME": str(root), "CFFIXED_USER_HOME": str(root), "CODEX_HOME": str(root / "empty"),
-        "CODEXBAR_CONFIG": str(config), "CODEX_CLI_PATH": str(stub), "PATH": "/usr/bin:/bin",
+        "SHARINGAN_CONFIG": str(config), "CODEX_CLI_PATH": str(stub), "PATH": "/usr/bin:/bin",
         "SHELL": "/bin/sh", "CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1",
         "CODEXBAR_DISABLE_KEYCHAIN_ACCESS": "1", "CODEXBAR_TEST_SESSION_FILE_ISOLATION": "1",
         "CODEXBAR_TEST_CODEX_FILE_ISOLATION": "1",

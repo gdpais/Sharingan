@@ -2,6 +2,8 @@
 set -euo pipefail
 
 APP_NAME="CodexBar"
+# Bundle executable name (the SwiftPM product and its dSYM stay `CodexBar`).
+APP_EXECUTABLE="Sharingan"
 APP_IDENTITY="${APP_IDENTITY:-Developer ID Application: Peter Steinberger (Y5PE65HELJ)}"
 APP_BUNDLE="Sharingan.app"
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
@@ -139,7 +141,7 @@ if [[ ! -d "$DSYM_PATH" ]]; then
   exit 1
 fi
 codexbar_verify_dsym_matches_binary \
-  "$APP_BUNDLE/Contents/MacOS/$APP_NAME" \
+  "$APP_BUNDLE/Contents/MacOS/$APP_EXECUTABLE" \
   "$DSYM_PATH/Contents/Resources/DWARF/$APP_NAME" \
   "${ARCH_LIST[@]}"
 "$DITTO_BIN" --norsrc -c -k --keepParent "$DSYM_PATH" "$DSYM_ZIP"

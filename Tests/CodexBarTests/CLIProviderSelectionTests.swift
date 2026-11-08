@@ -65,9 +65,9 @@ struct CLIProviderSelectionTests {
         #expect(root.contains("--log-level"))
         #expect(usage.contains("--verbose"))
         #expect(root.contains("--verbose"))
-        #expect(usage.contains("codexbar usage --provider gemini"))
-        #expect(usage.contains("codexbar usage --format json --provider all --pretty"))
-        #expect(root.contains("codexbar --provider gemini"))
+        #expect(usage.contains("sharingan usage --provider gemini"))
+        #expect(usage.contains("sharingan usage --format json --provider all --pretty"))
+        #expect(root.contains("sharingan --provider gemini"))
     }
 
     @Test
@@ -97,8 +97,8 @@ struct CLIProviderSelectionTests {
 
         #expect(usage.contains("--format text|json|toon"))
         #expect(root.contains("--format text|json|toon"))
-        #expect(usage.contains("codexbar usage --format toon"))
-        #expect(root.contains("codexbar --format toon"))
+        #expect(usage.contains("sharingan usage --format toon"))
+        #expect(root.contains("sharingan --format toon"))
     }
 
     @Test

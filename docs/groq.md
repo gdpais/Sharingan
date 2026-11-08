@@ -56,7 +56,7 @@ GROQ_SESSION_TOKEN=<stytch_session> codexbar usage --provider groq --json
 
 ## Prometheus metrics (Enterprise, optional)
 
-- Requires an Enterprise API key stored in `~/.codexbar/config.json` (Settings → Providers → Groq) or `GROQ_API_KEY`.
+- Requires an Enterprise API key stored in `~/.sharingan/config.json` (Settings → Providers → Groq) or `GROQ_API_KEY`.
 - `GET https://api.groq.com/v1/metrics/prometheus/api/v1/query` for `rate5m` request/token/cache series.
 - Standard keys receive HTTP 404 here (Enterprise-only feature), so this path simply yields no data for them.
 

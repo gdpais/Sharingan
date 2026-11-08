@@ -115,7 +115,7 @@ struct CLIPluginConfigPreservationTests {
         }
 
         var providersDirectory: URL {
-            self.directory.appendingPathComponent(".config/codexbar/providers")
+            self.directory.appendingPathComponent(".config/sharingan/providers")
         }
 
         init(discoveryFails: Bool = false) throws {
@@ -177,7 +177,7 @@ struct CLIPluginConfigPreservationTests {
                     "CODEX_HOME": self.directory.appendingPathComponent(".codex").path,
                     "CODEX_CLI_PATH": self.directory.appendingPathComponent("codex").path,
                     "SHELL": "/bin/sh",
-                    "CODEXBAR_CONFIG": self.configURL.path,
+                    "SHARINGAN_CONFIG": self.configURL.path,
                     "CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1",
                 ],
                 timeout: 30,

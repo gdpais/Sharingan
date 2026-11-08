@@ -261,8 +261,9 @@ for ARCH in "${ARCH_LIST[@]}"; do
   stage_build_products "$ARCH"
 done
 
-# Sharingan (fork of CodexBar): the bundle is Sharingan.app, but the executable inside stays `CodexBar`
-# (KeychainPromptCoordinator, release dSYM tooling, and the CLI/watchdog helpers key off that name).
+# Sharingan (fork of CodexBar): the SwiftPM product stays `CodexBar`, but it ships as Contents/MacOS/Sharingan so
+# `pkill -x`/Activity Monitor never confuse it with a running CodexBar.app.
+APP_EXECUTABLE="Sharingan"
 APP_FINAL="$ROOT/Sharingan.app"
 APP_STAGE="$ROOT/.build/package/Sharingan.app"
 rm -rf "$APP_STAGE"
@@ -298,11 +299,11 @@ if [[ "$SIGNING_MODE" == "adhoc" ]]; then
 fi
 WIDGET_BUNDLE_ID="${BUNDLE_ID}.widget"
 resolve_package_signing_identity
-# The app group must match AppGroupSupport.currentGroupID, which keeps the upstream storage identifier
-# (`<team>.com.steipete.codexbar[.debug]`) so the app and widget share one container.
-APP_GROUP_BASE="com.steipete.codexbar"
+# The app group must match AppGroupSupport.currentGroupID (`<team>.com.gdpais.sharingan[.debug]`, from
+# AppIdentity.reverseDNS) so the app and widget share one container that never collides with CodexBar's.
+APP_GROUP_BASE="com.gdpais.sharingan"
 if [[ "$LOWER_CONF" == "debug" ]]; then
-  APP_GROUP_BASE="com.steipete.codexbar.debug"
+  APP_GROUP_BASE="com.gdpais.sharingan.debug"
 fi
 APP_GROUP_ID="${APP_TEAM_ID}.${APP_GROUP_BASE}"
 ENTITLEMENTS_DIR="$ROOT/.build/entitlements"
@@ -384,7 +385,7 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <key>CFBundleName</key><string>Sharingan</string>
     <key>CFBundleDisplayName</key><string>Sharingan</string>
     <key>CFBundleIdentifier</key><string>${BUNDLE_ID}</string>
-    <key>CFBundleExecutable</key><string>CodexBar</string>
+    <key>CFBundleExecutable</key><string>${APP_EXECUTABLE}</string>
     <key>CFBundlePackageType</key><string>APPL</string>
     <key>CFBundleShortVersionString</key><string>${MARKETING_VERSION}</string>
     <key>CFBundleVersion</key><string>${BUILD_NUMBER}</string>
@@ -575,8 +576,8 @@ install_widget_extension() {
   verify_binary_arches "$widget_app/Contents/MacOS/CodexBarWidget" "${ARCH_LIST[@]}"
 }
 
-install_binary "CodexBar" "$APP/Contents/MacOS/CodexBar"
-strip_release_binary "$APP/Contents/MacOS/CodexBar"
+install_binary "CodexBar" "$APP/Contents/MacOS/$APP_EXECUTABLE"
+strip_release_binary "$APP/Contents/MacOS/$APP_EXECUTABLE"
 # Ship CodexBarCLI alongside the app for easy symlinking.
 install_binary "CodexBarCLI" "$APP/Contents/Helpers/CodexBarCLI"
 strip_release_binary "$APP/Contents/Helpers/CodexBarCLI"
@@ -592,7 +593,7 @@ swiftpm_bin_path "${ARCH_LIST[0]}" PREFERRED_BUILD_DIR
 SPARKLE_SOURCE=$(codexbar_require_product_directory "$PREFERRED_BUILD_DIR" Sparkle.framework packaging)
 cp -R "$SPARKLE_SOURCE" "$APP/Contents/Frameworks/"
 chmod -R a+rX "$APP/Contents/Frameworks/Sparkle.framework"
-install_name_tool -add_rpath "@executable_path/../Frameworks" "$APP/Contents/MacOS/CodexBar"
+install_name_tool -add_rpath "@executable_path/../Frameworks" "$APP/Contents/MacOS/$APP_EXECUTABLE"
 # Re-sign Sparkle and all nested components with the selected package identity.
 SPARKLE="$APP/Contents/Frameworks/Sparkle.framework"
 if [[ "$SIGNING_MODE" == "adhoc" ]]; then

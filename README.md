@@ -15,8 +15,8 @@ code, provider integrations, and documentation come from CodexBar; Sharingan reb
 upstream closely. CodexBar is released under the MIT License; Sharingan keeps that license and the original copyright
 notice — see [LICENSE](LICENSE). Please consider supporting the original project.
 
-Internally the code still uses CodexBar names (Swift modules and types, the `codexbar` CLI, config paths) to keep
-upstream merges cheap.
+Internally the source still uses CodexBar names (Swift modules, targets, and types) to keep upstream merges cheap.
+Everything Sharingan stores or installs uses its own names, so it runs side by side with CodexBar.
 
 <img src="docs/codexbar.png" alt="Menu popover with provider tiles, usage bars, and reset countdowns (screenshot from upstream CodexBar)" width="520" />
 
@@ -46,10 +46,12 @@ Ad-hoc-signed rebuilds can trigger repeat Keychain prompts; see [Keychain prompt
 
 ### Things to know
 
-- **Shares config with CodexBar — don't run both.** Sharingan reads the same provider config
-  (`~/.config/codexbar/config.json`, or legacy `~/.codexbar/config.json`), Keychain items, and caches as CodexBar,
-  so existing provider setup carries over. Menu/display preferences live in Sharingan's own defaults domain
-  (`com.gdpais.sharingan`) and start fresh. Running CodexBar and Sharingan at the same time is not supported.
+- **Runs side by side with CodexBar.** Sharingan has its own config (`~/.config/sharingan/config.json`, override
+  with `SHARINGAN_CONFIG`), Keychain items (`com.gdpais.sharingan*`), app group, caches, logs, and `sharingan` CLI,
+  and never reads or writes CodexBar's. Provider setup therefore starts fresh; to reuse CodexBar's providers, copy
+  `~/.config/codexbar/config.json` (or `~/.codexbar/config.json`) to `~/.config/sharingan/config.json` once. Display
+  preferences are imported from CodexBar on first launch (read-only). See
+  [Running beside CodexBar](docs/SHARINGAN_SIDE_BY_SIDE.md).
 - **No automatic updates yet.** Sharingan builds ship without a Sparkle feed and with automatic update checks off;
   rebuild from source to update. (Owner TODO: set up a Sharingan appcast and Sparkle signing key.)
 - **iCloud sync is unavailable.** It depends on upstream's Apple developer team and is disabled in Sharingan builds.
@@ -66,20 +68,20 @@ Homebrew/AUR packages. Upstream's published packages install CodexBar, not Shari
 - Optional: Settings → Providers → Codex → OpenAI cookies (Automatic or Manual) to add dashboard extras.
 
 ### Set API keys from the CLI
-Provider toggles and API keys live in the resolved CodexBar config file. New installs use
-`~/.config/codexbar/config.json`; existing `~/.codexbar/config.json` installs still load from the legacy path. You can
-script the same provider list that Settings → Providers uses:
+Provider toggles and API keys live in the resolved Sharingan config file, `~/.config/sharingan/config.json` (a legacy
+`~/.sharingan/config.json` also loads; `SHARINGAN_CONFIG` overrides both). You can script the same provider list that
+Settings → Providers uses:
 
 ```bash
-codexbar config providers
-codexbar config enable --provider grok
-codexbar config disable --provider cursor
+sharingan config providers
+sharingan config enable --provider grok
+sharingan config disable --provider cursor
 ```
 
 For API-key providers, store a key without opening Settings:
 
 ```bash
-printf '%s' "$ELEVENLABS_API_KEY" | codexbar config set-api-key --provider elevenlabs --stdin
+printf '%s' "$ELEVENLABS_API_KEY" | sharingan config set-api-key --provider elevenlabs --stdin
 ```
 
 `set-api-key` trims the piped value, stores it with restrictive config-file permissions, and enables the provider by default. Use `--no-enable` to only save the key, or `--api-key <key>` for one-off local scripts where shell history is not a concern.
@@ -219,14 +221,14 @@ show an incident indicator.
 - Display controls for provider icons, labels, bars, reset-time style, and highest-usage auto-selection.
 - Fresh installs default to Adaptive refresh. Existing users keep every valid stored choice, while legacy unset or
   invalid preferences resolve to 5 minutes. Manual and fixed 1m, 2m, 5m, 15m, and 30m alternatives remain available.
-- Bundled CLI (`codexbar`) for scripts and CI (including `codexbar cost --provider codex`, `claude`, or `both` for local cost usage); macOS and Linux CLI builds available.
+- Bundled CLI (`sharingan`) for scripts and CI (including `sharingan cost --provider codex`, `claude`, or `both` for local cost usage); macOS and Linux CLI builds available.
 - WidgetKit widgets for supported providers.
 - Localized app and website with a shared 23-language catalog, automatic website detection, persistent pickers, and RTL support.
 - Optional session quota notifications and weekly-reset confetti.
 - Privacy-first: on-device parsing by default; browser cookies are opt-in and reused (no passwords stored).
 
 ## Privacy note
-Wondering if Sharingan scans your disk? It doesn’t crawl your filesystem; it reads a small set of known locations (browser cookies/local storage, provider config files, local JSONL logs) when the related features are enabled. Plain Adaptive refresh never inspects local agent activity. The separate Adaptive (agent-aware) option asks before inspecting the running-process list (including command lines) to identify Codex/Claude and reading bounded known-session metadata. Declining returns to plain Adaptive. When allowed with Agent Sessions hidden, Sharingan retains only the latest activity time and discards session paths and identities. Provider tokens and token-account settings live in the shared CodexBar config file (`~/.config/codexbar`) with restrictive file permissions. See the upstream discussion and audit notes in [CodexBar issue #12](https://github.com/steipete/CodexBar/issues/12).
+Wondering if Sharingan scans your disk? It doesn’t crawl your filesystem; it reads a small set of known locations (browser cookies/local storage, provider config files, local JSONL logs) when the related features are enabled. Plain Adaptive refresh never inspects local agent activity. The separate Adaptive (agent-aware) option asks before inspecting the running-process list (including command lines) to identify Codex/Claude and reading bounded known-session metadata. Declining returns to plain Adaptive. When allowed with Agent Sessions hidden, Sharingan retains only the latest activity time and discards session paths and identities. Provider tokens and token-account settings live in Sharingan's config file (`~/.config/sharingan`) with restrictive file permissions. See the upstream discussion and audit notes in [CodexBar issue #12](https://github.com/steipete/CodexBar/issues/12).
 
 ## macOS permissions (why they’re needed)
 - **Full Disk Access (optional)**: only required to read Safari cookies/local storage for web-based providers. If you don’t grant it, use another supported browser, manual cookies/API keys, OAuth, or CLI/local sources where that provider supports them.
@@ -282,7 +284,7 @@ make check                           # SwiftFormat + SwiftLint
 make docs-list                       # list docs with frontmatter summaries
 ```
 
-CLI install (the CLI keeps its `codexbar` name and is bundled inside the app):
+CLI install (installs a `sharingan` symlink to the CLI bundled inside the app; CodexBar's `codexbar` is untouched):
 ```bash
 # after copying Sharingan.app to /Applications
 ./bin/install-codexbar-cli.sh

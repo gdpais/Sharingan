@@ -20,7 +20,7 @@ Browser quota requests use form encoding that preserves reserved characters in t
 When the RPC endpoint returns `ConsoleNeedLogin`, CodexBar treats that as a console-session requirement. In API mode it is surfaced as an explicit API-path limitation; in `auto` mode fallback remains observable through the fetch-attempt chain.
 
 ## Token sources (fallback order)
-1) Config token (`~/.codexbar/config.json` -> `providers[].apiKey` for provider `alibaba`).
+1) Config token (`~/.sharingan/config.json` -> `providers[].apiKey` for provider `alibaba`).
 2) Environment variables, checked in order:
    - `ALIBABA_CODING_PLAN_API_KEY`
    - `ALIBABA_QWEN_API_KEY`

@@ -9,7 +9,7 @@ struct DashboardManagedCodexCollectionTests {
     func `dashboard CLI emits redacted managed accounts from an isolated home`() throws {
         let fixture = try ManagedDashboardFixture()
         defer { fixture.remove() }
-        let appDirectory = fixture.root.appendingPathComponent("Library/Application Support/CodexBar")
+        let appDirectory = fixture.root.appendingPathComponent("Library/Application Support/Sharingan")
         try FileManager.default.createDirectory(at: appDirectory, withIntermediateDirectories: true)
         for url in [fixture.accountsURL, fixture.cacheURL] {
             try FileManager.default.copyItem(at: url, to: appDirectory.appendingPathComponent(url.lastPathComponent))
@@ -23,7 +23,7 @@ struct DashboardManagedCodexCollectionTests {
             "HOME": fixture.root.path,
             "CFFIXED_USER_HOME": fixture.root.path,
             "CODEX_HOME": fixture.root.appendingPathComponent(".codex").path,
-            "CODEXBAR_CONFIG": configURL.path,
+            "SHARINGAN_CONFIG": configURL.path,
             "PATH": "/usr/bin:/bin",
             "CODEXBAR_TEST_SESSION_FILE_ISOLATION": "1",
             "CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1",

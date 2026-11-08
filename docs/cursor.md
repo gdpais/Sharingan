@@ -131,7 +131,7 @@ Manual option:
 - Cursor usage includes the Grok Bot weekly allowance and reset time when the account exposes it. Grok Bot endpoint failures do not hide Cursor usage.
 - Explicit `--source web` requires a manual cookie and never reads the app token.
 - Automatic browser cookie import and the external-browser Add/Switch flow remain macOS app features.
-- Manual cookie headers from `~/.config/codexbar/config.json` (or legacy `~/.codexbar/config.json`) work on Linux.
+- Manual cookie headers from `~/.config/sharingan/config.json` (or legacy `~/.sharingan/config.json`) work on Linux.
 
 ## Local storage footprint
 When **Settings → Advanced → Track provider local storage** is enabled on macOS, CodexBar measures:

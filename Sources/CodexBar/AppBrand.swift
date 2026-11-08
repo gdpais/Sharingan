@@ -3,7 +3,8 @@ import Foundation
 /// User-facing branding for the Sharingan fork of CodexBar.
 ///
 /// Kept in a standalone file so upstream CodexBar merges only touch the few call sites that read it.
-/// Identifiers, bundle ids, paths, URL schemes, and Keychain names intentionally keep the upstream names.
+/// Runtime identifiers (paths, defaults, Keychain, app group) live in `AppIdentity` so Sharingan never shares
+/// state with a CodexBar install; Swift module and type names keep the upstream names.
 enum AppBrand {
     static let displayName = "Sharingan"
     static let repositoryURL = "https://github.com/gdpais/Sharingan"

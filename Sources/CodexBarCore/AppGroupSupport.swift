@@ -6,8 +6,10 @@ import Security
 public enum AppGroupSupport {
     public static let defaultTeamID = "Y5PE65HELJ"
     public static let teamIDInfoKey = "CodexBarTeamID"
-    public static let legacyReleaseGroupID = "group.com.steipete.codexbar"
-    public static let legacyDebugGroupID = "group.com.steipete.codexbar.debug"
+    // Sharingan: the pre-team-prefix group is our own, never CodexBar's, so the one-time migration cannot read
+    // CodexBar's container (and trigger the macOS "access data from other apps" prompt).
+    public static let legacyReleaseGroupID = "group.\(AppIdentity.reverseDNS)"
+    public static let legacyDebugGroupID = "group.\(AppIdentity.reverseDNS).debug"
     public static let widgetSnapshotFilename = "widget-snapshot.json"
     public static let migrationVersion = 1
     public static let migrationVersionKey = "appGroupMigrationVersion"
@@ -40,7 +42,7 @@ public enum AppGroupSupport {
     }
 
     static func currentGroupID(teamID: String, bundleID: String?) -> String {
-        let base = "\(teamID).com.steipete.codexbar"
+        let base = "\(teamID).\(AppIdentity.reverseDNS)"
         return self.isDebugBundleID(bundleID) ? "\(base).debug" : base
     }
 
@@ -111,7 +113,7 @@ public enum AppGroupSupport {
     {
         let base = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             ?? fileManager.temporaryDirectory
-        let directory = base.appendingPathComponent("CodexBar", isDirectory: true)
+        let directory = base.appendingPathComponent(AppIdentity.supportDirectoryName, isDirectory: true)
         try? fileManager.createDirectory(at: directory, withIntermediateDirectories: true)
         return directory
     }

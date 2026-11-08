@@ -48,8 +48,8 @@ tar -xzf CodexBarCLI-v0.17.0-macos-x86_64.tar.gz
 
 ## Configuration
 CodexBar reads the resolved config file for provider settings, secrets, and ordering. New installs use
-`~/.config/codexbar/config.json`; absolute `XDG_CONFIG_HOME` paths and `CODEXBAR_CONFIG` are supported, and existing
-`~/.codexbar/config.json` installs keep using the legacy file when no XDG config exists.
+`~/.config/sharingan/config.json`; absolute `XDG_CONFIG_HOME` paths and `SHARINGAN_CONFIG` are supported, and existing
+`~/.sharingan/config.json` installs keep using the legacy file when no XDG config exists.
 See [Configuration](configuration.md) for the schema and [Providers](providers.md) for every registered provider's
 sources and setup guide. The [provider ID list](provider-ids.md) is generated from the registry;
 `codexbar config providers` lists providers and their configured enablement without fetching usage.

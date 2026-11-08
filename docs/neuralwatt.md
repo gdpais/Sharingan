@@ -37,8 +37,8 @@ Store the API key without opening Settings:
 printf '%s' "$NEURALWATT_API_KEY" | codexbar config set-api-key --provider neuralwatt --stdin
 ```
 
-This trims the piped key, writes it to CodexBar's config file (`~/.config/codexbar/config.json`
-by default, or the legacy `~/.codexbar/config.json` when already present), and enables Neuralwatt by
+This trims the piped key, writes it to CodexBar's config file (`~/.config/sharingan/config.json`
+by default, or the legacy `~/.sharingan/config.json` when already present), and enables Neuralwatt by
 default. Use `--no-enable` to save the key without enabling the provider.
 
 ### Settings

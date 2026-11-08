@@ -2,8 +2,10 @@
 
 ## Sharingan fork notes
 - This repo (gdpais/Sharingan) is a fork of CodexBar by Peter Steinberger (https://github.com/steipete/CodexBar). The guidelines below are upstream's; `/Users/steipete/...` paths refer to upstream's machine.
-- Keep internal names as CodexBar: Swift modules, targets, types, file names, the `codexbar` CLI binary, config paths (`~/.config/codexbar`, `~/.codexbar`), and Keychain service/account names.
-- Rename only user-visible surfaces (app/display name, bundle name, menu/settings copy, README) to Sharingan.
+- Sharingan must run side by side with CodexBar, so it owns none of CodexBar's runtime state. Every on-disk, defaults, Keychain, app-group, and log name comes from `Sources/CodexBarCore/AppIdentity.swift` (`~/.config/sharingan`, `~/.sharingan`, `SHARINGAN_CONFIG`, `com.gdpais.sharingan*`, `~/Library/{Application Support,Caches,Logs}/Sharingan`); never hard-code a CodexBar name for these. See `docs/SHARINGAN_SIDE_BY_SIDE.md`.
+- The bundle is `Sharingan.app` with executable `Contents/MacOS/Sharingan`; the installed CLI symlink is `sharingan`. Never `pkill -x CodexBar` or `pkill -f CodexBar.app`: that kills the real CodexBar.
+- Keep source-level names as CodexBar to keep upstream merges cheap: Swift modules, targets, SwiftPM products (`CodexBar`, `CodexBarCLI`), types, file names, and `CODEXBAR_*` env vars other than the config path.
+- Rename user-visible surfaces (app/display name, bundle name, menu/settings copy, CLI help, README) to Sharingan.
 - Keep upstream merges cheap: prefer new, additive files over edits to upstream files; when an upstream file must change, keep the diff minimal.
 - `Localizable.strings`: for branding, edit values in place only; do not rename, move, or reorder keys.
 - README must always credit CodexBar by Peter Steinberger, link https://github.com/steipete/CodexBar, and note the MIT license (link `LICENSE`).
@@ -17,7 +19,7 @@
 ## Build, Test, Run
 - Dev loop: `./Scripts/compile_and_run.sh` kills old instances, builds, packages, relaunches `CodexBar.app`, and confirms it stays running; add `--test` for the sharded full suite.
 - Quick build/test: `swift build` (debug) or `swift build -c release`; `make test` for the sharded full suite.
-- Package locally: `./Scripts/package_app.sh` to refresh `CodexBar.app`, then restart with `pkill -x CodexBar || pkill -f CodexBar.app || true; cd /Users/steipete/Projects/codexbar && open -n /Users/steipete/Projects/codexbar/CodexBar.app`.
+- Package locally: `./Scripts/package_app.sh` to refresh `Sharingan.app`, then restart with `pkill -x Sharingan || true; open -n ./Sharingan.app` from the repo root.
 - Release publication is owned by `.github/workflows/release.yml`; use its default dry-run dispatch to rehearse. Repo build/signing stays in `Scripts/sign-and-notarize.sh`; see `docs/RELEASING.md`.
 
 ## Coding Style & Naming
@@ -48,7 +50,7 @@
 - Use the provided scripts and package manager (SwiftPM); avoid adding dependencies or tooling without confirmation.
 - Menu bar automation: capture the target screen first and verify the CodexBar icon is visibly onscreen. Reject `click-extra` success when coordinates fall outside display bounds; hidden menu extras are not click proof.
 - Validate UI/runtime behavior against the freshly built bundle; restart via the pkill+open command above to avoid running stale binaries.
-- To guarantee the right bundle is running after a rebuild, use: `pkill -x CodexBar || pkill -f CodexBar.app || true; cd /Users/steipete/Projects/codexbar && open -n /Users/steipete/Projects/codexbar/CodexBar.app`.
+- To guarantee the right bundle is running after a rebuild, use: `pkill -x Sharingan || true; open -n ./Sharingan.app` from the repo root.
 - For CLI-testable provider/parser/settings behavior, use CLI/focused tests instead of `Scripts/package_app.sh` or `./Scripts/compile_and_run.sh`.
 - Run `./Scripts/compile_and_run.sh` only when UI/runtime behavior needs bundle-level validation; it builds, tests, packages, relaunches, and verifies the app stays running.
 - Widget/Tahoe UI issues: use Parallels macOS VM plus screenshots/clicks for autonomous verification.

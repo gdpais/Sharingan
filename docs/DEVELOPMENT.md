@@ -32,7 +32,7 @@ read_when:
 2. **Run** `./Scripts/compile_and_run.sh --test` to test, rebuild, and launch
 3. **Check logs** in Console.app (filter by "codexbar")
 4. **Optional file log**: enable Debug → Logging → "Enable file logging" to write
-   `~/Library/Logs/CodexBar/CodexBar.log` (verbosity defaults to "Verbose")
+   `~/Library/Logs/Sharingan/Sharingan.log` (verbosity defaults to "Verbose")
 
 ## Localized countdowns
 
@@ -659,7 +659,7 @@ defaults write com.gdpais.sharingan debugMainThreadHangWatchdog -bool true
 ```
 
 Hangs are written to the app log. Hangs over two seconds also request a process
-sample under `~/Library/Logs/CodexBar/`. Disable the release opt-in with:
+sample under `~/Library/Logs/Sharingan/`. Disable the release opt-in with:
 
 ```bash
 defaults delete com.gdpais.sharingan debugMainThreadHangWatchdog
@@ -677,7 +677,7 @@ defaults delete com.gdpais.sharingan debugMainThreadHangWatchdog
 - Automatic browser import via SweetCookieKit
 - Keychain cache for some imported browser cookies and OAuth/device-flow credentials
 - The resolved config file for provider settings, manual cookies, and stored API keys: new installs use
-  `~/.config/codexbar/config.json`, while existing `~/.codexbar/config.json` installs retain their legacy path
+  `~/.config/sharingan/config.json`, while existing `~/.sharingan/config.json` installs retain their legacy path
 - Manual override for debugging
 - Browser-cookie import when cached sessions need refresh
 

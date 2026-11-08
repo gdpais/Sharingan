@@ -16,7 +16,7 @@ case "$ENVIRONMENT" in
 esac
 
 TEAM_ID="Y5PE65HELJ"
-CONTAINER_ID="iCloud.com.steipete.codexbar"
+CONTAINER_ID="iCloud.com.gdpais.sharingan"
 SCHEMA_FILE="$(cd "$(dirname "$0")" && pwd)/schema.ckdb"
 
 TOKEN_ARGS=()

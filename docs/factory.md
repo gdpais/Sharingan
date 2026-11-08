@@ -14,7 +14,7 @@ Factory (displayed as "Droid") supports API-key and web-based auth. Source mode 
 
 ### API (`api`)
 1. Resolve a Factory API key from, in order:
-   - `~/.codexbar/config.json` `providers[].apiKey` for `factory` (also via Settings or
+   - `~/.sharingan/config.json` `providers[].apiKey` for `factory` (also via Settings or
      `codexbar config set-api-key --provider factory`)
    - `FACTORY_API_KEY`
    - optional `~/.factory/.env` (`FACTORY_API_KEY=…` or `export FACTORY_API_KEY=…`)

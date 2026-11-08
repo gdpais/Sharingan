@@ -24,7 +24,7 @@ Manual cookies must include an `ory_session_*` cookie. A `csrftoken` cookie enab
 require the `X-CSRFTOKEN` header.
 
 On Linux, browser import is unavailable, so the CLI reads Mistral only in Manual mode: set the provider's
-`cookieSource` to `manual` and its `cookieHeader` to the pasted header in `~/.config/codexbar/config.json`.
+`cookieSource` to `manual` and its `cookieHeader` to the pasted header in `~/.config/sharingan/config.json`.
 
 Automatic import follows the shared supported-browser order. Safari requires Full Disk Access.
 The shared access gate bounds Keychain prompts. Automatic import reads only unexpired cookies from

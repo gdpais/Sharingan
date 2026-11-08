@@ -197,7 +197,7 @@ struct CLIConfigCookieCommandTests {
         let handle = try FileHandle(forReadingFrom: input)
         defer { try? handle.close() }
         let environment = [
-            "CODEXBAR_CONFIG": root.appendingPathComponent("config.json").path,
+            "SHARINGAN_CONFIG": root.appendingPathComponent("config.json").path,
             "HOME": root.path,
             "CFFIXED_USER_HOME": root.path,
             "CODEX_HOME": root.appendingPathComponent(".codex").path,

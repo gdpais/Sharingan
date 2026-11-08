@@ -34,7 +34,7 @@ Goal: let CodexBar users opt in to seeing one or more Kilo organizations alongsi
 - Existing CodexBar patterns to reuse:
   - `ProviderIdentitySnapshot.accountOrganization` for rendering the org name in a card.
   - Stacked multi-snapshot rendering used by Claude tokenAccounts (Preferences → Advanced → Display).
-  - `~/.codexbar/config.json` per-provider entry for persisted state.
+  - `~/.sharingan/config.json` per-provider entry for persisted state.
 
 ## User stories
 
@@ -77,7 +77,7 @@ Goal: let CodexBar users opt in to seeing one or more Kilo organizations alongsi
 - Personal scope is implicit: always enabled, can't be toggled off.
 
 Persistence:
-- Add `organizations: [KiloOrganization]?` and `enabledOrganizationIds: [String]?` to the Kilo provider's entry in `~/.codexbar/config.json`.
+- Add `organizations: [KiloOrganization]?` and `enabledOrganizationIds: [String]?` to the Kilo provider's entry in `~/.sharingan/config.json`.
 - Mutators write through `updateProviderConfig(provider: .kilo)`.
 
 ### Refresh / UsageStore

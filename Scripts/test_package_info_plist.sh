@@ -18,7 +18,9 @@ identity_start = script.index('BUNDLE_ID="com.gdpais.sharingan"')
 identity_end = script.index('if [[ "$LOWER_CONF" == "debug" ]]; then', identity_start)
 start = script.index('cat > "$APP/Contents/Info.plist" <<PLIST')
 end = script.index('\nPLIST\n', start) + len('\nPLIST\n')
-Path(sys.argv[2]).write_text(script[identity_start:identity_end] + script[start:end])
+exe_start = script.index('APP_EXECUTABLE="')
+exe_line = script[exe_start:script.index('\n', exe_start) + 1]
+Path(sys.argv[2]).write_text(exe_line + script[identity_start:identity_end] + script[start:end])
 PY
 
 APP="$TEMP_DIR/Sharingan.app"
@@ -42,7 +44,7 @@ plist = plistlib.loads(Path(sys.argv[1]).read_bytes())
 assert plist.get("CFBundleIdentifier") == "com.gdpais.sharingan"
 assert plist.get("CFBundleName") == "Sharingan"
 assert plist.get("CFBundleDisplayName") == "Sharingan"
-assert plist.get("CFBundleExecutable") == "CodexBar"
+assert plist.get("CFBundleExecutable") == "Sharingan"
 assert "Peter Steinberger" in plist.get("NSHumanReadableCopyright", "")
 # No update feed until Sharingan has its own appcast and Sparkle key (see TODO(sharingan) in package_app.sh).
 assert plist.get("SUFeedURL") == ""

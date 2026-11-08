@@ -164,7 +164,7 @@ be polled within the readiness deadline.
 - Discovery reads the ID and secret initialized together in the language server's OAuth configuration. Antigravity 2.19.1 on Apple Silicon and Intel stores two clients in separately pooled strings; their order does not identify a pair. Among recognized records, CodexBar prefers the client used by agy's consumer sign-in, then falls back to the first matched record. Older artifacts with a single pair remain supported; ambiguous artifacts without a recognized record are rejected.
 - Accounts previously signed in with the other client may receive `GOOGLE_TOS_NOT_SUPPORTED_BY_CLIENT` with no current tier or project. Without a saved project, CodexBar asks you to sign in again instead of displaying placeholder 100% quotas. Refresh tokens remain bound to their original client; discovery does not migrate an existing grant. The Hub request User-Agent is independent of this OAuth client selection.
 - If discovery fails or Google rejects the client with `invalid_client`, update Antigravity or set both overrides to a matching client ID and secret before retrying. These failures do not add or replace a saved account.
-- A successful login writes the latest shared credentials to `~/.codexbar/antigravity/oauth_creds.json` and upserts a token-account entry for the Google account.
+- A successful login writes the latest shared credentials to `~/.sharingan/antigravity/oauth_creds.json` and upserts a token-account entry for the Google account.
 - Each token-account entry stores serialized `AntigravityOAuthCredentials` and is injected into remote fetches through `ANTIGRAVITY_OAUTH_CREDENTIALS_JSON`.
 - When a token account is selected, the OAuth fetcher uses that account before falling back to the shared credentials file.
   In `auto` mode the ambient Antigravity app, `agy` CLI, and IDE probes still run first, but a snapshot whose account
@@ -172,7 +172,7 @@ be polled within the readiness deadline.
   the pipeline falls through to the account-scoped OAuth fetch (see
   `AntigravitySelectedAccountGuard`). If no account is selected/injected, `auto` includes OAuth only when the legacy
   shared credentials file already exists. Explicit `cli`/`oauth` source modes stay authoritative and are not re-checked.
-- Removing the last saved token account that matches `~/.codexbar/antigravity/oauth_creds.json` deletes that shared file,
+- Removing the last saved token account that matches `~/.sharingan/antigravity/oauth_creds.json` deletes that shared file,
   so a removed CodexBar account does not silently continue refreshing through the legacy shared cache.
 - The menu action is labeled `Add Account...`; switching between saved accounts scopes Google OAuth fetches.
 
@@ -412,7 +412,7 @@ Local history reads only the existing recognized roots: `~/.gemini/antigravity-c
 lets you opt in to other homes with a folder picker and remove them individually. Select each profile's
 Gemini directory (usually its `.gemini` directory), not its parent HOME or its `conversations` directory.
 The CLI reads the same `antigravityAdditionalProfileHomes` array from the Antigravity provider entry in
-`~/.codexbar/config.json` (or `CODEXBAR_CONFIG`):
+`~/.sharingan/config.json` (or `SHARINGAN_CONFIG`):
 
 ```json
 {

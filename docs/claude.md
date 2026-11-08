@@ -70,7 +70,7 @@ lookup, until the token changes or CodexBar restarts. This process-local display
 ownership. Organization UUIDs are ownership evidence, not organization display names.
 
 Admin API key setup:
-- Preferences → Providers → Claude → Admin API key, stored in `~/.codexbar/config.json`.
+- Preferences → Providers → Claude → Admin API key, stored in `~/.sharingan/config.json`.
 - CLI/env: `printf '%s' "$ANTHROPIC_ADMIN_KEY" | codexbar config set-api-key --provider claude --stdin`.
 - Token accounts can also hold `sk-ant-admin...` keys; they route to the Admin API instead of cookie/OAuth usage.
 - Environment fallback: `ANTHROPIC_ADMIN_KEY`.
@@ -311,7 +311,7 @@ unreadable history directory leaves its estimate unavailable. Clear the mapping 
 view; unmapped accounts and claude-swap retain their current behavior. The optional `claudeConfigDirectory` field
 is stored on the token account in the config file and does not change quota fetching or credential resolution.
 
-- Multi-account manual tokens: add entries to `~/.codexbar/config.json` (`tokenAccounts`) and set Claude cookies to
+- Multi-account manual tokens: add entries to `~/.sharingan/config.json` (`tokenAccounts`) and set Claude cookies to
   Manual. The menu can show all accounts stacked or a switcher bar (Preferences → Advanced → Display).
 - In Settings → Providers → Claude, **Edit** changes a saved account’s label and credential in place.
   The credential field is masked and starts empty; leave it blank to keep the saved credential, or enter a
@@ -499,7 +499,7 @@ The accepted multi-account design in
   Codex lists keep their sectioned stacked layout). To use this
   presentation with one account, enable “Show account card when only one account is available” or set
   `claudeSwapShowSingleAccount: true` on the Claude provider in the resolved config file (normally
-  `~/.config/codexbar/config.json`; legacy installs may use `~/.codexbar/config.json`). The option defaults off,
+  `~/.config/sharingan/config.json`; legacy installs may use `~/.sharingan/config.json`). The option defaults off,
   zero accounts still use the ambient presentation, and account identity is `claude-swap:<slot>`, never the display
   email.
 - Session forecasts use each account's own recorded usage. History keys hash the normalized email and organization

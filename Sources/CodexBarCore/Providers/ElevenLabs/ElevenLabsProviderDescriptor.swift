@@ -2,7 +2,7 @@ import Foundation
 
 public enum ElevenLabsProviderDescriptor {
     private static let missingCredentialMessage =
-        "Missing ElevenLabs API key. Set apiKey in ~/.codexbar/config.json or ELEVENLABS_API_KEY."
+        "Missing ElevenLabs API key. Set apiKey in ~/.config/sharingan/config.json or ELEVENLABS_API_KEY."
     public static let descriptor: ProviderDescriptor = Self.spec.makeDescriptor()
     public static let spec = PluginProviderSpec(
         id: .elevenlabs,

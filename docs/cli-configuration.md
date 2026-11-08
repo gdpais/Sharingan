@@ -9,8 +9,8 @@ read_when:
 # CLI configuration
 
 `codexbar config` edits the same resolved config file used by the app's Settings → Providers pane.
-New installs use `~/.config/codexbar/config.json`; absolute `XDG_CONFIG_HOME` paths and `CODEXBAR_CONFIG` are
-supported, and existing `~/.codexbar/config.json` installs keep using the legacy file when no XDG config exists.
+New installs use `~/.config/sharingan/config.json`; absolute `XDG_CONFIG_HOME` paths and `SHARINGAN_CONFIG` are
+supported, and existing `~/.sharingan/config.json` installs keep using the legacy file when no XDG config exists.
 The CLI stages writes in a private `0700` directory on the destination volume, creates the file with `0600` permissions before writing any bytes, then syncs and atomically replaces the config.
 
 ## Providers
@@ -61,7 +61,7 @@ JSON mode emits newline-delimited objects (one object per event; `--pretty` has 
 
 Failures after argument parsing emit `{"status":"failed","error":"..."}` and exit nonzero. Neither output
 mode prints the access token or device code used for polling. This is an interactive setup command;
-`usage` and `serve` never start login automatically. `CODEXBAR_CONFIG` also applies to login.
+`usage` and `serve` never start login automatically. `SHARINGAN_CONFIG` also applies to login.
 
 ## API keys
 
@@ -146,7 +146,7 @@ is empty and the config file is not written.
 For tests, demos, and CI, point CodexBar at a temporary config file:
 
 ```bash
-export CODEXBAR_CONFIG=/tmp/codexbar-config.json
+export SHARINGAN_CONFIG=/tmp/codexbar-config.json
 codexbar config enable --provider grok
 codexbar config providers --json --pretty
 ```

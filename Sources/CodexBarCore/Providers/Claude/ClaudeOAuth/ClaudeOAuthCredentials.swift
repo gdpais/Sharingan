@@ -89,9 +89,9 @@ public enum ClaudeOAuthCredentialsStore {
         "ClaudeOAuthPendingCodexBarOAuthKeychainCacheClearV1"
     private static let directKeychainReadConsentRevocationMarkerKey =
         "ClaudeOAuthDirectKeychainReadConsentRevocationMarkerV1"
-    // Deliberately not AppDefaultsDomain.release: this state tracks the `com.steipete.codexbar.cache` Keychain item
-    // and Claude's Keychain entry, which keep their CodexBar names, so it stays where every app/CLI already looks.
-    private static let sharedKeychainStateDefaultsDomain = AppDefaultsDomain.legacyRelease
+    // Tracks the app's own Keychain cache item (AppIdentity.keychainCacheService), so it lives in Sharingan's
+    // release domain, which the app and the bundled CLI both read; CodexBar's domain is never touched.
+    private static let sharedKeychainStateDefaultsDomain = AppDefaultsDomain.release
     private static var sharedDefaults: UserDefaults {
         ClaudeOAuthApplicationDefaults.resolve(domain: self.sharedKeychainStateDefaultsDomain)
     }

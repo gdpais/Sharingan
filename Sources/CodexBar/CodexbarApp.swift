@@ -52,7 +52,7 @@ struct CodexBarApp: App {
         let storedLevel = CodexBarLog.parseLevel(UserDefaults.standard.string(forKey: "debugLogLevel")) ?? .verbose
         let level = CodexBarLog.parseLevel(env["CODEXBAR_LOG_LEVEL"]) ?? storedLevel
         CodexBarLog.bootstrapIfNeeded(.init(
-            destination: .oslog(subsystem: "com.steipete.codexbar"),
+            destination: .oslog(subsystem: AppIdentity.reverseDNS),
             level: level,
             json: false))
 

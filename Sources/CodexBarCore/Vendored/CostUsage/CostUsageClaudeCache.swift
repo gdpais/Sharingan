@@ -428,7 +428,7 @@ enum CostUsageClaudeCacheIO {
     {
         precondition(provider == .claude || provider == .vertexai)
         let root = cacheRoot ?? FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first!
-            .appendingPathComponent("CodexBar", isDirectory: true)
+            .appendingPathComponent(AppIdentity.supportDirectoryName, isDirectory: true)
         // Parsing filters dates before selecting duplicate responses, so independent report windows
         // need their own rows.
         let suffix = reportContext == .spendDashboard ? "-history" : ""

@@ -47,7 +47,7 @@ struct ProviderSessionStoreFileTests {
                 processName: "CodexBar",
                 environment: [:],
                 applicationSupportDirectory: { root })
-            #expect(url == root.appendingPathComponent("CodexBar").appendingPathComponent(filename))
+            #expect(url == root.appendingPathComponent("Sharingan").appendingPathComponent(filename))
         }
     }
 

@@ -37,7 +37,7 @@ class PackagedAppLaunchTests(unittest.TestCase):
                 assert home == Path(os.environ['CFFIXED_USER_HOME'])
                 assert home.parent.name.startswith('codexbar-launch-smoke.')
                 assert home.parent.parent == Path({str(temporary)!r})
-                config = Path(os.environ['CODEXBAR_CONFIG'])
+                config = Path(os.environ['SHARINGAN_CONFIG'])
                 assert config.is_relative_to(home)
                 providers = json.loads(config.read_text())['providers']
                 assert providers and all(p.get('enabled') is False for p in providers)
@@ -61,7 +61,7 @@ class PackagedAppLaunchTests(unittest.TestCase):
                 else:
                     time.sleep(60)
                 """)
-            for relative in ["Contents/MacOS/CodexBar", "Contents/Helpers/CodexBarCLI"]:
+            for relative in ["Contents/MacOS/Sharingan", "Contents/Helpers/CodexBarCLI"]:
                 executable = app / relative
                 executable.parent.mkdir(parents=True, exist_ok=True)
                 executable.write_text(child)
@@ -84,7 +84,7 @@ class PackagedAppLaunchTests(unittest.TestCase):
                 HOME=str(ambient),
                 CFFIXED_USER_HOME=str(ambient),
                 TMPDIR=str(temporary) + "/",
-                CODEXBAR_CONFIG=str(ambient / "private-config.json"),
+                SHARINGAN_CONFIG=str(ambient / "private-config.json"),
                 CODEXBAR_SKIP_LAUNCH_SMOKE="0",
                 CODEXBAR_LAUNCH_SMOKE_SECONDS="6",
                 SMOKE_AMBIENT_SENTINEL="synthetic-only",
@@ -101,7 +101,7 @@ class PackagedAppLaunchTests(unittest.TestCase):
             observations = [json.loads(line) for line in receipts.read_text().splitlines()]
             self.assertEqual([r["resource"] for r in observations], ["1", "1", "1", None])
             self.assertEqual([r["executable"] for r in observations],
-                             ["CodexBarCLI", "codexbar", "CodexBar", "CodexBar"])
+                             ["CodexBarCLI", "sharingan", "Sharingan", "Sharingan"])
             sandbox_profiles = [json.loads(line) for line in profiles.read_text().splitlines()]
             self.assertEqual(len(sandbox_profiles), 4)
             for profile in sandbox_profiles:

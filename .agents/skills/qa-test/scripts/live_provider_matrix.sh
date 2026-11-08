@@ -17,7 +17,7 @@ Usage:
 
 Environment:
   CODEXBAR_CLI=/path/to/CodexBarCLI
-  CODEXBAR_CONFIG=/path/to/config.json
+  SHARINGAN_CONFIG=/path/to/config.json
   CODEXBAR_QA_WEB_TIMEOUT=12
   CODEXBAR_QA_CASE_TIMEOUT=60
 USAGE

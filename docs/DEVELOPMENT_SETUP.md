@@ -110,12 +110,12 @@ swift build  # defaults to debug
 
 ## Troubleshooting
 
-### "CodexBar is already running"
+### "Sharingan is already running"
 
 The compile_and_run script should kill old instances, but if it doesn't:
 
 ```bash
-pkill -x CodexBar || pkill -f CodexBar.app || true
+pkill -x Sharingan || true
 ```
 
 ### "Permission denied" when accessing keychain
@@ -144,6 +144,6 @@ Or manually:
 
 ```bash
 ./Scripts/package_app.sh
-pkill -x CodexBar || pkill -f CodexBar.app || true
-open -n CodexBar.app
+pkill -x Sharingan || true
+open -n Sharingan.app
 ```

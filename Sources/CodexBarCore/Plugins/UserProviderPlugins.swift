@@ -82,7 +82,9 @@ public final class ProviderPluginApprovalStore: @unchecked Sendable {
 
     public static var defaultURL: URL {
         FileManager.default.homeDirectoryForCurrentUser
-            .appendingPathComponent("Library/Application Support/CodexBar/plugin-approvals.json")
+            .appendingPathComponent("Library/Application Support", isDirectory: true)
+            .appendingPathComponent(AppIdentity.supportDirectoryName, isDirectory: true)
+            .appendingPathComponent("plugin-approvals.json")
     }
 
     private let fileURL: URL
@@ -227,12 +229,12 @@ public final class UserProviderPluginLoader: @unchecked Sendable {
 
     public static var defaultProvidersDirectory: URL {
         FileManager.default.homeDirectoryForCurrentUser
-            .appendingPathComponent(".config/codexbar/providers", isDirectory: true)
+            .appendingPathComponent(".config/\(AppIdentity.configDirectoryName)/providers", isDirectory: true)
     }
 
     public static var defaultCacheDirectory: URL {
         FileManager.default.homeDirectoryForCurrentUser
-            .appendingPathComponent("Library/Caches/CodexBar/plugins", isDirectory: true)
+            .appendingPathComponent("Library/Caches/\(AppIdentity.supportDirectoryName)/plugins", isDirectory: true)
     }
 
     private let providersDirectory: URL

@@ -6,7 +6,7 @@ import os
 typealias CodexModelsSignpostID = OSSignpostID
 
 enum CodexModelsTelemetry {
-    private static let log = OSLog(subsystem: "com.steipete.codexbar", category: "ModelsAnalytics")
+    private static let log = OSLog(subsystem: AppIdentity.reverseDNS, category: "ModelsAnalytics")
 
     static func begin(_ name: StaticString) -> CodexModelsSignpostID {
         let id = OSSignpostID(log: self.log)

@@ -137,7 +137,7 @@ struct BalanceHistoryStore: Sendable {
         guard let root = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first else {
             return nil
         }
-        let dir = root.appendingPathComponent("com.steipete.codexbar", isDirectory: true)
+        let dir = root.appendingPathComponent(AppIdentity.reverseDNS, isDirectory: true)
         return dir.appendingPathComponent("balance-history", isDirectory: true)
     }
 

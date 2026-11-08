@@ -14,7 +14,7 @@ final class CLIEntryTests: XCTestCase {
     func test_rootHelpAdvertisesDashboardSnapshotCommand() {
         let help = CodexBarCLI.rootHelp(version: "0.0.0")
 
-        XCTAssertTrue(help.contains("codexbar dashboard [--pretty] [--timeout <seconds>] [--output <path>]"))
+        XCTAssertTrue(help.contains("sharingan dashboard [--pretty] [--timeout <seconds>] [--output <path>]"))
     }
 
     func test_dashboardCommandIsRegisteredAndParsesOptions() throws {
@@ -926,7 +926,7 @@ extension CLIEntryTests {
             "HOME": home.path,
             "CFFIXED_USER_HOME": home.path,
             "CODEX_HOME": home.appendingPathComponent(".codex").path,
-            "CODEXBAR_CONFIG": home.appendingPathComponent("config.json").path,
+            "SHARINGAN_CONFIG": home.appendingPathComponent("config.json").path,
             "CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1",
         ]) { _, override in override }.merging(environment) { _, override in override }
 

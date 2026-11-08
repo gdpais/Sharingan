@@ -10,7 +10,7 @@ read_when:
 LiteLLM uses a virtual key plus the proxy base URL. The key reads its own identity and budget data through LiteLLM's
 authenticated information endpoints, with a spend-report fallback for deployments that disable management access.
 
-Configure it in Settings -> Providers -> LiteLLM, or in `~/.codexbar/config.json`:
+Configure it in Settings -> Providers -> LiteLLM, or in `~/.sharingan/config.json`:
 
 ```json
 {

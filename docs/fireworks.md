@@ -13,8 +13,8 @@ Fireworks is API-only for billing: there is no public credit-balance endpoint, s
 
 ## Data sources
 
-1. **API key** stored in `~/.codexbar/config.json` or supplied via `FIREWORKS_API_KEY` (legacy alias: `FIREWORKS_KEY`).
-2. **Optional account slug** stored in `~/.codexbar/config.json` or supplied via `FIREWORKS_ACCOUNT_SLUG`.
+1. **API key** stored in `~/.sharingan/config.json` or supplied via `FIREWORKS_API_KEY` (legacy alias: `FIREWORKS_KEY`).
+2. **Optional account slug** stored in `~/.sharingan/config.json` or supplied via `FIREWORKS_ACCOUNT_SLUG`.
 
 CodexBar calls `GET https://api.fireworks.ai/v1/accounts` to list the accounts visible to the key. A single
 account is selected automatically and its slug is saved to the config. When several accounts are visible, the

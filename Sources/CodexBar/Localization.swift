@@ -29,7 +29,7 @@ private func appLanguageDefaults() -> UserDefaults {
         return .standard
     }
     // Fallback for running outside a .app bundle (swift run / debug builds)
-    return UserDefaults(suiteName: "CodexBar") ?? .standard
+    return UserDefaults(suiteName: AppIdentity.supportDirectoryName) ?? .standard
 }
 
 private let isRunningTestsProcessAtStartup = TestProcessSafety.isRunning

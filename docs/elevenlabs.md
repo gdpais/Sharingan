@@ -29,7 +29,7 @@ Store the API key without opening Settings:
 printf '%s' "$ELEVENLABS_API_KEY" | codexbar config set-api-key --provider elevenlabs --stdin
 ```
 
-This trims the piped key, writes it to `~/.codexbar/config.json` with restrictive permissions, and enables ElevenLabs by default. Use `--no-enable` to save the key without enabling the provider.
+This trims the piped key, writes it to `~/.sharingan/config.json` with restrictive permissions, and enables ElevenLabs by default. Use `--no-enable` to save the key without enabling the provider.
 
 ### Settings
 

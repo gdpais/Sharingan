@@ -27,7 +27,7 @@ third-party Kimi relays.
 
 ## Data sources
 
-1. **API key** stored in `~/.codexbar/config.json` or supplied via `MOONSHOT_API_KEY` / `MOONSHOT_KEY`.
+1. **API key** stored in `~/.sharingan/config.json` or supplied via `MOONSHOT_API_KEY` / `MOONSHOT_KEY`.
    CodexBar binds saved keys to the selected regional host. Switching regions does not send the saved key to
    the other host; switch back or replace it with a key issued for the newly selected region.
 2. **Region**

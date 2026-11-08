@@ -20,7 +20,7 @@ def account_data(result):
 
 
 def verify(binary, root):
-    app = root / "Library/Application Support/CodexBar"
+    app = root / "Library/Application Support/Sharingan"
     app.mkdir(parents=True)
     first = "9e122a52-b3db-4a7e-a7a7-c3b8fc9d01e9"
     second = "a1c82a14-9250-4a32-b9f6-1de9b69f865a"
@@ -53,7 +53,7 @@ def verify(binary, root):
         "HOME": str(root),
         "CFFIXED_USER_HOME": str(root),
         "CODEX_HOME": str(root / ".codex"),
-        "CODEXBAR_CONFIG": str(config),
+        "SHARINGAN_CONFIG": str(config),
         "PATH": "/usr/bin:/bin",
         "CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1",
         "CODEXBAR_DISABLE_KEYCHAIN_ACCESS": "1",

@@ -579,7 +579,7 @@ public enum CursorStatusProbeError: LocalizedError, Sendable {
             "Not logged in to Cursor. Please log in via the Sharingan menu."
             #else
             "Not logged in to Cursor. Paste a Cookie header copied from cursor.com into "
-                + "~/.config/codexbar/config.json (legacy: ~/.codexbar/config.json)."
+                + "~/.config/sharingan/config.json (legacy: ~/.sharingan/config.json)."
             #endif
         case let .networkError(msg):
             "Cursor API error: \(msg)"
@@ -594,7 +594,7 @@ public enum CursorStatusProbeError: LocalizedError, Sendable {
                 + "You can also sign in to Cursor from the Sharingan menu (Add / switch account)."
             #else
             "No Cursor session found. Paste a Cookie header copied from cursor.com into "
-                + "~/.config/codexbar/config.json (legacy: ~/.codexbar/config.json)."
+                + "~/.config/sharingan/config.json (legacy: ~/.sharingan/config.json)."
             #endif
         }
     }

@@ -159,8 +159,8 @@ generated = subprocess.run(["/usr/bin/osascript", "-", str(helper)], input=captu
                            env=environment, capture_output=True, text=True, check=True).stdout
 assert shlex.split(generated) == [
     "set", "-eu", "/bin/mkdir", "-p", "/usr/local/bin", "/opt/homebrew/bin",
-    "/bin/ln", "-sf", str(helper), "/usr/local/bin/codexbar",
-    "/bin/ln", "-sf", str(helper), "/opt/homebrew/bin/codexbar",
+    "/bin/ln", "-sf", str(helper), "/usr/local/bin/sharingan",
+    "/bin/ln", "-sf", str(helper), "/opt/homebrew/bin/sharingan",
 ]
 
 # Run only the captured shell body with both destinations replaced by temp paths.
@@ -174,14 +174,14 @@ def local_command(case):
 root, command = local_command("success")
 subprocess.run(["/bin/sh", "-c", command], env=environment, check=True)
 for prefix in ("local", "homebrew"):
-    assert os.readlink(root / prefix / "bin/codexbar") == str(helper)
+    assert os.readlink(root / prefix / "bin/sharingan") == str(helper)
 
 for tool in ("/bin/mkdir", "/bin/ln"):
     root, command = local_command(Path(tool).name + "-failure")
     command = command.replace(tool, "/usr/bin/false", 1)
     failed = subprocess.run(["/bin/sh", "-c", command], env=environment, capture_output=True)
     assert failed.returncode != 0
-    assert not (root / "homebrew/bin/codexbar").is_symlink(), "Continued after an install failure"
+    assert not (root / "homebrew/bin/sharingan").is_symlink(), "Continued after an install failure"
 
 print("CLI installer tests passed (nonprivileged command capture and temporary symlinks).")
 PY
