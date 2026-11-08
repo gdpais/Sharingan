@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Synthetic CLI/HTTP dashboard regression; requires a local debug CodexBarCLI build."""
+"""Synthetic CLI/HTTP dashboard regression; requires a local debug SharinganCLI build."""
 
 import json
 import pathlib
@@ -55,11 +55,11 @@ def verify(binary, root):
         "CODEX_HOME": str(root / ".codex"),
         "SHARINGAN_CONFIG": str(config),
         "PATH": "/usr/bin:/bin",
-        "CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1",
-        "CODEXBAR_DISABLE_KEYCHAIN_ACCESS": "1",
-        "CODEXBAR_TEST_CODEX_FILE_ISOLATION": "1",
-        "CODEXBAR_TEST_SESSION_FILE_ISOLATION": "1",
-        "CODEXBAR_TEST_CODEX_FILE_FIXTURES": json.dumps({"grants": [
+        "SHARINGAN_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1",
+        "SHARINGAN_DISABLE_KEYCHAIN_ACCESS": "1",
+        "SHARINGAN_TEST_CODEX_FILE_ISOLATION": "1",
+        "SHARINGAN_TEST_SESSION_FILE_ISOLATION": "1",
+        "SHARINGAN_TEST_CODEX_FILE_FIXTURES": json.dumps({"grants": [
             {"url": root.as_uri(), "resolvedURL": root.as_uri(), "isRoot": True},
         ]}),
     }
@@ -121,9 +121,9 @@ def verify(binary, root):
 
 
 def main():
-    binaries = list(pathlib.Path(".build").glob("*/debug/CodexBarCLI"))
+    binaries = list(pathlib.Path(".build").glob("*/debug/SharinganCLI"))
     if len(binaries) != 1:
-        raise SystemExit("Expected one local debug CodexBarCLI build.")
+        raise SystemExit("Expected one local debug SharinganCLI build.")
     with tempfile.TemporaryDirectory(prefix="codex-dashboard-fixture-") as folder:
         # Keep Foundation's /var spelling; its fixture grants compare normalized URL paths.
         return verify(str(binaries[0].resolve()), pathlib.Path(folder))

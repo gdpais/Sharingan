@@ -3,19 +3,19 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-fixture="$(mktemp -d "${TMPDIR:-/tmp}/codexbar-make-lint.XXXXXX")"
+fixture="$(mktemp -d "${TMPDIR:-/tmp}/sharingan-make-lint.XXXXXX")"
 trap 'rm -rf "$fixture"' EXIT
 mkdir -p "$fixture/bin" "$fixture/Scripts"
 
 cat > "$fixture/bin/uname" <<'SH'
 #!/usr/bin/env bash
-printf '%s\n' "$CODEXBAR_TEST_PLATFORM"
+printf '%s\n' "$SHARINGAN_TEST_PLATFORM"
 SH
 
 cat > "$fixture/Scripts/lint.sh" <<'SH'
 #!/usr/bin/env bash
-printf '%s\n' "$@" > "$CODEXBAR_TEST_LINT_ARGS"
-exit "$CODEXBAR_TEST_LINT_STATUS"
+printf '%s\n' "$@" > "$SHARINGAN_TEST_LINT_ARGS"
+exit "$SHARINGAN_TEST_LINT_STATUS"
 SH
 chmod +x "$fixture/bin/uname" "$fixture/Scripts/lint.sh"
 
@@ -23,9 +23,9 @@ assert_dispatch() {
   local platform="$1" target="$2" expected="$3" lint_status="${4:-0}"
   local status=0
   PATH="$fixture/bin:$PATH" \
-    CODEXBAR_TEST_PLATFORM="$platform" \
-    CODEXBAR_TEST_LINT_ARGS="$fixture/args" \
-    CODEXBAR_TEST_LINT_STATUS="$lint_status" \
+    SHARINGAN_TEST_PLATFORM="$platform" \
+    SHARINGAN_TEST_LINT_ARGS="$fixture/args" \
+    SHARINGAN_TEST_LINT_STATUS="$lint_status" \
     MAKEFLAGS= MFLAGS= MAKELEVEL=0 \
     make --no-print-directory --file "$ROOT_DIR/Makefile" --directory "$fixture" "$target" \
       > "$fixture/output" 2>&1 || status=$?

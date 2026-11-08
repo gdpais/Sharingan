@@ -6,7 +6,7 @@ import Glibc
 import Musl
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct AntigravityProcessLauncherLinuxTests {
     @Test

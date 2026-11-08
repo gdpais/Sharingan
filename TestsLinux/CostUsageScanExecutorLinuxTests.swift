@@ -1,5 +1,5 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
 
 @Suite

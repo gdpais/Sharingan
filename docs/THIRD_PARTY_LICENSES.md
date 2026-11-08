@@ -8,7 +8,7 @@ read_when:
 # Third-party notices
 
 Settings → About → Acknowledgements displays the full notices bundled in
-`Sources/CodexBarCore/Resources/Acknowledgements.json`. This generated resource ships with the app,
+`Sources/SharinganCore/Resources/Acknowledgements.json`. This generated resource ships with the app,
 widget and CLI. CLI and Linux desktop release archives also carry a readable `THIRD_PARTY_NOTICES` file.
 The desktop links system Qt libraries; it does not bundle Qt.
 

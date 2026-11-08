@@ -25,7 +25,7 @@ local Amp CLI, then an Amp access token, and finally browser cookies.
 - **Individual credits**: Shows the remaining paid balance shared by agent and orb usage when Amp reports one.
 - **Workspace credits**: Shows each workspace's remaining paid credit balance separately.
 - **CLI-first fetch**: Uses `amp usage` when the Amp CLI is installed and signed in.
-- **Access token support**: Uses `AMP_API_KEY` or the access token saved in CodexBar settings.
+- **Access token support**: Uses `AMP_API_KEY` or the access token saved in Sharingan settings.
 - **Browser cookie fallback**: Reads the legacy settings-page payload when the CLI and access token are unavailable.
 
 ## Setup
@@ -59,13 +59,13 @@ Create an access token in Amp settings, then paste it into **Amp → Access toke
 
 ### “Amp access token is invalid or expired”
 
-Create a new access token in Amp settings, update `AMP_API_KEY` or CodexBar settings, then refresh.
+Create a new access token in Amp settings, update `AMP_API_KEY` or Sharingan settings, then refresh.
 
 ## Troubleshooting
 
 ### “No Amp session cookie found”
 
-Log in to Amp in a supported browser (Safari or Chromium-based), then refresh in CodexBar.
+Log in to Amp in a supported browser (Safari or Chromium-based), then refresh in Sharingan.
 
 ### “Amp session cookie expired”
 

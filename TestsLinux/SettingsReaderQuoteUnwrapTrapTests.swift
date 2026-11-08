@@ -1,5 +1,5 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
 
 /// Removing both quotes with mutating String operations formerly trapped on a lone quote.

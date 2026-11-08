@@ -12,13 +12,13 @@ read_when:
 # Munito
 
 Enable **Munito** in Settings → Providers and enter a Munito admin API key, or set `MUNITO_API_KEY` (or
-`MUNITO_ADMIN_KEY`) for the CLI. The key is saved in CodexBar's local config file; a configured key takes precedence
-over the environment. CodexBar sends the key only to `https://api.munito.ai` as `Authorization: Bearer …` and does not
+`MUNITO_ADMIN_KEY`) for the CLI. The key is saved in Sharingan's local config file; a configured key takes precedence
+over the environment. Sharingan sends the key only to `https://api.munito.ai` as `Authorization: Bearer …` and does not
 import browser cookies or start a login flow.
 
 Create the key in [console.munito.ai/keys](https://console.munito.ai/keys) with the **Read account data (Admin API)**
-permission. Only owners and admins can create such a key. CodexBar makes read-only GET requests; an inference-only
-key returns HTTP 403, which CodexBar reports as a permission problem rather than an expired key.
+permission. Only owners and admins can create such a key. Sharingan makes read-only GET requests; an inference-only
+key returns HTTP 403, which Sharingan reports as a permission problem rather than an expired key.
 
 The bundled JavaScript plugin reads `GET /admin/v1/limits` and shows:
 
@@ -33,13 +33,13 @@ The bundled JavaScript plugin reads `GET /admin/v1/limits` and shows:
 
 Numeric-string amounts are accepted; missing or zero limits keep the spend rows without a percentage window, and an
 empty `periods` array still shows the account card. Missing, negative, or nonfinite amounts fail parsing instead of
-becoming zero. The API does not report a reset time, so CodexBar shows the daily window without a guessed countdown.
+becoming zero. The API does not report a reset time, so Sharingan shows the daily window without a guessed countdown.
 
 When the reported period has a positive limit, its budget is also available to menu bar **Spend** layout items and
 conditions through the **Extra usage** metric.
 
 ```sh
-codexbar usage --provider munito --source api --json
+sharingan usage --provider munito --source api --json
 ```
 
 Sources checked October 14, 2026:

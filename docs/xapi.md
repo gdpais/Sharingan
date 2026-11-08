@@ -16,7 +16,7 @@ and **Grok** subscription quotas. Enable it under Settings → Providers → X A
 
 Sign in to [the X developer console](https://console.x.com) in a supported browser and choose Automatic cookies, or paste a
 Cookie header from a console request into Manual mode. The header needs `auth_token` and `ct0` from the same session.
-Manual cookies also work on Linux with `codexbar usage --provider xapi --source web --json` and the existing provider
+Manual cookies also work on Linux with `sharingan usage --provider xapi --source web --json` and the existing provider
 config `cookieSource` / `cookieHeader` fields. An X API bearer token does not replace a website session.
 
 The bundled `xapi.js` plugin makes two read-only requests:
@@ -25,7 +25,7 @@ The bundled `xapi.js` plugin makes two read-only requests:
 2. `GET https://console.x.com/api/accounts/{account.id}/credits` supplies `credits.balance` and `freeCredits.balance`.
 
 The console displays both balances directly as USD; they are not cents or the thousandths used by its spend endpoint.
-CodexBar adds purchased and free credits for **Balance**, with separate detail rows for each. Missing free-credit data
+Sharingan adds purchased and free credits for **Balance**, with separate detail rows for each. Missing free-credit data
 means zero as in the console; malformed supplied numbers fail parsing. A negative balance retains its sign in the menu,
 CLI JSON, and **Balance** layout token. No quota percentage, reset time, or token count is inferred.
 JSON exposes the amount as `providerCost.balance`; its required `used`/`limit` values stay neutral at zero, without
@@ -36,10 +36,10 @@ request URL. The host copies the selected `ct0` cookie into `X-CSRF-Token` for `
 read cookies or send requests to any other origin. Imported sessions are not persisted by this provider. Off mode makes
 no requests; expired sessions can advance to another automatic profile, while manual mode remains pinned.
 
-If multiple browsers are blocked, the shared cookie diagnostic lists each browser's recovery action. Chrome profile access needs **System Settings → Privacy & Security → Files & Folders → CodexBar → Google Chrome**; Safari cookie access may need **Full Disk Access** for CodexBar. A Safari denial no longer hides Chrome's profile guidance. This changes error reporting only, without extra cookie reads or permission prompts.
+If multiple browsers are blocked, the shared cookie diagnostic lists each browser's recovery action. Chrome profile access needs **System Settings → Privacy & Security → Files & Folders → Sharingan → Google Chrome**; Safari cookie access may need **Full Disk Access** for Sharingan. A Safari denial no longer hides Chrome's profile guidance. This changes error reporting only, without extra cookie reads or permission prompts.
 
 Use a refresh interval of at least five minutes if the console rate-limits requests. HTTP 429 is reported as rate
-limited, without an immediate retry. The integration follows CodexBar's shared refresh interval; it does not introduce
+limited, without an immediate retry. The integration follows Sharingan's shared refresh interval; it does not introduce
 an independent polling timer. Recent spend, payment controls, plan history, and widgets are outside this integration.
 
 ## Source contract

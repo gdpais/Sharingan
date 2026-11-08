@@ -1,31 +1,31 @@
-name: CodexBarWidgetExtension
+name: SharinganWidgetExtension
 options:
   deploymentTarget:
     macOS: "14.0"
 packages:
-  CodexBar:
+  Sharingan:
     path: ..
 targets:
-  CodexBarWidgetExtension:
+  SharinganWidgetExtension:
     type: app-extension
     platform: macOS
     deploymentTarget: "14.0"
     sources:
-      - path: ../Sources/CodexBarWidget
+      - path: ../Sources/SharinganWidget
     dependencies:
-      - package: CodexBar
-        product: CodexBarCore
+      - package: Sharingan
+        product: SharinganCore
       - sdk: SwiftUI.framework
       - sdk: WidgetKit.framework
     info:
       path: Info.plist
       properties:
         CFBundleDisplayName: Sharingan
-        CFBundleName: CodexBarWidget
+        CFBundleName: SharinganWidget
         CFBundlePackageType: XPC!
         CFBundleShortVersionString: "$(MARKETING_VERSION)"
         CFBundleVersion: "$(CURRENT_PROJECT_VERSION)"
-        CodexBarTeamID: "$(CODEXBAR_TEAM_ID)"
+        SharinganTeamID: "$(SHARINGAN_TEAM_ID)"
         LSMinimumSystemVersion: "14.0"
         NSExtension:
           NSExtensionPointIdentifier: com.apple.widgetkit-extension
@@ -35,8 +35,8 @@ targets:
         CODE_SIGNING_ALLOWED: false
         ENABLE_DEBUG_DYLIB: false
         ENABLE_APP_SANDBOX: true
-        INFOPLIST_KEY_CodexBarTeamID: "$(CODEXBAR_TEAM_ID)"
+        INFOPLIST_KEY_SharinganTeamID: "$(SHARINGAN_TEAM_ID)"
         LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks"
-        PRODUCT_BUNDLE_IDENTIFIER: "$(CODEXBAR_WIDGET_BUNDLE_ID)"
-        PRODUCT_NAME: CodexBarWidget
+        PRODUCT_BUNDLE_IDENTIFIER: "$(SHARINGAN_WIDGET_BUNDLE_ID)"
+        PRODUCT_NAME: SharinganWidget
         SWIFT_VERSION: "6.0"

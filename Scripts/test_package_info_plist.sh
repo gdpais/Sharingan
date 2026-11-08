@@ -3,8 +3,8 @@ set -euo pipefail
 
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 PACKAGE_SCRIPT="$ROOT/Scripts/package_app.sh"
-PLIST_SCRIPT=$(mktemp "${TMPDIR:-/tmp}/codexbar-package-info-plist-script.XXXXXX")
-TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/codexbar-package-info-plist.XXXXXX")
+PLIST_SCRIPT=$(mktemp "${TMPDIR:-/tmp}/sharingan-package-info-plist-script.XXXXXX")
+TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/sharingan-package-info-plist.XXXXXX")
 trap 'rm -f "$PLIST_SCRIPT"; rm -rf "$TEMP_DIR"' EXIT
 
 python3 - "$PACKAGE_SCRIPT" "$PLIST_SCRIPT" <<'PY'

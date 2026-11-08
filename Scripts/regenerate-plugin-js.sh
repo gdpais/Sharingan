@@ -3,7 +3,7 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-PLUGIN_DIR="${ROOT_DIR}/Sources/CodexBarCore/Resources/Plugins"
+PLUGIN_DIR="${ROOT_DIR}/Sources/SharinganCore/Resources/Plugins"
 SUCRASE_FILE="${PLUGIN_DIR}/sucrase-3.35.1.min.js"
 OXFMT="${ROOT_DIR}/.build/lint-tools/bin/oxfmt"
 MODE="${1:-write}"

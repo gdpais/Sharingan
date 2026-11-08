@@ -13,7 +13,7 @@ Doubao reads Coding Plan and Agent Plan quota windows from the official `arkcli`
 ## Setup
 1. Enable **Doubao** in Settings → Providers.
 2. Install `arkcli`, then run `arkcli auth login`.
-3. Refresh provider usage. CodexBar resolves `arkcli` through `ARKCLI_PATH`, the login-shell/host `PATH`, and standard install locations.
+3. Refresh provider usage. Sharingan resolves `arkcli` through `ARKCLI_PATH`, the login-shell/host `PATH`, and standard install locations.
 
 To keep using API credentials instead, paste an API key or AK/SK pair in provider settings. Environment variables `ARK_API_KEY`, `VOLCENGINE_API_KEY`, and `DOUBAO_API_KEY` remain supported.
 
@@ -24,8 +24,8 @@ switcher selects the active account, and the account view can show each saved ke
 the API route; CLI account selection also overrides a saved CLI source preference. Removing all saved accounts
 restores the existing single-account behavior without changing stored source preferences or provider-wide credentials.
 
-For CLI usage, select a saved account with `codexbar usage --provider doubao --account <label>` or fetch all saved
-keys with `codexbar usage --provider doubao --all-accounts`. Selected keys are isolated from provider-wide and
+For CLI usage, select a saved account with `sharingan usage --provider doubao --account <label>` or fetch all saved
+keys with `sharingan usage --provider doubao --all-accounts`. Selected keys are isolated from provider-wide and
 environment API keys, AK/SK pairs, and the ambient arkcli session; a failed key never falls back to another account.
 
 These entries accept Ark API keys only. Multiple AK/SK pairs and arkcli SSO profiles are not supported by this
@@ -41,5 +41,5 @@ windows; valid keys without reliable request-limit headers still show limits as 
 - Ark API-key endpoint: `POST https://ark.cn-beijing.volces.com/api/coding/v3/chat/completions`
 - Probe models: `doubao-seed-2.0-code`, `doubao-1.5-pro-32k`, `doubao-lite-32k`
 - Reads `x-ratelimit-remaining-requests`, `x-ratelimit-limit-requests`, and `x-ratelimit-reset-requests` when returned.
-- If the key is valid but rate-limit headers are missing, CodexBar shows the key as active and links to the dashboard for details.
+- If the key is valid but rate-limit headers are missing, Sharingan shows the key as active and links to the dashboard for details.
 - Agent Plan bearer keys for `/api/plan/v3/chat/completions` are not part of the arkcli usage path; see issue #1835.

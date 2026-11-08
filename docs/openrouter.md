@@ -24,25 +24,25 @@ export OPENROUTER_API_KEY="sk-or-v1-..."
 
 ### Settings
 
-You can also configure the API key in CodexBar Settings → Providers → OpenRouter.
+You can also configure the API key in Sharingan Settings → Providers → OpenRouter.
 
 The **API key** field is required and accepts either a regular API key or a Management API key. If you only have a Management API key, enter it here; it enables account Activity when using the official OpenRouter API.
 
 The separate **Management API key** field is an optional additional key for account Activity, only needed when you want to use a different Management API key from the one in the required field above. It does not replace the required API key. When configured, it takes precedence for Activity; the selected API key still supplies quota and balance when OpenRouter permits it.
 
-If the primary field is empty, CodexBar reports a missing credential and asks you to enter either key type in **API key** (or set `OPENROUTER_API_KEY`). Filling only the optional Management field does not select an account for quota or balance requests.
+If the primary field is empty, Sharingan reports a missing credential and asks you to enter either key type in **API key** (or set `OPENROUTER_API_KEY`). Filling only the optional Management field does not select an account for quota or balance requests.
 
 ### CLI config
 
-To monitor multiple OpenRouter accounts, add labeled API keys in the same provider settings. CodexBar fetches each
+To monitor multiple OpenRouter accounts, add labeled API keys in the same provider settings. Sharingan fetches each
 key independently. Choose the segmented account switcher or stacked account cards under Settings → Display.
 
 ```bash
-printf '%s' "$OPENROUTER_API_KEY" | codexbar config set-api-key --provider openrouter --stdin
+printf '%s' "$OPENROUTER_API_KEY" | sharingan config set-api-key --provider openrouter --stdin
 ```
 
 A key exported in a terminal is not automatically available to an already-running GUI app. The command above saves
-it to CodexBar's resolved config file with owner-only permissions; the app watches that file for changes. The default
+it to Sharingan's resolved config file with owner-only permissions; the app watches that file for changes. The default
 is `~/.config/sharingan/config.json`, with legacy `~/.sharingan/config.json` and configured path overrides also supported.
 
 ## Data Source
@@ -56,16 +56,16 @@ OpenRouter documents the [Current Key](https://openrouter.ai/docs/api/api-refere
 [Activity](https://openrouter.ai/docs/api/api-reference/analytics/get-user-activity) contracts separately.
 
 1. **Current Key API** (`/api/v1/key`): Returns the configured key's spending limit, remaining limit, reset window, and key-level usage.
-2. **Credits API** (`/api/v1/credits`): Returns total credits purchased and total usage. The balance is calculated as `total_credits - total_usage`. CodexBar always uses the selected API key so a provider-wide management key cannot replace another account’s balance. A rejected request leaves balance unavailable while valid key usage survives.
+2. **Credits API** (`/api/v1/credits`): Returns total credits purchased and total usage. The balance is calculated as `total_credits - total_usage`. Sharingan always uses the selected API key so a provider-wide management key cannot replace another account’s balance. A rejected request leaves balance unavailable while valid key usage survives.
 3. **Activity API** (`/api/v1/activity`, Management API key required): Returns account activity for the last 30 completed UTC days.
 
-Without a Management API key, CodexBar still shows regular API-key quota and key usage, and preserves balance when
+Without a Management API key, Sharingan still shows regular API-key quota and key usage, and preserves balance when
 OpenRouter accepts the regular key. It leaves a rejected balance and 30-day account spend unavailable instead of
 treating either as zero.
 
 Optional requests each have a four-second production deadline starting when the transport task begins. Scheduler
 waits remain bounded by the plugin's total fetch deadline, without consuming an optional request's own budget. If the Key API is slow or unavailable,
-CodexBar keeps any valid balance and labels the API key limit as unavailable with a safe timeout, HTTP,
+Sharingan keeps any valid balance and labels the API key limit as unavailable with a safe timeout, HTTP,
 or response diagnostic.
 
 Activity history is optional and uses only the fixed official endpoint. The separately configured Management API key wins over a primary management key. Malformed activity, including a combined input/output token total outside the safe integer range, leaves valid credits and key quota available and marks history unavailable.
@@ -111,10 +111,10 @@ The deprecated Current Key API `rate_limit` field is ignored, including malforme
 With a Management API key, successful Activity history appears in usage text and full terminal cards as a `Last 30 days (UTC)` spend/token summary. Reported spend, BYOK estimates, and mixed totals are labeled accordingly; an empty successful history shows zero. Ordinary usage JSON continues to expose quota, balance, and detail diagnostics without embedding live cost history.
 
 ```bash
-codexbar --provider openrouter
-codexbar -p or  # alias
-codexbar --provider openrouter --account Personal
-codexbar --provider openrouter --all-accounts --format json --pretty
+sharingan --provider openrouter
+sharingan -p or  # alias
+sharingan --provider openrouter --account Personal
+sharingan --provider openrouter --all-accounts --format json --pretty
 ```
 
 ## Environment Variables
@@ -125,7 +125,7 @@ codexbar --provider openrouter --all-accounts --format json --pretty
 | `OPENROUTER_MANAGEMENT_API_KEY` | Optional Management API key used only for exact 30-day account spend |
 | `OPENROUTER_API_URL` | Override the base API URL (optional, defaults to `https://openrouter.ai/api/v1`) |
 | `OPENROUTER_HTTP_REFERER` | Optional client referer sent as `HTTP-Referer` header |
-| `OPENROUTER_X_TITLE` | Optional client title sent as `X-Title` header (defaults to `CodexBar`) |
+| `OPENROUTER_X_TITLE` | Optional client title sent as `X-Title` header (defaults to `Sharingan`) |
 
 ## Notes
 

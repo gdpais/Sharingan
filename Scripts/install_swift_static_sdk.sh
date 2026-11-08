@@ -3,7 +3,7 @@ set -euo pipefail
 
 url="${SWIFT_STATIC_LINUX_SDK_URL:?Swift static SDK URL is required}"
 checksum="${SWIFT_STATIC_LINUX_SDK_CHECKSUM:?Swift static SDK checksum is required}"
-work_dir="$(mktemp -d "${RUNNER_TEMP:-${TMPDIR:-/tmp}}/codexbar-swift-sdk.XXXXXX")"
+work_dir="$(mktemp -d "${RUNNER_TEMP:-${TMPDIR:-/tmp}}/sharingan-swift-sdk.XXXXXX")"
 trap 'rm -r "$work_dir"' EXIT
 archive="$work_dir/swift.artifactbundle.tar.gz"
 

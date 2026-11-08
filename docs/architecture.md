@@ -8,15 +8,15 @@ read_when:
 # Architecture overview
 
 ## Modules
-- `Sources/CodexBarCore`: fetch + parse (Codex RPC, PTY runner, Claude probes, OpenAI web scraping, status polling).
-- `Sources/CodexBar`: state + UI (UsageStore, SettingsStore, StatusItemController, menus, icon rendering).
-- `Sources/CodexBarWidget`: WidgetKit extension wired to the shared snapshot.
-- `Sources/CodexBarCLI`: bundled CLI for `codexbar` usage/status output.
-- `Sources/CodexBarClaudeWatchdog`: helper process for stable Claude CLI PTY sessions.
-- `Sources/CodexBarClaudeWebProbe`: CLI helper to diagnose Claude web fetches.
+- `Sources/SharinganCore`: fetch + parse (Codex RPC, PTY runner, Claude probes, OpenAI web scraping, status polling).
+- `Sources/Sharingan`: state + UI (UsageStore, SettingsStore, StatusItemController, menus, icon rendering).
+- `Sources/SharinganWidget`: WidgetKit extension wired to the shared snapshot.
+- `Sources/SharinganCLI`: bundled CLI for `sharingan` usage/status output.
+- `Sources/SharinganClaudeWatchdog`: helper process for stable Claude CLI PTY sessions.
+- `Sources/SharinganClaudeWebProbe`: CLI helper to diagnose Claude web fetches.
 
 ## Entry points
-- `CodexBarApp`: SwiftUI keepalive + Settings scene.
+- `SharinganApp`: SwiftUI keepalive + Settings scene.
 - `AppDelegate`: wires status controller, Sparkle updater, notifications.
 - Status items are created on the main actor from `applicationDidFinishLaunching`; see
   [status-item startup diagnostics](status-item-diagnostics.md) for opt-in lifecycle and Control Center traces.

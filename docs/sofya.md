@@ -11,11 +11,11 @@ read_when:
 # Sofya
 
 Enable **Sofya** in Settings → Providers and enter a Sofya API key, or set `SOFYA_API_KEY`
-for the CLI. Settings saves the key in CodexBar's local config file; configured keys take
+for the CLI. Settings saves the key in Sharingan's local config file; configured keys take
 precedence over the environment. Auto and API modes use the bundled TypeScript plugin:
 
 ```sh
-codexbar usage --provider sofya --source api
+sharingan usage --provider sofya --source api
 ```
 
 The plugin reads `GET https://sofya.co/v1/auth/me` with bearer authentication. It displays
@@ -28,7 +28,7 @@ becoming zero. A response must contain at least one valid balance.
 Sofya grants recurring credits to eligible GitHub accounts; email sign-ups begin on pay as
 you go with zero credits. Free credits refresh monthly without rollover, while purchased
 credits never expire and are spent after free credits. The endpoint does not supply an
-account allowance denominator, so CodexBar does not invent a percentage bar, monthly used
+account allowance denominator, so Sharingan does not invent a percentage bar, monthly used
 amount, dollar balance, or reset date from pricing defaults. A zero balance remains visible.
 
 Only the declared Sofya HTTPS origin receives the key. The plugin does not run searches,

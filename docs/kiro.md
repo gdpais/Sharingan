@@ -9,7 +9,7 @@ read_when:
 
 # Kiro provider
 
-Kiro uses `kiro-cli` to fetch usage data. The CLI owns authentication; CodexBar does not import browser cookies or implement a separate OAuth flow.
+Kiro uses `kiro-cli` to fetch usage data. The CLI owns authentication; Sharingan does not import browser cookies or implement a separate OAuth flow.
 
 ## Data sources
 
@@ -19,9 +19,9 @@ Kiro uses `kiro-cli` to fetch usage data. The CLI owns authentication; CodexBar 
      `/context` in the process tree is expected. Both commands start chat sessions. `--no-interactive`
      does not promise session-free execution, and Kiro CLI 2.33.1 is reported to save empty session
      pairs for these probes (#4746). The public command and headless references do not document a
-     no-save flag or a standalone usage command. CodexBar does not delete the CLI's session files.
+     no-save flag or a standalone usage command. Sharingan does not delete the CLI's session files.
    - Timeout: 20 seconds (idle cutoff after 4 seconds of no output once the CLI starts responding).
-   - CodexBar tries ordinary stdout/stderr pipes first for current Kiro CLI releases. Incomplete or unusable
+   - Sharingan tries ordinary stdout/stderr pipes first for current Kiro CLI releases. Incomplete or unusable
      pipe output falls back to a pseudo-terminal within the same overall command deadline for older releases.
    - Requires `kiro-cli` installed and logged in via AWS Builder ID.
    - Background refreshes first make an unauthenticated, four-second `HEAD` request to the CLI profile's
@@ -30,9 +30,9 @@ Kiro uses `kiro-cli` to fetch usage data. The CLI owns authentication; CodexBar 
      through the shared offline handling. Any HTTP response establishes reachability; manual refreshes
      retain their existing CLI path.
    - The [CLI command reference](https://kiro.dev/docs/reference/cli-commands/) describes `--no-interactive`
-     as disabling the chat loop, not browser authentication. CodexBar retains that flag and uses the
+     as disabling the chat loop, not browser authentication. Sharingan retains that flag and uses the
      reachability check to contain offline background sign-in attempts.
-   - Output is ANSI-decorated; CodexBar strips escape sequences before parsing.
+   - Output is ANSI-decorated; Sharingan strips escape sequences before parsing.
    - Kiro CLI 2.20 summary output such as `Plan: KIRO PRO MAX | 1 usage breakdowns` is accepted
      as a plan-only report. A breakdown count does not imply zero usage or an available allowance.
 
@@ -80,7 +80,7 @@ Kiro uses `kiro-cli` to fetch usage data. The CLI owns authentication; CodexBar 
     a Plan Usage history series, and the recorded quota burndown.
 - **Secondary window**: Bonus credits (when present).
   - Parsed from `Bonus credits: X.XX/Y credits used`. Always CLI-sourced. When `GetUsageLimits` includes a
-    non-empty `bonuses[]` array, CodexBar keeps the CLI plan gauge instead of treating bonus spend as plan
+    non-empty `bonuses[]` array, Sharingan keeps the CLI plan gauge instead of treating bonus spend as plan
     usage; overage enrichment still applies.
   - Expiry from `expires in N days`.
 - **Extra window** `kiro-overage`: overage credits spent against `overageCapWithPrecision` (API only). This
@@ -120,7 +120,7 @@ Kiro does not have a dedicated status page. The "View Status" link opens the AWS
 
 ## Key files
 
-- `Sources/CodexBarCore/Providers/Kiro/KiroProviderDescriptor.swift`
-- `Sources/CodexBarCore/Providers/Kiro/KiroStatusProbe.swift`
-- `Sources/CodexBarCore/Providers/Kiro/KiroUsageLimitsAPI.swift`
-- `Sources/CodexBar/Providers/Kiro/KiroProviderImplementation.swift`
+- `Sources/SharinganCore/Providers/Kiro/KiroProviderDescriptor.swift`
+- `Sources/SharinganCore/Providers/Kiro/KiroStatusProbe.swift`
+- `Sources/SharinganCore/Providers/Kiro/KiroUsageLimitsAPI.swift`
+- `Sources/Sharingan/Providers/Kiro/KiroProviderImplementation.swift`

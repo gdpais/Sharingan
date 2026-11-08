@@ -15,11 +15,11 @@ Enable Soniox in **Settings → Providers** and enter an **Organization API key*
 one in [Soniox Console](https://console.soniox.com) under **Settings → Organization API keys**. Enable only
 **Balance and spend** and **Usage and limits** access. Project API keys cannot read organization billing.
 
-The key is stored in the CodexBar config file. The CLI also accepts `SONIOX_ORG_API_KEY`, or a stored key:
+The key is stored in the Sharingan config file. The CLI also accepts `SONIOX_ORG_API_KEY`, or a stored key:
 
 ```sh
-printf '%s' "$SONIOX_ORG_API_KEY" | codexbar config set-api-key --provider soniox --stdin
-codexbar usage --provider soniox --source api
+printf '%s' "$SONIOX_ORG_API_KEY" | sharingan config set-api-key --provider soniox --stdin
+sharingan usage --provider soniox --source api
 ```
 
 Refresh never submits transcription or synthesis work. The provider uses bearer authentication for two read-only requests to `https://api.soniox.com`:

@@ -2,7 +2,7 @@
 import Darwin
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct ProviderPluginEngineBenchmarkTests {
     private static let bundledPlugins = [
@@ -15,7 +15,7 @@ struct ProviderPluginEngineBenchmarkTests {
 
     @Test
     func `compare provider plugin engines`() async throws {
-        guard ProcessInfo.processInfo.environment["CODEXBAR_PLUGIN_BENCHMARK"] == "1" else { return }
+        guard ProcessInfo.processInfo.environment["SHARINGAN_PLUGIN_BENCHMARK"] == "1" else { return }
 
         let javaScriptCore = try await self.measure(engine: .javaScriptCore, label: "JavaScriptCore")
         let quickJS = try await self.measure(engine: .quickJS, label: "QuickJS")
@@ -72,7 +72,7 @@ struct ProviderPluginEngineBenchmarkTests {
         engine: ProviderPluginEngineKind,
         transport: any ProviderHTTPTransport) throws -> ProviderPluginRuntime
     {
-        let bundle = try #require(CodexBarCoreResources.bundle)
+        let bundle = try #require(SharinganCoreResources.bundle)
         let sourceURL = try #require(bundle.url(forResource: plugin, withExtension: "js"))
         let source = try String(contentsOf: sourceURL, encoding: .utf8)
         try ProviderPluginSourceLint.validateBundled(source, name: plugin)

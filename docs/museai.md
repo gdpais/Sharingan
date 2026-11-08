@@ -15,8 +15,8 @@ Automatic import follows SweetCookieKit's default browser order, including Aside
 The Cookie source description and missing-session message list the supported browsers directly from that catalog.
 Existing profile and Keychain access checks still apply. **Off** disables cookie access. For browsers outside the
 catalog, choose **Manual** and paste a Cookie header from a signed-in `muse.ai` request.
-CLI cookie refresh supports both `codexbar cookie refresh --provider museai --allow-keychain-prompt` and `--all`.
-On Linux, use a manual Cookie header; no browser integration or Muse Code CLI login is needed. CodexBar shows the weekly
+CLI cookie refresh supports both `sharingan cookie refresh --provider museai --allow-keychain-prompt` and `--all`.
+On Linux, use a manual Cookie header; no browser integration or Muse Code CLI login is needed. Sharingan shows the weekly
 percentage, reset time, plan, tokens left (paid plans), renewal date, and any additional (top-up) tokens.
 
 muse.ai has no usage API. `museai.js` posts the settings dialog's Next.js server action (`fetchSubscriptionAction`) with

@@ -10,9 +10,9 @@ import subprocess
 import tarfile
 
 ROOT = Path(__file__).resolve().parents[1]
-RESOURCE = Path('Sources/CodexBarCore/Resources/Acknowledgements.json')
+RESOURCE = Path('Sources/SharinganCore/Resources/Acknowledgements.json')
 LOCKS = [Path('Package.resolved'), Path(
-    'WidgetExtension/CodexBarWidgetExtension.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved')]
+    'WidgetExtension/SharinganWidgetExtension.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved')]
 # All resolved packages are intentional, including platform-conditional/transitive products.
 PACKAGES = {
     'commander': ('Commander', ['Peter Steinberger'], 'MIT', ['LICENSE']),
@@ -133,7 +133,7 @@ def generate(root):
 
 def check(root, entries):
     resolved = pins(root)
-    bundle = root / 'Sources/CodexBarCore/Resources/Plugins/sucrase-3.35.1.min.js'
+    bundle = root / 'Sources/SharinganCore/Resources/Plugins/sucrase-3.35.1.min.js'
     if digest(bundle.read_bytes()) != SUCRASE_SHA256:
         raise ValueError('Sucrase bundle changed; audit and regenerate its dependency notices')
     actual = {item['identity']: (item['url'], item['revision']) for item in entries if 'identity' in item}
@@ -158,7 +158,7 @@ def check(root, entries):
 
 
 def render(entries):
-    return 'CodexBar — Third-party notices\n\n' + '\n\n'.join(
+    return 'Sharingan — Third-party notices\n\n' + '\n\n'.join(
         f'{item["name"]} ({item["license"]})\n{item["url"]}\n\n' + '\n\n'.join(
             f'--- {notice["path"]} ---\n{notice["text"]}' for notice in item['sources']) for item in entries) + '\n'
 

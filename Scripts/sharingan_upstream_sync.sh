@@ -61,10 +61,10 @@ else
 fi
 
 echo
-echo "New upstream English strings that mention CodexBar. Values in auto-resolved catalog blocks are already"
+echo "New upstream English strings that mention Sharingan. Values in auto-resolved catalog blocks are already"
 echo "rebranded; check any that landed elsewhere, and hardcoded Swift strings, by hand:"
 git diff "$BASE" "$UPSTREAM_REF" -- 'Sources/*/Resources/en.lproj/Localizable.strings' \
-    | grep -E '^\+"' | grep -E '= ".*CodexBar' | sed 's/^+/  /' || echo "  (none)"
+    | grep -E '^\+"' | grep -E '= ".*Sharingan' | sed 's/^+/  /' || echo "  (none)"
 
 echo
 REMAINING=$(git diff --name-only --diff-filter=U)

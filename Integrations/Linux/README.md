@@ -1,14 +1,14 @@
-# CodexBar for Linux
+# Sharingan for Linux
 
 A Qt 6 desktop app with an opt-in compact Quick View, separate Usage & Spend and Settings
-windows, an optional system tray icon, and a launcher entry. The Swift `codexbar` CLI owns provider
+windows, an optional system tray icon, and a launcher entry. The Swift `sharingan` CLI owns provider
 fetching and authentication. The desktop owns polling, settings, notifications,
 and a private local socket for desktop adapters. No HTTP server is needed.
 
 ## Install release archives
 
 Desktop archives are published for x86_64 and ARM64 alongside the separate
-CodexBarCLI archives, each with a `.sha256` file. The desktop uses system Qt;
+SharinganCLI archives, each with a `.sha256` file. The desktop uses system Qt;
 release binaries require glibc 2.39+ and Qt 6.4+. Ubuntu 24.04 and Debian 13 meet
 these floors. Older systems need a source build. The musl CLI archives are for
 CLI-only use on distributions such as Alpine; they do not make the glibc desktop
@@ -60,7 +60,7 @@ Run this block in `sh` or `bash` (from fish, enter `bash` first). It selects the
 latest stable GitHub release, downloads both matching archives, and stops on any
 download or checksum failure. The subshell leaves your current directory and
 shell options unchanged. It uses a fresh temporary directory on each run; the
-CLI and its resource bundle are kept together under `~/.local/lib/codexbar-cli`.
+CLI and its resource bundle are kept together under `~/.local/lib/sharingan-cli`.
 
 ```sh
 (
@@ -74,22 +74,22 @@ api=https://api.github.com/repos/steipete/CodexBar/releases/latest
 curl -fsSL "$api" -o release.json
 version=$(python3 -c 'import json; print(json.load(open("release.json"))["tag_name"])')
 base="https://github.com/steipete/CodexBar/releases/download/$version"
-cli="CodexBarCLI-$version-linux-$arch.tar.gz"
-desktop="CodexBarDesktop-$version-linux-$arch.tar.gz"
+cli="SharinganCLI-$version-linux-$arch.tar.gz"
+desktop="SharinganDesktop-$version-linux-$arch.tar.gz"
 for archive in "$cli" "$desktop"; do
   curl -fSL "$base/$archive" -o "$archive"
   curl -fSL "$base/$archive.sha256" -o "$archive.sha256"
   sha256sum -c "$archive.sha256"
 done
 # Neither archive is extracted until both checksums have passed.
-cli_dir="$HOME/.local/lib/codexbar-cli"
+cli_dir="$HOME/.local/lib/sharingan-cli"
 mkdir -p "$cli_dir" "$HOME/.local/bin"
 tar -xzf "$cli" -C "$cli_dir"
-ln -sfn "$cli_dir/codexbar" "$HOME/.local/bin/codexbar"
-"$HOME/.local/bin/codexbar" --version
+ln -sfn "$cli_dir/sharingan" "$HOME/.local/bin/sharingan"
+"$HOME/.local/bin/sharingan" --version
 tar -xzf "$desktop"
 cd "${desktop%.tar.gz}"
-python3 Integrations/Linux/install.py --cli "$HOME/.local/bin/codexbar"
+python3 Integrations/Linux/install.py --cli "$HOME/.local/bin/sharingan"
 )
 ```
 
@@ -97,23 +97,23 @@ Add `--omarchy` to the installer command only on Omarchy, or `--no-autostart` to
 disable starting at login. Then open the installed app:
 
 ```sh
-~/.local/bin/codexbar-linux --settings
+~/.local/bin/sharingan-linux --settings
 ```
 
-Put `~/.local/bin` on your PATH to use `codexbar` without its full path. The
+Put `~/.local/bin` on your PATH to use `sharingan` without its full path. The
 symlink resolves to the CLI installation directory; keep `VERSION` and
-`CodexBar_CodexBarCore.bundle` there when upgrading. Homebrew and the AUR
-`codexbar-cli` package are alternative CLI installation methods; with an existing
+`Sharingan_SharinganCore.bundle` there when upgrading. Homebrew and the AUR
+`sharingan-cli` package are alternative CLI installation methods; with an existing
 CLI, pass its absolute path to the desktop installer instead.
 
 If the unauthenticated GitHub API is rate-limited, download the four matching
 files from [GitHub Releases](https://github.com/steipete/CodexBar/releases/latest),
-or use `gh release download --repo steipete/CodexBar --pattern 'CodexBar*-linux-x86_64.tar.gz*'`
+or use `gh release download --repo steipete/CodexBar --pattern 'Sharingan*-linux-x86_64.tar.gz*'`
 (substitute `aarch64` for ARM64). In a fresh directory, verify both `.sha256`
 files successfully before extracting either archive, then use the installation
 commands above with the downloaded filenames.
 
-To upgrade, quit CodexBar, rerun the installation block, and reopen it.
+To upgrade, quit Sharingan, rerun the installation block, and reopen it.
 Preferences and disabled autostart are preserved, including `Hidden = true` entries and comments in existing desktop files. There is no desktop
 auto-updater or distro repository package yet. Ordinary CI artifacts are
 previews, not releases. See [validation and removal](#validation-and-removal)
@@ -127,7 +127,7 @@ archived before the new adapter is installed.
 
 The installer honors absolute `XDG_CONFIG_HOME` and `XDG_DATA_HOME` paths.
 Unset, empty, or relative values use `~/.config` and `~/.local/share`, respectively.
-The executable always installs to `~/.local/bin/codexbar-linux`; `XDG_BIN_HOME`
+The executable always installs to `~/.local/bin/sharingan-linux`; `XDG_BIN_HOME`
 does not change that destination.
 
 Launcher actions and login startup support home paths containing spaces, quotes,
@@ -141,17 +141,17 @@ Quick Controls, Network, D-Bus, and SVG icon support. Install Qt's Wayland plugi
 for Wayland sessions. On Arch/Omarchy these are `base-devel qt6-base
 qt6-declarative qt6-svg qt6-wayland`.
 
-Install a CodexBar Linux CLI release, keeping its resource bundle beside the
+Install a Sharingan Linux CLI release, keeping its resource bundle beside the
 executable, and authenticate with the provider's CLI. From the repository root:
 
 ```sh
 mkdir -p .local/linux-build
 cd .local/linux-build
-qmake6 ../../Integrations/Linux/codexbar-linux.pro
+qmake6 ../../Integrations/Linux/sharingan-linux.pro
 make -j4
 cd ../..
-python3 Integrations/Linux/install.py --cli /absolute/path/to/codexbar
-~/.local/bin/codexbar-linux --settings
+python3 Integrations/Linux/install.py --cli /absolute/path/to/sharingan
+~/.local/bin/sharingan-linux --settings
 ```
 
 Add `--omarchy` to install the compact Omarchy adapter. Add `--no-autostart` to
@@ -160,15 +160,15 @@ backs up existing preferences before changes. Reinstallation preserves disabled
 autostart. A release archive can also be installed without a checkout:
 
 ```sh
-# Inside an extracted CodexBarDesktop archive:
-python3 Integrations/Linux/install.py --cli /absolute/path/to/codexbar --omarchy
+# Inside an extracted SharinganDesktop archive:
+python3 Integrations/Linux/install.py --cli /absolute/path/to/sharingan --omarchy
 ```
 
 To create an archive from a local build, run
 `python3 Integrations/Linux/package.py --version 0.1.0`. The archive contains only
 the app, installer, icons, adapter, license, and instructions. The Omarchy adapter
 includes the provider SVG logos already shipped by the Mac app. It needs compatible
-system Qt/glibc libraries and a separately installed CodexBar CLI; it is not an
+system Qt/glibc libraries and a separately installed Sharingan CLI; it is not an
 AppImage or a distro-native package. Build on the oldest distro you intend to support.
 The executable is resolved before packaging, so `--binary` may point to a symlink.
 
@@ -231,31 +231,31 @@ quota threshold crossings, observed resets, and service-status transitions.
 Startup, provider errors, and ambiguous multi-account results stay silent.
 
 Closing a window leaves the backend running. Quit from Quick View or the tray,
-or use `codexbar-linux --quit`. Launching again opens the existing process.
-Preferences live in `$XDG_CONFIG_HOME/codexbar/linux.json` (normally `~/.config`),
+or use `sharingan-linux --quit`. Launching again opens the existing process.
+Preferences live in `$XDG_CONFIG_HOME/sharingan/linux.json` (normally `~/.config`),
 written atomically with user-only permissions. Invalid files are never overwritten:
 fix or remove the file and restart. Authentication remains in the CLI's stores.
 
 ## Adapter interface
 
 ```sh
-codexbar-linux --background
-codexbar-linux --usage
-codexbar-linux --quick-view
-codexbar-linux --settings
-codexbar-linux --spending
-codexbar-linux --refresh
-codexbar-linux --snapshot
-codexbar-linux --snapshot --with-spending
-codexbar-linux --configure '{"provider":"both","refreshSeconds":300}'
-codexbar-linux --autostart status # also enable or disable
-codexbar-linux --quit
+sharingan-linux --background
+sharingan-linux --usage
+sharingan-linux --quick-view
+sharingan-linux --settings
+sharingan-linux --spending
+sharingan-linux --refresh
+sharingan-linux --snapshot
+sharingan-linux --snapshot --with-spending
+sharingan-linux --configure '{"provider":"both","refreshSeconds":300}'
+sharingan-linux --autostart status # also enable or disable
+sharingan-linux --quit
 ```
 
 Snapshot, refresh, configure, autostart, and quit require an existing process. UI commands
 start one when needed. IPC clients load no GUI plugin. `--cli PATH` and `--no-tray`
 apply when starting a new instance. The private, same-user local socket lives at
-`$XDG_RUNTIME_DIR/codexbar-linux/desktop.sock`; requests and replies are newline
+`$XDG_RUNTIME_DIR/sharingan-linux/desktop.sock`; requests and replies are newline
 terminated JSON. Snapshot schema version 1 includes compact provider windows,
 summary, update time, busy/stale/error state, and spending availability. `barEntries`
 contains `{provider, tag, text}` with quota text already formatted for the
@@ -297,11 +297,11 @@ QT_QPA_PLATFORM=offscreen QT_QUICK_BACKEND=software /usr/lib/qt6/bin/qmltestrunn
 ```
 
 Runtime tests isolate HOME/XDG paths and use a fake CLI and offscreen Qt. Set
-`CODEXBAR_TEST_PLATFORM=xcb` to exercise X11 on a session with DISPLAY access.
+`SHARINGAN_TEST_PLATFORM=xcb` to exercise X11 on a session with DISPLAY access.
 
-To uninstall, quit CodexBar and remove `~/.local/bin/codexbar-linux`,
-`$XDG_DATA_HOME/applications/com.steipete.CodexBar.desktop`,
-`$XDG_DATA_HOME/icons/hicolor/scalable/apps/codexbar.svg`, and
-`$XDG_CONFIG_HOME/autostart/com.steipete.CodexBar.desktop`.
+To uninstall, quit Sharingan and remove `~/.local/bin/sharingan-linux`,
+`$XDG_DATA_HOME/applications/com.gdpais.sharingan.desktop`,
+`$XDG_DATA_HOME/icons/hicolor/scalable/apps/sharingan.svg`, and
+`$XDG_CONFIG_HOME/autostart/com.gdpais.sharingan.desktop`.
 The default data/config directories are `~/.local/share` and `~/.config`.
 Preferences and their backups can be retained for a later reinstall.

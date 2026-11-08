@@ -8,7 +8,7 @@ read_when:
 
 # Fireworks provider
 
-Fireworks is API-only for billing: there is no public credit-balance endpoint, so CodexBar shows the
+Fireworks is API-only for billing: there is no public credit-balance endpoint, so Sharingan shows the
 **last 30 days of rated spend** from the account billing summary API instead of a balance gauge.
 
 ## Data sources
@@ -16,7 +16,7 @@ Fireworks is API-only for billing: there is no public credit-balance endpoint, s
 1. **API key** stored in `~/.sharingan/config.json` or supplied via `FIREWORKS_API_KEY` (legacy alias: `FIREWORKS_KEY`).
 2. **Optional account slug** stored in `~/.sharingan/config.json` or supplied via `FIREWORKS_ACCOUNT_SLUG`.
 
-CodexBar calls `GET https://api.fireworks.ai/v1/accounts` to list the accounts visible to the key. A single
+Sharingan calls `GET https://api.fireworks.ai/v1/accounts` to list the accounts visible to the key. A single
 account is selected automatically and its slug is saved to the config. When several accounts are visible, the
 user must choose one in the app.fireworks.ai home account switcher or obtain it from `firectl whoami`, then enter
 it in Settings. A configured slug remains useful for selecting among multiple accounts.
@@ -27,7 +27,7 @@ it in Settings. A configured slug remains useful for selecting among multiple ac
 - Request headers: `Authorization: Bearer <api key>`, `Accept: application/json`
 - The 30-day window is sent explicitly (`startTime`/`endTime` as ISO 8601); `granularity` is not requested.
 - Response contains `lineItems` with rated `totalCost` entries (`currencyCode`, `units`, `nanos`).
-- CodexBar sums `units + nanos / 1e9` across line items, using the first rated currency as the display currency
+- Sharingan sums `units + nanos / 1e9` across line items, using the first rated currency as the display currency
   and skipping rows in other currencies.
 
 ## Usage details
@@ -54,8 +54,8 @@ usage remains available with a diagnostic and the discovered slug is not install
 
 ## Key files
 
-- `Sources/CodexBarCore/Providers/Fireworks/FireworksProviderDescriptor.swift` (descriptor + fetch strategy)
-- `Sources/CodexBarCore/Resources/Plugins/fireworks.js` (HTTP requests, discovery, and billing parser)
-- `Sources/CodexBarCore/Providers/Fireworks/FireworksSettingsReader.swift` (env var resolution)
-- `Sources/CodexBar/Providers/Fireworks/FireworksProviderImplementation.swift` (settings fields)
-- `Sources/CodexBar/Providers/Fireworks/FireworksSettingsStore.swift` (SettingsStore extension)
+- `Sources/SharinganCore/Providers/Fireworks/FireworksProviderDescriptor.swift` (descriptor + fetch strategy)
+- `Sources/SharinganCore/Resources/Plugins/fireworks.js` (HTTP requests, discovery, and billing parser)
+- `Sources/SharinganCore/Providers/Fireworks/FireworksSettingsReader.swift` (env var resolution)
+- `Sources/Sharingan/Providers/Fireworks/FireworksProviderImplementation.swift` (settings fields)
+- `Sources/Sharingan/Providers/Fireworks/FireworksSettingsStore.swift` (SettingsStore extension)

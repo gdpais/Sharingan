@@ -30,7 +30,7 @@ class MiMoUsageCacheTests(unittest.TestCase):
         temporary_paths = []
         staged_payloads = []
 
-        with tempfile.TemporaryDirectory(prefix="codexbar-mimo-cache-") as root:
+        with tempfile.TemporaryDirectory(prefix="sharingan-mimo-cache-") as root:
             cache_path = Path(root) / "usage.json"
             module.CACHE_PATH = cache_path
             try:
@@ -92,7 +92,7 @@ class MiMoUsageCacheTests(unittest.TestCase):
 
         for failure_stage in ("write", "replace"):
             with self.subTest(stage=failure_stage), tempfile.TemporaryDirectory(
-                prefix="codexbar-mimo-failure-"
+                prefix="sharingan-mimo-failure-"
             ) as root:
                 cache_path = Path(root) / "usage.json"
                 other_writer = Path(root) / ".usage.json.other-writer.tmp"
@@ -158,7 +158,7 @@ class MiMoUsageParsingTests(unittest.TestCase):
                 ("2026-01-11T00:00:00Z", 1000),
             ]
         ]
-        with tempfile.TemporaryDirectory(prefix="codexbar-mimo-windows-") as root:
+        with tempfile.TemporaryDirectory(prefix="sharingan-mimo-windows-") as root:
             projects = Path(root)
             (projects / "session.jsonl").write_text("\n".join(json.dumps(row) for row in rows))
             with patch.object(module, "PROJECTS_DIR", projects), patch.object(module, "datetime", FixedDateTime):
@@ -177,7 +177,7 @@ class MiMoUsageParsingTests(unittest.TestCase):
             "timestamp": "2026-01-01T12:00:00Z", "message": {"usage": {"input_tokens": 12}},
         }).encode("utf-8")
         for rows in ([valid, b"\xff", valid], [valid, valid, b"\xe2\x82"]):
-            with self.subTest(rows=rows), tempfile.TemporaryDirectory(prefix="codexbar-mimo-utf8-") as root:
+            with self.subTest(rows=rows), tempfile.TemporaryDirectory(prefix="sharingan-mimo-utf8-") as root:
                 projects = Path(root)
                 (projects / "session.jsonl").write_bytes(b"\n".join(rows))
                 with patch.object(module, "PROJECTS_DIR", projects):
@@ -202,7 +202,7 @@ class MiMoUsageParsingTests(unittest.TestCase):
             {**valid, "message": {"usage": {"cache_creation_input_tokens": float("inf")}}},
         ]
         for invalid in invalid_rows:
-            with self.subTest(row=invalid), tempfile.TemporaryDirectory(prefix="codexbar-mimo-rows-") as root:
+            with self.subTest(row=invalid), tempfile.TemporaryDirectory(prefix="sharingan-mimo-rows-") as root:
                 projects = Path(root)
                 (projects / "session.jsonl").write_text(
                     "\n".join(json.dumps(row) for row in [valid, invalid, valid]))
@@ -226,7 +226,7 @@ class MiMoUsageParsingTests(unittest.TestCase):
             **valid, "timestamp": "2026-01-01T12:01:00Z",
             "message": {**valid["message"], "usage": {"input_tokens": "unknown"}},
         }
-        with tempfile.TemporaryDirectory(prefix="codexbar-mimo-update-") as root:
+        with tempfile.TemporaryDirectory(prefix="sharingan-mimo-update-") as root:
             projects = Path(root)
             (projects / "session.jsonl").write_text("\n".join(json.dumps(row) for row in [valid, invalid]))
             with patch.object(module, "PROJECTS_DIR", projects):

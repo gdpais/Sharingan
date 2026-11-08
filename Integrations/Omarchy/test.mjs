@@ -79,9 +79,9 @@ test('account selection is scoped to a single provider and arguments never use a
     assert.ok(!command.includes('--all-accounts'));
     assert.ok(!command.includes('--account-index'));
     assert.ok(!model.command({provider: 'enabled'}).includes('--provider'));
-    const single = model.command({provider: 'codex', allAccounts: true, source: 'oauth', executable: '/a path/codexbar'});
+    const single = model.command({provider: 'codex', allAccounts: true, source: 'oauth', executable: '/a path/sharingan'});
     assert.ok(single.includes('--all-accounts'));
-    assert.ok(single.includes('/a path/codexbar'));
+    assert.ok(single.includes('/a path/sharingan'));
     assert.ok(single.includes('oauth'));
     assert.ok(!model.command({accountIndex: '2;bad'}).includes('--account-index'));
 });

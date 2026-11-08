@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 /// Tests for the regex-based JetBrains XML parser used on Linux.
 /// These tests verify that the non-libxml2 implementation correctly parses

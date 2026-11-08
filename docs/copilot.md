@@ -9,7 +9,7 @@ read_when:
 
 Copilot uses GitHub OAuth device flow and the Copilot internal usage API for primary usage. Optional budget extras use GitHub web cookies only when enabled.
 
-CLI-only setups can run `codexbar config login --provider copilot` (or add `--json` for a stream of login
+CLI-only setups can run `sharingan config login --provider copilot` (or add `--json` for a stream of login
 events). It uses the same device flow, issuer-aware account matching, and config-backed token accounts as
 the app, without opening a browser or prompting for Keychain access. See [CLI configuration](cli-configuration.md#copilot-device-login).
 
@@ -22,7 +22,7 @@ the app, without opening a browser or prompting for Keychain access. See [CLI co
      - `POST https://github.com/login/oauth/access_token`
    - Optional enterprise host:
      - set Copilot `enterpriseHost` in `~/.sharingan/config.json` or the provider settings UI
-     - CodexBar normalizes values such as `https://octocorp.ghe.com/login` to `octocorp.ghe.com`
+     - Sharingan normalizes values such as `https://octocorp.ghe.com/login` to `octocorp.ghe.com`
      - device flow uses `https://<enterpriseHost>/login/...`
      - identity lookup uses `https://api.<enterpriseHost>/user`, matching the usage API host
      - default HTTPS ports and trailing host dots normalize to the same issuer; nondefault ports remain distinct
@@ -47,10 +47,10 @@ the app, without opening a browser or prompting for Keychain access. See [CLI co
 
 3) **Budget fetch** (optional GitHub web endpoint, best-effort)
    - Available only for the public GitHub host. Enterprise quota fetches skip public identity and browser-cookie budget enrichment.
-   - Disabled by default. The Copilot provider's "Budget extras" setting must be enabled before CodexBar imports
+   - Disabled by default. The Copilot provider's "Budget extras" setting must be enabled before Sharingan imports
      github.com cookies or renders budget bars.
    - Automatic cookie imports follow the shared supported-browser order and access gate; background imports never request Keychain permission.
-   - CodexBar asks the logged-in GitHub web endpoint for customer-scope budgets:
+   - Sharingan asks the logged-in GitHub web endpoint for customer-scope budgets:
      - `GET https://github.com/settings/billing/budgets?page=<page>&page_size=10&scope=customer`
    - Headers:
      - `Cookie: <github.com browser cookies>`
@@ -58,8 +58,8 @@ the app, without opening a browser or prompting for Keychain access. See [CLI co
      - `X-Requested-With: XMLHttpRequest`
      - `GitHub-Verified-Fetch: true`
      - `X-Fetch-Nonce: <fresh nonce when available>`
-   - CodexBar first tries to read a fresh nonce from `https://github.com/settings/billing/budgets`, then calls the JSON
-     endpoint. If GitHub rejects the web request, CodexBar keeps the normal Copilot quota bars and omits budget bars.
+   - Sharingan first tries to read a fresh nonce from `https://github.com/settings/billing/budgets`, then calls the JSON
+     endpoint. If GitHub rejects the web request, Sharingan keeps the normal Copilot quota bars and omits budget bars.
    - This is intentionally not the public GitHub REST billing API. The REST API did not expose the personal budget list
      for the tested individual account.
 
@@ -85,7 +85,7 @@ is therefore user-entered:
 - Preferences → Providers → Copilot → "Included AI credits (per seat)"
 
 A configured entitlement turns the row into a progress bar ("31 / 3000") via the shared provider-detail row's
-optional progress ratio. Without one, the row stays plain text, because a bar would imply a limit CodexBar cannot
+optional progress ratio. Without one, the row stays plain text, because a bar would imply a limit Sharingan cannot
 actually know. Either way the row also carries the numeric credits used (`usageValue`), so editing or clearing
 the entitlement rewrites the cached row (text ↔ bar) immediately, even when the follow-up refresh never lands
 (offline, token lost, 401).
@@ -108,8 +108,8 @@ host still invalidates its cached data. A refresh already in flight uses the cur
 late successful response cannot restore a cleared default.
 
 ## Key files
-- `Sources/CodexBarCore/Providers/Copilot/CopilotUsageFetcher.swift`
-- `Sources/CodexBarCore/Providers/Copilot/CopilotDeviceFlow.swift`
-- `Sources/CodexBarCore/Providers/Copilot/CopilotCreditEntitlementParser.swift`
-- `Sources/CodexBar/Providers/Copilot/CopilotLoginFlow.swift`
-- `Sources/CodexBar/Providers/Copilot/CopilotTokenStore.swift` (legacy migration helper)
+- `Sources/SharinganCore/Providers/Copilot/CopilotUsageFetcher.swift`
+- `Sources/SharinganCore/Providers/Copilot/CopilotDeviceFlow.swift`
+- `Sources/SharinganCore/Providers/Copilot/CopilotCreditEntitlementParser.swift`
+- `Sources/Sharingan/Providers/Copilot/CopilotLoginFlow.swift`
+- `Sources/Sharingan/Providers/Copilot/CopilotTokenStore.swift` (legacy migration helper)

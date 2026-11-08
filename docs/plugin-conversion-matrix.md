@@ -15,7 +15,7 @@ other legacy classifications still need their own parity audit.
 authentication, and generic snapshot capabilities. Text decoding and dependent requests can be implemented in the
 script. Settings-derived origins include the private-network HTTP policy for LLM Proxy and LiteLLM.
 
-`converted` means the bundled conversion is present behind `CODEXBAR_JS_PROVIDERS=1`. `cut-over` means the script is
+`converted` means the bundled conversion is present behind `SHARINGAN_JS_PROVIDERS=1`. `cut-over` means the script is
 authoritative on its supported engines; each row states whether a Linux native core remains. Totals count only the
 69 audit rows below, excluding the separately listed plugin-first additions. The registry now contains 110 providers:
 69 audit rows, 32 additional plugin-first rows, and 9 providers not yet classified in this matrix (CodeRabbit,

@@ -8,7 +8,7 @@ read_when:
 
 # Ollama Provider
 
-The Ollama provider reads included usage and purchased credits through an API key or usage-related data from the authenticated settings page. Current Usage settings can expose a **credit balance**, **monthly credits used**, and a **refill target**, but not a quota percentage; CodexBar shows those as details instead of inventing a quota bar. Older settings pages that report monthly included-usage, session/hourly, or weekly meters remain supported.
+The Ollama provider reads included usage and purchased credits through an API key or usage-related data from the authenticated settings page. Current Usage settings can expose a **credit balance**, **monthly credits used**, and a **refill target**, but not a quota percentage; Sharingan shows those as details instead of inventing a quota bar. Older settings pages that report monthly included-usage, session/hourly, or weekly meters remain supported.
 
 ## Features
 
@@ -40,7 +40,7 @@ Ollama API keys currently do not expire, but they can be revoked from the key se
 
 If Manual is selected with no header or saved cookie account, the settings row says **No cookie header pasted.**
 Use **Use automatic cookies** to return to Auto, or paste a header. The action is hidden in API-key mode and while
-Keychain access is disabled in Advanced settings. CodexBar does not switch cookie sources automatically.
+Keychain access is disabled in Advanced settings. Sharingan does not switch cookie sources automatically.
 
 ## How it works
 
@@ -56,7 +56,7 @@ Keychain access is disabled in Advanced settings. CodexBar does not switch cooki
 - Cookie discovery recognizes the current WorkOS AuthKit `wos-session` cookie alongside legacy Ollama and NextAuth
   session names.
 - Redirects from settings to `/signin` or the WorkOS AuthKit authorization page are treated as expired sessions, so
-  CodexBar can try the next cookie candidate and show sign-in guidance instead of a parser error.
+  Sharingan can try the next cookie candidate and show sign-in guidance instead of a parser error.
 - Parses:
   - Plan badge under **Included usage** or **Cloud Usage**.
   - **Monthly usage** dollar credits, falling back to a valid meter width in the same usage block when necessary.
@@ -78,7 +78,7 @@ import or a network request; a nonempty header without a recognized session cook
 
 ### “No Ollama session cookie found”
 
-Sign in at `https://ollama.com/signin` in Chrome, then refresh CodexBar.
+Sign in at `https://ollama.com/signin` in Chrome, then refresh Sharingan.
 If your active session is only in Safari (or another browser), use **Cookie source → Manual** and paste a cookie header.
 
 ### “Ollama session cookie expired”

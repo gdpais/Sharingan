@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Deploys the CodexBar CloudKit schema (Scripts/cloudkit/schema.ckdb).
+# Deploys the Sharingan CloudKit schema (Scripts/cloudkit/schema.ckdb).
 #
 # Requires a CloudKit management token (create one at
 # https://icloud.developer.apple.com/dashboard → account menu → Tokens,

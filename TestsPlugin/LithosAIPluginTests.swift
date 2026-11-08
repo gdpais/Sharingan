@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct LithosAIPluginTests {
     private static let now = Date(timeIntervalSince1970: 1_800_489_600) // 2027-01-21 UTC

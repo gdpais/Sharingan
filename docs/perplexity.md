@@ -8,7 +8,7 @@ read_when:
 
 # Perplexity Provider
 
-CodexBar reads Perplexity account credit data with a Perplexity web session cookie. It does not use a Perplexity API
+Sharingan reads Perplexity account credit data with a Perplexity web session cookie. It does not use a Perplexity API
 key and does not support token-cost history.
 
 ## Setup
@@ -35,7 +35,7 @@ export PERPLEXITY_COOKIE="__Secure-next-auth.session-token=..."
 
 ## Data Source
 
-CodexBar requests:
+Sharingan requests:
 
 - `GET https://www.perplexity.ai/rest/billing/credits?version=2.18&source=default`
 
@@ -64,14 +64,14 @@ Large finite credit counts retain their whole-number descriptions; nonfinite agg
 ## CLI Usage
 
 ```bash
-codexbar usage --provider perplexity --verbose
+sharingan usage --provider perplexity --verbose
 ```
 
 ## Troubleshooting
 
 ### "Perplexity session token is missing"
 
-Sign in to [perplexity.ai](https://www.perplexity.ai/) and refresh CodexBar, or paste a fresh cookie/session token in
+Sign in to [perplexity.ai](https://www.perplexity.ai/) and refresh Sharingan, or paste a fresh cookie/session token in
 manual mode.
 
 ### "Perplexity session token is invalid or expired"
@@ -85,8 +85,8 @@ account has visible credit data.
 
 ## Related Files
 
-- `Sources/CodexBarCore/Providers/Perplexity/PerplexityProviderDescriptor.swift`
-- `Sources/CodexBarCore/Resources/Plugins/perplexity.js`
-- `Sources/CodexBarCore/Plugins/ProviderPluginCookieBroker.swift`
-- `Sources/CodexBarCore/Providers/Perplexity/PerplexityCookieHeader.swift`
-- `Sources/CodexBar/Providers/Shared/PluginCookieProviderImplementation.swift`
+- `Sources/SharinganCore/Providers/Perplexity/PerplexityProviderDescriptor.swift`
+- `Sources/SharinganCore/Resources/Plugins/perplexity.js`
+- `Sources/SharinganCore/Plugins/ProviderPluginCookieBroker.swift`
+- `Sources/SharinganCore/Providers/Perplexity/PerplexityCookieHeader.swift`
+- `Sources/Sharingan/Providers/Shared/PluginCookieProviderImplementation.swift`

@@ -6,7 +6,7 @@ import Glibc
 import Musl
 #endif
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 @Suite(.serialized)
 struct CLIServeRequestDeadlineLinuxTests {

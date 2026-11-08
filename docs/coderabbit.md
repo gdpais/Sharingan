@@ -8,7 +8,7 @@ read_when:
 
 # CodeRabbit provider
 
-CodexBar monitors CodeRabbit review activity, usage billing state, and billing period reset dates via the local `coderabbit` CLI.
+Sharingan monitors CodeRabbit review activity, usage billing state, and billing period reset dates via the local `coderabbit` CLI.
 
 ## Data source
 
@@ -18,7 +18,7 @@ CodexBar monitors CodeRabbit review activity, usage billing state, and billing p
 coderabbit usage
 ```
 
-CodexBar sets the documented `CODERABBIT_CLI_DISABLE_AUTO_UPDATE=true` environment variable on its usage child,
+Sharingan sets the documented `CODERABBIT_CLI_DISABLE_AUTO_UPDATE=true` environment variable on its usage child,
 so passive refreshes do not trigger CLI auto-updates. This does not change saved settings or user-launched sessions.
 See the [CLI environment variables](https://docs.coderabbit.ai/cli/reference#environment-variables).
 
@@ -41,11 +41,11 @@ Authentication is handled via the CodeRabbit CLI:
 coderabbit auth login
 ```
 
-The CLI owns authentication and credential storage. CodexBar does not read or change those credential files. The usage command requires a hosted CodeRabbit login; self-hosted logins are not supported by the upstream command.
+The CLI owns authentication and credential storage. Sharingan does not read or change those credential files. The usage command requires a hosted CodeRabbit login; self-hosted logins are not supported by the upstream command.
 
 ## Snapshot mapping
 
-| CodeRabbit field | CodexBar display |
+| CodeRabbit field | Sharingan display |
 | --- | --- |
 | `Your reviews` | Detail row: Reviews count |
 | `Period resets` | Billing period reset detail; not a subscription-renewal claim |
@@ -53,15 +53,15 @@ The CLI owns authentication and credential storage. CodexBar does not read or ch
 | `Usage billing` | Detail row: Billing state (active/inactive) |
 | `Plan` (only if the usage report supplies it) | Plan badge |
 
-The integration stays native because the plugin sandbox cannot execute local programs. HTTP or filesystem capabilities are not added to JavaScript for this provider. Reports have no documented quota denominator, so CodexBar shows review counts without a percentage bar or a fabricated spending balance.
+The integration stays native because the plugin sandbox cannot execute local programs. HTTP or filesystem capabilities are not added to JavaScript for this provider. Reports have no documented quota denominator, so Sharingan shows review counts without a percentage bar or a fabricated spending balance.
 
 See the [official CLI reference](https://docs.coderabbit.ai/cli/reference#usage-command). Set `CODERABBIT_CLI_PATH` for an explicit executable; an invalid override fails rather than selecting a different installation.
 
 ## Key files
 
-- `Sources/CodexBarCore/Providers/CodeRabbit/CodeRabbitCLIProbe.swift` - CLI execution probe
-- `Sources/CodexBarCore/Providers/CodeRabbit/CodeRabbitUsageParser.swift` - Output parser
-- `Sources/CodexBarCore/Providers/CodeRabbit/CodeRabbitUsageSnapshot.swift` - Usage models & snapshot mapping
-- `Sources/CodexBarCore/Providers/CodeRabbit/CodeRabbitProviderDescriptor.swift` - Provider metadata and fetch strategies
-- `Sources/CodexBar/Providers/CodeRabbit/CodeRabbitProviderImplementation.swift` - App registration
+- `Sources/SharinganCore/Providers/CodeRabbit/CodeRabbitCLIProbe.swift` - CLI execution probe
+- `Sources/SharinganCore/Providers/CodeRabbit/CodeRabbitUsageParser.swift` - Output parser
+- `Sources/SharinganCore/Providers/CodeRabbit/CodeRabbitUsageSnapshot.swift` - Usage models & snapshot mapping
+- `Sources/SharinganCore/Providers/CodeRabbit/CodeRabbitProviderDescriptor.swift` - Provider metadata and fetch strategies
+- `Sources/Sharingan/Providers/CodeRabbit/CodeRabbitProviderImplementation.swift` - App registration
 - `TestsLinux/CodeRabbitUsageTests.swift` - Unit tests for parser and probe

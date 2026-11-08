@@ -8,7 +8,7 @@ read_when:
 
 # OpenAI API provider
 
-CodexBar's OpenAI API provider targets the API Platform organization dashboard, not ChatGPT/Codex subscription limits.
+Sharingan's OpenAI API provider targets the API Platform organization dashboard, not ChatGPT/Codex subscription limits.
 
 The bundled `openai.js` plugin is authoritative on QuickJS and JavaScriptCore. Swift retains settings and the typed
 usage-card adapter; the script supplies daily history, source labels, project scoping, and legacy billing fallback.
@@ -29,7 +29,7 @@ usage-card adapter; the script supplies daily history, source labels, project sc
 Store a key in the shared app/CLI config:
 
 ```bash
-printf '%s' "$OPENAI_ADMIN_KEY" | codexbar config set-api-key --provider openai --stdin
+printf '%s' "$OPENAI_ADMIN_KEY" | sharingan config set-api-key --provider openai --stdin
 ```
 
 Settings → Providers → OpenAI writes the same `~/.sharingan/config.json` field. `OPENAI_ADMIN_KEY` is preferred over
@@ -39,8 +39,8 @@ credential keeps its own manual organization rate limits; Settings edits the sel
 that account, or edits the provider key's list when no token account is selected.
 
 Project service-account keys are project-scoped credentials for API workloads. They are not organization Admin API
-keys, so they cannot read the organization usage and cost endpoints used by CodexBar. Configure an organization Admin
-API key instead; CodexBar reports this distinction when a project or service-account key is rejected.
+keys, so they cannot read the organization usage and cost endpoints used by Sharingan. Configure an organization Admin
+API key instead; Sharingan reports this distinction when a project or service-account key is rejected.
 
 To scope Admin API usage to a project, set the OpenAI Project ID field in Settings or add `workspaceID` to the `openai`
 provider config:
@@ -100,7 +100,7 @@ project scope, or the whole organization when no project is configured.
 Manual organization limits belong to the credential whose organization they describe. Provider-level
 `modelRateLimits` describes the provider key (configured `apiKey` or environment key); each token account stores
 its own `tokenAccounts.accounts[].modelRateLimits`, with no inheritance from the provider key or other accounts.
-Sync keeps an account's limits when an older CodexBar version updates token accounts.
+Sync keeps an account's limits when an older Sharingan version updates token accounts.
 Settings edits the selected account's list and says which credential it applies to. Switching accounts switches
 the limits used by Settings and the live menu card; stacked token-account cards use their own account's limits.
 Cards whose credential is unknown, such as snapshots from other Macs, show no organization-limit utilization.
@@ -119,7 +119,7 @@ this holds even after the project setting changes but before a successful refres
 
 OpenAI has no organization-level limits endpoint. Per-project limits are **project caps**, not an organization
 ceiling: observed organization traffic exceeded every project's cap because traffic was spread across projects.
-For context, CodexBar lists active projects with `GET /v1/organization/projects` and reads
+For context, Sharingan lists active projects with `GET /v1/organization/projects` and reads
 `GET /v1/organization/projects/{project_id}/rate_limits`, taking the maximum TPM and RPM independently for each
 model across up to **25 active projects**. The table and single-model limit tile show project caps separately;
 project caps never drive utilization percentages or chart limit lines. A truncated sample is labeled. Discovery

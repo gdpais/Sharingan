@@ -111,7 +111,7 @@ function rows(text, showIdentity) {
             credits: entry.credits && typeof entry.credits.remaining === "number" ? entry.credits.remaining : null,
             extraUsage: providerCost(usage.providerCost),
             resetCredits: resetCredits(entry.resetCredits),
-            error: entry.error ? "Usage unavailable. Check this provider’s CodexBar login/configuration." :
+            error: entry.error ? "Usage unavailable. Check this provider’s Sharingan login/configuration." :
                 windows.length ? "" : "No quota windows reported."
         };
     });
@@ -119,7 +119,7 @@ function rows(text, showIdentity) {
 
 function command(settings) {
     var provider = String(settings.provider || "codex");
-    var args = ["timeout", "--kill-after=5", "60", String(settings.executable || "codexbar"),
+    var args = ["timeout", "--kill-after=5", "60", String(settings.executable || "sharingan"),
         "usage", "--format", "json", "--json-only"];
     if (provider !== "enabled") args.push("--provider", provider);
     var source = String(settings.source || "auto");

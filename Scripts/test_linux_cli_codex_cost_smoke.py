@@ -19,7 +19,7 @@ PREAMBLE = '''#!/bin/sh
 class LinuxCLICodexCostSmokeTests(unittest.TestCase):
     def check(self, body):
         with tempfile.TemporaryDirectory() as directory:
-            binary = Path(directory) / 'CodexBarCLI'
+            binary = Path(directory) / 'SharinganCLI'
             binary.write_text(PREAMBLE + body)
             binary.chmod(0o755)
             return subprocess.run(['bash', str(SCRIPT), str(binary)],

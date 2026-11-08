@@ -7,6 +7,6 @@
     "types": []
   },
   "include": [
-    "Sources/CodexBarCore/Resources/Plugins/*.ts"
+    "Sources/SharinganCore/Resources/Plugins/*.ts"
   ]
 }

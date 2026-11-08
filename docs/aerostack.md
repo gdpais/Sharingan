@@ -12,9 +12,9 @@ read_when:
 # Aerostack
 
 Aerostack is disabled by default. Enter an **account JWT** in Settings → Providers → Aerostack, or set
-`AEROSTACK_TOKEN`. The masked setting is saved in CodexBar's local config file. This is the account bearer token
+`AEROSTACK_TOKEN`. The masked setting is saved in Sharingan's local config file. This is the account bearer token
 used by the billing API, not an Agent Endpoint key (`aek_…`) or an upstream LLM key. Replace it when it expires;
-CodexBar does not sign in, refresh tokens, or import browser credentials.
+Sharingan does not sign in, refresh tokens, or import browser credentials.
 
 The bundled `aerostack.ts` plugin makes one read-only request:
 
@@ -33,11 +33,11 @@ visible. Usage above the allowance is not a claim that the account is blocked: A
 Invalid counters fail parsing without including response content in the error.
 
 The usage contract has no reset timestamp, timezone, live Agent Endpoint rate headroom, or wallet balance.
-CodexBar does not derive a reset from the period label or subscription end, sum per-run history, execute agents,
+Sharingan does not derive a reset from the period label or subscription end, sum per-run history, execute agents,
 or combine prepaid funds with recurring token allowances.
 
 ```sh
-codexbar usage --provider aerostack --source api --json
+sharingan usage --provider aerostack --source api --json
 ```
 
 Sources checked October 8, 2026:

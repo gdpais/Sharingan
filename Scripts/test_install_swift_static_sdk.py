@@ -17,7 +17,7 @@ ARCHIVE = b"synthetic Swift static SDK archive"
 
 class StaticSDKInstallerTests(unittest.TestCase):
     def run_installer(self, *, checksum=None, curl_exit=0, swift_exit=0):
-        with tempfile.TemporaryDirectory(prefix="codexbar sdk test ") as temporary:
+        with tempfile.TemporaryDirectory(prefix="sharingan sdk test ") as temporary:
             root = Path(temporary)
             binaries = root / "bin"
             binaries.mkdir()

@@ -7,7 +7,7 @@ read_when:
 
 # Aixy
 
-[Aixy](https://aixy-gateway.com) is an AI gateway using customer-configured provider credentials. CodexBar reads key-scoped usage and applicable budgets without calling model providers, making inference requests, or using administrator credentials or browser sessions.
+[Aixy](https://aixy-gateway.com) is an AI gateway using customer-configured provider credentials. Sharingan reads key-scoped usage and applicable budgets without calling model providers, making inference requests, or using administrator credentials or browser sessions.
 
 ## Setup
 
@@ -25,7 +25,7 @@ Equivalent provider configuration:
 ```
 
 `enterpriseHost` is optional. Environment variables are `AIXY_API_KEY` and `AIXY_BASE_URL`.
-The CLI uses `codexbar usage --provider aixy --source api`.
+The CLI uses `sharingan usage --provider aixy --source api`.
 
 Base URLs may include a path prefix and trailing `/v1`. Public hosts require HTTPS; loopback, private-network, and `.local` HTTP are supported. Embedded credentials, query strings, and fragments are rejected. Keys are stored in provider-config/token-account storage and sent only to the selected gateway origin.
 

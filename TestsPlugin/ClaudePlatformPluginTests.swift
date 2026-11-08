@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct ClaudePlatformPluginTests {
     private static let now = Date(timeIntervalSince1970: 1_791_849_600) // 2026-10-13 UTC

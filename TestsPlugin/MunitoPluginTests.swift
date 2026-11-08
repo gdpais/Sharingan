@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct MunitoPluginTests {
     /// Documented `GET /admin/v1/limits` schema with synthetic values, plus the optional organization read.

@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct CodexNativeJWTExpiryTests {
     @Test(arguments: ["-8334601228800", "-1", "-0", "0", "1", "4102444800", "8210266876799"])

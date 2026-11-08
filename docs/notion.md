@@ -15,13 +15,13 @@ Notion begins enforcing the AI usage allowance on **August 3, 2026**. Before tha
 reports `"enforcement": "preview"` while still returning real usage numbers, so the gauges are accurate
 either way.
 
-> **Unsupported integration:** CodexBar uses Notion's internal, cookie-authenticated `/api/v3` endpoints.
+> **Unsupported integration:** Sharingan uses Notion's internal, cookie-authenticated `/api/v3` endpoints.
 > These endpoints are not a supported public API and may change or break without notice.
 
 ## Requirements
 
 The usage allowance only exists on **Business** and **Enterprise** workspaces. Free, Plus, and personal
-workspaces make the endpoint answer `{"status":"not_applicable"}`, and CodexBar surfaces that as a clear
+workspaces make the endpoint answer `{"status":"not_applicable"}`, and Sharingan surfaces that as a clear
 provider error rather than an empty gauge.
 
 ## Setup
@@ -62,7 +62,7 @@ To capture the cookie manually:
 2. Open Developer Tools → Network tab.
 3. Open **Settings → Notion AI → Usage** and find a `getCreditRateLimitStatus` request.
 4. Right-click → Copy → Copy as cURL.
-5. Paste the full `curl` command into the **Notion cookie** field in CodexBar settings.
+5. Paste the full `curl` command into the **Notion cookie** field in Sharingan settings.
 
 ### Workspace selection
 
@@ -71,7 +71,7 @@ plan. To pin a specific one, set **Workspace ID** in the provider settings, or `
 `notion` entry in `config.json`. Both dashed and undashed UUID forms are accepted.
 
 For accounts with many workspaces or members, discovery can exceed the plugin's 5 MiB response limit.
-If **Workspace ID** contains a valid UUID, CodexBar then requests allowances directly for that workspace.
+If **Workspace ID** contains a valid UUID, Sharingan then requests allowances directly for that workspace.
 Email, account ID, workspace name, and plan are omitted for that refresh because discovery did not complete;
 normal-sized discovery still supplies them. Without a valid Workspace ID, the error asks you to configure one.
 The shared response limit remains unchanged, including for the allowance request.
@@ -81,7 +81,7 @@ only manual paths are the Settings fields above and `config.json`.
 
 ## Data Source
 
-CodexBar sends two POST requests per refresh, both to `https://app.notion.com`:
+Sharingan sends two POST requests per refresh, both to `https://app.notion.com`:
 
 1. `/api/v3/getSpaces` — resolves the signed-in user (email, name) and the workspaces the account can see,
    including each workspace's `plan_type` and `subscription_tier`. This is what makes automatic workspace
@@ -109,7 +109,7 @@ The rate-limit response looks like this:
 
 ## Mapping
 
-| CodexBar window | Notion field | Notes |
+| Sharingan window | Notion field | Notes |
 | --- | --- | --- |
 | Rolling (primary) | `window.used` / `window.limit` | `window.window` (`6h`) sets the window length; `resetsInSeconds` sets the reset time. |
 | Monthly (secondary) | `billingPeriodWindow.used` / `.limit` | `periodEndMs` sets the reset time, and the window length is the calendar month ending there. |
@@ -128,7 +128,7 @@ The monthly card also shows a daily credit target from the reported remaining al
 calendar days until reset, including today. This does not estimate credits consumed today; Notion does
 not report that breakdown. Hiding pace hides the target as well.
 
-Both bars carry an expected-usage estimate on the card and in `codexbar usage`, reading `n% in deficit`
+Both bars carry an expected-usage estimate on the card and in `sharingan usage`, reading `n% in deficit`
 when you are ahead of an even burn and `n% in reserve` when behind.
 
 The monthly estimate needs a window length, and Notion reports only `periodEndMs`. The snapshot
@@ -148,7 +148,7 @@ period and goes through the reset-window path instead.
 
 ## Status
 
-Notion publishes a status page at <https://status.notion.so/>; CodexBar links to it but does not poll
+Notion publishes a status page at <https://status.notion.so/>; Sharingan links to it but does not poll
 components.
 
 ## Troubleshooting

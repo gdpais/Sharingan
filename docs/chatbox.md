@@ -15,7 +15,7 @@ Enable Chatbox AI in Settings → Providers, then paste your Chatbox **License K
 **API key** field. The CLI also accepts `CHATBOX_LICENSE_KEY`; the saved provider key takes precedence.
 This provider uses the standard credential field and storage policy. It does not read the Chatbox
 desktop profile, discover account sessions, or activate/deactivate a license. When changing licenses,
-update the key in CodexBar. Keep License Keys private: they can authorize AI requests as well as quota reads.
+update the key in Sharingan. Keep License Keys private: they can authorize AI requests as well as quota reads.
 Signing into the Chatbox app does not configure this provider. Account-login users also need a manually
 copyable License Key; accounts that do not expose one cannot be connected through this plugin.
 
@@ -65,5 +65,5 @@ Reset dates come from the server without inventing daily or fixed monthly durati
 retain reported details without promising replenishment.
 
 ```sh
-codexbar usage --provider chatbox --source api --json
+sharingan usage --provider chatbox --source api --json
 ```

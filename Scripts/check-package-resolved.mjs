@@ -6,8 +6,8 @@ import { fileURLToPath } from "node:url";
 const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const rootPath = "Package.resolved";
 const widgetPath =
-  "WidgetExtension/CodexBarWidgetExtension.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved";
-const fixCommand = "xcodebuild -resolvePackageDependencies -project WidgetExtension/CodexBarWidgetExtension.xcodeproj";
+  "WidgetExtension/SharinganWidgetExtension.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved";
+const fixCommand = "xcodebuild -resolvePackageDependencies -project WidgetExtension/SharinganWidgetExtension.xcodeproj";
 
 function readPins(relativePath) {
   const resolved = JSON.parse(fs.readFileSync(path.join(repoRoot, relativePath), "utf8"));

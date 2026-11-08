@@ -16,7 +16,7 @@ The current [Groq guide](groq.md) covers the default console-session source and 
 Store the key in the shared app/CLI config:
 
 ```bash
-printf '%s' "$GROQ_API_KEY" | codexbar config set-api-key --provider groq --stdin
+printf '%s' "$GROQ_API_KEY" | sharingan config set-api-key --provider groq --stdin
 ```
 
 Or set `GROQ_API_KEY` in the process environment. `GROQ_API_URL` can override the default `https://api.groq.com/v1`
@@ -29,4 +29,4 @@ base URL for private gateways.
 - Tertiary: prompt cache hits per minute when the metric exists.
 - Dashboard link: Groq console usage dashboard.
 
-If the key lacks Prometheus metrics access, CodexBar shows the API error instead of guessing from unrelated endpoints.
+If the key lacks Prometheus metrics access, Sharingan shows the API error instead of guessing from unrelated endpoints.

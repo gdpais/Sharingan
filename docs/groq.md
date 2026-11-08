@@ -7,7 +7,7 @@ read_when:
 
 # Groq provider
 
-CodexBar shows Groq organization usage and spend from the **console.groq.com** dashboard API, read through your
+Sharingan shows Groq organization usage and spend from the **console.groq.com** dashboard API, read through your
 browser session. This replaces the old public-API rate-limit metric, which only described request/token throttles
 rather than actual usage.
 
@@ -27,7 +27,7 @@ Source modes: `web` (console only), `api` (Prometheus only), `auto` (console the
 - Session comes from the `groq.com` cookies, in browser import order:
   - `stytch_session` — long-lived (~30 day) opaque token. Preferred.
   - `stytch_session_jwt` — short-lived (~5 min) JWT. Used directly only as a fallback.
-- Because the JWT cookie expires quickly and is refreshed by the SPA only while a console tab is open, CodexBar
+- Because the JWT cookie expires quickly and is refreshed by the SPA only while a console tab is open, Sharingan
   exchanges the long-lived opaque token for a fresh JWT on each fetch via Stytch's B2B frontend SDK endpoint (the same
   call the console web app makes):
   - `POST https://api.stytchb2b.groq.com/sdk/v1/b2b/sessions/authenticate`
@@ -41,7 +41,7 @@ Source modes: `web` (console only), `api` (Prometheus only), `auto` (console the
   - The organization id is read from the JWT's `https://groq.com/organization` claim (no signature verification —
     the API authenticates the token, this only reads the routing claim).
 - Each activity row is per-model, per-day: `cost`, `n_context_tokens_total`, `n_non_cached_context_tokens_total`
-  (cached = context − non-cached), `n_generated_tokens_total`, `num_requests`. CodexBar aggregates these into daily
+  (cached = context − non-cached), `n_generated_tokens_total`, `num_requests`. Sharingan aggregates these into daily
   buckets and renders the shared cost-history inline dashboard (as used by the OpenAI API provider).
 - Identity login method: `Console`.
 
@@ -51,7 +51,7 @@ Source modes: `web` (console only), `api` (Prometheus only), `auto` (console the
 - `GROQ_SESSION_JWT` — a session JWT used directly (skips refresh); handy for a quick check but expires in minutes.
 
 ```bash
-GROQ_SESSION_TOKEN=<stytch_session> codexbar usage --provider groq --json
+GROQ_SESSION_TOKEN=<stytch_session> sharingan usage --provider groq --json
 ```
 
 ## Prometheus metrics (Enterprise, optional)
@@ -62,11 +62,11 @@ GROQ_SESSION_TOKEN=<stytch_session> codexbar usage --provider groq --json
 
 ## Key files
 
-- Console fetch: `Sources/CodexBarCore/Providers/Groq/GroqConsoleFetcher.swift`
-- Session import + JWT resolution: `Sources/CodexBarCore/Providers/Groq/GroqConsoleSession.swift`
-- Stytch refresh: `Sources/CodexBarCore/Providers/Groq/GroqConsoleStytch.swift`
-- Snapshot / cost-history projection: `Sources/CodexBarCore/Providers/Groq/GroqConsoleUsageSnapshot.swift`
-- Prometheus fallback: `Sources/CodexBarCore/Providers/Groq/GroqUsageFetcher.swift`
-- Provider wiring: `Sources/CodexBarCore/Providers/Groq/GroqProviderDescriptor.swift`
+- Console fetch: `Sources/SharinganCore/Providers/Groq/GroqConsoleFetcher.swift`
+- Session import + JWT resolution: `Sources/SharinganCore/Providers/Groq/GroqConsoleSession.swift`
+- Stytch refresh: `Sources/SharinganCore/Providers/Groq/GroqConsoleStytch.swift`
+- Snapshot / cost-history projection: `Sources/SharinganCore/Providers/Groq/GroqConsoleUsageSnapshot.swift`
+- Prometheus fallback: `Sources/SharinganCore/Providers/Groq/GroqUsageFetcher.swift`
+- Provider wiring: `Sources/SharinganCore/Providers/Groq/GroqProviderDescriptor.swift`
 
 Prometheus mode treats malformed, negative, nonfinite, or overflowing rates as unavailable. An explicitly empty result vector still means zero usage; API errors retain the server message.

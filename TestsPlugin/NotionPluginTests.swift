@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct NotionPluginTests {
     private static let now = Date(timeIntervalSince1970: 1_785_600_000)

@@ -28,7 +28,7 @@ The grok.com billing gRPC-web endpoint remains a best-effort fallback.
    - Reads `email`, `team_id`, `first_name`/`last_name`, plan-hint (`auth_mode`),
      and the optional `principal_type` for the identity row in the menu.
    - Team principals are recognized on the CLI and web billing paths. Until Grok
-     exposes a supported team usage surface, CodexBar keeps the identity row and
+     exposes a supported team usage surface, Sharingan keeps the identity row and
      reports that team usage is unavailable instead of exposing the personal-team
      rejection verbatim.
 2) **`grok agent stdio` ACP JSON-RPC**
@@ -52,7 +52,7 @@ The grok.com billing gRPC-web endpoint remains a best-effort fallback.
      the CLI changes its wording; other RPC errors remain failures.
    - A terminal CLI billing failure returns before scanning local session history or probing the CLI version, so the provider fallback does not wait for data that would be discarded. Successful billing and the established identity-only team fallback retain local history and plan enrichment.
    - After a successful RPC billing result (or the identity-only team fallback),
-     CodexBar still GETs `/v1/settings` for `subscription_tier_display` so the
+     Sharingan still GETs `/v1/settings` for `subscription_tier_display` so the
      billed plan is not lost just because the CLI route succeeded first. The
      settings lookup is optional enrichment with a 2-second budget.
    - Requests use `.withoutEscapingSlashes` so `_x.ai/billing` is written literally on the wire.
@@ -75,7 +75,7 @@ The grok.com billing gRPC-web endpoint remains a best-effort fallback.
    - Unknown usage yields no rate window at all, and a successful strategy ends the
      fetch pipeline, so a period-only credits answer would otherwise hide the usage
      bar for plans whose payload never publishes `creditUsagePercent`. Before that
-     answer is accepted, CodexBar retries the grok.com bearer gRPC path (step 4,
+     answer is accepted, Sharingan retries the grok.com bearer gRPC path (step 4,
      still without cookies) and adopts its percent when it has one, keeping the
      credits period and plan metadata, with the proxy's authoritative reset taking
      precedence over a conflicting gRPC timestamp. When grok.com has no percent
@@ -101,7 +101,7 @@ The grok.com billing gRPC-web endpoint remains a best-effort fallback.
      also runs under a 6-second budget, because period-only payloads recur on every
      refresh and a grok.com outage must not delay the credits answer already in hand.
    - Weekly credits do not include usage-limit reset coupons. After a successful
-     SuperGrok OAuth or CLI-proxy usage refresh, CodexBar POSTs an empty gRPC-web
+     SuperGrok OAuth or CLI-proxy usage refresh, Sharingan POSTs an empty gRPC-web
      request to `https://grok.com/prod_mc_billing.ConsumerUiSvc/GetRemainingResets`
      with the same bearer, or the exact cookie session that supplied browser billing. Ambient cookie storage is
      disabled for this request. Available tokens (`token_id` + `validity_end`) render as
@@ -109,11 +109,11 @@ The grok.com billing gRPC-web endpoint remains a best-effort fallback.
      short-lived in-memory cache in the background, with a 2-second transport
      budget, so the app can publish already-fetched weekly usage immediately. The CLI waits for the bounded
      optional result. Turning off optional usage skips the lookup. Expired or persisted inventory is not shown.
-     CodexBar does not
+     Sharingan does not
      redeem or modify reset tokens.
    - Plan name does not come from the credits payload. After a successful
      auth-file or SuperGrok OAuth web billing result (CLI-proxy) or the team
-     identity-only path, CodexBar GETs `https://cli-chat-proxy.grok.com/v1/settings`
+     identity-only path, Sharingan GETs `https://cli-chat-proxy.grok.com/v1/settings`
      with the same bearer headers and reads `subscription_tier_display`
      (`SuperGrok Heavy` vs `SuperGrok`). Cookie mode does not call the proxy.
      If the proxy fails, OAuth retries the grok.com bearer gRPC path, still
@@ -137,13 +137,13 @@ The grok.com billing gRPC-web endpoint remains a best-effort fallback.
    - This endpoint now requires the browser-held Web Key Exchange (WKE) keypair.
      Cookie-only authentication can fail with gRPC status 16 and
      `no-credentials`; signing in through Chrome alone cannot provide that proof
-     to CodexBar, so `grok login` is the recommended recovery path.
+     to Sharingan, so `grok login` is the recommended recovery path.
    - Uses grok.com browser session cookies. Successful cookie usage never inherits
      the auth-file account's identity or settings tier.
-   - CodexBar imports cookies in the shared supported-browser order; the shared access gate bounds Keychain prompts.
+   - Sharingan imports cookies in the shared supported-browser order; the shared access gate bounds Keychain prompts.
    - Ordinary CLI/test runtime does not import browser cookies unless
-     `CODEXBAR_ALLOW_BROWSER_COOKIE_IMPORT=1` is set. An explicit
-     `codexbar cookie refresh --provider grok` also opts in for that refresh.
+     `SHARINGAN_ALLOW_BROWSER_COOKIE_IMPORT=1` is set. An explicit
+     `sharingan cookie refresh --provider grok` also opts in for that refresh.
    - Validated sessions are stored in the Keychain-backed cookie cache and are
      reused first by later app and CLI fetches, so background work does not
      re-open the Chromium Keychain gate. The cached cookie is evicted only on
@@ -173,14 +173,14 @@ The grok.com billing gRPC-web endpoint remains a best-effort fallback.
 
 - File: `~/.grok/auth.json` (path overridable via `GROK_HOME`). This remains
   the preferred identity source when `grok login` has written a non-expired token.
-- Top-level keys are OIDC scope URLs. CodexBar prefers entries under
+- Top-level keys are OIDC scope URLs. Sharingan prefers entries under
   `https://auth.x.ai::<client-id>` (SuperGrok), falling back to
   `https://accounts.x.ai/sign-in` (legacy session).
 - Required fields per entry: `key` (bearer token), `refresh_token`, `expires_at`,
   `auth_mode`, `email`, `team_id`, `user_id`, `first_name`/`last_name`.
   `principal_type` is optional because older auth files do not include it.
 - Tokens are issued by `grok login` and expire after ~7 days; refresh is handled by
-  the CLI itself (CodexBar does not refresh; it just reads the cached credential).
+  the CLI itself (Sharingan does not refresh; it just reads the cached credential).
 - If `auth.json` is missing or expired, paste a SuperGrok bearer into Grok token
   accounts or set `GROK_OAUTH_TOKEN`. Cookie-shaped values and `xai-` management
   keys are rejected. The pasted token uses the same CLI-proxy credits URL.
@@ -230,7 +230,7 @@ The grok.com billing gRPC-web endpoint remains a best-effort fallback.
   ```
 - Auth errors surface as JSON-RPC errors with the message
   `"Authentication required to fetch billing data. Run 'grok login' to authenticate."`.
-- Timeouts: 4s for `initialize`, 3s for `_x.ai/billing`. CodexBar terminates the
+- Timeouts: 4s for `initialize`, 3s for `_x.ai/billing`. Sharingan terminates the
   child `grok` process on timeout to avoid leaking subprocesses.
 
 ## Mapping to `UsageSnapshot`
@@ -281,7 +281,7 @@ The grok.com billing gRPC-web endpoint remains a best-effort fallback.
       stop after ten bytes, reject overflow, and length-delimited reads cannot
       exceed the enclosing message. Reserved or compressed gRPC frame flags are
       rejected. Malformed data never qualifies for product shares or implicit zero.
-    - The menu rows and `codexbar usage --json` use the same `usage.details`
+    - The menu rows and `sharingan usage --json` use the same `usage.details`
       section; the breakdown adds no secondary quota window.
 - **Usage-limit reset coupons**:
   - From `GetRemainingResets`, not from `/v1/billing?format=credits`.
@@ -311,7 +311,7 @@ Each session directory contains `signals.json` with fields like:
 }
 ```
 
-CodexBar aggregates these into a `GrokLocalSessionSummary` (session count, total
+Sharingan aggregates these into a `GrokLocalSessionSummary` (session count, total
 tokens, last session time, primary model, per-day token buckets) and exposes it for
 diagnostics even when the RPC path is unavailable.
 
@@ -330,11 +330,11 @@ walking the session directory whenever they render.
 Wider dashboard ranges retain the scan's actual coverage instead of marking all of its token history unknown.
 For example, a 30-day scan still contributes its tokens in a 60-day view; older days remain unscanned.
 
-If remote billing fails, readable local sessions still update Usage & Spend and shared cards, including when CodexBar
+If remote billing fails, readable local sessions still update Usage & Spend and shared cards, including when Sharingan
 retains an older quota snapshot. The quota keeps its original timestamp; refreshed local tokens do not imply a fresh
 quota response. Results from a refresh whose account or configuration changed are discarded.
 
-`costUsage` is live-only data and is intentionally omitted from `codexbar usage`
+`costUsage` is live-only data and is intentionally omitted from `sharingan usage`
 JSON and persisted usage snapshots. Its absence in JSON does not establish that
 Usage & Spend lost the in-memory local token history. In Auto mode, an RPC
 `-32601` failure advances to the proxy/web strategy, which scans local sessions
@@ -353,17 +353,17 @@ points to `https://status.x.ai`.
 
 ## Key files
 
-- `Sources/CodexBarCore/Providers/Grok/GrokProviderDescriptor.swift`
-- `Sources/CodexBarCore/Providers/Grok/GrokAuth.swift`
-- `Sources/CodexBarCore/Providers/Grok/GrokPlan.swift`
-- `Sources/CodexBarCore/Providers/Grok/GrokRPCClient.swift`
-- `Sources/CodexBarCore/Providers/Grok/GrokCreditsProxyFetcher.swift`
-- `Sources/CodexBarCore/Providers/Grok/GrokRemainingResetsFetcher.swift`
-- `Sources/CodexBarCore/Providers/Grok/GrokCLISettingsFetcher.swift`
-- `Sources/CodexBarCore/Providers/Grok/GrokWebBillingFetcher.swift`
-- `Sources/CodexBarCore/Providers/Grok/GrokStatusProbe.swift`
-- `Sources/CodexBarCore/Providers/Grok/GrokLocalSessionScanner.swift`
-- `Sources/CodexBar/Providers/Grok/GrokProviderImplementation.swift`
+- `Sources/SharinganCore/Providers/Grok/GrokProviderDescriptor.swift`
+- `Sources/SharinganCore/Providers/Grok/GrokAuth.swift`
+- `Sources/SharinganCore/Providers/Grok/GrokPlan.swift`
+- `Sources/SharinganCore/Providers/Grok/GrokRPCClient.swift`
+- `Sources/SharinganCore/Providers/Grok/GrokCreditsProxyFetcher.swift`
+- `Sources/SharinganCore/Providers/Grok/GrokRemainingResetsFetcher.swift`
+- `Sources/SharinganCore/Providers/Grok/GrokCLISettingsFetcher.swift`
+- `Sources/SharinganCore/Providers/Grok/GrokWebBillingFetcher.swift`
+- `Sources/SharinganCore/Providers/Grok/GrokStatusProbe.swift`
+- `Sources/SharinganCore/Providers/Grok/GrokLocalSessionScanner.swift`
+- `Sources/Sharingan/Providers/Grok/GrokProviderImplementation.swift`
 
 ## Purchased credits in CLI JSON
 

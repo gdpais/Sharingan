@@ -1,11 +1,11 @@
 import Foundation
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct CLITimeZoneBootstrapTests {
     @Test
     func `derives IANA identifier from resolved zoneinfo path`() {
-        #expect(CodexBarCLI.linuxTimeZoneBootstrapIdentifier(
+        #expect(SharinganCLI.linuxTimeZoneBootstrapIdentifier(
             currentValue: nil,
             localTimeReadable: true,
             resolvedLocalTimePath: "/nix/store/hash-tzdata/share/zoneinfo/America/New_York")
@@ -18,12 +18,12 @@ struct CLITimeZoneBootstrapTests {
         ("/usr/share/zoneinfo/right/Etc/UTC", "Etc/UTC"),
     ])
     func `normalizes conventional zoneinfo paths`(resolvedPath: String, expectedIdentifier: String) {
-        #expect(CodexBarCLI.linuxTimeZoneIdentifier(from: resolvedPath) == expectedIdentifier)
+        #expect(SharinganCLI.linuxTimeZoneIdentifier(from: resolvedPath) == expectedIdentifier)
     }
 
     @Test
     func `does not bootstrap an unrecognized localtime path`() {
-        #expect(CodexBarCLI.linuxTimeZoneBootstrapIdentifier(
+        #expect(SharinganCLI.linuxTimeZoneBootstrapIdentifier(
             currentValue: nil,
             localTimeReadable: true,
             resolvedLocalTimePath: "/etc/localtime") == nil)
@@ -31,7 +31,7 @@ struct CLITimeZoneBootstrapTests {
 
     @Test(arguments: ["Asia/Kolkata", "", ":/custom/zoneinfo"])
     func `preserves caller timezone`(currentValue: String) {
-        #expect(CodexBarCLI.linuxTimeZoneBootstrapIdentifier(
+        #expect(SharinganCLI.linuxTimeZoneBootstrapIdentifier(
             currentValue: currentValue,
             localTimeReadable: true,
             resolvedLocalTimePath: "/nix/store/hash-tzdata/share/zoneinfo/Asia/Kolkata") == nil)
@@ -39,7 +39,7 @@ struct CLITimeZoneBootstrapTests {
 
     @Test
     func `does not set an unreadable localtime file`() {
-        #expect(CodexBarCLI.linuxTimeZoneBootstrapIdentifier(
+        #expect(SharinganCLI.linuxTimeZoneBootstrapIdentifier(
             currentValue: nil,
             localTimeReadable: false,
             resolvedLocalTimePath: "/nix/store/hash-tzdata/share/zoneinfo/Asia/Kolkata") == nil)
@@ -51,13 +51,13 @@ struct CLITimeZoneBootstrapTests {
         "/var/lib/timezone/Asia/Kolkata",
     ])
     func `rejects invalid or unrelated resolved paths`(resolvedPath: String) {
-        #expect(CodexBarCLI.linuxTimeZoneIdentifier(from: resolvedPath) == nil)
+        #expect(SharinganCLI.linuxTimeZoneIdentifier(from: resolvedPath) == nil)
     }
 
     @Test
     func `rejects invalid CoreFoundation timezone data`() {
-        #expect(!CodexBarCLI.primeCoreFoundationTimeZone(
-            identifier: "Etc/CodexBarInvalid",
+        #expect(!SharinganCLI.primeCoreFoundationTimeZone(
+            identifier: "Etc/SharinganInvalid",
             filePath: "/dev/null"))
     }
 
@@ -65,9 +65,9 @@ struct CLITimeZoneBootstrapTests {
     @Test
     func `primes the legacy formatter bridge with system timezone data`() throws {
         let resolvedPath = URL(fileURLWithPath: "/etc/localtime").resolvingSymlinksInPath().path
-        guard let identifier = CodexBarCLI.linuxTimeZoneIdentifier(from: resolvedPath) else { return }
+        guard let identifier = SharinganCLI.linuxTimeZoneIdentifier(from: resolvedPath) else { return }
 
-        #expect(CodexBarCLI.primeCoreFoundationTimeZone(
+        #expect(SharinganCLI.primeCoreFoundationTimeZone(
             identifier: identifier,
             filePath: "/etc/localtime"))
 

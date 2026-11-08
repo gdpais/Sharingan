@@ -1,7 +1,7 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct DashboardAccountInventoryTests {
     @Test(arguments: [DashboardIdentityMode.none, .redacted, .full])
@@ -80,7 +80,7 @@ struct DashboardAccountInventoryTests {
         let payload = self.payload(provider: .codex, id: "visible-profile")
         let account = hasVisibleAccount ? payload.dashboardAccount : nil
         let partials = DashboardInventoryPartialRecorder()
-        let result = await CodexBarCLI.collectAccountUsage(
+        let result = await SharinganCLI.collectAccountUsage(
             provider: .codex,
             accounts: [account],
             inventoryIncomplete: true,
@@ -106,7 +106,7 @@ struct DashboardAccountInventoryTests {
         "token:00000000-0000-0000-0000-00000000000\(index + 1)"
     }
 
-    private var tokenConfig: CodexBarConfig {
+    private var tokenConfig: SharinganConfig {
         let accounts = (0..<2).map { index in
             ProviderTokenAccount(
                 id: UUID(uuidString: "00000000-0000-0000-0000-00000000000\(index + 1)")!,
@@ -117,13 +117,13 @@ struct DashboardAccountInventoryTests {
         }
         var provider = ProviderConfig(id: .claude, enabled: true)
         provider.tokenAccounts = ProviderTokenAccountData(version: 1, accounts: accounts, activeIndex: 0)
-        return CodexBarConfig(providers: [provider])
+        return SharinganConfig(providers: [provider])
     }
 
     private func snapshot(
         _ payloads: [ProviderPayload],
         mode: DashboardIdentityMode = .none,
-        config: CodexBarConfig = CodexBarConfig(providers: []),
+        config: SharinganConfig = SharinganConfig(providers: []),
         expanded: Bool = true,
         adapter: DashboardAccountsInput? = nil) -> DashboardSnapshotPayload
     {
@@ -134,7 +134,7 @@ struct DashboardAccountInventoryTests {
             identityMode: mode,
             generatedAt: Date(timeIntervalSince1970: 0),
             refreshInterval: 60,
-            codexBarVersion: nil,
+            sharinganVersion: nil,
             accountCollections: adapter.map { [.claude: $0] } ?? [:],
             allAccounts: expanded)
     }

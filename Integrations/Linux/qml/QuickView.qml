@@ -5,7 +5,7 @@ import "../Shared/Usage.js" as Usage
 
 ApplicationWindow {
     id: window
-    title: "CodexBar"
+    title: "Sharingan"
     width: 420
     height: selectedIndex === -1 ? Math.min(650, 405 + desktop.entries.length * 54) : 680
     minimumWidth: 360; minimumHeight: 400
@@ -53,7 +53,7 @@ ApplicationWindow {
             Layout.leftMargin: 20; Layout.rightMargin: 14
             Layout.topMargin: 12; Layout.bottomMargin: 8
             Label {
-                text: "CodexBar"
+                text: "Sharingan"
                 color: window.primaryText
                 font.pixelSize: 14
                 font.weight: Font.DemiBold
@@ -430,7 +430,7 @@ ApplicationWindow {
             spacing: 1
             ActionRow { text: "Usage & Spend…"; onClicked: window.openPage("usage") }
             ActionRow { text: "Settings…"; onClicked: window.openPage("settings") }
-            ActionRow { text: "About CodexBar"; onClicked: about.open() }
+            ActionRow { text: "About Sharingan"; onClicked: about.open() }
             ActionRow { text: "Quit"; onClicked: Qt.quit() }
         }
     }
@@ -438,9 +438,9 @@ ApplicationWindow {
         id: about
         anchors.centerIn: parent
         modal: true
-        title: "About CodexBar"
+        title: "About Sharingan"
         standardButtons: Dialog.Ok
-        Label { text: "CodexBar Linux " + Qt.application.version; padding: 14 }
+        Label { text: "Sharingan Linux " + Qt.application.version; padding: 14 }
     }
     component ActionRow: Button {
         Layout.fillWidth: true

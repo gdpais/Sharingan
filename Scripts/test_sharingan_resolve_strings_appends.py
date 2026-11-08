@@ -31,21 +31,21 @@ class ResolveStringsAppendsTests(unittest.TestCase):
         self.assertEqual(out, '"a" = "A";\n"ours" = "Ours";\n"theirs" = "Theirs";\n')
 
     def test_rebrand_changes_only_upstream_values(self):
-        theirs = '/* OpenDesign */\n"Refresh CodexBar" = "Sign in, then refresh CodexBar. Run codexbar.";\n'
-        ours = '"CodexBar ours" = "Keep CodexBar here";\n'
+        theirs = '/* OpenDesign */\n"Refresh Sharingan" = "Sign in, then refresh Sharingan. Run sharingan.";\n'
+        ours = '"Sharingan ours" = "Keep Sharingan here";\n'
         code, out, _ = self.run_resolver(conflict(ours, "", theirs), "--rebrand")
         self.assertEqual(code, 0)
-        self.assertIn('"CodexBar ours" = "Keep CodexBar here";\n', out)
+        self.assertIn('"Sharingan ours" = "Keep Sharingan here";\n', out)
         self.assertIn('/* OpenDesign */\n', out)
-        self.assertIn('"Refresh CodexBar" = "Sign in, then refresh Sharingan. Run codexbar.";\n', out)
+        self.assertIn('"Refresh Sharingan" = "Sign in, then refresh Sharingan. Run sharingan.";\n', out)
 
     def test_without_rebrand_upstream_values_are_untouched(self):
-        code, out, _ = self.run_resolver(conflict("", "", '"k" = "CodexBar";\n'))
+        code, out, _ = self.run_resolver(conflict("", "", '"k" = "Sharingan";\n'))
         self.assertEqual(code, 0)
-        self.assertEqual(out, '"k" = "CodexBar";\n')
+        self.assertEqual(out, '"k" = "Sharingan";\n')
 
     def test_edited_line_conflict_is_left_for_a_human(self):
-        text = conflict('"k" = "Sharingan";\n', '"k" = "CodexBar";\n', '"k" = "CodexBar!";\n')
+        text = conflict('"k" = "Sharingan";\n', '"k" = "Sharingan";\n', '"k" = "Sharingan!";\n')
         code, out, stderr = self.run_resolver(text, "--rebrand")
         self.assertEqual(code, 1)
         self.assertEqual(out, text)

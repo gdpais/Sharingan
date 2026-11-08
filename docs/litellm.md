@@ -2,7 +2,7 @@
 summary: "LiteLLM provider setup and usage data shape."
 read_when:
   - Configuring LiteLLM usage tracking
-  - Troubleshooting LiteLLM API-key usage in CodexBar
+  - Troubleshooting LiteLLM API-key usage in Sharingan
 ---
 
 # LiteLLM
@@ -28,7 +28,7 @@ export LITELLM_API_KEY=sk-...
 export LITELLM_BASE_URL=https://litellm.example.com
 ```
 
-`LITELLM_BASE_URL` may include `/v1`; CodexBar strips that suffix before calling LiteLLM management endpoints.
+`LITELLM_BASE_URL` may include `/v1`; Sharingan strips that suffix before calling LiteLLM management endpoints.
 
 The base URL must use HTTPS unless it names a loopback or private-network address, or a `.local` mDNS host,
 and must not embed credentials because the API key is sent to it as a bearer token. Plain HTTP remains
@@ -48,7 +48,7 @@ The provider calls:
 2. `GET /user/info?user_id=<user_id>` to read personal spend, budget, and teams.
 3. For team-only keys without a `user_id`, `GET /team/info?team_id=<team_id>` to read team spend and budget.
 
-All requests use `Authorization: Bearer <apiKey>`. CodexBar does not request or store a LiteLLM master key.
+All requests use `Authorization: Bearer <apiKey>`. Sharingan does not request or store a LiteLLM master key.
 
 For user-bound keys, personal usage is shown as the primary window. If the key has a team, its exact matching team
 budget is shown as the secondary window and becomes the automatic menu bar metric because that budget is enforced for
@@ -58,14 +58,14 @@ when LiteLLM does not configure a budget.
 CLI text/cards and native menus show budget amounts as details, with actual reset dates separately; an absent reset
 never turns the amount into a reset clock.
 
-Budget tracking requires access to `/key/info` and the corresponding user or team information endpoint. CodexBar
+Budget tracking requires access to `/key/info` and the corresponding user or team information endpoint. Sharingan
 validates returned user and team IDs against `/key/info` before displaying budget usage.
 
 ### Spend-only deployments
 
-When `/key/info` returns HTTP 401, 403, or 404, CodexBar tries `GET /key/spend/report`. If that report also returns
+When `/key/info` returns HTTP 401, 403, or 404, Sharingan tries `GET /key/spend/report`. If that report also returns
 401, 403, or 404, it tries `GET /user/spend/report`. These routes are deployment-dependent; the virtual key must be
-permitted to read a self-scoped report. CodexBar sends only `start_date` (the first day of the current UTC month) and
+permitted to read a self-scoped report. Sharingan sends only `start_date` (the first day of the current UTC month) and
 `end_date` (today in UTC), without `api_key` or `internal_user_id` overrides.
 
 The snapshot sums each row's `total_cost` once and labels the amount **Key spend only** or **User spend only**, with
@@ -100,5 +100,5 @@ have permission to read its user's activity. The upstream endpoint is beta.
 
 ## Security
 
-Treat LiteLLM keys as secrets. CodexBar stores configured keys only in provider config or token-account storage and
+Treat LiteLLM keys as secrets. Sharingan stores configured keys only in provider config or token-account storage and
 sends them only to the configured LiteLLM base URL.

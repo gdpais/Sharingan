@@ -7,16 +7,16 @@ plugin_scope: Host-owned website session cookies with the matching Chrome User-A
 read_when:
   - Configuring WorkBuddy credit tracking
   - Debugging WorkBuddy session-cookie or billing parsing
-  - Explaining why CodexBar asks for a WorkBuddy website session
+  - Explaining why Sharingan asks for a WorkBuddy website session
 ---
 
 # WorkBuddy Provider
 
 [WorkBuddy](https://www.workbuddy.cn) is Tencent's desktop AI work assistant. Its usage is billed in credits through
-the CodeBuddy / Tencent Cloud Code Assistant billing system. CodexBar shows the amounts reported on the signed-in
+the CodeBuddy / Tencent Cloud Code Assistant billing system. Sharingan shows the amounts reported on the signed-in
 **Plans & usage** page (`https://www.workbuddy.cn/profile/plans-usage`).
 
-CodexBar reads the website billing API with a **website session**:
+Sharingan reads the website billing API with a **website session**:
 
 ```text
 POST https://www.workbuddy.cn/billing/meter/get-user-resource-summary
@@ -29,19 +29,19 @@ Cookie: …
 WorkBuddy is off by default. In Settings → Providers → WorkBuddy, enable it and choose a cookie source:
 
 - **Automatic:** sign in to `www.workbuddy.cn` in Chrome, then refresh once (or run
-  `codexbar cookie refresh --provider workbuddy --allow-keychain-prompt`). Only Chrome is queried. The imported
+  `sharingan cookie refresh --provider workbuddy --allow-keychain-prompt`). Only Chrome is queried. The imported
   session is cached after the billing API accepts it, so later background refreshes do not need a Keychain prompt.
 - **Manual:** paste the Cookie header from a Chrome request to `www.workbuddy.cn/profile/plans-usage` into
   **Cookie header**. It stays pinned to that account with no Chrome fallback.
 - **Off:** disables cookie access and billing requests.
 
 The WorkBuddy desktop app calls the same endpoints with its own bearer token, which it stores encrypted under
-`~/.workbuddy/`. CodexBar never reads or decrypts that token.
+`~/.workbuddy/`. Sharingan never reads or decrypts that token.
 
 ### User-Agent binding
 
 WorkBuddy binds the website session to the browser User-Agent: the same cookies return HTTP 401 with any other
-User-Agent, including an older Chrome version. Chrome's reduced User-Agent differs only by major version, so CodexBar
+User-Agent, including an older Chrome version. Chrome's reduced User-Agent differs only by major version, so Sharingan
 reads the installed Chrome version (`/Applications/Google Chrome.app` or `~/Applications/Google Chrome.app`) and sends
 `Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/<major>.0.0.0 Safari/537.36`.
 If that is rejected, it retries once with the previous major version, which covers an installed Chrome update that
@@ -86,7 +86,7 @@ order, and resource IDs); the plugin never uses, displays, or logs them.
 | `SubscriptionPackageName` | Header plan label, as returned (for example `体验版` for the free tier). |
 
 **Left** and **Total** rows appear instead of the meter when the total is zero; any reserved credits remain visible.
-Amounts use CodexBar's shared number formatting, including thousands separators.
+Amounts use Sharingan's shared number formatting, including thousands separators.
 
 ## Limitations
 

@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 enum ProviderPluginCancellationTestSupport {
     static func checkCallerCancellation(
@@ -46,7 +46,7 @@ enum ProviderPluginCancellationTestSupport {
               }
             });
             """,
-            resourceBundle: CodexBarCoreResources.bundle,
+            resourceBundle: SharinganCoreResources.bundle,
             transport: ProviderHTTPTransportHandler { request in
                 #expect(!waitingForAdmission, "Cancelled admission must not reach transport")
                 try await hold(request)

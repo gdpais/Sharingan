@@ -15,15 +15,15 @@ Factory (displayed as "Droid") supports API-key and web-based auth. Source mode 
 ### API (`api`)
 1. Resolve a Factory API key from, in order:
    - `~/.sharingan/config.json` `providers[].apiKey` for `factory` (also via Settings or
-     `codexbar config set-api-key --provider factory`)
+     `sharingan config set-api-key --provider factory`)
    - `FACTORY_API_KEY`
    - optional `~/.factory/.env` (`FACTORY_API_KEY=…` or `export FACTORY_API_KEY=…`)
 2. Call Factory APIs with `Authorization: Bearer <apiKey>` (same billing-limits / bearer path as session tokens).
 
 ### Web (`web`)
 Fetch attempts run in this exact order:
-1) **Cached cookie header** (Keychain cache `com.steipete.codexbar.cache`, account `cookie.factory`).
-2) **Stored session** (`~/Library/Application Support/CodexBar/factory-session.json`).
+1) **Cached cookie header** (Keychain cache `com.gdpais.sharingan.cache`, account `cookie.factory`).
+2) **Stored session** (`~/Library/Application Support/Sharingan/factory-session.json`).
 3) **Stored bearer token** (same session file).
 4) **Stored WorkOS refresh token** (same session file).
 5) **Local storage WorkOS tokens** (Safari + Chrome/Chromium/Arc leveldb).
@@ -58,9 +58,9 @@ Manual option:
 
 ## CLI
 ```bash
-printf '%s' "$FACTORY_API_KEY" | codexbar config set-api-key --provider factory --stdin
-codexbar usage --provider factory --source api
-codexbar usage --provider factory --source web
+printf '%s' "$FACTORY_API_KEY" | sharingan config set-api-key --provider factory --stdin
+sharingan usage --provider factory --source api
+sharingan usage --provider factory --source web
 ```
 
 ## Cookie import
@@ -133,7 +133,7 @@ Endpoints:
   localStorage; use a Factory API key or a supported browser session in that case.
 
 ## Session storage
-- File: `~/Library/Application Support/CodexBar/factory-session.json`
+- File: `~/Library/Application Support/Sharingan/factory-session.json`
 - Stores cookies + bearer token + WorkOS refresh token.
 
 ## Snapshot mapping
@@ -142,12 +142,12 @@ Endpoints:
 - Plan/tier + org name from auth response.
 
 ## Troubleshooting
-- Missing API key: set `FACTORY_API_KEY`, Settings → Droid → API key, or `codexbar config set-api-key --provider factory`.
+- Missing API key: set `FACTORY_API_KEY`, Settings → Droid → API key, or `sharingan config set-api-key --provider factory`.
 - Unauthorized API key (401/403): regenerate at app.factory.ai/settings/api-keys.
 - Missing session: log in to app.factory.ai in a supported browser, or paste a Cookie header in Manual mode.
 
 ## Key files
-- `Sources/CodexBarCore/Providers/Factory/FactoryProviderDescriptor.swift`
-- `Sources/CodexBarCore/Providers/Factory/FactorySettingsReader.swift`
-- `Sources/CodexBarCore/Providers/Factory/FactoryStatusProbe.swift`
-- `Sources/CodexBarCore/Providers/Factory/FactoryLocalStorageImporter.swift`
+- `Sources/SharinganCore/Providers/Factory/FactoryProviderDescriptor.swift`
+- `Sources/SharinganCore/Providers/Factory/FactorySettingsReader.swift`
+- `Sources/SharinganCore/Providers/Factory/FactoryStatusProbe.swift`
+- `Sources/SharinganCore/Providers/Factory/FactoryLocalStorageImporter.swift`

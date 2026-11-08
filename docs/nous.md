@@ -2,7 +2,7 @@
 summary: "Nous Portal provider: Hermes Agent OAuth token reuse, account endpoint parsing, and credit display."
 read_when:
   - Debugging Nous Portal credit or subscription parsing
-  - Explaining why CodexBar asks to run `hermes` to refresh the token
+  - Explaining why Sharingan asks to run `hermes` to refresh the token
   - Updating Nous Portal setup or environment variables
 ---
 
@@ -14,11 +14,11 @@ balance on top of that grant.
 
 ## Authentication
 
-Account and billing endpoints require the Hermes Agent device-code OAuth login. Inference API keys work only for `/v1/chat/completions` and `/v1/completions`, not credits. CodexBar runs no login and stores no Nous secrets:
+Account and billing endpoints require the Hermes Agent device-code OAuth login. Inference API keys work only for `/v1/chat/completions` and `/v1/completions`, not credits. Sharingan runs no login and stores no Nous secrets:
 
 1. Sign in once with Hermes Agent (`hermes` and choose Nous Portal, or `hermes auth add nous`).
 2. Hermes writes the token to `~/.hermes/auth.json` (and a cross-profile copy to `~/.hermes/shared/nous_auth.json`).
-3. CodexBar reads the access token from those files on every refresh.
+3. Sharingan reads the access token from those files on every refresh.
 
 Overrides:
 
@@ -41,9 +41,9 @@ A stored host outside `nousresearch.com` is ignored, logged as a warning, and re
 `rejectedStoredHost=<host>`; the request then goes to the default portal. Expired tokens, whether from the auth file or
 from `NOUS_PORTAL_ACCESS_TOKEN`, are rejected before any request is made.
 
-### Why CodexBar never refreshes the token
+### Why Sharingan never refreshes the token
 
-Access tokens last about an hour. Refresh tokens rotate on every use; replay revokes the entire session. To avoid logging Hermes out, CodexBar reads only the access token and asks you to run `hermes` when it expires. Any Hermes command or a running Hermes gateway renews it.
+Access tokens last about an hour. Refresh tokens rotate on every use; replay revokes the entire session. To avoid logging Hermes out, Sharingan reads only the access token and asks you to run `hermes` when it expires. Any Hermes command or a running Hermes gateway renews it.
 
 ## Data Source
 
@@ -69,13 +69,13 @@ monthly meter exists, while accounts with a monthly meter keep their usage perce
 
 ## Local usage and spend
 
-Enable **Include OpenCodex usage logs** (default off) to attribute ledger rows with `provider: "nous"` to Nous in Usage & Spend. CodexBar reads `~/.opencodex/usage.jsonl` or `$OPENCODEX_HOME/usage.jsonl`, without running an extractor or reading Hermes's session database. These estimates retain the OpenCodex source label, separate from Portal credits. Nous has no native token-cost scanner; provider-level cost capability is disabled.
+Enable **Include OpenCodex usage logs** (default off) to attribute ledger rows with `provider: "nous"` to Nous in Usage & Spend. Sharingan reads `~/.opencodex/usage.jsonl` or `$OPENCODEX_HOME/usage.jsonl`, without running an extractor or reading Hermes's session database. These estimates retain the OpenCodex source label, separate from Portal credits. Nous has no native token-cost scanner; provider-level cost capability is disabled.
 
 The [extractor supplied for #4008](https://github.com/steipete/CodexBar/issues/4008#issuecomment-5843400899)
 writes `provider: "nous"`, epoch-second `timestamp` values, the exact inference `model` ID, and the standard
 `usage` token counters. It emits one aggregate per session/model at `first_seen`, not one row per API call;
 dashboard request counts therefore count ledger rows, and activity is dated to that first timestamp.
-`usageStatus: "estimated"` rows use CodexBar's exact Nous/model catalog price or a custom pricing override.
+`usageStatus: "estimated"` rows use Sharingan's exact Nous/model catalog price or a custom pricing override.
 Missing prices stay unpriced with token activity preserved; another vendor's rates are never inferred from a
 model prefix. `unreported` rows retain tokens without a dollar estimate. See [model pricing](model-pricing.md).
 
@@ -86,7 +86,7 @@ they are neither a pricing contract nor Portal-metered credits. Its `conversatio
 ## CLI
 
 ```bash
-codexbar usage --provider nous
+sharingan usage --provider nous
 ```
 
 Aliases: `nous-portal`, `hermes`. Source modes: `auto`, `api`.

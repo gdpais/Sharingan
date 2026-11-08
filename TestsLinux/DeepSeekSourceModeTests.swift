@@ -1,25 +1,25 @@
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 struct DeepSeekSourceModeTests {
     @Test
     func `Auto with an API key passes the Linux web support gate`() async {
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(
             .auto, provider: .deepseek, environment: ["DEEPSEEK_API_KEY": "synthetic-api-key"]))
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(
             .auto, provider: .deepseek, environment: ["DEEPSEEK_KEY": "synthetic-api-key"]))
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(
             .auto, provider: .deepseek, environment: [:]))
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(
             .auto, provider: .deepseek, environment: ["DEEPSEEK_API_KEY": " \n "]))
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(
             .web, provider: .deepseek, environment: ["DEEPSEEK_API_KEY": "synthetic-api-key"]))
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(.api, provider: .deepseek, environment: [:]))
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(.api, provider: .deepseek, environment: [:]))
     }
 }
 
-extension CodexBarCLI {
+extension SharinganCLI {
     static func sourceModeRequiresWebSupport(
         _ sourceMode: ProviderSourceMode,
         provider: UsageProvider,

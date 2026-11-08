@@ -1,7 +1,7 @@
 import Foundation
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 struct DashboardClaudeSwapCollectionTests {
     @Test(arguments: [false, true], [false, true])
@@ -24,7 +24,7 @@ struct DashboardClaudeSwapCollectionTests {
             persistCLISessions: false)
         let usage = try JSONDecoder().decode(
             OAuthUsageResponse.self, from: Data(#"{"five_hour":{"utilization":25}}"#.utf8))
-        let output = try await CodexBarCLI.serveUsageOutput(
+        let output = try await SharinganCLI.serveUsageOutput(
             selection: .custom([.claude]),
             context: context,
             fetchUsage: { provider, tokenContext, command, publish in
@@ -54,7 +54,7 @@ struct DashboardClaudeSwapCollectionTests {
                     await ClaudeUsageFetcher.$loadOAuthCredentialsOverride.withValue(loadCredentials) {
                         await ClaudeUsageFetcher.$fetchOAuthUsageOverride.withValue(fetchUsage) {
                             await ClaudeUsageFetcher.$fetchOAuthProfileOverride.withValue(fetchProfile) {
-                                await CodexBarCLI.fetchUsageOutputs(
+                                await SharinganCLI.fetchUsageOutputs(
                                     provider: provider,
                                     status: nil,
                                     tokenContext: tokenContext,
@@ -80,11 +80,11 @@ struct DashboardClaudeSwapCollectionTests {
     @Test
     func `adapter preference does not suppress other providers or disabled adapter configurations`() {
         let configured = self.config(adapterEnabled: true)
-        #expect(!CodexBarCLI.serveIncludesConfiguredAccounts(provider: .claude, config: configured, allAccounts: true))
-        #expect(CodexBarCLI.serveIncludesConfiguredAccounts(provider: .ibmbob, config: configured, allAccounts: true))
+        #expect(!SharinganCLI.serveIncludesConfiguredAccounts(provider: .claude, config: configured, allAccounts: true))
+        #expect(SharinganCLI.serveIncludesConfiguredAccounts(provider: .ibmbob, config: configured, allAccounts: true))
         var disabled = configured
         disabled.providers[0].enabled = false
-        #expect(CodexBarCLI.serveIncludesConfiguredAccounts(provider: .claude, config: disabled, allAccounts: true))
+        #expect(SharinganCLI.serveIncludesConfiguredAccounts(provider: .claude, config: disabled, allAccounts: true))
     }
 
     private var accounts: [ProviderTokenAccount] {
@@ -98,12 +98,12 @@ struct DashboardClaudeSwapCollectionTests {
         }
     }
 
-    private func config(adapterEnabled: Bool) -> CodexBarConfig {
+    private func config(adapterEnabled: Bool) -> SharinganConfig {
         let data = ProviderTokenAccountData(version: 1, accounts: self.accounts, activeIndex: 1)
         var claude = ProviderConfig(id: .claude, enabled: true, tokenAccounts: data)
         claude.source = .oauth
         claude.claudeSwapEnabled = adapterEnabled
-        return CodexBarConfig(providers: [claude, ProviderConfig(id: .ibmbob, enabled: true, tokenAccounts: data)])
+        return SharinganConfig(providers: [claude, ProviderConfig(id: .ibmbob, enabled: true, tokenAccounts: data)])
     }
 }
 

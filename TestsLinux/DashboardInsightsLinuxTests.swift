@@ -1,14 +1,14 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct DashboardInsightsLinuxTests {
     private static let generatedAt = Date(timeIntervalSince1970: 1_793_880_000)
 
     @Test
     func `producer snapshot carries insights and redacts project identity`() async throws {
-        let cost = CodexBarCLI.makeCostPayload(
+        let cost = SharinganCLI.makeCostPayload(
             provider: .claude,
             snapshot: Self.snapshot(calendar: DashboardInsightsBuilder.defaultCalendar()),
             error: nil,
@@ -17,12 +17,12 @@ struct DashboardInsightsLinuxTests {
             collectUsage: { _ in UsageCommandOutput() },
             collectCost: { _, _ in [cost] },
             now: { Self.generatedAt })
-        let config = CodexBarConfig(providers: [ProviderConfig(id: .claude, enabled: true)])
+        let config = SharinganConfig(providers: [ProviderConfig(id: .claude, enabled: true)])
 
         let redacted = try await producer.collect(
             config: config,
             refreshInterval: 0,
-            codexBarVersion: nil,
+            sharinganVersion: nil,
             identityMode: .redacted)
         let insights = try #require(redacted.payload.insights)
         #expect(insights.currencyCode == "USD")
@@ -41,7 +41,7 @@ struct DashboardInsightsLinuxTests {
         let full = try await producer.collect(
             config: config,
             refreshInterval: 0,
-            codexBarVersion: nil,
+            sharinganVersion: nil,
             identityMode: .full)
         #expect(full.payload.insights?.projectTrends?.projects.first?.label == "linux-secret-project")
         #expect(full.payload.insights?.projectTrends?.projects.first?.path == "/home/fixture/linux-secret-project")
@@ -54,9 +54,9 @@ struct DashboardInsightsLinuxTests {
             collectCost: { _, _ in [] },
             now: { Self.generatedAt })
         let result = try await producer.collect(
-            config: CodexBarConfig(providers: [ProviderConfig(id: .claude, enabled: true)]),
+            config: SharinganConfig(providers: [ProviderConfig(id: .claude, enabled: true)]),
             refreshInterval: 0,
-            codexBarVersion: nil)
+            sharinganVersion: nil)
         #expect(result.payload.insights == nil)
         let json = try #require(String(data: JSONEncoder().encode(result.payload), encoding: .utf8))
         #expect(!json.contains("insights"))

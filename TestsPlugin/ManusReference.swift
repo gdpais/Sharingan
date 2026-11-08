@@ -1,1 +1,1 @@
-../Tests/CodexBarTests/ManusReference.swift
+../Tests/SharinganTests/ManusReference.swift

@@ -13,13 +13,13 @@
   "assets": [
     "Sharingan-macos-universal-{version}.zip",
     "Sharingan-macos-universal-{version}.dSYM.zip",
-    "CodexBarCLI-v{version}-linux-x86_64.tar.gz",
-    "CodexBarCLI-v{version}-linux-aarch64.tar.gz",
-    "CodexBarCLI-v{version}-linux-musl-x86_64.tar.gz",
-    "CodexBarCLI-v{version}-linux-musl-aarch64.tar.gz",
-    "CodexBarCLI-v{version}-macos-arm64.tar.gz",
-    "CodexBarCLI-v{version}-macos-x86_64.tar.gz",
-    "CodexBarDesktop-v{version}-linux-x86_64.tar.gz",
-    "CodexBarDesktop-v{version}-linux-aarch64.tar.gz"
+    "SharinganCLI-v{version}-linux-x86_64.tar.gz",
+    "SharinganCLI-v{version}-linux-aarch64.tar.gz",
+    "SharinganCLI-v{version}-linux-musl-x86_64.tar.gz",
+    "SharinganCLI-v{version}-linux-musl-aarch64.tar.gz",
+    "SharinganCLI-v{version}-macos-arm64.tar.gz",
+    "SharinganCLI-v{version}-macos-x86_64.tar.gz",
+    "SharinganDesktop-v{version}-linux-x86_64.tar.gz",
+    "SharinganDesktop-v{version}-linux-aarch64.tar.gz"
   ]
 }

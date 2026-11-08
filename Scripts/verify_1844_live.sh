@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Live verification for the Claude credential-ownership boundary.
-# CodexBar must use Claude-owned interfaces and never read Claude Code's Keychain item itself.
+# Sharingan must use Claude-owned interfaces and never read Claude Code's Keychain item itself.
 set -euo pipefail
 umask 077
 
@@ -13,11 +13,11 @@ fail() {
   exit 1
 }
 
-ARTIFACT="$(mktemp -d "${TMPDIR:-/tmp}/codexbar-claude-ownership.XXXXXX")"
+ARTIFACT="$(mktemp -d "${TMPDIR:-/tmp}/sharingan-claude-ownership.XXXXXX")"
 APP_BUNDLE="$ROOT/Sharingan.app"
-CLI="$APP_BUNDLE/Contents/Helpers/CodexBarCLI"
+CLI="$APP_BUNDLE/Contents/Helpers/SharinganCLI"
 APP="$APP_BUNDLE/Contents/MacOS/Sharingan"
-LIVE_TIMEOUT_SECONDS="${CODEXBAR_VERIFY_LIVE_TIMEOUT_SECONDS:-45}"
+LIVE_TIMEOUT_SECONDS="${SHARINGAN_VERIFY_LIVE_TIMEOUT_SECONDS:-45}"
 
 write_source_snapshot() {
   local output="$1"
@@ -44,10 +44,10 @@ write_source_snapshot() {
 }
 
 case "$LIVE_TIMEOUT_SECONDS" in
-  ''|*[!0-9]*) fail "CODEXBAR_VERIFY_LIVE_TIMEOUT_SECONDS must be an integer from 5 through 300." ;;
+  ''|*[!0-9]*) fail "SHARINGAN_VERIFY_LIVE_TIMEOUT_SECONDS must be an integer from 5 through 300." ;;
 esac
 if (( LIVE_TIMEOUT_SECONDS < 5 || LIVE_TIMEOUT_SECONDS > 300 )); then
-  fail "CODEXBAR_VERIFY_LIVE_TIMEOUT_SECONDS must be an integer from 5 through 300."
+  fail "SHARINGAN_VERIFY_LIVE_TIMEOUT_SECONDS must be an integer from 5 through 300."
 fi
 
 CLAUDE_BIN="$(command -v claude || true)"
@@ -102,7 +102,7 @@ fi
 TEST_DYLD_FRAMEWORK_PATH="$TEST_FRAMEWORK_DIR${DYLD_FRAMEWORK_PATH:+:$DYLD_FRAMEWORK_PATH}"
 
 DYLD_FRAMEWORK_PATH="$TEST_DYLD_FRAMEWORK_PATH" \
-  CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS=1 swift test --no-parallel \
+  SHARINGAN_SUPPRESS_TEST_KEYCHAIN_ACCESS=1 swift test --no-parallel \
   --filter ClaudeCredentialOwnershipBoundaryTests \
   --filter ClaudeOAuthNoninteractiveCredentialLoadTests \
   --filter ClaudeOAuthCredentialsStoreTemporaryKeychainCacheTests \
@@ -128,7 +128,7 @@ DYLD_FRAMEWORK_PATH="$TEST_DYLD_FRAMEWORK_PATH" \
 
 DYLD_FRAMEWORK_PATH="$TEST_DYLD_FRAMEWORK_PATH" \
   LIVE_CLAUDE_KEYCHAIN_PROOF=1 \
-  CODEXBAR_ALLOW_TEST_KEYCHAIN_ACCESS=1 \
+  SHARINGAN_ALLOW_TEST_KEYCHAIN_ACCESS=1 \
   swift test --no-parallel --filter ClaudeKeychainLiveProofTests \
   2>&1 | tee "$ARTIFACT/live-owner-tests.log"
 log "Phase 1 passed"
@@ -173,7 +173,7 @@ log "Phase 2 passed"
 
 log "Phase 3: bounded app-Auto owner-mediated fetch plus process and unified-log audit"
 VERIFIER_HELPER_SOURCE="$ARTIFACT/verifier-helper.c"
-VERIFIER_HELPER="$ARTIFACT/CodexBarOwnershipVerifierHelper"
+VERIFIER_HELPER="$ARTIFACT/SharinganOwnershipVerifierHelper"
 cat >"$VERIFIER_HELPER_SOURCE" <<'EOF'
 #include <errno.h>
 #include <os/log.h>
@@ -192,7 +192,7 @@ int main(int argc, char *argv[]) {
         return 71;
     }
     if (argc == 3 && strcmp(argv[1], "--log-canary") == 0) {
-        os_log_t logger = os_log_create("com.steipete.codexbar.verifier", "visibility");
+        os_log_t logger = os_log_create("com.gdpais.sharingan.verifier", "visibility");
         os_log_with_type(logger, OS_LOG_TYPE_DEFAULT, "%{public}s", argv[2]);
         usleep(200000);
         return 0;
@@ -237,13 +237,13 @@ set +e
 "$VERIFIER_HELPER" --group-exec /usr/bin/env \
   -u ANTHROPIC_ADMIN_KEY \
   -u ANTHROPIC_ADMIN_API_KEY \
-  -u CODEXBAR_CLAUDE_OAUTH_TOKEN \
-  -u CODEXBAR_CLAUDE_OAUTH_SCOPES \
-  -u CODEXBAR_CLAUDE_OAUTH_CLIENT_ID \
-  -u CODEXBAR_CLAUDE_SECURITY_CLI_KEYCHAIN \
-  -u CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS \
+  -u SHARINGAN_CLAUDE_OAUTH_TOKEN \
+  -u SHARINGAN_CLAUDE_OAUTH_SCOPES \
+  -u SHARINGAN_CLAUDE_OAUTH_CLIENT_ID \
+  -u SHARINGAN_CLAUDE_SECURITY_CLI_KEYCHAIN \
+  -u SHARINGAN_SUPPRESS_TEST_KEYCHAIN_ACCESS \
   SHARINGAN_CONFIG="$ISOLATED_CONFIG" \
-  CODEXBAR_DISABLE_KEYCHAIN_ACCESS=1 \
+  SHARINGAN_DISABLE_KEYCHAIN_ACCESS=1 \
   CLAUDE_CLI_PATH="$CLAUDE_BIN" \
   DISABLE_AUTOUPDATER=1 \
   "$CLI" usage --provider claude --source auto --app-auto-verifier --format json --json-only \
@@ -297,8 +297,8 @@ fi
 SECURITY_DESCENDANT_COUNT="$(wc -l <"$SECURITY_DESCENDANTS" | tr -d ' ')"
 
 # Claude can legitimately start its own MCP subprocesses; those owner-controlled tools may in turn use the macOS
-# `security` CLI (for example, GitHub tooling). Reject only a security descendant whose ancestry reaches CodexBarCLI
-# without first crossing the installed `claude` owner boundary. A direct or shell-wrapped CodexBar reader therefore
+# `security` CLI (for example, GitHub tooling). Reject only a security descendant whose ancestry reaches SharinganCLI
+# without first crossing the installed `claude` owner boundary. A direct or shell-wrapped Sharingan reader therefore
 # fails, while Claude-owned descendants remain visible in the retained evidence without being misattributed.
 /usr/bin/awk -v root_pid="$CLI_PID" '
   {
@@ -332,7 +332,7 @@ OWNER_SECURITY_DESCENDANT_COUNT=$((SECURITY_DESCENDANT_COUNT - UNOWNED_SECURITY_
 
 # This canary emits only a public OSLog marker. It performs no Keychain query and proves that the bounded
 # `log show` window is visible before a zero-event result is accepted.
-LOG_CANARY="codexbar-ownership-log-canary-$(/usr/bin/uuidgen)"
+LOG_CANARY="sharingan-ownership-log-canary-$(/usr/bin/uuidgen)"
 "$VERIFIER_HELPER" --log-canary "$LOG_CANARY" &
 LOG_CANARY_PID=$!
 wait "$LOG_CANARY_PID"
@@ -340,7 +340,7 @@ wait "$LOG_CANARY_PID"
 sleep 2
 END_LOCAL="$(date '+%Y-%m-%d %H:%M:%S')"
 UNIFIED_LOG="$ARTIFACT/unified.log"
-ATTRIBUTED_EVENTS="$ARTIFACT/codexbar-attributed-prompt-authorization-events.log"
+ATTRIBUTED_EVENTS="$ARTIFACT/sharingan-attributed-prompt-authorization-events.log"
 PREDICATE="((eventMessage CONTAINS[c] \"$LOG_CANARY\") OR ((((processID == $CLI_PID) OR (process == \"security\") OR (process == \"securityd\") OR (process == \"coreauthd\") OR (process == \"authd\") OR (process == \"SecurityAgent\") OR (process == \"authorizationhost\") OR (process == \"CoreServicesUIAgent\") OR (process == \"UserNotificationCenter\")) AND ((eventMessage CONTAINS[c] \"SecItem\") OR (eventMessage CONTAINS[c] \"QueryKeychainUse\") OR (eventMessage CONTAINS[c] \"LAContext\") OR (eventMessage CONTAINS[c] \"ACL\") OR (eventMessage CONTAINS[c] \"Claude Code-credentials\") OR (eventMessage CONTAINS[c] \"keychain prompt\") OR (eventMessage CONTAINS[c] \"authorization\")))))"
 
 /usr/bin/log show \
@@ -356,7 +356,7 @@ if ! rg -Fq "$LOG_CANARY" "$UNIFIED_LOG"; then
   fail "Unified-log visibility canary was not observable; zero events would not be meaningful."
 fi
 
-ATTRIBUTION_PATTERN="CodexBarCLI|\\($CLI_PID\\)|\\[$CLI_PID:|pid[=: ]+$CLI_PID"
+ATTRIBUTION_PATTERN="SharinganCLI|\\($CLI_PID\\)|\\[$CLI_PID:|pid[=: ]+$CLI_PID"
 while read -r security_pid _; do
   [[ "$security_pid" =~ ^[0-9]+$ ]] || continue
   ATTRIBUTION_PATTERN+="|\\($security_pid\\)|\\[$security_pid:|pid[=: ]+$security_pid"
@@ -391,7 +391,7 @@ fi
     echo "release-executable-${report_binary_index}-sha256: $binary_sha256"
   done <"$BINARY_HASH_MANIFEST"
   echo "claude-owner-authenticated: $CLAUDE_OWNER_AUTHENTICATED"
-  echo "codexbar-owned-oauth-cache-access: disabled-for-direct-oauth-absence-proof"
+  echo "sharingan-owned-oauth-cache-access: disabled-for-direct-oauth-absence-proof"
   echo "cli-timeout-seconds: $LIVE_TIMEOUT_SECONDS"
   echo "cli-timed-out: $CLI_TIMED_OUT"
   echo "cli-exit: $CLI_STATUS"
@@ -416,7 +416,7 @@ if [[ "$LIVE_PROVIDER" != "claude" || "$LIVE_SOURCE" != "claude" || "$LIVE_USAGE
   fail "Live app Auto did not safely fall back to the Claude owner CLI; see $STDOUT"
 fi
 if [[ "$UNOWNED_SECURITY_DESCENDANT_COUNT" -ne 0 ]]; then
-  fail "CodexBarCLI launched /usr/bin/security outside the Claude owner subtree; see $UNOWNED_SECURITY_DESCENDANTS"
+  fail "SharinganCLI launched /usr/bin/security outside the Claude owner subtree; see $UNOWNED_SECURITY_DESCENDANTS"
 fi
 if [[ "$ATTRIBUTED_EVENT_COUNT" -ne 0 ]]; then
   fail "Live fetch emitted attributable prompt/authorization events; see $ATTRIBUTED_EVENTS"

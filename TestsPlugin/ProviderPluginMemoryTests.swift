@@ -3,7 +3,7 @@ import Foundation
 import JavaScriptCore
 import ObjectiveC
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct ProviderPluginMemoryTests {
     @Test
@@ -28,7 +28,7 @@ struct ProviderPluginMemoryTests {
 
     @Test
     func `retiring JavaScriptCore engines releases their contexts`() throws {
-        let bundle = try #require(CodexBarCoreResources.bundle)
+        let bundle = try #require(SharinganCoreResources.bundle)
         let url = try #require(bundle.url(forResource: "provider-plugin-prelude", withExtension: "js"))
         let prelude = try String(contentsOf: url, encoding: .utf8)
         let objects = TrackedObjects()

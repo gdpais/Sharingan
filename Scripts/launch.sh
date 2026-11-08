@@ -1,15 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 
-# Simple script to launch CodexBar (kills existing instance first)
+# Simple script to launch Sharingan (kills existing instance first)
 # Usage: ./Scripts/launch.sh
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 APP_PATH="$PROJECT_ROOT/Sharingan.app"
 
-echo "==> Killing existing CodexBar instances"
-pkill -x CodexBar || pkill -f Sharingan.app || true
+echo "==> Killing existing Sharingan instances"
+pkill -x Sharingan || pkill -f Sharingan.app || true
 sleep 0.5
 
 if [[ ! -d "$APP_PATH" ]]; then
@@ -18,13 +18,13 @@ if [[ ! -d "$APP_PATH" ]]; then
     exit 1
 fi
 
-echo "==> Launching CodexBar from $APP_PATH"
+echo "==> Launching Sharingan from $APP_PATH"
 open -n "$APP_PATH"
 
 # Wait a moment and check if it's running
 sleep 1
-if pgrep -x CodexBar > /dev/null; then
-    echo "OK: CodexBar is running."
+if pgrep -x Sharingan > /dev/null; then
+    echo "OK: Sharingan is running."
 else
     echo "ERROR: App exited immediately. Check crash logs in Console.app (User Reports)."
     exit 1

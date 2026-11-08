@@ -17,7 +17,7 @@ Alibaba Coding Plan supports both browser-session and API-key paths, but the sup
 
 Browser quota requests use form encoding that preserves reserved characters in the security token and JSON parameters, including cookie-derived anonymous IDs.
 
-When the RPC endpoint returns `ConsoleNeedLogin`, CodexBar treats that as a console-session requirement. In API mode it is surfaced as an explicit API-path limitation; in `auto` mode fallback remains observable through the fetch-attempt chain.
+When the RPC endpoint returns `ConsoleNeedLogin`, Sharingan treats that as a console-session requirement. In API mode it is surfaced as an explicit API-path limitation; in `auto` mode fallback remains observable through the fetch-attempt chain.
 
 ## Token sources (fallback order)
 1) Config token (`~/.sharingan/config.json` -> `providers[].apiKey` for provider `alibaba`).
@@ -33,12 +33,12 @@ When the RPC endpoint returns `ConsoleNeedLogin`, CodexBar treats that as a cons
   - `POST /data/api.json?action=zeldaEasy.broadscope-bailian.codingPlan.queryCodingPlanInstanceInfoV2&product=broadscope-bailian&api=queryCodingPlanInstanceInfoV2`
 - Region is selected in Preferences -> Providers -> Alibaba Coding Plan -> Gateway region.
 - Auto fallback behavior:
-  - If International fails with credential/host-style API errors, CodexBar retries China mainland once.
+  - If International fails with credential/host-style API errors, Sharingan retries China mainland once.
 
 ### CN API-key limitation (known)
 - In some China mainland accounts/environments, the current Alibaba `/data/api.json` coding-plan endpoint can still return console-login-required responses (`ConsoleNeedLogin`) even when an API key is configured.
 - In that case, API-key mode may not be functionally available for that account/endpoint, and web session mode is required.
-- CodexBar now surfaces this as an API error in API mode (instead of a cookie-login-required message) so the limitation is explicit.
+- Sharingan now surfaces this as an API error in API mode (instead of a cookie-login-required message) so the limitation is explicit.
 
 ## Overrides
 - Override host base: `ALIBABA_CODING_PLAN_HOST`
@@ -63,7 +63,7 @@ When the RPC endpoint returns `ConsoleNeedLogin`, CodexBar treats that as a cons
   - `perWeekUsedQuota` + `perWeekTotalQuota` + `perWeekQuotaNextRefreshTime` -> secondary (weekly)
   - `perBillMonthUsedQuota` + `perBillMonthTotalQuota` + `perBillMonthQuotaNextRefreshTime` -> tertiary (monthly)
 - Each window maps to `usedPercent = used / total * 100` (bounded to valid range).
-- If the payload proves the plan is active but does not expose defensible quota counters, CodexBar preserves the visible plan state without manufacturing a normal quantitative quota window.
+- If the payload proves the plan is active but does not expose defensible quota counters, Sharingan preserves the visible plan state without manufacturing a normal quantitative quota window.
 - If neither real counters nor a defensible active-plan fallback signal exist, parsing fails explicitly instead of degrading to fake `0%` usage.
 
 ## Dashboard links
@@ -71,7 +71,7 @@ When the RPC endpoint returns `ConsoleNeedLogin`, CodexBar treats that as a cons
 - China mainland console: `https://bailian.console.aliyun.com/cn-beijing/?tab=model#/efm/coding_plan`
 
 ## Key files
-- `Sources/CodexBarCore/Providers/Alibaba/AlibabaCodingPlanProviderDescriptor.swift`
-- `Sources/CodexBarCore/Providers/Alibaba/AlibabaCodingPlanUsageFetcher.swift`
-- `Sources/CodexBarCore/Providers/Alibaba/AlibabaCodingPlanUsageSnapshot.swift`
-- `Sources/CodexBar/Providers/Alibaba/AlibabaCodingPlanProviderImplementation.swift`
+- `Sources/SharinganCore/Providers/Alibaba/AlibabaCodingPlanProviderDescriptor.swift`
+- `Sources/SharinganCore/Providers/Alibaba/AlibabaCodingPlanUsageFetcher.swift`
+- `Sources/SharinganCore/Providers/Alibaba/AlibabaCodingPlanUsageSnapshot.swift`
+- `Sources/Sharingan/Providers/Alibaba/AlibabaCodingPlanProviderImplementation.swift`

@@ -50,8 +50,8 @@ def main():
     assert asset['digest'] == 'sha256:' + expected_digest, 'Published cask archive digest differs'
     head = api(f'repos/{tap}/git/ref/heads/main')['object']['sha']
     paths = [f'Casks/{app.lower()}.rb']
-    if app == 'CodexBar':
-        paths.append('Formula/codexbar.rb')
+    if app == 'Sharingan':
+        paths.append('Formula/sharingan.rb')
     tree = []
     expected = {}
     for path in paths:
@@ -60,7 +60,7 @@ def main():
         if path.startswith('Casks/'):
             updated = rewrite_cask(source, version, expected_digest)
         else:
-            digests = {target: digest(f'CodexBarCLI-v{version}-{target}.tar.gz') for target in ['macos-arm64', 'macos-x86_64', 'linux-aarch64', 'linux-x86_64']}
+            digests = {target: digest(f'SharinganCLI-v{version}-{target}.tar.gz') for target in ['macos-arm64', 'macos-x86_64', 'linux-aarch64', 'linux-x86_64']}
             updated = rewrite_formula(source, version, digests)
         expected[path] = updated
         if updated != source:

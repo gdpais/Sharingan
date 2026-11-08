@@ -9,11 +9,11 @@ import { fileURLToPath } from "node:url";
 
 const checker = fileURLToPath(new URL("./check-package-resolved.mjs", import.meta.url));
 const widgetPath =
-  "WidgetExtension/CodexBarWidgetExtension.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved";
-const fixCommand = "xcodebuild -resolvePackageDependencies -project WidgetExtension/CodexBarWidgetExtension.xcodeproj";
+  "WidgetExtension/SharinganWidgetExtension.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved";
+const fixCommand = "xcodebuild -resolvePackageDependencies -project WidgetExtension/SharinganWidgetExtension.xcodeproj";
 
 function fixture(t) {
-  const root = fs.mkdtempSync(path.join(os.tmpdir(), "codexbar-resolved-"));
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "sharingan-resolved-"));
   t.after(() => fs.rmSync(root, { recursive: true, force: true }));
   const script = path.join(root, "Scripts", path.basename(checker));
   fs.mkdirSync(path.dirname(script), { recursive: true });

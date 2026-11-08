@@ -7,8 +7,8 @@ read_when:
 # Atlas Cloud
 
 Enable **Atlas Cloud** in Settings → Providers and enter a standard Atlas Cloud API key, or set
-`ATLASCLOUD_API_KEY` for the CLI. The key is saved in CodexBar's local config file when entered in Settings.
-Use `codexbar usage --provider atlascloud --source api` to fetch it.
+`ATLASCLOUD_API_KEY` for the CLI. The key is saved in Sharingan's local config file when entered in Settings.
+Use `sharingan usage --provider atlascloud --source api` to fetch it.
 
 The bundled JavaScript plugin reads `GET https://api.atlascloud.ai/public/v1/balance` with bearer authentication.
 It displays the **account-wide available USD balance** from `available.value`, validating `object: "balance"`,

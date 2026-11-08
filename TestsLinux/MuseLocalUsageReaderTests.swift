@@ -3,8 +3,8 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 /// Muse records every model turn to `~/.local/share/muse/sessions/<Y>/<M>/<D>/<session>/session.jsonl`.
 /// These fixtures mirror the record shapes observed in real logs, including the two `usage` payloads
@@ -645,16 +645,16 @@ struct MuseLocalUsageReaderTests {
         #expect(snapshot.last30DaysCostUSD == nil)
         #expect(snapshot.meteredCostUSD == nil)
         #expect(snapshot.historyCoverageIsEstablished == (source != "missing"))
-        let payload = CodexBarCLI.makeCostPayload(provider: .muse, snapshot: snapshot, error: nil, calendar: calendar)
+        let payload = SharinganCLI.makeCostPayload(provider: .muse, snapshot: snapshot, error: nil, calendar: calendar)
         #expect(payload.provider == "muse")
         #expect(payload.source == "local")
         #expect(payload.last30DaysTokens == expected)
         #expect(payload.last30DaysCostUSD == nil)
-        let text = CodexBarCLI.renderCostText(provider: .muse, snapshot: snapshot, useColor: false)
+        let text = SharinganCLI.renderCostText(provider: .muse, snapshot: snapshot, useColor: false)
         #expect(text.contains("Muse Code Token History"))
         #expect(!text.contains("$"))
         #expect(!text.contains("API-rate estimate"))
-        #expect(CodexBarCLI.costProviders(from: .single(.muse)) == [.muse])
+        #expect(SharinganCLI.costProviders(from: .single(.muse)) == [.muse])
     }
 
     @Test

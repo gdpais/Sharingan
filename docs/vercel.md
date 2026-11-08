@@ -12,7 +12,7 @@ Enable **Vercel AI Gateway** in Settings → Providers. The provider shows one o
 - **Personal budget** (optional): enter a Vercel access token and Team ID, or set `VERCEL_ACCESS_TOKEN` and
   `VERCEL_TEAM_ID`. When a token is configured, it replaces the team-credit view.
 
-Values entered in Settings are saved in CodexBar's local config file. Use `codexbar usage --provider vercel` to fetch.
+Values entered in Settings are saved in Sharingan's local config file. Use `sharingan usage --provider vercel` to fetch.
 
 The plugin host binds one authentication secret per manifest, so each view is a separate bundled script with its own
 secret and origin: `vercel.js` sends only the AI Gateway key to `ai-gateway.vercel.sh`, and `vercel-budget.js` sends only

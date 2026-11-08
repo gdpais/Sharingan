@@ -29,7 +29,7 @@ runs:
     - name: Build and test
       shell: bash
       env:
-        CODEXBAR_DESKTOP_VERSION: ${{ inputs.version }}
+        SHARINGAN_DESKTOP_VERSION: ${{ inputs.version }}
       run: |
         set -euo pipefail
         node --test Integrations/Omarchy/test.mjs Integrations/Omarchy/notifications.test.mjs
@@ -37,9 +37,9 @@ runs:
         mkdir -p .local/linux-build .local/linux-account-tests .local/linux-icon-tests
         (
           cd .local/linux-build
-          qmake6 ../../Integrations/Linux/codexbar-linux.pro
+          qmake6 ../../Integrations/Linux/sharingan-linux.pro
           make -j2
-          test "$(./codexbar-linux --version)" = "codexbar-linux $CODEXBAR_DESKTOP_VERSION"
+          test "$(./sharingan-linux --version)" = "sharingan-linux $SHARINGAN_DESKTOP_VERSION"
         )
         python3 Integrations/Linux/tests/test_desktop.py
         mkdir -p .local/linux-qml-tests

@@ -12,7 +12,7 @@ read_when:
 # Linkup
 
 Enable **Linkup** in Settings → Providers and enter a Linkup API key, or set `LINKUP_API_KEY` for the CLI.
-The setting is saved in CodexBar's local config file. CodexBar sends the key only to `https://api.linkup.so`
+The setting is saved in Sharingan's local config file. Sharingan sends the key only to `https://api.linkup.so`
 as `Authorization: Bearer …` and does not import browser cookies or start a login flow.
 
 The bundled JavaScript plugin reads `GET /v1/credits/balance` and displays the numeric `balance` as USD.
@@ -21,11 +21,11 @@ Zero and negative values remain visible. Missing, malformed, or nonfinite values
 
 Eligible accounts are topped back up to $20 each month; this is a top-up to a cap, not an additive monthly grant.
 The endpoint does not report eligibility, next top-up time, consumed credits, or request-rate headroom.
-CodexBar therefore shows the reported balance without a percentage, guessed reset, or invented monthly allowance.
+Sharingan therefore shows the reported balance without a percentage, guessed reset, or invented monthly allowance.
 Purchased funds can take the balance above $20. Open the provider's billing dashboard for consumption and top-ups.
 
 ```sh
-codexbar usage --provider linkup --source api --json
+sharingan usage --provider linkup --source api --json
 ```
 
 Sources checked October 8, 2026:

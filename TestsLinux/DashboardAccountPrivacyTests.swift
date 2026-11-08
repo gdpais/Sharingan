@@ -1,18 +1,18 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct DashboardAccountPrivacyTests {
     @Test(arguments: [false, true])
     func `expanded defaults never inherit the app identity preference`(hidePersonalInfo: Bool) {
-        #expect(CodexBarCLI.resolveDashboardIdentityMode(
+        #expect(SharinganCLI.resolveDashboardIdentityMode(
             configured: nil, hidesPersonalInfo: hidePersonalInfo, allAccounts: true) == .none)
         for explicit in [DashboardIdentityMode.full, .redacted] {
-            #expect(CodexBarCLI.resolveDashboardIdentityMode(
+            #expect(SharinganCLI.resolveDashboardIdentityMode(
                 configured: explicit, hidesPersonalInfo: hidePersonalInfo, allAccounts: true) == explicit)
         }
-        #expect(CodexBarCLI.resolveDashboardIdentityMode(
+        #expect(SharinganCLI.resolveDashboardIdentityMode(
             configured: nil, hidesPersonalInfo: hidePersonalInfo) == (hidePersonalInfo ? .redacted : .full))
     }
 
@@ -29,7 +29,7 @@ struct DashboardAccountPrivacyTests {
         let result = try await producer.collect(
             config: self.config,
             refreshInterval: 60,
-            codexBarVersion: nil,
+            sharinganVersion: nil,
             identityMode: mode == .none ? nil : mode)
         let row = try #require(result.payload.providers.first)
         let accounts = try #require(row.accounts)
@@ -66,7 +66,7 @@ struct DashboardAccountPrivacyTests {
             DashboardAccountsInput(accounts: nil, adapterError: diagnostic, weeklyWorkDays: nil)
         }
         let result = try await producer.collect(
-            config: self.config, refreshInterval: 60, codexBarVersion: nil, identityMode: mode)
+            config: self.config, refreshInterval: 60, sharinganVersion: nil, identityMode: mode)
         let row = try #require(result.payload.providers.first)
         #expect(row.accounts == nil)
         #expect(row.accountsError == (expanded && mode != .full ? "Account list unavailable" : diagnostic))
@@ -102,7 +102,7 @@ struct DashboardAccountPrivacyTests {
                 DashboardAccountsInput(accounts: rows, adapterError: nil, weeklyWorkDays: nil)
             }
             let result = try await producer.collect(
-                config: self.config, refreshInterval: 60, codexBarVersion: nil, identityMode: mode)
+                config: self.config, refreshInterval: 60, sharinganVersion: nil, identityMode: mode)
             let provider = try #require(result.payload.providers.first)
             let accounts = try #require(provider.accounts)
             #expect(accounts.count == rows.count)
@@ -121,10 +121,10 @@ struct DashboardAccountPrivacyTests {
     func `warm response cache never replays full identities in private mode`() async throws {
         let cache = CLIServeResponseCache()
         for mode in [DashboardIdentityMode.full, .none, .redacted, .none] {
-            let key = try CodexBarCLI.serveDashboardOperationKey(
+            let key = try SharinganCLI.serveDashboardOperationKey(
                 identityMode: mode, usageBarsShowUsed: false, provider: "claude", allAccounts: true)
             let expected = Data(mode.rawValue.utf8)
-            let response = await CodexBarCLI.cachedServeResponse(
+            let response = await SharinganCLI.cachedServeResponse(
                 key: key, cache: cache, refreshInterval: 60, configFingerprint: "fixture")
             { CLILocalHTTPResponse(status: .ok, body: expected) }
             #expect(response.body == expected)
@@ -132,8 +132,8 @@ struct DashboardAccountPrivacyTests {
         #expect(await cache.cachedEntryCount() == 3)
     }
 
-    private var config: CodexBarConfig {
-        CodexBarConfig(providers: [ProviderConfig(id: .claude, enabled: true)])
+    private var config: SharinganConfig {
+        SharinganConfig(providers: [ProviderConfig(id: .claude, enabled: true)])
     }
 
     private func producer(_ payloads: [ProviderPayload], expanded: Bool = true) -> DashboardSnapshotProducer {

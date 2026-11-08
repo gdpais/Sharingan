@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct V0PluginTests {
     #if canImport(JavaScriptCore)
@@ -195,7 +195,7 @@ struct V0PluginTests {
                 headerFields: ["Content-Type": "application/json", "Retry-After": retryAfter]))
             return (Data(body.utf8), response)
         }
-        let sourceURL = try #require(CodexBarCoreResources.bundle?.url(forResource: "v0", withExtension: "js"))
+        let sourceURL = try #require(SharinganCoreResources.bundle?.url(forResource: "v0", withExtension: "js"))
         let source = try String(contentsOf: sourceURL, encoding: .utf8)
         let runtime = try ProviderPluginRuntime(source: source, transport: transport, engine: engine)
         return try await runtime.fetchUsage(

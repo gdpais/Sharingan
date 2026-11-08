@@ -1,4 +1,4 @@
-# CodexBar for Omarchy
+# Sharingan for Omarchy
 
 A compact Quickshell bar adapter for the [Linux desktop app](../Linux/README.md).
 The popup shows remaining quota and reset times; Usage & Spend and Settings open
@@ -9,12 +9,12 @@ Requires Omarchy's plugin-based shell; older Waybar installations are not suppor
 Build the Linux desktop app first, then run from the repository root:
 
 ```sh
-python3 Integrations/Linux/install.py --omarchy --cli /absolute/path/to/codexbar
-~/.local/bin/codexbar-linux --background
+python3 Integrations/Linux/install.py --omarchy --cli /absolute/path/to/sharingan
+~/.local/bin/sharingan-linux --background
 omarchy restart shell
 ```
 
-The installer migrates old widget settings to `~/.config/codexbar/linux.json`,
+The installer migrates old widget settings to `~/.config/sharingan/linux.json`,
 backs up `shell.json`, and archives the old plugin outside the plugin discovery
 directory. Existing desktop preferences take precedence over old widget settings.
 It also adds a launcher and login autostart entry. Provider authentication remains
@@ -50,7 +50,7 @@ quota, weekly quota and weekly pace, as in `5H 37% · 7D 61% · +14%`. A positiv
 pace is a deficit against the sustainable weekly rate and a negative one a
 reserve, matching the menu bar on macOS. A lane the provider does not report
 contributes no text and no separator, so a weekly-only account reads
-`7D 61% · +14%`, and a pace CodexBar cannot compute contributes nothing rather
+`7D 61% · +14%`, and a pace Sharingan cannot compute contributes nothing rather
 than a placeholder. **Show pace** hides the pace on its own.
 
 **Show per-model caps in the bar** adds a cap a provider scopes to one model,
@@ -66,22 +66,22 @@ and a pace take about 1500 logical pixels, so raise it where the display has roo
 
 The tray tooltip keeps its own compact two-provider form.
 
-The keys in `$XDG_CONFIG_HOME/codexbar/linux.json` (normally
-`~/.config/codexbar/linux.json`) are `showBarDetail` (default `false`),
+The keys in `$XDG_CONFIG_HOME/sharingan/linux.json` (normally
+`~/.config/sharingan/linux.json`) are `showBarDetail` (default `false`),
 `showScopedCaps` (default `false`), and `barProviders` (0–80, default `2`).
 Use Settings → General → Display or the running backend's IPC to change them:
 
 ```sh
-codexbar-linux --configure '{"showBarDetail":true,"showScopedCaps":true,"barProviders":0}'
+sharingan-linux --configure '{"showBarDetail":true,"showScopedCaps":true,"barProviders":0}'
 ```
 
-The `steipete.codexbar` layout entry in `~/.config/omarchy/shell.json` now accepts
-only `desktopExecutable` (default `codexbar-linux`) in addition to its ID. Configure
+The `gdpais.sharingan` layout entry in `~/.config/omarchy/shell.json` now accepts
+only `desktopExecutable` (default `sharingan-linux`) in addition to its ID. Configure
 providers and their order, accounts, status, costs, notifications, display, and polling in the Settings
 window. Enabling the standalone tray with quota meters is optional; Omarchy installation hides it
 to avoid a duplicate indicator.
 
-Remove the layout entry and `~/.config/omarchy/plugins/steipete.codexbar` to remove
+Remove the layout entry and `~/.config/omarchy/plugins/gdpais.sharingan` to remove
 the adapter. The desktop app and its autostart are independent; see the Linux
 README for uninstall instructions.
 

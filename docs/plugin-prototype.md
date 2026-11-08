@@ -9,24 +9,24 @@ read_when:
 # JavaScript provider-plugin prototype
 
 This document describes the bundled first-party conversion prototype. User-installed files use the production path in
-[`plugins.md`](plugins.md); they do not depend on `CODEXBAR_JS_PROVIDERS`.
+[`plugins.md`](plugins.md); they do not depend on `SHARINGAN_JS_PROVIDERS`.
 
 This prototype proves that an existing first-party `UsageProvider` can define its manifest, HTTP requests, response
 parsing, and generic `UsageSnapshot` projection in one bundled JavaScript file. It is deliberately not a user-plugin
-system: IDs remain compile-time `UsageProvider` cases and scripts ship inside CodexBar. Venice, OpenRouter,
+system: IDs remain compile-time `UsageProvider` cases and scripts ship inside Sharingan. Venice, OpenRouter,
 ClawRouter, Deepgram, sub2api, Synthetic, Poe, xAI, and z.ai use the same bundled script on Apple platforms and Linux;
 their native fetch twins have been removed.
 
 The runtime selects QuickJS on every platform. QuickJS uses a 20-second in-engine interrupt watchdog, a 64 MiB heap
-limit, and a 2 MiB JavaScript stack limit. On Apple platforms, set `CODEXBAR_PLUGIN_ENGINE=jsc` or enable the
-JavaScriptCore rollback in **Settings → Debug → Provider Plugins** and restart CodexBar. An explicit engine environment
+limit, and a 2 MiB JavaScript stack limit. On Apple platforms, set `SHARINGAN_PLUGIN_ENGINE=jsc` or enable the
+JavaScriptCore rollback in **Settings → Debug → Provider Plugins** and restart Sharingan. An explicit engine environment
 value overrides the persisted Debug setting. JavaScriptCore remains in-tree for rollback and A/B drift detection.
 
 ## Engine benchmark
 
 The test-only `ProviderPluginEngineBenchmarkTests` instrumentation compares both engines without pass/fail thresholds.
 Run it on macOS with
-`CODEXBAR_PLUGIN_BENCHMARK=1 swift test --filter ProviderPluginEngineBenchmarkTests`. The August 8, 2026 baseline below
+`SHARINGAN_PLUGIN_BENCHMARK=1 swift test --filter ProviderPluginEngineBenchmarkTests`. The August 8, 2026 baseline below
 was captured from a Swift debug build on an Apple M3 Ultra. Creation includes loading and linting each bundled source,
 creating its runtime, and reading its manifest; values are the median of five samples in milliseconds.
 
@@ -68,13 +68,13 @@ case therefore remain out of scope for this prototype.
 
 ## Enable and test
 
-Set `CODEXBAR_JS_PROVIDERS=1` in CodexBar's environment. Manus,
+Set `SHARINGAN_JS_PROVIDERS=1` in Sharingan's environment. Manus,
 Perplexity, T3 Chat, and Qoder then prepend a script strategy to their existing pipeline.
 A missing required secret or disabled cookie source leaves the script
 strategy unavailable and permits the Swift strategy to run; a loaded script that fails does not fall back, so parity
 defects stay visible. Without the variable, the resolver returns the original Swift strategy only and does not load
 an engine or plugin resource for those providers. Venice, OpenRouter, ClawRouter, Deepgram, sub2api, Synthetic,
-OpenAI, Fireworks, Poe, xAI, and z.ai always resolve only their script strategy on every platform; `CODEXBAR_JS_PROVIDERS` does not affect
+OpenAI, Fireworks, Poe, xAI, and z.ai always resolve only their script strategy on every platform; `SHARINGAN_JS_PROVIDERS` does not affect
 them.
 
 Run the focused proof with:
@@ -225,7 +225,7 @@ the poisoned context is discarded and the next refresh creates a fresh one, whic
 
 The same hard-interrupt watchdog is production-default for first-party cut-over providers. It is part of the shared
 runtime, not the prototype flag, so cut-over providers retain timeout and fresh-context recovery without
-`CODEXBAR_JS_PROVIDERS`. The Apple-only JavaScriptCore rollback still uses a `JSContext` and `JSValue` objects confined
+`SHARINGAN_JS_PROVIDERS`. The Apple-only JavaScriptCore rollback still uses a `JSContext` and `JSValue` objects confined
 to its executor. The exported `JSContextGroupSetExecutionTimeLimit` symbol has no declaration in public macOS headers,
 so the rollback path does not bind that private SPI: its watchdog returns to the caller and discards the poisoned
 context, but it cannot interrupt the abandoned JavaScriptCore thread, which may remain alive until process exit.

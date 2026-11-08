@@ -17,7 +17,7 @@ An explicit refresh allows one bounded macOS Keychain permission retry; schedule
 If browser access is suppressed or denied, the error points back to Cookie source → Refresh and the Manual fallback.
 Automatic import follows the shared browser order and access gate. Alternatively choose Manual and paste a Cookie request header containing
 both `__Host-console_session` and `__Host-console_csrf` from the same signed-in console session. Manual cookies
-are stored in the CodexBar config file. Inference API keys cannot read console billing.
+are stored in the Sharingan config file. Inference API keys cannot read console billing.
 
 The bundled plugin shows the active organization's prepaid USD balance, payment-card state, account hold state,
 and optional today/month-to-date spend in UTC. Money fields use **1 USD = 1,000,000,000 nanos**. Sparse spend rows
@@ -39,10 +39,10 @@ Billing requests echo the active organization ID as `X-Organization-Id`. The hos
 Cookie values remain opaque to JavaScript. Both cookies must match the request URL; no persistent session cache
 is added; a validated refresh succeeds without requiring a persistent cookie write. HTTP 401 rejects that session and tries the next profile; 403 reports denied access without evicting it.
 
-CLI: `codexbar usage --provider lithosai --source web --json`. On Linux use a manual cookie header in the config;
+CLI: `sharingan usage --provider lithosai --source web --json`. On Linux use a manual cookie header in the config;
 automatic browser import is macOS-only. No API key or separate login command is needed.
 
 The undocumented console contract was documented by @apoorvdarshan in
 [#3868](https://github.com/steipete/CodexBar/issues/3868). Their
 [reference client](https://github.com/apoorvdarshan/lithosai-bar) was consulted for protocol semantics;
-CodexBar implements its own plugin and uses synthetic fixtures, without importing the client's code.
+Sharingan implements its own plugin and uses synthetic fixtures, without importing the client's code.

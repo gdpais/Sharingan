@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct ProviderPluginStorageTests {
     @Test
@@ -37,7 +37,7 @@ struct ProviderPluginStorageTests {
         _ = try await plugin.fetchUsage(settings: [:], secrets: [:], environment: [:], approvalStore: approval)
         let stateFile = directory.appendingPathComponent("storage-fixture.json")
         #expect(FileManager.default.fileExists(atPath: stateFile.path))
-        var config = CodexBarConfig.makeDefault()
+        var config = SharinganConfig.makeDefault()
         config.setProviderConfig(ProviderConfig(id: plugin.manifest.id))
         try UserProviderPluginManager.delete(plugin, approvalStore: approval, config: &config)
         #expect(!FileManager.default.fileExists(atPath: stateFile.path))

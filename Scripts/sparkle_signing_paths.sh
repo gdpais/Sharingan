@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-codexbar_resolve_sparkle_version_child() {
+sharingan_resolve_sparkle_version_child() {
   local versions_dir="$1"
   local candidate="$2"
   local label="$3"
@@ -19,7 +19,7 @@ codexbar_resolve_sparkle_version_child() {
   printf '%s\n' "$resolved"
 }
 
-codexbar_sparkle_version_dir() {
+sharingan_sparkle_version_dir() {
   local sparkle="$1"
   local versions_dir="${sparkle}/Versions"
 
@@ -38,7 +38,7 @@ codexbar_sparkle_version_dir() {
 
   if [[ -e "$versions_dir/Current" || -L "$versions_dir/Current" ]]; then
     local current
-    if ! current=$(codexbar_resolve_sparkle_version_child "$versions_dir" "$versions_dir/Current" "Versions/Current"); then
+    if ! current=$(sharingan_resolve_sparkle_version_child "$versions_dir" "$versions_dir/Current" "Versions/Current"); then
       return 1
     fi
     printf '%s\n' "$current"
@@ -62,7 +62,7 @@ codexbar_sparkle_version_dir() {
       ;;
     1)
       local resolved
-      if ! resolved=$(codexbar_resolve_sparkle_version_child \
+      if ! resolved=$(sharingan_resolve_sparkle_version_child \
         "$versions_dir" "${version_dirs[0]}" "version directory"); then
         return 1
       fi
@@ -75,7 +75,7 @@ codexbar_sparkle_version_dir() {
   esac
 }
 
-codexbar_require_sparkle_signing_target() {
+sharingan_require_sparkle_signing_target() {
   local path="$1"
   local label="$2"
   local trusted_root="$3"
@@ -109,30 +109,30 @@ codexbar_require_sparkle_signing_target() {
   printf '%s\n' "$resolved"
 }
 
-codexbar_sparkle_signing_targets() {
+sharingan_sparkle_signing_targets() {
   local sparkle="$1"
   local version_dir
-  if ! version_dir=$(codexbar_sparkle_version_dir "$sparkle"); then
+  if ! version_dir=$(sharingan_sparkle_version_dir "$sparkle"); then
     return 1
   fi
 
-  codexbar_require_sparkle_signing_target "$sparkle" "framework root" "$sparkle" >/dev/null || return 1
+  sharingan_require_sparkle_signing_target "$sparkle" "framework root" "$sparkle" >/dev/null || return 1
   # Nested signatures and timestamps must exist before an enclosing bundle seals them.
-  codexbar_require_sparkle_signing_target "$version_dir/Autoupdate" "autoupdate tool" "$version_dir" || return 1
-  codexbar_require_sparkle_signing_target \
+  sharingan_require_sparkle_signing_target "$version_dir/Autoupdate" "autoupdate tool" "$version_dir" || return 1
+  sharingan_require_sparkle_signing_target \
     "$version_dir/Updater.app/Contents/MacOS/Updater" "updater executable" "$version_dir" || return 1
-  codexbar_require_sparkle_signing_target "$version_dir/Updater.app" "updater app" "$version_dir" || return 1
-  codexbar_require_sparkle_signing_target \
+  sharingan_require_sparkle_signing_target "$version_dir/Updater.app" "updater app" "$version_dir" || return 1
+  sharingan_require_sparkle_signing_target \
     "$version_dir/XPCServices/Downloader.xpc/Contents/MacOS/Downloader" \
     "downloader executable" "$version_dir" || return 1
-  codexbar_require_sparkle_signing_target \
+  sharingan_require_sparkle_signing_target \
     "$version_dir/XPCServices/Downloader.xpc" "downloader xpc" "$version_dir" || return 1
-  codexbar_require_sparkle_signing_target \
+  sharingan_require_sparkle_signing_target \
     "$version_dir/XPCServices/Installer.xpc/Contents/MacOS/Installer" \
     "installer executable" "$version_dir" || return 1
-  codexbar_require_sparkle_signing_target \
+  sharingan_require_sparkle_signing_target \
     "$version_dir/XPCServices/Installer.xpc" "installer xpc" "$version_dir" || return 1
-  codexbar_require_sparkle_signing_target "$version_dir/Sparkle" "framework binary" "$version_dir" || return 1
-  codexbar_require_sparkle_signing_target "$version_dir" "framework version" "$version_dir" || return 1
-  codexbar_require_sparkle_signing_target "$sparkle" "framework root" "$sparkle" || return 1
+  sharingan_require_sparkle_signing_target "$version_dir/Sparkle" "framework binary" "$version_dir" || return 1
+  sharingan_require_sparkle_signing_target "$version_dir" "framework version" "$version_dir" || return 1
+  sharingan_require_sparkle_signing_target "$sparkle" "framework root" "$sparkle" || return 1
 }

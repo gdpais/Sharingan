@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct HostResultProviderTests {
     static let now = Date(timeIntervalSince1970: 1_700_179_200)
@@ -175,7 +175,7 @@ struct HostResultProviderTests {
     static func runtime(_ provider: String, transport: any ProviderHTTPTransport, engine: ProviderPluginEngineKind)
         throws -> ProviderPluginRuntime
     {
-        let url = try #require(CodexBarCoreResources.bundle?.url(forResource: provider, withExtension: "js"))
+        let url = try #require(SharinganCoreResources.bundle?.url(forResource: provider, withExtension: "js"))
         return try ProviderPluginRuntime(
             source: String(contentsOf: url, encoding: .utf8),
             transport: transport,

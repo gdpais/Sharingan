@@ -8,7 +8,7 @@ read_when:
 
 # Synthetic provider
 
-Synthetic is API-key only. CodexBar reads the quota endpoint and maps the
+Synthetic is API-key only. Sharingan reads the quota endpoint and maps the
 known Synthetic quota lanes into the shared provider card.
 
 ## Authentication
@@ -23,12 +23,12 @@ export SYNTHETIC_API_KEY="..."
 You can also store the key through the CLI:
 
 ```bash
-printf '%s' "$SYNTHETIC_API_KEY" | codexbar config set-api-key --provider synthetic --stdin
+printf '%s' "$SYNTHETIC_API_KEY" | sharingan config set-api-key --provider synthetic --stdin
 ```
 
 ## Data source
 
-CodexBar sends a read-only request to [Synthetic's quota API](https://dev.synthetic.new/docs/synthetic/quotas):
+Sharingan sends a read-only request to [Synthetic's quota API](https://dev.synthetic.new/docs/synthetic/quotas):
 
 ```http
 GET https://api.synthetic.new/v2/quotas
@@ -43,7 +43,7 @@ of the response or under `data`:
 - `weeklyTokenLimit` -> Weekly tokens
 - `search.hourly` -> Search hourly
 
-If those keys are absent, CodexBar falls back to generic quota payloads such as
+If those keys are absent, Sharingan falls back to generic quota payloads such as
 `quotas`, `quota`, `limits`, `usage`, `entries`, or `subscription`.
 
 ## Display
@@ -51,22 +51,22 @@ If those keys are absent, CodexBar falls back to generic quota payloads such as
 - The menu card shows the five-hour, weekly token, and search-hourly lanes when present. The compact menu bar metric
   uses the five-hour or weekly lane.
 - Usage is normalized from percent fields when present, or computed from used/remaining/limit values.
-- Reset timestamps are shown when Synthetic returns one. When no timestamp is available, CodexBar uses the returned
+- Reset timestamps are shown when Synthetic returns one. When no timestamp is available, Sharingan uses the returned
   or inferred window duration when present.
 - Plan name, when returned, is displayed as provider identity context.
-- Synthetic does not currently provide CodexBar cost history.
-- External status page: [status.synthetic.new](https://status.synthetic.new) (not linked or auto-polled by CodexBar).
+- Synthetic does not currently provide Sharingan cost history.
+- External status page: [status.synthetic.new](https://status.synthetic.new) (not linked or auto-polled by Sharingan).
 
 ## CLI usage
 
 ```bash
-codexbar usage --provider synthetic
-codexbar usage --provider synthetic.new
+sharingan usage --provider synthetic
+sharingan usage --provider synthetic.new
 ```
 
 ## Key files
 
-- `Sources/CodexBarCore/Providers/Synthetic/SyntheticProviderDescriptor.swift` (descriptor and script fetch strategy)
-- `Sources/CodexBarCore/Resources/Plugins/synthetic.js` (HTTP client and parser)
-- `Sources/CodexBarCore/Providers/Synthetic/SyntheticSettingsReader.swift` (environment variable parsing)
-- `Sources/CodexBar/Providers/Shared/PluginAPIKeyProviderImplementation.swift` (spec-built settings and availability)
+- `Sources/SharinganCore/Providers/Synthetic/SyntheticProviderDescriptor.swift` (descriptor and script fetch strategy)
+- `Sources/SharinganCore/Resources/Plugins/synthetic.js` (HTTP client and parser)
+- `Sources/SharinganCore/Providers/Synthetic/SyntheticSettingsReader.swift` (environment variable parsing)
+- `Sources/Sharingan/Providers/Shared/PluginAPIKeyProviderImplementation.swift` (spec-built settings and availability)

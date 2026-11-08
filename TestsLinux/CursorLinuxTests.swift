@@ -1,13 +1,13 @@
 #if os(Linux)
 import Foundation
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 struct CursorLinuxTests {
     @Test
     func `Cursor automatic source supports Linux app authentication`() async {
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(
             .auto,
             provider: .cursor,
             settings: ProviderSettingsSnapshot.make(
@@ -77,7 +77,7 @@ struct CursorLinuxTests {
 
     @Test
     func `Cursor manual cookie does not require macOS web support`() async {
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(
             .web,
             provider: .cursor,
             settings: ProviderSettingsSnapshot.make(
@@ -88,7 +88,7 @@ struct CursorLinuxTests {
 
     @Test
     func `empty Cursor manual cookie still requires macOS web support`() async {
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(
             .web,
             provider: .cursor,
             settings: ProviderSettingsSnapshot.make(
@@ -99,7 +99,7 @@ struct CursorLinuxTests {
 
     @Test
     func `disabled Cursor web source still requires macOS web support`() async {
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(
             .web,
             provider: .cursor,
             settings: ProviderSettingsSnapshot.make(

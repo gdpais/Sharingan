@@ -23,12 +23,12 @@ A successful browser refresh is reported as `web` and saves the imported session
 A session that does not reach the dashboard is rejected before the API-key fallback. An expired manual
 session asks for a fresh pasted Cookie header; an expired automatic session asks the user to sign in again.
 
-Add an API key in the provider settings or set `HYPER_API_KEY` in the environment that launches CodexBar.
-Saved API keys and manual Cookie headers use the CodexBar config file. Multiple API-key token accounts
+Add an API key in the provider settings or set `HYPER_API_KEY` in the environment that launches Sharingan.
+Saved API keys and manual Cookie headers use the Sharingan config file. Multiple API-key token accounts
 are supported; in Auto mode, selecting one uses API mode so an unrelated browser session cannot override that account.
 Cookies and bearer keys are sent separately, only to the declared `https://hyper.charm.land` origin.
 
-The CLI supports `codexbar usage --provider hyper --source api`. `--source web` requires a usable session
+The CLI supports `sharingan usage --provider hyper --source api`. `--source web` requires a usable session
 and never falls back to a key; a configured manual Cookie header works without browser import.
 Automatic browser import is macOS-only. On Linux, Auto can fall back to the API key.
 

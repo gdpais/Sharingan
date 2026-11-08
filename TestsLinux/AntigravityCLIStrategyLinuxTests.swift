@@ -1,13 +1,13 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 #if os(Linux)
 struct AntigravityCLIStrategyLinuxTests {
     @Test
     func `cli local strategy is available with HTTP fallback`() async throws {
         let binaryURL = FileManager.default.temporaryDirectory
-            .appendingPathComponent("codexbar-antigravity-\(UUID().uuidString)")
+            .appendingPathComponent("sharingan-antigravity-\(UUID().uuidString)")
         try FakeExecutable.install("#!/bin/sh\n", at: binaryURL)
         defer { try? FileManager.default.removeItem(at: binaryURL) }
 

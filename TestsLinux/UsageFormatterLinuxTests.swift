@@ -1,4 +1,4 @@
-import CodexBarCore
+import SharinganCore
 import Testing
 
 @Suite(.serialized)

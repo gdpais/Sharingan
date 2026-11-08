@@ -24,7 +24,7 @@ A declarative provider can reduce one-off integrations, but it is not a small ex
 Those providers still have compile-time `UsageProvider` identities, descriptors, implementations, request shapes, and response
 decoders. A custom provider adds two new trust boundaries:
 
-1. a config file chooses where CodexBar sends a secret;
+1. a config file chooses where Sharingan sends a secret;
 2. untrusted response data controls user-visible usage, cost, and identity fields.
 
 Accepted direction: pursue a config-only, GET-only, HTTP JSON MVP after separating runtime provider instance identity
@@ -94,7 +94,7 @@ Rules:
 - `label`: required, trimmed, 1–80 characters. MVP uses a built-in generic icon.
 - `method`: only `GET`.
 - `authentication`: `none`, `bearer`, or `x-api-key`; the secret is never inline. Authenticated instances read only their
-  derived variable `CODEXBAR_CUSTOM_<INSTANCE_ID>_API_KEY`, with the ID uppercased and hyphens replaced by underscores.
+  derived variable `SHARINGAN_CUSTOM_<INSTANCE_ID>_API_KEY`, with the ID uppercased and hyphens replaced by underscores.
   A definition cannot name an arbitrary environment variable or header; bearer uses `Authorization` and x-api-key uses
   `X-API-Key`.
 - `mapping.primary`: optional. When present, requires exactly one of `usedPercent` or `remainingPercent`. Optional fields
@@ -197,7 +197,7 @@ provider from being threaded through exhaustive first-party switches or sharing 
 
 Out of scope: defending a user from a request URL they explicitly approved, including a public hostname that later
 resolves to a local or private address. Approval grants that origin network authority for the approved URL; the
-confirmation must state this clearly. CodexBar still must contain the service response and must never disclose unrelated
+confirmation must state this clearly. Sharingan still must contain the service response and must never disclose unrelated
 credentials.
 
 ## Explicit non-goals
@@ -219,7 +219,7 @@ credentials.
    fixture data.
 3. **Bounded transport:** add URL/auth policy and an injected HTTP transport; prove redirect, timeout, size, content-type,
    status, and redaction behavior.
-4. **Config and CLI integration:** version-2 migration, `codexbar config validate`, local approval records and interactive
+4. **Config and CLI integration:** version-2 migration, `sharingan config validate`, local approval records and interactive
    approval command, diagnostics, and custom-provider CLI output. No live credentials in tests.
 5. **App integration:** generic metadata/icon, refresh lifecycle, menu rendering, persistence, and disabled/error states
    through existing shared provider UI.

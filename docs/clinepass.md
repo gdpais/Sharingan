@@ -11,19 +11,19 @@ ClinePass tracks subscription quota, separate from Cline pay-as-you-go balances.
 and add an API key, or sign in with your browser via `cline auth` (no API key needed):
 
 ```bash
-printf '%s' "$CLINE_API_KEY" | codexbar config set-api-key --provider clinepass --stdin
+printf '%s' "$CLINE_API_KEY" | sharingan config set-api-key --provider clinepass --stdin
 # or browser sign-in (writes ~/.cline/data/settings/providers.json, reused automatically):
 cline auth
 ```
 
 The CLI accepts `CLINE_API_KEY` or `CLINEPASS_API_KEY` from its environment, in that order, then falls back to the
 `cline` OAuth session in Cline's `providers.json` (`workos:` bearer token, shared by `cline` and `cline-pass`).
-CodexBar config and environment API keys take precedence over the session file. Within that file, Cline's own
+Sharingan config and environment API keys take precedence over the session file. Within that file, Cline's own
 [`getApiKey` resolver](https://github.com/cline/cline/blob/main/sdk/packages/core/src/auth/provider-auth-registry.ts)
-prefers `auth.accessToken`, then `apiKey`, then `auth.apiKey`; CodexBar follows the same order. Source modes are
+prefers `auth.accessToken`, then `apiKey`, then `auth.apiKey`; Sharingan follows the same order. Source modes are
 `auto` and `api`; both use the same bundled provider plugin on macOS and Linux.
 
-The file read is local and read-only: CodexBar never starts a login flow, imports browser cookies, refreshes tokens,
+The file read is local and read-only: Sharingan never starts a login flow, imports browser cookies, refreshes tokens,
 or copies the session into its config. If Cline's access token expires, the error asks you to run `cline auth` again.
 Keep Cline responsible for signing in and renewing its session. A stored Cline API key is also supported and remains
 labeled **API key**; an OAuth session is labeled **Browser**.
@@ -39,7 +39,7 @@ Settings → Providers → ClinePass stores labeled API keys for tracking severa
 selected account's key is injected as `CLINE_API_KEY` for that fetch, replacing the configured API key, an ambient
 `CLINE_API_KEY` / `CLINEPASS_API_KEY`, and the `cline auth` session. Only the selected key is sent; a rejected
 account never falls back to another credential. The menu bar account switcher and
-`codexbar usage --provider clinepass --account <label>` (or `--all-accounts`) select accounts without editing files.
+`sharingan usage --provider clinepass --account <label>` (or `--all-accounts`) select accounts without editing files.
 With no selected account, the existing configured-key, environment-key, and Cline-session precedence is unchanged.
 
 ## Data source
@@ -50,12 +50,12 @@ Each window uses the returned `percentUsed` and optional `resetsAt`; absent wind
 This endpoint does not provide pay-as-you-go balances or local cost history.
 
 ```bash
-codexbar usage --provider clinepass --source api --format json --pretty
+sharingan usage --provider clinepass --source api --format json --pretty
 ```
 
 ## Implementation
 
-- `Sources/CodexBarCore/Providers/ClinePass/ClinePassProviderDescriptor.swift` owns metadata and source selection.
-- `Sources/CodexBarCore/Providers/ClinePass/ClinePassSettingsReader.swift` resolves environment keys and the `cline auth`
+- `Sources/SharinganCore/Providers/ClinePass/ClinePassProviderDescriptor.swift` owns metadata and source selection.
+- `Sources/SharinganCore/Providers/ClinePass/ClinePassSettingsReader.swift` resolves environment keys and the `cline auth`
   browser session (`~/.cline/data/settings/providers.json`, `workos:` bearer token).
-- `Sources/CodexBarCore/Resources/Plugins/clinepass.ts` owns the request and response mapping; its JavaScript is generated.
+- `Sources/SharinganCore/Resources/Plugins/clinepass.ts` owns the request and response mapping; its JavaScript is generated.

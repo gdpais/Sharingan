@@ -11,7 +11,7 @@ read_when:
 The T3 Chat provider tracks the 4-hour Base and monthly Overage usage buckets from
 [t3.chat](https://t3.chat).
 
-> **Unofficial integration:** T3 Chat does not publish an API for this data. CodexBar reads a cookie-authenticated
+> **Unofficial integration:** T3 Chat does not publish an API for this data. Sharingan reads a cookie-authenticated
 > endpoint used by the website, so the integration may change or stop working without notice.
 
 ## Setup
@@ -21,7 +21,7 @@ The T3 Chat provider tracks the 4-hour Base and monthly Overage usage buckets fr
 1. Sign in to T3 Chat in any supported browser.
 2. Enable **T3 Chat** in **Settings → Providers**.
 
-CodexBar imports your browser session cookie automatically. CodexBar sends the cookie only to
+Sharingan imports your browser session cookie automatically. Sharingan sends the cookie only to
 `https://t3.chat`.
 
 **Note**: Browser cookie import may require Full Disk Access (especially for Safari) or macOS
@@ -41,19 +41,19 @@ To capture the cookie manually:
 2. Open Developer Tools → Network tab.
 3. Reload the page and find a `getCustomerData` tRPC request.
 4. Right-click → Copy → Copy as cURL.
-5. Paste the full `curl` command into the **T3 Chat cookie** field in CodexBar settings.
+5. Paste the full `curl` command into the **T3 Chat cookie** field in Sharingan settings.
 
 T3 Chat does not support a standalone environment variable or a `--cookie` CLI flag. The only manual path is the Settings field above.
 
 ## Data Source
 
-CodexBar sends one GET request per refresh:
+Sharingan sends one GET request per refresh:
 
 ```text
 GET https://t3.chat/api/trpc/getCustomerData?batch=1&input=...
 ```
 
-The response is JSONL. CodexBar scans each line for the embedded `getCustomerData` tRPC result
+The response is JSONL. Sharingan scans each line for the embedded `getCustomerData` tRPC result
 object in the bundled JavaScript plugin, on both QuickJS and JavaScriptCore. No other T3 Chat endpoints are called.
 
 The request retains the app/CLI web timeout (60 seconds by default), bounded to 1–90 seconds. The
@@ -62,7 +62,7 @@ Captured browser headers retain their existing allowlist; Cookie and Origin rema
 
 ### Fields mapped to usage windows
 
-| Source field | CodexBar label | Notes |
+| Source field | Sharingan label | Notes |
 |---|---|---|
 | `usageFourHourPercentage` | **Base** (primary) | 4-hour rolling window; 0–100 |
 | `usageFourHourNextResetAt` | Base reset time | JavaScript epoch ms or Unix seconds |
@@ -90,30 +90,30 @@ metadata is present, the reset time is shown as unknown.
 
 ```bash
 # Show T3 Chat usage
-codexbar usage --provider t3chat
+sharingan usage --provider t3chat
 
 # Or use the alias
-codexbar usage --provider t3-chat
-codexbar usage --provider t3
+sharingan usage --provider t3-chat
+sharingan usage --provider t3
 ```
 
 T3 Chat provides no token-cost data. The `usage --format json` output contains usage and identity
-data, while `codexbar cost --provider t3chat` is unsupported.
+data, while `sharingan cost --provider t3chat` is unsupported.
 
 ## Common errors
 
 | Error | Cause | Fix |
 |---|---|---|
 | `No T3 Chat cookies found` | No browser session for `t3.chat` | Sign in to T3 Chat in a supported browser and try automatic mode |
-| `T3 Chat session cookie is invalid or expired` | Stale or revoked session cookie | Sign out of T3 Chat, sign back in, then refresh CodexBar or repaste the cookie |
+| `T3 Chat session cookie is invalid or expired` | Stale or revoked session cookie | Sign out of T3 Chat, sign back in, then refresh Sharingan or repaste the cookie |
 | `T3 Chat returned a Vercel security challenge` | Manual Cookie header was used but T3 Chat requires additional Vercel request headers | Paste a full `curl` capture instead of a bare Cookie header |
-| `Could not parse T3 Chat usage` | T3 Chat changed its tRPC response shape | Open a CodexBar issue with a redacted response sample |
+| `Could not parse T3 Chat usage` | T3 Chat changed its tRPC response shape | Open a Sharingan issue with a redacted response sample |
 | `HTTP 401` / `HTTP 403` | Session expired or account not found | Re-authenticate |
 | `HTTP 429` with `x-vercel-mitigated: challenge` | Rate-limited by Vercel edge | Wait a few minutes, then retry with a full cURL capture |
 
 ## Key files
 
-- `Sources/CodexBarCore/Providers/T3Chat/T3ChatProviderDescriptor.swift` — provider metadata and fetch pipeline
-- `Sources/CodexBarCore/Resources/Plugins/t3chat.js` — tRPC request, response decoding, and window mapping
-- `Sources/CodexBar/Providers/Shared/PluginCookieProviderImplementation.swift` — settings pickers and bindings
-- `Sources/CodexBar/Providers/T3Chat/T3ChatSettingsStore.swift` — cookie source and header persistence
+- `Sources/SharinganCore/Providers/T3Chat/T3ChatProviderDescriptor.swift` — provider metadata and fetch pipeline
+- `Sources/SharinganCore/Resources/Plugins/t3chat.js` — tRPC request, response decoding, and window mapping
+- `Sources/Sharingan/Providers/Shared/PluginCookieProviderImplementation.swift` — settings pickers and bindings
+- `Sources/Sharingan/Providers/T3Chat/T3ChatSettingsStore.swift` — cookie source and header persistence

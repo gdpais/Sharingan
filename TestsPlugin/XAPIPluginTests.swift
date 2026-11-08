@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct XAPIPluginTests {
     @Test(arguments: BundledPluginTestSupport.engines)

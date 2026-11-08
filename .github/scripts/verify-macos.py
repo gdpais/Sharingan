@@ -50,16 +50,16 @@ with tempfile.TemporaryDirectory() as temp:
     def uuids(path):
         return set(re.findall(r'UUID: ([A-Fa-f0-9-]+) \(([^)]+)\)', subprocess.check_output(['dwarfdump', '--uuid', str(path)], text=True)))
     assert uuids(main) and uuids(main) == uuids(dwarf), 'dSYM UUID mismatch'
-if config['app'] == 'CodexBar':
-    env = dict(os.environ, CODEXBAR_RESOURCE_SMOKE='1')
+if config['app'] == 'Sharingan':
+    env = dict(os.environ, SHARINGAN_RESOURCE_SMOKE='1')
     for arch in sorted(required):
-        result = subprocess.run(['arch', '-' + arch, str(app / 'Contents/Helpers/CodexBarCLI')], env=env, text=True, capture_output=True, timeout=30)
-        assert result.returncode == 0 and 'CODEXBAR_RESOURCE_SMOKE_OK' in result.stdout, f'Bundled CLI resources failed for {arch}'
+        result = subprocess.run(['arch', '-' + arch, str(app / 'Contents/Helpers/SharinganCLI')], env=env, text=True, capture_output=True, timeout=30)
+        assert result.returncode == 0 and 'SHARINGAN_RESOURCE_SMOKE_OK' in result.stdout, f'Bundled CLI resources failed for {arch}'
     # The upstream packager owns the release capabilities; ensure they survived signing.
     entitlements = plistlib.loads(subprocess.check_output(['codesign', '-d', '--entitlements', ':-', str(app)], stderr=subprocess.DEVNULL))
-    assert entitlements['com.apple.developer.icloud-container-identifiers'] == ['iCloud.com.steipete.codexbar']
+    assert entitlements['com.apple.developer.icloud-container-identifiers'] == ['iCloud.com.gdpais.sharingan']
     assert (app / 'Contents/embedded.provisionprofile').is_file()
-    assert (app / 'Contents/PlugIns/CodexBarWidget.appex').is_dir()
+    assert (app / 'Contents/PlugIns/SharinganWidget.appex').is_dir()
 assert os.environ.get('CI') == 'true', 'Launch verification is only for a fresh CI runner'
 for arch in sorted(required):
     with tempfile.TemporaryDirectory() as home:

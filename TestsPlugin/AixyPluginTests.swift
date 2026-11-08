@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct AixyPluginTests {
     #if canImport(JavaScriptCore)
@@ -17,7 +17,7 @@ struct AixyPluginTests {
         engine: ProviderPluginEngineKind,
         transport: any ProviderHTTPTransport) throws -> ProviderPluginRuntime
     {
-        let bundle = try #require(CodexBarCoreResources.bundle)
+        let bundle = try #require(SharinganCoreResources.bundle)
         let url = try #require(bundle.url(forResource: name, withExtension: "js"))
         return try ProviderPluginRuntime(
             source: String(contentsOf: url, encoding: .utf8),

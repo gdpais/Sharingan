@@ -6,7 +6,7 @@ import subprocess
 import sys
 
 parser = argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--executable', required=True, help='CodexBar Linux CLI')
+parser.add_argument('--executable', required=True, help='Sharingan Linux CLI')
 parser.add_argument('--desktop-binary')
 parser.add_argument('--provider')
 args = parser.parse_args()

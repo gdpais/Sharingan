@@ -14,7 +14,7 @@ REPO = Path(__file__).resolve().parents[2]
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--binary', type=Path, default=REPO / '.local/linux-build/codexbar-linux')
+    parser.add_argument('--binary', type=Path, default=REPO / '.local/linux-build/sharingan-linux')
     parser.add_argument('--version', required=True)
     parser.add_argument('--output', type=Path, default=REPO / '.local/packages')
     args = parser.parse_args()
@@ -25,11 +25,11 @@ def main():
     architecture = {'x86_64': 'x86_64', 'aarch64': 'aarch64', 'arm64': 'aarch64'}.get(platform.machine())
     if architecture is None:
         parser.error('Supported architectures: x86_64 and aarch64')
-    name = f'CodexBarDesktop-v{args.version}-linux-{architecture}'
+    name = f'SharinganDesktop-v{args.version}-linux-{architecture}'
     args.output.mkdir(parents=True, exist_ok=True)
     destination = args.output / f'{name}.tar.gz'
     files = {
-        'bin/codexbar-linux': args.binary.resolve(),
+        'bin/sharingan-linux': args.binary.resolve(),
         'README.md': REPO / 'Integrations/Linux/README.md',
         'LICENSE': REPO / 'LICENSE',
     }
@@ -42,7 +42,7 @@ def main():
                  'Integrations/Omarchy/Panel.qml', 'Integrations/Omarchy/manifest.json']:
         files[path] = REPO / path
     # The adapter reads these beside itself; an archive without them falls back to text tags.
-    for icon in sorted((REPO / 'Sources/CodexBar/Resources').glob('ProviderIcon-*.svg')):
+    for icon in sorted((REPO / 'Sources/Sharingan/Resources').glob('ProviderIcon-*.svg')):
         files[f'Integrations/Omarchy/icons/{icon.name}'] = icon
     # Explicit allowlist: never archive the checkout, user config, or local CLI resource tree.
     with tarfile.open(destination, 'w:gz') as archive:
@@ -55,7 +55,7 @@ def main():
             info = archive.gettarinfo(str(source), arcname=f'{name}/{relative}')
             info.uid = info.gid = 0
             info.uname = info.gname = ''
-            info.mode = 0o755 if relative == 'bin/codexbar-linux' else 0o644
+            info.mode = 0o755 if relative == 'bin/sharingan-linux' else 0o644
             with source.open('rb') as content:
                 archive.addfile(info, content)
     print(destination)

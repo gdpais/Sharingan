@@ -10,7 +10,7 @@ import sys
 import tempfile
 source_path = pathlib.Path(sys.argv[1]) if len(sys.argv) > 1 else (
     pathlib.Path(__file__).resolve().parents[1]
-    / "Sources/CodexBarCore/Host/PTY/TTYCommandRunner.swift")
+    / "Sources/SharinganCore/Host/PTY/TTYCommandRunner.swift")
 source = source_path.read_text()
 start = source.index('enum TTYProcessTreeTerminator {')
 end = source.index('\nprivate enum TTYCommandRunnerTestingOverrides', start)

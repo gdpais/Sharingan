@@ -46,16 +46,16 @@ static QByteArray request(const QString &socketPath, const QJsonObject &message)
 int main(int argc, char **argv) {
     // IPC clients do not load a GUI platform plugin or instantiate a second backend.
     auto application = std::make_unique<QCoreApplication>(argc, argv);
-    QCoreApplication::setApplicationName("codexbar-linux");
-    QCoreApplication::setApplicationVersion(QStringLiteral(CODEXBAR_DESKTOP_VERSION));
+    QCoreApplication::setApplicationName("sharingan-linux");
+    QCoreApplication::setApplicationVersion(QStringLiteral(SHARINGAN_DESKTOP_VERSION));
     QCommandLineParser parser;
-    parser.setApplicationDescription("CodexBar desktop for Linux · Qt windows and optional tray");
+    parser.setApplicationDescription("Sharingan desktop for Linux · Qt windows and optional tray");
     parser.addHelpOption(); parser.addVersionOption();
     for (const auto &name : {"snapshot", "refresh", "settings", "spending", "usage", "quick-view", "quit", "background", "no-tray"})
         parser.addOption(QCommandLineOption(name, QString("%1 the running desktop app").arg(name)));
     parser.addOption(QCommandLineOption("autostart", "Set login startup: enable, disable, status", "action"));
     parser.addOption(QCommandLineOption("configure", "Update desktop settings through local IPC", "json"));
-    parser.addOption(QCommandLineOption("cli", "CodexBar CLI executable for a new instance", "path"));
+    parser.addOption(QCommandLineOption("cli", "Sharingan CLI executable for a new instance", "path"));
     parser.addOption(QCommandLineOption("with-spending", "With --snapshot, refresh local spending when its cache is stale"));
     parser.process(*application);
     QString command = "usage";
@@ -76,8 +76,8 @@ int main(int argc, char **argv) {
         message["settings"] = document.object();
     }
     QString runtime = QStandardPaths::writableLocation(QStandardPaths::RuntimeLocation);
-    if (runtime.isEmpty()) runtime = QDir::tempPath() + "/codexbar-" + QString::number(getuid());
-    runtime += "/codexbar-linux";
+    if (runtime.isEmpty()) runtime = QDir::tempPath() + "/sharingan-" + QString::number(getuid());
+    runtime += "/sharingan-linux";
     if (!QDir().mkpath(runtime) || QFileInfo(runtime).ownerId() != getuid() || QFileInfo(runtime).isSymLink()) {
         std::fputs("Cannot create a private runtime directory\n", stderr); return 1;
     }
@@ -88,21 +88,21 @@ int main(int argc, char **argv) {
         std::fwrite(reply.constData(), 1, reply.size(), stdout);
         return QJsonDocument::fromJson(reply).object().value("ok").toBool(true) ? 0 : 1;
     }
-    if (clientOnly) { std::fputs("CodexBar desktop is not running\n", stderr); return 1; }
+    if (clientOnly) { std::fputs("Sharingan desktop is not running\n", stderr); return 1; }
     QLockFile lock(runtime + "/desktop.lock");
     if (!lock.tryLock(0)) {
         // Another launch may still be loading QML. Never remove its live socket.
         for (int attempt = 0; attempt < 10 && reply.isEmpty(); ++attempt) {
             usleep(100000); reply = request(socketPath, message);
         }
-        if (reply.isEmpty()) { std::fputs("CodexBar is already starting; retry shortly\n", stderr); return 1; }
+        if (reply.isEmpty()) { std::fputs("Sharingan is already starting; retry shortly\n", stderr); return 1; }
         return 0;
     }
     application.reset();
     QApplication app(argc, argv);
-    app.setApplicationName("codexbar-linux");
-    app.setApplicationDisplayName("CodexBar");
-    app.setDesktopFileName("com.steipete.CodexBar");
+    app.setApplicationName("sharingan-linux");
+    app.setApplicationDisplayName("Sharingan");
+    app.setDesktopFileName("com.gdpais.sharingan");
     app.setQuitOnLastWindowClosed(false);
     app.setWindowIcon(QIcon(":/icon.svg"));
     QQuickStyle::setStyle("Fusion");
@@ -155,7 +155,7 @@ int main(int argc, char **argv) {
     menu.addAction("Settings…", &controller, [&controller] { controller.showWindow("settings"); });
     menu.addSeparator();
     menu.addAction("Refresh", &controller, [&controller] { controller.refresh(); controller.refreshCosts(); });
-    menu.addAction("Quit CodexBar", &app, &QCoreApplication::quit);
+    menu.addAction("Quit Sharingan", &app, &QCoreApplication::quit);
     tray.setContextMenu(&menu);
     QObject::connect(&tray, &QSystemTrayIcon::activated, &controller, [&controller](QSystemTrayIcon::ActivationReason reason) {
         if (reason == QSystemTrayIcon::Trigger || reason == QSystemTrayIcon::DoubleClick)
@@ -163,7 +163,7 @@ int main(int argc, char **argv) {
     });
     auto updateTray = [&] {
         tray.setVisible(!noTray && controller.settings().value("showTray").toBool());
-        tray.setToolTip("CodexBar · " + (controller.summary().isEmpty() ? "Usage unavailable" : controller.summary()) +
+        tray.setToolTip("Sharingan · " + (controller.summary().isEmpty() ? "Usage unavailable" : controller.summary()) +
             " · " + controller.settings().value("quotaDisplay").toString() + (controller.stale() ? " · out of date" : ""));
         if (controller.settings().value("trayStyle") == "icon") { tray.setIcon(QIcon(":/icon.svg")); return; }
         QVariantList windows;

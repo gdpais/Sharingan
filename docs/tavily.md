@@ -11,14 +11,14 @@ read_when:
 # Tavily
 
 Enable **Tavily** in Settings → Providers and enter a Tavily API key, or set `TAVILY_API_KEY` for the CLI.
-The key is saved in CodexBar's local config file when entered in Settings.
-Use `codexbar usage --provider tavily --source api` to fetch it.
+The key is saved in Sharingan's local config file when entered in Settings.
+Use `sharingan usage --provider tavily --source api` to fetch it.
 
 The bundled JavaScript plugin reads `GET https://api.tavily.com/usage` with bearer authentication. It displays
 **Account plan** usage from `account.plan_usage` / `account.plan_limit` and **API key** usage from
 `key.usage` / `key.limit` as separate meters. Pay-as-you-go totals, when reported, appear in a separate detail
 section. Credit totals come directly from Tavily, so differing search, extract, crawl, map, and research
-costs are already accounted for; CodexBar does not turn request counts into estimated credits.
+costs are already accounted for; Sharingan does not turn request counts into estimated credits.
 
 A null key limit means **Unlimited**. A null pay-as-you-go limit leaves the cap unspecified and shows only
 the reported usage. Zero limits and unlimited keys retain their detail rows without an
@@ -30,7 +30,7 @@ Tavily limits `/usage` to **10 requests per 10 minutes**, including both develop
 Keep refreshes at least one minute apart and avoid repeated manual refreshes. A throttled request fails as
 rate-limited without an automatic replay. The endpoint does not expose live request-rate headroom or an
 exact reset timestamp. Tavily documents monthly credits resetting on the first day of each month, but does
-not specify the timezone here; CodexBar does not invent a reset countdown. No browser session, local
+not specify the timezone here; Sharingan does not invent a reset countdown. No browser session, local
 credential discovery, or account mutation is used.
 
 Sources: [Usage API](https://docs.tavily.com/documentation/api-reference/endpoint/usage),

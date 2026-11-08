@@ -1,7 +1,7 @@
 import Foundation
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 @Suite(.serialized)
 struct PlatformGatingTests {
@@ -16,7 +16,7 @@ struct PlatformGatingTests {
 
     @Test
     func ampAutoSource_doesNotRequireWebSupport() async {
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(.auto, provider: .amp))
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(.auto, provider: .amp))
     }
 
     @Test
@@ -24,15 +24,15 @@ struct PlatformGatingTests {
         let manualCookieSettings = ProviderSettingsSnapshot.make(
             ollama: .init(cookieSource: .manual, manualCookieHeader: "__Secure-session=manual"))
 
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(
             .auto,
             provider: .ollama,
             settings: manualCookieSettings))
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(
             .web,
             provider: .ollama,
             settings: manualCookieSettings))
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(
             .web,
             provider: .ollama,
             settings: ProviderSettingsSnapshot.make(
@@ -41,8 +41,8 @@ struct PlatformGatingTests {
 
     @Test
     func claudeAutoSource_allowsPlannerToFallBackToCLI() async {
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(.auto, provider: .claude))
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(.web, provider: .claude))
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(.auto, provider: .claude))
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(.web, provider: .claude))
     }
 
     @Test
@@ -185,13 +185,13 @@ struct PlatformGatingTests {
 
     @Test
     func claudeOAuthUsageDoesNotDetectCLIVersion() {
-        #expect(!CodexBarCLI.shouldDetectVersion(
+        #expect(!SharinganCLI.shouldDetectVersion(
             provider: .claude,
             result: self.makeResult(kind: .oauth)))
-        #expect(CodexBarCLI.shouldDetectVersion(
+        #expect(SharinganCLI.shouldDetectVersion(
             provider: .claude,
             result: self.makeResult(kind: .cli)))
-        #expect(CodexBarCLI.shouldDetectVersion(
+        #expect(SharinganCLI.shouldDetectVersion(
             provider: .codex,
             result: self.makeResult(kind: .oauth)))
     }

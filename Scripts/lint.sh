@@ -64,7 +64,7 @@ check_packaged_app_launch() {
 }
 
 check_cli_installer() {
-  /bin/bash "${ROOT_DIR}/Scripts/test_install_codexbar_cli.sh"
+  /bin/bash "${ROOT_DIR}/Scripts/test_install_sharingan_cli.sh"
 }
 
 check_release_dsym_paths() {
@@ -192,8 +192,8 @@ run_swiftlint() {
 collect_javascript_files() {
   JAVASCRIPT_FILES=("${ROOT_DIR}/docs/site.js")
   local file
-  for file in "${ROOT_DIR}"/Scripts/*.mjs "${ROOT_DIR}"/Sources/CodexBarCore/Resources/Plugins/*.js \
-    "${ROOT_DIR}"/Sources/CodexBarCore/Resources/Plugins/*.ts
+  for file in "${ROOT_DIR}"/Scripts/*.mjs "${ROOT_DIR}"/Sources/SharinganCore/Resources/Plugins/*.js \
+    "${ROOT_DIR}"/Sources/SharinganCore/Resources/Plugins/*.ts
   do
     [[ -f "$file" ]] || continue
     case "$(basename "$file")" in

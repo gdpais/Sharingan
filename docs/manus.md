@@ -32,7 +32,7 @@ produces a reset clock; monthly renewal dates remain unavailable.
 
 1. In **Settings → Providers → Manus**, set Cookie source to **Manual**
 2. Open your browser DevTools on `manus.im`, copy the `Cookie:` header from any API request (must contain `session_id=...`)
-3. Paste the header into the cookie field in CodexBar
+3. Paste the header into the cookie field in Sharingan
 
 ### Environment variables (CLI / headless)
 
@@ -60,14 +60,14 @@ Manus supports multiple accounts via the standard token-account mechanism. Add e
 ## CLI
 
 ```bash
-codexbar usage --provider manus --verbose
+sharingan usage --provider manus --verbose
 ```
 
 ## Troubleshooting
 
 ### "No Manus session token provided"
 
-Log in to [manus.im](https://manus.im) in a supported browser (Safari, Chrome, Firefox), then refresh CodexBar. Alternatively, set `MANUS_SESSION_TOKEN` or `MANUS_COOKIE`, or paste a cookie header in manual mode.
+Log in to [manus.im](https://manus.im) in a supported browser (Safari, Chrome, Firefox), then refresh Sharingan. Alternatively, set `MANUS_SESSION_TOKEN` or `MANUS_COOKIE`, or paste a cookie header in manual mode.
 
 ### "Invalid Manus session token"
 

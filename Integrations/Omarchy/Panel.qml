@@ -8,12 +8,12 @@ import qs.Ui
 // Presentation only. The standalone app owns settings, polling and notifications.
 Panel {
     id: root
-    moduleName: "steipete.codexbar"
+    moduleName: "gdpais.sharingan"
     ipcTarget: moduleName
     property var snapshot: ({})
     property string response: ""
     property bool available: false
-    readonly property string executable: String(setting("desktopExecutable", "codexbar-linux"))
+    readonly property string executable: String(setting("desktopExecutable", "sharingan-linux"))
     implicitWidth: button.implicitWidth
     implicitHeight: button.implicitHeight
     function poll() { if (!reader.running) reader.running = true; }
@@ -46,12 +46,12 @@ Panel {
             ? root.snapshot.barEntries : []
         readonly property bool icons: Array.isArray(segments) && segments.length > 0
         // The backend formats quota; the bar only prefixes stale data.
-        text: !root.available ? "CodexBar —" : (root.snapshot.stale ? "! " : "") +
-            (root.snapshot.summary || "CodexBar —")
+        text: !root.available ? "Sharingan —" : (root.snapshot.stale ? "! " : "") +
+            (root.snapshot.summary || "Sharingan —")
         // The own label stays the tooltip fallback and the fallback renderer; icons replace it when present.
         labelVisible: !icons
         fixedWidth: icons ? badges.implicitWidth + scaledHorizontalMargin * 2 : -1
-        tooltipText: "CodexBar · quota " + (root.snapshot.quotaDisplay || "remaining") + "\nClick for usage · middle-click to refresh"
+        tooltipText: "Sharingan · quota " + (root.snapshot.quotaDisplay || "remaining") + "\nClick for usage · middle-click to refresh"
         onPressed: function(code) { if (code === Qt.MiddleButton) root.refresh(); else root.toggle(); }
         Row {
             id: badges
@@ -168,9 +168,9 @@ Panel {
                 Column {
                     id: content
                     width: parent.width; spacing: Style.space(12)
-                    Caption { text: "CodexBar"; font.bold: true; font.pixelSize: Style.font.heading }
+                    Caption { text: "Sharingan"; font.bold: true; font.pixelSize: Style.font.heading }
                     Caption {
-                        text: !root.available ? "Open CodexBar to start background refresh." : root.snapshot.error ||
+                        text: !root.available ? "Open Sharingan to start background refresh." : root.snapshot.error ||
                             (root.snapshot.busy ? "Refreshing…" : "Updated " + root.snapshot.updated + (root.snapshot.stale ? " · older data" : ""))
                     }
                     Repeater {

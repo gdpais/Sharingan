@@ -1,11 +1,11 @@
 import Commander
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct DashboardServeScopeTests {
     @Test
     func `live account expansion is an explicit serve only option`() throws {
-        let program = Program(descriptors: CodexBarCLI.commandDescriptors())
+        let program = Program(descriptors: SharinganCLI.commandDescriptors())
         let ordinary = try program.resolve(argv: ["serve"])
         let expanded = try program.resolve(argv: ["serve", "--all-accounts"])
         #expect(!ordinary.parsedValues.flags.contains("allAccounts"))

@@ -15,10 +15,10 @@ code, provider integrations, and documentation come from CodexBar; Sharingan reb
 upstream closely. CodexBar is released under the MIT License; Sharingan keeps that license and the original copyright
 notice — see [LICENSE](LICENSE). Please consider supporting the original project.
 
-Internally the source still uses CodexBar names (Swift modules, targets, and types) to keep upstream merges cheap.
-Everything Sharingan stores or installs uses its own names, so it runs side by side with CodexBar.
+The whole codebase is renamed to Sharingan (Swift modules, targets, types, files, CLI, config, and Keychain names), so
+Sharingan builds, installs, and runs side by side with CodexBar without sharing any state.
 
-<img src="docs/codexbar.png" alt="Menu popover with provider tiles, usage bars, and reset countdowns (screenshot from upstream CodexBar)" width="520" />
+<img src="docs/sharingan.png" alt="Menu popover with provider tiles, usage bars, and reset countdowns (screenshot from upstream CodexBar)" width="520" />
 
 ## Why
 
@@ -37,7 +37,7 @@ There are no prebuilt Sharingan releases, Homebrew casks, or other packages yet.
 ```bash
 git clone https://github.com/gdpais/Sharingan.git
 cd Sharingan
-./Scripts/package_app.sh   # release build; ad-hoc signing is the default (CODEXBAR_SIGNING=adhoc)
+./Scripts/package_app.sh   # release build; ad-hoc signing is the default (SHARINGAN_SIGNING=adhoc)
 open Sharingan.app
 ```
 
@@ -287,7 +287,7 @@ make docs-list                       # list docs with frontmatter summaries
 CLI install (installs a `sharingan` symlink to the CLI bundled inside the app; CodexBar's `codexbar` is untouched):
 ```bash
 # after copying Sharingan.app to /Applications
-./bin/install-codexbar-cli.sh
+./bin/install-sharingan-cli.sh
 ```
 
 ## Related (by CodexBar's author)

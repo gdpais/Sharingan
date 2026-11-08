@@ -39,7 +39,7 @@ Kilo supports API and CLI-backed auth. Source mode can be `auto`, `api`, or `cli
 
 ## Organizations
 
-CodexBar can show usage for any Kilo organization the API key belongs to.
+Sharingan can show usage for any Kilo organization the API key belongs to.
 
 - Open Preferences → Providers → Kilo, set the API key, then click **Refresh
   organizations**.
@@ -49,7 +49,7 @@ CodexBar can show usage for any Kilo organization the API key belongs to.
 - The resolved credential is checked again before publication, so replacing or removing CLI `auth.json` during discovery also invalidates the old response.
 - When at least one organization is enabled, the menu renders one Kilo card per
   enabled scope.
-- The CodexBar fetcher sends the standard `X-KILOCODE-ORGANIZATIONID` header on
+- The Sharingan fetcher sends the standard `X-KILOCODE-ORGANIZATIONID` header on
   every usage call to scope the response to that organization.
 - CLI source mode (`auth.json`): the header is applied to CLI-resolved tokens
   as well. If a CLI token isn't authorized for the chosen organization, that

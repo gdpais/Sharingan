@@ -3,7 +3,7 @@ import CSQLite3
 import Foundation
 import FoundationNetworking
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 @Suite(.serialized)
 struct CursorAppAuthLinuxTests {

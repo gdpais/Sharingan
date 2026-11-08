@@ -8,7 +8,7 @@ read_when:
 # Usage & Spend provider artwork
 
 Provider-level icons request `ProviderBrandIcon.Style.brand`. Account/source and model child rows
-retain CodexBar's existing monochrome provider artwork and 76% opacity, adapting to light and dark
+retain Sharingan's existing monochrome provider artwork and 76% opacity, adapting to light and dark
 appearance. The existing provider association is preserved. Menu bar and other settings callers
 retain the default monochrome rendering.
 
@@ -89,7 +89,7 @@ actual colored pixels in decoded assets, including warm/green Antigravity pixels
 light/dark UI proof, including narrow windows and incomplete model history, with:
 
 ```sh
-CODEXBAR_BRAND_ICON_PROOF_DIR=docs/screenshots/usage-spend-brand-icons \
+SHARINGAN_BRAND_ICON_PROOF_DIR=docs/screenshots/usage-spend-brand-icons \
   make test-fast FILTER='test_renderBrandIconScreenshots|test_renderProviderDetailPolishScreenshots'
 ```
 

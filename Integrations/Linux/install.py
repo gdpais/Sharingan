@@ -9,8 +9,8 @@ import shutil
 import tempfile
 
 REPO = Path(__file__).resolve().parents[2]
-APP_ID = 'com.steipete.CodexBar'
-PLUGIN_ID = 'steipete.codexbar'
+APP_ID = 'com.gdpais.sharingan'
+PLUGIN_ID = 'gdpais.sharingan'
 
 
 def atomic(path, content, mode=0o600, follow_links=False):
@@ -60,7 +60,7 @@ def xdg_directory(variable, fallback):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--binary', type=Path, default=REPO / ('bin/codexbar-linux' if (REPO / 'bin/codexbar-linux').exists() else '.local/linux-build/codexbar-linux'))
+    parser.add_argument('--binary', type=Path, default=REPO / ('bin/sharingan-linux' if (REPO / 'bin/sharingan-linux').exists() else '.local/linux-build/sharingan-linux'))
     parser.add_argument('--cli', type=Path)
     parser.add_argument('--omarchy', action='store_true')
     parser.add_argument('--no-autostart', action='store_true')
@@ -68,7 +68,7 @@ def main():
     args = parser.parse_args()
     binary = args.binary.resolve()
     if not binary.is_file() or not os.access(binary, os.X_OK):
-        parser.error('Build codexbar-linux first, or pass --binary')
+        parser.error('Build sharingan-linux first, or pass --binary')
     config = xdg_directory('XDG_CONFIG_HOME', Path.home() / '.config')
     data = xdg_directory('XDG_DATA_HOME', Path.home() / '.local/share')
     shell_path = config / 'omarchy/shell.json'
@@ -79,21 +79,21 @@ def main():
             for entry in section:
                 if isinstance(entry, dict) and entry.get('id') == PLUGIN_ID:
                     existing = entry
-    preferences = config / 'codexbar/linux.json'
+    preferences = config / 'sharingan/linux.json'
     settings = json.loads(preferences.read_text(encoding='utf-8')) if preferences.exists() else {}
     if not preferences.exists() and existing:
         keys = ['executable', 'provider', 'source', 'accountIndex', 'allAccounts', 'showIdentity',
                 'refreshSeconds', 'showCosts', 'showStatus', 'notifications', 'notifyThreshold']
         settings.update({key: existing[key] for key in keys if key in existing})
-    cli = args.cli or settings.get('executable') or shutil.which('codexbar')
+    cli = args.cli or settings.get('executable') or shutil.which('sharingan')
     if not cli:
-        candidate = REPO / '.local/omarchy-cli/codexbar'
+        candidate = REPO / '.local/omarchy-cli/sharingan'
         if candidate.exists():
             cli = candidate
     if cli and not Path(cli).is_absolute():
         cli = shutil.which(str(cli)) or cli
     if not cli or not Path(cli).is_file() or not os.access(cli, os.X_OK):
-        parser.error('Pass --cli with an installed CodexBar Linux CLI executable')
+        parser.error('Pass --cli with an installed Sharingan Linux CLI executable')
     settings['executable'] = str(Path(cli).resolve())
     settings.setdefault('provider', 'codex')
     if args.provider:
@@ -105,24 +105,24 @@ def main():
     if preferences.exists():
         shutil.copy2(preferences, preferences.with_name(f'linux.json.backup-{stamp}'))
     atomic(preferences, (json.dumps(settings, indent=2, ensure_ascii=False) + '\n').encode(), follow_links=True)
-    destination = Path.home() / '.local/bin/codexbar-linux'
+    destination = Path.home() / '.local/bin/sharingan-linux'
     atomic(destination, binary.read_bytes(), 0o755)
-    icon = data / 'icons/hicolor/scalable/apps/codexbar.svg'
+    icon = data / 'icons/hicolor/scalable/apps/sharingan.svg'
     atomic(icon, (REPO / 'Integrations/Linux/icon.svg').read_bytes(), 0o644)
     command = quoted(destination)
     if '%' in str(destination):
         # Desktop launchers inspect the executable before expanding literal percent escapes.
         # A constant shell program forwards the path literally, including '=' characters.
-        command = '/bin/sh -c ' + quoted('exec "$@"') + ' codexbar ' + command
+        command = '/bin/sh -c ' + quoted('exec "$@"') + ' sharingan ' + command
     launcher = f'''[Desktop Entry]
 Type=Application
-Name=CodexBar
+Name=Sharingan
 Comment=AI usage, accounts and local spending
 Exec={command} --usage
-Icon=codexbar
+Icon=sharingan
 Terminal=false
 Categories=Utility;Development;
-StartupWMClass=com.steipete.CodexBar
+StartupWMClass=com.gdpais.sharingan
 Actions=Settings;Spending;
 
 [Desktop Action Settings]
@@ -138,9 +138,9 @@ Exec={command} --spending
     startup_disabled = args.no_autostart or autostart_is_disabled(startup_path)
     startup = f'''[Desktop Entry]
 Type=Application
-Name=CodexBar
+Name=Sharingan
 Exec={command} --background
-Icon=codexbar
+Icon=sharingan
 Terminal=false
 Hidden={'true' if startup_disabled else 'false'}
 '''
@@ -160,14 +160,14 @@ Hidden={'true' if startup_disabled else 'false'}
         icons = plugin / 'icons'
         icons.mkdir()
         # A checkout keeps the marks in Sources; a release archive carries them beside the panel.
-        for folder in [REPO / 'Sources/CodexBar/Resources', REPO / 'Integrations/Omarchy/icons']:
+        for folder in [REPO / 'Sources/Sharingan/Resources', REPO / 'Integrations/Omarchy/icons']:
             for source in sorted(folder.glob('ProviderIcon-*.svg')):
                 shutil.copy2(source, icons / source.name)
-        shutil.copy2(shell_path, shell_path.with_name(f'shell.json.codexbar-backup-{stamp}'))
+        shutil.copy2(shell_path, shell_path.with_name(f'shell.json.sharingan-backup-{stamp}'))
         if existing is None:
             existing = {'id': PLUGIN_ID}
             shell.setdefault('bar', {}).setdefault('layout', {}).setdefault('right', []).insert(0, existing)
-        # Provider/app settings now belong exclusively to CodexBar.
+        # Provider/app settings now belong exclusively to Sharingan.
         for key in list(existing):
             if key not in ['id', 'desktopExecutable']:
                 existing.pop(key)
@@ -175,7 +175,7 @@ Hidden={'true' if startup_disabled else 'false'}
         atomic(shell_path, (json.dumps(shell, indent=2, ensure_ascii=False) + '\n').encode(), shell_path.stat().st_mode & 0o777,
                 follow_links=True)
     print(f'Installed {destination}')
-    print('Run codexbar-linux --settings, or open CodexBar from the application launcher.')
+    print('Run sharingan-linux --settings, or open Sharingan from the application launcher.')
 
 
 if __name__ == '__main__':

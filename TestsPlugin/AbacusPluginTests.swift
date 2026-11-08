@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct AbacusPluginTests {
     @Test(arguments: BundledPluginTestSupport.engines)
@@ -175,7 +175,7 @@ struct AbacusPluginTests {
         let (cancellations, cancelled) = AsyncStream<Bool>.makeStream()
         defer { cancelled.finish() }
         let requestTimeout = 2.0
-        let bundle = try #require(CodexBarCoreResources.bundle)
+        let bundle = try #require(SharinganCoreResources.bundle)
         let url = try #require(bundle.url(forResource: "abacus", withExtension: "js"))
         let runtime = try ProviderPluginRuntime(
             source: String(contentsOf: url, encoding: .utf8),

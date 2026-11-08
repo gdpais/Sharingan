@@ -8,7 +8,7 @@ read_when:
 # xKiro
 
 xKiro is disabled by default. Add an API key in Settings → Providers → xKiro, or set `XKIRO_API_KEY`.
-The setting is stored in CodexBar's local config file. CodexBar sends the key only to `https://api.xkiro.com`
+The setting is stored in Sharingan's local config file. Sharingan sends the key only to `https://api.xkiro.com`
 as `Authorization: Bearer …`; it never imports browser cookies or starts a login flow.
 
 The bundled `xkiro.ts` plugin reads `GET /v1/usage`. The provider documents this endpoint as free to call,
@@ -25,7 +25,7 @@ Malformed counters fail parsing. There is no guessed RPM limit: the usage endpoi
 HTTP 429 is classified as rate limiting and preserves `Retry-After` through the host's bounded retry policy.
 
 ```sh
-codexbar usage --provider xkiro --source api --json
+sharingan usage --provider xkiro --source api --json
 ```
 
 Sources checked September 24, 2026:

@@ -34,13 +34,13 @@ Set **API region** to **Global (api.z.ai)** or **BigModel CN (open.bigmodel.cn)*
 - CLI personal:
 
   ```bash
-  printf '%s' "$Z_AI_API_KEY" | codexbar config set-api-key --provider zai --stdin
+  printf '%s' "$Z_AI_API_KEY" | sharingan config set-api-key --provider zai --stdin
   ```
 
 - CLI team:
 
   ```bash
-  printf '%s' "$Z_AI_API_KEY" | codexbar config set-api-key --provider zai --stdin \
+  printf '%s' "$Z_AI_API_KEY" | sharingan config set-api-key --provider zai --stdin \
     --label Team \
     --usage-scope team \
     --organization-id org_... \
@@ -50,8 +50,8 @@ Set **API region** to **Global (api.z.ai)** or **BigModel CN (open.bigmodel.cn)*
 - Check:
 
   ```bash
-  codexbar config validate
-  codexbar usage --provider zai --account Team
+  sharingan config validate
+  sharingan usage --provider zai --account Team
   ```
 
 Personal config can use `providers[].apiKey`. Team config uses `tokenAccounts`:
@@ -83,7 +83,7 @@ Personal config can use `providers[].apiKey`. Team config uses `tokenAccounts`:
 Keep `organizationId` and `workspaceID` single-line. Do not paste display names, URLs, or multiple IDs.
 
 ## Finding the BigModel team IDs
-For BigModel China team usage, CodexBar needs the `Bigmodel-Organization` and `Bigmodel-Project` request headers:
+For BigModel China team usage, Sharingan needs the `Bigmodel-Organization` and `Bigmodel-Project` request headers:
 
 1. Open the BigModel API-key page and create/copy the API key:
    - `https://bigmodel.cn/usercenter/proj-mgmt/apikeys`
@@ -104,7 +104,7 @@ Copy each value once, on one line. Multi-line or duplicated IDs can make the API
 - BigModel (China mainland) host: `https://open.bigmodel.cn`
 - Override host via Providers → z.ai → *API region* or `Z_AI_API_HOST=open.bigmodel.cn`.
 - Override the full quota URL (e.g. coding plan endpoint) via `Z_AI_QUOTA_URL=https://open.bigmodel.cn/api/coding/paas/v4`.
-- Endpoint overrides must be explicit HTTPS URLs or bare hosts/paths that CodexBar normalizes to HTTPS. Explicit
+- Endpoint overrides must be explicit HTTPS URLs or bare hosts/paths that Sharingan normalizes to HTTPS. Explicit
   `http://` overrides fail closed before the bearer token is attached to a request. If both z.ai overrides are set,
   `Z_AI_QUOTA_URL` has priority for quota requests; a stale lower-priority `Z_AI_API_HOST` is ignored for that quota
   path, but direct model-usage requests still validate `Z_AI_API_HOST` before sending bearer auth.
@@ -123,7 +123,7 @@ Copy each value once, on one line. Multi-line or duplicated IDs can make the API
 - Team quota scope appends `type=2`; team hourly model usage appends `type=3`. Both send the BigModel selectors:
   - `Bigmodel-Organization: <org id>`
   - `Bigmodel-Project: <project id>`
-- Live API checks return success with empty limits when one of the selectors is missing, so CodexBar treats both
+- Live API checks return success with empty limits when one of the selectors is missing, so Sharingan treats both
   Organization ID and Project ID as required for team usage.
 
 ## Usage dashboard
@@ -131,7 +131,7 @@ Copy each value once, on one line. Multi-line or duplicated IDs can make the API
 - Global: `https://z.ai/manage-apikey/coding-plan/personal/my-plan`
 - BigModel China: `https://bigmodel.cn/coding-plan/personal/usage`
 - BigModel China team: `https://bigmodel.cn/coding-plan/team/usage-stats`
-- CodexBar's Usage Dashboard action follows the configured API region.
+- Sharingan's Usage Dashboard action follows the configured API region.
 
 ## Parsing + mapping
 - Response fields:
@@ -155,8 +155,8 @@ Copy each value once, on one line. Multi-line or duplicated IDs can make the API
   - Hourly and daily model token totals use compact M/B labels from one million upward; smaller totals remain exact. Chart points retain their full numeric values.
 
 ## Key files
-- `Sources/CodexBarCore/Resources/Plugins/zai.js` (quota parsing and window mapping)
-- `Sources/CodexBarCore/Providers/Zai/ZaiProviderDescriptor.swift`
-- `Sources/CodexBarCore/Providers/Zai/ZaiSettingsReader.swift`
-- `Sources/CodexBar/Providers/Zai/ZaiTokenStore.swift` (legacy migration helper)
-- `Tests/CodexBarTests/ProviderPluginDetailsParityTests.swift` (quota fixtures, including credit limits)
+- `Sources/SharinganCore/Resources/Plugins/zai.js` (quota parsing and window mapping)
+- `Sources/SharinganCore/Providers/Zai/ZaiProviderDescriptor.swift`
+- `Sources/SharinganCore/Providers/Zai/ZaiSettingsReader.swift`
+- `Sources/Sharingan/Providers/Zai/ZaiTokenStore.swift` (legacy migration helper)
+- `Tests/SharinganTests/ProviderPluginDetailsParityTests.swift` (quota fixtures, including credit limits)

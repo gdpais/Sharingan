@@ -26,7 +26,7 @@ Native descriptor/settings glue retains credential selection and endpoint valida
 Store the API key without opening Settings:
 
 ```bash
-printf '%s' "$ELEVENLABS_API_KEY" | codexbar config set-api-key --provider elevenlabs --stdin
+printf '%s' "$ELEVENLABS_API_KEY" | sharingan config set-api-key --provider elevenlabs --stdin
 ```
 
 This trims the piped key, writes it to `~/.sharingan/config.json` with restrictive permissions, and enables ElevenLabs by default. Use `--no-enable` to save the key without enabling the provider.
@@ -37,11 +37,11 @@ This trims the piped key, writes it to `~/.sharingan/config.json` with restricti
 2. Enable **ElevenLabs**
 3. Open `https://elevenlabs.io/app/settings/api-keys`
 4. Create or copy an API key
-5. Paste the key into CodexBar's ElevenLabs provider settings
+5. Paste the key into Sharingan's ElevenLabs provider settings
 
 ### Environment Variables
 
-CodexBar also accepts these environment variables:
+Sharingan also accepts these environment variables:
 
 - `ELEVENLABS_API_KEY`
 - `XI_API_KEY`
@@ -58,7 +58,7 @@ For tests or self-hosted/proxy setups, override the API base URL with `ELEVENLAB
 
 ### "Missing ElevenLabs API key"
 
-Set the key with `codexbar config set-api-key --provider elevenlabs --stdin`, add it in **Settings -> Providers -> ElevenLabs**, set `ELEVENLABS_API_KEY`, or configure an ElevenLabs token account.
+Set the key with `sharingan config set-api-key --provider elevenlabs --stdin`, add it in **Settings -> Providers -> ElevenLabs**, set `ELEVENLABS_API_KEY`, or configure an ElevenLabs token account.
 
 ### "ElevenLabs rejected the selected API key"
 
@@ -66,7 +66,7 @@ ElevenLabs returned an authentication or access error identifying `invalid_api_k
 
 ### "ElevenLabs API key is missing the user_read permission"
 
-ElevenLabs returned HTTP 401 or 403 identifying `missing_permissions` or `insufficient_permissions`. Enable the `user_read` permission for the selected key so CodexBar can fetch subscription usage.
+ElevenLabs returned HTTP 401 or 403 identifying `missing_permissions` or `insufficient_permissions`. Enable the `user_read` permission for the selected key so Sharingan can fetch subscription usage.
 
 ### "ElevenLabs could not authenticate the selected API key"
 
@@ -76,7 +76,7 @@ ElevenLabs returned HTTP 401 without a recognized error status. Check the key an
 
 ElevenLabs returned HTTP 403 without a recognized key or permission error. Check the key's endpoint permissions and IP allowlist in the ElevenLabs API-key settings.
 
-CodexBar reads recognized `detail.code` values first, as described in [ElevenLabs' error documentation](https://elevenlabs.io/docs/eleven-api/resources/errors). It also reads the legacy `detail.status` when the current code is absent or generic; live responses can still use that field for the specific rejection reason. Provider error messages are not copied into these diagnostics.
+Sharingan reads recognized `detail.code` values first, as described in [ElevenLabs' error documentation](https://elevenlabs.io/docs/eleven-api/resources/errors). It also reads the legacy `detail.status` when the current code is absent or generic; live responses can still use that field for the specific rejection reason. Provider error messages are not copied into these diagnostics.
 
 ### "ElevenLabs API error"
 

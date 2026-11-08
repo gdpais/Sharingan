@@ -12,7 +12,7 @@ The ZoomMate provider tracks credit usage against a budget cap from
 [zoommate.zoom.us](https://zoommate.zoom.us). ZoomMate is a credits-based quota — there is no
 session/weekly rate window, just a single primary "Credits" window.
 
-CodexBar's ZoomMate branding uses Zoom's official core palette: Bloom (`#0B5CFF`) as the primary
+Sharingan's ZoomMate branding uses Zoom's official core palette: Bloom (`#0B5CFF`) as the primary
 color, with Dawn (`#B4D0F8`) and Midnight (`#00053D`) as supporting colors. Provenance:
 [Zoom Brand Center, Visual identity — Color](https://brand.zoom.com/document/1#/visual-identity/color),
 retrieved 2026-07-18 (page last modified 2025-08-28).
@@ -24,7 +24,7 @@ retrieved 2026-07-18 (page last modified 2025-08-28).
 1. Sign in to ZoomMate in a supported browser.
 2. Enable **ZoomMate** in **Settings → Providers**. **Cookie source** defaults to **Auto**.
 
-CodexBar imports your ZoomMate/Zoom session cookies in the shared browser order (covering
+Sharingan imports your ZoomMate/Zoom session cookies in the shared browser order (covering
 `zoommate.zoom.us`, `ai.zoom.us`, and the parent `zoom.us` domain, where Zoom's SSO session cookies
 actually live) and exchanges them for a short-lived bearer token via the same
 cookie-to-token bootstrap endpoint ZoomMate's own web app uses internally
@@ -34,17 +34,17 @@ automatic path uses the shared access gate to bound Keychain prompts.
 Because the bearer token is minted from your (much longer-lived) session cookies, this keeps working
 as long as you stay signed in to ZoomMate in a supported browser. A minted token is reused from an in-memory cache
 across refreshes until it nears expiry, then re-minted from the same cookies — no re-paste required.
-If the browser session cookie is missing, CodexBar reports `noSession`; if Zoom rejects an existing
-session, CodexBar reports `invalidCredentials`.
+If the browser session cookie is missing, Sharingan reports `noSession`; if Zoom rejects an existing
+session, Sharingan reports `invalidCredentials`.
 
 Chromium cookie decryption keys live in the macOS Keychain. Background reads require an existing no-UI grant;
 explicit refreshes permit one bounded permission retry. Safari may need Full Disk Access; Firefox and Zen need no
 Keychain decryption. Once a
 fresh import validates — the cookie-to-token mint succeeds — the validated host-scoped cookie headers are saved to
-CodexBar's shared Keychain cookie cache (`com.steipete.codexbar.cache`, account `cookie.zoommate`,
+Sharingan's shared Keychain cookie cache (`com.gdpais.sharingan.cache`, account `cookie.zoommate`,
 same as other cookie providers) and reused before re-importing from browsers. If Zoom rejects the cached session,
-CodexBar drops it and retries a fresh browser import subject to the shared access gate. Background refreshes never
-request Keychain permission. Use `codexbar cookie refresh --provider zoommate --allow-keychain-prompt` for an explicit retry.
+Sharingan drops it and retries a fresh browser import subject to the shared access gate. Background refreshes never
+request Keychain permission. Use `sharingan cookie refresh --provider zoommate --allow-keychain-prompt` for an explicit retry.
 
 ### Manual
 
@@ -57,7 +57,7 @@ command captured from DevTools:
 4. Reload the page and find the `credits/status` request
    (`GET https://ai.zoom.us/ai-computer/api/v1/credits/status`).
 5. Right-click → Copy → Copy as cURL.
-6. Paste the full `curl` command into the **ZoomMate capture** field in CodexBar settings.
+6. Paste the full `curl` command into the **ZoomMate capture** field in Sharingan settings.
 
 Unlike some other manual-paste providers, the forwarded header allowlist for ZoomMate **includes
 `Authorization`** — that's the required credential (see "Common errors" below). `Cookie` and
@@ -65,7 +65,7 @@ selected browser headers may also be forwarded, but `Origin` and `Referer` are a
 the fixed `https://zoommate.zoom.us` value. Captures are accepted only for the HTTPS
 `/ai-computer/api/v1/credits/status` endpoint on `ai.zoom.us` or `zoommate.zoom.us` — DevTools may
 show the request on either host, since both currently serve the same first-party API. A captured
-`Cookie` header is bound to that request's host: CodexBar tries the captured host first and never
+`Cookie` header is bound to that request's host: Sharingan tries the captured host first and never
 forwards its cookies if a non-auth failure falls back to the sibling host.
 
 ## Token expiry (~hourly)
@@ -74,7 +74,7 @@ The ZoomMate bearer token itself is short-lived — typically about an hour. Ses
 longer, so:
 
 - **Automatic mode**: no action needed as long as you stay signed in to ZoomMate in a supported browser;
-  CodexBar mints a bearer token from your session cookies and reuses it (in memory) until it nears
+  Sharingan mints a bearer token from your session cookies and reuses it (in memory) until it nears
   expiry, then re-mints automatically.
 - **Manual mode**: re-capture and re-paste a fresh `curl` command when the pasted token expires
   (surfaced as `invalidCredentials` — see below). This is expected behavior, not a bug — switching
@@ -83,13 +83,13 @@ longer, so:
 ## Auth & privacy
 
 Automatic mode uses the same first-party ZoomMate web-client flow a signed-in browser uses:
-CodexBar imports Zoom session cookies from local browser cookie stores, partitions them into the
+Sharingan imports Zoom session cookies from local browser cookie stores, partitions them into the
 headers a browser would send to each fixed API host, exchanges one of those host-scoped headers for
 a short-lived bearer token, and then uses that bearer token for the `credits/status` and
 `credits/history` requests.
 
 The minted bearer token is never persisted — it is held only in a process-lifetime in-memory cache.
-The validated host-scoped cookie headers (and only those headers — never the bearer) are persisted to CodexBar's
+The validated host-scoped cookie headers (and only those headers — never the bearer) are persisted to Sharingan's
 existing shared Keychain cookie cache after a successful mint, the same cache and lifecycle other
 cookie providers (Claude web, Perplexity, OpenCode, …) already use, so background refreshes and the
 bundled CLI can reuse the session without rereading browser stores. ZoomMate logs intentionally omit
@@ -111,14 +111,14 @@ only to discover parent-scoped SSO cookies; it does not authorize requests to ar
 subdomains. ZoomMate does not currently expose a
 documented public API, so this provider depends on the product's first-party web-client endpoints.
 
-This cookie-to-bearer shape follows an existing CodexBar precedent in the Factory provider's WorkOS
+This cookie-to-bearer shape follows an existing Sharingan precedent in the Factory provider's WorkOS
 cookie exchange. The minted bearer is cached in memory (keyed by a SHA-256 of the cookie session)
 and reused until it nears its JWT `exp`; a token whose expiry can't be read is never cached, and a
 `401/403` from a downstream request evicts the cached token so the next refresh mints fresh.
 
 ## Data Source
 
-CodexBar sends up to a few GET requests per refresh:
+Sharingan sends up to a few GET requests per refresh:
 
 ```text
 GET https://ai.zoom.us/ai-computer/api/v1/credits/status
@@ -139,7 +139,7 @@ integration. A failed `credits/history` fetch is non-fatal: it never blocks the 
 
 ### Fields mapped to the Credits window
 
-| Source field | CodexBar mapping |
+| Source field | Sharingan mapping |
 |---|---|
 | `used_credit` / `budget_cap` | Primary window `usedPercent` (clamped 0–100) |
 | `cycle_end_date` | Primary window reset time (epoch ms) |
@@ -151,7 +151,7 @@ There is no secondary window; `resetDescription` is always "Credits".
 
 The same login bootstrap response used to mint the bearer token (`GET
 .../login/?continue=...`) also carries a `data.user_profile` object with the signed-in
-user's account details. CodexBar reads `user_profile.email` from it and surfaces it as the
+user's account details. Sharingan reads `user_profile.email` from it and surfaces it as the
 provider's `accountEmail` — the same identity field Codex/Claude populate — so the menu card's
 account row shows who is signed in, matching those providers' presentation. `loginMethod` is
 set to `"Cookie"` whenever an email was resolved this way. This is purely additive enrichment:
@@ -182,7 +182,7 @@ includes:
   `cycle_start_date`/`cycle_end_date` — comparing actual usage against the expected
   linear-elapsed-fraction of the cycle. This reuses `UsagePace`'s existing stage thresholds (on
   track / slightly ahead / ahead / far ahead / slightly behind / behind / far behind) rather than
-  a ZoomMate-specific scale, so the wording matches other CodexBar pacing indicators.
+  a ZoomMate-specific scale, so the wording matches other Sharingan pacing indicators.
 
 `is_deleted` history records are excluded from both the KPI tiles and the mini-bars; still-running
 sessions (`is_running: true`) are included since their `cost` reflects consumption so far. The
@@ -197,7 +197,7 @@ omits the section instead of showing an empty dashboard.
 ZoomMate's descriptor points at Zoom's public status page,
 [zoomstatus.com](https://www.zoomstatus.com/), which is an Atlassian Statuspage.io site — the same
 platform Claude's status page already uses. This means the overall-status row and its "Updated …"
-subtitle work through CodexBar's existing shared Statuspage.io fetch/parse path with no
+subtitle work through Sharingan's existing shared Statuspage.io fetch/parse path with no
 ZoomMate-specific fetcher code.
 
 Zoom's status page lists ~300+ components, dominated by heavy per-region duplication for services
@@ -227,15 +227,15 @@ descriptor allowlist and keeps showing every component their feed returns, uncha
 ## CLI
 
 ```bash
-codexbar usage --provider zoommate
+sharingan usage --provider zoommate
 ```
 
 The CLI first reuses the host-scoped cookies cached by a previous validated refresh. Browser fallback uses the shared
 access gate, which permits background reads only with existing prompt-free authorization. If no cached session exists yet (`noSession`), refresh once from the app or
-seed the cache from the terminal with `codexbar cookie refresh --provider zoommate` (add
+seed the cache from the terminal with `sharingan cookie refresh --provider zoommate` (add
 `--allow-keychain-prompt` to acknowledge that Chromium cookie decryption may prompt).
 
-ZoomMate provides no token-cost data and is not yet supported in the CodexBar widget (this
+ZoomMate provides no token-cost data and is not yet supported in the Sharingan widget (this
 includes the credits history dashboard and status page above — both are app-menu-only).
 
 ## Common errors
@@ -243,10 +243,10 @@ includes the credits history dashboard and status page above — both are app-me
 | Error | Cause | Fix |
 |---|---|---|
 | `noCapture` | Manual mode is selected but the capture is empty, off-domain, or lacks a parseable `Authorization` header | Paste a fresh cURL capture of the HTTPS `credits/status` request from `ai.zoom.us` or `zoommate.zoom.us` |
-| `noSession` | Automatic mode found no cached session and no ZoomMate/Zoom session cookies it may read (browser fallback is limited by the shared access gate) | Sign in to ZoomMate in a supported browser and refresh once from the app (or `codexbar cookie refresh --provider zoommate --allow-keychain-prompt`), or switch to Manual and paste a capture |
+| `noSession` | Automatic mode found no cached session and no ZoomMate/Zoom session cookies it may read (browser fallback is limited by the shared access gate) | Sign in to ZoomMate in a supported browser and refresh once from the app (or `sharingan cookie refresh --provider zoommate --allow-keychain-prompt`), or switch to Manual and paste a capture |
 | `invalidCredentials` | HTTP 401/403 — the token expired (~hourly) or was revoked | Re-sign-in (auto) or re-paste a fresh capture (manual) |
 | `apiError` | Any other non-200 HTTP status | Check ZoomMate's status; retry later |
-| `parseFailed` | HTTP 200 body did not contain the expected `credit_status` shape | Open a CodexBar issue with a redacted response sample |
+| `parseFailed` | HTTP 200 body did not contain the expected `credit_status` shape | Open a Sharingan issue with a redacted response sample |
 
 ## Plugin and session ownership
 
@@ -262,8 +262,8 @@ host; a bearer-only request may omit cookies on the alternate host. Cross-origin
 
 ## Key files
 
-- `Sources/CodexBarCore/Resources/Plugins/zoommate.ts` — requests, parsing, JWT expiry handling, history, and snapshot mapping.
-- `Sources/CodexBarCore/Providers/ZoomMate/ZoomMateProviderDescriptor.swift` — metadata, manual capture validation, and minimal strategy wiring.
-- `Sources/CodexBarCore/Plugins/ProviderPluginCookieJar.swift` — host-owned URL cookie matcher and isolated transport.
-- `Sources/CodexBarCore/Plugins/ProviderPluginPersistentCookies.swift` — validated single-entry cache, migration, and conditional rejection.
-- `Sources/CodexBar/Providers/ZoomMate/ZoomMateProviderImplementation.swift` — existing settings pickers and bindings.
+- `Sources/SharinganCore/Resources/Plugins/zoommate.ts` — requests, parsing, JWT expiry handling, history, and snapshot mapping.
+- `Sources/SharinganCore/Providers/ZoomMate/ZoomMateProviderDescriptor.swift` — metadata, manual capture validation, and minimal strategy wiring.
+- `Sources/SharinganCore/Plugins/ProviderPluginCookieJar.swift` — host-owned URL cookie matcher and isolated transport.
+- `Sources/SharinganCore/Plugins/ProviderPluginPersistentCookies.swift` — validated single-entry cache, migration, and conditional rejection.
+- `Sources/Sharingan/Providers/ZoomMate/ZoomMateProviderImplementation.swift` — existing settings pickers and bindings.

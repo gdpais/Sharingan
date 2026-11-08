@@ -1,5 +1,5 @@
 import Foundation
-@testable import CodexBarCore
+@testable import SharinganCore
 
 enum BundledPluginTestSupport {
     #if canImport(JavaScriptCore)
@@ -15,7 +15,7 @@ enum BundledPluginTestSupport {
         contextOptions: ProviderPluginContextOptions = .production,
         storageDirectory: URL? = nil) throws -> ProviderPluginRuntime
     {
-        guard let bundle = CodexBarCoreResources.bundle,
+        guard let bundle = SharinganCoreResources.bundle,
               let url = bundle.url(forResource: name, withExtension: "js")
         else {
             throw ProviderPluginError.load("bundled plugin '\(name).js' was not found")

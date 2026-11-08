@@ -1,7 +1,7 @@
 #if os(Linux)
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct ResetCountdownDayRolloverLinuxTests {
     private static let now = Date(timeIntervalSince1970: 1_700_000_000)

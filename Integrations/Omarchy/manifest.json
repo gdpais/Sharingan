@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "id": "steipete.codexbar",
-  "name": "CodexBar",
+  "id": "gdpais.sharingan",
+  "name": "Sharingan",
   "version": "1.0.0",
   "author": "steipete",
-  "description": "AI usage meters powered by the CodexBar Linux CLI",
+  "description": "AI usage meters powered by the Sharingan Linux CLI",
   "kinds": ["bar-widget"],
   "entryPoints": {"barWidget": "Panel.qml"},
   "barWidget": {
-    "displayName": "CodexBar",
+    "displayName": "Sharingan",
     "description": "Usage, reset times, and credits for your AI providers",
     "category": "Info",
     "allowMultiple": false

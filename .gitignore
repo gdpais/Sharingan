@@ -1,7 +1,7 @@
 # Xcode user/session
 xcuserdata/
 .swiftpm/xcode/xcshareddata/
-.codexbar/config.json
+.sharingan/config.json
 *.env
 *.local
 
@@ -11,11 +11,11 @@ DerivedData
 
 # Bundles / artifacts
 # Main app bundle (any variation)
-CodexBar.app/
 Sharingan.app/
-CodexBar *.app/
-CodexBar_*.app/
-Codexbar.app/
+Sharingan.app/
+Sharingan *.app/
+Sharingan_*.app/
+Sharingan.app/
 # Release artifacts
 *.ipa
 *.dSYM*

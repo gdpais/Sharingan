@@ -8,7 +8,7 @@ read_when:
 # Running Sharingan beside CodexBar
 
 Sharingan shares no runtime state with CodexBar, so both apps can run at the same time. Every name below comes from
-`Sources/CodexBarCore/AppIdentity.swift` (plus `AppDefaultsDomain` and `Scripts/package_app.sh`); new code must use
+`Sources/SharinganCore/AppIdentity.swift` (plus `AppDefaultsDomain` and `Scripts/package_app.sh`); new code must use
 those constants instead of hard-coding a path.
 
 | What | Sharingan | CodexBar |
@@ -46,5 +46,5 @@ CodexBar's defaults are never modified.
   running CodexBar stays up. To restart by hand use `pkill -x Sharingan || true; open -n ./Sharingan.app`. Never use
   `pkill -x CodexBar`.
 - `--clear-adhoc-keychain` only deletes Sharingan's Keychain services.
-- Source names stay upstream's (`CodexBar`, `CodexBarCore`, `CodexBarCLI`, `CODEXBAR_*` env vars other than the config
-  path) to keep upstream merges small.
+- Source names are Sharingan too (`Sharingan`, `SharinganCore`, `SharinganCLI`, `SHARINGAN_*` env vars). When merging
+  upstream CodexBar, apply the same rename to the incoming diff first (see `AGENTS.md`).

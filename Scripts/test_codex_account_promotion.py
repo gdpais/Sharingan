@@ -68,9 +68,9 @@ def verify(binary, mode):
         environment = {
             "HOME": str(root), "CFFIXED_USER_HOME": str(root), "CODEX_HOME": str(live.parent),
             "SHARINGAN_CONFIG": str(config), "PATH": "/usr/bin:/bin",
-            "CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1", "CODEXBAR_DISABLE_KEYCHAIN_ACCESS": "1",
-            "CODEXBAR_TEST_CODEX_FILE_ISOLATION": "1", "CODEXBAR_TEST_SESSION_FILE_ISOLATION": "1",
-            "CODEXBAR_TEST_CODEX_FILE_FIXTURES": json.dumps({"grants": [
+            "SHARINGAN_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1", "SHARINGAN_DISABLE_KEYCHAIN_ACCESS": "1",
+            "SHARINGAN_TEST_CODEX_FILE_ISOLATION": "1", "SHARINGAN_TEST_SESSION_FILE_ISOLATION": "1",
+            "SHARINGAN_TEST_CODEX_FILE_FIXTURES": json.dumps({"grants": [
                 {"url": root.as_uri(), "resolvedURL": root.as_uri(), "isRoot": True}]}),
         }
         result = subprocess.run([binary, "codex-accounts", "promote", target["id"], "--json"],
@@ -97,7 +97,7 @@ def verify(binary, mode):
 
 
 if __name__ == "__main__":
-    executable = str(Path(sys.argv[1] if len(sys.argv) > 1 else ".build/debug/CodexBarCLI").resolve())
+    executable = str(Path(sys.argv[1] if len(sys.argv) > 1 else ".build/debug/SharinganCLI").resolve())
     results = [verify(executable, mode) for mode in
                ["conflict-email", "conflict-provider", "import", "legacy-repair", "refresh",
                 "provider-repair-with-legacy-conflict"]]

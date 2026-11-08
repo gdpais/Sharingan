@@ -22,7 +22,7 @@ falls back across the provider's supported web requests when needed.
      returns 404.
 
 2) **Cached/imported browser session** (automatic web path)
-   - Uses CodexBar's standard cookie cache and browser import flow.
+   - Uses Sharingan's standard cookie cache and browser import flow.
 
 3) **Browser cookie import** (automatic)
    - Uses provider metadata for browser order and MiniMax domain filters.
@@ -63,13 +63,13 @@ Endpoint fallback, rejected-credential handling, and optional billing enrichment
   - Top model and top method breakdowns.
   - Summary rows for recent billing-history totals.
 
-If the billing-history endpoint is unavailable but normal Coding Plan quota data is present, CodexBar still shows the
+If the billing-history endpoint is unavailable but normal Coding Plan quota data is present, Sharingan still shows the
 quota card and omits the chart instead of treating the whole provider as failed.
 
 ## Key files
-- `Sources/CodexBarCore/Providers/MiniMax/MiniMaxUsageFetcher.swift`
-- `Sources/CodexBarCore/Providers/MiniMax/MiniMaxProviderDescriptor.swift`
-- `Sources/CodexBar/Providers/MiniMax/MiniMaxProviderImplementation.swift`
+- `Sources/SharinganCore/Providers/MiniMax/MiniMaxUsageFetcher.swift`
+- `Sources/SharinganCore/Providers/MiniMax/MiniMaxProviderDescriptor.swift`
+- `Sources/Sharingan/Providers/MiniMax/MiniMaxProviderImplementation.swift`
 
 ## CLI diagnose command
 
@@ -78,7 +78,7 @@ for issue reporting and verification. MiniMax adds a provider-specific `details`
 
 ### Usage
 ```
-codexbar diagnose --provider minimax --format json --pretty
+sharingan diagnose --provider minimax --format json --pretty
 ```
 
 ### Output

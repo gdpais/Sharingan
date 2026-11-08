@@ -4,7 +4,7 @@ set -euo pipefail
 ROOT=$(cd "$(dirname "$0")/.." && pwd)
 PACKAGE_SCRIPT="$ROOT/Scripts/package_app.sh"
 RELEASE_SCRIPT="$ROOT/Scripts/sign-and-notarize.sh"
-FUNCTIONS_FILE=$(mktemp "${TMPDIR:-/tmp}/codexbar-package-signing-functions.XXXXXX")
+FUNCTIONS_FILE=$(mktemp "${TMPDIR:-/tmp}/sharingan-package-signing-functions.XXXXXX")
 trap 'rm -f "$FUNCTIONS_FILE"' EXIT
 
 python3 - "$PACKAGE_SCRIPT" "$FUNCTIONS_FILE" <<'PY'
@@ -26,24 +26,24 @@ PY
 
 source "$FUNCTIONS_FILE"
 
-unset CODEXBAR_SIGNING
+unset SHARINGAN_SIGNING
 SIGNING_MODE=
 resolve_package_signing_mode
 [[ "$SIGNING_MODE" == "adhoc" ]]
 
-CODEXBAR_SIGNING=identity
+SHARINGAN_SIGNING=identity
 resolve_package_signing_mode
 [[ "$SIGNING_MODE" == "identity" ]]
 
-CODEXBAR_SIGNING=invalid
+SHARINGAN_SIGNING=invalid
 if resolve_package_signing_mode 2>/dev/null; then
   echo "Invalid package signing mode unexpectedly succeeded" >&2
   exit 1
 fi
 
-grep -Fq 'CODEXBAR_SIGNING=identity ./Scripts/package_app.sh release' "$RELEASE_SCRIPT"
+grep -Fq 'SHARINGAN_SIGNING=identity ./Scripts/package_app.sh release' "$RELEASE_SCRIPT"
 
-TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/codexbar-package-signing.XXXXXX")
+TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/sharingan-package-signing.XXXXXX")
 trap 'rm -f "$FUNCTIONS_FILE"; rm -rf "$TEMP_DIR"' EXIT
 APP="$TEMP_DIR/Sharingan.app"
 mkdir -p "$APP/Contents/Frameworks/Sparkle.framework"
@@ -102,11 +102,11 @@ if 'resolve_package_signing_identity() {' in source:
 for team, configuration, signing, profile_present in itertools.product(
     ['Y5PE65HELJ', 'TESTTEAM01'], ['release', 'debug'], ['identity', 'adhoc'], [False, True],
 ):
-    with tempfile.TemporaryDirectory(prefix='codexbar-entitlement-test-') as directory:
+    with tempfile.TemporaryDirectory(prefix='sharingan-entitlement-test-') as directory:
         root = Path(directory)
         app = root / 'Sharingan.app'
         (app / 'Contents').mkdir(parents=True)
-        profile = root / 'Scripts/profiles/CodexBar-DeveloperID.provisionprofile'
+        profile = root / 'Scripts/profiles/Sharingan-DeveloperID.provisionprofile'
         if profile_present:
             profile.parent.mkdir(parents=True)
             # Marker tests selection/copying only, not certificate or profile validity.
@@ -127,8 +127,8 @@ for team, configuration, signing, profile_present in itertools.product(
         # App groups keep the upstream storage identifier that AppGroupSupport.currentGroupID resolves.
         group_base = 'com.gdpais.sharingan' + ('.debug' if configuration == 'debug' else '')
         expected_group = f'{team}.{group_base}'
-        app_entitlements = plistlib.loads((root / '.build/entitlements/CodexBar.entitlements').read_bytes())
-        widget_entitlements = plistlib.loads((root / '.build/entitlements/CodexBarWidget.entitlements').read_bytes())
+        app_entitlements = plistlib.loads((root / '.build/entitlements/Sharingan.entitlements').read_bytes())
+        widget_entitlements = plistlib.loads((root / '.build/entitlements/SharinganWidget.entitlements').read_bytes())
         assert app_entitlements['com.apple.security.application-groups'] == [expected_group]
         assert widget_entitlements['com.apple.security.application-groups'] == [expected_group]
         assert widget_entitlements['com.apple.security.app-sandbox'] is True
@@ -169,7 +169,7 @@ cases = [
     ('no identities', fork, None, '     0 valid identities found\n', 0, None),
     ('duplicate name', fork, None, listing + f'  3) {first_hash} "{fork}"\n', 0, None),
 ]
-with tempfile.TemporaryDirectory(prefix='codexbar-identity-test-') as directory:
+with tempfile.TemporaryDirectory(prefix='sharingan-identity-test-') as directory:
     root = Path(directory)
     mock_bin = root / 'bin'
     mock_bin.mkdir()
@@ -188,7 +188,7 @@ with tempfile.TemporaryDirectory(prefix='codexbar-identity-test-') as directory:
             env['APP_TEAM_ID'] = override
         result = subprocess.run(['bash', '-eu', '-c', helper + '\n' + generation + '\nprintf "%s" "$CODESIGN_ID"'],
                                 env=env, capture_output=True, text=True)
-        app_path = case_root / '.build/entitlements/CodexBar.entitlements'
+        app_path = case_root / '.build/entitlements/Sharingan.entitlements'
         if expected_team is None:
             assert result.returncode != 0 and 'ERROR:' in result.stderr, (label, result.stderr)
             assert not app_path.exists(), label
@@ -196,7 +196,7 @@ with tempfile.TemporaryDirectory(prefix='codexbar-identity-test-') as directory:
         assert result.returncode == 0, (label, result.stderr)
         assert result.stdout == second_hash, (label, result.stdout)
         app_entitlements = plistlib.loads(app_path.read_bytes())
-        widget_entitlements = plistlib.loads((app_path.parent / 'CodexBarWidget.entitlements').read_bytes())
+        widget_entitlements = plistlib.loads((app_path.parent / 'SharinganWidget.entitlements').read_bytes())
         suffix = '.debug' if configuration == 'debug' else ''
         expected_group = [f'{expected_team}.com.gdpais.sharingan{suffix}']
         expected_app = {'com.apple.security.application-groups': expected_group}
@@ -209,11 +209,11 @@ print(f'{len(cases) * 2} direct identity cases passed without signing or Keychai
 release_source = Path(sys.argv[2]).read_text()
 identity_assignment = next(line for line in release_source.splitlines() if line.startswith('APP_IDENTITY='))
 package_call = next(line for line in release_source.splitlines() if './Scripts/package_app.sh release' in line)
-with tempfile.TemporaryDirectory(prefix='codexbar-release-identity-test-') as directory:
+with tempfile.TemporaryDirectory(prefix='sharingan-release-identity-test-') as directory:
     root = Path(directory)
     (root / 'Scripts').mkdir()
     package_stub = root / 'Scripts/package_app.sh'
-    package_stub.write_text('#!/bin/bash\n[[ "$*" == release && "$CODEXBAR_SIGNING" == identity ]] || exit 99\nprintf "%s" "$APP_IDENTITY"\n')
+    package_stub.write_text('#!/bin/bash\n[[ "$*" == release && "$SHARINGAN_SIGNING" == identity ]] || exit 99\nprintf "%s" "$APP_IDENTITY"\n')
     package_stub.chmod(0o755)
     for identity in [None, fork]:
         env = dict(os.environ, ARCHES_VALUE='arm64')
@@ -231,14 +231,14 @@ dev_source = Path(sys.argv[3]).read_text()
 start = dev_source.index('has_signing_identity() {')
 end = dev_source.index('\nrun_step() {', start)
 dev_selection = dev_source[start:end]
-legacy_listing = f'  1) {first_hash} "CodexBar Development"\n'
+legacy_listing = f'  1) {first_hash} "Sharingan Development"\n'
 for label, identities, explicit, expected_mode, expected_identity in [
     ('legacy only', legacy_listing, '', 'adhoc', ''),
     ('legacy with Apple identity', legacy_listing + listing, '', 'identity', upstream),
     ('no identities', '', '', 'adhoc', ''),
     ('development identity only', f'  1) {first_hash} "Apple Development: Fixture (PERSONID01)"\n', '', 'adhoc', ''),
     ('explicit missing identity', '', 'Missing', 'identity', 'Missing'),
-    ('explicit legacy identity', legacy_listing, 'CodexBar Development', 'identity', 'CodexBar Development'),
+    ('explicit legacy identity', legacy_listing, 'Sharingan Development', 'identity', 'Sharingan Development'),
 ]:
     env = dict(os.environ, SIGNING_MODE='', APP_IDENTITY=explicit, APP_TEAM_ID='', MOCK_IDENTITIES=identities)
     stubs = 'security() { [[ "$*" == "find-identity -p codesigning -v" ]] || exit 99; printf "%s" "$MOCK_IDENTITIES"; }; log() { :; }'

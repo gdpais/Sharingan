@@ -8,7 +8,7 @@ read_when:
 
 # Qoder Provider
 
-CodexBar reads Qoder big model credit usage from the Qoder account dashboard. It supports the international
+Sharingan reads Qoder big model credit usage from the Qoder account dashboard. It supports the international
 `qoder.com` site and the China mainland `qoder.com.cn` site.
 
 ## Setup
@@ -19,7 +19,7 @@ CodexBar reads Qoder big model credit usage from the Qoder account dashboard. It
    a supported browser.
 4. Leave Cookie source on **Automatic**, or switch to **Manual**. For `qoder.com`, paste a `Cookie:` header or a cURL/
    HTTP request capture from the usage page. For `qoder.com.cn`, paste a request capture that includes the China URL
-   or `Host` header so CodexBar can select the matching site.
+   or `Host` header so Sharingan can select the matching site.
 
 Bare `Cookie:` headers default to `qoder.com`. Request captures are parsed only when the target URL or header host
 clearly belongs to `qoder.com` or `qoder.com.cn`.
@@ -29,7 +29,7 @@ headers retain the global default; no config rewrite is needed.
 
 ## Data Source
 
-CodexBar requests:
+Sharingan requests:
 
 - `GET https://qoder.com/api/v2/me/usages/big_model_credits`
 - `GET https://qoder.com.cn/api/v2/me/usages/big_model_credits`
@@ -50,20 +50,20 @@ for the source label and usage-dashboard action.
 ## CLI Usage
 
 ```bash
-codexbar usage --provider qoder --verbose
+sharingan usage --provider qoder --verbose
 ```
 
 ## Troubleshooting
 
 ### "Qoder session cookie not found"
 
-Sign in to Qoder in a supported browser, then refresh CodexBar. If browser import is unavailable, switch to manual mode. Paste a
+Sign in to Qoder in a supported browser, then refresh Sharingan. If browser import is unavailable, switch to manual mode. Paste a
 fresh `Cookie:` header for `qoder.com`; for `qoder.com.cn`, paste a cURL/HTTP request capture containing the China URL
 or `Host` header.
 
 ### "Qoder session is invalid or expired"
 
-Log in to Qoder again. CodexBar clears invalid cached cookies and retries fresh browser cookies in automatic mode.
+Log in to Qoder again. Sharingan clears invalid cached cookies and retries fresh browser cookies in automatic mode.
 
 ### Usage values look wrong
 
@@ -72,8 +72,8 @@ captures should come from the same site.
 
 ## Related Files
 
-- `Sources/CodexBarCore/Providers/Qoder/QoderProviderDescriptor.swift`
-- `Sources/CodexBarCore/Resources/Plugins/qoder.js`
-- `Sources/CodexBarCore/Providers/Qoder/QoderCookieRouting.swift`
-- `Sources/CodexBarCore/Plugins/ProviderPluginCookieBroker.swift`
-- `Sources/CodexBar/Providers/Qoder/QoderProviderImplementation.swift`
+- `Sources/SharinganCore/Providers/Qoder/QoderProviderDescriptor.swift`
+- `Sources/SharinganCore/Resources/Plugins/qoder.js`
+- `Sources/SharinganCore/Providers/Qoder/QoderCookieRouting.swift`
+- `Sources/SharinganCore/Plugins/ProviderPluginCookieBroker.swift`
+- `Sources/Sharingan/Providers/Qoder/QoderProviderImplementation.swift`

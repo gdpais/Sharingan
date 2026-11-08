@@ -10,22 +10,22 @@ read_when:
 # Antigravity provider
 
 For Google individual, AI Pro, and Ultra accounts blocked by the June 2026 Gemini CLI OAuth
-shutdown, Antigravity is the replacement path for Gemini quota tracking in CodexBar. Launch
+shutdown, Antigravity is the replacement path for Gemini quota tracking in Sharingan. Launch
 the Antigravity app or run `agy`, sign in, then refresh. See `docs/gemini.md` for the Gemini
-provider migration notes. CodexBar offers the handoff only after an observed Google migration
+provider migration notes. Sharingan offers the handoff only after an observed Google migration
 signal and never enables or falls back to Antigravity automatically.
 
 To use the `agy` CLI source without keeping the desktop app open, install the CLI first
 (`brew install --cask antigravity-cli`; use `ANTIGRAVITY_CLI_PATH` when it is not on PATH), then
 run `agy` once and sign in. An explicit `ANTIGRAVITY_CLI_PATH` is authoritative: if it is empty,
-points to a missing file, or is not executable, CodexBar skips the CLI source instead of discovering another `agy`
+points to a missing file, or is not executable, Sharingan skips the CLI source instead of discovering another `agy`
 through PATH, installation directories, shell lookup, or aliases. Unset the variable to restore
 automatic discovery. Other providers retain their existing override behavior.
-CodexBar keeps the signed-in `agy` local HTTPS server alive briefly
+Sharingan keeps the signed-in `agy` local HTTPS server alive briefly
 after each refresh and stops it when idle, or reuses a signed-in `agy` you already have running
 without taking ownership of that process.
 
-Every CodexBar-owned `agy` child (version checks, ambient or account-scoped print reports, and managed PTY sessions)
+Every Sharingan-owned `agy` child (version checks, ambient or account-scoped print reports, and managed PTY sessions)
 receives `AGY_CLI_DISABLE_AUTO_UPDATE=true`, preventing passive quota probes from starting CLI auto-updates.
 The lowercase literal `true` is required: upstream reports show that `1` is ignored
 ([updater behavior](https://github.com/google-antigravity/antigravity-cli/issues/942),
@@ -33,13 +33,13 @@ The lowercase literal `true` is required: upstream reports show that `1` is igno
 This per-child override leaves user-launched terminal sessions and saved updater settings unchanged.
 
 The menu bar also reuses an already-running, same-user `agy` that matches the resolved executable;
-this does not require the desktop app or a saved Google account in CodexBar. Selected accounts still
+this does not require the desktop app or a saved Google account in Sharingan. Selected accounts still
 require matching identity. CLI quota refresh and **Add Account...** are separate: starting a new OAuth
 login still needs the app's OAuth client or the explicit client environment overrides described below.
 
 `agy` 1.2.2 and later reject tokenless local requests with `401 missing CSRF token` on both ports and do not
 expose the generated token (1.1.28, 1.2.0, and 1.2.1 answer the same request with `200`). When the selected
-executable reports 1.2.2 or later, CodexBar still spends its bounded warm-reuse check but does not spawn a
+executable reports 1.2.2 or later, Sharingan still spends its bounded warm-reuse check but does not spawn a
 managed session or wait for its readiness deadline. Unknown versions keep the managed spawn.
 The legacy gate and ambient or account-scoped print fallback share one `agy --version` result per refresh,
 including unknown versions and probe failures. Each later refresh probes again; successful warm reuse needs
@@ -47,7 +47,7 @@ no version subprocess. On the CSRF-gated fallback, CLI launches drop from three 
 and one usage report, without caching across accounts or refreshes.
 
 For `agy` 1.2.2 and later, a failed legacy HTTPS fetch can fall back to
-`agy -p /usage --output-format json`. CodexBar checks that the same executable reports version 1.1.11
+`agy -p /usage --output-format json`. Sharingan checks that the same executable reports version 1.1.11
 or later before using print mode; [Google introduced non-interactive usage reports in 1.1.11](https://antigravity.google/changelog).
 It requires a successful `usage` command report with known,
 enabled quota buckets, bounds the command to 90 seconds and its output to 1 MiB, and terminates the command
@@ -59,8 +59,8 @@ Automatic and manual usage refreshes can still retrieve quota with a working log
 sign-in through these launchers. A failed login returns a sign-in or timeout error; run `agy` in a terminal
 to sign in again. **Add Account...** keeps its explicit OAuth login flow. The launchers are removed with the
 probe directory after subprocess cleanup, including failure and cancellation.
-Each print probe receives a fresh `CODEXBAR_PROBE_OWNER` environment marker. On completion, timeout, or
-cancellation, CodexBar stops its process group and reaps same-user processes that still carry that exact marker,
+Each print probe receives a fresh `SHARINGAN_PROBE_OWNER` environment marker. On completion, timeout, or
+cancellation, Sharingan stops its process group and reaps same-user processes that still carry that exact marker,
 including detached MCP servers. Ownership and process start identity are checked again before each signal;
 unreadable environments are skipped. Cleanup never selects a process by name, executable, or working directory.
 Children that deliberately discard the inherited environment cannot be identified by this safety net. The installed
@@ -69,13 +69,13 @@ The report contains no account or plan identity: explicit CLI mode remains autho
 the ambient print fallback only without a selected token account or explicitly injected OAuth credentials. Successful
 HTTPS results retain their verified identity. Failed command diagnostics do not include raw stderr.
 
-On macOS, Auto can also run the print command for a selected or injected Google account. CodexBar writes
+On macOS, Auto can also run the print command for a selected or injected Google account. Sharingan writes
 its credentials into a temporary `0700` home with a `0600` token file, then runs `agy` with only PATH,
 locale, temporary-directory, and proxy settings inherited. `SSH_TTY` selects agy's file-token storage,
 keeping the ambient CLI login and Keychain untouched. Credentials without an ID token are supported;
 `agy` can silently refresh an expired grant in that temporary home; if that fails, the same browser-launch guard applies.
 
-Before attributing usage, CodexBar checks the effective access token through Google's userinfo endpoint
+Before attributing usage, Sharingan checks the effective access token through Google's userinfo endpoint
 and rejects a different or unverifiable account, including conflicting refreshed ID-token claims.
 Only verified refreshed credentials reach the existing saved-account updater. The CLI compares and saves
 under the shared config-file lock, advancing its comparison only after its own successful write. A concurrent
@@ -89,7 +89,7 @@ limit, and descendant cleanup. Identity verification has a 15-second request and
 The existing menu account model caps a refresh at six accounts; CLI `--all-accounts` refreshes sequentially.
 Grouped weekly-only Starter quotas use the same parser as the other sources.
 
-If live sources fail and local conversation history is available, CodexBar labels the result as offline and
+If live sources fail and local conversation history is available, Sharingan labels the result as offline and
 shows a safe explanation of the live failure in settings and CLI usage output. CLI failures distinguish sign-in,
 eligibility, and network problems without exposing stderr, URLs, or account emails. Offline conversation counts
 are history, not measured quota. A successful live fallback keeps its own diagnostic instead.
@@ -111,18 +111,18 @@ OAuth Cloud Code requests use the fixed compatibility identity
 `antigravity/hub/2.9.1 <darwin|linux>/<arm64|amd64>`. The shared request builder applies it to
 account setup, quota summaries, and legacy model/quota fallbacks for shared and selected Google accounts,
 including the OAuth fallback after a scoped `agy` run. The external `agy` process owns its own quota requests;
-the scoped ephemeral HTTP session in CodexBar verifies identity through Google's userinfo endpoint.
+the scoped ephemeral HTTP session in Sharingan verifies identity through Google's userinfo endpoint.
 
 The app-local `language_server` exists only while Antigravity.app is running. With the app closed,
-CodexBar relies on the `agy` CLI HTTPS source or the Google OAuth fallback. Without a signed-in
+Sharingan relies on the `agy` CLI HTTPS source or the Google OAuth fallback. Without a signed-in
 `agy`, the OAuth fallback may only prove model availability. Unverified all-100% model responses
 are not quota measurements: the menu shows `Limits not available` when quota access is denied.
 A freshly spawned `agy` needs a few seconds for macOS
 keyring authentication before its quota endpoints answer, so the first refresh after a cold start
-can take a few extra seconds while CodexBar waits for readiness; later refreshes reuse the warmed session.
+can take a few extra seconds while Sharingan waits for readiness; later refreshes reuse the warmed session.
 
 The local and CLI paths both prefer Antigravity's internal `RetrieveUserQuotaSummary` quota payload and may fall back to
-`GetUserStatus`, then `GetCommandModelConfigs`; CodexBar never scrapes the desktop UI or the `agy` TUI.
+`GetUserStatus`, then `GetCommandModelConfigs`; Sharingan never scrapes the desktop UI or the `agy` TUI.
 
 The Antigravity app, `agy` CLI, and Google OAuth paths prefer quota summaries, using the same parser for
 the two groups shown by Antigravity's Model Quota UI:
@@ -143,14 +143,14 @@ Current Antigravity IDE local endpoints return `GetUserStatus`, `GetAvailableMod
 with five-hour/session reset data, but not the app/CLI `RetrieveUserQuotaSummary` weekly/session grouping. OAuth
 payloads can be less complete and may only prove model availability. Treat `auto` as the authoritative user-facing mode:
 it accepts the first account-matching source in Antigravity app -> `agy` CLI -> Antigravity IDE order, and adds OAuth
-when CodexBar has a selected/injected Google account or an existing shared credentials file. An all-100%
+when Sharingan has a selected/injected Google account or an existing shared credentials file. An all-100%
 `fetchAvailableModels` payload is only accepted after `retrieveUserQuota` echoes bucket fractions; this can be an
 availability-style fallback rather than the full Antigravity quota summary.
-When OAuth identifies the account but quota endpoints deny access, CodexBar shows `Limits not available` instead of an
+When OAuth identifies the account but quota endpoints deny access, Sharingan shows `Limits not available` instead of an
 empty quota card. Auto skips ambient `agy` reports without account identity when a Google account is selected or injected;
 on macOS it can instead verify a private scoped run as described above.
 To try the local app or `agy` account instead, select **Local API / agy CLI** (CLI: `--source cli`).
-That source may use a different signed-in account from the Google account selected in CodexBar; it does not verify a match.
+That source may use a different signed-in account from the Google account selected in Sharingan; it does not verify a match.
 Saved Google accounts remain stored but inactive in this mode: they do not label local reports or trigger
 per-account refreshes. CLI account selectors (`--account`, `--account-index`, `--all-accounts`) require
 `--source auto` or `--source oauth`, not `--source cli`.
@@ -161,8 +161,8 @@ be polled within the readiness deadline.
 
 - OAuth refresh form-encodes credential values, preserving literal plus signs, separators, and percent escapes.
 - Login still uses Antigravity's Google OAuth client, discovered from `Antigravity.app` or overridden with `ANTIGRAVITY_OAUTH_CLIENT_ID` and `ANTIGRAVITY_OAUTH_CLIENT_SECRET`.
-- Discovery reads the ID and secret initialized together in the language server's OAuth configuration. Antigravity 2.19.1 on Apple Silicon and Intel stores two clients in separately pooled strings; their order does not identify a pair. Among recognized records, CodexBar prefers the client used by agy's consumer sign-in, then falls back to the first matched record. Older artifacts with a single pair remain supported; ambiguous artifacts without a recognized record are rejected.
-- Accounts previously signed in with the other client may receive `GOOGLE_TOS_NOT_SUPPORTED_BY_CLIENT` with no current tier or project. Without a saved project, CodexBar asks you to sign in again instead of displaying placeholder 100% quotas. Refresh tokens remain bound to their original client; discovery does not migrate an existing grant. The Hub request User-Agent is independent of this OAuth client selection.
+- Discovery reads the ID and secret initialized together in the language server's OAuth configuration. Antigravity 2.19.1 on Apple Silicon and Intel stores two clients in separately pooled strings; their order does not identify a pair. Among recognized records, Sharingan prefers the client used by agy's consumer sign-in, then falls back to the first matched record. Older artifacts with a single pair remain supported; ambiguous artifacts without a recognized record are rejected.
+- Accounts previously signed in with the other client may receive `GOOGLE_TOS_NOT_SUPPORTED_BY_CLIENT` with no current tier or project. Without a saved project, Sharingan asks you to sign in again instead of displaying placeholder 100% quotas. Refresh tokens remain bound to their original client; discovery does not migrate an existing grant. The Hub request User-Agent is independent of this OAuth client selection.
 - If discovery fails or Google rejects the client with `invalid_client`, update Antigravity or set both overrides to a matching client ID and secret before retrying. These failures do not add or replace a saved account.
 - A successful login writes the latest shared credentials to `~/.sharingan/antigravity/oauth_creds.json` and upserts a token-account entry for the Google account.
 - Each token-account entry stores serialized `AntigravityOAuthCredentials` and is injected into remote fetches through `ANTIGRAVITY_OAUTH_CREDENTIALS_JSON`.
@@ -173,7 +173,7 @@ be polled within the readiness deadline.
   `AntigravitySelectedAccountGuard`). If no account is selected/injected, `auto` includes OAuth only when the legacy
   shared credentials file already exists. Explicit `cli`/`oauth` source modes stay authoritative and are not re-checked.
 - Removing the last saved token account that matches `~/.sharingan/antigravity/oauth_creds.json` deletes that shared file,
-  so a removed CodexBar account does not silently continue refreshing through the legacy shared cache.
+  so a removed Sharingan account does not silently continue refreshing through the legacy shared cache.
 - The menu action is labeled `Add Account...`; switching between saved accounts scopes Google OAuth fetches.
 
 ## Remote OAuth data sources
@@ -208,7 +208,7 @@ When the Antigravity 2.0 app is running:
        `Antigravity IDE.app/.../extensions/antigravity/bin/` with `--app_data_dir antigravity-ide`; or
      - the **CLI**: an `antigravity-cli` / `antigravity_cli` path segment, or the
        `agy` binary (path-anchored so unrelated arguments/binaries do not match).
-   - CodexBar collects all valid local app language-server candidates and probes each reachable one. If multiple
+   - Sharingan collects all valid local app language-server candidates and probes each reachable one. If multiple
      app processes are open, it prefers the richer quota-summary snapshot over the legacy `GetUserStatus`
      two-pool fallback.
    - Extract CLI flags:
@@ -250,7 +250,7 @@ When the Antigravity 2.0 app is running:
 
 ### 2) `agy` CLI HTTPS source
 
-When source mode is `auto` or `cli` and the desktop local probe fails, CodexBar resolves `agy` via:
+When source mode is `auto` or `cli` and the desktop local probe fails, Sharingan resolves `agy` via:
 
 - `ANTIGRAVITY_CLI_PATH`
 - `PATH` / login-shell path lookup
@@ -259,7 +259,7 @@ When source mode is `auto` or `cli` and the desktop local probe fails, CodexBar 
   - `/opt/homebrew/bin/agy`
   - `/usr/local/bin/agy`
 
-CodexBar launches `agy` in a PTY because the CLI exposes its quota server only while the interactive process is alive.
+Sharingan launches `agy` in a PTY because the CLI exposes its quota server only while the interactive process is alive.
 The implementation still does **not** scrape terminal output; it only keeps the process alive, drains discarded PTY
 rendering, uses the same platform-specific port discovery described above, and probes the local HTTPS server:
 
@@ -272,29 +272,29 @@ The fallback can return quota without the account email or plan fields from `Get
 Differences from the desktop local probe:
 
 - Before `agy` 1.2.2, the CLI HTTPS endpoint does **not** require `X-Codeium-Csrf-Token`; 1.2.2 and later
-  require a token that CodexBar cannot obtain.
+  require a token that Sharingan cannot obtain.
 - Before launching `agy`, both menu-bar refreshes and one-shot CLI invocations spend at most two seconds looking for
   an already-running, same-user `agy` at the selected binary path and reuse its tokenless local HTTPS endpoint when it
-  returns parseable usage for the selected account. CodexBar-owned pids are excluded from external reuse so managed
-  probe/idle lifecycle accounting stays balanced; if no eligible external server answers, CodexBar uses its managed
+  returns parseable usage for the selected account. Sharingan-owned pids are excluded from external reuse so managed
+  probe/idle lifecycle accounting stays balanced; if no eligible external server answers, Sharingan uses its managed
   session as before.
 - On macOS, external reuse matches the selected binary against the kernel executable path, not the spelling of
   `argv[0]`; a bare `agy` command can match, but a conflicting executable cannot. Platforms without that identity
   retain the absolute command-path check. User/account and managed-process exclusions are unchanged.
 - An unavailable or tokenless fallback preserves an earlier attempted-source failure, including CLI sign-in guidance, API errors, timeouts, and transport errors. A newly detected tokenless source can still replace an earlier not-running result. Successful fallbacks supply usage, and more specific later errors retain their normal precedence.
 - The same error-selection policy applies when the final source stops fallback, including when local data disappears between availability checking and fetching. Per-source diagnostics still describe each original failure.
-- On failure, `codexbar usage --provider antigravity` prints each auto strategy's outcome. Debug logs record one per-source line for both exhausted chains and terminal failures, using safe error categories. `codexbar diagnose --provider antigravity --format json --pretty` exports per-attempt strategy IDs, outcomes (`succeeded`/`skipped`/`failed`), and safe error categories. Legacy exports without the added fields remain readable.
-- Readiness is endpoint-based: CodexBar retries until one of the quota endpoints parses, because fresh `agy`
+- On failure, `sharingan usage --provider antigravity` prints each auto strategy's outcome. Debug logs record one per-source line for both exhausted chains and terminal failures, using safe error categories. `sharingan diagnose --provider antigravity --format json --pretty` exports per-attempt strategy IDs, outcomes (`succeeded`/`skipped`/`failed`), and safe error categories. Legacy exports without the added fields remain readable.
+- Readiness is endpoint-based: Sharingan retries until one of the quota endpoints parses, because fresh `agy`
   processes can bind a port before the quota service is initialized.
 - App runtime uses a bounded warm session: `agy` is kept alive briefly after a refresh, then stopped on idle. CLI runtime
   tears it down immediately after the one-shot fetch.
 - Repeated endpoint failures force a relaunch instead of reusing a wedged process forever.
-- CodexBar records the launched pid + executable identity and conservatively reaps only its own matching stale `agy`
+- Sharingan records the launched pid + executable identity and conservatively reaps only its own matching stale `agy`
   process on the next launch. It never blind-kills a user-launched `agy`.
 
 ### 3) Antigravity IDE local probe
 
-When the Antigravity 2.0 app and `agy` CLI are unavailable, CodexBar probes Antigravity IDE language servers with
+When the Antigravity 2.0 app and `agy` CLI are unavailable, Sharingan probes Antigravity IDE language servers with
 `AntigravityStatusProbe(processScope: .ideOnly)`. Current observed IDE payloads return model-level/session quota data
 through `GetUserStatus`, `GetAvailableModels`, and `GetCascadeModelConfigData`; `RetrieveUserQuotaSummary` returns 404
 from the IDE local server. This means the IDE fallback can show session bars, but should not be expected to provide the
@@ -302,7 +302,7 @@ weekly limit shown by Antigravity 2.0.
 
 ### 4) OAuth remote fallback
 
-When source mode is `auto`, OAuth is used after app, `agy` CLI, and IDE paths fail if CodexBar has a selected/injected
+When source mode is `auto`, OAuth is used after app, `agy` CLI, and IDE paths fail if Sharingan has a selected/injected
 Google account or an existing shared credentials file. The app, `agy` CLI, and IDE probes still run first, but in
 `auto` mode their snapshots are accepted only when the reported account matches the selected account; otherwise the
 pipeline falls through to this account-scoped OAuth fetch. When source mode is `oauth`, only OAuth is used and the
@@ -344,7 +344,7 @@ Quota values, account ownership, and family selection remain unchanged.
     of display labels. Model-specific quotas remain the fallback when ordinary quota is absent, unknown, or disabled.
     Every returned bucket retains its percentage and reset metadata in `extraRateWindows`.
   - Hidden model rows such as Lite, autocomplete, and image variants do not drive summary bars.
-  - For each group, CodexBar uses the lowest remaining known candidate and preserves that row's reset metadata.
+  - For each group, Sharingan uses the lowest remaining known candidate and preserves that row's reset metadata.
   - Rows with reset metadata but no remaining fraction stay visible as unavailable reset context only when their group
     has no known usage row.
 - `resetTime` parsing:
@@ -383,7 +383,7 @@ Quota values, account ownership, and family selection remain unchanged.
   principle it already applies to cost data. The filter is display-only: the snapshot, raw CLI JSON, and menu-bar
   ranking still see every window, and menu-bar selection ranks by highest used, so an untouched family never wins.
 - The dashboard-v1 payload keeps every family for its script clients and marks the lanes of an untouched family with
-  `idle` instead. The `codexbar serve` web UI skips those rows, so the web card matches the menu without repeating
+  `idle` instead. The `sharingan serve` web UI skips those rows, so the web card matches the menu without repeating
   the family rule in JavaScript. See `docs/dashboard-api.md`.
 - CLI text and `cards` render quota-summary buckets once, using the same idle-family visibility rule. Missing or disabled quota stays unavailable, including in brief cards, while reset context remains visible. Raw JSON retains every bucket.
 - Linux and Omarchy list each measured quota-summary bucket once with its family title. Each family's selected representative stays first for the tray meters; stable bucket IDs preserve row and notification identity when titles change or quota values match.
@@ -426,7 +426,7 @@ The CLI reads the same `antigravityAdditionalProfileHomes` array from the Antigr
 ```
 
 Use absolute paths or `~/…` relative to the refresh environment's HOME. An empty or omitted list keeps
-single-home behavior. Each selected home contributes the same three recognized directories; CodexBar never
+single-home behavior. Each selected home contributes the same three recognized directories; Sharingan never
 discovers additional homes from running processes or by traversing unrelated directories. Duplicate paths
 (including symlink aliases) are scanned once. Copied databases retaining their conversation filename are
 deduplicated by conversation and row/request identity; distinct conversations remain separate. Conflicting
@@ -441,18 +441,18 @@ When SQLite discovery across all selected homes completes without any databases,
 Both overrides and `HOME` come from the same refresh environment. Declared roots and session files may be symlinks;
 discovery still visits only the immediate entries of the recognized directories. This is machine-local token history,
 not account attribution. Reading that history uses no language server, provider CLI, browser, credentials, or network.
-Pricing it is a separate step: when a recorded model has no cached price, CodexBar requests the public models.dev
+Pricing it is a separate step: when a recorded model has no cached price, Sharingan requests the public models.dev
 catalog over the network. That request carries no account identity and no usage data, and a failure leaves the
 affected models unpriced rather than failing the scan.
 
-Use `codexbar cost --provider antigravity --format json` to read this same local history from the CLI.
+Use `sharingan cost --provider antigravity --format json` to read this same local history from the CLI.
 The cost endpoint and dashboard also include it when Antigravity is selected. Known models receive local token ×
 public API-price estimates from the pricing catalog. Unknown models with tokens stay unpriced.
 Requests with no model and zero tokens still count for the day but add no model row. With pricing enabled,
 they count as estimated at $0; without pricing, their cost remains absent. Named zero-token rows are unchanged. A model-less zero-token day does not hide
 named unpriced model rows from other days. These figures are not Antigravity
 charges or credit deductions, and these entry points do not expand the supported timestamp layouts described below.
-Local reads use cached or built-in prices first. Routine catalog updates run in the background; `codexbar cost --provider antigravity --refresh` may wait for a bounded pricing refresh when a recorded model has no known rate. Empty or absent history never starts a pricing download. Historical requests use prices applicable to their event timestamps.
+Local reads use cached or built-in prices first. Routine catalog updates run in the background; `sharingan cost --provider antigravity --refresh` may wait for a bounded pricing refresh when a recorded model has no known rate. Empty or absent history never starts a pricing download. Historical requests use prices applicable to their event timestamps.
 
 SQLite is authoritative when present. An unreadable root, malformed database, unsupported event layout, or exhausted
 budget never authorizes replacement by a smaller/stale JSONL cache. A database that describes its own tables and no
@@ -476,9 +476,9 @@ Schema-budget exhaustion withholds only the database whose schema exceeded a lim
 
 The schema evidence is [Tokscale's pinned SQLite parser](https://github.com/junhoyeo/tokscale/blob/62ca1eb1677556972ba963fdfa3a41ab23c1eb4b/crates/tokscale-core/src/sessions/antigravity_cli.rs),
 whose header records six databases and 140 turns and establishes the table layout below. SQLite usage
-field 2 is input. Field 1 is the model enum ID (for example 1298 for `gemini-3.7-flash`), and CodexBar
+field 2 is input. Field 1 is the model enum ID (for example 1298 for `gemini-3.7-flash`), and Sharingan
 does not count it. Field 5 is cache read. Field 9 is reasoning (thinking) output, and field 10 is text
-(visible) output: reasoning and text are separate counts. CodexBar follows
+(visible) output: reasoning and text are separate counts. Sharingan follows
 [ccusage's Antigravity adapter](https://github.com/ccusage/ccusage/blob/d41bf3d48a911e9742793087142e323093ae6a4f/rust/adapters/antigravity/src/parser.rs)
 for this field 1/9/10 reading, cross-checked against
 [decoded local history](https://github.com/steipete/CodexBar/pull/4124). This reading differs from Tokscale's own reading
@@ -562,7 +562,7 @@ and source-linked, not private captures or proof of live installation/UI behavio
 - Local HTTPS uses a self-signed cert; the probe allows insecure TLS only for loopback hosts.
 
 ## Key files
-- `Sources/CodexBarCore/Providers/Antigravity/AntigravityCLISession.swift`
-- `Sources/CodexBarCore/Providers/Antigravity/AntigravityProviderDescriptor.swift`
-- `Sources/CodexBarCore/Providers/Antigravity/AntigravityStatusProbe.swift`
-- `Sources/CodexBar/Providers/Antigravity/AntigravityProviderImplementation.swift`
+- `Sources/SharinganCore/Providers/Antigravity/AntigravityCLISession.swift`
+- `Sources/SharinganCore/Providers/Antigravity/AntigravityProviderDescriptor.swift`
+- `Sources/SharinganCore/Providers/Antigravity/AntigravityStatusProbe.swift`
+- `Sources/Sharingan/Providers/Antigravity/AntigravityProviderImplementation.swift`

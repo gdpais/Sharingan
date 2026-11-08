@@ -1,5 +1,5 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif

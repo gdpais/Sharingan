@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct JsonlParityRow: Codable, Equatable {
     let bytes: Data
@@ -113,7 +113,7 @@ final class JsonlParityFixture {
 
     init() throws {
         self.root = FileManager.default.temporaryDirectory
-            .appendingPathComponent("CodexBar-jsonl-parity-" + UUID().uuidString, isDirectory: true)
+            .appendingPathComponent("Sharingan-jsonl-parity-" + UUID().uuidString, isDirectory: true)
         self.file = self.root.appendingPathComponent("input.jsonl")
         try FileManager.default.createDirectory(at: self.root, withIntermediateDirectories: true)
     }

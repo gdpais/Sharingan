@@ -1,5 +1,5 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
 
 struct UsageUpdatedHookMappingTests {
@@ -36,7 +36,7 @@ struct UsageUpdatedHookMappingTests {
         #expect(event.usagePercent == nil)
         #expect(payload["usagePercent"] == nil)
         #expect(payload["windowMinutes"] == nil)
-        #expect(event.environmentVariables()["CODEXBAR_SECONDARY_USAGE_PERCENT"] == nil)
+        #expect(event.environmentVariables()["SHARINGAN_SECONDARY_USAGE_PERCENT"] == nil)
     }
 
     @Test
@@ -56,7 +56,7 @@ struct UsageUpdatedHookMappingTests {
             #expect(dispatch.accountDiscriminator == "private-owner")
             let payload = try String(decoding: dispatch.event.jsonPayload(), as: UTF8.self)
             #expect(!payload.contains("private-owner"))
-            #expect(dispatch.event.environmentVariables()["CODEXBAR_ACCOUNT"] == nil)
+            #expect(dispatch.event.environmentVariables()["SHARINGAN_ACCOUNT"] == nil)
         }
     }
 
@@ -114,7 +114,7 @@ struct UsageUpdatedHookMappingTests {
             account: nil,
             timestamp: self.now)
         let limiter = HookRateLimiter()
-        let config = self.config(executable: "/nonexistent/codexbar-hook-fixture")
+        let config = self.config(executable: "/nonexistent/sharingan-hook-fixture")
         let first = await HookRunner.dispatch(
             event: event, config: config, rateLimiter: limiter, baseEnvironment: [:])
         let repeated = await HookRunner.dispatch(

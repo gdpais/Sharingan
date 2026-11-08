@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct HookDispatchTests {
     private func event(
@@ -94,7 +94,7 @@ struct HookDispatchTests {
     @Test
     func `dispatch coalesces repeated refresh failures`() async throws {
         let output = FileManager.default.temporaryDirectory
-            .appendingPathComponent("codexbar-hook-rate-limit-\(UUID().uuidString).json")
+            .appendingPathComponent("sharingan-hook-rate-limit-\(UUID().uuidString).json")
         defer { try? FileManager.default.removeItem(at: output) }
         let event = self.event(.refreshFailed, usagePercent: nil, window: nil)
         let config = HooksConfig(enabled: true, events: [
@@ -112,11 +112,11 @@ struct HookDispatchTests {
     @Test
     func `dispatch contains one rule failure and continues`() async {
         let output = FileManager.default.temporaryDirectory
-            .appendingPathComponent("codexbar-hook-failure-\(UUID().uuidString).json")
+            .appendingPathComponent("sharingan-hook-failure-\(UUID().uuidString).json")
         defer { try? FileManager.default.removeItem(at: output) }
         let event = self.event()
         let config = HooksConfig(enabled: true, events: [
-            HookRule(event: .quotaReached, executable: "/nonexistent/codexbar-hook"),
+            HookRule(event: .quotaReached, executable: "/nonexistent/sharingan-hook"),
             HookRule(event: .quotaReached, executable: "/usr/bin/tee", arguments: [output.path]),
         ])
 
@@ -128,7 +128,7 @@ struct HookDispatchTests {
     @Test
     func `disabled dispatch never invokes a rule`() async {
         let output = FileManager.default.temporaryDirectory
-            .appendingPathComponent("codexbar-hook-disabled-\(UUID().uuidString).json")
+            .appendingPathComponent("sharingan-hook-disabled-\(UUID().uuidString).json")
         defer { try? FileManager.default.removeItem(at: output) }
         let config = HooksConfig(enabled: false, events: [
             HookRule(event: .quotaReached, executable: "/usr/bin/tee", arguments: [output.path]),

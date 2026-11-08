@@ -1,7 +1,7 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct CLICardsClaudeSwapTests {
     private actor InvocationCounter {

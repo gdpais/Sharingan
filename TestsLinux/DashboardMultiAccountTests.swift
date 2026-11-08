@@ -1,7 +1,7 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct DashboardMultiAccountTests {
     @Test
@@ -15,7 +15,7 @@ struct DashboardMultiAccountTests {
             usageBarsShowUsed: { true },
             allAccounts: true)
         let result = try await producer.collect(
-            config: self.config, refreshInterval: 60, codexBarVersion: nil, identityMode: .full)
+            config: self.config, refreshInterval: 60, sharinganVersion: nil, identityMode: .full)
         let row = try #require(result.payload.providers.first)
         let accounts = try #require(row.accounts)
         #expect(result.payload.providers.count == 1)
@@ -105,7 +105,7 @@ struct DashboardMultiAccountTests {
     @Test
     func `configured accounts select non first active and missing accounts use ambient fallback`() throws {
         let accounts = [self.token(), self.token()]
-        let config = CodexBarConfig(providers: [ProviderConfig(
+        let config = SharinganConfig(providers: [ProviderConfig(
             id: .claude,
             enabled: true,
             tokenAccounts: ProviderTokenAccountData(version: 1, accounts: accounts, activeIndex: 1))])
@@ -121,19 +121,22 @@ struct DashboardMultiAccountTests {
             baseEnvironment: [:])
         #expect(try selected.resolvedAccounts(for: .claude, sourceMode: .web).map(\.id) == [accounts[1].id])
         #expect(try all.resolvedAccounts(for: .claude, sourceMode: .web).map(\.id) == accounts.map(\.id))
-        #expect(CodexBarCLI.serveIncludesConfiguredAccounts(provider: .claude, config: config, allAccounts: true))
-        #expect(!CodexBarCLI.serveIncludesConfiguredAccounts(provider: .claude, config: config, allAccounts: false))
-        #expect(!CodexBarCLI.serveIncludesConfiguredAccounts(provider: .claude, config: self.config, allAccounts: true))
-        #expect(!CodexBarCLI.serveIncludesConfiguredAccounts(provider: .codex, config: self.config, allAccounts: true))
+        #expect(SharinganCLI.serveIncludesConfiguredAccounts(provider: .claude, config: config, allAccounts: true))
+        #expect(!SharinganCLI.serveIncludesConfiguredAccounts(provider: .claude, config: config, allAccounts: false))
+        #expect(!SharinganCLI.serveIncludesConfiguredAccounts(
+            provider: .claude,
+            config: self.config,
+            allAccounts: true))
+        #expect(!SharinganCLI.serveIncludesConfiguredAccounts(provider: .codex, config: self.config, allAccounts: true))
     }
 
     @Test
     func `default all and usage scopes cannot share provider operation fingerprints`() {
-        let selected = CodexBarCLI.serveUsageOperationFingerprint(
+        let selected = SharinganCLI.serveUsageOperationFingerprint(
             configFingerprint: "fixture", includeAllCodexAccounts: false)
-        let usage = CodexBarCLI.serveUsageOperationFingerprint(
+        let usage = SharinganCLI.serveUsageOperationFingerprint(
             configFingerprint: "fixture", includeAllCodexAccounts: true)
-        let all = CodexBarCLI.serveUsageOperationFingerprint(
+        let all = SharinganCLI.serveUsageOperationFingerprint(
             configFingerprint: "fixture", includeAllCodexAccounts: true, includeAllAccounts: true)
         #expect(Set([selected, usage, all]).count == 3)
     }
@@ -142,10 +145,10 @@ struct DashboardMultiAccountTests {
     func `warm response cache keeps account scopes separate`() async throws {
         let cache = CLIServeResponseCache()
         for allAccounts in [false, true, false, true] {
-            let key = try CodexBarCLI.serveDashboardOperationKey(
+            let key = try SharinganCLI.serveDashboardOperationKey(
                 identityMode: .redacted, usageBarsShowUsed: false, provider: "codex", allAccounts: allAccounts)
             let expected = Data((allAccounts ? "all" : "selected").utf8)
-            let response = await CodexBarCLI.cachedServeResponse(
+            let response = await SharinganCLI.cachedServeResponse(
                 key: key, cache: cache, refreshInterval: 60, configFingerprint: "fixture")
             {
                 CLILocalHTTPResponse(status: .ok, body: expected)
@@ -173,7 +176,7 @@ struct DashboardMultiAccountTests {
             identityMode: .full,
             generatedAt: Date(timeIntervalSince1970: 0),
             refreshInterval: 60,
-            codexBarVersion: nil,
+            sharinganVersion: nil,
             accountCollections: [.claude: DashboardAccountsInput(
                 accounts: adapter, adapterError: nil, weeklyWorkDays: nil)],
             allAccounts: allAccounts)
@@ -223,13 +226,13 @@ struct DashboardMultiAccountTests {
         let accounts = [first.dashboardAccount, second.dashboardAccount]
         let deadline = now.advanced(by: .seconds(30))
         let leader = Task {
-            await CodexBarCLI.serveCollectUsageOutputs(
+            await SharinganCLI.serveCollectUsageOutputs(
                 providers: [.codex],
                 configFingerprint: "fixture",
                 deadline: deadline,
                 operations: operations)
             { provider, publish in
-                await CodexBarCLI.collectAccountUsage(
+                await SharinganCLI.collectAccountUsage(
                     provider: provider,
                     accounts: accounts,
                     publishPartial: expanded ? publish : nil)
@@ -245,7 +248,7 @@ struct DashboardMultiAccountTests {
         }
         await slowStarted.wait()
         let follower = Task {
-            await CodexBarCLI.serveCollectUsageOutputs(
+            await SharinganCLI.serveCollectUsageOutputs(
                 providers: [.codex],
                 configFingerprint: "fixture",
                 deadline: deadline,
@@ -263,7 +266,7 @@ struct DashboardMultiAccountTests {
         await timer.open()
         let outputs = await [leader.value, follower.value]
         #expect(await operations.snapshot().operationCount == 1)
-        let changedConfig = await CodexBarCLI.serveCollectUsageOutputs(
+        let changedConfig = await SharinganCLI.serveCollectUsageOutputs(
             providers: [.codex],
             configFingerprint: "different-account-configuration",
             deadline: deadline.advanced(by: .seconds(30)),
@@ -305,8 +308,8 @@ struct DashboardMultiAccountTests {
         }
     }
 
-    private var config: CodexBarConfig {
-        CodexBarConfig(providers: [ProviderConfig(id: .codex, enabled: true)])
+    private var config: SharinganConfig {
+        SharinganConfig(providers: [ProviderConfig(id: .codex, enabled: true)])
     }
 
     private func snapshot(
@@ -321,7 +324,7 @@ struct DashboardMultiAccountTests {
             identityMode: mode,
             generatedAt: Date(timeIntervalSince1970: 0),
             refreshInterval: 60,
-            codexBarVersion: nil,
+            sharinganVersion: nil,
             allAccounts: allAccounts)
     }
 

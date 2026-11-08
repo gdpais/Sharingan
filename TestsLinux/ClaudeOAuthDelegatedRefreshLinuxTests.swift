@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 @Suite(.serialized)
 struct ClaudeOAuthDelegatedRefreshLinuxTests {
@@ -42,7 +42,7 @@ struct ClaudeOAuthDelegatedRefreshLinuxTests {
             promptMode: .always)
 
         #expect(result.attempts == 0)
-        #expect(result.message.contains("CodexBar CLI does not launch Claude"))
+        #expect(result.message.contains("Sharingan CLI does not launch Claude"))
     }
 
     @Test

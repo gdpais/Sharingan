@@ -142,7 +142,7 @@ ApplicationWindow {
                         }
                         Option { id: tray; text: "Tray icon" }
                         Option { id: compactQuickView; text: "Use compact Quick View from the tray" }
-                        Label { text: "Optional with the Omarchy widget. CodexBar is also available in the application launcher."; Layout.fillWidth: true; wrapMode: Text.Wrap; opacity: 0.65 }
+                        Label { text: "Optional with the Omarchy widget. Sharingan is also available in the application launcher."; Layout.fillWidth: true; wrapMode: Text.Wrap; opacity: 0.65 }
                         RowLayout {
                             Layout.fillWidth: true
                             Label { text: "Tray style"; Layout.fillWidth: true }
@@ -189,7 +189,7 @@ ApplicationWindow {
                     ColumnLayout {
                         anchors.fill: parent; spacing: 10
                         Label { text: "Executable" }
-                        TextField { id: executable; Layout.fillWidth: true; selectByMouse: true; placeholderText: "codexbar" }
+                        TextField { id: executable; Layout.fillWidth: true; selectByMouse: true; placeholderText: "sharingan" }
                     }
                 }
             }
@@ -197,7 +197,7 @@ ApplicationWindow {
         Label { text: desktop.configError || window.feedback; visible: text !== ""; Layout.fillWidth: true; wrapMode: Text.Wrap }
         RowLayout {
             Layout.fillWidth: true
-            Label { text: "Closing windows keeps CodexBar running."; Layout.fillWidth: true; wrapMode: Text.Wrap; opacity: 0.65; font.pixelSize: 12 }
+            Label { text: "Closing windows keeps Sharingan running."; Layout.fillWidth: true; wrapMode: Text.Wrap; opacity: 0.65; font.pixelSize: 12 }
             Button { text: "Cancel"; onClicked: window.hide() }
             Button {
                 text: "Save"; highlighted: true

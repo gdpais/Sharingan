@@ -1,7 +1,7 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct CLICardsRendererTests {
     @Test
@@ -171,7 +171,7 @@ struct CLICardsRendererTests {
             useColor: false,
             now: Date(timeIntervalSince1970: 0))
 
-        #expect(output.contains("codexbar • AI Usage & Limits"))
+        #expect(output.contains("sharingan • AI Usage & Limits"))
         #expect(output.contains("Provider"))
         #expect(output.contains("Claude"))
         #expect(output.contains("web"))

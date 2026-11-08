@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct ElevenLabsPluginTests {
     #if canImport(JavaScriptCore)
@@ -184,7 +184,7 @@ struct ElevenLabsPluginTests {
     private static func runtime(
         engine: ProviderPluginEngineKind, transport: any ProviderHTTPTransport) throws -> ProviderPluginRuntime
     {
-        let bundle = try #require(CodexBarCoreResources.bundle)
+        let bundle = try #require(SharinganCoreResources.bundle)
         let url = try #require(bundle.url(forResource: "elevenlabs", withExtension: "js"))
         return try ProviderPluginRuntime(
             source: String(contentsOf: url, encoding: .utf8),

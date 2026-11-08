@@ -9,7 +9,7 @@ read_when:
 # llmman Provider
 
 [llmman](https://github.com/llmmanorg/llmman) runs models locally (and routes to hosted providers) behind an
-OpenAI- and Anthropic-compatible daemon, `llmman serve`. CodexBar reads that daemon's own node report to show
+OpenAI- and Anthropic-compatible daemon, `llmman serve`. Sharingan reads that daemon's own node report to show
 how much of its model memory the loaded models occupy.
 
 ## Features
@@ -30,7 +30,7 @@ how much of its model memory the loaded models occupy.
 From the CLI:
 
 ```sh
-codexbar usage --provider llmman
+sharingan usage --provider llmman
 ```
 
 ## How it works

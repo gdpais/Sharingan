@@ -1,15 +1,15 @@
 ---
-summary: "CodexBar config file layout for CLI + app settings."
+summary: "Sharingan config file layout for CLI + app settings."
 read_when:
-  - "Editing the CodexBar config file or moving settings off Keychain."
+  - "Editing the Sharingan config file or moving settings off Keychain."
   - "Adding new provider settings fields or defaults."
   - "Explaining CLI/app configuration and security."
 ---
 
 # Configuration
 
-The app's **Help → CodexBar Help** command opens the [README](https://github.com/steipete/CodexBar/blob/main/README.md), including setup instructions and links to provider documentation.
-**Settings → About → Website** opens the project website at [codexbar.app](https://codexbar.app).
+The app's **Help → Sharingan Help** command opens the [README](https://github.com/steipete/CodexBar/blob/main/README.md), including setup instructions and links to provider documentation.
+**Settings → About → Website** opens the project website at [sharingan.app](https://codexbar.app).
 
 The app and CLI share one JSON file for API keys, manual cookie headers, source selection, provider ordering, and token accounts. The running app detects external edits, atomic replacements, and restored older contents, including during watcher startup and change callbacks. App writes update the baseline without being treated as external edits.
 Keychain holds runtime cookie caches, browser Safe Storage access, and provider OAuth/device-flow credentials where required.
@@ -53,7 +53,7 @@ replaced by `loadOrCreateDefault()`.
 }
 ```
 
-`shareUsageWithCLI` (optional boolean, default off) lets `codexbar usage` fall back to the app's cached numbers in SSH
+`shareUsageWithCLI` (optional boolean, default off) lets `sharingan usage` fall back to the app's cached numbers in SSH
 sessions; see [CLI](cli.md#ssh-sessions-macos).
 
 ## External event hooks
@@ -86,7 +86,7 @@ values and command paths appear only as prompts in empty fields.
 Commands run as direct executable invocations, never through a shell. `executable` must be an absolute path,
 `arguments` preserves exact argument boundaries (including spaces and empty arguments), and `timeoutSeconds` must be
 between `0.1` and `300`. Hook processes receive only a small allowlist of general environment variables plus the
-event's `CODEXBAR_*` variables; CodexBar provider keys and tokens are not inherited. The same event is also encoded as
+event's `SHARINGAN_*` variables; Sharingan provider keys and tokens are not inherited. The same event is also encoded as
 JSON on stdin. Only configure executables you trust.
 
 Installed user plugins can be selected by manifest ID (or by an any-provider rule). Their successful, current app
@@ -106,7 +106,7 @@ Events:
   `secondaryResetAt` describe the positional secondary window. Synthetic placeholder windows are omitted.
 - `provider_unavailable`: a provider status changes to a minor, major, or critical outage.
 - `provider_recovered`: that tracked outage returns to normal.
-- `refresh_failed`: a provider refresh fails; `CODEXBAR_STATUS` is a coarse category such as `timeout`, `offline`,
+- `refresh_failed`: a provider refresh fails; `SHARINGAN_STATUS` is a coarse category such as `timeout`, `offline`,
   `network_error`, `auth_required`, `cancelled`, or `error`.
 
 `usage_updated`, `provider_unavailable`, and `refresh_failed` allow the first matching attempt immediately,
@@ -116,13 +116,13 @@ the in-memory limiter. Quota and recovery events use their transition detectors 
 contained and never block app provider refresh. `hooks watch` reports only events whose command execution was
 attempted, including failed commands, rather than suppressed candidates.
 
-Payload environment variables are `CODEXBAR_EVENT`, `CODEXBAR_PROVIDER`, `CODEXBAR_TIMESTAMP`, and, when available,
-`CODEXBAR_ACCOUNT`, `CODEXBAR_WINDOW`, `CODEXBAR_USAGE_PERCENT`, `CODEXBAR_USED`, `CODEXBAR_LIMIT`,
-`CODEXBAR_WINDOW_MINUTES`, `CODEXBAR_RESET_AT`, `CODEXBAR_SECONDARY_USAGE_PERCENT`,
-`CODEXBAR_SECONDARY_WINDOW_MINUTES`, `CODEXBAR_SECONDARY_RESET_AT`, and `CODEXBAR_STATUS`. Enabling Hide personal info
-omits `CODEXBAR_ACCOUNT` and the matching JSON field.
+Payload environment variables are `SHARINGAN_EVENT`, `SHARINGAN_PROVIDER`, `SHARINGAN_TIMESTAMP`, and, when available,
+`SHARINGAN_ACCOUNT`, `SHARINGAN_WINDOW`, `SHARINGAN_USAGE_PERCENT`, `SHARINGAN_USED`, `SHARINGAN_LIMIT`,
+`SHARINGAN_WINDOW_MINUTES`, `SHARINGAN_RESET_AT`, `SHARINGAN_SECONDARY_USAGE_PERCENT`,
+`SHARINGAN_SECONDARY_WINDOW_MINUTES`, `SHARINGAN_SECONDARY_RESET_AT`, and `SHARINGAN_STATUS`. Enabling Hide personal info
+omits `SHARINGAN_ACCOUNT` and the matching JSON field.
 
-The stdin JSON uses the same camel-case field names without the `CODEXBAR_` prefix. Dates are UTC ISO 8601 strings,
+The stdin JSON uses the same camel-case field names without the `SHARINGAN_` prefix. Dates are UTC ISO 8601 strings,
 usage percentages are `0...1` fractions, unavailable optional fields are omitted rather than encoded as `null`, and
 keys are emitted in sorted order. A `quota_reached` payload is exactly shaped like this (the timestamps vary):
 
@@ -130,7 +130,7 @@ keys are emitted in sorted order. A `quota_reached` payload is exactly shaped li
 {"event":"quota_reached","provider":"claude","resetAt":"2023-11-14T22:13:20Z","timestamp":"2023-11-14T22:15:00Z","usagePercent":0.42,"window":"session"}
 ```
 
-The v1 field names and meanings are compatibility-stable. Hook consumers should ignore unknown fields so CodexBar can
+The v1 field names and meanings are compatibility-stable. Hook consumers should ignore unknown fields so Sharingan can
 add optional observability data without breaking existing commands.
 
 Safety limits: at most 32 rules, 32 arguments per rule, 4 KiB per executable or argument string, 32 KiB per command,
@@ -173,7 +173,7 @@ All provider fields are optional unless noted.
 ## Manual cookies
 Use manual cookies when automatic browser import is unavailable, disabled, or too noisy for your setup.
 The app and CLI both read the same resolved config file, so a manual cookie saved in the UI is also used by
-`codexbar`, and a cookie written by tooling is shown in the app after reload.
+`sharingan`, and a cookie written by tooling is shown in the app after reload.
 
 `cookieHeader` expects the HTTP `Cookie:` request header value for the provider origin, not a raw Netscape cookie
 export. In browser DevTools, open the Network tab, select a request for the provider site, and copy the request
@@ -202,25 +202,25 @@ Example placeholder config:
 Or write the same two fields from the CLI, which also works where the app is unavailable (for example on Linux):
 
 ```bash
-pbpaste | codexbar config set-cookie --provider claude --stdin
+pbpaste | sharingan config set-cookie --provider claude --stdin
 ```
 
 Validate after editing:
 
 ```bash
-codexbar config validate
+sharingan config validate
 ```
 
-Replace the placeholder with your own cookie before fetching usage with `codexbar usage --provider claude`.
+Replace the placeholder with your own cookie before fetching usage with `sharingan usage --provider claude`.
 For another provider, use its registered [ID](provider-ids.md) and the cookie format in its [setup guide](providers.md).
 
 ## CLI configuration
 
 ```bash
-codexbar config providers
-codexbar config enable --provider grok
-codexbar config disable --provider cursor
-printf '%s' "$ELEVENLABS_API_KEY" | codexbar config set-api-key --provider elevenlabs --stdin
+sharingan config providers
+sharingan config enable --provider grok
+sharingan config disable --provider cursor
+printf '%s' "$ELEVENLABS_API_KEY" | sharingan config set-api-key --provider elevenlabs --stdin
 ```
 
 Use the same `set-api-key --provider <id> --stdin` command with these provider/key pairs:
@@ -238,7 +238,7 @@ Use the same `set-api-key --provider <id> --stdin` command with these provider/k
 
 See [CLI configuration](cli-configuration.md) for scripting examples and output formats.
 
-Manual cookies are secrets. Keep the CodexBar config file private, leave its permissions at `0600`, never commit it,
+Manual cookies are secrets. Keep the Sharingan config file private, leave its permissions at `0600`, never commit it,
 and never paste real cookie values or readable DevTools screenshots into public issues.
 
 ### tokenAccounts
@@ -259,7 +259,7 @@ and never paste real cookie values or readable DevTools screenshots into public 
 ```
 
 Each OpenAI token account can store `tokenAccounts.accounts[].modelRateLimits`: omitted means not set; `[]` means
-explicitly no limits (kept so clears sync and older CodexBar versions cannot erase limits during sync). Rows use
+explicitly no limits (kept so clears sync and older Sharingan versions cannot erase limits during sync). Rows use
 the same validation as provider-level `modelRateLimits`. Limits belong only to that account; there is no
 inheritance. Settings edits the selected account's limits, and switching accounts switches the list.
 
@@ -295,7 +295,7 @@ the timer, and a new reorder restarts it. Reduce Motion disables the fade animat
 ## iCloud sync
 The three sync sub-options are disabled while the main sync switch is off, iCloud is unavailable, or a newer app version is required. Their saved choices are retained when sync is turned off and restored when it is enabled again.
 
-Opt-in (Settings → iCloud Sync, off by default; requires a signed release build and an iCloud account). When enabled, CodexBar syncs across the user's Macs via CloudKit (private database, container `iCloud.com.gdpais.sharingan`):
+Opt-in (Settings → iCloud Sync, off by default; requires a signed release build and an iCloud account). When enabled, Sharingan syncs across the user's Macs via CloudKit (private database, container `iCloud.com.gdpais.sharingan`):
 
 - **Provider configuration** — portable fields of each provider entry (enabled intent, extras, region, workspace, quota-warning overrides, ordering-relevant metadata). Secrets (`apiKey`, `secretKey`, `cookieHeader`, `tokenAccounts`) sync only when "Include API keys, cookies, and tokens" is on, and travel exclusively in CloudKit `encryptedValues` (end-to-end encrypted; readable only on the user's devices).
 - **A curated preferences subset** — notification/threshold/display settings.
@@ -303,7 +303,7 @@ Opt-in (Settings → iCloud Sync, off by default; requires a signed release buil
 
 With Usage snapshots and Show accounts from other Macs enabled, an enabled provider without local usage can also use the freshest fleet fallback in separate, current-selection, highest-usage, and stacked menu bar icons. The menu labels its source and age; accessibility help includes the source Mac and capture time, respecting Hide personal info. Local snapshots remain authoritative. Remote usage does not enable local credential-dependent fetches or populate local costs, pace, credits, or account labels. Highest usage compares the same presentation snapshots without enabling local fetches. Fleet refreshes preserve an open menu's provider switcher until the menu is closed and reopened.
 
-The **Macs** list offers **Remove** for other devices, including stale duplicates left after a reinstall. Removal deletes that device record and its cached usage snapshots from iCloud; it leaves shared settings, credentials, and this Mac intact. Sync must be enabled and available. Failed removals remain visible and report a sync error. A Mac still running CodexBar with sync enabled can publish its records again: if a save finds that its previous record was deleted, it drops the stale server version and retries with a fresh record. If that fresh record is also reported missing, CodexBar surfaces the error instead of retrying indefinitely.
+The **Macs** list offers **Remove** for other devices, including stale duplicates left after a reinstall. Removal deletes that device record and its cached usage snapshots from iCloud; it leaves shared settings, credentials, and this Mac intact. Sync must be enabled and available. Failed removals remain visible and report a sync error. A Mac still running Sharingan with sync enabled can publish its records again: if a save finds that its previous record was deleted, it drops the stale server version and retries with a fresh record. If that fresh record is also reported missing, Sharingan surfaces the error instead of retrying indefinitely.
 
 Automatic reception of changes requires a release signed with the macOS Push Notifications entitlement. When that capability is present, enabling sync registers for silent remote notifications; CKSyncEngine manages the CloudKit database subscription. The existing launch, foreground, and 15-minute fetch requests remain, but are not a guarantee of prompt delivery without push support. See [release setup](RELEASING.md#icloud-sync-cloudkit).
 
@@ -315,10 +315,10 @@ Never synced, by design: `hooks` (sync payloads structurally cannot create or mo
 - Fields not relevant to a provider are ignored.
 - Omitted providers are appended with defaults during normalization.
 - Unknown or retired provider entries are retained with all their fields, settings, and secrets in their original array positions during unrelated saves. This also applies when plugin discovery fails or the plugin runtime is unavailable. `config providers` labels unavailable entries as `plugin (not loaded)`; `config dump` includes them but redacts their opaque fields unless `--show-secrets` is explicitly requested. Remove plugin data through explicit plugin deletion, or remove the entry by editing the file.
-- When a configuration read reports an error, CodexBar preserves `config.json` during startup and later settings saves. At startup it uses temporary defaults without clearing legacy credentials; repair the file and let CodexBar reload it, or remove it and restart, before saving settings. Temporary defaults and earlier queued or staged saves cannot overwrite the repaired file after a reload. Legacy migration retries on the next launch.
+- When a configuration read reports an error, Sharingan preserves `config.json` during startup and later settings saves. At startup it uses temporary defaults without clearing legacy credentials; repair the file and let Sharingan reload it, or remove it and restart, before saving settings. Temporary defaults and earlier queued or staged saves cannot overwrite the repaired file after a reload. Legacy migration retries on the next launch.
 - Reloading account settings from disk reloads the complete config, preserving unrelated edits. A failed config reload, plugin-settings read, or save-time config validation blocks saving until a valid full reload succeeds.
 - Keep the file private; it contains secrets.
-- Validate the file with `codexbar config validate` (JSON output available with `--format json`).
+- Validate the file with `sharingan config validate` (JSON output available with `--format json`).
 
 ## Portable UI preferences
 
@@ -327,8 +327,8 @@ for dotfiles. UserDefaults remains the runtime owner; the file is an explicit sn
 configuration source. Provider settings remain in `config.json`, which may contain credentials.
 
 ```sh
-codexbar config preferences export --file ~/dotfiles/codexbar/preferences.json
-codexbar config preferences import --file ~/dotfiles/codexbar/preferences.json --json
+sharingan config preferences export --file ~/dotfiles/sharingan/preferences.json
+sharingan config preferences import --file ~/dotfiles/sharingan/preferences.json --json
 ```
 
 Export without `--file` writes JSON to stdout. The CLI exports stored overrides (unset preferences keep the
@@ -336,7 +336,7 @@ app's defaults); Settings exports the effective preferences. CLI import queues a
 the running app applies it through its normal settings setters, or applies it at its next launch. The CLI
 reports `{"status":"queued"}`. Multiple pending imports merge, with the latest supplied value winning.
 `--defaults-domain` can select an alternate app preferences domain; it defaults to `com.gdpais.sharingan`.
-On first launch the app queues these portable preferences once from CodexBar's `com.steipete.codexbar` domain
+On first launch the app queues these portable preferences once from upstream CodexBar's `com.steipete.codexbar` domain
 (read-only); to repeat that later, export with `--defaults-domain com.steipete.codexbar` and import the file.
 These commands transfer macOS UI preferences and are unavailable on Linux.
 

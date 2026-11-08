@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct ProviderPluginOptionalRequestTests {
     @Test
@@ -197,7 +197,7 @@ struct ProviderPluginOptionalRequestTests {
               }
             });
             """,
-            resourceBundle: CodexBarCoreResources.bundle,
+            resourceBundle: SharinganCoreResources.bundle,
             transport: ProviderHTTPTransportHandler(handler),
             responseSizeLimit: limit,
             enforcesUserResponsePolicy: true,

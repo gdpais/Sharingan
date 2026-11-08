@@ -1,7 +1,7 @@
 # StoreStress
 
 Adversarial crash, contention, corpus-rebuild, WAL, and descriptor harness for the SQLite-backed
-`CostUsageStore`. It is a separate package so its internal test access never enters normal CodexBar builds.
+`CostUsageStore`. It is a separate package so its internal test access never enters normal Sharingan builds.
 
 Build the optimized harness from this directory:
 
@@ -12,7 +12,7 @@ swift build -c release -Xswiftc -enable-testing
 Run `swift run -c release -Xswiftc -enable-testing StoreStress --` without arguments to print the available
 subcommands. Every store/cache argument should point at a disposable temporary directory. `rebuild` and
 `incremental` accept an optional sessions root, which makes it possible to measure a read-only corpus snapshot
-without writing to the real Codex session or CodexBar cache directories.
+without writing to the real Codex session or Sharingan cache directories.
 
 On macOS, compare separate `memory <cacheRoot> full` and `memory <cacheRoot> lean`
 processes against the same disposable cache copy. The output includes physical
@@ -26,8 +26,8 @@ Generate a contained corpus with real synthetic source files and typed cached ro
 
 ```sh
 stress_bin="$(swift build -c release -Xswiftc -enable-testing --show-bin-path)/StoreStress"
-TZ=UTC "$stress_bin" fixture /tmp/codexbar-memory-fixture 256 1000
-TZ=UTC "$stress_bin" memory /tmp/codexbar-memory-fixture/cache lean
+TZ=UTC "$stress_bin" fixture /tmp/sharingan-memory-fixture 256 1000
+TZ=UTC "$stress_bin" memory /tmp/sharingan-memory-fixture/cache lean
 ```
 
 `fixture` requires a new directory and accepts up to 1,000 files with 1,000 rows each. Its sessions, cache, and

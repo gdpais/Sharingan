@@ -22,7 +22,7 @@ ApplicationWindow {
     header: ToolBar {
         RowLayout {
             anchors.fill: parent; anchors.margins: 10
-            Label { text: "CodexBar"; font.pixelSize: 22; font.bold: true; Layout.fillWidth: true }
+            Label { text: "Sharingan"; font.pixelSize: 22; font.bold: true; Layout.fillWidth: true }
             ToolButton {
                 text: "Menu"
                 onClicked: appMenu.open()
@@ -30,7 +30,7 @@ ApplicationWindow {
                     id: appMenu
                     MenuItem { text: "Copy summary"; enabled: desktop.entries.length > 0; onTriggered: desktop.copySummary() }
                     MenuSeparator {}
-                    MenuItem { text: "Quit CodexBar"; onTriggered: Qt.quit() }
+                    MenuItem { text: "Quit Sharingan"; onTriggered: Qt.quit() }
                 }
             }
             ToolButton { text: "Settings…"; onClicked: desktop.showWindow("settings") }

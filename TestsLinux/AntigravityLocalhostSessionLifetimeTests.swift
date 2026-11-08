@@ -10,7 +10,7 @@ import Glibc
 #elseif canImport(Musl)
 import Musl
 #endif
-@testable import CodexBarCore
+@testable import SharinganCore
 
 /// Covers the process-lifetime session-reuse contract from the #2243 mitigation,
 /// without establishing the root cause of Linux FoundationNetworking/libdispatch crashes.

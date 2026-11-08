@@ -5,7 +5,7 @@ import Glibc
 import Musl
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct AntigravityPortDiscoveryTests {
     @Test(arguments: [
@@ -189,7 +189,7 @@ struct AntigravityPortDiscoveryTests {
 
         init(script: String) throws {
             self.root = FileManager.default.temporaryDirectory
-                .appendingPathComponent("codexbar-port-discovery-\(UUID().uuidString)")
+                .appendingPathComponent("sharingan-port-discovery-\(UUID().uuidString)")
             self.lsof = self.root.appendingPathComponent("lsof")
             let files = FileManager.default
             try files.createDirectory(at: self.root.appendingPathComponent("42/fd"), withIntermediateDirectories: true)

@@ -70,7 +70,7 @@ bool DesktopController::validate(QVariantMap &values) {
         m_configError = "Unsupported provider source."; return false;
     }
     if (values.value("executable").toString().trimmed().isEmpty()) {
-        m_configError = "Specify the CodexBar CLI executable."; return false;
+        m_configError = "Specify the Sharingan CLI executable."; return false;
     }
     for (const auto &key : {"refreshSeconds", "accountIndex", "notifyThreshold", "barProviders"}) {
         bool ok = false;
@@ -105,13 +105,13 @@ bool DesktopController::validate(QVariantMap &values) {
 }
 
 void DesktopController::loadSettings(const QString &cliOverride) {
-    m_settings = {{"executable", "codexbar"}, {"provider", "codex"}, {"source", "auto"},
+    m_settings = {{"executable", "sharingan"}, {"provider", "codex"}, {"source", "auto"},
         {"refreshSeconds", 300}, {"accountIndex", 0}, {"notifyThreshold", 10}, {"allAccounts", false},
         {"showIdentity", false}, {"showCosts", true}, {"showStatus", true}, {"notifications", false}, {"showTray", true}, {"compactQuickView", false}, {"refreshOnOpen", false}, {"providerOrder", QStringList{}},
         {"quotaDisplay", "remaining"}, {"resetDisplay", "countdown"}, {"showPace", true},
         {"showBarDetail", false}, {"showScopedCaps", false}, {"barProviders", 2},
         {"warningColors", true}, {"trayStyle", "meters"}, {"followOmarchyTheme", false}};
-    m_configPath = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + "/codexbar/linux.json";
+    m_configPath = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) + "/sharingan/linux.json";
     QFile file(m_configPath);
     QVariantMap candidate = m_settings;
     if (file.open(QIODevice::ReadOnly)) {
@@ -119,7 +119,7 @@ void DesktopController::loadSettings(const QString &cliOverride) {
         const auto document = QJsonDocument::fromJson(file.readAll(), &parse);
         if (parse.error != QJsonParseError::NoError || !document.isObject()) {
             m_configBlocked = true;
-            m_configError = "Invalid linux.json. Fix or remove it and restart CodexBar before saving.";
+            m_configError = "Invalid linux.json. Fix or remove it and restart Sharingan before saving.";
         } else {
             const auto loaded = document.object().toVariantMap();
             for (auto it = loaded.begin(); it != loaded.end(); ++it) if (candidate.contains(it.key())) candidate[it.key()] = it.value();
@@ -129,7 +129,7 @@ void DesktopController::loadSettings(const QString &cliOverride) {
     }
     if (file.exists() && !file.isOpen()) {
         m_configBlocked = true;
-        m_configError = "Cannot read linux.json. Check permissions and restart CodexBar.";
+        m_configError = "Cannot read linux.json. Check permissions and restart Sharingan.";
     }
     if (!cliOverride.isEmpty()) m_settings["executable"] = cliOverride;
 }
@@ -285,7 +285,7 @@ void DesktopController::updateNotifications(const QVariantList &entries) {
         auto event = item.toMap();
         auto message = QDBusMessage::createMethodCall("org.freedesktop.Notifications", "/org/freedesktop/Notifications",
             "org.freedesktop.Notifications", "Notify");
-        message.setArguments({"CodexBar", uint(0), "codexbar", "CodexBar · " + event.value("provider").toString(),
+        message.setArguments({"Sharingan", uint(0), "sharingan", "Sharingan · " + event.value("provider").toString(),
             event.value("message").toString(), QStringList(), QVariantMap(), 8000});
         QDBusConnection::sessionBus().asyncCall(message);
     }
@@ -449,21 +449,21 @@ void DesktopController::loadProviders() {
 
 bool DesktopController::launchAtLogin() const {
     QFile file(QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
-        "/autostart/com.steipete.CodexBar.desktop");
+        "/autostart/com.gdpais.sharingan.desktop");
     if (!file.open(QIODevice::ReadOnly)) return false;
     return !QString::fromUtf8(file.readAll()).contains(QRegularExpression("(^|\n)Hidden\\s*=\\s*true(\n|$)"));
 }
 
 bool DesktopController::setLaunchAtLogin(bool enabled) {
     const auto path = QStandardPaths::writableLocation(QStandardPaths::GenericConfigLocation) +
-        "/autostart/com.steipete.CodexBar.desktop";
+        "/autostart/com.gdpais.sharingan.desktop";
     QDir().mkpath(QFileInfo(path).absolutePath());
     QString executable = QCoreApplication::applicationFilePath();
     if (executable.contains('\n') || executable.contains('\r')) return false;
     executable.replace("%", "%%");
     for (const auto &character : {QString("\\"), QString("\""), QString("`"), QString("$")})
         executable.replace(character, "\\" + character);
-    const auto content = QString("[Desktop Entry]\nType=Application\nName=CodexBar\nExec=\"%1\" --background\nIcon=codexbar\nTerminal=false\nHidden=%2\n")
+    const auto content = QString("[Desktop Entry]\nType=Application\nName=Sharingan\nExec=\"%1\" --background\nIcon=sharingan\nTerminal=false\nHidden=%2\n")
         .arg(executable, enabled ? "false" : "true").toUtf8();
     QSaveFile file(path);
     if (!file.open(QIODevice::WriteOnly) || file.write(content) != content.size() || !file.commit()) {

@@ -1,7 +1,7 @@
 import Foundation
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 struct RemoteCodexCostsTests {
     private static let now = Date(timeIntervalSince1970: 1_788_177_600)
@@ -69,11 +69,11 @@ struct RemoteCodexCostsTests {
     @Test
     func `measured zero stays distinct from an unavailable summary`() {
         let zero = Self.summary(tokens: 0, cost: 0)
-        let text = CodexBarCLI.renderHostCostText(.init(host: "local", source: "local", summary: zero))
+        let text = SharinganCLI.renderHostCostText(.init(host: "local", source: "local", summary: zero))
         #expect(text.contains("$0.00"))
         #expect(text.contains("0 tokens"))
         #expect(text.contains("Snapshot updated: 2026-08-31T12:00:00Z"))
-        let missing = CodexBarCLI.renderHostCostText(.init(
+        let missing = SharinganCLI.renderHostCostText(.init(
             host: "qa-linux", source: "ssh", summary: Self.summary(tokens: nil, cost: nil, complete: false)))
         #expect(!missing.contains("$0"))
         #expect(missing.contains("Partial history"))
@@ -87,8 +87,8 @@ struct RemoteCodexCostsTests {
         let remote = try Self.summary(
             updatedAt: Date(timeIntervalSince1970: 946_684_800),
             timeZone: #require(TimeZone(identifier: "Asia/Tokyo")))
-        let localText = CodexBarCLI.renderHostCostText(.init(host: "local", source: "local", summary: local))
-        let remoteText = CodexBarCLI.renderHostCostText(.init(host: "qa-linux", source: "ssh", summary: remote))
+        let localText = SharinganCLI.renderHostCostText(.init(host: "local", source: "local", summary: local))
+        let remoteText = SharinganCLI.renderHostCostText(.init(host: "qa-linux", source: "ssh", summary: remote))
 
         #expect(localText.contains("Snapshot updated: 2026-08-31T12:00:00Z"))
         // A retained source snapshot must not acquire this invocation's time or the other host's time.
@@ -99,7 +99,7 @@ struct RemoteCodexCostsTests {
 
     @Test(arguments: ["local", "ssh"])
     func `failed host text does not invent a snapshot timestamp`(source: String) {
-        let text = CodexBarCLI.renderHostCostText(.init(
+        let text = SharinganCLI.renderHostCostText(.init(
             host: "qa-linux", source: source, summary: nil, error: "Fixture unavailable."))
         let title = source == "local" ? "This machine" : "qa-linux"
         #expect(text == "\(title): Fixture unavailable.")
@@ -121,7 +121,7 @@ struct RemoteCodexCostsTests {
         #expect(args.contains("BatchMode=yes"))
         #expect(args.contains("-n"))
         let command = try #require(args.last)
-        #expect(command.contains("if command -v codexbar"))
+        #expect(command.contains("if command -v sharingan"))
         #expect(command.contains("--days 7 --refresh"))
         #expect(command.contains("--summary-only --provider-native-only"))
         #expect(!command.contains("||"))
@@ -194,7 +194,7 @@ struct RemoteCodexCostsTests {
     @Test
     func `host collection calls each scanner once and keeps totals separate`() async throws {
         let calls = CostHostCallRecorder()
-        let reports = try await CodexBarCLI.collectCodexHostCosts(
+        let reports = try await SharinganCLI.collectCodexHostCosts(
             remote: "qa-linux", historyDays: 30,
             local: { await calls.add("local"); return Self.summary(tokens: 100) },
             fetchRemote: { _ in await calls.add("remote"); return Self.summary(tokens: 900) })
@@ -205,7 +205,7 @@ struct RemoteCodexCostsTests {
 
     @Test
     func `remote failure preserves local results without disclosing stderr`() async throws {
-        let reports = try await CodexBarCLI.collectCodexHostCosts(
+        let reports = try await SharinganCLI.collectCodexHostCosts(
             remote: "qa-linux", historyDays: 30,
             local: { Self.summary() },
             fetchRemote: { _ in throw CostHostFixtureError() })
@@ -213,13 +213,13 @@ struct RemoteCodexCostsTests {
         #expect(reports[0].summary?.today.totalTokens == 1500)
         #expect(reports[1].summary == nil)
         #expect(reports[1].error == RemoteCodexCostError.unavailable.localizedDescription)
-        #expect(!reports.map(CodexBarCLI.renderHostCostText).joined().contains("fixture-private-stderr"))
+        #expect(!reports.map(SharinganCLI.renderHostCostText).joined().contains("fixture-private-stderr"))
     }
 
     @Test
     func `cancelled local work never starts SSH`() async {
         await #expect(throws: CancellationError.self) {
-            try await CodexBarCLI.collectCodexHostCosts(
+            try await SharinganCLI.collectCodexHostCosts(
                 remote: "qa-linux", historyDays: 30,
                 local: { throw CancellationError() },
                 fetchRemote: { _ in Issue.record("SSH started after cancellation"); return Self.summary() })
@@ -228,7 +228,7 @@ struct RemoteCodexCostsTests {
 
     @Test
     func `one day host text shows one today line`() {
-        let text = CodexBarCLI.renderHostCostText(.init(
+        let text = SharinganCLI.renderHostCostText(.init(
             host: "local", source: "local", summary: Self.summary(days: 1)))
         #expect(text.components(separatedBy: "Today:").count == 2)
         #expect(!text.contains("Last 1 days"))

@@ -12,11 +12,11 @@ read_when:
 # abliteration.ai
 
 Enable **abliteration.ai** in **Settings → Providers** and enter your **API key** in the existing secure field.
-The key follows CodexBar's standard local config storage policy. The CLI also accepts `ABLITERATION_API_KEY`;
+The key follows Sharingan's standard local config storage policy. The CLI also accepts `ABLITERATION_API_KEY`;
 a saved provider key takes precedence.
 
 ```sh
-codexbar usage --provider abliteration --source api --json
+sharingan usage --provider abliteration --source api --json
 ```
 
 Each refresh makes one non-billable `GET https://api.abliteration.ai/v1/credits` request with bearer authentication.

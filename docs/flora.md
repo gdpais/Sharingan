@@ -12,13 +12,13 @@ read_when:
 # FLORA
 
 Enable **FLORA** in Settings → Providers, enter a FLORA API key (`ak_…`) and the workspace ID (`ws_…`), or set
-`FLORA_API_KEY` and `FLORA_WORKSPACE_ID` for the CLI. Both are saved in CodexBar's local config file; configured values
-take precedence over the environment. CodexBar sends the key only to `https://app.flora.ai` as
+`FLORA_API_KEY` and `FLORA_WORKSPACE_ID` for the CLI. Both are saved in Sharingan's local config file; configured values
+take precedence over the environment. Sharingan sends the key only to `https://app.flora.ai` as
 `Authorization: Bearer …` and does not import browser cookies or start a login flow.
 
 Create the key in FLORA under Settings → API Keys and grant it **billing** on the workspace. The workspace ID is
 required: FLORA's `GET /api/v1/workspaces` lists only workspaces where the key has read access, and in practice an
-API key received an empty list, so CodexBar does not try to discover it. Copy the `ws_…` ID from the workspace URL.
+API key received an empty list, so Sharingan does not try to discover it. Copy the `ws_…` ID from the workspace URL.
 
 The bundled JavaScript plugin reads
 `GET /api/v1/workspaces/{workspace_id}/usage?start_date=<first of month>&end_date=<today>` in UTC and shows:
@@ -32,10 +32,10 @@ The bundled JavaScript plugin reads
 
 A missing or nonfinite `available_cost`, or an available spend block without a finite total, fails parsing.
 HTTP 403 means the key lacks billing permission on that workspace; 404 means the workspace ID was not found.
-The endpoint reports no allowance or reset date, so CodexBar shows amounts without a percentage or guessed reset.
+The endpoint reports no allowance or reset date, so Sharingan shows amounts without a percentage or guessed reset.
 
 ```sh
-codexbar usage --provider flora --source api --json
+sharingan usage --provider flora --source api --json
 ```
 
 Sources checked October 11, 2026:

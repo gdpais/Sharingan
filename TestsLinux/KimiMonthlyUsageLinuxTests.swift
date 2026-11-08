@@ -1,8 +1,8 @@
 #if os(Linux)
 import Foundation
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 struct KimiMonthlyUsageLinuxTests {
     private static let now = Date(timeIntervalSince1970: 1_791_284_400)

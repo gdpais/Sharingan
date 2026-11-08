@@ -7,7 +7,7 @@ read_when:
 
 # ZenMux Provider
 
-CodexBar reads subscription quota windows and pay-as-you-go balance from ZenMux's documented Management API.
+Sharingan reads subscription quota windows and pay-as-you-go balance from ZenMux's documented Management API.
 
 > **Service maturity:** ZenMux says its upstream access comes from
 > [official providers or authorized cloud partners](https://zenmux.ai/), but that authorization is currently
@@ -17,7 +17,7 @@ CodexBar reads subscription quota windows and pay-as-you-go balance from ZenMux'
 ## Authentication
 
 Create a Management API key in the [ZenMux Management Console](https://zenmux.ai/platform/management), then add it in
-CodexBar Settings → Providers → ZenMux. Standard ZenMux inference API keys are not accepted by these endpoints.
+Sharingan Settings → Providers → ZenMux. Standard ZenMux inference API keys are not accepted by these endpoints.
 
 You can also set the environment variable:
 
@@ -28,21 +28,21 @@ export ZENMUX_MANAGEMENT_API_KEY="..."
 Or configure it through the CLI:
 
 ```bash
-printf '%s' "$ZENMUX_MANAGEMENT_API_KEY" | codexbar config set-api-key --provider zenmux --stdin
+printf '%s' "$ZENMUX_MANAGEMENT_API_KEY" | sharingan config set-api-key --provider zenmux --stdin
 ```
 
 ## Data Source
 
 The bundled JavaScript plugin owns requests and quota parsing on both QuickJS and JavaScriptCore, without requiring
-`CODEXBAR_JS_PROVIDERS`. Swift retains provider registration, credential resolution, and settings. Each request keeps
+`SHARINGAN_JS_PROVIDERS`. Swift retains provider registration, credential resolution, and settings. Each request keeps
 its 15-second deadline. PAYG enrichment follows the app's optional-usage preference or the CLI's credits option.
 
-CodexBar requests:
+Sharingan requests:
 
 - `GET https://zenmux.ai/api/v1/management/subscription/detail`
 - `GET https://zenmux.ai/api/v1/management/payg/balance` as best-effort credit enrichment
 
-Both requests use `Authorization: Bearer <ZENMUX_MANAGEMENT_API_KEY>`. CodexBar does not read ZenMux browser cookies,
+Both requests use `Authorization: Bearer <ZENMUX_MANAGEMENT_API_KEY>`. Sharingan does not read ZenMux browser cookies,
 dashboard sessions, request logs, or inference prompts.
 
 ## Display
@@ -54,7 +54,7 @@ non-healthy account status, plan expiry, and PAYG balance in US dollars when ava
 ## CLI Usage
 
 ```bash
-codexbar --provider zenmux
+sharingan --provider zenmux
 ```
 
 ## Troubleshooting

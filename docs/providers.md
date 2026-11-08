@@ -1,5 +1,5 @@
 ---
-summary: "Provider data sources and parsing overview for every registered CodexBar provider."
+summary: "Provider data sources and parsing overview for every registered Sharingan provider."
 read_when:
   - Adding or modifying provider fetch/parsing
   - Adjusting provider labels, toggles, or metadata
@@ -8,7 +8,7 @@ read_when:
 
 # Providers
 
-CodexBar currently registers 110 provider IDs. Some companies expose multiple surfaces, such as Codex vs OpenAI API or
+Sharingan currently registers 110 provider IDs. Some companies expose multiple surfaces, such as Codex vs OpenAI API or
 OpenCode vs OpenCode Go, because the auth source and quota shape differ.
 
 ## Fetch strategies (current)
@@ -40,7 +40,7 @@ dashboard refresh before retrying. Codex account-cache ownership and provider-de
 
 Native cost-history sources are the descriptors that advertise token-cost support: Codex, Claude, OpenAI Admin,
 Mistral, AWS Bedrock, Vertex AI, Cursor, and OpenCode Go. Providers without that contract are omitted instead of
-appearing as empty subscriptions. Each native currency has its own total, ranking, and daily chart; CodexBar never
+appearing as empty subscriptions. Each native currency has its own total, ranking, and daily chart; Sharingan never
 adds or ranks amounts across currencies.
 
 The page also shows token mix (input / output / cache / reasoning), priced/unpriced/unmetered/estimated coverage,
@@ -302,7 +302,7 @@ complete when the available scan window covers fewer days.
 ## Cursor
 - Web API via browser cookies (`cursor.com` + `cursor.sh`).
 - Fallbacks: a legacy stored session, then Cursor.app local auth.
-- Add Account and Switch Account open Cursor's authenticator in a supported browser; Switch Account prefers stable account IDs and falls back to normalized email when IDs are unavailable. CodexBar uses the supported system HTTPS handler when possible and otherwise asks the user to choose an eligible supported browser.
+- Add Account and Switch Account open Cursor's authenticator in a supported browser; Switch Account prefers stable account IDs and falls back to normalized email when IDs are unavailable. Sharingan uses the supported system HTTPS handler when possible and otherwise asks the user to choose an eligible supported browser.
 - Grok Bot weekly included usage is a fourth Cursor card bar from `POST /api/dashboard/get-sand-usage-status` (same session). Paid 7-day Bot allowances show weekly pace on that extra bar. Accounts without a Bot allowance omit the bar.
 - Status: Statuspage.io (Cursor).
 - Details: `docs/cursor.md`.
@@ -323,7 +323,7 @@ complete when the available scan window covers fewer days.
   not include local fallback.
 - Uses the public usage API for rolling 5-hour, weekly, and monthly usage windows, with the workspace Go page/server
   data retained as a compatibility fallback.
-- Optional workspace ID comes from `~/.sharingan/config.json` (`providers[].workspaceID`) or `CODEXBAR_OPENCODEGO_WORKSPACE_ID`.
+- Optional workspace ID comes from `~/.sharingan/config.json` (`providers[].workspaceID`) or `SHARINGAN_OPENCODEGO_WORKSPACE_ID`.
 - Status: none yet.
 - Details: `docs/opencodego.md`.
 
@@ -353,7 +353,7 @@ complete when the available scan window covers fewer days.
 
 Alibaba Coding Plan, Alibaba Token Plan, and Qwen Cloud all run on the Aliyun OneConsole
 backend. They selectively reuse plumbing under
-`Sources/CodexBarCore/Providers/Shared/AliyunOneConsole/`:
+`Sources/SharinganCore/Providers/Shared/AliyunOneConsole/`:
 
 - `AliyunOneConsoleCookieImporter` — browser cookie iteration, Chromium fallback, Keychain preflight.
   The Alibaba providers and Qwen Cloud supply their own cookie domains and authenticated-session predicate.
@@ -467,7 +467,7 @@ provider-specific cookie validation, endpoints, login detection, and error trans
 - Credits API endpoint (`https://ai.zoom.us/ai-computer/api/v1/credits/status`) authenticated via a
   bearer token.
 - Auto-imports ZoomMate/Zoom session cookies in the shared browser order, validates and stores the narrowed cookie
-  header in CodexBar's Keychain cache, and exchanges it for a short-lived bearer token through
+  header in Sharingan's Keychain cache, and exchanges it for a short-lived bearer token through
   ZoomMate's own cookie-to-token bootstrap endpoint. The bearer remains in memory only and is reused
   until it nears expiry. Manual cURL capture is available as an explicit alternative.
 - Shows a single "Credits" window: used/remaining credits against a budget cap, resetting at the
@@ -496,11 +496,11 @@ provider-specific cookie validation, endpoints, login detection, and error trans
 - API key from `~/.sharingan/config.json` (`providers[].apiKey`) or `SYNTHETIC_API_KEY`.
 - The menu card shows rolling five-hour, weekly token, and search-hourly quota lanes when present. The compact menu bar
   metric uses the five-hour or weekly lane; weekly credit regeneration details appear when returned.
-- External status page: `https://status.synthetic.new` (not linked or auto-polled by CodexBar).
+- External status page: `https://status.synthetic.new` (not linked or auto-polled by Sharingan).
 - Details: `docs/synthetic.md`.
 
 ## OpenRouter
-- API token from the resolved CodexBar config (`providers[].apiKey`, default `~/.config/sharingan/config.json`) or `OPENROUTER_API_KEY` env var. Legacy config paths remain supported.
+- API token from the resolved Sharingan config (`providers[].apiKey`, default `~/.config/sharingan/config.json`) or `OPENROUTER_API_KEY` env var. Legacy config paths remain supported.
 - Reads key quota from `/key` and attempts credits with the selected API key. On the official API, a primary key identified as a management key also enables account Activity; a separate Management API key takes precedence for Activity without replacing the selected account’s balance credential.
 - Shows account spend, tokens, requests, and model counts for the last 30 completed UTC days when Activity is available.
 - Shows daily, weekly, and monthly API-key spend when `/api/v1/key` returns those fields.
@@ -605,7 +605,7 @@ provider-specific cookie validation, endpoints, login detection, and error trans
 
 ## ClinePass
 
-Cline's existing browser sign-in session is reused read-only when no API key is configured. CodexBar does not copy or
+Cline's existing browser sign-in session is reused read-only when no API key is configured. Sharingan does not copy or
 refresh the token; renew an expired session with `cline auth`. See the path overrides in [ClinePass setup](clinepass.md).
 
 ClinePass usage is fetched by the bundled TypeScript plugin on macOS and Linux; QuickJS is the default engine and
@@ -627,8 +627,8 @@ JavaScriptCore is the macOS rollback engine. The committed `.js` is generated fr
 - `grok agent stdio` (ACP) JSON-RPC `x.ai/billing` method; requires `grok login` (SuperGrok OAuth/OIDC).
 - Reads cached credentials from `~/.grok/auth.json` for identity (email, team).
 - Falls back to grok.com's billing gRPC-web endpoint via browser session cookies when the CLI does not expose billing.
-- Ordinary CLI/test runs do not import browser cookies unless `CODEXBAR_ALLOW_BROWSER_COOKIE_IMPORT=1` is set;
-  `codexbar cookie refresh --provider grok` opts in for its explicit refresh.
+- Ordinary CLI/test runs do not import browser cookies unless `SHARINGAN_ALLOW_BROWSER_COOKIE_IMPORT=1` is set;
+  `sharingan cookie refresh --provider grok` opts in for its explicit refresh.
 - Validated sessions are cached in the Keychain cookie cache and reused before any new browser import;
   the cache is evicted only on authentication failures.
 - Local fallback aggregates `~/.grok/sessions/**/signals.json` token counts when the RPC is unavailable.
@@ -651,10 +651,10 @@ JavaScriptCore is the macOS rollback engine. The committed `.js` is generated fr
 - Details: `docs/llm-proxy.md`.
 
 ## ClawRouter
-- API key from the resolved CodexBar config (`providers[].apiKey`) or `CLAWROUTER_API_KEY`.
+- API key from the resolved Sharingan config (`providers[].apiKey`) or `CLAWROUTER_API_KEY`.
 - Defaults to `https://clawrouter.openclaw.ai`; optional config `enterpriseHost` or `CLAWROUTER_BASE_URL` selects another HTTPS deployment.
 - Reads `/v1/usage` for the key policy's monthly budget, spend, request/token totals, and per-provider breakdown.
-- Provider rows are data-driven, so any routed provider returned by ClawRouter is displayed without provider-specific CodexBar code.
+- Provider rows are data-driven, so any routed provider returned by ClawRouter is displayed without provider-specific Sharingan code.
 - Details: `docs/clawrouter.md`.
 
 ## Wayfinder
@@ -674,9 +674,9 @@ JavaScriptCore is the macOS rollback engine. The committed `.js` is generated fr
 ## AWS Bedrock
 - AWS credentials from `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, and optional `AWS_SESSION_TOKEN`.
 - Region from `AWS_REGION` / `AWS_DEFAULT_REGION`, defaulting to `us-east-1`.
-- Reads AWS Cost Explorer for Bedrock spend and can compare usage against `CODEXBAR_BEDROCK_BUDGET`.
+- Reads AWS Cost Explorer for Bedrock spend and can compare usage against `SHARINGAN_BEDROCK_BUDGET`.
 - Optionally reads rolling 14-day Claude token and request totals from CloudWatch with `cloudwatch:GetMetricData`.
-- Override Cost Explorer base URL with `CODEXBAR_BEDROCK_API_URL` for tests.
+- Override Cost Explorer base URL with `SHARINGAN_BEDROCK_API_URL` for tests.
 - Details: `docs/bedrock.md`.
 
 ## Deepgram

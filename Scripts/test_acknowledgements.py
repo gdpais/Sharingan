@@ -58,7 +58,7 @@ class AcknowledgementsTests(unittest.TestCase):
     def test_release_archives_export_the_common_resource(self):
         workflow = (notices.ROOT / '.github/workflows/release-cli.yml').read_text()
         self.assertIn('Scripts/acknowledgements.py --text-output "$OUT_DIR/THIRD_PARTY_NOTICES"', workflow)
-        self.assertIn('CodexBarCLI codexbar VERSION THIRD_PARTY_NOTICES CodexBar_CodexBarCore.bundle', workflow)
+        self.assertIn('SharinganCLI sharingan VERSION THIRD_PARTY_NOTICES Sharingan_SharinganCore.bundle', workflow)
 
 
 if __name__ == '__main__':

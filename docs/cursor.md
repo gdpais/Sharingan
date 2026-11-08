@@ -41,12 +41,12 @@ Linux. Explicit `web` mode never reads local Cursor credentials; macOS uses its 
      - Linux main DB: absolute `$XDG_CONFIG_HOME/.../state.vscdb`, else absolute `$HOME/.config/...`, else account-home `.config/...`
      - Active WAL sidecars when present: `state.vscdb-wal` and `state.vscdb-shm`
    - The database is opened read-only. Active WAL state is read normally; an idle WAL-mode main file with no
-     sidecars uses SQLite immutable mode so CodexBar does not recreate files in Cursor's directory.
-   - The token is used only while its JWT expiry is more than 60 seconds away. CodexBar never refreshes it.
+     sidecars uses SQLite immutable mode so Sharingan does not recreate files in Cursor's directory.
+   - The token is used only while its JWT expiry is more than 60 seconds away. Sharingan never refreshes it.
    - On macOS, a validated derived session is also persisted owner-only at
-     `~/Library/Application Support/CodexBar/cursor-session.json` through the standard credential-file writer. Linux
+     `~/Library/Application Support/Sharingan/cursor-session.json` through the standard credential-file writer. Linux
      reads the Cursor database directly and does not persist the app token.
-   - When an already-cached cookie exposes a different email or subject, CodexBar logs the mismatch and keeps the
+   - When an already-cached cookie exposes a different email or subject, Sharingan logs the mismatch and keeps the
      chosen Cursor.app identity on the usage snapshot/card. It does not combine app usage with browser identity.
    - Temporary transport failures keep the previous usage measurement and its timestamp for an unchanged account,
      including when the network message is localized. The same policy applies to stored sessions; rejected sessions
@@ -54,7 +54,7 @@ Linux. Explicit `web` mode never reads local Cursor credentials; macOS uses its 
 
 2) **Cached cookie header**
    - Stored after successful browser import.
-   - Keychain cache: `com.steipete.codexbar.cache` (account `cookie.cursor`).
+   - Keychain cache: `com.gdpais.sharingan.cache` (account `cookie.cursor`).
 
 3) **Browser cookie import** (macOS only)
    - Cookie order from provider metadata, falling back to SweetCookieKit's default browser catalog, including Aside, Opera, Opera Neon, and Ego Lite.
@@ -65,12 +65,12 @@ Linux. Explicit `web` mode never reads local Cursor credentials; macOS uses its 
      - `next-auth.session-token`
 
 4) **Stored session cookies** (legacy fallback on macOS and Linux)
-   - Legacy sessions captured by older CodexBar releases remain readable.
-   - Stored in the platform Application Support directory: `~/Library/Application Support/CodexBar/cursor-session.json` on
-     macOS, or `$XDG_DATA_HOME/CodexBar/cursor-session.json` on Linux (default: `~/.local/share/CodexBar/cursor-session.json`).
+   - Legacy sessions captured by older Sharingan releases remain readable.
+   - Stored in the platform Application Support directory: `~/Library/Application Support/Sharingan/cursor-session.json` on
+     macOS, or `$XDG_DATA_HOME/Sharingan/cursor-session.json` on Linux (default: `~/.local/share/Sharingan/cursor-session.json`).
 
 On macOS, explicit `--source web` skips Cursor.app local auth and uses only the cookie ladder. On Linux, explicit `web`
-requires a configured Manual cookie and never reads the app token. `codexbar usage --provider cursor --source auto --verbose`
+requires a configured Manual cookie and never reads the app token. `sharingan usage --provider cursor --source auto --verbose`
 prints the selected automatic path and is the quickest live-read check after Cursor login.
 
 Manual option:
@@ -82,11 +82,11 @@ Manual option:
 - Aside, Opera, and Opera Neon are supported with SweetCookieKit 0.5.5. The selected application's bundle identifier pins login to that browser's cookie store.
 - SweetCookieKit 0.5.6 adds Ego Lite cookie imports. Add/Switch Account does not offer Ego Lite until its application has a verified, unambiguous bundle-identifier mapping; display names and storage paths are insufficient for interactive login.
 - **Switch Account** opens the same authenticator and waits for a different stable account ID when available, falling back to normalized email when IDs are unavailable.
-- When the system's HTTPS handler is a supported browser, CodexBar opens the route there automatically. When the handler is an intermediary app, CodexBar asks the user to choose a concrete supported browser before opening the route.
-- CodexBar pins the original HTTPS route to that concrete browser and polls cookies only from the same application. Interactive login never falls back to another browser, a stored session, or Cursor.app; cancelling browser selection or the absence of a supported browser stops before login opens.
-- An installed non-Safari browser remains eligible before its first profile or cookie database exists, and CodexBar detects the store created during login. Browsers with access-blocked profile data remain unavailable, while Safari still requires an existing readable cookie source.
-- CodexBar preserves its cached and legacy stored Cursor sessions while login is in progress. An accepted browser session must be durably cached before the legacy session is cleared, so cancellation or failure leaves the previous session intact. Add completes only after the authenticated response includes a Cursor account identity. Switch compares stable account IDs when both sides provide them and otherwise compares normalized email.
-- CodexBar checks all available profiles in the selected browser. Add accepts a sole unambiguous account automatically, while Switch always asks for confirmation before replacing the current account, even when only one eligible alternative is found. Multiple eligible accounts always require an explicit choice, and CodexBar caches only the chosen session.
+- When the system's HTTPS handler is a supported browser, Sharingan opens the route there automatically. When the handler is an intermediary app, Sharingan asks the user to choose a concrete supported browser before opening the route.
+- Sharingan pins the original HTTPS route to that concrete browser and polls cookies only from the same application. Interactive login never falls back to another browser, a stored session, or Cursor.app; cancelling browser selection or the absence of a supported browser stops before login opens.
+- An installed non-Safari browser remains eligible before its first profile or cookie database exists, and Sharingan detects the store created during login. Browsers with access-blocked profile data remain unavailable, while Safari still requires an existing readable cookie source.
+- Sharingan preserves its cached and legacy stored Cursor sessions while login is in progress. An accepted browser session must be durably cached before the legacy session is cleared, so cancellation or failure leaves the previous session intact. Add completes only after the authenticated response includes a Cursor account identity. Switch compares stable account IDs when both sides provide them and otherwise compares normalized email.
+- Sharingan checks all available profiles in the selected browser. Add accepts a sole unambiguous account automatically, while Switch always asks for confirmation before replacing the current account, even when only one eligible alternative is found. Multiple eligible accounts always require an explicit choice, and Sharingan caches only the chosen session.
 - A successful add or switch selects the Automatic cookie source. Saved manual headers and token accounts remain
   stored but passive: they do not override browser fetching, cached usage, quota warnings, or utilization/reset
   ownership. Explicitly selecting a saved token account switches Cursor back to Manual and reactivates it.
@@ -113,7 +113,7 @@ Manual option:
 - Firefox: `~/Library/Application Support/Firefox/Profiles/*/cookies.sqlite`
 
 ## Linux CLI
-- Automatic usage (`codexbar usage --provider cursor`) supports the signed-in Cursor app and `cursor-agent` on Linux after
+- Automatic usage (`sharingan usage --provider cursor`) supports the signed-in Cursor app and `cursor-agent` on Linux after
   manual, cached, and stored sessions have been considered.
 - Authentication order: manual cookie header → cached session → stored session → Cursor app access token →
   `cursor-agent` access token.
@@ -121,20 +121,20 @@ Manual option:
   config home as the app database (absolute `$XDG_CONFIG_HOME`, else `~/.config`). It is used when the app has no usable
   token or cursor.com rejects that token with HTTP 401/403, so a machine with only the Cursor CLI gets usage too. A missing,
   unreadable, or malformed local store does not hide the next login. Other API failures stop the fetch without switching
-  accounts. The file is read-only; CodexBar never refreshes tokens, changes permissions, or writes either credential store.
+  accounts. The file is read-only; Sharingan never refreshes tokens, changes permissions, or writes either credential store.
   Owner-readable files (including mode 0600) and symlinked auth files are supported. Missing or empty `accessToken` values
   provide no session; agent tokens use the same JWT identity and expiration checks as desktop tokens. Expired or invalid
   tokens are not sent, and exhausted local logins retain the existing missing-session error; run `cursor-agent login` to
   replace an expired agent login.
 - Linux requests use a reusable HTTP session with automatic cookie storage disabled, so a long-running `serve` process cannot replace the selected credential with cookies left by earlier responses.
-- The app token is read from absolute `$XDG_CONFIG_HOME/Cursor/User/globalStorage/state.vscdb`, then `$HOME/.config/...` when `HOME` is absolute, then the account home’s `.config/...`. Relative `XDG_CONFIG_HOME` / `HOME` values are ignored. The database is read-only; expired app tokens are not refreshed by CodexBar.
+- The app token is read from absolute `$XDG_CONFIG_HOME/Cursor/User/globalStorage/state.vscdb`, then `$HOME/.config/...` when `HOME` is absolute, then the account home’s `.config/...`. Relative `XDG_CONFIG_HOME` / `HOME` values are ignored. The database is read-only; expired app tokens are not refreshed by Sharingan.
 - Cursor usage includes the Grok Bot weekly allowance and reset time when the account exposes it. Grok Bot endpoint failures do not hide Cursor usage.
 - Explicit `--source web` requires a manual cookie and never reads the app token.
 - Automatic browser cookie import and the external-browser Add/Switch flow remain macOS app features.
 - Manual cookie headers from `~/.config/sharingan/config.json` (or legacy `~/.sharingan/config.json`) work on Linux.
 
 ## Local storage footprint
-When **Settings → Advanced → Track provider local storage** is enabled on macOS, CodexBar measures:
+When **Settings → Advanced → Track provider local storage** is enabled on macOS, Sharingan measures:
 - `~/Library/Application Support/Cursor`
 - `~/Library/Application Support/Caches/cursor-updater`
 - `~/.cursor`
@@ -144,7 +144,7 @@ When **Settings → Advanced → Track provider local storage** is enabled on ma
 - `~/Library/Caches/cursor-compile-cache`
 - `~/Library/HTTPStorages/com.todesktop.230313mzl4w4u92`
 
-The storage detail lists measured paths and their sizes. CodexBar does not delete Cursor data.
+The storage detail lists measured paths and their sizes. Sharingan does not delete Cursor data.
 
 ## Token cost (dashboard API)
 The cost summary's Cursor section is opt-in: it only fetches when **Show cost summary** is enabled and the Cursor provider is on.
@@ -153,7 +153,7 @@ Unlike Claude and Codex cost (scanned from local session logs on this machine), 
 Auth reuses the exact status-probe session resolution and cookie-source policy:
 - **Auto**: Cursor.app local auth → cached cookie header → browser cookie import → stored session.
 - **Manual**: a non-empty pasted cookie header is required and forwarded as-is, so cost and status share the same session; an empty header fails closed instead of falling back to another account.
-- **Off**: the fetch is skipped in the app; `codexbar cost --provider cursor` fails explicitly and `/cost` returns a provider error row.
+- **Off**: the fetch is skipped in the app; `sharingan cost --provider cursor` fails explicitly and `/cost` returns a provider error row.
 
 Fetch behavior:
 - `POST https://cursor.com/api/dashboard/get-filtered-usage-events` (cookie-authenticated; requires a matching `Origin` for CSRF).
@@ -201,14 +201,14 @@ reset-window selections for 0.60.x; V2/V1 projections remain available for older
 downgrade preserves the full layout on return, while edits made in an older release take precedence.
 
 ## Key files
-- `Sources/CodexBarCore/Providers/Cursor/CursorAppAuth.swift`
-- `Sources/CodexBarCore/Providers/Cursor/CursorStatusProbe.swift`
-- `Sources/CodexBarCore/Providers/Cursor/CursorStatusProbe+UsageSummary.swift` (summary projection)
-- `Sources/CodexBarCore/Providers/Cursor/CursorTeamSpend.swift` (verified member budget)
-- `Sources/CodexBarCore/Providers/Cursor/CursorSandUsage.swift` (Grok Bot weekly included usage)
-- `Sources/CodexBar/Providers/Cursor/CursorLoginRunner.swift` (login flow)
-- `Sources/CodexBar/Providers/Cursor/CursorLoginFlow.swift` (menu integration)
-- `Sources/CodexBar/Providers/Cursor/CursorLoginBrowserRouter.swift` (browser routing and selection)
+- `Sources/SharinganCore/Providers/Cursor/CursorAppAuth.swift`
+- `Sources/SharinganCore/Providers/Cursor/CursorStatusProbe.swift`
+- `Sources/SharinganCore/Providers/Cursor/CursorStatusProbe+UsageSummary.swift` (summary projection)
+- `Sources/SharinganCore/Providers/Cursor/CursorTeamSpend.swift` (verified member budget)
+- `Sources/SharinganCore/Providers/Cursor/CursorSandUsage.swift` (Grok Bot weekly included usage)
+- `Sources/Sharingan/Providers/Cursor/CursorLoginRunner.swift` (login flow)
+- `Sources/Sharingan/Providers/Cursor/CursorLoginFlow.swift` (menu integration)
+- `Sources/Sharingan/Providers/Cursor/CursorLoginBrowserRouter.swift` (browser routing and selection)
 
 ### Enterprise and Business member budgets
 

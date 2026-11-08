@@ -5,7 +5,7 @@ import SQLite3
 import CSQLite3
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct CodexPrioritySQLiteTests {
     @Test

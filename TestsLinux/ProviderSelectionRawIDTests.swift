@@ -1,6 +1,6 @@
-import CodexBarCore
+import SharinganCore
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct ProviderSelectionRawIDTests {
     @Test

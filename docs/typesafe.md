@@ -1,7 +1,7 @@
 ---
 summary: "TypeSafe billing spend and credit balance through the console session."
 read_when:
-  - Configuring TypeSafe in CodexBar
+  - Configuring TypeSafe in Sharingan
   - Debugging TypeSafe billing or session parsing
   - Adding or tweaking TypeSafe usage parsing
 ---

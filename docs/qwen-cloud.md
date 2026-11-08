@@ -80,7 +80,7 @@ For Team accounts, use the same procedure from `https://home.qwencloud.com/analy
 
 ### "No Qwen Cloud session cookies found in browsers"
 
-Log in at `https://home.qwencloud.com/billing/subscription/token-plan-individual` in a supported browser, then refresh CodexBar.
+Log in at `https://home.qwencloud.com/billing/subscription/token-plan-individual` in a supported browser, then refresh Sharingan.
 
 ### "Qwen Cloud cookie header is invalid"
 
@@ -89,4 +89,4 @@ logging in again.
 
 ### "Qwen Cloud login required"
 
-Your Qwen Cloud session is stale. Sign out and back in on the Qwen Cloud console, then refresh CodexBar.
+Your Qwen Cloud session is stale. Sign out and back in on the Qwen Cloud console, then refresh Sharingan.

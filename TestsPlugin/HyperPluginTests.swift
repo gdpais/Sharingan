@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct HyperPluginTests {
     #if canImport(JavaScriptCore)
@@ -299,7 +299,7 @@ struct HyperPluginTests {
                 headerFields: ["Content-Type": "application/json"]))
             return (Data(apiBody.utf8), response)
         }
-        let url = try #require(CodexBarCoreResources.bundle?.url(forResource: "hyper", withExtension: "js"))
+        let url = try #require(SharinganCoreResources.bundle?.url(forResource: "hyper", withExtension: "js"))
         let runtime = try ProviderPluginRuntime(
             source: String(contentsOf: url, encoding: .utf8), transport: transport, engine: engine)
         let result = try await runtime.fetchResult(

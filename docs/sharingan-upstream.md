@@ -8,9 +8,9 @@ read_when:
 
 # Sharingan upstream routine
 
-Sharingan is a fork of [CodexBar](https://github.com/steipete/CodexBar) by Peter Steinberger (MIT). Upstream
+Sharingan is a fork of [Sharingan](https://github.com/steipete/CodexBar) by Peter Steinberger (MIT). Upstream
 ships a release every two to three days and touches 30–50 files per release, so the fork stays cheap to merge
-by keeping internal names as CodexBar, preferring new files, and merging upstream **weekly**.
+by keeping internal names as Sharingan, preferring new files, and merging upstream **weekly**.
 
 ## Weekly merge (Mondays)
 
@@ -25,16 +25,16 @@ The script:
 3. merges upstream with a merge commit (never a rebase, so fork history stays intact);
 4. resolves the routine conflict in every `Localizable.strings`, where both sides appended keys at the end,
    by keeping Sharingan's block and then upstream's (`Scripts/sharingan_resolve_strings_appends.py`), and
-   renames "CodexBar" to "Sharingan" in the **values** of the keys upstream added, never in keys, never
-   lowercase `codexbar` (CLI, paths, URL schemes);
-5. lists new upstream strings that mention CodexBar and the conflicts left for a person, and never pushes.
+   renames "Sharingan" to "Sharingan" in the **values** of the keys upstream added, never in keys, never
+   lowercase `sharingan` (CLI, paths, URL schemes);
+5. lists new upstream strings that mention Sharingan and the conflicts left for a person, and never pushes.
 
 Then fix what's listed, run `make check` and the tests, push the branch and open a PR titled
 "Merge upstream CodexBar <sha>". Merge it with **Create a merge commit**.
 
 What usually needs a person:
 - `README.md`: keep the Sharingan header, the "Based on CodexBar" section and the build-from-source install.
-- Hardcoded Swift strings upstream added with the app name (`git grep -n '"[^"]*CodexBar' -- Sources`).
+- Hardcoded Swift strings upstream added with the app name (`git grep -n '"[^"]*Sharingan' -- Sources`).
 - Packaging identity in `Scripts/package_app.sh` and `.github/release.json` (bundle ID, no update feed).
 
 The first trial run (Nov 4, 2026; upstream 58 commits ahead of 5f93dc3) left only `README.md` after the

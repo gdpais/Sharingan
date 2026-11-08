@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct GitKrakenPluginTests {
     #if canImport(JavaScriptCore)
@@ -116,7 +116,7 @@ struct GitKrakenPluginTests {
         #expect(descriptor.cli.aliases == ["gk"])
         #expect(!descriptor.metadata.defaultEnabled)
         #expect(!descriptor.metadata.widgetSelectable)
-        #expect(!CodexBarConfigValidator.validate(CodexBarConfig(providers: [config]))
+        #expect(!SharinganConfigValidator.validate(SharinganConfig(providers: [config]))
             .contains { $0.code == "workspace_unused" || $0.code == "api_key_unused" })
     }
 
@@ -145,12 +145,12 @@ struct GitKrakenPluginTests {
             #expect(request.value(forHTTPHeaderField: "Authorization") == "Bearer fixture-token")
             #expect(request.value(forHTTPHeaderField: "gk-org-id") == (organization.isEmpty ? nil : organization))
             #expect(request.value(forHTTPHeaderField: "Cookie") == nil)
-            #expect(request.value(forHTTPHeaderField: "Client-Name") == "CodexBar")
+            #expect(request.value(forHTTPHeaderField: "Client-Name") == "Sharingan")
             let response = try #require(HTTPURLResponse(
                 url: request.url!, statusCode: statusCode, httpVersion: nil, headerFields: ["Retry-After": "1"]))
             return (Data((body ?? "{\"data\":\(payload),\"error\":null}").utf8), response)
         }
-        let url = try #require(CodexBarCoreResources.bundle?.url(forResource: "gitkraken", withExtension: "js"))
+        let url = try #require(SharinganCoreResources.bundle?.url(forResource: "gitkraken", withExtension: "js"))
         let runtime = try ProviderPluginRuntime(
             source: String(contentsOf: url, encoding: .utf8), transport: transport, engine: engine)
         return try await runtime.fetchUsage(

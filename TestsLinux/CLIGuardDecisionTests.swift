@@ -1,12 +1,12 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct CLIGuardDecisionTests {
     @Test
     func `ample headroom is ok and exits zero`() {
-        let result = CodexBarCLI.evaluateGuard(
+        let result = SharinganCLI.evaluateGuard(
             outcome: .available(74),
             minimumRemainingPercent: 10,
             failOpen: false)
@@ -16,7 +16,7 @@ struct CLIGuardDecisionTests {
 
     @Test
     func `insufficient headroom is blocked and exits one`() {
-        let result = CodexBarCLI.evaluateGuard(
+        let result = SharinganCLI.evaluateGuard(
             outcome: .available(5),
             minimumRemainingPercent: 10,
             failOpen: false)
@@ -26,7 +26,7 @@ struct CLIGuardDecisionTests {
 
     @Test
     func `fetch failure exits unavailable by default`() {
-        let result = CodexBarCLI.evaluateGuard(
+        let result = SharinganCLI.evaluateGuard(
             outcome: .unavailable(.fetchFailed),
             minimumRemainingPercent: 10,
             failOpen: false)
@@ -37,7 +37,7 @@ struct CLIGuardDecisionTests {
 
     @Test
     func `unknown remaining with fail-open exits zero`() {
-        let result = CodexBarCLI.evaluateGuard(
+        let result = SharinganCLI.evaluateGuard(
             outcome: .unavailable(.fetchFailed),
             minimumRemainingPercent: 10,
             failOpen: true)
@@ -47,7 +47,7 @@ struct CLIGuardDecisionTests {
 
     @Test
     func `remaining exactly equal to need is ok`() {
-        let result = CodexBarCLI.evaluateGuard(
+        let result = SharinganCLI.evaluateGuard(
             outcome: .available(10),
             minimumRemainingPercent: 10,
             failOpen: false)
@@ -57,7 +57,7 @@ struct CLIGuardDecisionTests {
 
     @Test
     func `unknown provider is rejected`() {
-        let result = CodexBarCLI.guardProvider(rawOverride: "definitely-not-a-provider")
+        let result = SharinganCLI.guardProvider(rawOverride: "definitely-not-a-provider")
         guard case let .failure(error) = result else {
             Issue.record("Expected unknown provider to be rejected")
             return
@@ -67,7 +67,7 @@ struct CLIGuardDecisionTests {
 
     @Test
     func `missing provider is rejected`() {
-        let result = CodexBarCLI.guardProvider(rawOverride: nil)
+        let result = SharinganCLI.guardProvider(rawOverride: nil)
         guard case let .failure(error) = result else {
             Issue.record("Expected missing provider to be rejected")
             return
@@ -77,7 +77,7 @@ struct CLIGuardDecisionTests {
 
     @Test
     func `timeout rejects values that could overflow duration`() {
-        let result = CodexBarCLI.guardTimeout(raw: "1e100")
+        let result = SharinganCLI.guardTimeout(raw: "1e100")
         guard case .failure = result else {
             Issue.record("Expected enormous timeout to be rejected")
             return
@@ -86,7 +86,7 @@ struct CLIGuardDecisionTests {
 
     @Test
     func `fetch timeout is reported as unavailable`() async {
-        let result = await CodexBarCLI.runGuardFetch(timeout: 0.01) {
+        let result = await SharinganCLI.runGuardFetch(timeout: 0.01) {
             try? await Task.sleep(for: .seconds(30))
             return .available(100)
         }
@@ -109,24 +109,24 @@ struct CLIGuardDecisionTests {
 
     @Test
     func `real window reports remaining headroom`() {
-        let remaining = CodexBarCLI.guardRemainingHeadroom(for: self.window(usedPercent: 30, synthetic: false))
+        let remaining = SharinganCLI.guardRemainingHeadroom(for: self.window(usedPercent: 30, synthetic: false))
         #expect(remaining == 70)
     }
 
     @Test
     func `synthetic placeholder window is treated as unknown`() {
-        let remaining = CodexBarCLI.guardRemainingHeadroom(for: self.window(usedPercent: 0, synthetic: true))
+        let remaining = SharinganCLI.guardRemainingHeadroom(for: self.window(usedPercent: 0, synthetic: true))
         #expect(remaining == nil)
     }
 
     @Test
     func `absent window is unknown`() {
-        #expect(CodexBarCLI.guardRemainingHeadroom(for: nil) == nil)
+        #expect(SharinganCLI.guardRemainingHeadroom(for: nil) == nil)
     }
 
     @Test
     func `fully used real window has zero headroom`() {
-        let remaining = CodexBarCLI.guardRemainingHeadroom(for: self.window(usedPercent: 100, synthetic: false))
+        let remaining = SharinganCLI.guardRemainingHeadroom(for: self.window(usedPercent: 100, synthetic: false))
         #expect(remaining == 0)
     }
 }

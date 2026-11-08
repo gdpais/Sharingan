@@ -1,12 +1,12 @@
 import Foundation
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 struct MistralLinuxTests {
     @Test(arguments: [ProviderSourceMode.auto, .web])
     func `Mistral manual cookie header does not require browser support`(sourceMode: ProviderSourceMode) async {
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(
             sourceMode,
             provider: .mistral,
             settings: ProviderSettingsSnapshot.make(
@@ -18,7 +18,7 @@ struct MistralLinuxTests {
         sourceMode: ProviderSourceMode,
         cookieSource: ProviderCookieSource) async
     {
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(
             sourceMode,
             provider: .mistral,
             settings: ProviderSettingsSnapshot.make(
@@ -30,7 +30,7 @@ struct MistralLinuxTests {
         sourceMode: ProviderSourceMode,
         header: String?) async
     {
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(
             sourceMode,
             provider: .mistral,
             settings: ProviderSettingsSnapshot.make(
@@ -39,7 +39,7 @@ struct MistralLinuxTests {
 
     @Test(arguments: [ProviderSourceMode.auto, .web])
     func `Mistral missing settings still require browser support`(sourceMode: ProviderSourceMode) async {
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(sourceMode, provider: .mistral))
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(sourceMode, provider: .mistral))
     }
 
     @Test
@@ -47,7 +47,7 @@ struct MistralLinuxTests {
         let header = "csrftoken=synthetic-private-value"
         let settings = ProviderSettingsSnapshot.make(
             mistral: .init(cookieSource: .manual, manualCookieHeader: header))
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(.auto, provider: .mistral, settings: settings))
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(.auto, provider: .mistral, settings: settings))
         let browserDetection = BrowserDetection(cacheTTL: 0)
         let context = ProviderFetchContext(
             runtime: .cli,

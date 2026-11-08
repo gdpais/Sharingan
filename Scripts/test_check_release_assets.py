@@ -12,7 +12,7 @@ ROOT = Path(__file__).resolve().parent.parent
 
 class ReleaseAssetTests(unittest.TestCase):
     def run_check(self, failure="", arches="arm64 x86_64"):
-        with tempfile.TemporaryDirectory(prefix="codexbar-release-assets-") as directory:
+        with tempfile.TemporaryDirectory(prefix="sharingan-release-assets-") as directory:
             root = Path(directory)
             log = root / "calls"
             stub = root / "tool"

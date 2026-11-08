@@ -3,8 +3,8 @@
 set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SOURCE_DIR="${ROOT_DIR}/Sources/CodexBarCore/Vendored/CostUsage"
-OUTPUT_FILE="${ROOT_DIR}/Sources/CodexBarCore/Generated/CodexParserHash.generated.swift"
+SOURCE_DIR="${ROOT_DIR}/Sources/SharinganCore/Vendored/CostUsage"
+OUTPUT_FILE="${ROOT_DIR}/Sources/SharinganCore/Generated/CodexParserHash.generated.swift"
 MODE="${1:-write}"
 
 case "$MODE" in

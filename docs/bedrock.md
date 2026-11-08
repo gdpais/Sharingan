@@ -8,7 +8,7 @@ read_when:
 
 # AWS Bedrock provider
 
-CodexBar reads AWS Cost Explorer for Bedrock spend and can compare the current month against an optional budget. When
+Sharingan reads AWS Cost Explorer for Bedrock spend and can compare the current month against an optional budget. When
 permitted, it also reads CloudWatch for rolling 14-day Claude token and request totals in the configured region.
 
 ## Monitoring charges and refresh frequency
@@ -16,7 +16,7 @@ permitted, it also reads CloudWatch for rolling 14-day Claude token and request 
 **Monitoring Bedrock spend can add charges to your AWS bill.** AWS currently charges **$0.01 per Cost Explorer API
 request** against the primary billing view, separately from Bedrock inference charges. See the
 [AWS Cost Explorer pricing page](https://aws.amazon.com/aws-cost-management/aws-cost-explorer/pricing/) for current rates.
-For example, 5,000 billed requests cost $50 at that rate. A CodexBar refresh is not a fixed-price unit: monthly spend,
+For example, 5,000 billed requests cost $50 at that rate. A Sharingan refresh is not a fixed-price unit: monthly spend,
 daily cost history, and paginated responses can make separate requests. Optional CloudWatch activity uses another API
 and is subject to [CloudWatch pricing](https://aws.amazon.com/cloudwatch/pricing/).
 
@@ -31,11 +31,11 @@ and explain how the shared refresh controls reduce requests in both access-key a
 
 ## Authentication
 
-CodexBar supports two authentication modes, selected in Preferences → Providers → AWS Bedrock → Authentication.
+Sharingan supports two authentication modes, selected in Preferences → Providers → AWS Bedrock → Authentication.
 
 ### Access keys (default)
 
-Provide static AWS credentials through Settings or the environment inherited by CodexBar/the CLI:
+Provide static AWS credentials through Settings or the environment inherited by Sharingan/the CLI:
 
 ```bash
 export AWS_ACCESS_KEY_ID="..."
@@ -47,19 +47,19 @@ Optional:
 
 ```bash
 export AWS_SESSION_TOKEN="..."
-export CODEXBAR_BEDROCK_BUDGET="250"
+export SHARINGAN_BEDROCK_BUDGET="250"
 ```
 
 ### AWS profile
 
 Resolve credentials from a named profile in `~/.aws/config` / `~/.aws/credentials` instead of pasting keys. Set the
-profile name in Settings (or via `AWS_PROFILE`). CodexBar shells out to the AWS CLI
+profile name in Settings (or via `AWS_PROFILE`). Sharingan shells out to the AWS CLI
 (`aws configure export-credentials --profile <name>`), so this works with **SSO**, **assume-role**,
 `credential_process`, and MFA-cached profiles — not just static credentials.
 
 Requirements:
 
-- AWS CLI v2 on your `PATH` (CodexBar also checks `/opt/homebrew/bin/aws`, `/usr/local/bin/aws`, and `~/.local/bin/aws`).
+- AWS CLI v2 on your `PATH` (Sharingan also checks `/opt/homebrew/bin/aws`, `/usr/local/bin/aws`, and `~/.local/bin/aws`).
   Override the location with `AWS_CLI_PATH` if it lives elsewhere.
 - For SSO profiles, an active session (`aws sso login --profile <name>`). Credentials are resolved fresh on each
   refresh; the AWS CLI caches the SSO token, so this does not re-prompt unless the session has expired.
@@ -70,7 +70,7 @@ The profile's region is read automatically (`aws configure get region`); leave t
 Relevant environment variables:
 
 ```bash
-export CODEXBAR_BEDROCK_AUTH_MODE="profile"   # set automatically by Settings; "keys" or "profile"
+export SHARINGAN_BEDROCK_AUTH_MODE="profile"   # set automatically by Settings; "keys" or "profile"
 export AWS_PROFILE="work"
 export AWS_CLI_PATH="/opt/homebrew/bin/aws"   # optional override
 ```
@@ -86,9 +86,9 @@ tracking continue unchanged.
 - Usage: current-month Bedrock spend and historical daily cost buckets. Cost Explorer buckets are UTC; shared reporting periods select available date-labeled buckets, and a local date ahead of UTC remains incomplete. The shared All cost period requests the current month plus up to 13 historical months, matching [Cost Explorer’s API history limit](https://docs.aws.amazon.com/cost-management/latest/userguide/ce-api-best-practices.html).
 - Claude activity: rolling 14-day input tokens, output tokens, and requests from the configured region's `AWS/Bedrock`
   CloudWatch metrics. Other model families are excluded.
-- Budget: `CODEXBAR_BEDROCK_BUDGET`, when set to a positive dollar amount.
-- Test override: `CODEXBAR_BEDROCK_API_URL` replaces the Cost Explorer endpoint; use HTTPS or loopback HTTP.
-- Test override: `CODEXBAR_BEDROCK_CLOUDWATCH_API_URL` replaces the CloudWatch endpoint; use HTTPS or loopback HTTP.
+- Budget: `SHARINGAN_BEDROCK_BUDGET`, when set to a positive dollar amount.
+- Test override: `SHARINGAN_BEDROCK_API_URL` replaces the Cost Explorer endpoint; use HTTPS or loopback HTTP.
+- Test override: `SHARINGAN_BEDROCK_CLOUDWATCH_API_URL` replaces the CloudWatch endpoint; use HTTPS or loopback HTTP.
 
 ## Display
 
@@ -100,15 +100,15 @@ tracking continue unchanged.
 ## CLI
 
 ```bash
-codexbar --provider bedrock --source api
-codexbar --provider bedrock --format json --pretty
+sharingan --provider bedrock --source api
+sharingan --provider bedrock --format json --pretty
 ```
 
 ## Troubleshooting
 
 ### "No AWS Bedrock cost data available"
 
-- Confirm the credentials are visible to CodexBar.
+- Confirm the credentials are visible to Sharingan.
 - Confirm the AWS account has Cost Explorer enabled.
 - Confirm the IAM principal can call `ce:GetCostAndUsage`.
 - To include Claude token/request totals, confirm the principal can call `cloudwatch:GetMetricData` in the configured
@@ -123,17 +123,17 @@ credentials) and retry.
 
 ### "AWS CLI not found"
 
-Profile mode requires AWS CLI v2. Install it (e.g. `brew install awscli`) or point CodexBar at the binary with
+Profile mode requires AWS CLI v2. Install it (e.g. `brew install awscli`) or point Sharingan at the binary with
 `AWS_CLI_PATH`.
 
 ### Wrong region
 
-Set `AWS_REGION` or `AWS_DEFAULT_REGION`. Bedrock usage is regional, but Cost Explorer itself is account-level; CodexBar still needs a signing region for the request.
+Set `AWS_REGION` or `AWS_DEFAULT_REGION`. Bedrock usage is regional, but Cost Explorer itself is account-level; Sharingan still needs a signing region for the request.
 
 ## Key files
 
-- `Sources/CodexBarCore/Providers/Bedrock/BedrockProviderDescriptor.swift`
-- `Sources/CodexBarCore/Providers/Bedrock/BedrockSettingsReader.swift`
-- `Sources/CodexBarCore/Providers/Bedrock/BedrockProfileCredentialProvider.swift`
-- `Sources/CodexBarCore/Providers/Bedrock/BedrockUsageStats.swift`
-- `Sources/CodexBarCore/Providers/Bedrock/BedrockAWSSigner.swift`
+- `Sources/SharinganCore/Providers/Bedrock/BedrockProviderDescriptor.swift`
+- `Sources/SharinganCore/Providers/Bedrock/BedrockSettingsReader.swift`
+- `Sources/SharinganCore/Providers/Bedrock/BedrockProfileCredentialProvider.swift`
+- `Sources/SharinganCore/Providers/Bedrock/BedrockUsageStats.swift`
+- `Sources/SharinganCore/Providers/Bedrock/BedrockAWSSigner.swift`

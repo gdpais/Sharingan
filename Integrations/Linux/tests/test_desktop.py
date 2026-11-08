@@ -8,7 +8,7 @@ import tempfile
 import time
 import unittest
 
-APP = Path(os.environ.get('CODEXBAR_LINUX_BINARY', '.local/linux-build/codexbar-linux')).resolve()
+APP = Path(os.environ.get('SHARINGAN_LINUX_BINARY', '.local/linux-build/sharingan-linux')).resolve()
 
 
 class DesktopTests(unittest.TestCase):
@@ -19,7 +19,7 @@ class DesktopTests(unittest.TestCase):
         self.runtime.mkdir(mode=0o700)
         self.environment = dict(os.environ, HOME=str(self.root), XDG_CONFIG_HOME=str(self.root / 'config'),
                                 XDG_DATA_HOME=str(self.root / 'data'), XDG_STATE_HOME=str(self.root / 'state'), XDG_RUNTIME_DIR=str(self.runtime),
-                                QT_QPA_PLATFORM=os.environ.get('CODEXBAR_TEST_PLATFORM', 'offscreen'), QT_QUICK_BACKEND='software', FIXTURE_HOME=str(self.root))
+                                QT_QPA_PLATFORM=os.environ.get('SHARINGAN_TEST_PLATFORM', 'offscreen'), QT_QUICK_BACKEND='software', FIXTURE_HOME=str(self.root))
         self.fake = self.root / 'fake-cli'
         self.fake.write_text('''#!/usr/bin/env python3
 import datetime,json,os,pathlib,sys,time
@@ -89,7 +89,7 @@ else:
         self.assertEqual(first['barEntries'], [{'provider': 'codex', 'tag': 'CX', 'text': '60%'}])
         self.assertNotIn('private@example.com', json.dumps(first))
         self.assertNotIn('executable', first)
-        socket = self.runtime / 'codexbar-linux' / 'desktop.sock'
+        socket = self.runtime / 'sharingan-linux' / 'desktop.sock'
         self.assertEqual(socket.stat().st_mode & 0o077, 0)
         calls = (self.root / 'calls.jsonl').read_text().splitlines()
         self.assertEqual(len(calls), 1)
@@ -99,7 +99,7 @@ else:
         self.assertTrue(self.client('--configure', '{"provider":"claude","refreshSeconds":900,"showIdentity":true}')['ok'])
         value = self.wait_for(lambda value: value.get('entries') and value['entries'][0]['provider'] == 'claude')
         self.assertNotIn('private@example.com', json.dumps(value))
-        settings = self.root / 'config/codexbar/linux.json'
+        settings = self.root / 'config/sharingan/linux.json'
         self.assertEqual(json.loads(settings.read_text())['refreshSeconds'], 900)
         self.assertEqual(settings.stat().st_mode & 0o077, 0)
 
@@ -266,7 +266,7 @@ else:
             self.assertEqual([row['provider'] for row in value['entries']], providers)
             self.assertEqual(value['summary'], 'CX 60%  ·  CL 60%  +1')
         self.assertEqual((self.root / 'calls.jsonl').read_text(), calls)
-        settings = self.root / 'config/codexbar/linux.json'
+        settings = self.root / 'config/sharingan/linux.json'
         saved = settings.read_bytes()
         for limit in [-1, 81, 'invalid', None]:
             self.assertFalse(self.client('--configure', json.dumps({'barProviders': limit}), check=False)['ok'])
@@ -280,7 +280,7 @@ else:
     def test_settings_from_before_the_bar_preferences_survive_an_upgrade(self):
         self.client('--quit')
         self.process.wait(timeout=4)
-        settings = self.root / 'config/codexbar/linux.json'
+        settings = self.root / 'config/sharingan/linux.json'
         settings.parent.mkdir(parents=True, exist_ok=True)
         # Written by a release without showBarDetail, showScopedCaps or barProviders.
         settings.write_text(json.dumps({'provider': 'custom', 'providerOrder': ['claude', 'codex'],
@@ -301,7 +301,7 @@ else:
     def test_invalid_config_is_not_overwritten(self):
         self.client('--quit')
         self.process.wait(timeout=4)
-        settings = self.root / 'config/codexbar/linux.json'
+        settings = self.root / 'config/sharingan/linux.json'
         settings.parent.mkdir(parents=True, exist_ok=True)
         settings.write_text('{broken')
         self.process = subprocess.Popen([str(APP), '--background', '--no-tray', '--cli', str(self.fake)],
@@ -329,7 +329,7 @@ else:
     def test_quick_view_is_opt_in_and_never_scans_cost_on_open(self):
         calls = self.root / 'calls.jsonl'
         self.client('--configure', '{}')
-        settings = self.root / 'config/codexbar/linux.json'
+        settings = self.root / 'config/sharingan/linux.json'
         self.assertFalse(json.loads(settings.read_text())['compactQuickView'])
         for enabled in [False, True]:
             self.client('--configure', json.dumps({'compactQuickView': enabled}))
@@ -398,7 +398,7 @@ else:
     def test_autostart_toggle_is_independent_of_preferences(self):
         self.assertFalse(self.client('--autostart', 'status')['enabled'])
         self.assertTrue(self.client('--autostart', 'enable')['enabled'])
-        path = self.root / 'config/autostart/com.steipete.CodexBar.desktop'
+        path = self.root / 'config/autostart/com.gdpais.sharingan.desktop'
         self.assertIn('--background', path.read_text())
         self.assertFalse(self.client('--autostart', 'disable')['enabled'])
         self.assertIn('Hidden=true', path.read_text())

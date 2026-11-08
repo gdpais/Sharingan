@@ -12,19 +12,19 @@ read_when:
 # Sail Research
 
 Enable Sail Research in Settings → Providers and enter a Sail API key, or set `SAIL_API_KEY`.
-The masked field saves the key in CodexBar's local config file; configured keys override the
+The masked field saves the key in Sharingan's local config file; configured keys override the
 environment. This is the same key used for Sail inference. See [CLI configuration](cli-configuration.md).
 
 Auto and API use the bundled TypeScript plugin on macOS and Linux:
 
 ```sh
-codexbar usage --provider sailresearch --source api
+sharingan usage --provider sailresearch --source api
 ```
 
 The plugin reads `GET https://api.sailresearch.com/v2/usage/summary?range=30d` with bearer
 authentication. It shows the organization-wide net credit balance and combined inference and
 Sailbox spend. The API key determines the organization; the amounts are not limited to that key's
-own requests. Sail reports money in fractional USD cents, which CodexBar converts to USD.
+own requests. Sail reports money in fractional USD cents, which Sharingan converts to USD.
 
 Spend uses the returned `effective_range`: Free organizations can receive seven days even when
 30 days were requested. A failed balance lookup displays “Unavailable” while valid spend remains

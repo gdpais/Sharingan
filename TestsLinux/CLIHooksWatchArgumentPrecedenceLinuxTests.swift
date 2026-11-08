@@ -1,14 +1,14 @@
-import CodexBarCore
 import Commander
 import Foundation
+import SharinganCore
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 /// Argument validation must not depend on the config file.
 ///
 /// `loadConfig` exits the process on a malformed config, so any command-only
 /// validation performed after it can never report its own error. These decoders
-/// therefore take no `CodexBarConfig`, which makes the ordering defect structurally
+/// therefore take no `SharinganConfig`, which makes the ordering defect structurally
 /// impossible rather than merely reordered.
 struct CLIHooksWatchArgumentPrecedenceLinuxTests {
     private static func values(
@@ -34,7 +34,7 @@ struct CLIHooksWatchArgumentPrecedenceLinuxTests {
 
     @Test
     func `interval below the floor is rejected without reading config`() {
-        let result = CodexBarCLI.decodeHooksWatchInterval(from: Self.values(options: ["interval": ["5"]]))
+        let result = SharinganCLI.decodeHooksWatchInterval(from: Self.values(options: ["interval": ["5"]]))
         guard case let .failure(error) = result else {
             Issue.record("expected failure for an interval below the floor")
             return
@@ -44,7 +44,7 @@ struct CLIHooksWatchArgumentPrecedenceLinuxTests {
 
     @Test
     func `non numeric interval is rejected without reading config`() {
-        let result = CodexBarCLI.decodeHooksWatchInterval(from: Self.values(options: ["interval": ["abc"]]))
+        let result = SharinganCLI.decodeHooksWatchInterval(from: Self.values(options: ["interval": ["abc"]]))
         guard case let .failure(error) = result else {
             Issue.record("expected failure for a non-numeric interval")
             return
@@ -54,17 +54,17 @@ struct CLIHooksWatchArgumentPrecedenceLinuxTests {
 
     @Test
     func `interval defaults when absent`() {
-        let result = CodexBarCLI.decodeHooksWatchInterval(from: Self.values())
+        let result = SharinganCLI.decodeHooksWatchInterval(from: Self.values())
         guard case let .success(interval) = result else {
             Issue.record("expected the default interval")
             return
         }
-        #expect(interval == CodexBarCLI.hooksWatchDefaultInterval)
+        #expect(interval == SharinganCLI.hooksWatchDefaultInterval)
     }
 
     @Test
     func `interval at the floor is accepted`() {
-        let result = CodexBarCLI.decodeHooksWatchInterval(from: Self.values(options: ["interval": ["60"]]))
+        let result = SharinganCLI.decodeHooksWatchInterval(from: Self.values(options: ["interval": ["60"]]))
         guard case let .success(interval) = result else {
             Issue.record("expected the floor value to be accepted")
             return
@@ -76,7 +76,7 @@ struct CLIHooksWatchArgumentPrecedenceLinuxTests {
 
     @Test
     func `unknown provider name is rejected without reading config`() {
-        let result = CodexBarCLI.decodeHooksWatchProviderNames(
+        let result = SharinganCLI.decodeHooksWatchProviderNames(
             from: Self.values(options: ["provider": ["nosuchprovider"]]))
         guard case let .failure(error) = result else {
             Issue.record("expected failure for an unknown provider")
@@ -87,7 +87,7 @@ struct CLIHooksWatchArgumentPrecedenceLinuxTests {
 
     @Test
     func `absent provider option defers to config`() {
-        let result = CodexBarCLI.decodeHooksWatchProviderNames(from: Self.values())
+        let result = SharinganCLI.decodeHooksWatchProviderNames(from: Self.values())
         guard case let .success(providers) = result else {
             Issue.record("expected success when no --provider is given")
             return
@@ -98,7 +98,7 @@ struct CLIHooksWatchArgumentPrecedenceLinuxTests {
 
     @Test
     func `explicit providers resolve without consulting config`() {
-        let result = CodexBarCLI.decodeHooksWatchProviderNames(
+        let result = SharinganCLI.decodeHooksWatchProviderNames(
             from: Self.values(options: ["provider": ["codex", "codex"]]))
         guard case let .success(providers) = result else {
             Issue.record("expected success for a known provider")
@@ -112,8 +112,8 @@ struct CLIHooksWatchArgumentPrecedenceLinuxTests {
 
     @Test
     func `explicit providers win over the enabled set`() {
-        let config = CodexBarConfig.makeDefault()
-        let result = CodexBarCLI.hooksWatchProviders(explicit: [.codex], config: config)
+        let config = SharinganConfig.makeDefault()
+        let result = SharinganCLI.hooksWatchProviders(explicit: [.codex], config: config)
         guard case let .success(providers) = result else {
             Issue.record("expected explicit providers to resolve")
             return
@@ -123,13 +123,13 @@ struct CLIHooksWatchArgumentPrecedenceLinuxTests {
 
     @Test
     func `empty enabled set reports no providers`() {
-        var config = CodexBarConfig.makeDefault()
+        var config = SharinganConfig.makeDefault()
         config.providers = config.providers.map { provider in
             var copy = provider
             copy.enabled = false
             return copy
         }
-        let result = CodexBarCLI.hooksWatchProviders(explicit: nil, config: config)
+        let result = SharinganCLI.hooksWatchProviders(explicit: nil, config: config)
         guard case let .failure(error) = result else {
             Issue.record("expected failure when nothing is enabled")
             return

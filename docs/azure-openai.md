@@ -8,7 +8,7 @@ read_when:
 
 # Azure OpenAI provider
 
-CodexBar's Azure OpenAI provider validates that a configured deployment is reachable. It does not read Azure spend,
+Sharingan's Azure OpenAI provider validates that a configured deployment is reachable. It does not read Azure spend,
 quota history, or token usage history.
 
 ## Authentication
@@ -19,7 +19,7 @@ Azure OpenAI requires three values:
 2. Resource endpoint
 3. Deployment name
 
-Settings -> Providers -> Azure OpenAI stores those values in the shared CodexBar config. The same values can also be
+Settings -> Providers -> Azure OpenAI stores those values in the shared Sharingan config. The same values can also be
 provided with environment variables:
 
 ```bash
@@ -31,7 +31,7 @@ export AZURE_OPENAI_DEPLOYMENT_NAME="chat-prod"
 You can store the API key through the CLI:
 
 ```bash
-printf '%s' "$AZURE_OPENAI_API_KEY" | codexbar config set-api-key --provider azure-openai --stdin
+printf '%s' "$AZURE_OPENAI_API_KEY" | sharingan config set-api-key --provider azure-openai --stdin
 ```
 
 Example v1 config (`enterpriseHost` is the endpoint; `workspaceID` is the deployment name):
@@ -58,7 +58,7 @@ The app and CLI share this config. Custom dated versions can be set in `azureOpe
 
 ## Data source
 
-CodexBar sends a JSON POST request with the `api-key` header and one `ping` message:
+Sharingan sends a JSON POST request with the `api-key` header and one `ping` message:
 
 | API version | Path relative to the resource endpoint | Request parameters |
 | --- | --- | --- |
@@ -70,10 +70,10 @@ The v1 completion budget includes reasoning tokens. The response's `model` field
 ## Endpoint handling
 
 `AZURE_OPENAI_ENDPOINT` and the configured endpoint field must be HTTPS URLs, or bare hosts that can be normalized to
-HTTPS. CodexBar rejects explicit `http://` endpoints, user info, and encoded host-delimiter tricks before attaching the
+HTTPS. Sharingan rejects explicit `http://` endpoints, user info, and encoded host-delimiter tricks before attaching the
 `api-key` header.
 
-Endpoint paths are preserved. CodexBar avoids duplicating a trailing `/openai` for dated API versions or a trailing
+Endpoint paths are preserved. Sharingan avoids duplicating a trailing `/openai` for dated API versions or a trailing
 `/openai/v1` for the v1 API when building the validation URL.
 
 Each refresh with complete, valid configuration sends this real, potentially billable inference request. The 64-token
@@ -92,15 +92,15 @@ v1 budget is a maximum, not automatic consumption; the deployment can consume fe
 ## CLI usage
 
 ```bash
-codexbar usage --provider azure-openai
-codexbar usage --provider azureopenai
-codexbar usage --provider aoai
+sharingan usage --provider azure-openai
+sharingan usage --provider azureopenai
+sharingan usage --provider aoai
 ```
 
 ## Key files
 
-- `Sources/CodexBarCore/Providers/AzureOpenAI/AzureOpenAIProviderDescriptor.swift`
-- `Sources/CodexBarCore/Providers/AzureOpenAI/AzureOpenAISettingsReader.swift`
-- `Sources/CodexBarCore/Providers/AzureOpenAI/AzureOpenAIUsageFetcher.swift`
-- `Sources/CodexBar/Providers/AzureOpenAI/AzureOpenAIProviderImplementation.swift`
-- `Tests/CodexBarTests/AzureOpenAIUsageFetcherTests.swift`
+- `Sources/SharinganCore/Providers/AzureOpenAI/AzureOpenAIProviderDescriptor.swift`
+- `Sources/SharinganCore/Providers/AzureOpenAI/AzureOpenAISettingsReader.swift`
+- `Sources/SharinganCore/Providers/AzureOpenAI/AzureOpenAIUsageFetcher.swift`
+- `Sources/Sharingan/Providers/AzureOpenAI/AzureOpenAIProviderImplementation.swift`
+- `Tests/SharinganTests/AzureOpenAIUsageFetcherTests.swift`

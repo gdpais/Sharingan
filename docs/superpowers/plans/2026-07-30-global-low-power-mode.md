@@ -8,7 +8,7 @@ read_when:
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Add a non-destructive global low-power mode that clamps CodexBar's automatic provider, local cost, storage, and OpenAI Web background work while preserving manual refreshes.
+**Goal:** Add a non-destructive global low-power mode that clamps Sharingan's automatic provider, local cost, storage, and OpenAI Web background work while preserving manual refreshes.
 
 **Architecture:** A pure `BackgroundWorkPowerPolicy` owns the 30-minute lower bound. `SettingsStore` persists one default-off toggle, and each automatic scheduling seam asks the shared policy for its effective interval. Manual entry points continue to bypass automatic cooldowns.
 
@@ -30,8 +30,8 @@ read_when:
 ### Task 1: Pure background power policy
 
 **Files:**
-- Create: `Sources/CodexBar/BackgroundWorkPowerPolicy.swift`
-- Create: `Tests/CodexBarTests/BackgroundWorkPowerPolicyTests.swift`
+- Create: `Sources/Sharingan/BackgroundWorkPowerPolicy.swift`
+- Create: `Tests/SharinganTests/BackgroundWorkPowerPolicyTests.swift`
 
 **Interfaces:**
 - Produces: `BackgroundWorkPowerPolicy.lowPowerMinimumInterval: TimeInterval`
@@ -42,7 +42,7 @@ read_when:
 ```swift
 import Foundation
 import Testing
-@testable import CodexBar
+@testable import Sharingan
 
 struct BackgroundWorkPowerPolicyTests {
     @Test
@@ -94,11 +94,11 @@ Expected: both policy tests pass.
 ### Task 2: Persist and expose the global setting
 
 **Files:**
-- Modify: `Sources/CodexBar/Settings/SettingsStoreState.swift`
-- Modify: `Sources/CodexBar/Settings/SettingsStore.swift`
-- Modify: `Sources/CodexBar/Settings/SettingsStore+Defaults.swift`
-- Modify: `Sources/CodexBar/Settings/SettingsStore+MenuObservation.swift`
-- Modify: `Tests/CodexBarTests/SettingsStoreCoverageTests.swift`
+- Modify: `Sources/Sharingan/Settings/SettingsStoreState.swift`
+- Modify: `Sources/Sharingan/Settings/SettingsStore.swift`
+- Modify: `Sources/Sharingan/Settings/SettingsStore+Defaults.swift`
+- Modify: `Sources/Sharingan/Settings/SettingsStore+MenuObservation.swift`
+- Modify: `Tests/SharinganTests/SettingsStoreCoverageTests.swift`
 
 **Interfaces:**
 - Consumes: `SettingsStore.noteBackgroundWorkSettingsChanged()`
@@ -140,9 +140,9 @@ Expected: default, persistence, revision, and effective-web assertions pass.
 ### Task 3: Clamp provider and Adaptive refresh timers
 
 **Files:**
-- Modify: `Sources/CodexBar/UsageStore/UsageStore.swift`
-- Modify: `Sources/CodexBar/UsageStore/UsageStore+AdaptiveRefresh.swift`
-- Modify: `Tests/CodexBarTests/AdaptiveRefreshTimerTests.swift`
+- Modify: `Sources/Sharingan/UsageStore/UsageStore.swift`
+- Modify: `Sources/Sharingan/UsageStore/UsageStore+AdaptiveRefresh.swift`
+- Modify: `Tests/SharinganTests/AdaptiveRefreshTimerTests.swift`
 
 **Interfaces:**
 - Consumes: `BackgroundWorkPowerPolicy.automaticInterval(_:lowPowerModeEnabled:)`
@@ -167,10 +167,10 @@ Expected: existing timer behavior stays green and low-power cases resolve to 180
 ### Task 4: Clamp local cost and storage scans
 
 **Files:**
-- Modify: `Sources/CodexBar/UsageStore/UsageStore.swift`
-- Modify: `Sources/CodexBar/UsageStore/UsageStore+ProviderStorage.swift`
-- Modify: `Tests/CodexBarTests/UsageStoreTokenRefreshCadenceTests.swift`
-- Modify: `Tests/CodexBarTests/ProviderStorageFootprintTests.swift`
+- Modify: `Sources/Sharingan/UsageStore/UsageStore.swift`
+- Modify: `Sources/Sharingan/UsageStore/UsageStore+ProviderStorage.swift`
+- Modify: `Tests/SharinganTests/UsageStoreTokenRefreshCadenceTests.swift`
+- Modify: `Tests/SharinganTests/ProviderStorageFootprintTests.swift`
 
 **Interfaces:**
 - Consumes: `BackgroundWorkPowerPolicy.automaticInterval(_:lowPowerModeEnabled:)`
@@ -196,14 +196,14 @@ Expected: automatic cooldowns clamp and explicit refreshes remain immediate.
 ### Task 5: Apply global saver to OpenAI Web and expose UI
 
 **Files:**
-- Modify: `Sources/CodexBar/Providers/Codex/UsageStore+OpenAIWeb.swift`
-- Modify: `Sources/CodexBar/UsageStore/UsageStore+RefreshEnrichment.swift`
-- Modify: `Sources/CodexBar/UsageStore/UsageStore+Logging.swift`
-- Modify: `Sources/CodexBar/Settings/PreferencesGeneralPane.swift`
-- Modify: `Sources/CodexBar/Providers/Codex/CodexProviderImplementation.swift`
-- Modify: `Sources/CodexBar/Resources/en.lproj/Localizable.strings`
-- Modify: `Sources/CodexBar/Resources/zh-Hans.lproj/Localizable.strings`
-- Modify: `Tests/CodexBarTests/CodexBackgroundRefreshCoalescingTests.swift`
+- Modify: `Sources/Sharingan/Providers/Codex/UsageStore+OpenAIWeb.swift`
+- Modify: `Sources/Sharingan/UsageStore/UsageStore+RefreshEnrichment.swift`
+- Modify: `Sources/Sharingan/UsageStore/UsageStore+Logging.swift`
+- Modify: `Sources/Sharingan/Settings/PreferencesGeneralPane.swift`
+- Modify: `Sources/Sharingan/Providers/Codex/CodexProviderImplementation.swift`
+- Modify: `Sources/Sharingan/Resources/en.lproj/Localizable.strings`
+- Modify: `Sources/Sharingan/Resources/zh-Hans.lproj/Localizable.strings`
+- Modify: `Tests/SharinganTests/CodexBackgroundRefreshCoalescingTests.swift`
 
 **Interfaces:**
 - Consumes: `SettingsStore.effectiveOpenAIWebBatterySaverEnabled`
@@ -233,7 +233,7 @@ Expected: Web policy and persistence tests pass; UI source compiles.
 
 **Files:**
 - Modify only if needed: `docs/superpowers/specs/2026-07-30-global-low-power-mode-design.zh-CN.md`
-- Create local artifact outside Git: `CodexBar-Low-Power-Local.app`
+- Create local artifact outside Git: `Sharingan-Low-Power-Local.app`
 
 **Interfaces:**
 - Consumes: all prior tasks
@@ -260,8 +260,8 @@ Assemble the app from the exact committed executable and resources, disable Spar
 
 - [ ] **Step 6: Back up and install**
 
-Quit CodexBar, copy the current `/Applications/CodexBar.app` to a timestamped backup, install the local app, launch it, verify the menu appears, enable Low Power Mode, and confirm existing settings remain readable.
+Quit Sharingan, copy the current `/Applications/Sharingan.app` to a timestamped backup, install the local app, launch it, verify the menu appears, enable Low Power Mode, and confirm existing settings remain readable.
 
 - [ ] **Step 7: Push the branch and prepare the upstream contribution**
 
-Push `codex/global-low-power-mode` to `Carl723000/CodexBar`. Prepare a PR referencing #2508 with the root cause, behavior table, tests, and explicit note that the no-Widget packaging workaround is local-only.
+Push `codex/global-low-power-mode` to `Carl723000/Sharingan`. Prepare a PR referencing #2508 with the root cause, behavior table, tests, and explicit note that the no-Widget packaging workaround is local-only.

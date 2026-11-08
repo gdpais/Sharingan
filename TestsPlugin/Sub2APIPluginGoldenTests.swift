@@ -1,1 +1,1 @@
-../Tests/CodexBarTests/Sub2APIPluginGoldenTests.swift
+../Tests/SharinganTests/Sub2APIPluginGoldenTests.swift

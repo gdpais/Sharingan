@@ -1,1 +1,1 @@
-../Tests/CodexBarTests/ProviderPluginDetailsParityTests.swift
+../Tests/SharinganTests/ProviderPluginDetailsParityTests.swift

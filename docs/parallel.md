@@ -31,18 +31,18 @@ Origin: https://platform.parallel.ai
 
 A successful response looks like
 `{"kind":"ok","data":{"balance":1234,"pendingDebitBalanceCents":0}}`, with both amounts in US cents.
-CodexBar shows:
+Sharingan shows:
 
 - **Balance**: `data.balance` as dollars. It is also the value shown in the menu bar's balance layouts.
 - **Pending debit**: `data.pendingDebitBalanceCents` as dollars, only when it is present and not zero.
 
-The endpoint reports no allowance, usage history, or reset date, so CodexBar shows the amount without a percentage.
+The endpoint reports no allowance, usage history, or reset date, so Sharingan shows the amount without a percentage.
 
 ## This endpoint is not a public API
 
 The balance comes from an internal, undocumented dashboard endpoint. Parallel can change or remove it at any time,
-and CodexBar would then stop showing a balance until the plugin is updated. Parallel's official balance route is
-part of its Account API, which needs an OAuth sign-in that CodexBar's plugin host does not support yet
+and Sharingan would then stop showing a balance until the plugin is updated. Parallel's official balance route is
+part of its Account API, which needs an OAuth sign-in that Sharingan's plugin host does not support yet
 ([#4345](https://github.com/steipete/CodexBar/issues/4345)). Parallel API keys cannot read the balance, so this
 provider has no API-key source.
 
@@ -59,7 +59,7 @@ Because the format can drift, the plugin checks the response shape and fails lou
 A format change surfaces as a parse error, never as a zero balance.
 
 ```sh
-codexbar usage --provider parallel --source web --json
+sharingan usage --provider parallel --source web --json
 ```
 
 The monochrome icon is Parallel's mark from `https://parallel.ai/views/icons/logo-parallel.svg` on the

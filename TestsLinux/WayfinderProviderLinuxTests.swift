@@ -1,10 +1,10 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 /// Fixtures below were captured verbatim from a locally running Wayfinder gateway
 /// (`wayfinder-router serve`, two-tier priced config) after routing real traffic.

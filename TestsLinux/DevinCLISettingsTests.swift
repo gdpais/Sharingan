@@ -3,8 +3,8 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 struct DevinCLISettingsTests {
     private func settings(source: String? = "manual", token: String = "Bearer fixture-token") throws
@@ -13,7 +13,7 @@ struct DevinCLISettingsTests {
         var provider = ["id": "devin", "cookieHeader": token, "workspaceID": "org_fixture"]
         provider["cookieSource"] = source
         let config = try JSONDecoder().decode(
-            CodexBarConfig.self,
+            SharinganConfig.self,
             from: JSONSerialization.data(withJSONObject: ["version": 1, "providers": [provider]]))
         let context = try TokenAccountCLIContext(
             selection: .init(label: nil, index: nil, allAccounts: false),
@@ -32,7 +32,7 @@ struct DevinCLISettingsTests {
         #expect(settings.organization == "org_fixture")
         #if os(Linux)
         for mode: ProviderSourceMode in [.auto, .web] {
-            #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(mode, provider: .devin, settings: snapshot))
+            #expect(await !SharinganCLI.sourceModeRequiresWebSupport(mode, provider: .devin, settings: snapshot))
         }
         #endif
 
@@ -56,7 +56,7 @@ struct DevinCLISettingsTests {
         let snapshot = try self.settings(source: source)
         #expect(snapshot.devin?.cookieSource.rawValue == source)
         #if os(Linux)
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(
             .web,
             provider: .devin,
             environment: ["DEVIN_BEARER_TOKEN": "environment-fixture"],
@@ -72,7 +72,7 @@ struct DevinCLISettingsTests {
         #expect(settings.bearerToken(environment: environment) == token)
         #expect(settings.bearerToken(environment: ["DEVIN_AUTHORIZATION": "fallback-fixture"]) == "fallback-fixture")
         #if os(Linux)
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(
             .web,
             provider: .devin,
             environment: environment,
@@ -85,7 +85,7 @@ struct DevinCLISettingsTests {
         let snapshot = try self.settings(token: "  ")
         #expect(DevinUsageFetcher.manualAuth(from: snapshot.devin?.bearerToken(environment: [:])) == nil)
         #if os(Linux)
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(.web, provider: .devin, settings: snapshot))
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(.web, provider: .devin, settings: snapshot))
         #endif
     }
 }

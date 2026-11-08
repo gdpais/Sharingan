@@ -3,8 +3,8 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 #if os(Linux)
 /// Manual-cookie transport and routing without browser import or live credentials.
@@ -20,13 +20,13 @@ struct ClaudeWebManualCookieLinuxTests {
             cookieSource: .manual,
             manualCookieHeader: Self.manualHeader))
 
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(.web, provider: .claude, settings: manual))
-        #expect(await !CodexBarCLI.sourceModeRequiresWebSupport(.auto, provider: .claude, settings: manual))
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(.web, provider: .claude, settings: manual))
+        #expect(await !SharinganCLI.sourceModeRequiresWebSupport(.auto, provider: .claude, settings: manual))
 
         // No manual cookie: explicit web still needs the macOS-only browser import.
-        #expect(await CodexBarCLI.sourceModeRequiresWebSupport(.web, provider: .claude, settings: .make()))
+        #expect(await SharinganCLI.sourceModeRequiresWebSupport(.web, provider: .claude, settings: .make()))
         for header in ["", "   ", "other=1", "sessionKey=invalid"] {
-            #expect(await CodexBarCLI.sourceModeRequiresWebSupport(
+            #expect(await SharinganCLI.sourceModeRequiresWebSupport(
                 .web,
                 provider: .claude,
                 settings: ProviderSettingsSnapshot.make(claude: .init(

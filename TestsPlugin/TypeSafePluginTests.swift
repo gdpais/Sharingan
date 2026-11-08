@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct TypeSafePluginTests {
     private static let oldActionID = String(repeating: "a", count: 40)

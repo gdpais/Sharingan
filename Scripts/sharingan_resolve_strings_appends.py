@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Resolve the routine upstream-merge conflicts in Sharingan's Localizable.strings catalogs.
 
-Upstream CodexBar and Sharingan both append new keys at the end of every catalog, so a merge leaves one
+Upstream Sharingan and Sharingan both append new keys at the end of every catalog, so a merge leaves one
 conflict hunk per file where both sides only ADDED lines. This script resolves exactly those hunks (diff3
 style, empty base) by keeping ours first and then theirs, and leaves every other hunk untouched for a human.
 
-With --rebrand it also replaces the app name "CodexBar" with "Sharingan" in the VALUES of keys that the
+With --rebrand it also replaces the app name "Sharingan" with "Sharingan" in the VALUES of keys that the
 resolved hunks brought in from upstream, matching the Phase 0 rebrand rules: keys are never changed, and
-lowercase `codexbar` (CLI, paths, URL schemes) is left alone.
+lowercase `sharingan` (CLI, paths, URL schemes) is left alone.
 
 Usage: Scripts/sharingan_resolve_strings_appends.py [--rebrand] FILE...
 Exit: 0 when every given file is conflict-free afterwards, 1 when hunks remain, 2 on bad input.
@@ -18,7 +18,7 @@ import sys
 
 ENTRY = re.compile(r'^(\s*"(?:[^"\\]|\\.)*"\s*=\s*")((?:[^"\\]|\\.)*)("\s*;\s*)$')
 KEY = re.compile(r'^\s*"((?:[^"\\]|\\.)*)"\s*=')
-APP_NAME = re.compile(r"\bCodexBar\b")
+APP_NAME = re.compile(r"\bSharingan\b")
 
 
 def rebrand(line: str) -> str:

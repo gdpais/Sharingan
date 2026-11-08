@@ -7,7 +7,7 @@ read_when:
 
 # Helmcode
 
-CodexBar reads the dashboard APIs for Helmcode Cloud and NaN Builders through a bundled TypeScript plugin. Inference
+Sharingan reads the dashboard APIs for Helmcode Cloud and NaN Builders through a bundled TypeScript plugin. Inference
 API keys do not provide dashboard quotas. Enable Helmcode in Settings → Providers, then sign in to the corresponding
 dashboard in a supported browser. Automatic import follows the shared browser order and access gate.
 The provider is disabled by default and is not widget-selectable.

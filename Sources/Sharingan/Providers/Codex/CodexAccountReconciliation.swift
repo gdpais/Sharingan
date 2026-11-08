@@ -1,0 +1,4 @@
+import SharinganCore
+
+typealias CodexVisibleAccount = SharinganCore.CodexVisibleAccount
+typealias CodexVisibleAccountProjection = SharinganCore.CodexVisibleAccountProjection

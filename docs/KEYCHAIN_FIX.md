@@ -1,5 +1,5 @@
 ---
-summary: "Current and historical engineering notes for CodexBar Keychain prompt containment."
+summary: "Current and historical engineering notes for Sharingan Keychain prompt containment."
 read_when:
   - Auditing Keychain access boundaries
   - Investigating legacy secret migration
@@ -45,11 +45,11 @@ and file-backed cookie/session stores use this path.
 
 ## Unified legacy migration
 
-`CodexBarConfigMigrator` is the single migration owner for retired token, cookie, MiniMax, Kimi, OpenCode, and token-
+`SharinganConfigMigrator` is the single migration owner for retired token, cookie, MiniMax, Kimi, OpenCode, and token-
 account stores. It reads every legacy source before cleanup, persists successfully read values idempotently, and only
 clears legacy stores after config persistence succeeds and every loader was readable. A loader failure records the
 provider/store identity without secret data, blocks all cleanup for that launch, and leaves
-`codexbar.legacySecretsMigrationCompleted` unset so the next launch retries.
+`sharingan.legacySecretsMigrationCompleted` unset so the next launch retries.
 
 This ordering matters: “not found” is a successful read with no value, while “unreadable” is a migration failure. The
 latter must never be collapsed into absence because doing so could mark migration complete or clear another store
@@ -72,21 +72,21 @@ file-keychain ACL or for a code-signature/designated-requirement mismatch.
 
 ## Safe verification
 
-Routine tests run with `CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS=1` through `Scripts/test.sh`. Tests use task overrides,
+Routine tests run with `SHARINGAN_SUPPRESS_TEST_KEYCHAIN_ACCESS=1` through `Scripts/test.sh`. Tests use task overrides,
 query construction checks, source audits, and store doubles. No test source except the audit itself may contain a
 direct Security item API call, and routine verification must not query the real Keychain, import browser cookies, or
 launch live provider probes.
 
 The live Claude PTY fetch test requires both `LIVE_CLAUDE_FETCH=1` and
-`CODEXBAR_ALLOW_TEST_KEYCHAIN_ACCESS=1`. The provider CLI owns its Keychain access and does not honor CodexBar's
+`SHARINGAN_ALLOW_TEST_KEYCHAIN_ACCESS=1`. The provider CLI owns its Keychain access and does not honor Sharingan's
 suppression flag, so the explicit access opt-in gates both the fetch and its raw diagnostic subprocess. Regression
 tests exercise that decision with synthetic environments without launching Claude.
 
 Relevant implementation files:
 
-- `Sources/CodexBarCore/KeychainSecurity.swift`
-- `Sources/CodexBarCore/KeychainAccessGate.swift`
-- `Sources/CodexBarCore/KeychainNoUIQuery.swift`
-- `Sources/CodexBarCore/BrowserCookieAccessGate.swift`
-- `Sources/CodexBar/Config/CodexBarConfigMigrator.swift`
-- `Sources/CodexBarCore/Providers/Claude/ClaudeOAuth/ClaudeOAuthCredentials.swift`
+- `Sources/SharinganCore/KeychainSecurity.swift`
+- `Sources/SharinganCore/KeychainAccessGate.swift`
+- `Sources/SharinganCore/KeychainNoUIQuery.swift`
+- `Sources/SharinganCore/BrowserCookieAccessGate.swift`
+- `Sources/Sharingan/Config/SharinganConfigMigrator.swift`
+- `Sources/SharinganCore/Providers/Claude/ClaudeOAuth/ClaudeOAuthCredentials.swift`

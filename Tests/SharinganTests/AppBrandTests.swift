@@ -1,0 +1,60 @@
+import Foundation
+import Testing
+@testable import Sharingan
+
+struct AppBrandTests {
+    @Test
+    func `app name and project links point at the Sharingan fork`() throws {
+        #expect(AppBrand.displayName == "Sharingan")
+        let repository = try #require(URL(string: AppBrand.repositoryURL))
+        #expect(repository.host == "github.com")
+        #expect(repository.path == "/gdpais/Sharingan")
+        let readme = try #require(URL(string: AppBrand.readmeURL))
+        #expect(readme.absoluteString.hasPrefix(AppBrand.repositoryURL + "/"))
+    }
+
+    @Test
+    func `upstream credit names Sharingan and links its repository`() throws {
+        let upstream = try #require(URL(string: AppBrand.upstreamRepositoryURL))
+        #expect(upstream.host == "github.com")
+        #expect(upstream.path == "/steipete/CodexBar")
+        #expect(AppBrand.upstreamCreditKey.contains(AppBrand.upstreamName))
+        #expect(AppBrand.upstreamCreditKey.contains(AppBrand.upstreamAuthor))
+    }
+
+    @Test
+    func `upstream credit falls back to its English text`() {
+        SharinganLocalizationOverride.$appLanguage.withValue("en") {
+            #expect(L(AppBrand.upstreamCreditKey) == "Based on CodexBar by Peter Steinberger")
+        }
+    }
+
+    @Test
+    func `about pane wires the fork repository and upstream credit`() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+            .deletingLastPathComponent().deletingLastPathComponent()
+        let source = try String(
+            contentsOf: root.appendingPathComponent("Sources/Sharingan/Settings/PreferencesAboutPane.swift"),
+            encoding: .utf8)
+        #expect(source.contains("url: AppBrand.repositoryURL"))
+        #expect(source.contains("title: L(AppBrand.upstreamCreditKey)"))
+        #expect(source.contains("url: AppBrand.upstreamRepositoryURL"))
+        #expect(source.contains("Text(AppBrand.displayName)"))
+        #expect(!source.contains("\"https://github.com/steipete/CodexBar\""))
+    }
+
+    @Test
+    func `about pane omits upstream author contact links`() throws {
+        let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent()
+            .deletingLastPathComponent().deletingLastPathComponent()
+        let source = try String(
+            contentsOf: root.appendingPathComponent("Sources/Sharingan/Settings/PreferencesAboutPane.swift"),
+            encoding: .utf8)
+        #expect(!source.contains("L(\"link_website\")"))
+        #expect(!source.contains("L(\"link_twitter\")"))
+        #expect(!source.contains("L(\"link_email\")"))
+        #expect(!source.contains("https://codexbar.app"))
+        #expect(!source.contains("twitter.com/steipete"))
+        #expect(!source.contains("peter@steipete.me"))
+    }
+}

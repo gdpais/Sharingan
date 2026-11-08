@@ -29,8 +29,8 @@ class InstallTests(unittest.TestCase):
                                         env=environment, capture_output=True, text=True, timeout=10)
                 self.assertEqual(result.returncode, 0, result.stderr)
                 receipt = home / 'receipt'
-                entries = [(data / 'applications/com.steipete.CodexBar.desktop', '--usage'),
-                           (config / 'autostart/com.steipete.CodexBar.desktop', '--background')]
+                entries = [(data / 'applications/com.gdpais.sharingan.desktop', '--usage'),
+                           (config / 'autostart/com.gdpais.sharingan.desktop', '--background')]
                 for entry, argument in entries:
                     with self.subTest(argument=argument):
                         receipt.unlink(missing_ok=True)
@@ -42,7 +42,7 @@ class InstallTests(unittest.TestCase):
                             time.sleep(0.01)
                         self.assertTrue(receipt.exists(), 'The installed executable did not record its invocation')
                         self.assertEqual(receipt.read_text().splitlines(),
-                                         [str(home / '.local/bin/codexbar-linux'), argument])
+                                         [str(home / '.local/bin/sharingan-linux'), argument])
 
     def test_desktop_commands_escape_special_characters_in_the_home_path(self):
         cases = [
@@ -65,12 +65,12 @@ class InstallTests(unittest.TestCase):
                                          '--cli', '/usr/bin/true'], env=environment,
                                         capture_output=True, text=True, timeout=10)
                 self.assertEqual(result.returncode, 0, result.stderr)
-                executable = r'/bin/sh -c "exec \\"\\$@\\"" codexbar ' if '%' in name else ''
-                command = f'Exec={executable}"{root}/{escaped}/.local/bin/codexbar-linux"'
-                launcher = (data / 'applications/com.steipete.CodexBar.desktop').read_text()
+                executable = r'/bin/sh -c "exec \\"\\$@\\"" sharingan ' if '%' in name else ''
+                command = f'Exec={executable}"{root}/{escaped}/.local/bin/sharingan-linux"'
+                launcher = (data / 'applications/com.gdpais.sharingan.desktop').read_text()
                 self.assertEqual([line for line in launcher.splitlines() if line.startswith('Exec=')],
                                  [command + ' --usage', command + ' --settings', command + ' --spending'])
-                startup = (config / 'autostart/com.steipete.CodexBar.desktop').read_text()
+                startup = (config / 'autostart/com.gdpais.sharingan.desktop').read_text()
                 self.assertIn(command + ' --background', startup.splitlines())
 
     def test_reinstall_preserves_the_desktop_entry_hidden_setting(self):
@@ -90,9 +90,9 @@ class InstallTests(unittest.TestCase):
             with self.subTest(entry=entry), tempfile.TemporaryDirectory() as temporary:
                 home = Path(temporary)
                 config, data = home / 'config', home / 'data'
-                startup = config / 'autostart/com.steipete.CodexBar.desktop'
+                startup = config / 'autostart/com.gdpais.sharingan.desktop'
                 startup.parent.mkdir(parents=True)
-                startup.write_text('[Desktop Entry]\nType=Application\nName=CodexBar\n' + entry)
+                startup.write_text('[Desktop Entry]\nType=Application\nName=Sharingan\n' + entry)
                 environment = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(config), XDG_DATA_HOME=str(data))
                 script = Path(__file__).resolve().parents[1] / 'Linux/install.py'
                 for _ in range(2):
@@ -110,7 +110,7 @@ class InstallTests(unittest.TestCase):
                 working.mkdir()
                 config = root / 'config' if value == 'absolute' else home / '.config'
                 data = root / 'data' if value == 'absolute' else home / '.local/share'
-                preferences = config / 'codexbar/linux.json'
+                preferences = config / 'sharingan/linux.json'
                 environment = {'PATH': os.environ['PATH'], 'HOME': str(home)}
                 for key, directory in [('XDG_CONFIG_HOME', config), ('XDG_DATA_HOME', data),
                                        ('XDG_BIN_HOME', root / 'bin')]:
@@ -132,20 +132,20 @@ class InstallTests(unittest.TestCase):
                 backups = list(preferences.parent.glob('linux.json.backup-*'))
                 self.assertEqual(len(backups), 1)
                 self.assertEqual(backups[0].read_text(), saved)
-                self.assertIn('Hidden=true', (config / 'autostart/com.steipete.CodexBar.desktop').read_text())
-                self.assertTrue((data / 'applications/com.steipete.CodexBar.desktop').is_file())
-                self.assertTrue((data / 'icons/hicolor/scalable/apps/codexbar.svg').is_file())
-                self.assertEqual((home / '.local/bin/codexbar-linux').read_bytes(), Path('/usr/bin/true').read_bytes())
+                self.assertIn('Hidden=true', (config / 'autostart/com.gdpais.sharingan.desktop').read_text())
+                self.assertTrue((data / 'applications/com.gdpais.sharingan.desktop').is_file())
+                self.assertTrue((data / 'icons/hicolor/scalable/apps/sharingan.svg').is_file())
+                self.assertEqual((home / '.local/bin/sharingan-linux').read_bytes(), Path('/usr/bin/true').read_bytes())
                 self.assertFalse((root / 'bin').exists())
 
     def test_migration_and_reinstall_preserve_preferences_and_layout(self):
-        with tempfile.TemporaryDirectory(prefix='codexbar install ') as temporary:
+        with tempfile.TemporaryDirectory(prefix='sharingan install ') as temporary:
             home = Path(temporary)
             config = home / 'config'
             shell = config / 'omarchy/shell.json'
             shell.parent.mkdir(parents=True)
             shell.write_text(json.dumps({'bar': {'layout': {'right': [
-                {'id': 'steipete.codexbar', 'provider': 'claude', 'refreshSeconds': 900, 'allAccounts': True},
+                {'id': 'gdpais.sharingan', 'provider': 'claude', 'refreshSeconds': 900, 'allAccounts': True},
                 {'id': 'omarchy.clock'}]}}, 'idle': {'lock': 123}}))
             script = Path(__file__).with_name('install.py')
             environment = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(config), XDG_DATA_HOME=str(home/'data'))
@@ -154,35 +154,35 @@ class InstallTests(unittest.TestCase):
                                 '--desktop-binary', '/usr/bin/true'], env=environment, check=True, capture_output=True)
             result = json.loads(shell.read_text())
             self.assertEqual(result['idle'], {'lock': 123})
-            self.assertEqual([e['id'] for e in result['bar']['layout']['right']], ['steipete.codexbar', 'omarchy.clock'])
+            self.assertEqual([e['id'] for e in result['bar']['layout']['right']], ['gdpais.sharingan', 'omarchy.clock'])
             entry = result['bar']['layout']['right'][0]
             self.assertEqual(set(entry), {'id', 'desktopExecutable'})
-            settings = json.loads((config/'codexbar/linux.json').read_text())
+            settings = json.loads((config/'sharingan/linux.json').read_text())
             self.assertEqual(settings['provider'], 'claude')
             self.assertEqual(settings['refreshSeconds'], 900)
             self.assertTrue(settings['allAccounts'])
             self.assertFalse(settings['showTray'])
             self.assertEqual(len(list((shell.parent / 'plugins').glob('*/manifest.json'))), 1)
-            sources = Path(__file__).resolve().parents[2] / 'Sources/CodexBar/Resources'
-            installed = shell.parent / 'plugins/steipete.codexbar/icons'
+            sources = Path(__file__).resolve().parents[2] / 'Sources/Sharingan/Resources'
+            installed = shell.parent / 'plugins/gdpais.sharingan/icons'
             logos = sorted(sources.glob('ProviderIcon-*.svg'))
             self.assertTrue(logos)
             self.assertEqual(sorted(path.name for path in installed.iterdir()), [path.name for path in logos])
             for logo in logos:
                 self.assertEqual((installed / logo.name).read_bytes(), logo.read_bytes())
             self.assertEqual(len(list((shell.parent / 'backups').iterdir())), 1)
-            self.assertEqual((config/'codexbar/linux.json').stat().st_mode & 0o077, 0)
-            launcher = (home/'data/applications/com.steipete.CodexBar.desktop').read_text()
-            self.assertIn(f'Exec="{home}/.local/bin/codexbar-linux" --settings', launcher)
-            self.assertTrue((config/'autostart/com.steipete.CodexBar.desktop').exists())
+            self.assertEqual((config/'sharingan/linux.json').stat().st_mode & 0o077, 0)
+            launcher = (home/'data/applications/com.gdpais.sharingan.desktop').read_text()
+            self.assertIn(f'Exec="{home}/.local/bin/sharingan-linux" --settings', launcher)
+            self.assertTrue((config/'autostart/com.gdpais.sharingan.desktop').exists())
 
     def test_dotfiles_symlinks_survive_and_receive_the_change(self):
-        with tempfile.TemporaryDirectory(prefix='codexbar symlink ') as temporary:
+        with tempfile.TemporaryDirectory(prefix='sharingan symlink ') as temporary:
             home = Path(temporary)
             config, data = home / 'config', home / 'data'
             managed = home / 'dotfiles'
             (managed / 'omarchy').mkdir(parents=True)
-            (managed / 'codexbar').mkdir()
+            (managed / 'sharingan').mkdir()
             (managed / 'autostart').mkdir()
             tracked = managed / 'omarchy/shell.json'
             tracked.write_text(json.dumps({'bar': {'layout': {'right': [
@@ -190,27 +190,27 @@ class InstallTests(unittest.TestCase):
             (config / 'omarchy').mkdir(parents=True)
             (config / 'omarchy/shell.json').symlink_to(os.path.relpath(tracked, config / 'omarchy'))
             # A preferences link can predate the install; an autostart link is created by it.
-            (config / 'codexbar').mkdir()
-            preferences = managed / 'codexbar/linux.json'
+            (config / 'sharingan').mkdir()
+            preferences = managed / 'sharingan/linux.json'
             preferences.write_text(json.dumps({'provider': 'claude'}))
-            (config / 'codexbar/linux.json').symlink_to(preferences)
+            (config / 'sharingan/linux.json').symlink_to(preferences)
             (config / 'autostart').mkdir()
-            startup = managed / 'autostart/com.steipete.CodexBar.desktop'
+            startup = managed / 'autostart/com.gdpais.sharingan.desktop'
             startup.write_text('[Desktop Entry]\n')
-            (config / 'autostart/com.steipete.CodexBar.desktop').symlink_to(startup)
+            (config / 'autostart/com.gdpais.sharingan.desktop').symlink_to(startup)
             (data / 'applications').mkdir(parents=True)
             launcher = managed / 'launcher.desktop'
             launcher.write_text('[Desktop Entry]\n')
-            (data / 'applications/com.steipete.CodexBar.desktop').symlink_to(launcher)
+            (data / 'applications/com.gdpais.sharingan.desktop').symlink_to(launcher)
             script = Path(__file__).resolve().parents[1] / 'Linux/install.py'
             environment = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(config), XDG_DATA_HOME=str(data))
             for _ in range(2):
                 subprocess.run(['python3', str(script), '--binary', '/usr/bin/true', '--cli', '/usr/bin/true',
                                 '--omarchy'], env=environment, check=True, capture_output=True)
-                for link in ['omarchy/shell.json', 'codexbar/linux.json', 'autostart/com.steipete.CodexBar.desktop']:
+                for link in ['omarchy/shell.json', 'sharingan/linux.json', 'autostart/com.gdpais.sharingan.desktop']:
                     self.assertTrue((config / link).is_symlink(), f'{link} lost its link')
-                self.assertTrue((data / 'applications/com.steipete.CodexBar.desktop').is_symlink())
-            self.assertIn('steipete.codexbar',
+                self.assertTrue((data / 'applications/com.gdpais.sharingan.desktop').is_symlink())
+            self.assertIn('gdpais.sharingan',
                           [entry['id'] for entry in json.loads(tracked.read_text())['bar']['layout']['right']])
             self.assertEqual(json.loads(preferences.read_text())['provider'], 'claude')
             self.assertIn('--background', startup.read_text())
@@ -222,10 +222,10 @@ class InstallTests(unittest.TestCase):
 
     def test_utf8_configuration_can_be_reinstalled_in_an_ascii_locale(self):
         for omarchy in [False, True]:
-            with self.subTest(omarchy=omarchy), tempfile.TemporaryDirectory(prefix='codexbar encoding ') as temporary:
+            with self.subTest(omarchy=omarchy), tempfile.TemporaryDirectory(prefix='sharingan encoding ') as temporary:
                 home = Path(temporary)
                 config, data = home / 'config', home / 'data'
-                preferences = config / 'codexbar/linux.json'
+                preferences = config / 'sharingan/linux.json'
                 preferences.parent.mkdir(parents=True)
                 preferences.write_text(json.dumps({'provider': 'claude', 'note': 'caf\u00e9'}), encoding='utf-8')
                 shell = config / 'omarchy/shell.json'
@@ -247,42 +247,42 @@ class InstallTests(unittest.TestCase):
                     self.assertIn('\uf017', shell.read_text(encoding='utf-8'))
 
     def test_installer_payload_paths_replace_links_instead_of_writing_through_them(self):
-        with tempfile.TemporaryDirectory(prefix='codexbar payload ') as temporary:
+        with tempfile.TemporaryDirectory(prefix='sharingan payload ') as temporary:
             home = Path(temporary)
             config, data = home / 'config', home / 'data'
             decoy = home / 'decoy'
             decoy.mkdir()
-            binary_target = decoy / 'codexbar-linux'
+            binary_target = decoy / 'sharingan-linux'
             binary_target.write_text('original')
             (home / '.local/bin').mkdir(parents=True)
-            (home / '.local/bin/codexbar-linux').symlink_to(binary_target)
+            (home / '.local/bin/sharingan-linux').symlink_to(binary_target)
             plugin_target = decoy / 'plugin'
             plugin_target.mkdir()
             (config / 'omarchy/plugins').mkdir(parents=True)
-            (config / 'omarchy/plugins/steipete.codexbar').symlink_to(plugin_target)
+            (config / 'omarchy/plugins/gdpais.sharingan').symlink_to(plugin_target)
             (config / 'omarchy').mkdir(parents=True, exist_ok=True)
             (config / 'omarchy/shell.json').write_text('{}')
             script = Path(__file__).resolve().parents[1] / 'Linux/install.py'
             environment = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(config), XDG_DATA_HOME=str(data))
             subprocess.run(['python3', str(script), '--binary', '/usr/bin/true', '--cli', '/usr/bin/true',
                             '--omarchy'], env=environment, check=True, capture_output=True)
-            self.assertFalse((home / '.local/bin/codexbar-linux').is_symlink())
+            self.assertFalse((home / '.local/bin/sharingan-linux').is_symlink())
             self.assertEqual(binary_target.read_text(), 'original')
-            self.assertFalse((config / 'omarchy/plugins/steipete.codexbar').is_symlink())
+            self.assertFalse((config / 'omarchy/plugins/gdpais.sharingan').is_symlink())
             self.assertEqual(list(plugin_target.iterdir()), [])
 
     def test_a_broken_plugin_link_does_not_abort_the_install(self):
-        with tempfile.TemporaryDirectory(prefix='codexbar broken ') as temporary:
+        with tempfile.TemporaryDirectory(prefix='sharingan broken ') as temporary:
             home = Path(temporary)
             config, data = home / 'config', home / 'data'
             (config / 'omarchy/plugins').mkdir(parents=True)
-            (config / 'omarchy/plugins/steipete.codexbar').symlink_to(home / 'gone')
+            (config / 'omarchy/plugins/gdpais.sharingan').symlink_to(home / 'gone')
             (config / 'omarchy/shell.json').write_text('{}')
             script = Path(__file__).resolve().parents[1] / 'Linux/install.py'
             environment = dict(os.environ, HOME=str(home), XDG_CONFIG_HOME=str(config), XDG_DATA_HOME=str(data))
             subprocess.run(['python3', str(script), '--binary', '/usr/bin/true', '--cli', '/usr/bin/true',
                             '--omarchy'], env=environment, check=True, capture_output=True)
-            self.assertTrue((config / 'omarchy/plugins/steipete.codexbar/manifest.json').is_file())
+            self.assertTrue((config / 'omarchy/plugins/gdpais.sharingan/manifest.json').is_file())
 
     def test_standalone_install_does_not_require_omarchy(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -292,7 +292,7 @@ class InstallTests(unittest.TestCase):
             subprocess.run(['python3', str(script), '--binary', '/usr/bin/true', '--cli', '/usr/bin/true', '--no-autostart'],
                            env=environment, check=True, capture_output=True)
             self.assertFalse((home/'config/omarchy').exists())
-            self.assertIn('Hidden=true', (home/'config/autostart/com.steipete.CodexBar.desktop').read_text())
+            self.assertIn('Hidden=true', (home/'config/autostart/com.gdpais.sharingan.desktop').read_text())
 
 
 if __name__ == '__main__':

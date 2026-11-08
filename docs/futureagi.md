@@ -12,7 +12,7 @@ read_when:
 
 Enable Future AGI in Settings → Providers and enter both the **API key** and **Secret key** from your
 Future AGI account, or set `FI_API_KEY` and `FI_SECRET_KEY`. Both fields are masked and saved in
-CodexBar's local config file. Configured values override their environment equivalents.
+Sharingan's local config file. Configured values override their environment equivalents.
 For CLI-only configuration, use the two environment variables; the usual `set-api-key` command
 sets only the API key, not the required companion secret.
 

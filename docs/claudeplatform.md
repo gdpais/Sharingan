@@ -19,13 +19,13 @@ providers never share identity, plan, or session data.
 ## Authentication
 
 Enable Claude Platform in Settings → Providers and sign in at <https://platform.claude.com>. Automatic import reads
-the `sessionKey` cookie for `platform.claude.com` in CodexBar's default browser order, which covers every browser in
+the `sessionKey` cookie for `platform.claude.com` in Sharingan's default browser order, which covers every browser in
 the shared catalog (including Brave); the Cookie source description lists them. Import follows the host's
 browser-access gate: use **Refresh** beside **Cookie source** (or the menu's Refresh action) to authorize the import;
-scheduled refreshes never prompt. To keep CodexBar away from every browser store, choose **Manual** in Settings → Providers → Claude
+scheduled refreshes never prompt. To keep Sharingan away from every browser store, choose **Manual** in Settings → Providers → Claude
 Platform → **Cookie source** (config: `"cookieSource": "manual"` plus `cookieHeader`), and paste a Cookie request
 header from a signed-in platform.claude.com request; it should contain `sessionKey`. Manual cookies are stored in the
-CodexBar config file. **Off** (`"cookieSource": "off"`) disables cookie access. HTTP 401 from the organization list
+Sharingan config file. **Off** (`"cookieSource": "off"`) disables cookie access. HTTP 401 from the organization list
 or credit balance request, or HTTP 403 from the organization list, rejects that session and tries the next browser
 profile; when every candidate is rejected the error asks you to sign in at platform.claude.com again.
 
@@ -36,13 +36,13 @@ balance.
 ## Data
 
 These are undocumented Console endpoints used by the platform.claude.com billing page, so they may change without
-notice. CodexBar only issues read-only GETs:
+notice. Sharingan only issues read-only GETs:
 
 - `/api/organizations` lists organizations. Every organization whose `capabilities` include `api` is a candidate,
   in listed order; Claude.ai chat organizations in the same list are ignored. An account without an API organization
   reports that it has no Claude Console API organization.
 - `/api/organizations/{uuid}/prepaid/credits` supplies the total balance (`amount`, in minor units) and credit grants
-  (`promo_tranches` and `tranches`). CodexBar requests it for each candidate in order: HTTP 403 moves to the next
+  (`promo_tranches` and `tranches`). Sharingan requests it for each candidate in order: HTTP 403 moves to the next
   candidate, and the first readable organization supplies the balance, spend, and organization name. If every
   candidate answers 403 the error reports that billing access was denied. Amounts are divided by
   10^`balance.credits.exponent` (0–4, default 2 when absent). This request is required; a malformed balance fails the
@@ -67,5 +67,5 @@ Grants whose expiry is at or before the refresh time are dropped; an unparseable
 grants expire instead of resetting, so their expiry dates are UTC calendar dates shown as detail text rather than reset
 countdowns. The organization name and the `Console session` login label are the only identity fields.
 
-CLI: `codexbar usage --provider claude-platform --source web --json`. On Linux use a manual cookie header in the
+CLI: `sharingan usage --provider claude-platform --source web --json`. On Linux use a manual cookie header in the
 config; automatic browser import is macOS-only.

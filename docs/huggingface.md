@@ -1,16 +1,16 @@
 ---
 summary: "Hugging Face authentication and Inference Providers credit tracking."
 read_when:
-  - Configuring Hugging Face in CodexBar
+  - Configuring Hugging Face in Sharingan
   - Debugging Hugging Face token or billing permission errors
   - Adding or tweaking Hugging Face usage parsing
 ---
 
 # Hugging Face
 
-CodexBar shows month-to-date Inference Providers charges and optional ZeroGPU quota. Billing details include
+Sharingan shows month-to-date Inference Providers charges and optional ZeroGPU quota. Billing details include
 billable usage, reported gross/included amounts, and a configured spending limit when available. The billing
-report does not establish a remaining-credit allowance or quota reset, so CodexBar does not invent either.
+report does not establish a remaining-credit allowance or quota reset, so Sharingan does not invent either.
 The prepaid/general compute-credit wallet appears separately under **Credits** when an eligible browser session
 can be verified as belonging to the same account as the API token.
 Identity (username and PRO/Free plan) comes from `whoami-v2`, cached for hours because Hugging Face rate-limits that
@@ -23,18 +23,18 @@ the selected token, so switching accounts cannot reuse another account's identit
 ## Authentication
 
 Create an access token at [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens), then add it in
-CodexBar's provider settings or token accounts, or set:
+Sharingan's provider settings or token accounts, or set:
 
 ```bash
 export HF_TOKEN="your-access-token"
 ```
 
-Token sources, in precedence order: CodexBar settings (`CODEXBAR_HUGGINGFACE_API_KEY`), `HF_TOKEN`,
+Token sources, in precedence order: Sharingan settings (`SHARINGAN_HUGGINGFACE_API_KEY`), `HF_TOKEN`,
 `HUGGING_FACE_HUB_TOKEN`, then the token saved by `hf auth login` (`$HF_TOKEN_PATH`, `$HF_HOME/token`,
 `$XDG_CACHE_HOME/huggingface/token`, or `~/.cache/huggingface/token`).
 
 Classic `read` tokens can read billing. Fine-grained tokens must have the **Billing read** permission or the billing
-endpoints return HTTP 403, which CodexBar surfaces with a pointer to this requirement.
+endpoints return HTTP 403, which Sharingan surfaces with a pointer to this requirement.
 
 ## Data shown
 
@@ -47,7 +47,7 @@ endpoints return HTTP 403, which CodexBar surfaces with a pointer to this requir
 ## Endpoint contract
 
 The billing endpoint (`/api/settings/billing/usage-v2`) is listed in Hugging Face's OpenAPI spec, but its response
-shape is not documented. CodexBar parses it defensively and reports a clear "response format changed" error if the
+shape is not documented. Sharingan parses it defensively and reports a clear "response format changed" error if the
 shape drifts instead of showing partial data. ZeroGPU quota and `whoami-v2` are fully documented endpoints and are
 fetched best-effort — their failures preserve billing data.
 
@@ -68,7 +68,7 @@ legacy `invoiceCreditsCents` value, which is converted from cents once. Missing,
 or mismatched wallet data is omitted while API usage remains visible. The balance has no inferred percentage,
 allowance, or reset; it appears as a Credits detail section and as `providerCost.balance` in snapshot output.
 
-Explicit API mode (`codexbar usage --provider huggingface --source api`) never resolves cookies or requests the
+Explicit API mode (`sharingan usage --provider huggingface --source api`) never resolves cookies or requests the
 browser billing page. The plugin also honors Off and Manual policies when supplied by the host; this change does
 not add a Hugging Face cookie picker or a browser-only source. Browser identity is verified afresh for each wallet
 observation, even when the token identity is cached. Wallets for other or unverified accounts are omitted rather

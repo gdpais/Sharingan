@@ -7,11 +7,11 @@ read_when:
 
 # Poe Provider
 
-CodexBar reads Poe's official usage API with a manually configured API key. It does not perform OAuth login or import browser cookies.
+Sharingan reads Poe's official usage API with a manually configured API key. It does not perform OAuth login or import browser cookies.
 
 ## Authentication
 
-Create or copy an API key from [Poe API Keys](https://poe.com/api/keys), then add it in CodexBar Settings → Providers → Poe.
+Create or copy an API key from [Poe API Keys](https://poe.com/api/keys), then add it in Sharingan Settings → Providers → Poe.
 
 You can also set the environment variable:
 
@@ -22,12 +22,12 @@ export POE_API_KEY="..."
 Or configure it through the CLI:
 
 ```bash
-printf '%s' "$POE_API_KEY" | codexbar config set-api-key --provider poe --stdin
+printf '%s' "$POE_API_KEY" | sharingan config set-api-key --provider poe --stdin
 ```
 
 ## Data Source
 
-CodexBar requests:
+Sharingan requests:
 
 - `GET https://api.poe.com/usage/current_balance`
 - `GET https://api.poe.com/usage/points_history`
@@ -46,5 +46,5 @@ The last 7 and 30 days totals cover rolling time windows, including days without
 ## CLI Usage
 
 ```bash
-codexbar --provider poe
+sharingan --provider poe
 ```

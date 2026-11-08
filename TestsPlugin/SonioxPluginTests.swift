@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct SonioxPluginTests {
     private static let balance = #"{"available_balance_usd":"18.50","invoice_billing_enabled":false}"#
@@ -100,7 +100,7 @@ struct SonioxPluginTests {
         } throws: { error in
             (error as? ProviderFetchClassifiedError)?.kind == .parseFailure &&
                 error.localizedDescription.contains("Refresh to try again") &&
-                error.localizedDescription.contains("update CodexBar or report the issue")
+                error.localizedDescription.contains("update Sharingan or report the issue")
         }
     }
 
@@ -119,7 +119,7 @@ struct SonioxPluginTests {
         case 401, 403: ""
         case 429: "Wait a moment, then refresh"
         case 500: "Try again later or check https://status.soniox.com"
-        default: "Refresh to try again. If this persists, update CodexBar or report the issue"
+        default: "Refresh to try again. If this persists, update Sharingan or report the issue"
         }
         for path in ["balance", "usage/monthly"] {
             await #expect {

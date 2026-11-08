@@ -29,7 +29,7 @@ The Abacus AI provider tracks ChatLLM/RouteLLM compute credit usage via browser 
 
 1. In **Settings → Providers → Abacus AI**, set Cookie source to **Manual**
 2. Open your browser DevTools on `apps.abacus.ai`, copy the `Cookie:` header from any API request
-3. Paste the header into the cookie field in CodexBar
+3. Paste the header into the cookie field in Sharingan
 
 ## How it works
 
@@ -70,14 +70,14 @@ CLI text and cards retain used/total compute credits beside the real billing res
 credit amounts remain details without a reset label; native quota details and pacing are unchanged.
 
 ```bash
-codexbar usage --provider abacusai --verbose
+sharingan usage --provider abacusai --verbose
 ```
 
 ## Troubleshooting
 
 ### "No Abacus AI session found"
 
-Log in to [apps.abacus.ai](https://apps.abacus.ai) in a supported browser (Safari, Chrome, Firefox), then refresh CodexBar.
+Log in to [apps.abacus.ai](https://apps.abacus.ai) in a supported browser (Safari, Chrome, Firefox), then refresh Sharingan.
 
 ### "Abacus AI session expired"
 

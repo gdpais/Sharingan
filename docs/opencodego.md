@@ -16,7 +16,7 @@ Auto and API sources can reuse the active OpenCode CLI login without another API
 keys and usable browser sessions ahead of the CLI login. API mode uses the configured key when present, otherwise
 the CLI login, without importing cookies. A rejected configured key never borrows the CLI account. V2 credentials come from the CLI's SQLite database; older installs use the `opencode-go`
 API entry in `auth.json`. An active Go credential takes precedence over the general OpenCode OAuth login. Explicit
-CodexBar accounts, manual cookies, workspace overrides, and Web mode never borrow an unrelated CLI login.
+Sharingan accounts, manual cookies, workspace overrides, and Web mode never borrow an unrelated CLI login.
 A successful CLI quota read reports `local+cli` when local history is available, or `cli` without local history.
 CLI quotas retain local daily history but never attach another browser account's balance.
 
@@ -52,5 +52,5 @@ The shared [OpenCode guide](opencode.md) documents authentication, scoped source
 boundary between device-local estimates and account quota. Keep those details there so the two guides do not drift.
 
 ```bash
-codexbar usage --provider opencodego --format json --pretty
+sharingan usage --provider opencodego --format json --pretty
 ```

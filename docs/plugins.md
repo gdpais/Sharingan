@@ -1,18 +1,18 @@
 ---
 summary: "Authoring, installing, approving, and operating local JavaScript and TypeScript provider plugins."
 read_when:
-  - Writing a CodexBar provider plugin
+  - Writing a Sharingan provider plugin
   - Installing or reviewing a local provider plugin
   - Debugging plugin approval, TypeScript, settings, or network behavior
 ---
 
 # Local provider plugins
 
-CodexBar can load one local JavaScript or TypeScript file as a provider. Put a `.js` or `.ts` file in
+Sharingan can load one local JavaScript or TypeScript file as a provider. Put a `.js` or `.ts` file in
 `~/.config/sharingan/providers/`, or choose **Settings → Plugins → Install…**. Each file declares its complete authority
-and settings schema in a manifest, fetches through CodexBar's sandboxed host API, and returns a generic usage snapshot.
+and settings schema in a manifest, fetches through Sharingan's sandboxed host API, and returns a generic usage snapshot.
 
-Plugins are local files only. CodexBar has no plugin catalog, does not download plugin code or assets, and does not
+Plugins are local files only. Sharingan has no plugin catalog, does not download plugin code or assets, and does not
 resolve imports. A plugin cannot use Node, browser globals, subprocesses, local files, databases, OAuth, WebViews, or
 arbitrary native APIs. The maximum source size is 1 MiB.
 
@@ -174,7 +174,7 @@ defineProvider({
   `https://api.example.com` (no path, query, fragment, or user info). A settings-derived endpoint is
   `{setting: "BASE_URL", policy: "https"}`, `{setting: "BASE_URL", policy: "https-or-loopback-http"}`, or
   `{setting: "BASE_URL", policy: "https-or-private-network-http"}`. Its setting must be declared as `plain`.
-  A missing, empty, or whitespace-only value is required configuration, not an invalid manifest. CodexBar identifies
+  A missing, empty, or whitespace-only value is required configuration, not an invalid manifest. Sharingan identifies
   the plugin and missing setting; fetching stays blocked until a valid endpoint is configured and approved.
   `https-or-loopback-http` preserves the unauthenticated loopback-only rule. `https-or-private-network-http` also permits
   authenticated HTTP for loopback, RFC 1918 IPv4, IPv4 link-local, IPv6 unique-local/link-local, and `.local` targets,
@@ -199,8 +199,8 @@ auth: { type: "authorization-scheme", scheme: "Token", secret: "API_KEY" }
 The host owns the authentication header; plugin request options cannot override it. Authenticated public origins must be
 HTTPS; authenticated private-network HTTP requires `https-or-private-network-http` plus typed approval. Secure settings
 can be overridden for CLI use with
-`CODEXBAR_PLUGIN_<PLUGIN_ID>_<SETTING_KEY>`, uppercased with non-alphanumeric characters replaced by underscores. For
-example, `acme-usage` and `API_KEY` use `CODEXBAR_PLUGIN_ACME_USAGE_API_KEY`.
+`SHARINGAN_PLUGIN_<PLUGIN_ID>_<SETTING_KEY>`, uppercased with non-alphanumeric characters replaced by underscores. For
+example, `acme-usage` and `API_KEY` use `SHARINGAN_PLUGIN_ACME_USAGE_API_KEY`.
 
 ### Bundled cookie header echo
 
@@ -218,7 +218,7 @@ LithosAI uses this for its console CSRF requirement on both plugin engines.
 
 ## `ctx` API
 
-`ctx` exists only during `fetchUsage`. CodexBar uses QuickJS-NG 0.17.0 on every platform; both QuickJS and the Apple-only
+`ctx` exists only during `fetchUsage`. Sharingan uses QuickJS-NG 0.17.0 on every platform; both QuickJS and the Apple-only
 JavaScriptCore rollback engine provide ECMAScript built-ins but no browser or Node environment. `Intl` is
 engine-dependent and unavailable in QuickJS,
 so portable third-party plugins must use the host helpers below instead of ECMA-402. `fetch`, `XMLHttpRequest`, timers,
@@ -279,7 +279,7 @@ so portable third-party plugins must use the host helpers below instead of ECMA-
   than a missing login when all authentication paths fail; valid fallback credentials can still succeed. A successful
   refresh retains each manifest's cookie persistence policy, including nonpersistent sessions.
   When an admitted discovery attempt cannot read a browser profile, the error names the browser and points to
-  **System Settings → Privacy & Security → Files & Folders → CodexBar**. Enable that browser and refresh.
+  **System Settings → Privacy & Security → Files & Folders → Sharingan**. Enable that browser and refresh.
   Policy-blocked imports do not probe profiles, and an observed Keychain denial keeps its existing guidance.
 - `ctx.browser.supportedBrowsers` is a comma-separated display list from the provider's configured browser catalog subset (Chrome for user plugins). It describes supported Automatic sources, not installed or searched profiles; it performs no browser or Keychain access. On platforms without browser import it reads `none on this platform`.
 - `await ctx.browser.cookieHeader(domain)` returns a cookie header only with the `browser-cookies` capability and for a
@@ -357,12 +357,12 @@ cookies, and tokens belong in secure settings. Storage does not alter `ctx.cache
 Bundled first-party providers that have cut over to JavaScript use the shared runtime's 20-second hung-script watchdog.
 A timeout fails that refresh and discards the poisoned worker before returning the error, so an immediate retry starts
 with a fresh context. Cancellation retires the worker in the same way. This is production-default and does not depend
-on `CODEXBAR_JS_PROVIDERS`.
+on `SHARINGAN_JS_PROVIDERS`.
 QuickJS enforces the watchdog in-engine with `JS_SetInterruptHandler`, caps the runtime heap at 64 MiB, and caps the
 JavaScript stack at 2 MiB. The interrupt terminates evaluation on its confined thread; timed-out scripts do not leave an
-abandoned evaluation thread behind. On Apple platforms, `CODEXBAR_PLUGIN_ENGINE=jsc` selects the JavaScriptCore rollback
+abandoned evaluation thread behind. On Apple platforms, `SHARINGAN_PLUGIN_ENGINE=jsc` selects the JavaScriptCore rollback
 engine; the same rollback is available in **Settings → Debug → Provider Plugins** and takes effect after restarting
-CodexBar. JavaScriptCore has no public interrupt API, so a timed-out rollback-engine context is discarded but its
+Sharingan. JavaScriptCore has no public interrupt API, so a timed-out rollback-engine context is discarded but its
 abandoned evaluation thread can remain alive until process exit.
 
 QuickJS worker jobs drain autoreleased host objects when they finish, preventing refresh temporaries from building up
@@ -524,7 +524,7 @@ secret-write capability or arbitrary config-field access.
 
 ## TypeScript
 
-`codexbar-plugin.d.ts` in `Sources/CodexBarCore/Resources/Plugins/` is the canonical authoring
+`sharingan-plugin.d.ts` in `Sources/SharinganCore/Resources/Plugins/` is the canonical authoring
 contract for `defineProvider`, the `ctx` host API, manifests, and usage snapshots. Bundled plugins may use that contract
 directly as `.ts` sources. `Scripts/regenerate-plugin-js.sh` transpiles them with the vendored Sucrase build into
 committed sibling `.js` files; the runtime continues to load only those JavaScript files, so bundled TypeScript has no
@@ -536,19 +536,19 @@ edit a generated sibling `.js` file directly.
 TypeScript files are transpiled by the selected plugin engine with the bundled Sucrase 3.35.1 build using its
 `typescript` transform. Use ordinary
 type syntax but no module imports, JSX, decorators, or runtime TypeScript features that require module resolution.
-Transpiled output is cached in `~/Library/Caches/CodexBar/plugins/` under a filename containing the SHA-256 of the source
+Transpiled output is cached in `~/Library/Caches/Sharingan/plugins/` under a filename containing the SHA-256 of the source
 and the Sucrase version. An unchanged file is a cache hit; any source or compiler-version change produces a new key.
 Transpile failures appear as that plugin's Settings error.
 
 ## Install, approve, run, and delete
 
 1. Open **Settings → Plugins** and choose **Install…**, or copy one `.js`/`.ts` file into the providers directory.
-2. CodexBar validates the source and manifest without network, file, cookie, or secret capabilities.
+2. Sharingan validates the source and manifest without network, file, cookie, or secret capabilities.
 3. The approval sheet lists exact normalized origins, auth mode, capabilities, secure setting names, and cookie domains.
 4. For loopback, IP-literal, or `.local` origins, type every normalized origin exactly before approval.
 5. Enter manifest settings and enable the plugin. Its refresh result appears in its generic menu card.
 
-Approval records live outside plugin files under `~/Library/Application Support/CodexBar/plugin-approvals.json`. A
+Approval records live outside plugin files under `~/Library/Application Support/Sharingan/plugin-approvals.json`. A
 change to instance ID, normalized origins, auth mode/header, secure setting names, capabilities, or cookie domains
 invalidates approval before the next request. There is no bulk approval or import path.
 
@@ -556,7 +556,7 @@ Bundled first-party plugins do not use the interactive plugin-approval flow. The
 accepted for bundled code only for LLM Proxy, LiteLLM, Bifrost, and llmman, whose configured endpoints permit exactly those
 targets. Other bundled providers fail manifest validation if they request that policy.
 
-`codexbar plugins list` shows locally discovered plugins. `codexbar plugins fetch <id>` displays the same approval
+`sharingan plugins list` shows locally discovered plugins. `sharingan plugins fetch <id>` displays the same approval
 fields and can approve only from an interactive terminal; redirected/headless input fails closed. Browser-cookie plugins
 are app-only and fail closed in the CLI.
 
@@ -567,7 +567,7 @@ not delete saved data. `config providers` labels these entries as `plugin (not l
 redacted in `config dump` unless `--show-secrets` is explicitly requested.
 After discovery, entries using an unsupported future config format remain unchanged if an edit would lose data.
 
-Delete from Settings with **Delete…**. CodexBar removes the plugin file, matching TypeScript cache output, approval,
+Delete from Settings with **Delete…**. Sharingan removes the plugin file, matching TypeScript cache output, approval,
 per-instance settings and secrets, and per-instance usage history. Invalid plugin files are listed with their validation
 error and can also be deleted.
 
@@ -578,7 +578,7 @@ Reloading or removing plugins does not leave inactive sessions retained by their
 
 Treat a plugin like code you run locally, even though its host capabilities are narrow. Read the manifest and source,
 verify every origin, and avoid installing files from untrusted repositories. Approval grants the listed origin network
-authority; DNS changes after approval are outside CodexBar's threat model. Secrets are never placed in URLs or logged,
+authority; DNS changes after approval are outside Sharingan's threat model. Secrets are never placed in URLs or logged,
 redirects cannot forward authentication, and undeclared settings/cookies/origins fail closed.
 
 Plugins support the macOS app plus the macOS and Linux CLIs. They are excluded from widgets and all built-in-provider-only
@@ -698,7 +698,7 @@ Bundled scripts own requests, error classification, and snapshot mapping; Swift 
 
 ## Native adapters with declarative registration
 
-Ollama's API-key strategy runs `ollama-api.ts` on both engines: a fixed-origin bearer GET reads the included allowance, reset, and purchased balance into the existing Monthly and Credits presentation. Cookie import and HTML parsing remain native. The public legacy catalog fetcher remains available for CodexBarCore API compatibility but is no longer used by provider refreshes.
+Ollama's API-key strategy runs `ollama-api.ts` on both engines: a fixed-origin bearer GET reads the included allowance, reset, and purchased balance into the existing Monthly and Credits presentation. Cookie import and HTML parsing remain native. The public legacy catalog fetcher remains available for SharinganCore API compatibility but is no longer used by provider refreshes.
 
 Hugging Face, Nous, Fireworks, xAI, Venice, and Zed also declare `PluginProviderSpec` values. Hugging Face keeps its
 serialized, retained script runtime and CLI-token reader. Nous keeps Hermes credential validation and diagnostics;
@@ -724,7 +724,7 @@ the profile selection, previous measurements, and pending fetches. Safari requir
 the importer's browser-wide placeholder is rejected.
 There is no default profile, Manual header path, other-profile fallback, or cookie-cache read/write.
 The single-browser `selectedProfileBrowser` initializer and property remain supported for source compatibility
-with the public `CodexBarCore` API shipped in v0.73.0. New registrations use `selectedProfileBrowsers`; the legacy
+with the public `SharinganCore` API shipped in v0.73.0. New registrations use `selectedProfileBrowsers`; the legacy
 property returns `nil` for registrations that support multiple browsers.
 
 The host fingerprints the selected browser/profile and the applicable required cookies before fetching. After

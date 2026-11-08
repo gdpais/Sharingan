@@ -61,10 +61,10 @@ for line in sys.stdin:
     environment = {
         "HOME": str(root), "CFFIXED_USER_HOME": str(root), "CODEX_HOME": str(root / "empty"),
         "SHARINGAN_CONFIG": str(config), "CODEX_CLI_PATH": str(stub), "PATH": "/usr/bin:/bin",
-        "SHELL": "/bin/sh", "CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1",
-        "CODEXBAR_DISABLE_KEYCHAIN_ACCESS": "1", "CODEXBAR_TEST_SESSION_FILE_ISOLATION": "1",
-        "CODEXBAR_TEST_CODEX_FILE_ISOLATION": "1",
-        "CODEXBAR_TEST_CODEX_FILE_FIXTURES": json.dumps({"grants": [
+        "SHELL": "/bin/sh", "SHARINGAN_SUPPRESS_TEST_KEYCHAIN_ACCESS": "1",
+        "SHARINGAN_DISABLE_KEYCHAIN_ACCESS": "1", "SHARINGAN_TEST_SESSION_FILE_ISOLATION": "1",
+        "SHARINGAN_TEST_CODEX_FILE_ISOLATION": "1",
+        "SHARINGAN_TEST_CODEX_FILE_FIXTURES": json.dumps({"grants": [
             {"url": root.as_uri(), "resolvedURL": root.as_uri(), "isRoot": True},
         ]}),
     }
@@ -128,8 +128,8 @@ for line in sys.stdin:
 
 
 def main():
-    binaries = list(pathlib.Path(".build").glob("*/debug/CodexBarCLI"))
-    assert len(binaries) == 1, "Expected one local debug CodexBarCLI"
+    binaries = list(pathlib.Path(".build").glob("*/debug/SharinganCLI"))
+    assert len(binaries) == 1, "Expected one local debug SharinganCLI"
     with tempfile.TemporaryDirectory(prefix="private-dashboard-fixture-") as directory:
         verify(str(binaries[0].resolve()), pathlib.Path(directory))
 

@@ -7,16 +7,16 @@
 # machine still had the checkout at that exact path. This check reproduces a
 # user machine: it copies the packaged app to a temp directory, launches the
 # binary directly (skipping LaunchServices, so it cannot re-activate a running
-# production CodexBar) with every file read under the repo checkout denied via
+# production Sharingan) with every file read under the repo checkout denied via
 # sandbox-exec, and requires the process to stay alive. A resource-bundle
 # regression now fails packaging instead of shipping.
 
 set -euo pipefail
 
-APP_BUNDLE="${1:?usage: verify_packaged_app_launch.sh /path/to/CodexBar.app}"
+APP_BUNDLE="${1:?usage: verify_packaged_app_launch.sh /path/to/Sharingan.app}"
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
-SMOKE_SECONDS="${CODEXBAR_LAUNCH_SMOKE_SECONDS:-6}"
+SMOKE_SECONDS="${SHARINGAN_LAUNCH_SMOKE_SECONDS:-6}"
 # Swift runtime trap signatures for a missing SwiftPM resource bundle. These
 # always hard-fail packaging, even without a GUI session.
 FATAL_PATTERN='Fatal error|could not load resource bundle|unable to find bundle named'
@@ -24,8 +24,8 @@ FATAL_PATTERN='Fatal error|could not load resource bundle|unable to find bundle 
 log()  { printf '%s\n' "$*"; }
 warn() { printf 'WARN: %s\n' "$*" >&2; }
 
-if [[ "${CODEXBAR_SKIP_LAUNCH_SMOKE:-0}" == "1" ]]; then
-  log "Launch smoke check: skipped (CODEXBAR_SKIP_LAUNCH_SMOKE=1)."
+if [[ "${SHARINGAN_SKIP_LAUNCH_SMOKE:-0}" == "1" ]]; then
+  log "Launch smoke check: skipped (SHARINGAN_SKIP_LAUNCH_SMOKE=1)."
   exit 0
 fi
 
@@ -33,12 +33,12 @@ if [[ ! -x "$APP_BUNDLE/Contents/MacOS/Sharingan" ]]; then
   echo "ERROR: Launch smoke check: missing executable in ${APP_BUNDLE}" >&2
   exit 1
 fi
-if [[ ! -x "$APP_BUNDLE/Contents/Helpers/CodexBarCLI" ]]; then
-  echo "ERROR: Launch smoke check: missing Helpers/CodexBarCLI in ${APP_BUNDLE}" >&2
+if [[ ! -x "$APP_BUNDLE/Contents/Helpers/SharinganCLI" ]]; then
+  echo "ERROR: Launch smoke check: missing Helpers/SharinganCLI in ${APP_BUNDLE}" >&2
   exit 1
 fi
-if [[ ! -d "$APP_BUNDLE/Contents/Helpers/CodexBar_CodexBarCore.bundle" ]]; then
-  echo "ERROR: Launch smoke check: missing CodexBarCore resource bundle beside Helpers/CodexBarCLI" >&2
+if [[ ! -d "$APP_BUNDLE/Contents/Helpers/Sharingan_SharinganCore.bundle" ]]; then
+  echo "ERROR: Launch smoke check: missing SharinganCore resource bundle beside Helpers/SharinganCLI" >&2
   exit 1
 fi
 
@@ -56,12 +56,12 @@ if [[ "$(launchctl managername 2>/dev/null || true)" != "Aqua" ]]; then
   warn "Launch smoke check: no Aqua session; only the resource-bundle fatal signature will fail packaging."
 fi
 
-SMOKE_DIR="$(mktemp -d "${TMPDIR:-/tmp}/codexbar-launch-smoke.XXXXXX")"
+SMOKE_DIR="$(mktemp -d "${TMPDIR:-/tmp}/sharingan-launch-smoke.XXXXXX")"
 SMOKE_PID=""
 # shellcheck disable=SC2329  # invoked via trap
 cleanup() {
   # Kill only our own spawned PID; never pattern-kill, so a running production
-  # CodexBar is untouched.
+  # Sharingan is untouched.
   if [[ -n "$SMOKE_PID" ]]; then
     if kill -0 "$SMOKE_PID" 2>/dev/null; then
       kill "$SMOKE_PID" 2>/dev/null || true
@@ -77,9 +77,9 @@ cleanup() {
 }
 trap cleanup EXIT INT TERM
 
-cp -R "$APP_BUNDLE" "$SMOKE_DIR/CodexBar.app"
-SMOKE_BIN="$SMOKE_DIR/CodexBar.app/Contents/MacOS/Sharingan"
-CLI_BIN="$SMOKE_DIR/CodexBar.app/Contents/Helpers/CodexBarCLI"
+cp -R "$APP_BUNDLE" "$SMOKE_DIR/Sharingan.app"
+SMOKE_BIN="$SMOKE_DIR/Sharingan.app/Contents/MacOS/Sharingan"
+CLI_BIN="$SMOKE_DIR/Sharingan.app/Contents/Helpers/SharinganCLI"
 CLI_SYMLINK_DIR="$SMOKE_DIR/bin"
 CLI_SYMLINK="$CLI_SYMLINK_DIR/sharingan"
 SMOKE_LOG="$SMOKE_DIR/launch.log"
@@ -101,9 +101,9 @@ SMOKE_ENV=(/usr/bin/env -i
   "TMPDIR=$SMOKE_DIR/tmp/"
   "SHARINGAN_CONFIG=$SMOKE_HOME/config.json"
   "SWIFT_TESTING=1"
-  "CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS=1"
-  "CODEXBAR_TEST_CODEX_FILE_ISOLATION=1"
-  "CODEXBAR_TEST_SESSION_FILE_ISOLATION=1")
+  "SHARINGAN_SUPPRESS_TEST_KEYCHAIN_ACCESS=1"
+  "SHARINGAN_TEST_CODEX_FILE_ISOLATION=1"
+  "SHARINGAN_TEST_SESSION_FILE_ISOLATION=1")
 SANDBOX_PROFILE="(version 1)
 (allow default)
 (deny network*)
@@ -140,7 +140,7 @@ fail_with_cli_symlink_probe_log() {
 log "Launch smoke check: probing packaged Helpers CLI resource loads with ${ROOT} unreadable."
 (
   cd "$SMOKE_DIR"
-  exec sandbox-exec -p "$SANDBOX_PROFILE" "${SMOKE_ENV[@]}" CODEXBAR_RESOURCE_SMOKE=1 "$CLI_BIN"
+  exec sandbox-exec -p "$SANDBOX_PROFILE" "${SMOKE_ENV[@]}" SHARINGAN_RESOURCE_SMOKE=1 "$CLI_BIN"
 ) >"$CLI_PROBE_LOG" 2>&1 &
 SMOKE_PID=$!
 CLI_PROBE_OK=0
@@ -157,15 +157,15 @@ fi
 CLI_PROBE_STATUS=0
 wait "$SMOKE_PID" || CLI_PROBE_STATUS=$?
 SMOKE_PID=""
-if [[ "$CLI_PROBE_STATUS" -ne 0 ]] || ! grep -q "CODEXBAR_RESOURCE_SMOKE_OK" "$CLI_PROBE_LOG"; then
-  fail_with_cli_probe_log "Launch smoke check FAILED: packaged Helpers CLI cannot load CodexBarCore resources without the build checkout. Exit status: ${CLI_PROBE_STATUS}."
+if [[ "$CLI_PROBE_STATUS" -ne 0 ]] || ! grep -q "SHARINGAN_RESOURCE_SMOKE_OK" "$CLI_PROBE_LOG"; then
+  fail_with_cli_probe_log "Launch smoke check FAILED: packaged Helpers CLI cannot load SharinganCore resources without the build checkout. Exit status: ${CLI_PROBE_STATUS}."
 fi
 log "Launch smoke check: Helpers CLI resource probe OK."
 
 log "Launch smoke check: probing symlinked Helpers CLI resource loads with ${ROOT} unreadable."
 (
   cd "$SMOKE_DIR"
-  exec sandbox-exec -p "$SANDBOX_PROFILE" "${SMOKE_ENV[@]}" CODEXBAR_RESOURCE_SMOKE=1 "$CLI_SYMLINK"
+  exec sandbox-exec -p "$SANDBOX_PROFILE" "${SMOKE_ENV[@]}" SHARINGAN_RESOURCE_SMOKE=1 "$CLI_SYMLINK"
 ) >"$CLI_SYMLINK_PROBE_LOG" 2>&1 &
 SMOKE_PID=$!
 CLI_SYMLINK_PROBE_OK=0
@@ -182,19 +182,19 @@ fi
 CLI_SYMLINK_PROBE_STATUS=0
 wait "$SMOKE_PID" || CLI_SYMLINK_PROBE_STATUS=$?
 SMOKE_PID=""
-if [[ "$CLI_SYMLINK_PROBE_STATUS" -ne 0 ]] || ! grep -q "CODEXBAR_RESOURCE_SMOKE_OK" "$CLI_SYMLINK_PROBE_LOG"; then
-  fail_with_cli_symlink_probe_log "Launch smoke check FAILED: symlinked packaged Helpers CLI cannot load CodexBarCore resources without the build checkout. Exit status: ${CLI_SYMLINK_PROBE_STATUS}."
+if [[ "$CLI_SYMLINK_PROBE_STATUS" -ne 0 ]] || ! grep -q "SHARINGAN_RESOURCE_SMOKE_OK" "$CLI_SYMLINK_PROBE_LOG"; then
+  fail_with_cli_symlink_probe_log "Launch smoke check FAILED: symlinked packaged Helpers CLI cannot load SharinganCore resources without the build checkout. Exit status: ${CLI_SYMLINK_PROBE_STATUS}."
 fi
 log "Launch smoke check: symlinked Helpers CLI resource probe OK."
 
-# Phase 1 (deterministic, headless-safe): CODEXBAR_RESOURCE_SMOKE=1 makes the
+# Phase 1 (deterministic, headless-safe): SHARINGAN_RESOURCE_SMOKE=1 makes the
 # app force the resource loads that trapped in 0.48.0 and exit before any UI.
 # The loads are lazy in normal operation, so the liveness phase below cannot be
 # relied on alone to reach them.
 log "Launch smoke check: probing packaged resource loads with ${ROOT} unreadable."
 (
   cd "$SMOKE_DIR"
-  exec sandbox-exec -p "$SANDBOX_PROFILE" "${SMOKE_ENV[@]}" CODEXBAR_RESOURCE_SMOKE=1 "$SMOKE_BIN"
+  exec sandbox-exec -p "$SANDBOX_PROFILE" "${SMOKE_ENV[@]}" SHARINGAN_RESOURCE_SMOKE=1 "$SMOKE_BIN"
 ) >"$PROBE_LOG" 2>&1 &
 SMOKE_PID=$!
 PROBE_OK=0
@@ -211,7 +211,7 @@ fi
 PROBE_STATUS=0
 wait "$SMOKE_PID" || PROBE_STATUS=$?
 SMOKE_PID=""
-if [[ "$PROBE_STATUS" -ne 0 ]] || ! grep -q "CODEXBAR_RESOURCE_SMOKE_OK" "$PROBE_LOG"; then
+if [[ "$PROBE_STATUS" -ne 0 ]] || ! grep -q "SHARINGAN_RESOURCE_SMOKE_OK" "$PROBE_LOG"; then
   fail_with_probe_log "Launch smoke check FAILED: packaged app cannot load its resource bundles without the build checkout (the 0.48.0 crash class, #2738). Do not ship this build. Exit status: ${PROBE_STATUS}."
 fi
 log "Launch smoke check: resource probe OK."

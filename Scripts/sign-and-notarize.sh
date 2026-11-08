@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-APP_NAME="CodexBar"
-# Bundle executable name (the SwiftPM product and its dSYM stay `CodexBar`).
+APP_NAME="Sharingan"
+# Bundle executable name (matches the SwiftPM product and its dSYM).
 APP_EXECUTABLE="Sharingan"
 APP_IDENTITY="${APP_IDENTITY:-Developer ID Application: Peter Steinberger (Y5PE65HELJ)}"
 APP_BUNDLE="Sharingan.app"
@@ -23,15 +23,15 @@ verify_distribution_policy() {
 
 # Allow building a universal binary if ARCHES is provided; default to universal (arm64 + x86_64).
 ARCHES_VALUE=${ARCHES:-"arm64 x86_64"}
-ZIP_NAME=$(codexbar_app_zip_name "$MARKETING_VERSION" "$ARCHES_VALUE")
-DSYM_ZIP=$(codexbar_dsym_zip_name "$MARKETING_VERSION" "$ARCHES_VALUE")
+ZIP_NAME=$(sharingan_app_zip_name "$MARKETING_VERSION" "$ARCHES_VALUE")
+DSYM_ZIP=$(sharingan_dsym_zip_name "$MARKETING_VERSION" "$ARCHES_VALUE")
 
 NOTARYTOOL_OPTIONS=(--wait)
-case "${CODEXBAR_NOTARY_S3_ACCELERATION-1}" in
+case "${SHARINGAN_NOTARY_S3_ACCELERATION-1}" in
   0) NOTARYTOOL_OPTIONS+=(--no-s3-acceleration) ;;
   1) ;;
   *)
-    echo "CODEXBAR_NOTARY_S3_ACCELERATION must be 0 or 1." >&2
+    echo "SHARINGAN_NOTARY_S3_ACCELERATION must be 0 or 1." >&2
     exit 1
     ;;
 esac
@@ -41,9 +41,9 @@ if [[ -z "${APP_STORE_CONNECT_API_KEY_P8:-}" || -z "${APP_STORE_CONNECT_KEY_ID:-
   exit 1
 fi
 
-NOTARIZATION_TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/codexbar-notarize.XXXXXX")
+NOTARIZATION_TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/sharingan-notarize.XXXXXX")
 chmod 700 "$NOTARIZATION_TEMP_DIR"
-API_KEY_PATH="$NOTARIZATION_TEMP_DIR/codexbar-api-key.p8"
+API_KEY_PATH="$NOTARIZATION_TEMP_DIR/sharingan-api-key.p8"
 NOTARIZATION_ZIP="$NOTARIZATION_TEMP_DIR/${APP_NAME}Notarize.zip"
 trap 'rm -rf "$NOTARIZATION_TEMP_DIR"' EXIT
 
@@ -54,28 +54,28 @@ trap 'rm -rf "$NOTARIZATION_TEMP_DIR"' EXIT
 chmod 600 "$API_KEY_PATH"
 
 ARCH_LIST=( ${ARCHES_VALUE} )
-APP_IDENTITY="$APP_IDENTITY" ARCHES="${ARCHES_VALUE}" CODEXBAR_SIGNING=identity ./Scripts/package_app.sh release
+APP_IDENTITY="$APP_IDENTITY" ARCHES="${ARCHES_VALUE}" SHARINGAN_SIGNING=identity ./Scripts/package_app.sh release
 
 ENTITLEMENTS_DIR="$ROOT/.build/entitlements"
-APP_ENTITLEMENTS="${ENTITLEMENTS_DIR}/CodexBar.entitlements"
-WIDGET_ENTITLEMENTS="${ENTITLEMENTS_DIR}/CodexBarWidget.entitlements"
+APP_ENTITLEMENTS="${ENTITLEMENTS_DIR}/Sharingan.entitlements"
+WIDGET_ENTITLEMENTS="${ENTITLEMENTS_DIR}/SharinganWidget.entitlements"
 
 echo "Signing with $APP_IDENTITY"
-if [[ -f "$APP_BUNDLE/Contents/Helpers/CodexBarCLI" ]]; then
+if [[ -f "$APP_BUNDLE/Contents/Helpers/SharinganCLI" ]]; then
   codesign --force --timestamp --options runtime --sign "$APP_IDENTITY" \
-    "$APP_BUNDLE/Contents/Helpers/CodexBarCLI"
+    "$APP_BUNDLE/Contents/Helpers/SharinganCLI"
 fi
-if [[ -f "$APP_BUNDLE/Contents/Helpers/CodexBarClaudeWatchdog" ]]; then
+if [[ -f "$APP_BUNDLE/Contents/Helpers/SharinganClaudeWatchdog" ]]; then
   codesign --force --timestamp --options runtime --sign "$APP_IDENTITY" \
-    "$APP_BUNDLE/Contents/Helpers/CodexBarClaudeWatchdog"
+    "$APP_BUNDLE/Contents/Helpers/SharinganClaudeWatchdog"
 fi
-if [[ -d "$APP_BUNDLE/Contents/PlugIns/CodexBarWidget.appex" ]]; then
+if [[ -d "$APP_BUNDLE/Contents/PlugIns/SharinganWidget.appex" ]]; then
   codesign --force --timestamp --options runtime --sign "$APP_IDENTITY" \
     --entitlements "$WIDGET_ENTITLEMENTS" \
-    "$APP_BUNDLE/Contents/PlugIns/CodexBarWidget.appex/Contents/MacOS/CodexBarWidget"
+    "$APP_BUNDLE/Contents/PlugIns/SharinganWidget.appex/Contents/MacOS/SharinganWidget"
   codesign --force --timestamp --options runtime --sign "$APP_IDENTITY" \
     --entitlements "$WIDGET_ENTITLEMENTS" \
-    "$APP_BUNDLE/Contents/PlugIns/CodexBarWidget.appex"
+    "$APP_BUNDLE/Contents/PlugIns/SharinganWidget.appex"
 fi
 codesign --force --timestamp --options runtime --sign "$APP_IDENTITY" \
   --entitlements "$APP_ENTITLEMENTS" \
@@ -112,15 +112,15 @@ for ARCH in "${ARCH_LIST[@]}"; do
     DSYM_PATHS+=("$STAGED_DSYM")
     continue
   fi
-  BIN_DIR=$(codexbar_swiftpm_bin_path release "$ARCH")
-  DSYM_PATHS+=("$(codexbar_resolve_dsym_path "$DSYM_STAGE_ROOT" "$BIN_DIR" "$APP_NAME" "$ARCH")")
+  BIN_DIR=$(sharingan_swiftpm_bin_path release "$ARCH")
+  DSYM_PATHS+=("$(sharingan_resolve_dsym_path "$DSYM_STAGE_ROOT" "$BIN_DIR" "$APP_NAME" "$ARCH")")
 done
 
 DSYM_PATH="${DSYM_PATHS[0]}"
 DSYM_DWARF_PATHS=()
 for ((index = 0; index < ${#ARCH_LIST[@]}; index++)); do
   ARCH="${ARCH_LIST[$index]}"
-  if ! ARCH_DSYM=$(codexbar_require_dsym_dwarf_for_arch "${DSYM_PATHS[$index]}" "$APP_NAME" "$ARCH"); then
+  if ! ARCH_DSYM=$(sharingan_require_dsym_dwarf_for_arch "${DSYM_PATHS[$index]}" "$APP_NAME" "$ARCH"); then
     exit 1
   fi
   DSYM_DWARF_PATHS+=("$ARCH_DSYM")
@@ -140,7 +140,7 @@ if [[ ! -d "$DSYM_PATH" ]]; then
   echo "Missing dSYM at SwiftPM-reported path: $DSYM_PATH" >&2
   exit 1
 fi
-codexbar_verify_dsym_matches_binary \
+sharingan_verify_dsym_matches_binary \
   "$APP_BUNDLE/Contents/MacOS/$APP_EXECUTABLE" \
   "$DSYM_PATH/Contents/Resources/DWARF/$APP_NAME" \
   "${ARCH_LIST[@]}"

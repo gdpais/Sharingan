@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct ProviderPluginTransportTests {
     #if canImport(JavaScriptCore)
@@ -114,7 +114,7 @@ struct ProviderPluginTransportTests {
 
     @Test(arguments: Self.engines)
     func `interrupt survives a fetch that has not started`(engine: ProviderPluginEngineKind) async throws {
-        let url = try #require(CodexBarCoreResources.bundle?.url(
+        let url = try #require(SharinganCoreResources.bundle?.url(
             forResource: "provider-plugin-prelude", withExtension: "js"))
         let worker = try ProviderPluginEngineFactory.make(
             kind: engine,
@@ -334,7 +334,7 @@ struct ProviderPluginTransportTests {
               async fetchUsage(ctx) { \(body) }
             });
             """,
-            resourceBundle: CodexBarCoreResources.bundle,
+            resourceBundle: SharinganCoreResources.bundle,
             transport: transport,
             timeout: timeout,
             enforcesUserResponsePolicy: enforcesUserResponsePolicy,

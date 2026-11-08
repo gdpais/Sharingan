@@ -8,14 +8,14 @@ read_when:
 
 # Zed provider
 
-CodexBar monitors Zed plan status, billing cycle dates, edit-prediction quota, and overdue invoices via Zed's cloud API.
+Sharingan monitors Zed plan status, billing cycle dates, edit-prediction quota, and overdue invoices via Zed's cloud API.
 Optional browser billing adds token spend, its spending limit, and remaining budget.
 
 ## Data source
 
 **Browser billing (opt-in)** — in Zed provider settings, change **Cookie source** from **Off** to **Auto** to import a
 browser session in the shared browser order, or **Manual** to paste a Cookie request header. Sign in to `zed.dev` in a supported browser first; signing in only
-inside the editor does not create this browser session. CodexBar requests:
+inside the editor does not create this browser session. Sharingan requests:
 
 ```text
 GET https://cloud.zed.dev/frontend/billing/usage
@@ -48,21 +48,21 @@ Authorization: {user_id} {access_token}
 | Account | Zed user ID (string) |
 | Secret | Access token (UTF-8 bytes) |
 
-CodexBar requests a non-interactive Keychain read. Existing Zed items can still carry an access-control list that makes
-macOS show a SecurityAgent prompt the first time CodexBar reads them. Choose **Always Allow** to avoid repeat prompts. If
+Sharingan requests a non-interactive Keychain read. Existing Zed items can still carry an access-control list that makes
+macOS show a SecurityAgent prompt the first time Sharingan reads them. Choose **Always Allow** to avoid repeat prompts. If
 Zed has never been signed in, or access is denied, the provider reports **Not signed in to Zed**.
 
 ### Settings override
 
-CodexBar reads Zed’s user settings from `~/.config/zed/settings.json`. The `credentials_url` setting (falls back to
+Sharingan reads Zed’s user settings from `~/.config/zed/settings.json`. The `credentials_url` setting (falls back to
 `server_url`) selects which Keychain entry to read. For the trusted
 `https://zed.dev` and `https://staging.zed.dev` servers, Zed may use a separate credential identifier. Custom servers
-must use HTTPS and store credentials under the exact same `server_url`; CodexBar rejects cross-origin overrides so a
+must use HTTPS and store credentials under the exact same `server_url`; Sharingan rejects cross-origin overrides so a
 settings-file change cannot forward a Keychain token to another host.
 
 ## Snapshot mapping
 
-| Zed field | CodexBar display |
+| Zed field | Sharingan display |
 | --- | --- |
 | `plan.plan_v3` | Plan label (Free / Pro / Trial / Student / Business) |
 | `plan.usage.edit_predictions` | Primary bar: used/limit or “Unlimited” on Pro+ |
@@ -85,14 +85,14 @@ Per [LLM Providers](https://zed.dev/docs/ai/llm-providers.html) and [External Ag
 - Confirm a Keychain internet-password entry exists for server `https://zed.dev` (or your custom `credentials_url`).
 
 ### “Could not read Zed credentials from the Keychain”
-- macOS may block Keychain access until you allow CodexBar (same class of issue as other IDE probes).
+- macOS may block Keychain access until you allow Sharingan (same class of issue as other IDE probes).
 - Re-sign in to Zed after changing `credentials_url`.
 
 ## Key files
 
-- `Sources/CodexBarCore/Resources/Plugins/zed.js` - HTTP requests and snapshot mapping for both sources
-- `Sources/CodexBarCore/Providers/Zed/ZedStatusProbe.swift` - editor settings and Keychain credential bridge
-- `Sources/CodexBarCore/Providers/Zed/ZedProviderDescriptor.swift` - provider metadata and source selection
-- `Sources/CodexBar/Providers/Zed/ZedProviderImplementation.swift` - app registration and cookie settings
-- `Tests/CodexBarTests/ZedStatusProbeTests.swift` - cloud API and routing tests
-- `Tests/CodexBarTests/ZedPluginTests.swift` - synthetic billing and editor fixtures on both plugin engines
+- `Sources/SharinganCore/Resources/Plugins/zed.js` - HTTP requests and snapshot mapping for both sources
+- `Sources/SharinganCore/Providers/Zed/ZedStatusProbe.swift` - editor settings and Keychain credential bridge
+- `Sources/SharinganCore/Providers/Zed/ZedProviderDescriptor.swift` - provider metadata and source selection
+- `Sources/Sharingan/Providers/Zed/ZedProviderImplementation.swift` - app registration and cookie settings
+- `Tests/SharinganTests/ZedStatusProbeTests.swift` - cloud API and routing tests
+- `Tests/SharinganTests/ZedPluginTests.swift` - synthetic billing and editor fixtures on both plugin engines

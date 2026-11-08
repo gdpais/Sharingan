@@ -1,13 +1,13 @@
 ---
 summary: "Muse Code authentication, subscription windows, and local token history."
 read_when:
-  - Configuring Muse Code in CodexBar
+  - Configuring Muse Code in Sharingan
   - Debugging Muse Code login or subscription usage errors
 ---
 
 # Muse Code
 
-CodexBar shows Muse Code subscription usage and local token history. Subscription quota comes from the bundled JavaScript provider; token history comes from the Muse CLI's session logs. Dollar costs remain unavailable because those logs do not provide billing amounts.
+Sharingan shows Muse Code subscription usage and local token history. Subscription quota comes from the bundled JavaScript provider; token history comes from the Muse CLI's session logs. Dollar costs remain unavailable because those logs do not provide billing amounts.
 
 ## Authentication
 
@@ -17,19 +17,19 @@ Sign in with the Muse CLI:
 muse login
 ```
 
-CodexBar reads the same Keychain item the CLI stores (`ai.meta.dev.credentials` / `meta`) and sends only the device-code `dca:` access token to `POST https://api.meta.ai/muse-code/key`. Meta dashboard `LLM_` keys and Muse-minted `LLM|` inference keys cannot read this quota (they 401 on that mint endpoint).
+Sharingan reads the same Keychain item the CLI stores (`ai.meta.dev.credentials` / `meta`) and sends only the device-code `dca:` access token to `POST https://api.meta.ai/muse-code/key`. Meta dashboard `LLM_` keys and Muse-minted `LLM|` inference keys cannot read this quota (they 401 on that mint endpoint).
 
-Credential precedence: when `providers.meta.access_token` is present inline in the CLI metadata file `~/.config/muse/auth.json`, that token selects the account queried and takes precedence over Keychain. Otherwise CodexBar reads the device-code token from the CLI's Keychain item. An `auth.json` with `"mechanism": "oauth"` but no inline token still counts as a login; the token then comes from Keychain. Override the file path with `MUSE_AUTH_PATH` if needed.
+Credential precedence: when `providers.meta.access_token` is present inline in the CLI metadata file `~/.config/muse/auth.json`, that token selects the account queried and takes precedence over Keychain. Otherwise Sharingan reads the device-code token from the CLI's Keychain item. An `auth.json` with `"mechanism": "oauth"` but no inline token still counts as a login; the token then comes from Keychain. Override the file path with `MUSE_AUTH_PATH` if needed.
 
-The Keychain item belongs to the Muse CLI, so its access list may not include CodexBar. CodexBar checks that access list without requesting the token. Background refreshes and the `codexbar` CLI never prompt: if access would require a prompt or the check cannot complete, they fail promptly without reading the token. Detecting whether a Muse login exists never requests its secret. A Keychain-only item detected as requiring interaction keeps the access diagnostic even when the CLI metadata file is absent.
+The Keychain item belongs to the Muse CLI, so its access list may not include Sharingan. Sharingan checks that access list without requesting the token. Background refreshes and the `sharingan` CLI never prompt: if access would require a prompt or the check cannot complete, they fail promptly without reading the token. Detecting whether a Muse login exists never requests its secret. A Keychain-only item detected as requiring interaction keeps the access diagnostic even when the CLI metadata file is absent.
 
-A manual refresh in the app is the one exception. When the access list does not include CodexBar yet, CodexBar first explains the request, then lets macOS ask for the item: choose **Always Allow** and later refreshes read silently. The read shares the manual action’s single interactive Keychain allowance with browser cookie imports. Denying the prompt keeps the grant diagnostic below and suppresses further manual prompts for six hours. Background and settings-triggered refreshes never prompt.
+A manual refresh in the app is the one exception. When the access list does not include Sharingan yet, Sharingan first explains the request, then lets macOS ask for the item: choose **Always Allow** and later refreshes read silently. The read shares the manual action’s single interactive Keychain allowance with browser cookie imports. Denying the prompt keeps the grant diagnostic below and suppresses further manual prompts for six hours. Background and settings-triggered refreshes never prompt.
 
-If the card says CodexBar is not allowed to read the credentials (for example after denying the prompt, or for `codexbar` CLI reads), grant access in Keychain Access instead:
+If the card says Sharingan is not allowed to read the credentials (for example after denying the prompt, or for `sharingan` CLI reads), grant access in Keychain Access instead:
 
 1. Open **Keychain Access**, select the **login** keychain, and search for `ai.meta.dev.credentials`.
-2. Open the item, choose **Access Control**, and add `CodexBar.app` from `/Applications` to the allowed applications. Avoid "Allow all applications."
-3. Save with your Keychain password, then refresh Muse Code in CodexBar. For `codexbar` CLI reads, also add `Contents/Helpers/CodexBarCLI` inside the CodexBar app bundle.
+2. Open the item, choose **Access Control**, and add `Sharingan.app` from `/Applications` to the allowed applications. Avoid "Allow all applications."
+3. Save with your Keychain password, then refresh Muse Code in Sharingan. For `sharingan` CLI reads, also add `Contents/Helpers/SharinganCLI` inside the Sharingan app bundle.
 
 A fresh `muse login` can recreate the Keychain item without the grant, so repeat these steps if the message returns after signing in again. If the card instead says the credentials could not be read right now, unlock the login Keychain and refresh.
 
@@ -39,7 +39,7 @@ When CLI metadata points to Keychain and access is disabled, the diagnostic name
 
 The bundled `muse.ts` plugin owns the JSON request and subscription parsing on macOS and Linux. Native code only
 reads the CLI-owned credential and registers the provider. The returned inference key and payment metadata are
-discarded; CodexBar never writes them to the CLI's credential store.
+discarded; Sharingan never writes them to the CLI's credential store.
 
 - Plan name from `subs_tier_name` (for example Muse Code Power Usage).
 - 5-hour window percent, duration, and `resets_at`.
@@ -53,22 +53,22 @@ An active subscription whose mint response omits `subs_usage` or returns it as `
 
 ## Browser team quota
 
-When `subs_usage` is missing, CodexBar can read the subscription quota of one `dev.meta.ai` team that you choose, using your browser session for `dev.meta.ai` (the `llama_dev_sess` cookie). A session can see more than one team, and nothing in the responses links a team to the CLI login, so CodexBar never picks a team for you.
+When `subs_usage` is missing, Sharingan can read the subscription quota of one `dev.meta.ai` team that you choose, using your browser session for `dev.meta.ai` (the `llama_dev_sess` cookie). A session can see more than one team, and nothing in the responses links a team to the CLI login, so Sharingan never picks a team for you.
 
-1. `GET https://dev.meta.ai/api/auth/me`. The session email must match the CLI login email, or CodexBar ignores the browser session. If `email` is blank, CodexBar needs the session's `userId` and checks step 3 instead.
+1. `GET https://dev.meta.ai/api/auth/me`. The session email must match the CLI login email, or Sharingan ignores the browser session. If `email` is blank, Sharingan needs the session's `userId` and checks step 3 instead.
 2. `GET https://dev.meta.ai/api/portal/teams`. The selected **Browser team** must be in this list, or no quota is read.
-3. Only when the session email is blank: `GET https://dev.meta.ai/api/portal/teams/{team_id}/members` for the selected team, or for the first listed team when no visible team is selected. The member whose `user_id` equals the session `userId` must have the CLI login email. Otherwise CodexBar ignores the browser session and lists no teams. A `403` on this list also ignores the session, but CodexBar keeps the stored cookie because the response does not mean the session expired.
+3. Only when the session email is blank: `GET https://dev.meta.ai/api/portal/teams/{team_id}/members` for the selected team, or for the first listed team when no visible team is selected. The member whose `user_id` equals the session `userId` must have the CLI login email. Otherwise Sharingan ignores the browser session and lists no teams. A `403` on this list also ignores the session, but Sharingan keeps the stored cookie because the response does not mean the session expired.
 4. `GET https://dev.meta.ai/api/portal/teams/{team_id}/subscription-quota` for the selected team only. Its `tier` must equal the plan in the login response (`subs_tier_name`), or the quota is ignored.
 
-Usage is `used / limit` for the 5-hour and weekly weighted limits. An idle 5-hour window with zero reported usage, or one whose valid reset time has passed, shows 0% with no reset time. A malformed reset, or nonzero usage without a reset, withholds the browser reading rather than inventing an idle window. If the weekly reset time has passed, or a limit is zero or missing, CodexBar shows no browser-team reading at all. The menu shows the values in a **Browser team quota (dev.meta.ai)** section with the team name, the source label becomes `oauth+web`, and the snapshot confidence is `estimated`, because the link between the team and the CLI login is your choice, not something Meta reports. The device-code token is sent only to `api.meta.ai`; `dev.meta.ai` requests carry only the browser cookie.
+Usage is `used / limit` for the 5-hour and weekly weighted limits. An idle 5-hour window with zero reported usage, or one whose valid reset time has passed, shows 0% with no reset time. A malformed reset, or nonzero usage without a reset, withholds the browser reading rather than inventing an idle window. If the weekly reset time has passed, or a limit is zero or missing, Sharingan shows no browser-team reading at all. The menu shows the values in a **Browser team quota (dev.meta.ai)** section with the team name, the source label becomes `oauth+web`, and the snapshot confidence is `estimated`, because the link between the team and the CLI login is your choice, not something Meta reports. The device-code token is sent only to `api.meta.ai`; `dev.meta.ai` requests carry only the browser cookie.
 
 Setup, in **Settings → Providers → Muse Code**:
 
-1. Set **Cookie source**. It is **Off** by default, so CodexBar reads no browser data until you choose a source. **Automatic** imports the cookie in the shared supported-browser order; **Manual** uses a pasted Cookie header or cURL capture from `dev.meta.ai`.
+1. Set **Cookie source**. It is **Off** by default, so Sharingan reads no browser data until you choose a source. **Automatic** imports the cookie in the shared supported-browser order; **Manual** uses a pasted Cookie header or cURL capture from `dev.meta.ai`.
 2. Refresh Muse Code. When the login omits `subs_usage`, **Browser team** lists the teams the session can see, with their IDs. It starts at **Choose a team…** and never selects the first team automatically. The same list appears in the Muse menu.
-3. Choose the team whose web quota you want to display, then refresh. A saved team that is no longer visible stays marked unavailable; CodexBar never switches to another team for you.
+3. Choose the team whose web quota you want to display, then refresh. A saved team that is no longer visible stays marked unavailable; Sharingan never switches to another team for you.
 
-Automatic mode tries later browser sessions when the first session is expired or belongs to another account. Sessions with a blank email go last, after every session whose email matches the login, because their membership check costs one more request. The fallback makes at most five web requests per refresh; Manual uses only the pasted session. If membership is unavailable or no session can be verified within that budget, CodexBar keeps the login response and shows no browser-team quota.
+Automatic mode tries later browser sessions when the first session is expired or belongs to another account. Sessions with a blank email go last, after every session whose email matches the login, because their membership check costs one more request. The fallback makes at most five web requests per refresh; Manual uses only the pasted session. If membership is unavailable or no session can be verified within that budget, Sharingan keeps the login response and shows no browser-team quota.
 
 In `~/.sharingan/config.json`, the team ID is the Muse entry's `workspaceID`:
 
@@ -80,7 +80,7 @@ If the source is off, there is no session, the session belongs to another accoun
 
 ## Local token history
 
-Enable local usage tracking to show today's tokens, recent daily history, and token comparisons below the subscription windows. The command `codexbar cost --provider muse` also reports tokens; its JSON keeps unavailable monetary fields absent. Local history requires no provider request, credential access, or pricing download.
+Enable local usage tracking to show today's tokens, recent daily history, and token comparisons below the subscription windows. The command `sharingan cost --provider muse` also reports tokens; its JSON keeps unavailable monetary fields absent. Local history requires no provider request, credential access, or pricing download.
 
 The reader uses `$MUSE_SESSIONS_DIR`, or `$XDG_DATA_HOME/muse/sessions` (default `~/.local/share/muse/sessions`). It reads `YYYY/MM/DD/session/session.jsonl` files and buckets turns by their recorded timestamp in the local calendar, including turns written after a session's directory date. This is machine-local history across the selected session tree, not an account billing statement or a quota estimate.
 
@@ -90,4 +90,4 @@ Scans are bounded to 30 seconds and 2 GiB of newly read data per refresh, with p
 
 ## Privacy
 
-The mint response can include a card brand/last-four `payment_method` field. CodexBar does not display it. Email and plan stay on the Muse identity card.
+The mint response can include a card brand/last-four `payment_method` field. Sharingan does not display it. Email and plan stay on the Muse identity card.

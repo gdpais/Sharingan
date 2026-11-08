@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct QwenCloudTeamPluginTests {
     private static let now = Date(timeIntervalSince1970: 1_789_500_000)

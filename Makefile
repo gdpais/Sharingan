@@ -14,13 +14,13 @@ start-debug:
 
 start-release:
 	./Scripts/package_app.sh release
-	pkill -x CodexBar || pkill -f Sharingan.app || true
+	pkill -x Sharingan || pkill -f Sharingan.app || true
 	open -n "$(CURDIR)/Sharingan.app"
 
 restart: start
 
 stop:
-	pkill -x CodexBar || pkill -f Sharingan.app || true
+	pkill -x Sharingan || pkill -f Sharingan.app || true
 
 check lint:
 	./Scripts/lint.sh $(if $(filter Linux,$(shell uname -s)),lint-linux,lint)
@@ -44,10 +44,10 @@ test-skip-build:
 	./Scripts/test_fast.sh --skip-build $(test_filter_arg)
 
 test-tty:
-	source ./Scripts/test_environment.sh && CODEXBAR_SUPPRESS_TEST_KEYCHAIN_ACCESS=1 swift test --filter TTYIntegrationTests
+	source ./Scripts/test_environment.sh && SHARINGAN_SUPPRESS_TEST_KEYCHAIN_ACCESS=1 swift test --filter TTYIntegrationTests
 
 test-live:
-	export CODEXBAR_ALLOW_TEST_KEYCHAIN_ACCESS=1 && source ./Scripts/test_environment.sh && LIVE_TEST=1 swift test --filter LiveAccountTests
+	export SHARINGAN_ALLOW_TEST_KEYCHAIN_ACCESS=1 && source ./Scripts/test_environment.sh && LIVE_TEST=1 swift test --filter LiveAccountTests
 
 release:
 	./Scripts/package_app.sh release

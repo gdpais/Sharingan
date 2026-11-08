@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct CLITerminalCapabilitiesTests {
     @Test
@@ -24,7 +24,7 @@ struct CLITerminalCapabilitiesTests {
 
     @Test
     func `respects forced enhanced env override`() {
-        let env = ["TERM": "dumb", "CODEXBAR_CARDS_ENHANCED": "1"]
+        let env = ["TERM": "dumb", "SHARINGAN_CARDS_ENHANCED": "1"]
         #expect(CLITerminalCapabilities.supportsEnhancedCards(useColor: true, environment: env))
     }
 
@@ -43,7 +43,7 @@ struct CLITerminalCapabilitiesTests {
 
     @Test
     func `respects forced enhanced opt out`() {
-        let env = ["TERM": "xterm-256color", "CODEXBAR_CARDS_ENHANCED": "0"]
+        let env = ["TERM": "xterm-256color", "SHARINGAN_CARDS_ENHANCED": "0"]
         #expect(!CLITerminalCapabilities.supportsEnhancedCards(useColor: true, environment: env))
     }
 }

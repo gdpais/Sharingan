@@ -1,7 +1,7 @@
-import CodexBarCore
 import Foundation
+import SharinganCore
 import Testing
-@testable import CodexBarCLI
+@testable import SharinganCLI
 
 struct CLIHooksWatchSleepLinuxTests {
     @Test
@@ -9,7 +9,7 @@ struct CLIHooksWatchSleepLinuxTests {
         let stop = HooksWatchStopSignal()
         stop.request()
 
-        await CodexBarCLI.sleepInterruptibly(interval: 30, stop: stop) { _ in
+        await SharinganCLI.sleepInterruptibly(interval: 30, stop: stop) { _ in
             Issue.record("An already requested stop must not sleep")
         }
     }
@@ -20,7 +20,7 @@ struct CLIHooksWatchSleepLinuxTests {
         // requested ticks so a single full-interval sleep cannot satisfy this test.
         let stop = HooksWatchStopSignal()
         var ticks: [UInt64] = []
-        await CodexBarCLI.sleepInterruptibly(interval: 10, stop: stop) { nanoseconds in
+        await SharinganCLI.sleepInterruptibly(interval: 10, stop: stop) { nanoseconds in
             ticks.append(nanoseconds)
             stop.request()
         }
@@ -32,7 +32,7 @@ struct CLIHooksWatchSleepLinuxTests {
     func `unsignaled sleep requests the full interval in bounded ticks`(interval: TimeInterval) async {
         let stop = HooksWatchStopSignal()
         var ticks: [UInt64] = []
-        await CodexBarCLI.sleepInterruptibly(interval: interval, stop: stop) { nanoseconds in
+        await SharinganCLI.sleepInterruptibly(interval: interval, stop: stop) { nanoseconds in
             ticks.append(nanoseconds)
         }
 

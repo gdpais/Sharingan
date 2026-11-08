@@ -6,8 +6,8 @@ TAG=${1:-$(git -C "$SCRIPT_DIR/.." describe --tags --abbrev=0)}
 
 # Asset presence alone cannot detect a damaged or incorrectly signed release.
 source "$SCRIPT_DIR/release_artifacts.sh"
-ARCHIVE=$(codexbar_app_zip_name "${TAG#v}" "${ARCHES:-arm64 x86_64}")
-TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/codexbar-release-assets.XXXXXX")
+ARCHIVE=$(sharingan_app_zip_name "${TAG#v}" "${ARCHES:-arm64 x86_64}")
+TEMP_DIR=$(mktemp -d "${TMPDIR:-/tmp}/sharingan-release-assets.XXXXXX")
 trap 'rm -rf "$TEMP_DIR"' EXIT
 curl --fail --location --silent --show-error --connect-timeout 15 --max-time 300 \
   "https://github.com/gdpais/Sharingan/releases/download/$TAG/$ARCHIVE" \

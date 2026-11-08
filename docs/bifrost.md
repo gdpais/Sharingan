@@ -2,12 +2,12 @@
 summary: "Bifrost provider setup and usage data shape."
 read_when:
   - Configuring Bifrost usage tracking
-  - Troubleshooting Bifrost virtual-key usage in CodexBar
+  - Troubleshooting Bifrost virtual-key usage in Sharingan
 ---
 
 # Bifrost
 
-[Bifrost](https://github.com/maximhq/bifrost) is a self-hosted AI gateway. CodexBar reads a virtual key's own
+[Bifrost](https://github.com/maximhq/bifrost) is a self-hosted AI gateway. Sharingan reads a virtual key's own
 governance budgets and rate limits through Bifrost's self-service quota endpoint — no admin/master credential is
 required or used.
 
@@ -33,7 +33,7 @@ export BIFROST_API_KEY=vk-...
 export BIFROST_BASE_URL=https://bifrost.example.com
 ```
 
-Both the virtual key and the base URL are required; Bifrost has no default public host and CodexBar does not guess
+Both the virtual key and the base URL are required; Bifrost has no default public host and Sharingan does not guess
 one. The base URL must use HTTPS unless it names a loopback or private-network address, or a `.local` mDNS host, and
 must not embed credentials because the key is sent to it as a header. Plain HTTP remains available for self-hosted
 gateways on loopback, RFC 1918, link-local, and IPv6 unique-local networks. A base URL that does not meet these rules
@@ -49,7 +49,7 @@ x-bf-vk: <virtual key>
 ```
 
 This is a self-service endpoint scoped to the calling virtual key — it ships in Bifrost's open-source edition with no
-admin middleware, and CodexBar never requests or stores a Bifrost admin/master key.
+admin middleware, and Sharingan never requests or stores a Bifrost admin/master key.
 
 The response's budgets are ordered by shortest reset cycle: the shortest is the primary window, the next is the
 secondary window, and any further budgets appear as additional named windows. Provider- and model-scoped budgets
@@ -71,7 +71,7 @@ unused dimensions too. A positive limit or a nonempty reset duration is required
 
 Bifrost's `override_amount`/`override_mode`/`override_cycles_remaining` fields determine the effective budget limit.
 Duration shorthand supplies labels and orders budget windows. The quota response omits the owner's calendar-alignment
-policy, so CodexBar does not guess reset dates or exact window lengths for `d`/`w`/`M`/`Q`/`Y` periods. Sub-day Go-style
+policy, so Sharingan does not guess reset dates or exact window lengths for `d`/`w`/`M`/`Q`/`Y` periods. Sub-day Go-style
 durations such as `1h30m` retain their next reset date when `last_reset` is present.
 Reset-only rate limits retain their reset metadata and display **Unavailable** instead of a measured 0% usage.
 Budget detail bars use a consumed fraction capped at 100%; numeric spend remains uncapped, including overages.
@@ -92,5 +92,5 @@ the top 5 are shown; any further models are folded into a single "Other models" 
 
 ## Security
 
-Treat Bifrost virtual keys as secrets. CodexBar stores configured keys only in provider config or token-account
+Treat Bifrost virtual keys as secrets. Sharingan stores configured keys only in provider config or token-account
 storage and sends them only to the configured Bifrost base URL.

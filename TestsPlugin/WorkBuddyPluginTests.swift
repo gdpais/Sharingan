@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 #if canImport(FoundationNetworking)
 import FoundationNetworking
 #endif
@@ -210,7 +210,7 @@ struct WorkBuddyPluginTests {
                 fileExists: { _ in false }, directoryContents: { _ in nil }))
         let web = try #require(WorkBuddyProviderDescriptor.spec.webSource)
         let values = try #require(web.resolveValues(context))
-        let bundle = try #require(CodexBarCoreResources.bundle)
+        let bundle = try #require(SharinganCoreResources.bundle)
         let source = try String(
             contentsOf: #require(bundle.url(forResource: "workbuddy", withExtension: "js")),
             encoding: .utf8)

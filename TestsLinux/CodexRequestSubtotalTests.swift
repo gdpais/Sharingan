@@ -1,7 +1,7 @@
 import Foundation
 import Testing
-@testable import CodexBarCLI
-@testable import CodexBarCore
+@testable import SharinganCLI
+@testable import SharinganCore
 
 struct CodexRequestSubtotalTests {
     private static let start: Int64 = 1_788_134_400_000
@@ -28,7 +28,7 @@ struct CodexRequestSubtotalTests {
             cacheReadTokens: 0,
             outputTokens: 0,
             reasoningTokens: nil) }
-        let report = try await CodexBarCLI.collectCodexIdentifiedUsage(
+        let report = try await SharinganCLI.collectCodexIdentifiedUsage(
             remote: "fixture-host",
             startUnixMs: Self.start,
             endUnixMs: Self.end,
@@ -264,7 +264,7 @@ struct CodexRequestSubtotalTests {
             endUnixMs: Self.end,
             environment: ["UNRELATED_TOKEN": "fixture-secret"])
         #expect(received.records == ledger.records)
-        let combined = try await CodexBarCLI.collectCodexIdentifiedUsage(
+        let combined = try await SharinganCLI.collectCodexIdentifiedUsage(
             remote: "fixture-host",
             startUnixMs: Self.start,
             endUnixMs: Self.end,
@@ -272,7 +272,7 @@ struct CodexRequestSubtotalTests {
             fetchRemote: { _ in received })
         #expect(combined.allSourcesAvailable)
         #expect(combined.subtotal?.totalTokens == 110)
-        let report = try await CodexBarCLI.collectCodexIdentifiedUsage(
+        let report = try await SharinganCLI.collectCodexIdentifiedUsage(
             remote: "fixture-host",
             startUnixMs: Self.start,
             endUnixMs: Self.end,
@@ -284,7 +284,7 @@ struct CodexRequestSubtotalTests {
         #expect(report.reports[0].ledger != nil)
         #expect(report.reports[1].ledger == nil)
         let cancelled = Task {
-            try await CodexBarCLI.collectCodexIdentifiedUsage(
+            try await SharinganCLI.collectCodexIdentifiedUsage(
                 remote: "fixture-host",
                 startUnixMs: Self.start,
                 endUnixMs: Self.end,

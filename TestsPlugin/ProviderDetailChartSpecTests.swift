@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct ProviderDetailChartSpecTests {
     private typealias Chart = ProviderDetailSection.Chart

@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 /// Regression guard for the provider credential-file hardening. `CredentialFileWriter` must create
 /// credential files owner-only (0600), publish atomically, and repair a pre-existing world-readable
@@ -29,7 +29,7 @@ struct CredentialFileWriterTests {
 
         #expect(try self.mode(of: url) == 0o600, "a credential file must be created owner-only (0600)")
         let staged = try FileManager.default.contentsOfDirectory(atPath: dir.path)
-            .filter { $0.contains("codexbar-staged") }
+            .filter { $0.contains("sharingan-staged") }
         #expect(staged.isEmpty, "no staged temp file should remain after publish")
     }
 

@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct ProviderPluginOptionalAdmissionTests {
     @Test(arguments: BundledPluginTestSupport.engines)
@@ -21,7 +21,7 @@ struct ProviderPluginOptionalAdmissionTests {
               }
             });
             """,
-            resourceBundle: CodexBarCoreResources.bundle,
+            resourceBundle: SharinganCoreResources.bundle,
             transport: ProviderHTTPTransportHandler { request in
                 if request.url?.path == "/optional" { try await Task.sleep(for: .milliseconds(20)) }
                 return try (Data("ready".utf8), #require(HTTPURLResponse(

@@ -17,7 +17,7 @@ the two apps have matching interfaces.
 Omarchy colors can follow its current theme, with the system palette as fallback.
 Other Linux desktops use Qt's system palette. Source builds and a tested portable
 archive installer are available; the archive requires compatible system Qt/glibc
-libraries and a separately installed CodexBar CLI.
+libraries and a separately installed Sharingan CLI.
 
 Mac-only managed account profiles, token-account editing, browser credential
 imports, advanced menu-bar layout/pace coloring, and macOS-specific surfaces remain

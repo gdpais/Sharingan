@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct HooksTests {
     private func event(
@@ -110,14 +110,14 @@ struct HooksTests {
     func `environment variables include set fields and omit nil`() {
         let env = self.event(.quotaLow, usagePercent: 0.5, account: nil, window: "weekly")
             .environmentVariables()
-        #expect(env["CODEXBAR_EVENT"] == "quota_low")
-        #expect(env["CODEXBAR_PROVIDER"] == "codex")
-        #expect(env["CODEXBAR_WINDOW"] == "weekly")
-        #expect(env["CODEXBAR_USAGE_PERCENT"] == "0.5")
-        #expect(env["CODEXBAR_RESET_AT"] == "2023-11-14T22:13:20Z")
-        #expect(env["CODEXBAR_TIMESTAMP"] != nil)
-        #expect(env["CODEXBAR_ACCOUNT"] == nil)
-        #expect(env["CODEXBAR_STATUS"] == nil)
+        #expect(env["SHARINGAN_EVENT"] == "quota_low")
+        #expect(env["SHARINGAN_PROVIDER"] == "codex")
+        #expect(env["SHARINGAN_WINDOW"] == "weekly")
+        #expect(env["SHARINGAN_USAGE_PERCENT"] == "0.5")
+        #expect(env["SHARINGAN_RESET_AT"] == "2023-11-14T22:13:20Z")
+        #expect(env["SHARINGAN_TIMESTAMP"] != nil)
+        #expect(env["SHARINGAN_ACCOUNT"] == nil)
+        #expect(env["SHARINGAN_STATUS"] == nil)
     }
 
     @Test
@@ -169,8 +169,8 @@ struct HooksTests {
         // /usr/bin/env prints the environment; assert our injected vars reach the child.
         let rule = HookRule(event: .quotaReached, executable: "/usr/bin/env")
         let result = try await HookRunner.run(rule: rule, event: self.event())
-        #expect(result.stdout.contains("CODEXBAR_EVENT=quota_reached"))
-        #expect(result.stdout.contains("CODEXBAR_PROVIDER=codex"))
+        #expect(result.stdout.contains("SHARINGAN_EVENT=quota_reached"))
+        #expect(result.stdout.contains("SHARINGAN_PROVIDER=codex"))
     }
 
     @Test
@@ -185,7 +185,7 @@ struct HooksTests {
 
     @Test
     func `runner throws on missing executable`() async {
-        let rule = HookRule(event: .quotaReached, executable: "/nonexistent/codexbar-hook")
+        let rule = HookRule(event: .quotaReached, executable: "/nonexistent/sharingan-hook")
         await #expect(throws: SubprocessRunnerError.self) {
             try await HookRunner.run(rule: rule, event: self.event())
         }

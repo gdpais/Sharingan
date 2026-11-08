@@ -1,6 +1,6 @@
 import Foundation
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 #if os(Linux)
 struct TTYProcessTreeProcfsReadLinuxTests {

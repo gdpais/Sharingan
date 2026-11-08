@@ -7,8 +7,8 @@ set -euo pipefail
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 APP_BUNDLE="${ROOT_DIR}/Sharingan.app"
 APP_PROCESS_PATTERN="Sharingan.app/Contents/MacOS/Sharingan"
-DEBUG_PROCESS_PATTERN="${ROOT_DIR}/.build/debug/CodexBar"
-RELEASE_PROCESS_PATTERN="${ROOT_DIR}/.build/release/CodexBar"
+DEBUG_PROCESS_PATTERN="${ROOT_DIR}/.build/debug/Sharingan"
+RELEASE_PROCESS_PATTERN="${ROOT_DIR}/.build/release/Sharingan"
 LOCK_KEY="$(printf '%s' "${ROOT_DIR}" | shasum -a 256 | cut -c1-8)"
 LOCK_DIR="${TMPDIR:-/tmp}/sharingan-compile-and-run-${LOCK_KEY}"
 LOCK_PID_FILE="${LOCK_DIR}/pid"
@@ -16,7 +16,7 @@ WAIT_FOR_LOCK=0
 RUN_TESTS=0
 DEBUG_LLDB=0
 RELEASE_ARCHES=""
-SIGNING_MODE="${CODEXBAR_SIGNING:-}"
+SIGNING_MODE="${SHARINGAN_SIGNING:-}"
 CLEAR_ADHOC_KEYCHAIN=0
 
 log()  { printf '%s\n' "$*"; }
@@ -155,13 +155,13 @@ acquire_lock() {
 trap cleanup EXIT INT TERM
 
 kill_claude_probes() {
-  # CodexBar spawns `claude /usage` + `/status` in a PTY; if we kill the app mid-probe we can orphan them.
+  # Sharingan spawns `claude /usage` + `/status` in a PTY; if we kill the app mid-probe we can orphan them.
   pkill -f "claude (/status|/usage) --allowed-tools" 2>/dev/null || true
   sleep 0.2
   pkill -9 -f "claude (/status|/usage) --allowed-tools" 2>/dev/null || true
 }
 
-kill_all_codexbar() {
+kill_all_sharingan() {
   is_running() {
     pgrep -f "${APP_PROCESS_PATTERN}" >/dev/null 2>&1 \
       || pgrep -f "${DEBUG_PROCESS_PATTERN}" >/dev/null 2>&1 \
@@ -230,7 +230,7 @@ acquire_lock
 
 # 2) Kill all running Sharingan instances (debug, release, bundled).
 log "==> Killing existing Sharingan instances"
-kill_all_codexbar
+kill_all_sharingan
 kill_claude_probes
 
 # 2.5) Optionally delete keychain entries to avoid permission prompts with adhoc signing
@@ -261,10 +261,10 @@ PACKAGE_ENV=(
   ARCHES="${ARCHES_VALUE}"
 )
 if [[ "${DEBUG_LLDB}" == "1" ]]; then
-  run_step "package app" env CODEXBAR_ALLOW_LLDB=1 "${PACKAGE_ENV[@]}" "${ROOT_DIR}/Scripts/package_app.sh" debug
+  run_step "package app" env SHARINGAN_ALLOW_LLDB=1 "${PACKAGE_ENV[@]}" "${ROOT_DIR}/Scripts/package_app.sh" debug
 else
   if [[ -n "${SIGNING_MODE}" ]]; then
-    run_step "package app" env CODEXBAR_SIGNING="${SIGNING_MODE}" "${PACKAGE_ENV[@]}" "${ROOT_DIR}/Scripts/package_app.sh"
+    run_step "package app" env SHARINGAN_SIGNING="${SIGNING_MODE}" "${PACKAGE_ENV[@]}" "${ROOT_DIR}/Scripts/package_app.sh"
   else
     run_step "package app" env "${PACKAGE_ENV[@]}" "${ROOT_DIR}/Scripts/package_app.sh"
   fi

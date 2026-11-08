@@ -3,7 +3,7 @@ import Foundation
 import FoundationNetworking
 #endif
 import Testing
-@testable import CodexBarCore
+@testable import SharinganCore
 
 struct NeuralWattPluginTests {
     private static let fixtures = [
@@ -436,7 +436,7 @@ struct NeuralWattPluginTests {
         _ engine: ProviderPluginEngineKind,
         transport: any ProviderHTTPTransport) throws -> ProviderPluginRuntime
     {
-        let url = try #require(CodexBarCoreResources.bundle?.url(forResource: "neuralwatt", withExtension: "js"))
+        let url = try #require(SharinganCoreResources.bundle?.url(forResource: "neuralwatt", withExtension: "js"))
         return try ProviderPluginRuntime(
             source: String(contentsOf: url, encoding: .utf8),
             transport: transport,
