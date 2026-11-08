@@ -9,7 +9,7 @@ struct MenuCardLayoutTests {
     func `default layout lists every section visible in today's order with the automatic chart`() {
         let layout = MenuCardLayout.default
         #expect(layout.order == [.usage, .pace, .chart, .credits, .extraUsage, .cost])
-        #expect(layout.sections.allSatisfy(\.isVisible))
+        #expect(!layout.sections.contains { !$0.isVisible })
         #expect(layout.chart == .automatic)
         #expect(layout.hiddenMenuItems.isEmpty)
         #expect(layout.isDefault)
