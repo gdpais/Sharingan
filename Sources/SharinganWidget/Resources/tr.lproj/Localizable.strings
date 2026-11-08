@@ -39,7 +39,9 @@
 "Activity" = "Etkinlik";
 "Add-on credits" = "Eklenti Krediler";
 "Agent" = "Temsilci";
+"All providers" = "Tüm sağlayıcılar";
 "Amp Free" = "Amp Ücretsiz";
+"Automatic" = "Otomatik";
 "Balance" = "Bakiye";
 "Base" = "Baz";
 "Billing" = "Faturalandırma";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Kota yazma sağlayıcısı";
 "Chat" = "Sohbet";
 "Choose an account" = "Bir hesap seçin";
+"Choose which providers the switcher shows and their order." = "Değiştiricinin hangi sağlayıcıları hangi sırayla göstereceğini seçin.";
 "Claude and GPT" = "Claude ve GPT";
 "Code 7-day" = "Kod 7 günlük Kota";
 "Code review" = "Kod incelemesi";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "Günlük ücretsiz token";
 "Daily refresh" = "Günlük yenileme";
 "Daily usage" = "Günlük kullanım";
+"Default" = "Varsayılan";
 "Deployment" = "Dağıtım";
 "Edit predictions" = "Tahminleri düzenle";
 "Enable a provider in Sharingan → Settings → Providers." = "Sharingan → Ayarlar → Sağlayıcılar’da bir sağlayıcıyı etkinleştirin.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo Geçişi";
 "Last %d days" = "Son %d gün";
 "Last 30 days" = "Son 30 gün";
+"Last 7 days" = "Son 7 gün";
+"Last 90 days" = "Son 90 gün";
+"Match app" = "Uygulamayla aynı";
 "Memory" = "Bellek kullanımı";
 "Metric" = "Metrik";
 "Model quota" = "Model Kota";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Aylık bütçe";
 "Monthly credits" = "Aylık Krediler";
 "Monthly quota" = "Aylık Kota";
+"Name" = "Ad";
 "No data" = "Veri yok";
 "Not reported by %@" = "%@ tarafından bildirilmedi";
 "On-demand" = "İsteğe bağlı kullanım";
@@ -119,11 +127,14 @@
 "Provider" = "Sağlayıcı";
 "Provider %@" = "Sağlayıcı %@";
 "Provider + Metric" = "Sağlayıcı + Metrik";
+"Providers" = "Sağlayıcılar";
 "Purchased" = "Satın alındı";
 "Quota" = "Kota";
 "Ran out" = "Kota tükendi";
+"Range" = "Aralık";
 "Rate limit" = "Oran sınırı";
 "Refill" = "Yeniden doldurma";
+"Remaining" = "Kalan";
 "Remaining budget compared with an ideal steady burn rate." = "İdeal sabit yazma hızıyla karşılaştırıldığında kalan bütçe.";
 "Requests" = "İstekler";
 "Reset: %@" = "Sıfırla: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Krediler ile oturum ve haftalık kullanım ve maliyetler.";
 "Shared pool" = "Ortak kota";
 "Sonnet" = "Sonnet";
+"Sort by" = "Sıralama ölçütü";
 "Spend" = "Harcama";
 "Standard" = "Standart";
 "Status" = "Durum";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Sağlayıcıyı Değiştir";
 "Switch the provider shown in the widget." = "Widget'ta gösterilen sağlayıcıyı değiştirin.";
 "Switch to %@" = "%@'ye geçiş yapın";
+"Switcher" = "Değiştirici";
 "Team budget" = "Takım bütçesi";
 "Third Party" = "Üçüncü Taraf";
 "Third quota" = "Üçüncü Kota";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Kayıtlı bir hesap için kullanım sınırları ve geri sayımları sıfırlama.";
 "Usage widget with a provider switcher." = "Sağlayıcı değiştiricili kullanım widget'ı.";
 "Usage window" = "Kullanım penceresi";
+"Used" = "Kullanılan";
 "Voices" = "Sesler";
 "Weekly" = "Haftalık";
 "Weekly (7-day)" = "Haftalık (7 günlük)";

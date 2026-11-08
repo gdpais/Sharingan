@@ -39,7 +39,9 @@
 "Activity" = "活動";
 "Add-on credits" = "額外購買的額度";
 "Agent" = "智能體";
+"All providers" = "所有提供者";
 "Amp Free" = "Amp Free";
+"Automatic" = "自動";
 "Balance" = "餘額";
 "Base" = "基礎";
 "Billing" = "計費";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "額度消耗趨勢的提供商";
 "Chat" = "聊天";
 "Choose an account" = "選擇帳戶";
+"Choose which providers the switcher shows and their order." = "選擇切換器顯示哪些提供者及其順序。";
 "Claude and GPT" = "Claude 和 GPT";
 "Code 7-day" = "編程額度 · 7 天";
 "Code review" = "程式碼審查";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "每日免費 token";
 "Daily refresh" = "每日重新整理";
 "Daily usage" = "每日用量";
+"Default" = "預設";
 "Deployment" = "部署";
 "Edit predictions" = "編輯預測";
 "Enable a provider in Sharingan → Settings → Providers." = "在 Sharingan → 設定 → 供應商中啟用一個供應商。";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo Pass";
 "Last %d days" = "近 %d 天";
 "Last 30 days" = "近 30 天";
+"Last 7 days" = "近 7 天";
+"Last 90 days" = "近 90 天";
+"Match app" = "跟隨 App";
 "Memory" = "內存";
 "Metric" = "指標";
 "Model quota" = "模型額度";
@@ -99,6 +106,7 @@
 "Monthly budget" = "每月預算";
 "Monthly credits" = "每月 額度";
 "Monthly quota" = "每月額度";
+"Name" = "名稱";
 "No data" = "無資料";
 "Not reported by %@" = "%@ 未報告";
 "On-demand" = "按需使用";
@@ -119,11 +127,14 @@
 "Provider" = "提供者";
 "Provider %@" = "供應商 %@";
 "Provider + Metric" = "提供者+指標";
+"Providers" = "提供者";
 "Purchased" = "已購買";
 "Quota" = "配額";
 "Ran out" = "配額 已耗盡";
+"Range" = "時間範圍";
 "Rate limit" = "速率限制";
 "Refill" = "補充額度";
+"Remaining" = "剩餘";
 "Remaining budget compared with an ideal steady burn rate." = "比較剩餘額度與理想的均勻使用速度。";
 "Requests" = "請求";
 "Reset: %@" = "重置：%@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "顯示會話及每周用量、額度和費用。";
 "Shared pool" = "共享額度池";
 "Sonnet" = "Sonnet";
+"Sort by" = "排序依據";
 "Spend" = "支出";
 "Standard" = "標準型";
 "Status" = "狀態";
@@ -155,6 +167,7 @@
 "Switch Provider" = "切換提供者";
 "Switch the provider shown in the widget." = "切換小工具中顯示的提供者。";
 "Switch to %@" = "切換至%@";
+"Switcher" = "切換器";
 "Team budget" = "團隊預算";
 "Third Party" = "第三方";
 "Third quota" = "第三項配額";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "一個已儲存帳戶的使用限制和重設倒數。";
 "Usage widget with a provider switcher." = "可切換提供商的用量小工具。";
 "Usage window" = "配額週期";
+"Used" = "已用";
 "Voices" = "語音";
 "Weekly" = "每週";
 "Weekly (7-day)" = "每週（7 天）";

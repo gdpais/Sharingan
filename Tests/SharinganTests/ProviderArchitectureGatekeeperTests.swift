@@ -109,8 +109,10 @@ struct ProviderArchitectureGatekeeperTests {
 
     @Test
     func `widget provider choices match selectable descriptor metadata`() {
+        // The AppEnum catalog covers every built-in provider; the original picker set stays descriptor-driven.
+        #expect(Set(ProviderChoice.allCases.map(\.provider)) == Set(UsageProvider.allCases))
         let selectable = Set(ProviderDescriptorRegistry.all.filter(\.metadata.widgetSelectable).map(\.id))
-        let choices = Set(ProviderChoice.allCases.map(\.provider))
+        let choices = Set(UsageProvider.allCases.compactMap { ProviderChoice(provider: $0)?.provider })
         let missing = selectable.subtracting(choices).map(\.rawValue).sorted()
         let unexpected = choices.subtracting(selectable).map(\.rawValue).sorted()
 
@@ -1571,13 +1573,13 @@ struct ProviderArchitectureGatekeeperTests {
         SuppressedProviderReference(
             path: "Sources/SharinganWidget/SharinganWidgetProvider.swift",
             occurrence: 1,
-            anchor: "@Parameter(title: \"Provider\", default: .codex)",
+            anchor: "@Parameter(title: \"Provider\", default: .codex, optionsProvider: WidgetProviderOptions())",
             expectedProviderIDs: ["codex"],
             reason: "This WidgetKit default or preview pins the established Codex sample provider."),
         SuppressedProviderReference(
             path: "Sources/SharinganWidget/SharinganWidgetProvider.swift",
             occurrence: 2,
-            anchor: "@Parameter(title: \"Provider\", default: .codex)",
+            anchor: "@Parameter(title: \"Provider\", default: .codex, optionsProvider: WidgetProviderOptions())",
             expectedProviderIDs: ["codex"],
             reason: "This WidgetKit default or preview pins the established Codex sample provider."),
         SuppressedProviderReference(

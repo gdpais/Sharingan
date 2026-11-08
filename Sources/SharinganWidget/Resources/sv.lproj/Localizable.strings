@@ -39,7 +39,9 @@
 "Activity" = "Aktivitet";
 "Add-on credits" = "Tillägg Krediter";
 "Agent" = "Agent";
+"All providers" = "Alla leverantörer";
 "Amp Free" = "Amp gratis";
+"Automatic" = "Automatiskt";
 "Balance" = "Saldo";
 "Base" = "Bas";
 "Billing" = "Fakturering";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Kvot burn-down leverantör";
 "Chat" = "Chatta";
 "Choose an account" = "Välj ett konto";
+"Choose which providers the switcher shows and their order." = "Välj vilka leverantörer växlaren visar och i vilken ordning.";
 "Claude and GPT" = "Claude och GPT";
 "Code 7-day" = "Kod 7-dagars Kvot";
 "Code review" = "Kodgranskning";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "Daglig gratis token";
 "Daily refresh" = "Daglig uppdatering";
 "Daily usage" = "Daglig användning";
+"Default" = "Standard";
 "Deployment" = "Distribution";
 "Edit predictions" = "Redigera förutsägelser";
 "Enable a provider in Sharingan → Settings → Providers." = "Aktivera en leverantör i Sharingan → Inställningar → Leverantörer.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo Pass";
 "Last %d days" = "Senaste %d dagarna";
 "Last 30 days" = "Senaste 30 dagarna";
+"Last 7 days" = "Senaste 7 dagarna";
+"Last 90 days" = "Senaste 90 dagarna";
+"Match app" = "Som i appen";
 "Memory" = "Minnesanvändning";
 "Metric" = "Mått";
 "Model quota" = "Modell Kvot";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Månadsbudget";
 "Monthly credits" = "Månatlig Krediter";
 "Monthly quota" = "Månatlig Kvot";
+"Name" = "Namn";
 "No data" = "Inga data";
 "Not reported by %@" = "Inte rapporterad av %@";
 "On-demand" = "Användning på begäran";
@@ -119,11 +127,14 @@
 "Provider" = "Leverantör";
 "Provider %@" = "Leverantör %@";
 "Provider + Metric" = "Leverantör + Mått";
+"Providers" = "Leverantörer";
 "Purchased" = "Inköpt";
 "Quota" = "Kvot";
 "Ran out" = "Kvot utarmat";
+"Range" = "Period";
 "Rate limit" = "Gräns för anropsfrekvens";
 "Refill" = "Påfyllning";
+"Remaining" = "Kvar";
 "Remaining budget compared with an ideal steady burn rate." = "Återstående budget jämfört med en idealisk jämn förbränningshastighet.";
 "Requests" = "Förfrågningar";
 "Reset: %@" = "Återställ: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Session och veckovis användning med Krediter och kostnader.";
 "Shared pool" = "Gemensam kvot";
 "Sonnet" = "Sonnet";
+"Sort by" = "Sortera efter";
 "Spend" = "Utgifter";
 "Standard" = "Standard";
 "Status" = "Status";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Byt leverantör";
 "Switch the provider shown in the widget." = "Byt leverantör som visas i widgeten.";
 "Switch to %@" = "Byt till %@";
+"Switcher" = "Växlare";
 "Team budget" = "Lagbudget";
 "Third Party" = "Tredje part";
 "Third quota" = "Tredje Kvot";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Användningsgränser och återställ nedräkningar för ett sparat konto.";
 "Usage widget with a provider switcher." = "Användningswidget med en leverantörsväxlare.";
 "Usage window" = "Användningsfönster";
+"Used" = "Använt";
 "Voices" = "Röster";
 "Weekly" = "Vecka";
 "Weekly (7-day)" = "Varje vecka (7 dagar)";

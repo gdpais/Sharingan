@@ -64,6 +64,7 @@ extension ProviderConfig {
             guard !genericKeys.contains(key.stringValue), try !container.decodeNil(forKey: key) else { return }
             values[key.stringValue] = try container.decode(ProviderConfigExtensionValue.self, forKey: key)
         }
+        self.adoptStoredQuotaWarningLanes()
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -80,7 +81,7 @@ extension ProviderConfig {
         try container.encodeIfPresent(self.workspaceID, forKey: .init(CodingKeys.workspaceID.rawValue))
         try container.encodeIfPresent(self.enterpriseHost, forKey: .init(CodingKeys.enterpriseHost.rawValue))
         try container.encodeIfPresent(self.tokenAccounts, forKey: .init(CodingKeys.tokenAccounts.rawValue))
-        try container.encodeIfPresent(self.quotaWarnings, forKey: .init(CodingKeys.quotaWarnings.rawValue))
+        try container.encodeIfPresent(self.storedQuotaWarnings, forKey: .init(CodingKeys.quotaWarnings.rawValue))
         try container.encodeIfPresent(self.accentColor, forKey: .init(CodingKeys.accentColor.rawValue))
         try container.encodeIfPresent(
             self.hiddenUsageItemIDs,
@@ -90,7 +91,7 @@ extension ProviderConfig {
         }
         try container.encodeIfPresent(self.pluginSettings, forKey: .init(CodingKeys.pluginSettings.rawValue))
         try container.encodeIfPresent(self.pluginSecrets, forKey: .init(CodingKeys.pluginSecrets.rawValue))
-        for (key, value) in self.extensionValues {
+        for (key, value) in self.storedExtensionValues {
             try container.encode(value, forKey: .init(key))
         }
     }

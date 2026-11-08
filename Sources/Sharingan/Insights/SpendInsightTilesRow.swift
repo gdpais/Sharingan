@@ -5,17 +5,19 @@ import SwiftUI
 /// tokens and the top model's share of spend, each with a previous-period delta and a trend.
 struct SpendInsightTilesRow: View {
     let group: SpendDashboardModel.CurrencyGroup
-    /// Monthly plan price in the group's currency; `nil` until a plan price setting exists.
-    let planMonthlyPrice: Double?
+    /// Each provider's plan price and budget (see `ProviderSpendPlan`); plan value reads the prices.
+    @Environment(\.spendPlans) private var spendPlans
 
     var body: some View {
+        let pricing = SpendInsightTileItem.planPricing(group: self.group, spendPlans: self.spendPlans)
         let items = SpendInsightTileItem.items(
             for: SpendInsightTiles(
                 inputs: self.group.insightInputs,
                 calendar: self.group.calendar,
-                planMonthlyPrice: self.planMonthlyPrice),
+                planPricing: pricing),
             currencyCode: self.group.currencyCode,
-            planMonthlyPrice: self.planMonthlyPrice)
+            planPricing: pricing,
+            planScopeNames: SpendInsightTileItem.planScopeNames(pricing: pricing, group: self.group))
         if !items.isEmpty {
             LazyVGrid(
                 columns: [GridItem(.adaptive(minimum: 160, maximum: 260), spacing: 12)],
@@ -44,7 +46,7 @@ struct SpendInsightTileItem: Identifiable, Equatable {
 
     let kind: Kind
     let title: String
-    /// `nil` for the plan value hint, which has no number until a plan price is set.
+    /// `nil` for a tile that shows only its detail.
     let value: String?
     let detail: String?
     let delta: String?
@@ -54,32 +56,29 @@ struct SpendInsightTileItem: Identifiable, Equatable {
         self.kind
     }
 
-    /// Tiles without a value are left out, except plan value, which asks for a plan price while
-    /// there is spend to compare it with.
+    /// Tiles without a value are left out. Plan value appears only when a provider in the group has a
+    /// plan price and that provider has spend to compare with it.
+    ///
+    /// - Parameter planScopeNames: Names of the priced plans when they cover only part of the group,
+    ///   so the title says whose spend the tile compares; `nil` when they cover all of it.
     static func items(
         for tiles: SpendInsightTiles,
         currencyCode: String,
-        planMonthlyPrice: Double?) -> [SpendInsightTileItem]
+        planPricing: SpendInsightPlanPricing?,
+        planScopeNames: [String]? = nil) -> [SpendInsightTileItem]
     {
         var items: [SpendInsightTileItem] = []
-        if let price = planMonthlyPrice, let tile = tiles.planValue {
+        if let pricing = planPricing, !pricing.isEmpty, let tile = tiles.planValue {
+            let price = UsageFormatter.currencyString(pricing.monthlyPrice, currencyCode: currencyCode)
             items.append(SpendInsightTileItem(
                 kind: .planValue,
-                title: L("Plan value"),
+                title: planScopeNames.map { L("Plan value · %@", $0.joined(separator: ", ")) } ?? L("Plan value"),
                 value: spendInsightMultipleText(tile.value),
-                detail: L(
-                    "API-equivalent vs %@ plan",
-                    UsageFormatter.currencyString(price, currencyCode: currencyCode)),
+                detail: pricing.plans.count == 1
+                    ? L("API-equivalent vs %@ plan", price)
+                    : L("API-equivalent vs %@ in plans", price),
                 delta: spendInsightDeltaText(tile.delta, style: .multiple),
                 trend: tile.trend))
-        } else if planMonthlyPrice == nil, tiles.apiEquivalentCost != nil {
-            items.append(SpendInsightTileItem(
-                kind: .planValue,
-                title: L("Plan value"),
-                value: nil,
-                detail: L("Set a plan price to compare"),
-                delta: nil,
-                trend: []))
         }
         if let tile = tiles.cacheHitRate {
             items.append(SpendInsightTileItem(

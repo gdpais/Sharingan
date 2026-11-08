@@ -170,8 +170,9 @@ enum PlanFitPresentation {
         L("%@h", self.hoursText(hours))
     }
 
+    /// A 0–100 axis value as a localized percent ("50%", "50 %", "%50"), never a hard-coded suffix.
     static func percentAxisLabel(_ percent: Double) -> String {
-        "\(sharinganLocalizedInteger(Int(percent.rounded())))%"
+        (percent.rounded() / 100).formatted(.percent.precision(.fractionLength(0)).locale(sharinganLocalizedLocale()))
     }
 
     static func hoursText(_ hours: Double) -> String {

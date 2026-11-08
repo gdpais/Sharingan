@@ -39,7 +39,9 @@
 "Activity" = "กิจกรรม";
 "Add-on credits" = "อุปกรณ์เสริม เครดิต";
 "Agent" = "ตัวแทน";
+"All providers" = "ผู้ให้บริการทั้งหมด";
 "Amp Free" = "Amp ฟรี";
+"Automatic" = "อัตโนมัติ";
 "Balance" = "ยอดคงเหลือ";
 "Base" = "ฐาน";
 "Billing" = "การเรียกเก็บเงิน";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "ผู้ให้บริการเบิร์นดาวน์ โควต้า";
 "Chat" = "แชท";
 "Choose an account" = "เลือกบัญชี";
+"Choose which providers the switcher shows and their order." = "เลือกผู้ให้บริการที่สวิตช์แสดงและลำดับการแสดง";
 "Claude and GPT" = "Claude และ GPT";
 "Code 7-day" = "รหัส 7 วัน โควต้า";
 "Code review" = "การตรวจสอบโค้ด";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "ฟรีทุกวัน โทเค็น";
 "Daily refresh" = "รีเฟรชทุกวัน";
 "Daily usage" = "การใช้งานรายวัน";
+"Default" = "ค่าเริ่มต้น";
 "Deployment" = "การปรับใช้";
 "Edit predictions" = "แก้ไขคำทำนาย";
 "Enable a provider in Sharingan → Settings → Providers." = "เปิดใช้งานผู้ให้บริการใน Sharingan → การตั้งค่า → ผู้ให้บริการ";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo ผ่าน";
 "Last %d days" = "%d วันที่ผ่านมา";
 "Last 30 days" = "30 วันที่ผ่านมา";
+"Last 7 days" = "7 วันที่ผ่านมา";
+"Last 90 days" = "90 วันที่ผ่านมา";
+"Match app" = "ตามแอป";
 "Memory" = "การใช้หน่วยความจำ";
 "Metric" = "เมตริก";
 "Model quota" = "รุ่น โควต้า";
@@ -99,6 +106,7 @@
 "Monthly budget" = "งบประมาณรายเดือน";
 "Monthly credits" = "เครดิต รายเดือน";
 "Monthly quota" = "โควต้า รายเดือน";
+"Name" = "ชื่อ";
 "No data" = "ไม่มีข้อมูล";
 "Not reported by %@" = "ไม่ได้รายงานโดย %@";
 "On-demand" = "การใช้งานตามความต้องการ";
@@ -119,11 +127,14 @@
 "Provider" = "ผู้ให้บริการ";
 "Provider %@" = "ผู้ให้บริการ %@";
 "Provider + Metric" = "ผู้ให้บริการ + เมตริก";
+"Providers" = "ผู้ให้บริการ";
 "Purchased" = "ซื้อแล้ว";
 "Quota" = "โควต้า";
 "Ran out" = "โควต้า หมดลง";
+"Range" = "ช่วงเวลา";
 "Rate limit" = "ขีดจำกัดอัตรา";
 "Refill" = "เติมเงิน";
+"Remaining" = "คงเหลือ";
 "Remaining budget compared with an ideal steady burn rate." = "งบประมาณที่เหลืออยู่เมื่อเทียบกับอัตราการเผาไหม้ที่มั่นคงในอุดมคติ";
 "Requests" = "คําขอ";
 "Reset: %@" = "รีเซ็ต: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "การใช้งานเซสชันและรายสัปดาห์กับ เครดิต และค่าใช้จ่าย";
 "Shared pool" = "โควตาที่ใช้ร่วมกัน";
 "Sonnet" = "Sonnet";
+"Sort by" = "จัดเรียงตาม";
 "Spend" = "ค่าใช้จ่าย";
 "Standard" = "มาตรฐาน";
 "Status" = "สถานะ";
@@ -155,6 +167,7 @@
 "Switch Provider" = "ผู้ให้บริการสวิตช์";
 "Switch the provider shown in the widget." = "สลับผู้ให้บริการที่แสดงในวิดเจ็ต";
 "Switch to %@" = "เปลี่ยนเป็น %@";
+"Switcher" = "สวิตช์";
 "Team budget" = "งบประมาณทีม";
 "Third Party" = "บุคคลที่สาม";
 "Third quota" = "โควต้า ตัวที่สาม";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "ขีดจำกัดการใช้งานและรีเซ็ตการนับถอยหลังสำหรับบัญชีที่บันทึกไว้หนึ่งบัญชี";
 "Usage widget with a provider switcher." = "วิดเจ็ตการใช้งานพร้อมตัวสลับผู้ให้บริการ";
 "Usage window" = "หน้าต่างการใช้งาน";
+"Used" = "ใช้แล้ว";
 "Voices" = "เสียง";
 "Weekly" = "รายสัปดาห์";
 "Weekly (7-day)" = "รายสัปดาห์ (7 วัน)";

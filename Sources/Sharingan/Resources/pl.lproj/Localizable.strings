@@ -2802,6 +2802,29 @@
 "Project trends" = "Trendy projektów";
 "Change compares the last %d days with the %d days before." = "Zmiana porównuje ostatnie %d dni z %d dniami wcześniej.";
 "New" = "Nowy";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Wartość planu · %@";
+"API-equivalent vs %@ in plans" = "Równowartość API wobec planów za %@";
+"Plan & budget" = "Plan i budżet";
+"Plan price" = "Cena planu";
+"plan_price_subtitle" = "Miesięczna cena subskrypcji. Wartość planu porównuje ją z wydatkami w równowartości API.";
+"monthly_budget_subtitle" = "Porównywany z szacowanymi wydatkami od początku miesiąca na wykresie kosztów, w alertach i hakach.";
+"Currency" = "Waluta";
+"plan_budget_footer" = "Twoje własne liczby, zapisane przy tym dostawcy we wspólnym pliku konfiguracji. Zostaw pole puste, aby je wyłączyć.";
+"plan_budget_invalid_amount" = "Wpisz kwotę większą od zera.";
+"Month to date %@ of %@ budget" = "Od początku miesiąca %1$@ z budżetu %2$@";
+"Month to date at least %@ of %@ budget" = "Od początku miesiąca co najmniej %1$@ z budżetu %2$@";
+"budget %@/day" = "budżet %@/dzień";
+"budget_notifications_title" = "Alerty budżetu";
+"budget_notifications_subtitle" = "Powiadamia, gdy szacowane wydatki od początku miesiąca osiągną 80% i 100% miesięcznego budżetu dostawcy.";
+"budget_notifications_no_budget" = "Ustaw miesięczny budżet w ustawieniach dostawcy, aby otrzymywać alerty budżetu.";
+"budget_notification_title_warning" = "Budżet %1$@ na poziomie %2$@";
+"budget_notification_title_reached" = "Osiągnięto budżet %@";
+"budget_notification_body" = "Szacowane wydatki w tym miesiącu: %1$@ z Twojego budżetu %2$@.";
+"budget_hooks_header" = "Haki budżetu";
+"budget_hooks_add_rule" = "Dodaj hak budżetu";
+"budget_hooks_footer" = "Uruchamia polecenie, gdy szacowane wydatki od początku miesiąca osiągną 80% lub 100% miesięcznego budżetu dostawcy. Działa zgodnie z przełącznikiem haków powyżej. Zapisywane w preferencjach aplikacji na tym Macu, a nie we wspólnym pliku konfiguracji.";
 "quota_warning_add_threshold" = "Dodaj próg";
 "quota_warning_remove_threshold" = "Usuń najniższy próg";
 "quota_warning_lane_follows_weekly" = "Tylko znaczniki tygodniowe, bez powiadomień";
@@ -2813,3 +2836,28 @@
 "Drawn inside usage rows." = "Wyświetlane w wierszach użycia.";
 "Menu links" = "Linki w menu";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ustal kolejność i widoczność sekcji karty menu tego dostawcy oraz wybierz jej wykres. Sekcje i wykresy bez danych pozostają ukryte.";
+
+/* Chart preferences */
+"Charts" = "Wykresy";
+"Charts never show more days than the History window." = "Wykresy nigdy nie pokazują więcej dni niż zakres historii.";
+"Stack by model" = "Skumuluj według modelu";
+"Splits each day by its two largest models." = "Dzieli każdy dzień według dwóch największych modeli.";
+"Average line" = "Linia średniej";
+"Chart style" = "Styl wykresu";
+"Bars" = "Słupki";
+"Line" = "Linia";
+"Palette" = "Paleta";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Tryb przyjazny daltonistom zastępuje kolory akcentu dostawców na wykresach z jedną serią. Tryb monochromatyczny używa wszędzie odcieni szarości, także na mapach cieplnych.";
+"Provider accents" = "Kolory akcentu dostawców";
+"Colorblind-safe" = "Przyjazna daltonistom";
+"Monochrome" = "Monochromatyczna";
+/* Widget options */
+"Match app" = "Jak w aplikacji";
+"Used" = "Wykorzystano";
+"Last 7 days" = "Ostatnie 7 dni";
+"Last 90 days" = "Ostatnie 90 dni";
+"All providers" = "Wszyscy dostawcy";
+"Name" = "Nazwa";
+"Switcher" = "Przełącznik";
+"Choose which providers the switcher shows and their order." = "Wybierz, których dostawców pokazuje przełącznik i w jakiej kolejności.";
+"menu_bar_style_tomoe" = "Tomoe";

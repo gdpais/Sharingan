@@ -197,6 +197,8 @@ public struct CostUsageTokenSnapshot: Sendable, Equatable {
     /// Exact event-time slices for quota-window projection. Empty for legacy/coarse providers.
     public let quotaSlices: [CostUsageTimedEntry]
     public let updatedAt: Date
+    /// Entries of the equal window before `daily`, read only when the scan provably covered it; nil otherwise.
+    public var previousPeriodDaily: [CostUsageDailyReport.Entry]?
     let quotaProjectionMemo = CostUsageQuotaProjectionMemo()
 
     public init(

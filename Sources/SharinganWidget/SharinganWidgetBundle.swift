@@ -19,8 +19,9 @@ struct SharinganSwitcherWidget: Widget {
     private let kind = "SharinganSwitcherWidget"
 
     var body: some WidgetConfiguration {
-        StaticConfiguration(
+        AppIntentConfiguration(
             kind: self.kind,
+            intent: SwitcherSelectionIntent.self,
             provider: SharinganSwitcherTimelineProvider())
         { entry in
             SharinganSwitcherWidgetView(entry: entry)

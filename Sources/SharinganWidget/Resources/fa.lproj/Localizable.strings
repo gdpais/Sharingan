@@ -39,7 +39,9 @@
 "Activity" = "فعالیت ها";
 "Add-on credits" = "افزونه اعتبارات";
 "Agent" = "عامل";
+"All providers" = "همه ارائه‌دهندگان";
 "Amp Free" = "Amp رایگان";
+"Automatic" = "اتوماتیک";
 "Balance" = "موجودی";
 "Base" = "پایه";
 "Billing" = "صورتحساب";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "ارائه دهنده سوختگی سهمیه";
 "Chat" = "چت کنید";
 "Choose an account" = "یک حساب کاربری انتخاب کنید";
+"Choose which providers the switcher shows and their order." = "انتخاب کنید سوئیچر کدام ارائه‌دهندگان را و به چه ترتیبی نشان دهد.";
 "Claude and GPT" = "Claude و GPT";
 "Code 7-day" = "کد 7 روزه سهمیه";
 "Code review" = "بررسی کد";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "توکن ها رایگان روزانه";
 "Daily refresh" = "تازه کردن روزانه";
 "Daily usage" = "استفاده روزانه";
+"Default" = "پیش فرض";
 "Deployment" = "استقرار";
 "Edit predictions" = "ویرایش پیش بینی ها";
 "Enable a provider in Sharingan → Settings → Providers." = "یک ارائه‌دهنده را در Sharingan → تنظیمات → ارائه‌دهندگان فعال کنید.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "پاس Kilo";
 "Last %d days" = "%d روز آخر";
 "Last 30 days" = "۳۰ روز آخر";
+"Last 7 days" = "۷ روز آخر";
+"Last 90 days" = "۹۰ روز آخر";
+"Match app" = "مطابق برنامه";
 "Memory" = "استفاده از حافظه";
 "Metric" = "معیار";
 "Model quota" = "مدل سهمیه";
@@ -99,6 +106,7 @@
 "Monthly budget" = "بودجه ماهانه";
 "Monthly credits" = "ماهانه اعتبارات";
 "Monthly quota" = "ماهانه سهمیه";
+"Name" = "نام";
 "No data" = "داده ای وجود ندارد";
 "Not reported by %@" = "توسط %@ گزارش نشده است";
 "On-demand" = "استفاده بر حسب تقاضا";
@@ -119,11 +127,14 @@
 "Provider" = "ارائه دهنده";
 "Provider %@" = "ارائه دهنده %@";
 "Provider + Metric" = "ارائه دهنده + معیار";
+"Providers" = "ارائه دهندگان";
 "Purchased" = "خریداری شده است";
 "Quota" = "سهمیه";
 "Ran out" = "سهمیه تخلیه شد";
+"Range" = "بازه";
 "Rate limit" = "محدودیت نرخ";
 "Refill" = "دوباره پر کنید";
+"Remaining" = "باقی‌مانده";
 "Remaining budget compared with an ideal steady burn rate." = "بودجه باقی مانده در مقایسه با نرخ سوزاندن ثابت ایده آل.";
 "Requests" = "درخواست ها";
 "Reset: %@" = "تنظیم مجدد: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "جلسه و استفاده هفتگی با اعتبارات و هزینه ها.";
 "Shared pool" = "سهمیه مشترک";
 "Sonnet" = "Sonnet";
+"Sort by" = "مرتب‌سازی بر اساس";
 "Spend" = "هزینه";
 "Standard" = "استاندارد";
 "Status" = "وضعیت";
@@ -155,6 +167,7 @@
 "Switch Provider" = "سوئیچ ارائه دهنده";
 "Switch the provider shown in the widget." = "ارائه دهنده نشان داده شده در ویجت را تغییر دهید.";
 "Switch to %@" = "به %@ بروید";
+"Switcher" = "سوئیچر";
 "Team budget" = "بودجه تیم";
 "Third Party" = "شخص ثالث";
 "Third quota" = "سوم سهمیه";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "محدودیت های استفاده و بازنشانی شمارش معکوس برای یک حساب ذخیره شده.";
 "Usage widget with a provider switcher." = "استفاده از ویجت با تغییر دهنده ارائه دهنده.";
 "Usage window" = "پنجره استفاده";
+"Used" = "مصرف‌شده";
 "Voices" = "صداها";
 "Weekly" = "هفتگی";
 "Weekly (7-day)" = "هفتگی (7 روزه)";

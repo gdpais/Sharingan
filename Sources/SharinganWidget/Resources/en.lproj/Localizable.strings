@@ -39,7 +39,9 @@
 "Activity" = "Activity";
 "Add-on credits" = "Add-on credits";
 "Agent" = "Agent";
+"All providers" = "All providers";
 "Amp Free" = "Amp Free";
+"Automatic" = "Automatic";
 "Balance" = "Balance";
 "Base" = "Base";
 "Billing" = "Billing";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Burn Down Provider";
 "Chat" = "Chat";
 "Choose an account" = "Choose an account";
+"Choose which providers the switcher shows and their order." = "Choose which providers the switcher shows and their order.";
 "Claude and GPT" = "Claude and GPT";
 "Code 7-day" = "Code 7-day";
 "Code review" = "Code review";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "Daily free tokens";
 "Daily refresh" = "Daily refresh";
 "Daily usage" = "Daily usage";
+"Default" = "Default";
 "Deployment" = "Deployment";
 "Edit predictions" = "Edit predictions";
 "Enable a provider in Sharingan → Settings → Providers." = "Enable a provider in Sharingan → Settings → Providers.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo Pass";
 "Last %d days" = "Last %d days";
 "Last 30 days" = "Last 30 days";
+"Last 7 days" = "Last 7 days";
+"Last 90 days" = "Last 90 days";
+"Match app" = "Match app";
 "Memory" = "Memory";
 "Metric" = "Metric";
 "Model quota" = "Model quota";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Monthly budget";
 "Monthly credits" = "Monthly credits";
 "Monthly quota" = "Monthly quota";
+"Name" = "Name";
 "No data" = "No data";
 "Not reported by %@" = "Not reported by %@";
 "On-demand" = "On-demand";
@@ -119,11 +127,14 @@
 "Provider" = "Provider";
 "Provider %@" = "Provider %@";
 "Provider + Metric" = "Provider + Metric";
+"Providers" = "Providers";
 "Purchased" = "Purchased";
 "Quota" = "Quota";
 "Ran out" = "Ran out";
+"Range" = "Range";
 "Rate limit" = "Rate limit";
 "Refill" = "Refill";
+"Remaining" = "Remaining";
 "Remaining budget compared with an ideal steady burn rate." = "Remaining budget compared with an ideal steady burn rate.";
 "Requests" = "Requests";
 "Reset: %@" = "Reset: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Session and weekly usage with credits and costs.";
 "Shared pool" = "Shared pool";
 "Sonnet" = "Sonnet";
+"Sort by" = "Sort by";
 "Spend" = "Spend";
 "Standard" = "Standard";
 "Status" = "Status";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Switch Provider";
 "Switch the provider shown in the widget." = "Switch the provider shown in the widget.";
 "Switch to %@" = "Switch to %@";
+"Switcher" = "Switcher";
 "Team budget" = "Team budget";
 "Third Party" = "Third Party";
 "Third quota" = "Third quota";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Usage limits and reset countdowns for one saved account.";
 "Usage widget with a provider switcher." = "Usage widget with a provider switcher.";
 "Usage window" = "Usage window";
+"Used" = "Used";
 "Voices" = "Voices";
 "Weekly" = "Weekly";
 "Weekly (7-day)" = "Weekly (7-day)";

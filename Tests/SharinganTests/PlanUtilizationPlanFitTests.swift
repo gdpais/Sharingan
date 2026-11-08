@@ -147,4 +147,16 @@ struct PlanUtilizationPlanFitTests {
         #expect(PlanFitPresentation.percentAxisLabel(50) == "50%")
         #expect(PlanFitPresentation.medianText(61.6) == "Median 62%")
     }
+
+    @Test
+    func `percent axis labels follow the app language`() {
+        for language in ["de", "tr", "ar"] {
+            SharinganLocalizationOverride.$appLanguage.withValue(language) {
+                let label = PlanFitPresentation.percentAxisLabel(49.6)
+                let locale = sharinganLocalizedLocale()
+                #expect(label == 0.5.formatted(.percent.precision(.fractionLength(0)).locale(locale)))
+                #expect(label != "50%")
+            }
+        }
+    }
 }

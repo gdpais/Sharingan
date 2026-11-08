@@ -2803,6 +2803,29 @@
 "Project trends" = "روند پروژه‌ها";
 "Change compares the last %d days with the %d days before." = "تغییر، %d روز اخیر را با %d روز پیش از آن مقایسه می‌کند.";
 "New" = "جدید";
+
+/* Plan price and budgets */
+"Plan value · %@" = "ارزش طرح · %@";
+"API-equivalent vs %@ in plans" = "معادل API در برابر طرح‌هایی به مبلغ %@";
+"Plan & budget" = "طرح و بودجه";
+"Plan price" = "قیمت طرح";
+"plan_price_subtitle" = "قیمت ماهانه اشتراک. ارزش طرح آن را با هزینه معادل API مقایسه می‌کند.";
+"monthly_budget_subtitle" = "با هزینه تخمینی از ابتدای ماه در نمودار هزینه، هشدارها و قلاب‌ها مقایسه می‌شود.";
+"Currency" = "ارز";
+"plan_budget_footer" = "اعداد خودتان، ذخیره‌شده همراه این ارائه‌دهنده در فایل پیکربندی مشترک. برای خاموش کردن، فیلد را خالی بگذارید.";
+"plan_budget_invalid_amount" = "مبلغی بیشتر از صفر وارد کنید.";
+"Month to date %@ of %@ budget" = "از ابتدای ماه %1$@ از بودجه %2$@";
+"Month to date at least %@ of %@ budget" = "از ابتدای ماه دست‌کم %1$@ از بودجه %2$@";
+"budget %@/day" = "بودجه %@/روز";
+"budget_notifications_title" = "هشدارهای بودجه";
+"budget_notifications_subtitle" = "وقتی هزینه تخمینی از ابتدای ماه به ۸۰٪ و ۱۰۰٪ بودجه ماهانه یک ارائه‌دهنده برسد، اعلان می‌دهد.";
+"budget_notifications_no_budget" = "برای دریافت هشدارهای بودجه، در تنظیمات یک ارائه‌دهنده بودجه ماهانه تعیین کنید.";
+"budget_notification_title_warning" = "بودجه %1$@ در %2$@";
+"budget_notification_title_reached" = "بودجه %@ به پایان رسید";
+"budget_notification_body" = "هزینه تخمینی این ماه: %1$@ از بودجه %2$@ شما.";
+"budget_hooks_header" = "قلاب‌های بودجه";
+"budget_hooks_add_rule" = "افزودن قلاب بودجه";
+"budget_hooks_footer" = "وقتی هزینه تخمینی از ابتدای ماه به ۸۰٪ یا ۱۰۰٪ بودجه ماهانه یک ارائه‌دهنده برسد، یک دستور اجرا می‌کند. از کلید قلاب‌ها در بالا پیروی می‌کند. در تنظیمات برنامه روی این Mac ذخیره می‌شود، نه در فایل پیکربندی مشترک.";
 "quota_warning_add_threshold" = "افزودن آستانه";
 "quota_warning_remove_threshold" = "حذف پایین‌ترین آستانه";
 "quota_warning_lane_follows_weekly" = "فقط نشانگرهای هفتگی، بدون اعلان";
@@ -2814,3 +2837,28 @@
 "Drawn inside usage rows." = "درون ردیف‌های استفاده نمایش داده می‌شود.";
 "Menu links" = "پیوندهای منو";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "بخش‌های کارت منوی این ارائه‌دهنده را مرتب کنید، نمایش دهید یا پنهان کنید و نمودار آن را انتخاب کنید. بخش‌ها و نمودارهای بدون داده پنهان می‌مانند.";
+
+/* Chart preferences */
+"Charts" = "نمودارها";
+"Charts never show more days than the History window." = "نمودارها هرگز بیش از روزهای پنجره تاریخچه را نشان نمی‌دهند.";
+"Stack by model" = "انباشت بر اساس مدل";
+"Splits each day by its two largest models." = "هر روز را بر اساس دو مدل بزرگ‌ترش تقسیم می‌کند.";
+"Average line" = "خط میانگین";
+"Chart style" = "سبک نمودار";
+"Bars" = "ستونی";
+"Line" = "خطی";
+"Palette" = "پالت رنگ";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "حالت مناسب کوررنگی، رنگ‌های تأکید ارائه‌دهندگان را در نمودارهای تک‌سری جایگزین می‌کند. حالت تک‌رنگ همه‌جا از خاکستری استفاده می‌کند، از جمله در نقشه‌های حرارتی.";
+"Provider accents" = "رنگ‌های تأکید ارائه‌دهندگان";
+"Colorblind-safe" = "مناسب کوررنگی";
+"Monochrome" = "تک‌رنگ";
+/* Widget options */
+"Match app" = "مطابق برنامه";
+"Used" = "مصرف‌شده";
+"Last 7 days" = "۷ روز آخر";
+"Last 90 days" = "۹۰ روز آخر";
+"All providers" = "همه ارائه‌دهندگان";
+"Name" = "نام";
+"Switcher" = "سوئیچر";
+"Choose which providers the switcher shows and their order." = "انتخاب کنید سوئیچر کدام ارائه‌دهندگان را و به چه ترتیبی نشان دهد.";
+"menu_bar_style_tomoe" = "تومویه";

@@ -2801,6 +2801,29 @@
 "Project trends" = "Tren proyek";
 "Change compares the last %d days with the %d days before." = "Perubahan membandingkan %d hari terakhir dengan %d hari sebelumnya.";
 "New" = "Baru";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Nilai paket · %@";
+"API-equivalent vs %@ in plans" = "Setara API vs paket senilai %@";
+"Plan & budget" = "Paket & anggaran";
+"Plan price" = "Harga paket";
+"plan_price_subtitle" = "Harga langganan bulanan. Nilai paket membandingkannya dengan pengeluaran setara API.";
+"monthly_budget_subtitle" = "Dibandingkan dengan perkiraan pengeluaran bulan berjalan di grafik biaya, peringatan, dan hook.";
+"Currency" = "Mata uang";
+"plan_budget_footer" = "Angka Anda sendiri, disimpan bersama penyedia ini di file konfigurasi bersama. Kosongkan kolom untuk menonaktifkannya.";
+"plan_budget_invalid_amount" = "Masukkan jumlah lebih dari nol.";
+"Month to date %@ of %@ budget" = "Bulan berjalan %1$@ dari anggaran %2$@";
+"Month to date at least %@ of %@ budget" = "Bulan berjalan minimal %1$@ dari anggaran %2$@";
+"budget %@/day" = "anggaran %@/hari";
+"budget_notifications_title" = "Peringatan anggaran";
+"budget_notifications_subtitle" = "Memberi tahu saat perkiraan pengeluaran bulan berjalan mencapai 80% dan 100% dari anggaran bulanan penyedia.";
+"budget_notifications_no_budget" = "Tetapkan anggaran bulanan di pengaturan penyedia untuk mendapatkan peringatan anggaran.";
+"budget_notification_title_warning" = "Anggaran %1$@ di %2$@";
+"budget_notification_title_reached" = "Anggaran %@ tercapai";
+"budget_notification_body" = "Perkiraan pengeluaran bulan ini: %1$@ dari anggaran %2$@ Anda.";
+"budget_hooks_header" = "Hook anggaran";
+"budget_hooks_add_rule" = "Tambah hook anggaran";
+"budget_hooks_footer" = "Menjalankan perintah saat perkiraan pengeluaran bulan berjalan mencapai 80% atau 100% dari anggaran bulanan penyedia. Mengikuti sakelar hook di atas. Disimpan di preferensi aplikasi di Mac ini, bukan di file konfigurasi bersama.";
 "quota_warning_add_threshold" = "Tambah ambang";
 "quota_warning_remove_threshold" = "Hapus ambang terendah";
 "quota_warning_lane_follows_weekly" = "Hanya penanda mingguan, tanpa notifikasi";
@@ -2812,3 +2835,28 @@
 "Drawn inside usage rows." = "Ditampilkan di dalam baris penggunaan.";
 "Menu links" = "Tautan menu";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Atur urutan dan tampilkan bagian kartu menu penyedia ini, lalu pilih grafiknya. Bagian dan grafik tanpa data tetap disembunyikan.";
+
+/* Chart preferences */
+"Charts" = "Grafik";
+"Charts never show more days than the History window." = "Grafik tidak pernah menampilkan lebih banyak hari daripada jendela riwayat.";
+"Stack by model" = "Tumpuk menurut model";
+"Splits each day by its two largest models." = "Membagi setiap hari menurut dua model terbesarnya.";
+"Average line" = "Garis rata-rata";
+"Chart style" = "Gaya grafik";
+"Bars" = "Batang";
+"Line" = "Garis";
+"Palette" = "Palet";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Ramah buta warna mengganti warna aksen penyedia pada grafik satu seri. Monokrom memakai abu-abu di mana saja, termasuk peta panas.";
+"Provider accents" = "Warna aksen penyedia";
+"Colorblind-safe" = "Ramah buta warna";
+"Monochrome" = "Monokrom";
+/* Widget options */
+"Match app" = "Ikuti aplikasi";
+"Used" = "Terpakai";
+"Last 7 days" = "7 hari terakhir";
+"Last 90 days" = "90 hari terakhir";
+"All providers" = "Semua penyedia";
+"Name" = "Nama";
+"Switcher" = "Pengalih";
+"Choose which providers the switcher shows and their order." = "Pilih penyedia yang ditampilkan pengalih dan urutannya.";
+"menu_bar_style_tomoe" = "Tomoe";

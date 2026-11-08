@@ -467,6 +467,7 @@ struct SpendDashboardPane: View {
                         self.controller.selectDay(nil)
                     })
             }
+            .environment(\.spendPlans, self.settings.spendPlansByProvider)
         }
 
         if self.settings.costUsageEnabled, !self.controller.model.tokenActivity.isEmpty {
@@ -731,7 +732,7 @@ struct SpendDashboardCurrencySection: View {
                     .foregroundStyle(.secondary)
             }
 
-            SpendInsightTilesRow(group: self.group, planMonthlyPrice: nil) // Phase 3: plan price
+            SpendInsightTilesRow(group: self.group)
             SpendDashboardSummary(
                 group: self.group,
                 onClearSelectedDay: self.onClearSelectedDay)

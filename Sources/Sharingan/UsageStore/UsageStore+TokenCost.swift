@@ -305,6 +305,7 @@ extension UsageStore {
         self.tokenSnapshotPublicationRevisions[provider.instanceID, default: 0] &+= 1
         self.installCachedTokenSnapshot(snapshot, for: provider, accounting: accounting)
         self.synchronizeSharedSpendDashboardAfterTokenPublication(for: provider)
+        self.evaluateSpendBudgetAlerts(for: provider)
     }
 
     /// The menu card projects quota weeks synchronously while it builds, so the per-slice pass runs

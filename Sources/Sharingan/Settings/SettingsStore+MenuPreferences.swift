@@ -5,12 +5,14 @@ enum MenuBarIconStyle: String, CaseIterable {
     case critters
     case bars
     case iconAndPercent
+    case tomoe
 
     var label: String {
         switch self {
         case .critters: L("menu_bar_style_critters")
         case .bars: L("menu_bar_style_bars")
         case .iconAndPercent: L("menu_bar_style_icon_percent")
+        case .tomoe: L("menu_bar_style_tomoe")
         }
     }
 }
@@ -152,9 +154,13 @@ extension SettingsStore {
             if self.menuBarShowsBrandIconWithPercent {
                 return .iconAndPercent
             }
+            if self.menuBarShowsTomoeIcon {
+                return .tomoe
+            }
             return self.menuBarHidesCritters ? .bars : .critters
         }
         set {
+            self.menuBarShowsTomoeIcon = newValue == .tomoe
             switch newValue {
             case .critters:
                 self.menuBarShowsBrandIconWithPercent = false
@@ -164,6 +170,8 @@ extension SettingsStore {
                 self.menuBarHidesCritters = true
             case .iconAndPercent:
                 self.menuBarShowsBrandIconWithPercent = true
+            case .tomoe:
+                self.menuBarShowsBrandIconWithPercent = false
             }
         }
     }

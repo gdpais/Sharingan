@@ -2797,6 +2797,29 @@
 "Project trends" = "Tendencias de proyectos";
 "Change compares the last %d days with the %d days before." = "El cambio compara los últimos %d días con los %d días anteriores.";
 "New" = "Nuevo";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Valor del plan · %@";
+"API-equivalent vs %@ in plans" = "Equivalente en API frente a planes de %@";
+"Plan & budget" = "Plan y presupuesto";
+"Plan price" = "Precio del plan";
+"plan_price_subtitle" = "Precio mensual de la suscripción. El valor del plan lo compara con el gasto equivalente en API.";
+"monthly_budget_subtitle" = "Se compara con el gasto estimado del mes en curso en el gráfico de costes, los avisos y los hooks.";
+"Currency" = "Moneda";
+"plan_budget_footer" = "Tus propias cifras, guardadas con este proveedor en el archivo de configuración compartido. Deja un campo vacío para desactivarlo.";
+"plan_budget_invalid_amount" = "Introduce un importe mayor que cero.";
+"Month to date %@ of %@ budget" = "Mes en curso: %1$@ de un presupuesto de %2$@";
+"Month to date at least %@ of %@ budget" = "Mes en curso: al menos %1$@ de un presupuesto de %2$@";
+"budget %@/day" = "presupuesto %@/día";
+"budget_notifications_title" = "Avisos de presupuesto";
+"budget_notifications_subtitle" = "Avisa cuando el gasto estimado del mes en curso alcanza el 80% y el 100% del presupuesto mensual de un proveedor.";
+"budget_notifications_no_budget" = "Define un presupuesto mensual en la configuración de un proveedor para recibir avisos de presupuesto.";
+"budget_notification_title_warning" = "Presupuesto de %1$@ al %2$@";
+"budget_notification_title_reached" = "Presupuesto de %@ alcanzado";
+"budget_notification_body" = "Gasto estimado este mes: %1$@ de tu presupuesto de %2$@.";
+"budget_hooks_header" = "Hooks de presupuesto";
+"budget_hooks_add_rule" = "Añadir hook de presupuesto";
+"budget_hooks_footer" = "Ejecuta un comando cuando el gasto estimado del mes en curso alcanza el 80% o el 100% del presupuesto mensual de un proveedor. Sigue el interruptor de hooks de arriba. Se guarda en las preferencias de la app de este Mac, no en el archivo de configuración compartido.";
 "quota_warning_add_threshold" = "Añadir umbral";
 "quota_warning_remove_threshold" = "Quitar el umbral más bajo";
 "quota_warning_lane_follows_weekly" = "Solo marcadores semanales, sin notificaciones";
@@ -2808,3 +2831,28 @@
 "Drawn inside usage rows." = "Se muestra dentro de las filas de uso.";
 "Menu links" = "Enlaces del menú";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordena y muestra las secciones de la tarjeta del menú de este proveedor y elige su gráfico. Las secciones y los gráficos sin datos permanecen ocultos.";
+
+/* Chart preferences */
+"Charts" = "Gráficos";
+"Charts never show more days than the History window." = "Los gráficos nunca muestran más días que la ventana de historial.";
+"Stack by model" = "Apilar por modelo";
+"Splits each day by its two largest models." = "Divide cada día según sus dos modelos principales.";
+"Average line" = "Línea de promedio";
+"Chart style" = "Estilo del gráfico";
+"Bars" = "Barras";
+"Line" = "Línea";
+"Palette" = "Paleta";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Apta para daltonismo sustituye los colores de acento de los proveedores en los gráficos de una sola serie. Monocromo usa grises en todas partes, incluidos los mapas de calor.";
+"Provider accents" = "Colores de acento de los proveedores";
+"Colorblind-safe" = "Apta para daltonismo";
+"Monochrome" = "Monocromo";
+/* Widget options */
+"Match app" = "Igual que la app";
+"Used" = "Usado";
+"Last 7 days" = "Últimos 7 días";
+"Last 90 days" = "Últimos 90 días";
+"All providers" = "Todos los proveedores";
+"Name" = "Nombre";
+"Switcher" = "Conmutador";
+"Choose which providers the switcher shows and their order." = "Elige qué proveedores muestra el conmutador y en qué orden.";
+"menu_bar_style_tomoe" = "Tomoe";

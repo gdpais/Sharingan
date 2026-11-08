@@ -39,7 +39,9 @@
 "Activity" = "Aktywność";
 "Add-on credits" = "Dodatek Kredyty";
 "Agent" = "Agent";
+"All providers" = "Wszyscy dostawcy";
 "Amp Free" = "Amp Bezpłatnie";
+"Automatic" = "Automatycznie";
 "Balance" = "Saldo";
 "Base" = "Baza";
 "Billing" = "Rozliczenia";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Dostawca wypalania Limit";
 "Chat" = "Czat";
 "Choose an account" = "Wybierz konto";
+"Choose which providers the switcher shows and their order." = "Wybierz, których dostawców pokazuje przełącznik i w jakiej kolejności.";
 "Claude and GPT" = "Claude i GPT";
 "Code 7-day" = "Kod 7-dniowy Limit";
 "Code review" = "Przegląd kodu";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "Codziennie darmowy tokeny";
 "Daily refresh" = "Codzienne odświeżanie";
 "Daily usage" = "Codzienne użytkowanie";
+"Default" = "Domyślne";
 "Deployment" = "Wdrożenie";
 "Edit predictions" = "Edytuj prognozy";
 "Enable a provider in Sharingan → Settings → Providers." = "Włącz dostawcę w Sharingan → Ustawienia → Dostawcy.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Przepustka Kilo";
 "Last %d days" = "Ostatnie %d dni";
 "Last 30 days" = "Ostatnie 30 dni";
+"Last 7 days" = "Ostatnie 7 dni";
+"Last 90 days" = "Ostatnie 90 dni";
+"Match app" = "Jak w aplikacji";
 "Memory" = "Użycie pamięci";
 "Metric" = "Wskaźnik";
 "Model quota" = "Model Limit";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Miesięczny budżet";
 "Monthly credits" = "Miesięcznie Kredyty";
 "Monthly quota" = "Miesięcznie Limit";
+"Name" = "Nazwa";
 "No data" = "Brak danych";
 "Not reported by %@" = "Nie zgłoszone przez %@";
 "On-demand" = "Użycie na żądanie";
@@ -119,11 +127,14 @@
 "Provider" = "Dostawca";
 "Provider %@" = "Dostawca %@";
 "Provider + Metric" = "Dostawca + Wskaźnik";
+"Providers" = "Dostawcy";
 "Purchased" = "Kupiony";
 "Quota" = "Limit";
 "Ran out" = "Limit wyczerpany";
+"Range" = "Okres";
 "Rate limit" = "Limit częstotliwości żądań";
 "Refill" = "Uzupełnij";
+"Remaining" = "Pozostało";
 "Remaining budget compared with an ideal steady burn rate." = "Pozostały budżet w porównaniu z idealnym, stałym współczynnikiem spalania.";
 "Requests" = "Żądania";
 "Reset: %@" = "Resetuj: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Sesyjne i tygodniowe użycie Kredyty oraz koszty.";
 "Shared pool" = "Wspólny limit";
 "Sonnet" = "Sonnet";
+"Sort by" = "Sortuj według";
 "Spend" = "Wydatki";
 "Standard" = "Standardowe";
 "Status" = "Stan";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Zmień dostawcę";
 "Switch the provider shown in the widget." = "Zmień dostawcę widocznego w widżecie.";
 "Switch to %@" = "Przełącz na %@";
+"Switcher" = "Przełącznik";
 "Team budget" = "Budżet zespołu";
 "Third Party" = "Strona trzecia";
 "Third quota" = "Trzeci Limit";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Limity wykorzystania i resetowanie odliczania dla jednego zapisanego konta.";
 "Usage widget with a provider switcher." = "Widżet użytkowania z przełącznikiem dostawców.";
 "Usage window" = "Okno użytkowania";
+"Used" = "Wykorzystano";
 "Voices" = "Głosy";
 "Weekly" = "Tydzień";
 "Weekly (7-day)" = "Tygodniowy (7-dniowy)";

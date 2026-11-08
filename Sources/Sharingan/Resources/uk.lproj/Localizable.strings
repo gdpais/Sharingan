@@ -2800,6 +2800,29 @@
 "Project trends" = "Динаміка проєктів";
 "Change compares the last %d days with the %d days before." = "Зміна порівнює останні %d дн. з %d дн. перед ними.";
 "New" = "Новий";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Цінність плану · %@";
+"API-equivalent vs %@ in plans" = "Еквівалент API проти планів за %@";
+"Plan & budget" = "План і бюджет";
+"Plan price" = "Ціна плану";
+"plan_price_subtitle" = "Щомісячна ціна підписки. Цінність плану порівнює її з витратами в еквіваленті API.";
+"monthly_budget_subtitle" = "Порівнюється з оцінкою витрат від початку місяця на графіку витрат, у сповіщеннях і хуках.";
+"Currency" = "Валюта";
+"plan_budget_footer" = "Ваші власні значення, збережені для цього провайдера в спільному файлі конфігурації. Залиште поле порожнім, щоб вимкнути його.";
+"plan_budget_invalid_amount" = "Введіть суму, більшу за нуль.";
+"Month to date %@ of %@ budget" = "Від початку місяця %1$@ з бюджету %2$@";
+"Month to date at least %@ of %@ budget" = "Від початку місяця щонайменше %1$@ з бюджету %2$@";
+"budget %@/day" = "бюджет %@/день";
+"budget_notifications_title" = "Сповіщення про бюджет";
+"budget_notifications_subtitle" = "Сповіщає, коли оцінка витрат від початку місяця досягає 80% і 100% місячного бюджету провайдера.";
+"budget_notifications_no_budget" = "Задайте місячний бюджет у налаштуваннях провайдера, щоб отримувати сповіщення про бюджет.";
+"budget_notification_title_warning" = "Бюджет %1$@: %2$@";
+"budget_notification_title_reached" = "Бюджет %@ вичерпано";
+"budget_notification_body" = "Оцінка витрат цього місяця: %1$@ з вашого бюджету %2$@.";
+"budget_hooks_header" = "Хуки бюджету";
+"budget_hooks_add_rule" = "Додати хук бюджету";
+"budget_hooks_footer" = "Запускає команду, коли оцінка витрат від початку місяця досягає 80% або 100% місячного бюджету провайдера. Підпорядковується перемикачу хуків вище. Зберігається в налаштуваннях застосунку на цьому Mac, а не в спільному файлі конфігурації.";
 "quota_warning_add_threshold" = "Додати поріг";
 "quota_warning_remove_threshold" = "Видалити найнижчий поріг";
 "quota_warning_lane_follows_weekly" = "Лише тижневі маркери, без сповіщень";
@@ -2811,3 +2834,28 @@
 "Drawn inside usage rows." = "Відображається всередині рядків використання.";
 "Menu links" = "Посилання в меню";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Упорядкуйте розділи картки меню цього постачальника, налаштуйте їх видимість і виберіть графік. Розділи та графіки без даних залишаються прихованими.";
+
+/* Chart preferences */
+"Charts" = "Графіки";
+"Charts never show more days than the History window." = "Графіки ніколи не показують більше днів, ніж вікно історії.";
+"Stack by model" = "Накопичувати за моделями";
+"Splits each day by its two largest models." = "Ділить кожен день за двома найбільшими моделями.";
+"Average line" = "Лінія середнього";
+"Chart style" = "Стиль графіка";
+"Bars" = "Стовпці";
+"Line" = "Лінія";
+"Palette" = "Палітра";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Режим для людей з дальтонізмом замінює акцентні кольори провайдерів на графіках з одним рядом. Монохромний режим усюди використовує відтінки сірого, зокрема на теплових картах.";
+"Provider accents" = "Акцентні кольори провайдерів";
+"Colorblind-safe" = "Для людей з дальтонізмом";
+"Monochrome" = "Монохромна";
+/* Widget options */
+"Match app" = "Як у застосунку";
+"Used" = "Використано";
+"Last 7 days" = "Останні 7 днів";
+"Last 90 days" = "Останні 90 днів";
+"All providers" = "Усі провайдери";
+"Name" = "Назва";
+"Switcher" = "Перемикач";
+"Choose which providers the switcher shows and their order." = "Виберіть, яких провайдерів показує перемикач і в якому порядку.";
+"menu_bar_style_tomoe" = "Томое";

@@ -262,6 +262,10 @@ struct MenuBarPercentWindowPreferenceTests {
             layout: layout,
             available: options) == false)
         #expect(MenuBarPercentWindowPreference.isVisible(
+            iconStyle: .tomoe,
+            layout: layout,
+            available: options) == false)
+        #expect(MenuBarPercentWindowPreference.isVisible(
             iconStyle: .iconAndPercent,
             layout: MenuBarLayout(lines: [[.icon]]),
             available: options) == false)
