@@ -10,7 +10,7 @@ const mode = parseMode(args);
 const cname = fs.readFileSync(path.join(docsDir, "CNAME"), "utf8").trim();
 const origin = "https://" + cname;
 const productName = "Sharingan";
-const source = "https://github.com/steipete/CodexBar";
+const source = "https://github.com/gdpais/Sharingan";
 const outputPath = path.join(docsDir, "llms.txt");
 
 const pages = allHtml(docsDir)

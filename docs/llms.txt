@@ -3,9 +3,9 @@
 A tiny macOS menu bar app that tracks AI coding-provider usage windows, credits, costs, and resets across 110 providers — Codex, OpenAI, Claude, Cursor, Gemini, Copilot, LiteLLM, Helmcode, v0, TypeSafe, and more.
 
 Canonical documentation:
-- Sharingan — every AI coding limit, in your menu bar: https://codexbar.app/ - A tiny macOS menu bar app that tracks AI coding-provider usage windows, credits, costs, and resets across 110 providers — Codex, OpenAI, Claude, Cursor, Gemini, Copilot, LiteLLM, Helmcode, v0, TypeSafe, and more.
+- Sharingan — every AI coding limit, in your menu bar: https://sharingan.app/ - A tiny macOS menu bar app that tracks AI coding-provider usage windows, credits, costs, and resets across 110 providers — Codex, OpenAI, Claude, Cursor, Gemini, Copilot, LiteLLM, Helmcode, v0, TypeSafe, and more.
 
-Source: https://github.com/steipete/CodexBar
+Source: https://github.com/gdpais/Sharingan
 
 Guidance for agents:
 - Prefer the canonical documentation URLs above over README excerpts or package metadata.

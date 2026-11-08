@@ -1,12 +1,11 @@
 # Repository Guidelines
 
-## Sharingan fork notes
-- This repo (gdpais/Sharingan) is a fork of CodexBar by Peter Steinberger (https://github.com/steipete/CodexBar). The guidelines below are upstream's; `/Users/steipete/...` paths refer to upstream's machine.
+## Sharingan project notes
+- Sharingan (gdpais/Sharingan) is an independent project, forked from CodexBar by Peter Steinberger (https://github.com/steipete/CodexBar, MIT). It does not track or merge upstream; CodexBar is referenced only as the credited origin of the codebase.
 - Sharingan must run side by side with CodexBar, so it owns none of CodexBar's runtime state. Every on-disk, defaults, Keychain, app-group, and log name comes from `Sources/SharinganCore/AppIdentity.swift` (`~/.config/sharingan`, `~/.sharingan`, `SHARINGAN_CONFIG`, `com.gdpais.sharingan*`, `~/Library/{Application Support,Caches,Logs}/Sharingan`); never hard-code a CodexBar name for these. See `docs/SHARINGAN_SIDE_BY_SIDE.md`.
 - The bundle is `Sharingan.app` with executable `Contents/MacOS/Sharingan`; the installed CLI symlink is `sharingan`. Never `pkill -x CodexBar` or `pkill -f CodexBar.app`: that kills the real CodexBar.
-- Everything is named Sharingan: Swift modules and targets (`Sharingan`, `SharinganCore`, `SharinganCLI`, …), types, file and folder names, `SHARINGAN_*` env vars, CLI help, and copy. When merging upstream CodexBar changes, apply the same rename (`CodexBar`→`Sharingan`, `codexBar`/`codexbar`→`sharingan`, `CODEXBAR`→`SHARINGAN`, `Sources/CodexBar*`→`Sources/Sharingan*`) to the incoming diff before resolving conflicts.
-- Only these keep CodexBar names on purpose: upstream credits and links (`AppBrand.upstream*`, README, LICENSE), CodexBar's legacy defaults domains used for the one-time preference import (`AppDefaultsDomain.legacy*`), upstream cask detection (`InstallOrigin`), Keychain/hash domain-separator salts, the MiniMax `MM-API-Source` header, and `CHANGELOG.md` history.
-- Prefer new, additive files over broad edits to shared upstream code; keep diffs minimal.
+- Everything is named Sharingan: Swift modules and targets (`Sharingan`, `SharinganCore`, `SharinganCLI`, …), types, file and folder names, `SHARINGAN_*` env vars, CLI help, copy, and links to this repo (`https://github.com/gdpais/Sharingan`). Do not introduce new CodexBar names; if you port an idea from CodexBar, rewrite it with Sharingan names.
+- Only these keep CodexBar names on purpose: credits and links to the original project (`AppBrand.upstream*`, README, LICENSE, and doc links to historical CodexBar issues/PRs), CodexBar's legacy defaults domains used for the one-time preference import (`AppDefaultsDomain.legacy*`), upstream cask detection (`InstallOrigin`), Keychain/hash domain-separator salts, the MiniMax `MM-API-Source` header, and `CHANGELOG.md` history.
 - `Localizable.strings`: keep keys in sync with the Swift source strings; do not move or reorder keys.
 - README must always credit CodexBar by Peter Steinberger, link https://github.com/steipete/CodexBar, and note the MIT license (link `LICENSE`).
 
@@ -55,7 +54,7 @@
 - Run `./Scripts/compile_and_run.sh` only when UI/runtime behavior needs bundle-level validation; it builds, tests, packages, relaunches, and verifies the app stays running.
 - Widget/Tahoe UI issues: use Parallels macOS VM plus screenshots/clicks for autonomous verification.
 - Release workflow: wait for completion and verify the complete artifact/feed/tap handoff; do not publish locally.
-- Sparkle release key: CI `SPARKLE_PRIVATE_KEY` must match the existing AGCY public key in `.github/release.json`; never substitute another app’s key.
+- Sparkle: Sharingan ships without an update feed. The `AGCY…` key in `.github/release.json` is CodexBar's; before enabling updates, generate Sharingan's own EdDSA key pair, replace that public key, and set CI `SPARKLE_PRIVATE_KEY` to the matching private key (see `TODO(sharingan)` in `Scripts/package_app.sh`). Never point Sharingan at CodexBar's appcast.
 - Swift concurrency: treat sibling `async let` tasks as a review red flag when one child is required and another is optional/best-effort. Prefer sequential awaits or a drained `withThrowingTaskGroup` that surfaces required failures and explicitly contains optional failures; crash stacks mentioning `swift_task_dealloc` or `asyncLet_finish_after_task_completion` should trigger an audit of nearby `async let` usage.
 - Prefer modern SwiftUI/Observation macros: use `@Observable` models with `@State` ownership and `@Bindable` in views; avoid `ObservableObject`, `@ObservedObject`, and `@StateObject`.
 - Favor modern macOS 15+ APIs over legacy/deprecated counterparts when refactoring (Observation, new display link APIs, updated menu item styling, etc.).

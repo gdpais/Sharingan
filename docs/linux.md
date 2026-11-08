@@ -8,7 +8,7 @@ read_when:
 # Linux desktop
 
 The Linux desktop is a lightweight Qt shell over the shared Sharingan CLI. See the
-[Linux guide](https://github.com/steipete/CodexBar/blob/main/Integrations/Linux/README.md) for installation, settings, the local
+[Linux guide](https://github.com/gdpais/Sharingan/blob/main/Integrations/Linux/README.md) for installation, settings, the local
 socket interface, and isolated runtime tests.
 
 Installation uses absolute `XDG_CONFIG_HOME` and `XDG_DATA_HOME` overrides, falling

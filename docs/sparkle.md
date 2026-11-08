@@ -18,7 +18,7 @@ read_when:
 
 ## Release flow
 
-The [CI release workflow](https://github.com/steipete/CodexBar/blob/main/.github/workflows/release.yml) builds and notarizes the app, signs and verifies its appcast entry, publishes the verified assets, and updates the existing feed on main. See [the release process](RELEASING.md) for signed tags and no-publish dry runs. Prerelease versions such as `X.Y.Z-beta.N` stay on the opt-in beta channel and do not replace stable Homebrew packages.
+The [CI release workflow](https://github.com/gdpais/Sharingan/blob/main/.github/workflows/release.yml) builds and notarizes the app, signs and verifies its appcast entry, publishes the verified assets, and updates the existing feed on main. See [the release process](RELEASING.md) for signed tags and no-publish dry runs. Prerelease versions such as `X.Y.Z-beta.N` stay on the opt-in beta channel and do not replace stable Homebrew packages.
 
 ## Notes
 - Release notes are embedded as Markdown in `<description sparkle:format="markdown">`, with linked GitHub issue and contributor references. Sparkle 2.9+ renders headings, lists, and wrapping text on macOS 12+; Sharingan supports macOS 14+. Older Sharingan builds carrying Sparkle 2.8.1 display these notes as readable plain text and can still install the update. Keep the format attribute: without it, Sparkle interprets the description as HTML.

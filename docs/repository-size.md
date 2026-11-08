@@ -40,8 +40,8 @@ the check.
 For a smaller local checkout when full history is unnecessary, use one of:
 
 ```bash
-git clone --filter=blob:none https://github.com/steipete/CodexBar.git
-git clone --depth=1 https://github.com/steipete/CodexBar.git
+git clone --filter=blob:none https://github.com/gdpais/Sharingan.git
+git clone --depth=1 https://github.com/gdpais/Sharingan.git
 ```
 
 ## One-time history cleanup

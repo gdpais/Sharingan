@@ -10,13 +10,14 @@ Sharingan is a tiny macOS 14+ menu bar app that keeps **AI coding-provider limit
 
 ## Based on CodexBar
 
-Sharingan is a fork of **[CodexBar](https://github.com/steipete/CodexBar) by Peter Steinberger**. Nearly all of the
-code, provider integrations, and documentation come from CodexBar; Sharingan rebrands the user-facing app and tracks
-upstream closely. CodexBar is released under the MIT License; Sharingan keeps that license and the original copyright
-notice — see [LICENSE](LICENSE). Please consider supporting the original project.
+Sharingan is a fork of **[CodexBar](https://github.com/steipete/CodexBar) by Peter Steinberger**. Its core — the
+app, provider integrations, and documentation — comes from CodexBar. Sharingan is now developed as a separate project:
+it does not track upstream and will grow in its own direction. CodexBar is released under the MIT License; Sharingan
+keeps that license and the original copyright notice — see [LICENSE](LICENSE). Please consider supporting the original
+project.
 
-The whole codebase is renamed to Sharingan (Swift modules, targets, types, files, CLI, config, and Keychain names), so
-Sharingan builds, installs, and runs side by side with CodexBar without sharing any state.
+Sharingan has its own names throughout (Swift modules, targets, types, files, CLI, config, and Keychain), so it builds,
+installs, and runs side by side with CodexBar without sharing any state.
 
 <img src="docs/sharingan.png" alt="Menu popover with provider tiles, usage bars, and reset countdowns (screenshot from upstream CodexBar)" width="520" />
 

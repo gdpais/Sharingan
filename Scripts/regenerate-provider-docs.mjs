@@ -83,7 +83,7 @@ update("docs/index.html", (text) =>
     text.replace(/\d+(?= (?:AI coding )?providers)/gu, String(count)),
     entries.map(
       (entry) =>
-        `          <li class="provider-card" data-provider="${entry.id}"><a class="provider-card-link" href="https://github.com/steipete/CodexBar/blob/main/docs/${entry.file}"><span class="provider-logo" style="--brand:#${entry.color};--icon:url('./logos/${entry.id}.svg')"><img src="./logos/${entry.id}.svg" alt="" loading="lazy" onerror="this.remove()" /></span><p><strong>${html(entry.name)}</strong><span data-i18n="auth.${entry.auth}">${entry.auth === "cookies" ? "Cookies" : "API key"}</span></p></a></li>`,
+        `          <li class="provider-card" data-provider="${entry.id}"><a class="provider-card-link" href="https://github.com/gdpais/Sharingan/blob/main/docs/${entry.file}"><span class="provider-logo" style="--brand:#${entry.color};--icon:url('./logos/${entry.id}.svg')"><img src="./logos/${entry.id}.svg" alt="" loading="lazy" onerror="this.remove()" /></span><p><strong>${html(entry.name)}</strong><span data-i18n="auth.${entry.auth}">${entry.auth === "cookies" ? "Cookies" : "API key"}</span></p></a></li>`,
     ),
   ),
 );
