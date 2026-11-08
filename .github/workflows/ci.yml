@@ -178,11 +178,11 @@ jobs:
         # Batch short suites; the runner isolates expensive suites without changing their deadlines.
         timeout-minutes: 75
         run: |
-          touch "$RUNNER_TEMP/codexbar-tests-started"
+          touch "$RUNNER_TEMP/sharingan-tests-started"
           echo "Hosted tests run the complete inventory with two verified direct workers."
-          CODEXBAR_TEST_GROUP_SIZE=8 \
-            CODEXBAR_TEST_SUITE_TIMEOUT=120 \
-            CODEXBAR_TEST_RETRY_NON_TIMEOUT_FAILURES=0 \
+          SHARINGAN_TEST_GROUP_SIZE=8 \
+            SHARINGAN_TEST_SUITE_TIMEOUT=120 \
+            SHARINGAN_TEST_RETRY_NON_TIMEOUT_FAILURES=0 \
             ./Scripts/test.sh --direct-workers 2
 
       - name: Provider plugin engine A/B goldens
@@ -203,8 +203,8 @@ jobs:
         if: ${{ failure() }}
         shell: bash
         run: |
-          if [[ -f "$RUNNER_TEMP/codexbar-tests-started" ]]; then
-            python3 Scripts/swift_test_diagnostics.py --since "$RUNNER_TEMP/codexbar-tests-started"
+          if [[ -f "$RUNNER_TEMP/sharingan-tests-started" ]]; then
+            python3 Scripts/swift_test_diagnostics.py --since "$RUNNER_TEMP/sharingan-tests-started"
           fi
 
       - name: Summarize macOS tests
@@ -476,11 +476,11 @@ jobs:
             -o "$sqlite_out/build/sqlite3.o"
           llvm-ar crs "$sqlite_out/lib/libsqlite3.a" "$sqlite_out/build/sqlite3.o"
 
-          echo "CODEXBAR_SQLITE3_LIB_DIR=$sqlite_out/lib" >> "$GITHUB_ENV"
+          echo "SHARINGAN_SQLITE3_LIB_DIR=$sqlite_out/lib" >> "$GITHUB_ENV"
 
-      - name: Build CodexBarCLI (release, Linux musl x86_64)
+      - name: Build SharinganCLI (release, Linux musl x86_64)
         run: >-
-          swift build -c release --product CodexBarCLI
+          swift build -c release --product SharinganCLI
           --swift-sdk "$SWIFT_STATIC_LINUX_SDK"
           --triple "$SWIFT_STATIC_LINUX_SDK_TRIPLE"
 
@@ -488,11 +488,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          BIN_DIR="$(swift build -c release --product CodexBarCLI \
+          BIN_DIR="$(swift build -c release --product SharinganCLI \
             --swift-sdk "$SWIFT_STATIC_LINUX_SDK" \
             --triple "$SWIFT_STATIC_LINUX_SDK_TRIPLE" \
             --show-bin-path)"
-          BIN="$BIN_DIR/CodexBarCLI"
+          BIN="$BIN_DIR/SharinganCLI"
           file "$BIN"
           bash Scripts/check-linux-cli-codex-cost-smoke.sh "$BIN"
 
@@ -578,8 +578,8 @@ jobs:
           hash -r
           swift --version
 
-      - name: Build CodexBarCLI (release, static Swift stdlib)
-        run: swift build -c release --product CodexBarCLI --static-swift-stdlib
+      - name: Build SharinganCLI (release, static Swift stdlib)
+        run: swift build -c release --product SharinganCLI --static-swift-stdlib
 
       - name: Swift Test (Linux only)
         run: |
@@ -589,28 +589,28 @@ jobs:
       - name: Verify procfs teardown releases empty read buffers
         run: python3 Scripts/test_linux_procfs_reads.py
 
-      - name: Smoke test CodexBarCLI
+      - name: Smoke test SharinganCLI
         shell: bash
         run: |
           set -euo pipefail
-          BIN_DIR="$(swift build -c release --product CodexBarCLI --static-swift-stdlib --show-bin-path)"
-          BIN="$BIN_DIR/CodexBarCLI"
+          BIN_DIR="$(swift build -c release --product SharinganCLI --static-swift-stdlib --show-bin-path)"
+          BIN="$BIN_DIR/SharinganCLI"
           "$BIN" --help >/dev/null
           "$BIN" --version >/dev/null
           if "$BIN" usage --provider codex --web >/dev/null 2>&1; then
             echo "Expected --web to fail on Linux"
             exit 1
           fi
-          "$BIN" usage --provider codex --web 2>&1 | tee /tmp/codexbarcli-stderr.txt >/dev/null || true
-          grep -q "macOS" /tmp/codexbarcli-stderr.txt
+          "$BIN" usage --provider codex --web 2>&1 | tee /tmp/sharingancli-stderr.txt >/dev/null || true
+          grep -q "macOS" /tmp/sharingancli-stderr.txt
           bash Scripts/check-linux-cli-codex-cost-smoke.sh "$BIN"
 
-      - name: Verify CodexBarCLI does not link libxml2
+      - name: Verify SharinganCLI does not link libxml2
         shell: bash
         run: |
           set -euo pipefail
-          BIN_DIR="$(swift build -c release --product CodexBarCLI --static-swift-stdlib --show-bin-path)"
-          BIN="$BIN_DIR/CodexBarCLI"
+          BIN_DIR="$(swift build -c release --product SharinganCLI --static-swift-stdlib --show-bin-path)"
+          BIN="$BIN_DIR/SharinganCLI"
           bash Scripts/check-linux-cli-linkage.sh "$BIN"
 
       - name: Summarize Linux CLI build

@@ -116,8 +116,8 @@ jobs:
           echo "$RUNNER_TEMP/apple-tools" >> "$GITHUB_PATH"
       - name: Build, sign, notarize, and staple
         env:
-          # Cold universal widget builds compile CodexBarCore again in Xcode.
-          CODEXBAR_WIDGET_EXTENSION_TIMEOUT_SECONDS: "3600"
+          # Cold universal widget builds compile SharinganCore again in Xcode.
+          SHARINGAN_WIDGET_EXTENSION_TIMEOUT_SECONDS: "3600"
           APP_STORE_CONNECT_API_KEY_P8: ${{ secrets.ASC_PRIVATE_KEY_P8 }}
           APP_STORE_CONNECT_KEY_ID: ${{ secrets.ASC_KEY_ID }}
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.ASC_ISSUER_ID }}
@@ -129,10 +129,10 @@ jobs:
           set -euo pipefail
           source version.env
           mkdir -p release-assets "$RUNNER_TEMP/extracted"
-          cp "CodexBar-macos-universal-${MARKETING_VERSION}.zip" "CodexBar-macos-universal-${MARKETING_VERSION}.dSYM.zip" release-assets/
-          ditto -x -k "release-assets/CodexBar-macos-universal-${MARKETING_VERSION}.zip" "$RUNNER_TEMP/extracted"
-          python3 .github/scripts/verify-macos.py "$RUNNER_TEMP/extracted/CodexBar.app"
-          export APP_BUNDLE="$RUNNER_TEMP/extracted/CodexBar.app"
+          cp "Sharingan-macos-universal-${MARKETING_VERSION}.zip" "Sharingan-macos-universal-${MARKETING_VERSION}.dSYM.zip" release-assets/
+          ditto -x -k "release-assets/Sharingan-macos-universal-${MARKETING_VERSION}.zip" "$RUNNER_TEMP/extracted"
+          python3 .github/scripts/verify-macos.py "$RUNNER_TEMP/extracted/Sharingan.app"
+          export APP_BUNDLE="$RUNNER_TEMP/extracted/Sharingan.app"
           export SPARKLE_SIGN_UPDATE="$RUNNER_TEMP/sparkle-bin/bin/sign_update"
           test -x "$SPARKLE_SIGN_UPDATE"
           python3 .github/scripts/release.py appcast
