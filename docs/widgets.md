@@ -157,23 +157,6 @@ Automatic extension recovery does not change the shared snapshot schema.
 A fresh snapshot and a reload request cannot make an old running extension use the
 replacement executable or prove that `chronod` accepted its output.
 
-### Widgets removed during Homebrew upgrades
-
-Homebrew replaces the app bundle during a cask upgrade. Even when it preserves the outer
-`Sharingan.app` directory, its removal of the old contents temporarily removes the embedded
-widget extension. macOS can treat that as an uninstall and remove placed widgets (#3627).
-If Sharingan is still in the gallery but desktop or Notification Center widgets disappeared,
-re-registering the extension or reloading timelines does not restore their saved placements
-and configuration. WidgetCenter exposes configuration queries and reload requests, not an
-API for restoring removed widget placements. Add and configure those widgets again.
-
-`brew upgrade --formula` upgrades formulae only and can defer cask replacement until you are
-ready to reconfigure widgets; it does not update Sharingan. Neither `--no-quit` nor `--no-binaries`
-prevents replacement of the app's embedded extension. For an alternative update mechanism,
-use a standalone GitHub release installation with Sparkle; Homebrew-managed installations
-disable Sparkle. Widget placement preservation with that alternative still needs native
-upgrade testing and is not guaranteed here.
-
 ### Timelines remain stale despite successful extension logs
 
 `reloadAllTimelines()` requests an update; it does not confirm that `chronod` accepted the

@@ -1,0 +1,13 @@
+diff --git a/.github/workflows/release.yml b/.github/workflows/release.yml
+index c7c4923..b21cd6c 100644
+--- a/.github/workflows/release.yml
++++ b/.github/workflows/release.yml
+@@ -224,8 +224,3 @@ jobs:
+           GH_TOKEN: ${{ github.token }}
+           RELEASE_SHA: ${{ needs.validate.outputs.sha }}
+         run: python3 .github/scripts/release.py publish
+-      - name: Update Homebrew from the verified release
+-        if: ${{ !contains(needs.validate.outputs.version, '-') }}
+-        env:
+-          GH_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+-        run: python3 .github/scripts/homebrew.py

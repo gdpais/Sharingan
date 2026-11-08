@@ -7,10 +7,12 @@ const repoRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), ".."
 const docsDir = path.join(repoRoot, "docs");
 const args = process.argv.slice(2);
 const mode = parseMode(args);
-const cname = fs.readFileSync(path.join(docsDir, "CNAME"), "utf8").trim();
-const origin = "https://" + cname;
 const productName = "Sharingan";
 const source = "https://github.com/gdpais/Sharingan";
+// Sharingan has no hosted website yet; without docs/CNAME the index links to the files in the repository.
+const cnamePath = path.join(docsDir, "CNAME");
+const cname = fs.existsSync(cnamePath) ? fs.readFileSync(cnamePath, "utf8").trim() : "";
+const origin = cname ? "https://" + cname : source + "/blob/main/docs";
 const outputPath = path.join(docsDir, "llms.txt");
 
 const pages = allHtml(docsDir)
@@ -79,6 +81,7 @@ function allHtml(dir) {
 }
 
 function pageUrl(rel) {
+  if (!cname) return origin + "/" + rel;
   return rel === "index.html" ? origin + "/" : origin + "/" + rel;
 }
 

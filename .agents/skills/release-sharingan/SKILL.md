@@ -1,11 +1,11 @@
 ---
 name: release-sharingan
-description: "Sharingan release: versioning, notarization, appcast, Homebrew, post-release bump."
+description: "Sharingan release: versioning, notarization, GitHub Releases, post-release bump."
 ---
 
 # Sharingan Release
 
-Use for releasing signed/notarized macOS apps, especially repos with Sparkle appcasts and Homebrew casks.
+Use for releasing Sharingan to GitHub Releases, its only distribution channel (no Homebrew, no website). CI publication and first-release prerequisites are in `docs/RELEASING.md`.
 
 ## Start
 
@@ -54,9 +54,6 @@ Paths:
 - packaged app: `Sharingan.app`
 - version file: `version.env`
 - changelog: `CHANGELOG.md`
-- Homebrew tap: `~/Projects/homebrew-tap`
-- cask: `~/Projects/homebrew-tap/Casks/sharingan.rb`
-- formula: `~/Projects/homebrew-tap/Formula/sharingan.rb`
 - CLI release workflow: `.github/workflows/release-cli.yml`
 
 Normal release:
@@ -77,8 +74,6 @@ Sharingan CLI tarballs are not produced by `Scripts/release.sh` itself. The GitH
 - `SharinganCLI-v<version>-linux-aarch64.tar.gz`
 - `SharinganCLI-v<version>-linux-x86_64.tar.gz`
 - matching `.sha256` files
-
-If the workflow fails only in `update-homebrew-tap` with GitHub API rate limiting, the CLI assets may already be uploaded. Verify assets live, then update `Formula/sharingan.rb` manually from the tarball checksums.
 
 ## Verify
 
@@ -104,31 +99,16 @@ codesign --verify --deep --strict --verbose=2 Sharingan.app
 spctl --assess --type execute --verbose Sharingan.app
 ```
 
-For Homebrew:
-
-```bash
-shasum -a 256 Sharingan-macos-universal-<VERSION>.zip
-cd /Users/steipete/Projects/homebrew-tap
-python3 .github/scripts/update_formula.py --formula sharingan --tag v<VERSION> --repository steipete/CodexBar --artifact-template 'SharinganCLI-{tag}-{target}.tar.gz' --target-aliases 'darwin_arm64=macos-arm64,darwin_amd64=macos-x86_64,linux_arm64=linux-aarch64,linux_amd64=linux-x86_64'
-brew fetch --cask --force --retry sharingan
-brew fetch --formula --force --retry steipete/tap/codexbar
-```
-
-Update the cask when app zip assets exist. Update the formula only when standalone CLI tarballs for that version exist.
-
-Tap audit can be noisy from unrelated formulae; keep evidence specific to the app cask.
-
 ## Closeout
 
 1. Create/push tag and GitHub release through the release script.
 2. Verify appcast points to the new GitHub release asset with signature and length.
-3. Update/push the Homebrew cask if the app zip changed.
-4. Bump the app repo to next patch `Unreleased`:
+3. Bump the app repo to next patch `Unreleased`:
    - `version.env`: next `MARKETING_VERSION`, next `BUILD_NUMBER`
    - `CHANGELOG.md`: top `## <next> — Unreleased`
-5. Commit, push, then pull `--ff-only`.
-6. Restart the local app from the packaged bundle and verify the running bundle version.
-7. Check no release/notary/op temp sessions or temp env files remain.
+4. Commit, push, then pull `--ff-only`.
+5. Restart the local app from the packaged bundle and verify the running bundle version.
+6. Check no release/notary/op temp sessions or temp env files remain.
 
 Sharingan restart:
 

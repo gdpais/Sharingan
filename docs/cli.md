@@ -28,8 +28,8 @@ approval is still required. The installer uses absolute system tools, clears the
 requesting approval, and stops on installation failure. The in-app installer is separate and uses Foundation symlinks.
 
 ### Release tarball install (macOS/Linux)
-- Homebrew formula (Linux today): `brew install steipete/tap/codexbar`.
-- Download release tarballs from GitHub Releases:
+- Download release tarballs from [GitHub Releases](https://github.com/gdpais/Sharingan/releases) (the only
+  distribution channel; there is no Homebrew formula):
   - macOS: `SharinganCLI-v<tag>-macos-arm64.tar.gz`, `SharinganCLI-v<tag>-macos-x86_64.tar.gz`
   - Linux (glibc): `SharinganCLI-v<tag>-linux-aarch64.tar.gz`, `SharinganCLI-v<tag>-linux-x86_64.tar.gz`
   - Linux (static musl): `SharinganCLI-v<tag>-linux-musl-aarch64.tar.gz`, `SharinganCLI-v<tag>-linux-musl-x86_64.tar.gz`
