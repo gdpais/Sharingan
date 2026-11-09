@@ -83,6 +83,17 @@ public enum ClaudeUsageError: LocalizedError, Sendable {
     case parseFailed(String)
     case oauthFailed(String)
 
+    /// Shown when an expired Claude Code token needs the `claude` CLI to refresh it, but the Keychain prompt
+    /// policy only allows that on user action. The app retries under user interaction when the menu opens.
+    static let userActionRepairRequiredDescription =
+        "Claude OAuth token expired, but background repair is suppressed when Keychain prompt policy "
+            + "is set to only prompt on user action. Click Refresh in the Sharingan menu to retry."
+
+    /// Whether a stored provider error describes a Claude repair that only a user action may perform.
+    public static func isUserActionRepairRequiredDescription(_ description: String) -> Bool {
+        description.contains(Self.userActionRepairRequiredDescription)
+    }
+
     public static func isClaudeOAuthUsageRateLimit(_ error: Error) -> Bool {
         if let fetchError = error as? ClaudeOAuthFetchError,
            case .rateLimited = fetchError
@@ -195,9 +206,7 @@ public struct ClaudeUsageFetcher: ClaudeUsageFetching, Sendable {
            policy.interaction != .userInitiated,
            !allowBackgroundDelegatedRefresh
         {
-            throw ClaudeUsageError.oauthFailed(
-                "Claude OAuth token expired, but background repair is suppressed when Keychain prompt policy "
-                    + "is set to only prompt on user action. Click Refresh in the Sharingan menu to retry.")
+            throw ClaudeUsageError.oauthFailed(ClaudeUsageError.userActionRepairRequiredDescription)
         }
     }
 

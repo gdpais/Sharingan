@@ -1218,21 +1218,26 @@ extension StatusItemController {
                 return
             }
             self.deferredMenuInteractionRefreshProviders.formUnion(retryInstanceIDs)
-            await ProviderInteractionContext.$current.withValue(.background) {
-                if plan.scheduling == .concurrent {
-                    // Refresh concurrently so one slow provider doesn't delay the rest, mirroring the
-                    // periodic refresh in `UsageStore.runRefresh`. `coalesceIfRefreshing` makes each call
-                    // wait for any in-flight refresh (e.g. a manual refresh) instead of overriding it.
-                    await withTaskGroup(of: Void.self) { group in
-                        for provider in retryProviders {
-                            group.addTask {
+            let interactions = Dictionary(uniqueKeysWithValues: retryProviders.map {
+                ($0, self.store.menuOpenRetryInteraction(for: $0))
+            })
+            if plan.scheduling == .concurrent {
+                // Refresh concurrently so one slow provider doesn't delay the rest, mirroring the
+                // periodic refresh in `UsageStore.runRefresh`. `coalesceIfRefreshing` makes each call
+                // wait for any in-flight refresh (e.g. a manual refresh) instead of overriding it.
+                await withTaskGroup(of: Void.self) { group in
+                    for provider in retryProviders {
+                        group.addTask {
+                            await ProviderInteractionContext.$current.withValue(interactions[provider] ?? .background) {
                                 await self.store.refreshProvider(provider, coalesceIfRefreshing: true)
                             }
                         }
                     }
-                } else {
-                    for provider in retryProviders {
-                        guard !Task.isCancelled else { return }
+                }
+            } else {
+                for provider in retryProviders {
+                    guard !Task.isCancelled else { return }
+                    await ProviderInteractionContext.$current.withValue(interactions[provider] ?? .background) {
                         await self.store.refreshProvider(provider, coalesceIfRefreshing: true)
                     }
                 }
