@@ -78,6 +78,11 @@ final class SettingsWindowController: NSWindowController {
                 codexAccountPromotionCoordinator: codexAccountPromotionCoordinator,
                 runProviderLoginFlow: runProviderLoginFlow)
             let hostingController = NSHostingController(rootView: rootView)
+            // The default `.standardBounds` options re-measure the whole settings tree's min, ideal and
+            // max size on every frame of a live resize, which makes dragging the window edge lag. The
+            // window owns its bounds instead: `SettingsWindowSizing` sets `minSize`, and the root view
+            // fills whatever frame the window has.
+            hostingController.sizingOptions = []
             let window = NSWindow(
                 contentRect: NSRect(
                     x: 0,
