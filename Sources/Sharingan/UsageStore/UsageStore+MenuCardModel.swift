@@ -173,7 +173,7 @@ extension UsageStore {
             workdayTickAppearance: self.settings.workdayTickAppearance,
             paceVisible: self.settings.paceVisible,
             usesLiveSubtitle: !isSettings && isLive,
-            preferredCurrencyCode: isSettings ? "auto" : self.settings.preferredCurrencyCode,
+            preferredCurrencyCode: self.settings.preferredCurrencyCode,
             costUsageBucketCalendar: self.settings.costUsageBucketCalendar,
             now: now,
             observedWeeklyResets: descriptor.presentation.menuCard.showsQuotaWeekCost

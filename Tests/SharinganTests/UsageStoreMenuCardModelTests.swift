@@ -173,7 +173,7 @@ struct UsageStoreMenuCardModelTests {
         #expect(menu.costComparisonPeriodsEnabled)
         #expect(!settings.costComparisonPeriodsEnabled)
         #expect(menu.preferredCurrencyCode == "EUR")
-        #expect(settings.preferredCurrencyCode == "auto")
+        #expect(settings.preferredCurrencyCode == "EUR")
         #expect(menu.usesLiveSubtitle)
         #expect(!settings.usesLiveSubtitle)
         #expect(settings.showsAllUsageLanes)
