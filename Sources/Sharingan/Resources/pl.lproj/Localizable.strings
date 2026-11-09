@@ -2860,3 +2860,6 @@
 "menu_bar_style_tomoe" = "Tomoe";
 "show_project_names_title" = "Pokazuj nazwy projektów";
 "show_project_names_subtitle" = "Adresy e-mail pozostają ukryte, ale nazwy i ścieżki projektów, sesji i źródeł w historii kosztów są widoczne.";
+"Provider order" = "Kolejność dostawców";
+"Alphabetical" = "Alfabetycznie";
+"Drag providers to set their order in the menu bar." = "Przeciągnij dostawców, aby ustawić ich kolejność na pasku menu.";

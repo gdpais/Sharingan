@@ -91,6 +91,27 @@ struct ProviderBrowsingTests {
     }
 
     @Test
+    func `menu bar order follows the chosen custom or alphabetical order`() {
+        let settings = self.store(config: SharinganConfig(providers: [
+            ProviderConfig(id: .codex, enabled: true),
+            ProviderConfig(id: .gemini, enabled: false),
+            ProviderConfig(id: .claude, enabled: true),
+        ]))
+        let metadata = ProviderDescriptorRegistry.metadata
+        let custom = settings.configSnapshot.providers.map(\.id)
+        #expect(settings.enabledProvidersOrdered(metadataByProvider: metadata) == [.codex, .claude])
+        #expect(Array(settings.orderedFirstPartyProviders().prefix(2)) == [.codex, .gemini])
+
+        settings.providersSortedAlphabetically = true
+        #expect(settings.enabledProvidersOrdered(metadataByProvider: metadata) == [.claude, .codex])
+        #expect(Array(settings.orderedFirstPartyProviders().prefix(2)) == [.claude, .codex])
+        #expect(settings.configSnapshot.providers.map(\.id) == custom)
+
+        settings.providersSortedAlphabetically = false
+        #expect(settings.enabledProvidersOrdered(metadataByProvider: metadata) == [.codex, .claude])
+    }
+
+    @Test
     func `stale undo cannot overwrite an external order or a later mode choice`() {
         let settings = self.store()
         let initial = settings.orderedFirstPartyProviders().map(\.instanceID)

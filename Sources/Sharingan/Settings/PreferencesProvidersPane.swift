@@ -177,7 +177,7 @@ struct ProvidersPane: View {
 
     func moveProviders(fromOffsets: IndexSet, toOffset: Int) {
         self.settings.moveVisibleProviders(
-            self.settings.orderedFirstPartyProviders().map(\.instanceID),
+            self.settings.orderedProviders().filter { $0.firstPartyProvider != nil },
             fromOffsets: fromOffsets,
             toOffset: toOffset)
     }

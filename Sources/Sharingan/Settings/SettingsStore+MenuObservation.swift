@@ -3,6 +3,7 @@ import Foundation
 extension SettingsStore {
     var menuObservationToken: Int {
         _ = self.providerOrder
+        _ = self.providersSortedAlphabetically
         _ = self.providerEnablement
         _ = self.refreshFrequency
         _ = self.adaptiveActivityScanConsent

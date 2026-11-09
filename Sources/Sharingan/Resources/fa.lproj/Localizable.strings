@@ -2861,3 +2861,6 @@
 "menu_bar_style_tomoe" = "تومویه";
 "show_project_names_title" = "نام پروژه‌ها نمایش داده شود";
 "show_project_names_subtitle" = "ایمیل‌ها همچنان پنهان می‌مانند، اما نام و مسیر پروژه‌ها، نشست‌ها و منابع در تاریخچهٔ هزینه نمایش داده می‌شود.";
+"Provider order" = "ترتیب ارائه‌دهندگان";
+"Alphabetical" = "الفبایی";
+"Drag providers to set their order in the menu bar." = "ارائه‌دهندگان را بکشید تا ترتیبشان در نوار منو تعیین شود.";

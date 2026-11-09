@@ -1129,9 +1129,9 @@ extension SettingsStore {
         set { self.setDefault(\.providerDetectionCompleted, newValue, key: "providerDetectionCompleted") }
     }
 
-    /// Whether the Providers settings pane displays providers sorted alphabetically (enabled on
-    /// top). Defaults to `false`. Purely a display preference — it never rewrites the stored manual
-    /// order, so turning it on sorts the display without losing the user's hand-arranged sequence.
+    /// Whether providers are ordered alphabetically (enabled first) in the menu bar, the menu, and the
+    /// Settings sidebar, instead of the saved custom order. Defaults to `false`. It never rewrites the
+    /// stored custom order, so switching back to custom restores the user's hand-arranged sequence.
     var providersSortedAlphabetically: Bool {
         get { self.defaultsState.providersSortedAlphabetically }
         set {

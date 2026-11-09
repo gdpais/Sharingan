@@ -2859,3 +2859,6 @@
 "menu_bar_style_tomoe" = "Tomoe";
 "show_project_names_title" = "Mantén visibles els noms dels projectes";
 "show_project_names_subtitle" = "Continua amagant els correus, però mostra els noms i camins de projectes, sessions i fonts de l'historial de costos.";
+"Provider order" = "Ordre dels proveïdors";
+"Alphabetical" = "Alfabètic";
+"Drag providers to set their order in the menu bar." = "Arrossega els proveïdors per definir-ne l'ordre a la barra de menús.";

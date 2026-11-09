@@ -2859,3 +2859,6 @@
 "menu_bar_style_tomoe" = "Tomoe";
 "show_project_names_title" = "Tetap tampilkan nama proyek";
 "show_project_names_subtitle" = "Email tetap disembunyikan, tetapi nama dan jalur proyek, sesi, dan sumber di riwayat biaya ditampilkan.";
+"Provider order" = "Urutan penyedia";
+"Alphabetical" = "Alfabetis";
+"Drag providers to set their order in the menu bar." = "Seret penyedia untuk mengatur urutannya di bilah menu.";
