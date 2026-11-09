@@ -58,7 +58,7 @@ struct HomebrewUpgradeCommandTests {
             printf '%s' '"version":"\(availableVersion)","installed":"\(receiptVersion)","disabled":false}]}'
             exit 0
         fi
-        [ "$#" = 3 ] && [ "$2" = --cask ] && [ "$3" = steipete/tap/codexbar ] || exit 91
+        [ "$#" = 3 ] && [ "$2" = --cask ] && [ "$3" = steipete/tap/sharingan ] || exit 91
         [ "$1" = upgrade ] && [ "\(scenario)" != upgrade ] && exit 0
         [ "\(scenario)" = failed-reinstall ] && { printf 'reinstall failed' >&2; exit 7; }
         [ "\(scenario)" = unchanged-reinstall ] && exit 0
@@ -172,8 +172,8 @@ struct HomebrewUpgradeCommandTests {
         #expect(cask.rawValue == tap)
         #expect(cask.qualifiedName == "\(tap)/sharingan")
         let expected = tap == "homebrew/cask"
-            ? "https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/c/codexbar.rb"
-            : "https://raw.githubusercontent.com/steipete/homebrew-tap/main/Casks/codexbar.rb"
+            ? "https://raw.githubusercontent.com/Homebrew/homebrew-cask/master/Casks/c/sharingan.rb"
+            : "https://raw.githubusercontent.com/steipete/homebrew-tap/main/Casks/sharingan.rb"
         #expect(cask.sourceURL.absoluteString == expected)
     }
 
