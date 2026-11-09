@@ -27,18 +27,15 @@ extension HookEvent {
 
     /// The budget fields as `SHARINGAN_*` variables; empty for every other event.
     func budgetEnvironmentVariables() -> [String: String] {
-        var env: [String: String] = [:]
-        if let estimatedCost { env["SHARINGAN_ESTIMATED_COST"] = Self.number(estimatedCost) }
-        if let budget { env["SHARINGAN_BUDGET"] = Self.number(budget) }
-        if let estimatedBudgetFraction {
-            env["SHARINGAN_ESTIMATED_BUDGET_FRACTION"] = Self.number(estimatedBudgetFraction)
-        }
-        if let budgetThreshold { env["SHARINGAN_BUDGET_THRESHOLD"] = Self.number(budgetThreshold) }
-        if let currency { env["SHARINGAN_CURRENCY"] = currency }
-        if let budgetMonth { env["SHARINGAN_BUDGET_MONTH"] = budgetMonth }
-        if let estimatedCostIsPartial {
-            env["SHARINGAN_ESTIMATED_COST_IS_PARTIAL"] = estimatedCostIsPartial ? "true" : "false"
-        }
-        return env
+        let fields: [(String, String?)] = [
+            ("SHARINGAN_ESTIMATED_COST", self.estimatedCost.map(Self.number)),
+            ("SHARINGAN_BUDGET", self.budget.map(Self.number)),
+            ("SHARINGAN_ESTIMATED_BUDGET_FRACTION", self.estimatedBudgetFraction.map(Self.number)),
+            ("SHARINGAN_BUDGET_THRESHOLD", self.budgetThreshold.map(Self.number)),
+            ("SHARINGAN_CURRENCY", self.currency),
+            ("SHARINGAN_BUDGET_MONTH", self.budgetMonth),
+            ("SHARINGAN_ESTIMATED_COST_IS_PARTIAL", self.estimatedCostIsPartial.map { $0 ? "true" : "false" }),
+        ]
+        return Dictionary(uniqueKeysWithValues: fields.compactMap { key, value in value.map { (key, $0) } })
     }
 }
