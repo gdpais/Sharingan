@@ -104,3 +104,51 @@ struct SpendDashboardMidnightDSTTests {
         #expect(SpendTrendChartModel(group: group, section: .hourly, day: transition).domain.upperBound == nextStart)
     }
 }
+
+struct SpendDashboardDayCountDSTTests {
+    @Test(arguments: [
+        // Autumn change (25 Oct 2026) and spring change (29 Mar 2026) inside the 30-day scan.
+        DateComponents(year: 2026, month: 11, day: 9, hour: 12),
+        DateComponents(year: 2026, month: 4, day: 15, hour: 12),
+    ])
+    func `covered day count stays exact when the window crosses a Lisbon DST change`(
+        nowComponents: DateComponents) throws
+    {
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = try #require(TimeZone(identifier: "Europe/Lisbon"))
+        let now = try #require(calendar.date(from: nowComponents))
+        let today = calendar.startOfDay(for: now)
+        let start = try #require(calendar.date(byAdding: .day, value: -29, to: today))
+        #expect(SpendDashboardModel.dayCount(in: start...today, calendar: calendar) == 30)
+        #expect(SpendDashboardModel.dayCount(in: today...now, calendar: calendar) == 1)
+
+        let formatter = DateFormatter()
+        formatter.calendar = calendar
+        formatter.timeZone = calendar.timeZone
+        formatter.dateFormat = "yyyy-MM-dd"
+        let snapshot = CostUsageTokenSnapshot(
+            sessionTokens: 85,
+            sessionCostUSD: nil,
+            last30DaysTokens: 85,
+            last30DaysCostUSD: nil,
+            historyDays: 30,
+            historyCoverageIsEstablished: true,
+            daily: [.init(
+                date: formatter.string(from: now),
+                inputTokens: nil,
+                outputTokens: nil,
+                totalTokens: 85,
+                costUSD: nil,
+                modelsUsed: nil,
+                modelBreakdowns: nil)],
+            updatedAt: now)
+        let model = SpendDashboardModel.build(
+            inputs: [.init(provider: .grok, displayName: "Grok", snapshot: snapshot)],
+            requestedDays: 60,
+            now: now,
+            calendar: calendar)
+        let row = try #require(model.groups.flatMap(\.providers).first { $0.provider == .grok })
+        #expect(row.totalTokens == 85)
+        #expect(row.coveredDayCount == 30)
+    }
+}
