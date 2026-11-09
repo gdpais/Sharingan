@@ -125,13 +125,13 @@ mkdir -p "$fixture_dir"
 cat > "$fixture_dir/Formula.rb" <<'RUBY'
 class Sharingan < Formula
   version "0.49.0"
-  url "https://github.com/steipete/CodexBar/releases/download/v#{version}/CodexBarCLI-v#{version}-macos-arm64.tar.gz"
+  url "https://github.com/gdpais/Sharingan/releases/download/v#{version}/SharinganCLI-v#{version}-macos-arm64.tar.gz"
   sha256 "1111111111111111111111111111111111111111111111111111111111111111"
-  url "https://github.com/steipete/CodexBar/releases/download/v#{version}/CodexBarCLI-v#{version}-macos-x86_64.tar.gz"
+  url "https://github.com/gdpais/Sharingan/releases/download/v#{version}/SharinganCLI-v#{version}-macos-x86_64.tar.gz"
   sha256 "2222222222222222222222222222222222222222222222222222222222222222"
-  url "https://github.com/steipete/CodexBar/releases/download/v#{version}/CodexBarCLI-v#{version}-linux-aarch64.tar.gz"
+  url "https://github.com/gdpais/Sharingan/releases/download/v#{version}/SharinganCLI-v#{version}-linux-aarch64.tar.gz"
   sha256 "3333333333333333333333333333333333333333333333333333333333333333"
-  url "https://github.com/steipete/CodexBar/releases/download/v#{version}/CodexBarCLI-v#{version}-linux-x86_64.tar.gz"
+  url "https://github.com/gdpais/Sharingan/releases/download/v#{version}/SharinganCLI-v#{version}-linux-x86_64.tar.gz"
   sha256 "4444444444444444444444444444444444444444444444444444444444444444"
 end
 RUBY
@@ -139,14 +139,14 @@ cat > "$fixture_dir/Cask.rb" <<'RUBY'
 cask "sharingan" do
   version "0.49.0"
   sha256 "5555555555555555555555555555555555555555555555555555555555555555"
-  url "https://github.com/steipete/CodexBar/releases/download/v#{version}/CodexBar-macos-universal-#{version}.zip"
+  url "https://github.com/gdpais/Sharingan/releases/download/v#{version}/Sharingan-macos-universal-#{version}.zip"
 end
 RUBY
 cat > "$fixture_dir/Cask-old.rb" <<'RUBY'
 cask "sharingan" do
   version "0.48.1"
   sha256 "5555555555555555555555555555555555555555555555555555555555555555"
-  url "https://github.com/steipete/CodexBar/releases/download/v#{version}/CodexBar-macos-universal-#{version}.zip"
+  url "https://github.com/gdpais/Sharingan/releases/download/v#{version}/Sharingan-macos-universal-#{version}.zip"
 end
 RUBY
 
