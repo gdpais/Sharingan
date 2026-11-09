@@ -123,6 +123,7 @@ struct SpendDashboardPane: View {
     @State private var isDataControlsExpanded = true
     @State private var detailSelections: [String: SpendDashboardDetailSection] = [:]
     @State private var sessionNavigation = SessionUsageNavigation.shared
+    @State private var isScrolling = false
 
     init(settings: SettingsStore, store: UsageStore) {
         self.settings = settings
@@ -154,7 +155,10 @@ struct SpendDashboardPane: View {
                 }
             }
             .padding(24)
+            .verticalScrollPassthrough()
+            .environment(\.spendDashboardIsScrolling, self.isScrolling)
         }
+        .modifier(SpendDashboardScrollPhaseTracker(isScrolling: self.$isScrolling))
         .background(FocusResigningBackground())
         .onAppear {
             self.isVisible = true
