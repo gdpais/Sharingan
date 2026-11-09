@@ -49,10 +49,16 @@ struct HideProjectInfoSettingsTests {
 
     @Test
     func `project identity follows the project info flag`() {
-        let shown = CostHistoryIdentity(name: "sharingan", path: "/tmp/sharingan", placeholder: "Project 1",
-                                        hidePersonalInfo: false)
-        let hidden = CostHistoryIdentity(name: "sharingan", path: "/tmp/sharingan", placeholder: "Project 1",
-                                         hidePersonalInfo: true)
+        let shown = CostHistoryIdentity(
+            name: "sharingan",
+            path: "/tmp/sharingan",
+            placeholder: "Project 1",
+            hidePersonalInfo: false)
+        let hidden = CostHistoryIdentity(
+            name: "sharingan",
+            path: "/tmp/sharingan",
+            placeholder: "Project 1",
+            hidePersonalInfo: true)
 
         #expect(shown.name == "sharingan")
         #expect(shown.path == "/tmp/sharingan")

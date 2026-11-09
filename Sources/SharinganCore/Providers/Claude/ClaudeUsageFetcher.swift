@@ -91,7 +91,7 @@ public enum ClaudeUsageError: LocalizedError, Sendable {
 
     /// Whether a stored provider error describes a Claude repair that only a user action may perform.
     public static func isUserActionRepairRequiredDescription(_ description: String) -> Bool {
-        description.contains(Self.userActionRepairRequiredDescription)
+        description.contains(self.userActionRepairRequiredDescription)
     }
 
     public static func isClaudeOAuthUsageRateLimit(_ error: Error) -> Bool {
