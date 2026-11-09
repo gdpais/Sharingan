@@ -1,5 +1,5 @@
-@testable import Sharingan
 import Testing
+@testable import Sharingan
 
 struct VerticalScrollPassthroughRouterTests {
     @Test
