@@ -57,29 +57,36 @@ struct SpendInsightTilesRowTests {
     }
 
     @Test
-    func `plan value shows a price hint until a plan price is set`() {
-        let tiles = { (price: Double?) in
-            SpendInsightTiles(
-                inputs: SpendInsightInputs(
-                    period: SpendInsightPeriod(start: Self.day("2026-07-01"), dayCount: 30),
-                    samples: [SpendInsightSample(sourceID: "claude", day: Self.day("2026-07-02"), cost: 1300)]),
-                calendar: Self.calendar,
-                planMonthlyPrice: price)
+    func `plan value appears only once a provider in the group has a plan price`() throws {
+        let group = try #require(Self.group(historyDays: 30))
+        let tiles = { (pricing: SpendInsightPlanPricing) in
+            SpendInsightTiles(inputs: group.insightInputs, calendar: group.calendar, planPricing: pricing)
         }
-        SharinganLocalizationOverride.$appLanguage.withValue("en") {
-            let hint = SpendInsightTileItem.items(for: tiles(nil), currencyCode: "USD", planMonthlyPrice: nil)
-            #expect(hint.map(\.kind) == [.planValue])
-            #expect(hint.first?.value == nil)
-            #expect(hint.first?.detail == "Set a plan price to compare")
+        #expect(group.insightInputs.coverage == ["claude": Self.day("2026-07-10")...Self.day("2026-07-16")])
 
-            let priced = SpendInsightTileItem.items(for: tiles(200), currencyCode: "USD", planMonthlyPrice: 200)
-            #expect(priced.first?.value == "6.5×")
-            #expect(priced.first?.detail == "API-equivalent vs $200.00 plan")
-            #expect(priced.first?.delta == nil)
+        let unpriced = SpendInsightTileItem.planPricing(group: group, spendPlans: [:])
+        #expect(unpriced.isEmpty)
+        let hidden = SpendInsightTileItem.items(for: tiles(unpriced), currencyCode: "USD", planPricing: unpriced)
+        #expect(!hidden.contains { $0.kind == .planValue })
+        #expect(SpendInsightTileItem.planPricing(
+            group: group,
+            spendPlans: [.claude: ProviderSpendPlan(monthlyBudget: 50, currencyCode: "USD")]).isEmpty)
+
+        let priced = SpendInsightTileItem.planPricing(
+            group: group,
+            spendPlans: [.claude: ProviderSpendPlan(planMonthlyPrice: 30, currencyCode: "USD")])
+        let items = SharinganLocalizationOverride.$appLanguage.withValue("en") {
+            SpendInsightTileItem.items(
+                for: tiles(priced),
+                currencyCode: "USD",
+                planPricing: priced,
+                planScopeNames: SpendInsightTileItem.planScopeNames(pricing: priced, group: group))
         }
-
-        let noSpend = SpendInsightTiles(inputs: SpendInsightInputs(), calendar: Self.calendar, planMonthlyPrice: nil)
-        #expect(SpendInsightTileItem.items(for: noSpend, currencyCode: "USD", planMonthlyPrice: nil).isEmpty)
+        let item = try #require(items.first { $0.kind == .planValue })
+        #expect(item.title == "Plan value")
+        #expect(item.detail == "API-equivalent vs $30.00 plan")
+        // $2 of spend against seven covered days of a $30 month ($7) is 0.29x.
+        #expect(item.value == "0.3×")
     }
 
     @Test

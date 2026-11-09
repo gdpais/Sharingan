@@ -24,6 +24,19 @@ struct LocalizationFormattingTests {
         }
     }
 
+    @Test
+    func `system language mode formats decimals by the resolved UI language not the region`() {
+        let english = sharinganSystemModeLocale(localization: "en")
+        #expect(2.7.formatted(.number.locale(english)) == "2.7")
+        #expect(1234.formatted(.number.locale(english)) == "1,234")
+
+        let portuguese = sharinganSystemModeLocale(localization: "pt-PT")
+        #expect(2.7.formatted(.number.locale(portuguese)) == "2,7")
+
+        #expect(sharinganSystemModeLocale(localization: nil) == .current)
+        #expect(sharinganSystemModeLocale(localization: "Base") == .current)
+    }
+
     @Test(arguments: ["ru", "pl", "ar"])
     func `generic formatter follows the plural rules of the selected resources`(language: String) {
         SharinganLocalizationOverride.$appLanguage.withValue(language) {

@@ -2801,6 +2801,26 @@
 "Project trends" = "แนวโน้มโครงการ";
 "Change compares the last %d days with the %d days before." = "การเปลี่ยนแปลงเปรียบเทียบ %d วันล่าสุดกับ %d วันก่อนหน้า";
 "New" = "ใหม่";
+
+/* Plan price and budgets */
+"Plan value · %@" = "มูลค่าแผนบริการ · %@";
+"API-equivalent vs %@ in plans" = "มูลค่าเทียบเท่า API เทียบกับแผนบริการรวม %@";
+"Plan & budget" = "แผนบริการและงบประมาณ";
+"Plan price" = "ราคาแผนบริการ";
+"plan_price_subtitle" = "ราคาสมัครสมาชิกรายเดือน มูลค่าแผนบริการจะเทียบกับค่าใช้จ่ายเทียบเท่า API";
+"monthly_budget_subtitle" = "เทียบกับค่าใช้จ่ายโดยประมาณตั้งแต่ต้นเดือนในกราฟต้นทุน การแจ้งเตือน และฮุก";
+"Currency" = "สกุลเงิน";
+"plan_budget_footer" = "ตัวเลขของคุณเอง บันทึกไว้กับผู้ให้บริการนี้ในไฟล์การตั้งค่า เว้นช่องว่างไว้เพื่อปิด";
+"plan_budget_invalid_amount" = "ป้อนจำนวนเงินที่มากกว่าศูนย์";
+"Month to date %@ of %@ budget" = "ตั้งแต่ต้นเดือน %1$@ จากงบประมาณ %2$@";
+"Month to date at least %@ of %@ budget" = "ตั้งแต่ต้นเดือนอย่างน้อย %1$@ จากงบประมาณ %2$@";
+"budget %@/day" = "งบประมาณ %@/วัน";
+"budget_notifications_title" = "การแจ้งเตือนงบประมาณ";
+"budget_notifications_subtitle" = "แจ้งเตือนเมื่อค่าใช้จ่ายโดยประมาณตั้งแต่ต้นเดือนถึง 80% และ 100% ของงบประมาณรายเดือนของผู้ให้บริการ";
+"budget_notifications_no_budget" = "ตั้งงบประมาณรายเดือนในการตั้งค่าของผู้ให้บริการเพื่อรับการแจ้งเตือนงบประมาณ";
+"budget_notification_title_warning" = "งบประมาณ %1$@ ถึง %2$@";
+"budget_notification_title_reached" = "งบประมาณ %@ ครบแล้ว";
+"budget_notification_body" = "ค่าใช้จ่ายโดยประมาณเดือนนี้: %1$@ จากงบประมาณ %2$@ ของคุณ";
 "quota_warning_add_threshold" = "เพิ่มเกณฑ์";
 "quota_warning_remove_threshold" = "ลบเกณฑ์ต่ำสุด";
 "quota_warning_lane_follows_weekly" = "เฉพาะเครื่องหมายรายสัปดาห์ ไม่มีการแจ้งเตือน";
@@ -2812,3 +2832,30 @@
 "Drawn inside usage rows." = "แสดงอยู่ภายในแถวการใช้งาน";
 "Menu links" = "ลิงก์ในเมนู";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "จัดลำดับและแสดงส่วนต่างๆ ของการ์ดเมนูของผู้ให้บริการนี้ แล้วเลือกแผนภูมิ ส่วนและแผนภูมิที่ไม่มีข้อมูลจะยังคงซ่อนอยู่";
+
+/* Chart preferences */
+"Charts" = "แผนภูมิ";
+"Charts never show more days than the History window." = "แผนภูมิจะไม่แสดงจำนวนวันมากกว่ากรอบเวลาประวัติ";
+"Stack by model" = "ซ้อนตามโมเดล";
+"Splits each day by its two largest models." = "แบ่งแต่ละวันตามสองโมเดลที่ใหญ่ที่สุด";
+"Average line" = "เส้นค่าเฉลี่ย";
+"Chart style" = "รูปแบบแผนภูมิ";
+"Bars" = "แท่ง";
+"Line" = "เส้น";
+"Palette" = "จานสี";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "โหมดเหมาะสำหรับผู้ที่มีภาวะตาบอดสีจะใช้ชุดสีที่ตรวจสอบแล้วแทนสีเน้นของผู้ให้บริการในแผนภูมิแบบชุดข้อมูลเดียว โหมดขาวดำใช้สีเทาทุกที่ รวมถึงแผนที่ความร้อน";
+"Provider accents" = "สีเน้นของผู้ให้บริการ";
+"Colorblind-safe" = "เหมาะสำหรับผู้ที่มีภาวะตาบอดสี";
+"Monochrome" = "ขาวดำ";
+/* Widget options */
+"Match app" = "ตามแอป";
+"Used" = "ใช้แล้ว";
+"Last 7 days" = "7 วันที่ผ่านมา";
+"Last 90 days" = "90 วันที่ผ่านมา";
+"All providers" = "ผู้ให้บริการทั้งหมด";
+"Name" = "ชื่อ";
+"Switcher" = "สวิตช์";
+"Choose which providers the switcher shows and their order." = "เลือกผู้ให้บริการที่สวิตช์แสดงและลำดับการแสดง";
+"menu_bar_style_tomoe" = "โทโมเอะ";
+"show_project_names_title" = "แสดงชื่อโปรเจกต์ต่อไป";
+"show_project_names_subtitle" = "ยังคงซ่อนอีเมล แต่แสดงชื่อและพาธของโปรเจกต์ เซสชัน และแหล่งที่มาในประวัติค่าใช้จ่าย";

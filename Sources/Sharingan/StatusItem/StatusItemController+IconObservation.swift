@@ -112,6 +112,7 @@ extension StatusItemController {
             "layoutResets=\(layoutResetSignature ?? "nil")",
             "layoutCondWindows=\(layoutConditionalWindowSignature ?? "nil")",
             "layoutSpend=\(layoutSpendSignature ?? "nil")",
+            "tomoe=\(self.tomoeStoreIconObservationSignature(snapshot: snapshot))",
         ].joined(separator: "|")
     }
 

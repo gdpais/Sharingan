@@ -2799,6 +2799,26 @@
 "Project trends" = "プロジェクトの推移";
 "Change compares the last %d days with the %d days before." = "変化は直近%d日間とその前の%d日間を比較しています。";
 "New" = "新規";
+
+/* Plan price and budgets */
+"Plan value · %@" = "プランの価値 · %@";
+"API-equivalent vs %@ in plans" = "%@ のプランに対する API 換算額";
+"Plan & budget" = "プランと予算";
+"Plan price" = "プラン料金";
+"plan_price_subtitle" = "サブスクリプションの月額料金。プランの価値はこれを API 換算の支出と比較します。";
+"monthly_budget_subtitle" = "コストグラフ、アラート、フックで今月の推定支出と比較されます。";
+"Currency" = "通貨";
+"plan_budget_footer" = "あなた自身の数値で、このプロバイダーとともに設定ファイルに保存されます。オフにするには欄を空にしてください。";
+"plan_budget_invalid_amount" = "0 より大きい金額を入力してください。";
+"Month to date %@ of %@ budget" = "今月 %1$@ / 予算 %2$@";
+"Month to date at least %@ of %@ budget" = "今月 %1$@ 以上 / 予算 %2$@";
+"budget %@/day" = "予算 %@/日";
+"budget_notifications_title" = "予算アラート";
+"budget_notifications_subtitle" = "今月の推定支出がプロバイダーの月間予算の 80% と 100% に達したときに通知します。";
+"budget_notifications_no_budget" = "予算アラートを受け取るには、プロバイダーの設定で月間予算を設定してください。";
+"budget_notification_title_warning" = "%1$@ の予算が %2$@ に到達";
+"budget_notification_title_reached" = "%@ の予算に到達";
+"budget_notification_body" = "今月の推定支出: 予算 %2$@ のうち %1$@。";
 "quota_warning_add_threshold" = "しきい値を追加";
 "quota_warning_remove_threshold" = "最も低いしきい値を削除";
 "quota_warning_lane_follows_weekly" = "週間マーカーのみ、通知なし";
@@ -2810,3 +2830,30 @@
 "Drawn inside usage rows." = "使用量の行の中に表示されます。";
 "Menu links" = "メニューのリンク";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "このプロバイダーのメニューカードのセクションを並べ替えて表示を切り替え、グラフを選択します。データのないセクションやグラフは非表示のままです。";
+
+/* Chart preferences */
+"Charts" = "グラフ";
+"Charts never show more days than the History window." = "グラフに履歴期間より多くの日数が表示されることはありません。";
+"Stack by model" = "モデル別に積み上げる";
+"Splits each day by its two largest models." = "各日を上位2つのモデルで分けて表示します。";
+"Average line" = "平均線";
+"Chart style" = "グラフのスタイル";
+"Bars" = "棒グラフ";
+"Line" = "折れ線グラフ";
+"Palette" = "カラーパレット";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "色覚多様性対応では、単一系列のグラフでもプロバイダのアクセントカラーの代わりに検証済みの配色を使います。モノクロでは、ヒートマップを含むすべてにグレーを使います。";
+"Provider accents" = "プロバイダのアクセントカラー";
+"Colorblind-safe" = "色覚多様性対応";
+"Monochrome" = "モノクロ";
+/* Widget options */
+"Match app" = "アプリに合わせる";
+"Used" = "使用済み";
+"Last 7 days" = "過去7日間";
+"Last 90 days" = "過去90日間";
+"All providers" = "すべてのプロバイダ";
+"Name" = "名前";
+"Switcher" = "スイッチャー";
+"Choose which providers the switcher shows and their order." = "スイッチャーに表示するプロバイダとその順序を選択します。";
+"menu_bar_style_tomoe" = "巴";
+"show_project_names_title" = "プロジェクト名を表示したままにする";
+"show_project_names_subtitle" = "メールアドレスは非表示のまま、コスト履歴のプロジェクト・セッション・ソースの名前とパスを表示します。";

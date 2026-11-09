@@ -42,10 +42,10 @@ struct CostUsageClaudeReconciliationMemoryTests {
         ]
         let digest = try SHA256.hash(data: encoder.encode(bytes)).map { String(format: "%02x", $0) }.joined()
         let expected = [
-            "7c046ec860b6766bb825f1870706c75d7e50ddb23b69f11fe78738f307d66930",
-            "6b0663417d6124b4d66568a6ae26efcf42ed486ac5e9466290489a2364159c1c",
-            "059a88ac800275b4ac0bee8571d393a45ae32117baa67bc89c5ed7e1e63ae1a8",
-            "581788d8c7ee6d142f2673f0c0dde5287a8c6cc699aee3bf2fa8a1dabf3cd3a3",
+            "65f548c19bcca0f021147a8a108a92a712ad76ebed26787ea85388fb3485a0e1",
+            "866cc469f7084c70e2ba066bb65f237d496c17fe513df82330df53dc21bb3503",
+            "1393a078e1a3cdb4a061924c774771a2fb4305180d5fdf41b8d7fb5923c97529",
+            "2b79b81e98ea90cc8a84e9b61cc54fcaa21d1d8a1f9153b0edc84c2ef34b2511",
         ]
         #expect(digest == expected[seed])
         #expect(cache.days["2026-09-01"]?["fixture/overflow"] == nil)

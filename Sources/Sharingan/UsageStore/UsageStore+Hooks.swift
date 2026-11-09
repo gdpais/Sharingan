@@ -38,7 +38,7 @@ extension UsageStore {
         self.dispatchHookEvent(event, accountDiscriminator: accountDiscriminator)
     }
 
-    private func dispatchHookEvent(_ event: HookEvent, accountDiscriminator: String?) {
+    func dispatchHookEvent(_ event: HookEvent, accountDiscriminator: String?) {
         guard let hooks = self.settings.config.hooks,
               hooks.enabled,
               hooks.events.count <= HooksConfig.maximumRuleCount

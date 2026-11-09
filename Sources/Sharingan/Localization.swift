@@ -232,7 +232,13 @@ func sharinganLocalizedResourceLocale() -> Locale {
 }
 
 private func sharinganLocale(forLanguage language: String) -> Locale {
-    guard !language.isEmpty else { return .current }
+    guard !language.isEmpty else {
+        let bundleURL = localizedBundle().bundleURL
+        let localization = bundleURL.pathExtension == "lproj"
+            ? bundleURL.deletingPathExtension().lastPathComponent
+            : nil
+        return sharinganSystemModeLocale(localization: localization)
+    }
     let normalized = language.lowercased()
     if normalized == "ar" || normalized.hasPrefix("ar-") {
         return Locale(identifier: "\(language)@numbers=arab")
@@ -247,6 +253,14 @@ private func sharinganLocale(forLanguage language: String) -> Locale {
     default:
         return Locale(identifier: language)
     }
+}
+
+/// System language mode formats numbers by the language the UI text resolved to, not by the Mac's
+/// region. An English UI on a Portugal-region Mac (`en_US@rg=ptzzzz`) then shows "2.7", matching the
+/// surrounding text and the fixed en_US money format, instead of "2,7" next to "€1,924.78".
+func sharinganSystemModeLocale(localization: String?) -> Locale {
+    guard let localization, !localization.isEmpty, localization != "Base" else { return .current }
+    return sharinganLocale(forLanguage: localization)
 }
 
 func sharinganLocalizedInteger(_ value: Int) -> String {

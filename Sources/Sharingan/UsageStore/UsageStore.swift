@@ -169,6 +169,7 @@ final class UsageStore {
     var claudeSwapLastError: String?
     var claudeSwapDetectedVersion: String?
     var claudeSwapRevision: UInt64 = 0
+    @ObservationIgnored var lastClaudeMenuOpenRepairAt: Date?
     @ObservationIgnored var claudeSwapRefreshTask: Task<Void, Never>?
     @ObservationIgnored var claudeSwapTransientState = ClaudeSwapTransientState()
     var tokenSnapshotPublications: [ProviderInstanceID: TokenSnapshotPublication] = [:]

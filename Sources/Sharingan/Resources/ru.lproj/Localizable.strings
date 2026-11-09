@@ -2800,6 +2800,26 @@
 "Project trends" = "Динамика проектов";
 "Change compares the last %d days with the %d days before." = "Изменение сравнивает последние %d дн. с %d дн. до них.";
 "New" = "Новый";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Ценность плана · %@";
+"API-equivalent vs %@ in plans" = "Эквивалент API против планов за %@";
+"Plan & budget" = "План и бюджет";
+"Plan price" = "Цена плана";
+"plan_price_subtitle" = "Ежемесячная цена подписки. Ценность плана сравнивает её с расходами в эквиваленте API.";
+"monthly_budget_subtitle" = "Сравнивается с оценкой расходов с начала месяца на графике затрат, в уведомлениях и хуках.";
+"Currency" = "Валюта";
+"plan_budget_footer" = "Ваши собственные значения, сохранённые для этого провайдера в файле конфигурации. Оставьте поле пустым, чтобы отключить его.";
+"plan_budget_invalid_amount" = "Введите сумму больше нуля.";
+"Month to date %@ of %@ budget" = "С начала месяца %1$@ из бюджета %2$@";
+"Month to date at least %@ of %@ budget" = "С начала месяца не менее %1$@ из бюджета %2$@";
+"budget %@/day" = "бюджет %@/день";
+"budget_notifications_title" = "Уведомления о бюджете";
+"budget_notifications_subtitle" = "Уведомляет, когда оценка расходов с начала месяца достигает 80% и 100% месячного бюджета провайдера.";
+"budget_notifications_no_budget" = "Задайте месячный бюджет в настройках провайдера, чтобы получать уведомления о бюджете.";
+"budget_notification_title_warning" = "Бюджет %1$@: %2$@";
+"budget_notification_title_reached" = "Бюджет %@ исчерпан";
+"budget_notification_body" = "Оценка расходов за этот месяц: %1$@ из вашего бюджета %2$@.";
 "quota_warning_add_threshold" = "Добавить порог";
 "quota_warning_remove_threshold" = "Удалить самый низкий порог";
 "quota_warning_lane_follows_weekly" = "Только недельные маркеры, без уведомлений";
@@ -2811,3 +2831,30 @@
 "Drawn inside usage rows." = "Отображается внутри строк использования.";
 "Menu links" = "Ссылки в меню";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Упорядочьте разделы карточки меню этого провайдера, настройте их видимость и выберите график. Разделы и графики без данных остаются скрытыми.";
+
+/* Chart preferences */
+"Charts" = "Графики";
+"Charts never show more days than the History window." = "Графики никогда не показывают больше дней, чем окно истории.";
+"Stack by model" = "Накопление по моделям";
+"Splits each day by its two largest models." = "Делит каждый день по двум крупнейшим моделям.";
+"Average line" = "Линия среднего";
+"Chart style" = "Стиль графика";
+"Bars" = "Столбцы";
+"Line" = "Линия";
+"Palette" = "Палитра";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Режим для дальтоников заменяет акцентные цвета провайдеров на графиках с одним рядом. Монохромный режим везде использует оттенки серого, включая тепловые карты.";
+"Provider accents" = "Акцентные цвета провайдеров";
+"Colorblind-safe" = "Для дальтоников";
+"Monochrome" = "Монохромная";
+/* Widget options */
+"Match app" = "Как в приложении";
+"Used" = "Использовано";
+"Last 7 days" = "Последние 7 дней";
+"Last 90 days" = "Последние 90 дней";
+"All providers" = "Все провайдеры";
+"Name" = "Название";
+"Switcher" = "Коммутатор";
+"Choose which providers the switcher shows and their order." = "Выберите, каких провайдеров показывает коммутатор и в каком порядке.";
+"menu_bar_style_tomoe" = "Томоэ";
+"show_project_names_title" = "Показывать названия проектов";
+"show_project_names_subtitle" = "Адреса электронной почты остаются скрытыми, но названия и пути проектов, сеансов и источников в истории расходов отображаются.";

@@ -661,6 +661,22 @@ extension SettingsStore {
         set { self.setDefault(\.hidePersonalInfo, newValue, key: "hidePersonalInfo") }
     }
 
+    /// With personal info hidden, keep cost-history project, session, and source names visible (emails stay hidden).
+    var showProjectNamesWhenHidingPersonalInfo: Bool {
+        get { self.defaultsState.showProjectNamesWhenHidingPersonalInfo }
+        set {
+            self.setDefault(
+                \.showProjectNamesWhenHidingPersonalInfo,
+                newValue,
+                key: "showProjectNamesWhenHidingPersonalInfo")
+        }
+    }
+
+    /// Whether cost-history project, session, and source names and paths are masked.
+    var hideProjectInfo: Bool {
+        self.hidePersonalInfo && !self.showProjectNamesWhenHidingPersonalInfo
+    }
+
     var randomBlinkEnabled: Bool {
         get { self.defaultsState.randomBlinkEnabled }
         set { self.setDefault(\.randomBlinkEnabled, newValue, key: "randomBlinkEnabled") }

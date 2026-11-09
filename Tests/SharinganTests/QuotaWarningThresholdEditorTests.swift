@@ -151,6 +151,8 @@ struct QuotaWarningThresholdEditorTests {
         #expect(config.isEnabled(forLane: "tertiary", fallback: false))
         #expect(config.isEnabled(forLane: "fictional-extra", fallback: false) == false)
 
+        // On its own (the sync payload shape) the config nests its lanes; a provider config stores them at the
+        // provider level instead (QuotaWarningLaneStorageTests).
         let data = try JSONEncoder().encode(config)
         let decoded = try JSONDecoder().decode(QuotaWarningConfig.self, from: data)
         #expect(decoded == config)

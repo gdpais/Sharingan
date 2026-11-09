@@ -39,7 +39,9 @@
 "Activity" = "Активность";
 "Add-on credits" = "Дополнение Кредиты";
 "Agent" = "Агент";
+"All providers" = "Все провайдеры";
 "Amp Free" = "Amp Бесплатно";
+"Automatic" = "Автоматически";
 "Balance" = "Баланс";
 "Base" = "База";
 "Billing" = "Биллинг";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Поставщик выгорания Квота";
 "Chat" = "Чат";
 "Choose an account" = "Выберите учетную запись";
+"Choose which providers the switcher shows and their order." = "Выберите, каких провайдеров показывает коммутатор и в каком порядке.";
 "Claude and GPT" = "Claude и GPT";
 "Code 7-day" = "Код 7-дневный Квота";
 "Code review" = "Ревью кода";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "Ежедневно бесплатно токены";
 "Daily refresh" = "Ежедневное обновление";
 "Daily usage" = "Ежедневное использование";
+"Default" = "По умолчанию";
 "Deployment" = "Развёртывание";
 "Edit predictions" = "Редактировать прогнозы";
 "Enable a provider in Sharingan → Settings → Providers." = "Включите провайдера в Sharingan → Настройки → Провайдеры.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo Пропуск";
 "Last %d days" = "Последние %d дн.";
 "Last 30 days" = "Последние 30 дней";
+"Last 7 days" = "Последние 7 дней";
+"Last 90 days" = "Последние 90 дней";
+"Match app" = "Как в приложении";
 "Memory" = "Использование памяти";
 "Metric" = "Показатель";
 "Model quota" = "Модель Квота";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Ежемесячный бюджет";
 "Monthly credits" = "Ежемесячно Кредиты";
 "Monthly quota" = "Ежемесячно Квота";
+"Name" = "Название";
 "No data" = "Нет данных";
 "Not reported by %@" = "Не сообщил %@";
 "On-demand" = "Использование по требованию";
@@ -119,11 +127,14 @@
 "Provider" = "Провайдер";
 "Provider %@" = "Провайдер %@";
 "Provider + Metric" = "Провайдер + Показатель";
+"Providers" = "Провайдеры";
 "Purchased" = "Куплено";
 "Quota" = "Квота";
 "Ran out" = "Квота исчерпан";
+"Range" = "Интервал";
 "Rate limit" = "Ограничение скорости";
 "Refill" = "Пополнить";
+"Remaining" = "Осталось";
 "Remaining budget compared with an ideal steady burn rate." = "Оставшийся бюджет по сравнению с идеальной постоянной скоростью расходования средств.";
 "Requests" = "Запросы";
 "Reset: %@" = "Сброс: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Сеансовое и еженедельное использование с Кредиты и стоимость.";
 "Shared pool" = "Общая квота";
 "Sonnet" = "Sonnet";
+"Sort by" = "Сортировать по";
 "Spend" = "Расходы";
 "Standard" = "Стандартный";
 "Status" = "Статус";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Сменить поставщика";
 "Switch the provider shown in the widget." = "Переключите провайдера, показанного в виджете.";
 "Switch to %@" = "Переключиться на %@";
+"Switcher" = "Коммутатор";
 "Team budget" = "Бюджет команды";
 "Third Party" = "Третья сторона";
 "Third quota" = "Третий Квота";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Ограничения использования и сброс обратного отсчета для одной сохраненной учетной записи.";
 "Usage widget with a provider switcher." = "Виджет использования с переключателем провайдера.";
 "Usage window" = "Окно использования";
+"Used" = "Использовано";
 "Voices" = "Голоса";
 "Weekly" = "Недельный";
 "Weekly (7-day)" = "Еженедельно (7 дней)";

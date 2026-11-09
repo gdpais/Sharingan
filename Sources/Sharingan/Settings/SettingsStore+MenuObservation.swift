@@ -33,6 +33,7 @@ extension SettingsStore {
         _ = self.highlightMenuCardsOnHover
         _ = self.menuBarShowsBrandIconWithPercent
         _ = self.menuBarHidesCritters
+        _ = self.menuBarShowsTomoeIcon
         _ = self.menuBarColorPace
         _ = self.menuBarPaceReservePositive
         _ = self.menuBarColorByProvider
@@ -64,6 +65,7 @@ extension SettingsStore {
         _ = self.costSummaryDisplayStyle
         _ = self.appLanguage
         _ = self.hidePersonalInfo
+        _ = self.showProjectNamesWhenHidingPersonalInfo
         _ = self.randomBlinkEnabled
         _ = self.confettiOnSessionLimitResetsEnabled
         _ = self.confettiOnWeeklyLimitResetsEnabled

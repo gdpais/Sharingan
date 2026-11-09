@@ -108,6 +108,8 @@ Events:
 - `provider_recovered`: that tracked outage returns to normal.
 - `refresh_failed`: a provider refresh fails; `SHARINGAN_STATUS` is a coarse category such as `timeout`, `offline`,
   `network_error`, `auth_required`, `cancelled`, or `error`.
+- `budget_reached` (Sharingan): estimated month-to-date spend for a provider reached 80% or 100% of the monthly
+  budget you set in that provider's Plan & budget settings. See [Budget hooks](#budget-hooks).
 
 `usage_updated`, `provider_unavailable`, and `refresh_failed` allow the first matching attempt immediately,
 then drop further attempts for the same provider/account/window for 600 seconds. Failed command attempts consume
@@ -135,6 +137,32 @@ add optional observability data without breaking existing commands.
 
 Safety limits: at most 32 rules, 32 arguments per rule, 4 KiB per executable or argument string, 32 KiB per command,
 and 4 KiB per event payload. Configurations beyond these limits fail closed and do not execute.
+
+### Budget hooks
+
+There is still no generic cost-threshold hook: local costs are API-rate estimates, not bills. `budget_reached`
+instead compares that estimate with a monthly budget you entered yourself (see `spendPlan` under
+[Provider fields](#provider-fields)), and every amount in its payload says so in its name.
+
+- **Opt-in like every hook.** Add a rule with event `budget_reached` under `hooks.events` (or Settings > Hooks).
+  It runs only while `hooks.enabled` is on and the rule itself is enabled, with the same executable, argument,
+  timeout, and environment rules as above. A rule can be scoped to one provider or match any provider.
+  `sharingan hooks test budget_reached` sends a sample event at the 80% threshold of a 50 USD budget.
+- **When it fires.** After the app publishes new cost history for a provider with a budget, once per threshold
+  (0.8 and 1) per calendar month in the cost time zone. A refresh that crosses both reports only `1`. Changing the
+  budget amount or currency starts the month over. Events are not rate limited; the per-month record dedupes them.
+- **Payload.** `event`, `provider`, `timestamp`, `window` (`"month"`), plus `estimatedCost` (month-to-date
+  estimated spend), `budget`, `estimatedBudgetFraction` (`estimatedCost / budget`, above 1 when over budget),
+  `budgetThreshold` (`0.8` or `1`), `currency` (ISO 4217 code of both amounts), `budgetMonth` (`yyyy-MM`), and
+  `estimatedCostIsPartial` (`true` when history does not reach the first of the month, a scan stopped short, or a
+  day has unpriced usage, so `estimatedCost` is a floor). The matching variables are `SHARINGAN_ESTIMATED_COST`,
+  `SHARINGAN_BUDGET`, `SHARINGAN_ESTIMATED_BUDGET_FRACTION`, `SHARINGAN_BUDGET_THRESHOLD`, `SHARINGAN_CURRENCY`,
+  `SHARINGAN_BUDGET_MONTH`, and `SHARINGAN_ESTIMATED_COST_IS_PARTIAL` (`true` or `false`). Budget events carry no
+  account.
+
+```json
+{"budget":50,"budgetMonth":"2026-11","budgetThreshold":0.8,"currency":"USD","estimatedBudgetFraction":0.82,"estimatedCost":41,"estimatedCostIsPartial":false,"event":"budget_reached","provider":"claude","timestamp":"2026-11-18T09:30:00Z","window":"month"}
+```
 
 ## Provider fields
 All provider fields are optional unless noted.
@@ -169,6 +197,13 @@ All provider fields are optional unless noted.
   `tcr list --json`), the card label and the `<source>:<slot>` identity. Machine-local like the executable path.
 - `claudeSwapShowSingleAccount`: prefer a claude-swap card when exactly one account is available. Defaults to
   `false`; multiple claude-swap accounts retain their existing precedence.
+- `spendPlan` (Sharingan): your own numbers for this provider, edited under the provider's Plan & budget settings.
+  `planMonthlyPrice` is the monthly subscription price that plan value in Usage & Spend compares API-equivalent
+  spend with; `monthlyBudget` drives the cost chart's budget line, budget alerts, and
+  [budget hooks](#budget-hooks); `currencyCode` is the ISO 4217 code of both (absent means the provider's cost
+  currency, else USD). Each amount must be greater than `0` and at most `1000000`; an object with no valid amount
+  reads as absent. Absent by default, which leaves every surface unchanged. Example:
+  `"spendPlan": {"planMonthlyPrice": 200, "monthlyBudget": 50, "currencyCode": "USD"}`.
 
 ## Manual cookies
 Use manual cookies when automatic browser import is unavailable, disabled, or too noisy for your setup.

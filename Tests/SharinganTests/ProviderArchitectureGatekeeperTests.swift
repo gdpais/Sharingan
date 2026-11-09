@@ -109,8 +109,10 @@ struct ProviderArchitectureGatekeeperTests {
 
     @Test
     func `widget provider choices match selectable descriptor metadata`() {
+        // The AppEnum catalog covers every built-in provider; the original picker set stays descriptor-driven.
+        #expect(Set(ProviderChoice.allCases.map(\.provider)) == Set(UsageProvider.allCases))
         let selectable = Set(ProviderDescriptorRegistry.all.filter(\.metadata.widgetSelectable).map(\.id))
-        let choices = Set(ProviderChoice.allCases.map(\.provider))
+        let choices = Set(UsageProvider.allCases.compactMap { ProviderChoice(provider: $0)?.provider })
         let missing = selectable.subtracting(choices).map(\.rawValue).sorted()
         let unexpected = choices.subtracting(selectable).map(\.rawValue).sorted()
 
@@ -1571,13 +1573,13 @@ struct ProviderArchitectureGatekeeperTests {
         SuppressedProviderReference(
             path: "Sources/SharinganWidget/SharinganWidgetProvider.swift",
             occurrence: 1,
-            anchor: "@Parameter(title: \"Provider\", default: .codex)",
+            anchor: "@Parameter(title: \"Provider\", default: .codex, optionsProvider: WidgetProviderOptions())",
             expectedProviderIDs: ["codex"],
             reason: "This WidgetKit default or preview pins the established Codex sample provider."),
         SuppressedProviderReference(
             path: "Sources/SharinganWidget/SharinganWidgetProvider.swift",
             occurrence: 2,
-            anchor: "@Parameter(title: \"Provider\", default: .codex)",
+            anchor: "@Parameter(title: \"Provider\", default: .codex, optionsProvider: WidgetProviderOptions())",
             expectedProviderIDs: ["codex"],
             reason: "This WidgetKit default or preview pins the established Codex sample provider."),
         SuppressedProviderReference(
@@ -2609,7 +2611,7 @@ struct ProviderArchitectureGatekeeperTests {
             anchor: "guard provider != .claude || window != .session || Self.isSessionWindow(rateWindow) else { return }",
             expectedProviderIDs: ["claude"],
             expectedReferenceCount: 2,
-            expectedReferenceFingerprint: ["claude@0", "claude@5"],
+            expectedReferenceFingerprint: ["claude@0", "claude@8"],
             reason: "Claude preserves session history across weekly promotion and reconciles unresolved warning owners."),
         AllowedProviderConstruct(
             path: "Sources/Sharingan/UsageStore/UsageStore+Refresh.swift",
@@ -3119,13 +3121,6 @@ struct ProviderArchitectureGatekeeperTests {
             reason: "This exact CLI construct preserves the provider-specific command and output contract."),
         AllowedProviderConstruct(
             path: "Sources/SharinganCLI/CLICostCommand.swift",
-            anchor: "let projects = provider == .codex",
-            expectedProviderIDs: ["codex"],
-            expectedReferenceCount: 1,
-            expectedReferenceFingerprint: ["codex@0"],
-            reason: "This exact CLI construct preserves the provider-specific command and output contract."),
-        AllowedProviderConstruct(
-            path: "Sources/SharinganCLI/CLICostCommand.swift",
             anchor: "guard provider == .cursor else { return nil }",
             expectedProviderIDs: ["cursor"],
             expectedReferenceCount: 1,
@@ -3201,7 +3196,7 @@ struct ProviderArchitectureGatekeeperTests {
             anchor: "var historyCoverageIsEstablished = provider != .codex",
             expectedProviderIDs: ["codex"],
             expectedReferenceCount: 2,
-            expectedReferenceFingerprint: ["codex@0", "codex@1"],
+            expectedReferenceFingerprint: ["codex@0", "codex@2"],
             reason: "This exact cost scanner dispatch selects a provider-owned transcript, cache, or pricing format."),
         AllowedProviderConstruct(
             path: "Sources/SharinganCore/CostUsageFetcher.swift",
@@ -3343,13 +3338,13 @@ struct ProviderArchitectureGatekeeperTests {
                 "codex@0",
                 "claude@3",
                 "claude@5",
-                "gemini@11",
                 "gemini@13",
-                "opencode@16",
-                "opencodego@16",
-                "copilot@20",
-                "cursor@24",
-                "cursor@28",
+                "gemini@15",
+                "opencode@18",
+                "opencodego@18",
+                "copilot@22",
+                "cursor@26",
+                "cursor@30",
             ],
             reason: "This exact shared provider integration dispatches a capability owned by the provider descriptor or adapter."),
         AllowedProviderConstruct(

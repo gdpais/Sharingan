@@ -2798,6 +2798,26 @@
 "Project trends" = "Tendances des projets";
 "Change compares the last %d days with the %d days before." = "La variation compare les %d derniers jours aux %d jours précédents.";
 "New" = "Nouveau";
+
+/* Plan price and budgets */
+"Plan value · %@" = "Valeur du forfait · %@";
+"API-equivalent vs %@ in plans" = "Équivalent API face à des forfaits de %@";
+"Plan & budget" = "Forfait et budget";
+"Plan price" = "Prix du forfait";
+"plan_price_subtitle" = "Prix mensuel de l'abonnement. La valeur du forfait le compare aux dépenses équivalentes API.";
+"monthly_budget_subtitle" = "Comparé aux dépenses estimées depuis le début du mois dans le graphique des coûts, les alertes et les hooks.";
+"Currency" = "Devise";
+"plan_budget_footer" = "Vos propres chiffres, enregistrés avec ce fournisseur dans le fichier de configuration. Laissez un champ vide pour le désactiver.";
+"plan_budget_invalid_amount" = "Saisissez un montant supérieur à zéro.";
+"Month to date %@ of %@ budget" = "Depuis le début du mois : %1$@ sur un budget de %2$@";
+"Month to date at least %@ of %@ budget" = "Depuis le début du mois : au moins %1$@ sur un budget de %2$@";
+"budget %@/day" = "budget %@/jour";
+"budget_notifications_title" = "Alertes de budget";
+"budget_notifications_subtitle" = "Avertit lorsque les dépenses estimées depuis le début du mois atteignent 80 % et 100 % du budget mensuel d'un fournisseur.";
+"budget_notifications_no_budget" = "Définissez un budget mensuel dans les réglages d'un fournisseur pour recevoir des alertes de budget.";
+"budget_notification_title_warning" = "Budget %1$@ à %2$@";
+"budget_notification_title_reached" = "Budget %@ atteint";
+"budget_notification_body" = "Dépenses estimées ce mois-ci : %1$@ sur votre budget de %2$@.";
 "quota_warning_add_threshold" = "Ajouter un seuil";
 "quota_warning_remove_threshold" = "Supprimer le seuil le plus bas";
 "quota_warning_lane_follows_weekly" = "Marqueurs hebdomadaires uniquement, sans notifications";
@@ -2809,3 +2829,30 @@
 "Drawn inside usage rows." = "Affiché dans les lignes d’utilisation.";
 "Menu links" = "Liens du menu";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "Ordonnez et affichez les sections de la carte de menu de ce fournisseur, et choisissez son graphique. Les sections et graphiques sans données restent masqués.";
+
+/* Chart preferences */
+"Charts" = "Graphiques";
+"Charts never show more days than the History window." = "Les graphiques n'affichent jamais plus de jours que la fenêtre d'historique.";
+"Stack by model" = "Empiler par modèle";
+"Splits each day by its two largest models." = "Répartit chaque jour selon ses deux principaux modèles.";
+"Average line" = "Ligne de moyenne";
+"Chart style" = "Style de graphique";
+"Bars" = "Barres";
+"Line" = "Ligne";
+"Palette" = "Palette";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "Adaptée au daltonisme remplace les couleurs d'accentuation des fournisseurs dans les graphiques à une seule série. Monochrome utilise des gris partout, cartes de chaleur comprises.";
+"Provider accents" = "Couleurs d'accentuation des fournisseurs";
+"Colorblind-safe" = "Adaptée au daltonisme";
+"Monochrome" = "Monochrome";
+/* Widget options */
+"Match app" = "Comme l'app";
+"Used" = "Utilisé";
+"Last 7 days" = "7 derniers jours";
+"Last 90 days" = "90 derniers jours";
+"All providers" = "Tous les fournisseurs";
+"Name" = "Nom";
+"Switcher" = "Commutateur";
+"Choose which providers the switcher shows and their order." = "Choisissez les fournisseurs affichés par le commutateur et leur ordre.";
+"menu_bar_style_tomoe" = "Tomoe";
+"show_project_names_title" = "Garder les noms de projets visibles";
+"show_project_names_subtitle" = "Les e-mails restent masqués, mais les noms et chemins des projets, sessions et sources de l’historique des coûts sont affichés.";

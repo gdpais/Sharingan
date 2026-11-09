@@ -171,6 +171,9 @@ extension SharinganCLI {
                 account: nil,
                 timestamp: timestamp)
         }
+        if type == .budgetReached {
+            return self.sampleBudgetReachedEvent(provider: provider)
+        }
         let usagePercent: Double?
         let status: String?
         switch type {
@@ -180,7 +183,7 @@ extension SharinganCLI {
         case .quotaReset:
             usagePercent = 0
             status = nil
-        case .usageUpdated:
+        case .usageUpdated, .budgetReached:
             usagePercent = nil
             status = nil
         case .providerUnavailable:
@@ -200,6 +203,21 @@ extension SharinganCLI {
             usagePercent: usagePercent,
             status: status,
             timestamp: Date())
+    }
+
+    /// `budget_reached` at the 80% threshold of a sample monthly budget in the current month.
+    private static func sampleBudgetReachedEvent(provider: String) -> HookEvent {
+        let timestamp = Date()
+        var calendar = Calendar(identifier: .gregorian)
+        calendar.timeZone = .current
+        let month = SpendBudgetMonth.containing(timestamp, calendar: calendar)
+            ?? SpendBudgetMonth(key: "1970-01", start: timestamp, dayCount: 31, todayKey: "1970-01-01")
+        return HookEvent.budgetReached(
+            provider: provider,
+            status: SpendBudgetStatus(month: month, budget: 50, monthToDateCost: 41, isComplete: true),
+            threshold: 0.8,
+            currencyCode: "USD",
+            timestamp: timestamp)
     }
 }
 

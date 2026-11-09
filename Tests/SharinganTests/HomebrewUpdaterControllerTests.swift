@@ -168,7 +168,7 @@ struct HomebrewUpdaterControllerTests {
         let controller = Fixture().makeController(cask: cask)
         let expected = cask == .official
             ? "brew upgrade --cask homebrew/cask/sharingan"
-            : "brew upgrade --cask steipete/tap/codexbar"
+            : "brew upgrade --cask steipete/tap/sharingan"
         #expect(controller.manualUpdateCommand == expected)
     }
 

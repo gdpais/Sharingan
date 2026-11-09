@@ -280,6 +280,8 @@ struct ProviderDetailView<SupplementaryContent: View>: View {
 
             ProviderQuotaWarningSettingsView(provider: self.provider, settings: self.store.settings)
 
+            ProviderPlanBudgetSettingsView(provider: self.provider, store: self.store)
+
             if !self.settingsToggles.isEmpty {
                 Section {
                     ForEach(self.settingsToggles) { toggle in

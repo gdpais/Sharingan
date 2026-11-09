@@ -2791,6 +2791,26 @@
 "Project trends" = "项目趋势";
 "Change compares the last %d days with the %d days before." = "变化比较最近 %d 天与之前 %d 天。";
 "New" = "新增";
+
+/* Plan price and budgets */
+"Plan value · %@" = "套餐价值 · %@";
+"API-equivalent vs %@ in plans" = "API 等价金额对比 %@ 的套餐";
+"Plan & budget" = "套餐与预算";
+"Plan price" = "套餐价格";
+"plan_price_subtitle" = "每月订阅价格。套餐价值会将其与 API 等价支出进行比较。";
+"monthly_budget_subtitle" = "在成本图表、提醒和钩子中与本月迄今的估算支出进行比较。";
+"Currency" = "货币";
+"plan_budget_footer" = "你自己的数字，与此提供商一起保存在配置文件中。留空即可关闭。";
+"plan_budget_invalid_amount" = "请输入大于零的金额。";
+"Month to date %@ of %@ budget" = "本月迄今 %1$@，预算 %2$@";
+"Month to date at least %@ of %@ budget" = "本月迄今至少 %1$@，预算 %2$@";
+"budget %@/day" = "预算 %@/天";
+"budget_notifications_title" = "预算提醒";
+"budget_notifications_subtitle" = "当本月迄今的估算支出达到提供商每月预算的 80% 和 100% 时通知你。";
+"budget_notifications_no_budget" = "在某个提供商的设置中设定每月预算即可接收预算提醒。";
+"budget_notification_title_warning" = "%1$@ 预算已达 %2$@";
+"budget_notification_title_reached" = "%@ 预算已用完";
+"budget_notification_body" = "本月估算支出：%1$@，预算 %2$@。";
 "quota_warning_add_threshold" = "添加阈值";
 "quota_warning_remove_threshold" = "移除最低阈值";
 "quota_warning_lane_follows_weekly" = "仅显示每周标记，不发送通知";
@@ -2802,3 +2822,30 @@
 "Drawn inside usage rows." = "显示在用量行内。";
 "Menu links" = "菜单链接";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "调整此提供商菜单卡片各部分的顺序和显示，并选择其图表。没有数据的部分和图表会保持隐藏。";
+
+/* Chart preferences */
+"Charts" = "图表";
+"Charts never show more days than the History window." = "图表显示的天数不会超过历史窗口。";
+"Stack by model" = "按模型堆叠";
+"Splits each day by its two largest models." = "按当天用量最大的两个模型拆分每一天。";
+"Average line" = "平均线";
+"Chart style" = "图表样式";
+"Bars" = "柱状";
+"Line" = "折线";
+"Palette" = "配色";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "色盲友好模式在单系列图表中也用经过验证的配色替代提供商强调色。单色模式在所有地方使用灰色，包括热力图。";
+"Provider accents" = "提供商强调色";
+"Colorblind-safe" = "色盲友好";
+"Monochrome" = "单色";
+/* Widget options */
+"Match app" = "跟随应用";
+"Used" = "已使用";
+"Last 7 days" = "近 7 天";
+"Last 90 days" = "近 90 天";
+"All providers" = "所有提供商";
+"Name" = "名称";
+"Switcher" = "切换器";
+"Choose which providers the switcher shows and their order." = "选择切换器显示哪些提供商以及它们的顺序。";
+"menu_bar_style_tomoe" = "勾玉";
+"show_project_names_title" = "保持显示项目名称";
+"show_project_names_subtitle" = "仍隐藏电子邮件，但显示费用历史中的项目、会话和来源名称及路径。";

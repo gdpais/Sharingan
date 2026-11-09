@@ -1135,7 +1135,7 @@ enum IconRenderer {
         CGRect(x: self.snap(x), y: self.snap(y), width: self.snap(width), height: self.snap(height))
     }
 
-    private static func renderImage(_ draw: () -> Void) -> NSImage {
+    static func renderImage(_ draw: () -> Void) -> NSImage {
         let image = NSImage(size: Self.outputSize)
 
         if let rep = NSBitmapImageRep(

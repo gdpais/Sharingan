@@ -14,6 +14,7 @@ extension ProviderConfig {
                 activeIndex: data.activeIndex)
         }
         copy.claudeResetCreditsVisibilityMigrated = nil
+        copy.spendPlan = nil
         return copy
     }
 }

@@ -241,7 +241,7 @@ struct QuotaBurndownChartMenuViewTests {
         #expect(band.first?.date == weeklyReset.addingTimeInterval(-7 * 86400))
         #expect(band.last?.date == weeklyReset)
         #expect(learned._seriesTypicalWeekForTesting["session:300"]?.isEmpty == true)
-        #expect(unlearned._seriesTypicalWeekForTesting.values.allSatisfy(\.isEmpty))
+        #expect(!unlearned._seriesTypicalWeekForTesting.values.contains { !$0.isEmpty })
     }
 
     @Test

@@ -22,7 +22,7 @@ struct CostUsageClaudeRebuildTests {
         #expect(digests == [
             "6260cd7640a6e48831af1d67ca2d78ecbe606db0374f5a1f31d8bda3b509a6f5",
             "900db7be9b3420d62fccdea6d1ab359528f1b736c95bb332c1eb98a2b8aa4544",
-            "b502508338e96fc6552b09f546aafbfdfadf4dd4e7f4f3c226d0570d1b01cd9c",
+            "87d20f37cd69fb5ff06497710bc31eb5a427129b3e8ed8c03e8da106673ee649",
             "7e9f76fc6fd41c9755399563e10bfaad51708e0e5e9676abba785af3553133d4",
             "ff44af15a44b217acedff8e0d76241c8d32152c36c5d671e2157b9fd557a2093",
         ])

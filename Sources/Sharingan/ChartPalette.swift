@@ -1,4 +1,5 @@
 import AppKit
+import SharinganCore
 import SwiftUI
 
 /// Shared categorical palette for menu charts.
@@ -108,6 +109,65 @@ enum ChartPalette {
             .map(\.key)
     }
 
+    // MARK: - Modes
+
+    /// Gray series for `.monochrome`, darkest first in light mode and lightest first in dark mode. Each
+    /// keeps at least 4.8:1 against white and #1E1E1E and about 13 L* from its neighbors.
+    static let monochromeSwatches: [Swatch] = [
+        Swatch(light: 0x1F1F1F, dark: 0xF1F1F1),
+        Swatch(light: 0x424242, dark: 0xCCCCCC),
+        Swatch(light: 0x666666, dark: 0xA8A8A8),
+    ]
+
+    /// "Other" in `.monochrome`: the faintest gray that still keeps 3:1 against white and #1E1E1E.
+    static let monochromeOtherSwatch = Swatch(light: 0x898989, dark: 0x848484)
+
+    private static let monochromeColors: [Color] = ChartPalette.monochromeSwatches.map {
+        ChartPalette.dynamicColor($0)
+    }
+
+    private static let monochromeOtherColor: Color = ChartPalette.dynamicColor(ChartPalette.monochromeOtherSwatch)
+
+    /// The swatch a slot paints with in `mode`. Accents and colorblind-safe share the validated categorical
+    /// order; monochrome has three grays, so later slots share the third.
+    static func swatch(for slot: Slot, mode: ChartPaletteMode) -> Swatch {
+        switch (mode, slot) {
+        case (.monochrome, .other):
+            self.monochromeOtherSwatch
+        case let (.monochrome, .index(index)):
+            self.monochromeSwatches[min(max(index, 0), self.monochromeSwatches.count - 1)]
+        case (_, .other):
+            self.otherSwatch
+        case let (_, .index(index)):
+            self.swatches.indices.contains(index) ? self.swatches[index] : self.otherSwatch
+        }
+    }
+
+    /// `color(for:)` in `mode`; `.accents` and `.colorblindSafe` return exactly `color(for:)`.
+    static func color(for slot: Slot, mode: ChartPaletteMode) -> Color {
+        guard mode == .monochrome else { return self.color(for: slot) }
+        switch slot {
+        case let .index(index):
+            return self.monochromeColors[min(max(index, 0), self.monochromeColors.count - 1)]
+        case .other:
+            return self.monochromeOtherColor
+        }
+    }
+
+    /// The "Other" color in `mode`.
+    static func otherColor(mode: ChartPaletteMode) -> Color {
+        self.color(for: .other, mode: mode)
+    }
+
+    /// The color of a chart with one series: the provider accent with `.accents` (today's behavior), the
+    /// first validated slot with `.colorblindSafe`, and the first gray with `.monochrome`.
+    static func singleSeriesColor(accent: Color, mode: ChartPaletteMode) -> Color {
+        switch mode {
+        case .accents: accent
+        case .colorblindSafe, .monochrome: self.color(for: .index(0), mode: mode)
+        }
+    }
+
     // MARK: - Helpers
 
     private static func dynamicColor(_ swatch: Swatch) -> Color {
@@ -143,5 +203,34 @@ enum ChartReferenceLine {
         let active = dailyTotals.filter { $0.isFinite && $0 > 0 }
         guard !active.isEmpty else { return nil }
         return active.reduce(0, +) / Double(active.count)
+    }
+}
+
+/// The palette mode for views that build colors without settings at hand, such as the Usage & Spend
+/// heatmaps. `SettingsStore` updates it whenever the chart preferences change; before that it reads the
+/// stored preference once. Test processes always see `.accents`, so no test depends on a stored choice.
+enum ChartPaletteSetting {
+    private static let lock = NSLock()
+    private nonisolated(unsafe) static var cached: ChartPaletteMode?
+
+    static var activeMode: ChartPaletteMode {
+        self.lock.lock()
+        defer { self.lock.unlock() }
+        if let cached = self.cached {
+            return cached
+        }
+        let stored = UserDefaults.standard.dictionary(forKey: ChartPreferences.defaultsKey) as? [String: String]
+        let resolved: ChartPaletteMode = TestProcessSafety.isRunning
+            ? .accents
+            : ChartPreferences(storage: stored).paletteMode
+        self.cached = resolved
+        return resolved
+    }
+
+    static func apply(_ mode: ChartPaletteMode) {
+        guard !TestProcessSafety.isRunning else { return }
+        self.lock.lock()
+        self.cached = mode
+        self.lock.unlock()
     }
 }

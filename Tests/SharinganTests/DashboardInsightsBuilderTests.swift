@@ -18,7 +18,7 @@ struct DashboardInsightsBuilderTests {
         let insights = try #require(self.insights(identityMode: .full))
 
         #expect(insights.currencyCode == "USD")
-        #expect(insights.timeZone == "UTC")
+        #expect(insights.timeZone == Self.utc.timeZone.identifier)
         #expect(insights.range.start == "2026-10-07")
         #expect(insights.range.end == "2026-11-05")
         #expect(insights.range.days == 30)

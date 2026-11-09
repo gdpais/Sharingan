@@ -208,6 +208,7 @@ struct SpendTrendChart: View {
     var overviewInterval: DateInterval?
     var onSelectDay: ((Date) -> Void)?
     var onSelectInterval: ((DateInterval) -> Void)?
+    @Environment(\.spendDashboardIsScrolling) private var isPageScrolling
     @State private var inspectedDate: Date?
     @State private var pinnedDate: Date?
 
@@ -358,13 +359,15 @@ struct SpendTrendChart: View {
                     .onContinuousHover { phase in
                         switch phase {
                         case let .active(location):
-                            self.inspectedDate = self.date(
-                                at: location,
-                                proxy: proxy,
-                                geometry: geometry,
-                                model: model)
-                        case .ended: self.inspectedDate = nil
+                            guard !self.isPageScrolling else { return }
+                            let date = self.date(at: location, proxy: proxy, geometry: geometry, model: model)
+                            if date != self.inspectedDate { self.inspectedDate = date }
+                        case .ended:
+                            if self.inspectedDate != nil { self.inspectedDate = nil }
                         }
+                    }
+                    .onChange(of: self.isPageScrolling) { _, isScrolling in
+                        if isScrolling, self.inspectedDate != nil { self.inspectedDate = nil }
                     }
                     .onTapGesture { location in
                         guard let date = self.date(at: location, proxy: proxy, geometry: geometry, model: model)

@@ -95,15 +95,21 @@ public struct SpendInsightInputs: Sendable, Equatable {
     /// Samples for the equal-length period just before the range, or `nil` when history does not
     /// cover that whole period. Samples outside it are ignored.
     public var previousSamples: [SpendInsightSample]?
+    /// Days each source's history covers inside the range (start-of-day dates, inclusive). Plan value
+    /// spreads a plan's price only over the days its sources cover. Empty when unknown, which counts
+    /// every source as covering the whole range.
+    public var coverage: [String: ClosedRange<Date>]
 
     public init(
         period: SpendInsightPeriod? = nil,
         samples: [SpendInsightSample] = [],
-        previousSamples: [SpendInsightSample]? = nil)
+        previousSamples: [SpendInsightSample]? = nil,
+        coverage: [String: ClosedRange<Date>] = [:])
     {
         self.period = period
         self.samples = samples
         self.previousSamples = previousSamples
+        self.coverage = coverage
     }
 }
 
@@ -165,8 +171,9 @@ public struct SpendInsightPromptSplit: Sendable, Equatable {
 
 /// Insight tiles for the Usage & Spend window, computed over the selected range.
 ///
-/// - Plan value: API-equivalent spend divided by the plan price prorated to the range, where a plan
-///   month counts as `daysPerPlanMonth` days. `nil` without a positive plan price.
+/// - Plan value: the API-equivalent spend of sources billed by a priced plan, divided by those plans'
+///   prices prorated to the days their sources' history covers, where a plan month counts as
+///   `daysPerPlanMonth` days. `nil` without a positive plan price or without spend from a priced source.
 /// - Cache hit rate: cache reads divided by all prompt tokens (uncached input, cache writes and cache
 ///   reads; see `SpendInsightPromptSplit`). Only sources that report cache reads take part.
 /// - Cost per 1M tokens: spend divided by all tokens (cache reads included) times one million, over
@@ -232,7 +239,15 @@ public struct SpendInsightTiles: Sendable, Equatable {
     public let costPerMillionTokens: Tile?
     public let topModelShare: ModelShare?
 
+    /// One plan price for every source over the whole range.
     public init(inputs: SpendInsightInputs, calendar: Calendar, planMonthlyPrice: Double?) {
+        self.init(
+            inputs: inputs,
+            calendar: calendar,
+            planPricing: planMonthlyPrice.map { SpendInsightPlanPricing.unscoped(monthlyPrice: $0) })
+    }
+
+    public init(inputs: SpendInsightInputs, calendar: Calendar, planPricing: SpendInsightPlanPricing?) {
         guard let period = inputs.period, period.dayCount > 0 else {
             self.trendBucketCount = 0
             self.apiEquivalentCost = nil
@@ -261,15 +276,8 @@ public struct SpendInsightTiles: Sendable, Equatable {
 
         self.trendBucketCount = window.bucketCount
         self.apiEquivalentCost = current.apiEquivalentCost
-        if let price = planMonthlyPrice, price.isFinite, price > 0 {
-            self.planValue = Self.tile(
-                current.planValue(price: price, dayCount: period.dayCount),
-                previous: previous?.planValue(price: price, dayCount: period.dayCount),
-                trend: buckets.enumerated().map { index, totals in
-                    totals.planValue(price: price, dayCount: window.dayCount(ofBucket: index))
-                })
-        } else {
-            self.planValue = nil
+        self.planValue = planPricing.flatMap { pricing in
+            Self.planValueTile(inputs: inputs, period: period, calendar: calendar, pricing: pricing)
         }
         self.cacheHitRate = Self.tile(
             current.cacheHitRate,
@@ -334,6 +342,21 @@ extension SpendInsightTiles {
         func dayCount(ofBucket bucket: Int) -> Int {
             Self.ceilingDivide((bucket + 1) * self.dayCount, by: self.bucketCount)
                 - Self.ceilingDivide(bucket * self.dayCount, by: self.bucketCount)
+        }
+
+        /// Day indices of the range that a plan's sources cover: the span from the earliest covered
+        /// day to the latest. Without coverage data every day counts.
+        func coveredDays(of plan: SpendInsightPlanPricing.Plan, coverage: [String: ClosedRange<Date>]) -> [Int] {
+            guard !coverage.isEmpty else { return Array(0..<self.dayCount) }
+            let intervals = coverage.filter { plan.covers($0.key) }.map(\.value)
+            guard let first = intervals.map(\.lowerBound).min(),
+                  let last = intervals.map(\.upperBound).max(),
+                  let start = self.dayIndex(of: first),
+                  let end = self.dayIndex(of: last)
+            else { return [] }
+            let lower = max(0, start)
+            let upper = min(self.dayCount - 1, end)
+            return lower <= upper ? Array(lower...upper) : []
         }
 
         private func dayIndex(of day: Date) -> Int? {
@@ -426,12 +449,6 @@ extension SpendInsightTiles {
             return value.isFinite ? min(1, value) : nil
         }
 
-        func planValue(price: Double, dayCount: Int) -> Double? {
-            guard let cost = self.apiEquivalentCost, dayCount > 0 else { return nil }
-            let value = cost / (price * Double(dayCount) / SpendInsightTiles.daysPerPlanMonth)
-            return value.isFinite ? value : nil
-        }
-
         private func ranksAhead(_ lhs: (key: String, value: Double), _ rhs: (key: String, value: Double)) -> Bool {
             if lhs.value != rhs.value { return lhs.value > rhs.value }
             let lhsName = self.modelNames[lhs.key] ?? lhs.key
@@ -439,5 +456,65 @@ extension SpendInsightTiles {
             if lhsName != rhsName { return lhsName < rhsName }
             return lhs.key < rhs.key
         }
+    }
+}
+
+// MARK: - Plan value
+
+extension SpendInsightTiles {
+    /// Spend from priced sources and the prices spread over their covered days, for one span of days.
+    private struct PlanTotals {
+        private var cost = 0.0
+        private var sawCost = false
+        /// Sum over plans of the monthly price times the days its sources cover.
+        var priceDays = 0.0
+
+        mutating func add(cost: Double) {
+            self.cost += cost
+            self.sawCost = true
+        }
+
+        var value: Double? {
+            guard self.sawCost, self.priceDays > 0, self.cost.isFinite else { return nil }
+            let value = self.cost / (self.priceDays / SpendInsightTiles.daysPerPlanMonth)
+            return value.isFinite ? value : nil
+        }
+    }
+
+    /// Plan value compares each priced plan's own sources with that plan's price, so spend from sources
+    /// without a price stays out, and a price counts only for the days its sources' history covers.
+    private static func planValueTile(
+        inputs: SpendInsightInputs,
+        period: SpendInsightPeriod,
+        calendar: Calendar,
+        pricing: SpendInsightPlanPricing) -> Tile?
+    {
+        let window = Window(period: period, calendar: calendar)
+        guard !pricing.isEmpty, window.dayCount > 0, window.bucketCount > 0 else { return nil }
+        var current = PlanTotals()
+        var buckets = Array(repeating: PlanTotals(), count: window.bucketCount)
+        for plan in pricing.plans {
+            for day in window.coveredDays(of: plan, coverage: inputs.coverage) {
+                current.priceDays += plan.monthlyPrice
+                buckets[day * window.bucketCount / window.dayCount].priceDays += plan.monthlyPrice
+            }
+        }
+        for sample in inputs.samples where pricing.covers(sample.sourceID) {
+            guard let cost = sample.cost, let bucket = window.bucket(of: sample.day) else { continue }
+            current.add(cost: cost)
+            buckets[bucket].add(cost: cost)
+        }
+        // Previous samples exist only when every source covers that whole period.
+        let previous: PlanTotals? = inputs.previousSamples.map { samples -> PlanTotals in
+            var totals = PlanTotals()
+            totals.priceDays = pricing.monthlyPrice * Double(window.dayCount)
+            for sample in samples where pricing.covers(sample.sourceID) && window.isInPreviousPeriod(sample.day) {
+                if let cost = sample.cost {
+                    totals.add(cost: cost)
+                }
+            }
+            return totals
+        }
+        return Self.tile(current.value, previous: previous?.value, trend: buckets.map(\.value))
     }
 }

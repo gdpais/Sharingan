@@ -2803,6 +2803,26 @@
 "Project trends" = "اتجاهات المشاريع";
 "Change compares the last %d days with the %d days before." = "يقارن التغيّر آخر %d يومًا بالـ %d يومًا التي سبقتها.";
 "New" = "جديد";
+
+/* Plan price and budgets */
+"Plan value · %@" = "قيمة الخطة · %@";
+"API-equivalent vs %@ in plans" = "ما يعادل تكلفة API مقابل خطط بقيمة %@";
+"Plan & budget" = "الخطة والميزانية";
+"Plan price" = "سعر الخطة";
+"plan_price_subtitle" = "سعر الاشتراك الشهري. تقارنه قيمة الخطة بالإنفاق المكافئ لتكلفة API.";
+"monthly_budget_subtitle" = "تُقارن بالإنفاق المقدَّر منذ بداية الشهر في مخطط التكلفة والتنبيهات والخطافات.";
+"Currency" = "العملة";
+"plan_budget_footer" = "أرقامك الخاصة، محفوظة مع هذا المزوّد في ملف الإعدادات. اترك الحقل فارغًا لإيقافه.";
+"plan_budget_invalid_amount" = "أدخل مبلغًا أكبر من صفر.";
+"Month to date %@ of %@ budget" = "منذ بداية الشهر %1$@ من ميزانية %2$@";
+"Month to date at least %@ of %@ budget" = "منذ بداية الشهر %1$@ على الأقل من ميزانية %2$@";
+"budget %@/day" = "الميزانية %@/يوم";
+"budget_notifications_title" = "تنبيهات الميزانية";
+"budget_notifications_subtitle" = "يُعلمك عندما يبلغ الإنفاق المقدَّر منذ بداية الشهر 80% و100% من الميزانية الشهرية للمزوّد.";
+"budget_notifications_no_budget" = "عيّن ميزانية شهرية في إعدادات أحد المزوّدين لتلقي تنبيهات الميزانية.";
+"budget_notification_title_warning" = "ميزانية %1$@ عند %2$@";
+"budget_notification_title_reached" = "تم بلوغ ميزانية %@";
+"budget_notification_body" = "الإنفاق المقدَّر هذا الشهر: %1$@ من ميزانيتك البالغة %2$@.";
 "quota_warning_add_threshold" = "إضافة حد";
 "quota_warning_remove_threshold" = "إزالة أدنى حد";
 "quota_warning_lane_follows_weekly" = "علامات أسبوعية فقط، بلا إشعارات";
@@ -2814,3 +2834,30 @@
 "Drawn inside usage rows." = "تُعرض داخل صفوف الاستخدام.";
 "Menu links" = "روابط القائمة";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "رتّب أقسام بطاقة القائمة لهذا المزوّد وأظهرها أو أخفِها، واختر الرسم البياني الخاص بها. تبقى الأقسام والرسوم البيانية التي لا تتوفر لها بيانات مخفية.";
+
+/* Chart preferences */
+"Charts" = "الرسوم البيانية";
+"Charts never show more days than the History window." = "لا تعرض الرسوم البيانية أبدًا أيامًا أكثر من نافذة التاريخ.";
+"Stack by model" = "التكديس حسب النموذج";
+"Splits each day by its two largest models." = "يقسّم كل يوم حسب أكبر نموذجين فيه.";
+"Average line" = "خط المتوسط";
+"Chart style" = "نمط الرسم البياني";
+"Bars" = "أعمدة";
+"Line" = "خط";
+"Palette" = "لوحة الألوان";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "يستبدل الوضع الآمن لعمى الألوان ألوان تمييز المزوّدين في الرسوم البيانية ذات السلسلة الواحدة. ويستخدم الوضع أحادي اللون درجات الرمادي في كل مكان، بما في ذلك الخرائط الحرارية.";
+"Provider accents" = "ألوان تمييز المزوّدين";
+"Colorblind-safe" = "آمن لعمى الألوان";
+"Monochrome" = "أحادي اللون";
+/* Widget options */
+"Match app" = "مطابقة التطبيق";
+"Used" = "المستخدم";
+"Last 7 days" = "آخر 7 أيام";
+"Last 90 days" = "آخر 90 يوما";
+"All providers" = "كل مقدمي الخدمات";
+"Name" = "الاسم";
+"Switcher" = "المبدّل";
+"Choose which providers the switcher shows and their order." = "اختر مقدمي الخدمات الذين يعرضهم المبدّل وترتيبهم.";
+"menu_bar_style_tomoe" = "توموي";
+"show_project_names_title" = "إبقاء أسماء المشاريع ظاهرة";
+"show_project_names_subtitle" = "يبقى البريد الإلكتروني مخفيًا، مع إظهار أسماء ومسارات المشاريع والجلسات والمصادر في سجل التكاليف.";

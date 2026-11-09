@@ -36,6 +36,7 @@ struct SettingsDefaultsState {
     var highlightMenuCardsOnHover: Bool
     var menuBarShowsBrandIconWithPercent: Bool
     var menuBarHidesCritters: Bool
+    var menuBarShowsTomoeIcon: Bool = false
     var menuBarColorPace: Bool
     var menuBarPaceReservePositive: Bool
     var menuBarColorByProvider: Bool
@@ -69,6 +70,7 @@ struct SettingsDefaultsState {
     var costComparisonPeriodsEnabled: Bool
     var costSummaryDisplayStyleRaw: String
     var hidePersonalInfo: Bool
+    var showProjectNamesWhenHidingPersonalInfo: Bool
     var randomBlinkEnabled: Bool
     var confettiOnSessionLimitResetsEnabled: Bool
     var confettiOnWeeklyLimitResetsEnabled: Bool

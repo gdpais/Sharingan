@@ -141,6 +141,7 @@ struct PreferencesPaneSmokeTests {
     func `inactive display contrast is available only for icon and percent`() {
         #expect(!MenuBarPane.layoutEditorEnabled(for: .critters))
         #expect(!MenuBarPane.layoutEditorEnabled(for: .bars))
+        #expect(!MenuBarPane.layoutEditorEnabled(for: .tomoe))
         #expect(MenuBarPane.layoutEditorEnabled(for: .iconAndPercent))
     }
 
@@ -149,6 +150,7 @@ struct PreferencesPaneSmokeTests {
         #expect(MenuBarPane.layoutEditorEnabled(for: .iconAndPercent))
         #expect(!MenuBarPane.layoutEditorEnabled(for: .critters))
         #expect(!MenuBarPane.layoutEditorEnabled(for: .bars))
+        #expect(!MenuBarPane.layoutEditorEnabled(for: .tomoe))
 
         SharinganLocalizationOverride.$appLanguage.withValue("en") {
             let enabledFooter = MenuBarPane.layoutFooterText(for: .iconAndPercent)

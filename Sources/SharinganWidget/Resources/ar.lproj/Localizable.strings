@@ -39,7 +39,9 @@
 "Activity" = "النشاط";
 "Add-on credits" = "الوظيفة الإضافية الاعتمادات";
 "Agent" = "وكيل";
+"All providers" = "كل مقدمي الخدمات";
 "Amp Free" = "Amp مجاني";
+"Automatic" = "أوتوماتيكي";
 "Balance" = "الرصيد";
 "Base" = "قاعدة";
 "Billing" = "الفواتير";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "مزود الحرق الحصة";
 "Chat" = "الدردشة";
 "Choose an account" = "اختر حسابًا";
+"Choose which providers the switcher shows and their order." = "اختر مقدمي الخدمات الذين يعرضهم المبدّل وترتيبهم.";
 "Claude and GPT" = "Claude وGPT";
 "Code 7-day" = "كود 7 أيام الحصة";
 "Code review" = "مراجعة الكود";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "الرموز مجانًا يوميًا";
 "Daily refresh" = "التحديث اليومي";
 "Daily usage" = "الاستخدام اليومي";
+"Default" = "الافتراضي";
 "Deployment" = "النشر";
 "Edit predictions" = "تحرير التوقعات";
 "Enable a provider in Sharingan → Settings → Providers." = "فعِّل مزوِّدًا في Sharingan → الإعدادات → المزوِّدين.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "ممر Kilo";
 "Last %d days" = "آخر %d أيام";
 "Last 30 days" = "آخر 30 يوما";
+"Last 7 days" = "آخر 7 أيام";
+"Last 90 days" = "آخر 90 يوما";
+"Match app" = "مطابقة التطبيق";
 "Memory" = "استخدام الذاكرة";
 "Metric" = "المؤشر";
 "Model quota" = "الموديل الحصة";
@@ -99,6 +106,7 @@
 "Monthly budget" = "الميزانية الشهرية";
 "Monthly credits" = "الاعتمادات الشهرية";
 "Monthly quota" = "الحصة الشهرية";
+"Name" = "الاسم";
 "No data" = "لا توجد بيانات";
 "Not reported by %@" = "لم يتم الإبلاغ عنها بواسطة %@";
 "On-demand" = "الاستخدام حسب الطلب";
@@ -119,11 +127,14 @@
 "Provider" = "المزود";
 "Provider %@" = "المزود %@";
 "Provider + Metric" = "المزود + المؤشر";
+"Providers" = "مقدمو الخدمات";
 "Purchased" = "تم شراؤها";
 "Quota" = "الحصة";
 "Ran out" = "تم استنفاد الحصة";
+"Range" = "الفترة";
 "Rate limit" = "حد المعدل";
 "Refill" = "إعادة الملء";
+"Remaining" = "المتبقي";
 "Remaining budget compared with an ideal steady burn rate." = "الميزانية المتبقية مقارنة بمعدل حرق ثابت مثالي.";
 "Requests" = "الطلبات";
 "Reset: %@" = "إعادة الضبط: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "الجلسة والاستخدام الأسبوعي مع الاعتمادات والتكاليف.";
 "Shared pool" = "الحصة المشتركة";
 "Sonnet" = "Sonnet";
+"Sort by" = "ترتيب حسب";
 "Spend" = "الإنفاق";
 "Standard" = "قياسي";
 "Status" = "الحالة";
@@ -155,6 +167,7 @@
 "Switch Provider" = "مزود التبديل";
 "Switch the provider shown in the widget." = "قم بتبديل الموفر الموضح في القطعة.";
 "Switch to %@" = "قم بالتبديل إلى %@";
+"Switcher" = "المبدّل";
 "Team budget" = "ميزانية الفريق";
 "Third Party" = "الطرف الثالث";
 "Third quota" = "الثالث الحصة";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "حدود الاستخدام وإعادة ضبط العد التنازلي لحساب محفوظ واحد.";
 "Usage widget with a provider switcher." = "أداة لعرض الاستخدام مع مبدّل لموفري الخدمة.";
 "Usage window" = "نافذة الاستخدام";
+"Used" = "المستخدم";
 "Voices" = "أصوات";
 "Weekly" = "الأسبوعي";
 "Weekly (7-day)" = "أسبوعيًا (7 أيام)";

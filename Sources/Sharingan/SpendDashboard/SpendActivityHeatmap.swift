@@ -495,6 +495,7 @@ private struct SpendActivityDailyGrid: View {
 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.colorSchemeContrast) private var contrast
+    @Environment(\.spendDashboardIsScrolling) private var isPageScrolling
     @State private var hoveredIndex: Int?
     @State private var keyboardIndex: Int?
     @FocusState private var isKeyboardFocused: Bool
@@ -541,10 +542,15 @@ private struct SpendActivityDailyGrid: View {
                     .onContinuousHover { phase in
                         switch phase {
                         case let .active(location):
-                            self.hoveredIndex = self.cellIndex(at: location, pitch: pitch)
+                            guard !self.isPageScrolling else { return }
+                            let index = self.cellIndex(at: location, pitch: pitch)
+                            if index != self.hoveredIndex { self.hoveredIndex = index }
                         case .ended:
-                            self.hoveredIndex = nil
+                            if self.hoveredIndex != nil { self.hoveredIndex = nil }
                         }
+                    }
+                    .onChange(of: self.isPageScrolling) { _, isScrolling in
+                        if isScrolling, self.hoveredIndex != nil { self.hoveredIndex = nil }
                     }
                     .gesture(SpatialTapGesture().onEnded { event in
                         self.handleTap(at: event.location, pitch: pitch)
@@ -760,6 +766,7 @@ private struct SpendActivityWeekGrid: View {
 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.colorSchemeContrast) private var contrast
+    @Environment(\.spendDashboardIsScrolling) private var isPageScrolling
     @State private var hoverLocation: CGPoint?
 
     private let columns = SpendActivitySeries.weekCount
@@ -809,10 +816,14 @@ private struct SpendActivityWeekGrid: View {
             .onContinuousHover { phase in
                 switch phase {
                 case let .active(location):
+                    guard !self.isPageScrolling else { return }
                     self.hoverLocation = self.column(at: location, pitch: pitch) == nil ? nil : location
                 case .ended:
-                    self.hoverLocation = nil
+                    if self.hoverLocation != nil { self.hoverLocation = nil }
                 }
+            }
+            .onChange(of: self.isPageScrolling) { _, isScrolling in
+                if isScrolling, self.hoverLocation != nil { self.hoverLocation = nil }
             }
             .onChange(of: visibleRect.minX) { _, _ in self.hoverLocation = nil }
             .accessibilityElement(children: .contain)

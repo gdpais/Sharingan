@@ -39,7 +39,9 @@
 "Activity" = "Активність";
 "Add-on credits" = "Додаткові кредити";
 "Agent" = "Агент";
+"All providers" = "Усі провайдери";
 "Amp Free" = "Amp Free";
+"Automatic" = "Автоматично";
 "Balance" = "Баланс";
 "Base" = "База";
 "Billing" = "Оплата";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "Темп вичерпання квоти постачальника";
 "Chat" = "Чат";
 "Choose an account" = "Виберіть обліковий запис";
+"Choose which providers the switcher shows and their order." = "Виберіть, яких провайдерів показує перемикач і в якому порядку.";
 "Claude and GPT" = "Claude і GPT";
 "Code 7-day" = "7-денна квота Code";
 "Code review" = "Огляд коду";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "Безкоштовні токени за день";
 "Daily refresh" = "Щоденне оновлення";
 "Daily usage" = "Щоденне використання";
+"Default" = "Типово";
 "Deployment" = "Розгортання";
 "Edit predictions" = "Прогнози змін у коді";
 "Enable a provider in Sharingan → Settings → Providers." = "Увімкніть постачальника в Sharingan → Налаштування → Постачальники.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo Pass";
 "Last %d days" = "За останні %d дн.";
 "Last 30 days" = "Останні 30 днів";
+"Last 7 days" = "Останні 7 днів";
+"Last 90 days" = "Останні 90 днів";
+"Match app" = "Як у застосунку";
 "Memory" = "Пам’ять";
 "Metric" = "Показник";
 "Model quota" = "Квота моделі";
@@ -99,6 +106,7 @@
 "Monthly budget" = "Місячний бюджет";
 "Monthly credits" = "Щомісячні кредити";
 "Monthly quota" = "Місячна квота";
+"Name" = "Назва";
 "No data" = "Немає даних";
 "Not reported by %@" = "Не повідомляє %@";
 "On-demand" = "Використання за вимогою";
@@ -119,11 +127,14 @@
 "Provider" = "Провайдер";
 "Provider %@" = "Постачальник %@";
 "Provider + Metric" = "Постачальник + показник";
+"Providers" = "Провайдери";
 "Purchased" = "Придбаний";
 "Quota" = "Квота";
 "Ran out" = "Вичерпано";
+"Range" = "Інтервал";
 "Rate limit" = "Обмеження частоти запитів";
 "Refill" = "Поповнення";
+"Remaining" = "Залишилося";
 "Remaining budget compared with an ideal steady burn rate." = "Залишок бюджету порівняно з рівномірним очікуваним темпом витрат.";
 "Requests" = "Запити";
 "Reset: %@" = "Скидання: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "Використання за сеанс і тиждень, кредити та витрати.";
 "Shared pool" = "Спільний пул";
 "Sonnet" = "Sonnet";
+"Sort by" = "Сортувати за";
 "Spend" = "Витрати";
 "Standard" = "Стандартний";
 "Status" = "Статус";
@@ -155,6 +167,7 @@
 "Switch Provider" = "Змінити постачальника";
 "Switch the provider shown in the widget." = "Перемкнути постачальника у віджеті.";
 "Switch to %@" = "Перемкнутися на %@";
+"Switcher" = "Перемикач";
 "Team budget" = "Бюджет команди";
 "Third Party" = "Сторонні";
 "Third quota" = "Третя квота";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "Ліміти використання та зворотний відлік до їх скидання для одного збереженого облікового запису.";
 "Usage widget with a provider switcher." = "Віджет використання з перемикачем постачальників.";
 "Usage window" = "Вікно використання";
+"Used" = "Використано";
 "Voices" = "Голоси";
 "Weekly" = "Тижневий";
 "Weekly (7-day)" = "Тижневий (7 днів)";

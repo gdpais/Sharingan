@@ -276,11 +276,13 @@ extension StatusItemController {
             let showBrand = self.settings.menuBarShowsBrandIconWithPercent
             // Returning to a built-in provider must redraw even if its last quota is unchanged.
             self.lastAppliedMergedIconRenderSignature = nil
-            let image = showBrand ? self.userPluginSwitcherIcon(for: plugin) : IconRenderer.makeIcon(
+            let stale = self.store.errors[selected] != nil
+            let tomoe = self.pluginTomoeIcon(snapshot: snapshot, lanes: lanes, stale: stale)
+            let image = showBrand ? self.userPluginSwitcherIcon(for: plugin) : tomoe ?? IconRenderer.makeIcon(
                 primaryRemaining: lanes.primary,
                 weeklyRemaining: lanes.secondary,
                 creditsRemaining: nil,
-                stale: self.store.errors[selected] != nil,
+                stale: stale,
                 style: .combined,
                 hideCritters: true)
             self.statusItem.length = NSStatusItem.variableLength
@@ -417,7 +419,7 @@ extension StatusItemController {
 
         let needsAnimation = merged ? self.needsMenuBarIconAnimation() : self.shouldAnimate(provider: provider)
         if let phase, needsAnimation {
-            var pattern = self.animationPattern
+            var pattern = self.menuBarLoadingPattern
             // Provider-specific by design: Claude's star glyph cannot render the icon-only unbraid transition.
             if pattern == .unbraid, (merged && style == .combined) || (!merged && provider == .claude) {
                 pattern = .cylon
@@ -476,6 +478,11 @@ extension StatusItemController {
                 tint: providerTint,
                 for: button)
         } else {
+            let tomoeFills = self.tomoeIconFills(
+                provider: provider,
+                snapshot: snapshot,
+                lanes: (primary: primary, secondary: weekly),
+                loadingPhase: isLoading ? phase : nil)
             let signature = [
                 "mode=icon;measured=\(snapshot?.primary?.measured != nil)",
                 "provider=\(provider.rawValue)",
@@ -493,12 +500,15 @@ extension StatusItemController {
                 "hideCritters=\(self.settings.menuBarHidesCritters ? "1" : "0")",
                 "highContrast=\(self.shouldUseHighContrastStatusItemContent ? "1" : "0")",
                 "providerTint=\(providerTint?.description ?? "template")",
+                "tomoe=\(tomoeFills?.signature ?? "off")",
             ].joined(separator: "|")
             if shouldSkipRender(signature), canSkipCachedRender {
                 self.noteIconPerfRender(skipped: true)
                 return true
             }
-            let image = IconRenderer.makeIcon(
+            let image = tomoeFills.map {
+                IconRenderer.makeTomoeIcon(fills: $0, stale: stale, statusIndicator: statusIndicator)
+            } ?? IconRenderer.makeIcon(
                 primaryRemaining: primary,
                 weeklyRemaining: weekly,
                 creditsRemaining: credits,

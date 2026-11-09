@@ -69,6 +69,20 @@ struct CLIHooksTests {
     }
 
     @Test
+    func `sample budget event matches a budget rule from the config`() throws {
+        let event = SharinganCLI.sampleHookEvent(type: .budgetReached, provider: UsageProvider.claude.rawValue)
+        let config = try JSONDecoder().decode(
+            HooksConfig.self,
+            from: Data(#"{"enabled":true,"events":[{"event":"budget_reached","executable":"/bin/echo"}]}"#.utf8))
+
+        #expect(event.budgetThreshold == 0.8)
+        #expect(event.budget == 50)
+        #expect(event.estimatedCost == 41)
+        #expect(event.currency == "USD")
+        #expect(config.events.first?.matches(event) == true)
+    }
+
+    @Test
     func `sample usage update represents session and weekly windows`() {
         let event = SharinganCLI.sampleHookEvent(type: .usageUpdated, provider: UsageProvider.codex.rawValue)
 

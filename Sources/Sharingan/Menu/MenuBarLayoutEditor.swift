@@ -547,10 +547,13 @@ struct MenuBarLayoutEditor: View {
         }
     }
 
+    /// One editable layout line. Chips wrap instead of sitting in a horizontal `ScrollView`: a
+    /// nested horizontal scroll view inside the settings `Form` latches trackpad gestures that start
+    /// over it, so vertical scrolling of the pane stalls whenever the pointer crosses the strip.
     private func layoutLine(_ lineIndex: Int) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 5) {
-                let line = self.layout.lines[lineIndex]
+        Group {
+            let line = self.layout.lines[lineIndex]
+            MenuBarLayoutChipFlowLayout(spacing: 5) {
                 ForEach(Array(line.enumerated()), id: \.offset) { index, token in
                     let position = MenuBarLayoutPosition(line: lineIndex, index: index)
                     MenuBarLayoutEditorChip(

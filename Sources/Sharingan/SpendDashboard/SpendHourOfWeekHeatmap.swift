@@ -80,6 +80,7 @@ private struct SpendHourOfWeekGrid: View {
 
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.colorSchemeContrast) private var contrast
+    @Environment(\.spendDashboardIsScrolling) private var isPageScrolling
     @State private var hoveredCellID: Int?
 
     private static let cellHeight: CGFloat = 18
@@ -182,6 +183,7 @@ private struct SpendHourOfWeekGrid: View {
             .contentShape(Rectangle())
             .onHover { isHovering in
                 if isHovering {
+                    guard !self.isPageScrolling else { return }
                     self.hoveredCellID = cell.id
                 } else if self.hoveredCellID == cell.id {
                     self.hoveredCellID = nil

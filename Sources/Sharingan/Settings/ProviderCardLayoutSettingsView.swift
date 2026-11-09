@@ -99,7 +99,7 @@ struct ProviderCardLayoutSettingsView: View {
         .toggleStyle(.checkbox)
     }
 
-    private func menuLinkToggle(_ item: MenuCardMenuItem, title: String, layout: MenuCardLayout) -> some View {
+    private func menuLinkToggle(_ item: MenuCardLinkItem, title: String, layout: MenuCardLayout) -> some View {
         Toggle(
             title,
             isOn: Binding(

@@ -123,6 +123,7 @@ struct SpendDashboardPane: View {
     @State private var isDataControlsExpanded = true
     @State private var detailSelections: [String: SpendDashboardDetailSection] = [:]
     @State private var sessionNavigation = SessionUsageNavigation.shared
+    @State private var isScrolling = false
 
     init(settings: SettingsStore, store: UsageStore) {
         self.settings = settings
@@ -140,7 +141,7 @@ struct SpendDashboardPane: View {
                     }
                     SessionUsageBrowser(
                         context: request.context,
-                        hidePersonalInfo: self.settings.hidePersonalInfo,
+                        hidePersonalInfo: self.settings.hideProjectInfo,
                         selectedSessionID: request.sessionID)
                         .id(request.id)
                         .frame(height: 600)
@@ -154,7 +155,10 @@ struct SpendDashboardPane: View {
                 }
             }
             .padding(24)
+            .verticalScrollPassthrough()
+            .environment(\.spendDashboardIsScrolling, self.isScrolling)
         }
+        .modifier(SpendDashboardScrollPhaseTracker(isScrolling: self.$isScrolling))
         .background(FocusResigningBackground())
         .onAppear {
             self.isVisible = true
@@ -430,7 +434,7 @@ struct SpendDashboardPane: View {
                     chartDomain: Date.distantPast...Date.distantPast,
                     modelHistoryCompleteness: .incomplete,
                     timeZone: self.controller.configuration?.bucketCalendar.timeZone ?? .current),
-                hidePersonalInfo: self.settings.hidePersonalInfo,
+                hidePersonalInfo: self.settings.hideProjectInfo,
                 supportsCodexDetails: true,
                 selection: self.detailSelection(for: currency))
         }
@@ -458,7 +462,7 @@ struct SpendDashboardPane: View {
                 SpendDashboardCurrencySection(
                     group: group,
                     requestedDays: self.controller.model.requestedDays,
-                    hidePersonalInfo: self.settings.hidePersonalInfo,
+                    hidePersonalInfo: self.settings.hideProjectInfo,
                     detailSelection: self.detailSelection(for: group.id),
                     supportsCodexDetails: self.controller.configuration?.supportsCodexDetails == true
                         && (group.currencyCode == "USD" || group.currencyCode == self.detailCurrency),
@@ -467,6 +471,7 @@ struct SpendDashboardPane: View {
                         self.controller.selectDay(nil)
                     })
             }
+            .environment(\.spendPlans, self.settings.spendPlansByProvider)
         }
 
         if self.settings.costUsageEnabled, !self.controller.model.tokenActivity.isEmpty {
@@ -731,7 +736,7 @@ struct SpendDashboardCurrencySection: View {
                     .foregroundStyle(.secondary)
             }
 
-            SpendInsightTilesRow(group: self.group, planMonthlyPrice: nil) // Phase 3: plan price
+            SpendInsightTilesRow(group: self.group)
             SpendDashboardSummary(
                 group: self.group,
                 onClearSelectedDay: self.onClearSelectedDay)

@@ -39,7 +39,9 @@
 "Activity" = "활동";
 "Add-on credits" = "애드온 크레딧";
 "Agent" = "대리인";
+"All providers" = "모든 공급자";
 "Amp Free" = "Amp 무료";
+"Automatic" = "자동";
 "Balance" = "잔액";
 "Base" = "베이스";
 "Billing" = "청구";
@@ -51,6 +53,7 @@
 "Burn Down Provider" = "할당량 번다운 공급자";
 "Chat" = "채팅";
 "Choose an account" = "계정을 선택하세요";
+"Choose which providers the switcher shows and their order." = "스위처에 표시할 공급자와 순서를 선택합니다.";
 "Claude and GPT" = "Claude 및 GPT";
 "Code 7-day" = "코드 7일 할당량";
 "Code review" = "코드 검토";
@@ -74,6 +77,7 @@
 "Daily free tokens" = "매일 무료 토큰";
 "Daily refresh" = "매일 새로고침";
 "Daily usage" = "일일 사용량";
+"Default" = "기본값";
 "Deployment" = "배포";
 "Edit predictions" = "예측 편집";
 "Enable a provider in Sharingan → Settings → Providers." = "Sharingan → 설정 → 제공자에서 제공자를 활성화하세요.";
@@ -90,6 +94,9 @@
 "Kilo Pass" = "Kilo 패스";
 "Last %d days" = "최근 %d일";
 "Last 30 days" = "지난 30일";
+"Last 7 days" = "지난 7일";
+"Last 90 days" = "지난 90일";
+"Match app" = "앱 설정 따르기";
 "Memory" = "메모리 사용량";
 "Metric" = "지표";
 "Model quota" = "모델 할당량";
@@ -99,6 +106,7 @@
 "Monthly budget" = "월예산";
 "Monthly credits" = "월간 크레딧";
 "Monthly quota" = "월간 할당량";
+"Name" = "이름";
 "No data" = "데이터 없음";
 "Not reported by %@" = "%@에 의해 보고되지 않음";
 "On-demand" = "주문형 사용";
@@ -119,11 +127,14 @@
 "Provider" = "공급자";
 "Provider %@" = "공급자 %@";
 "Provider + Metric" = "공급자 + 지표";
+"Providers" = "공급자";
 "Purchased" = "구매함";
 "Quota" = "할당량";
 "Ran out" = "할당량 고갈";
+"Range" = "기간";
 "Rate limit" = "비율 제한";
 "Refill" = "리필";
+"Remaining" = "남음";
 "Remaining budget compared with an ideal steady burn rate." = "이상적인 꾸준한 연소율과 비교한 남은 예산입니다.";
 "Requests" = "요청";
 "Reset: %@" = "재설정: %@";
@@ -148,6 +159,7 @@
 "Session and weekly usage with credits and costs." = "크레딧를 사용한 세션 및 주간 사용량과 비용.";
 "Shared pool" = "공유 풀";
 "Sonnet" = "Sonnet";
+"Sort by" = "정렬 기준";
 "Spend" = "지출";
 "Standard" = "표준";
 "Status" = "상태";
@@ -155,6 +167,7 @@
 "Switch Provider" = "공급자 전환";
 "Switch the provider shown in the widget." = "위젯에 표시된 공급자를 전환하세요.";
 "Switch to %@" = "%@로 전환";
+"Switcher" = "스위처";
 "Team budget" = "팀 예산";
 "Third Party" = "제3자";
 "Third quota" = "세 번째 할당량";
@@ -171,6 +184,7 @@
 "Usage limits and reset countdowns for one saved account." = "저장된 하나의 계정에 대한 사용 제한 및 카운트다운 재설정.";
 "Usage widget with a provider switcher." = "공급자 전환기가 있는 사용 위젯.";
 "Usage window" = "사용량 창";
+"Used" = "사용됨";
 "Voices" = "목소리";
 "Weekly" = "주간";
 "Weekly (7-day)" = "주간(7일)";

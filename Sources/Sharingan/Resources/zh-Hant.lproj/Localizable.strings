@@ -2777,6 +2777,26 @@
 "Project trends" = "專案趨勢";
 "Change compares the last %d days with the %d days before." = "變化比較最近 %d 天與之前 %d 天。";
 "New" = "新增";
+
+/* Plan price and budgets */
+"Plan value · %@" = "方案價值 · %@";
+"API-equivalent vs %@ in plans" = "API 等值金額對比 %@ 的方案";
+"Plan & budget" = "方案與預算";
+"Plan price" = "方案價格";
+"plan_price_subtitle" = "每月訂閱價格。方案價值會將其與 API 等值支出比較。";
+"monthly_budget_subtitle" = "在成本圖表、提醒與掛鉤中與本月至今的估算支出比較。";
+"Currency" = "貨幣";
+"plan_budget_footer" = "你自己的數字，與此提供者一起儲存在設定檔中。留空即可關閉。";
+"plan_budget_invalid_amount" = "請輸入大於零的金額。";
+"Month to date %@ of %@ budget" = "本月至今 %1$@，預算 %2$@";
+"Month to date at least %@ of %@ budget" = "本月至今至少 %1$@，預算 %2$@";
+"budget %@/day" = "預算 %@/天";
+"budget_notifications_title" = "預算提醒";
+"budget_notifications_subtitle" = "當本月至今的估算支出達到提供者每月預算的 80% 與 100% 時通知你。";
+"budget_notifications_no_budget" = "在某個提供者的設定中設定每月預算即可接收預算提醒。";
+"budget_notification_title_warning" = "%1$@ 預算已達 %2$@";
+"budget_notification_title_reached" = "%@ 預算已用完";
+"budget_notification_body" = "本月估算支出：%1$@，預算 %2$@。";
 "quota_warning_add_threshold" = "新增門檻";
 "quota_warning_remove_threshold" = "移除最低門檻";
 "quota_warning_lane_follows_weekly" = "僅顯示每週標記，不傳送通知";
@@ -2788,3 +2808,30 @@
 "Drawn inside usage rows." = "顯示在用量列內。";
 "Menu links" = "選單連結";
 "Order and show this provider's menu card sections, and pick its chart. Sections and charts without data stay hidden." = "調整此供應商選單卡片各區段的順序與顯示，並選擇其圖表。沒有資料的區段與圖表會保持隱藏。";
+
+/* Chart preferences */
+"Charts" = "圖表";
+"Charts never show more days than the History window." = "圖表顯示的天數不會超過歷史時段。";
+"Stack by model" = "依模型堆疊";
+"Splits each day by its two largest models." = "依當天用量最大的兩個模型拆分每一天。";
+"Average line" = "平均線";
+"Chart style" = "圖表樣式";
+"Bars" = "長條";
+"Line" = "折線";
+"Palette" = "配色";
+"Colorblind-safe replaces provider accents in single-series charts. Monochrome uses grays everywhere, heatmaps included." = "色盲友善模式在單一系列圖表中也以經過驗證的配色取代供應商強調色。單色模式在所有地方使用灰色，包括熱度圖。";
+"Provider accents" = "供應商強調色";
+"Colorblind-safe" = "色盲友善";
+"Monochrome" = "單色";
+/* Widget options */
+"Match app" = "跟隨 App";
+"Used" = "已用";
+"Last 7 days" = "近 7 天";
+"Last 90 days" = "近 90 天";
+"All providers" = "所有提供者";
+"Name" = "名稱";
+"Switcher" = "切換器";
+"Choose which providers the switcher shows and their order." = "選擇切換器顯示哪些提供者及其順序。";
+"menu_bar_style_tomoe" = "勾玉";
+"show_project_names_title" = "保持顯示專案名稱";
+"show_project_names_subtitle" = "仍隱藏電子郵件，但顯示費用歷史中的專案、工作階段和來源名稱及路徑。";

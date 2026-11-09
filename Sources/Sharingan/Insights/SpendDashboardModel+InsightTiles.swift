@@ -25,7 +25,19 @@ extension SpendDashboardModel {
                 bounds: bounds,
                 dayCount: dayCount,
                 calendar: calendar,
-                summarize: summarize))
+                summarize: summarize),
+            coverage: Self.insightCoverage(summaries))
+    }
+
+    /// Days each source's history covers inside the range, so plan value prorates a plan price over
+    /// covered days only.
+    static func insightCoverage(_ summaries: [InputSummary]) -> [String: ClosedRange<Date>] {
+        var coverage: [String: ClosedRange<Date>] = [:]
+        for summary in summaries {
+            guard let interval = summary.coveredInterval else { continue }
+            coverage[summary.input.id] = interval
+        }
+        return coverage
     }
 
     static func insightSamples(_ summary: InputSummary) -> [SpendInsightSample] {

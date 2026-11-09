@@ -9,7 +9,7 @@ struct MenuCardLayoutTests {
     func `default layout lists every section visible in today's order with the automatic chart`() {
         let layout = MenuCardLayout.default
         #expect(layout.order == [.usage, .pace, .chart, .credits, .extraUsage, .cost])
-        #expect(layout.sections.allSatisfy(\.isVisible))
+        #expect(!layout.sections.contains { !$0.isVisible })
         #expect(layout.chart == .automatic)
         #expect(layout.hiddenMenuItems.isEmpty)
         #expect(layout.isDefault)
@@ -81,7 +81,8 @@ struct MenuCardLayoutTests {
     @Test
     func `moving a section away from the default order turns off the built in arrangement`() {
         var layout = MenuCardLayout.default
-        #expect(layout.move(.cost, by: -3))
+        let movedCostBack = layout.move(.cost, by: -3)
+        #expect(movedCostBack)
         #expect(layout.order == [.usage, .pace, .cost, .chart, .credits, .extraUsage])
         let resolved = layout.resolved(for: .everything)
         #expect(!resolved.usesDefaultOrder)
@@ -98,9 +99,12 @@ struct MenuCardLayoutTests {
     func `moves skip pace and stop at the ends`() {
         var layout = MenuCardLayout.default
         #expect(!layout.canMove(.usage, by: -1))
-        #expect(!layout.move(.cost, by: 1))
-        #expect(!layout.move(.pace, by: 1))
-        #expect(layout.move(.chart, by: -1))
+        let movedCostForward = layout.move(.cost, by: 1)
+        #expect(!movedCostForward)
+        let movedPaceForward = layout.move(.pace, by: 1)
+        #expect(!movedPaceForward)
+        let movedChartBack = layout.move(.chart, by: -1)
+        #expect(movedChartBack)
         #expect(layout.order == [.chart, .pace, .usage, .credits, .extraUsage, .cost])
         #expect(layout.reorderableSections.map(\.kind) == [.chart, .usage, .credits, .extraUsage, .cost])
     }

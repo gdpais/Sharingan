@@ -35,7 +35,7 @@ public enum MenuCardChartChoice: String, CaseIterable, Codable, Sendable {
 }
 
 /// A provider menu link the card builder can hide.
-public enum MenuCardMenuItem: String, CaseIterable, Codable, Sendable {
+public enum MenuCardLinkItem: String, CaseIterable, Codable, Sendable {
     case usageDashboard
     case statusPage
 }
@@ -98,12 +98,12 @@ public struct MenuCardLayout: Equatable, Sendable {
     /// Every known kind exactly once, in display order.
     public private(set) var sections: [Section]
     public var chart: MenuCardChartChoice
-    public var hiddenMenuItems: Set<MenuCardMenuItem>
+    public var hiddenMenuItems: Set<MenuCardLinkItem>
 
     public init(
         sections: [Section] = MenuCardSectionKind.defaultOrder.map { Section(kind: $0) },
         chart: MenuCardChartChoice = .automatic,
-        hiddenMenuItems: Set<MenuCardMenuItem> = [])
+        hiddenMenuItems: Set<MenuCardLinkItem> = [])
     {
         self.sections = Self.normalizedSections(sections)
         self.chart = chart
@@ -138,11 +138,11 @@ public struct MenuCardLayout: Equatable, Sendable {
         self.sections[index].isVisible = isVisible
     }
 
-    public func showsMenuItem(_ item: MenuCardMenuItem) -> Bool {
+    public func showsMenuItem(_ item: MenuCardLinkItem) -> Bool {
         !self.hiddenMenuItems.contains(item)
     }
 
-    public mutating func setMenuItem(_ item: MenuCardMenuItem, visible: Bool) {
+    public mutating func setMenuItem(_ item: MenuCardLinkItem, visible: Bool) {
         if visible {
             self.hiddenMenuItems.remove(item)
         } else {
@@ -281,7 +281,7 @@ extension MenuCardLayout: Codable {
         self.init(
             sections: sections,
             chart: rawChart.flatMap(MenuCardChartChoice.init(rawValue:)) ?? .automatic,
-            hiddenMenuItems: Set(rawItems.compactMap(MenuCardMenuItem.init(rawValue:))))
+            hiddenMenuItems: Set(rawItems.compactMap(MenuCardLinkItem.init(rawValue:))))
     }
 
     public func encode(to encoder: any Encoder) throws {

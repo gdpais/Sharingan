@@ -1,7 +1,7 @@
-import SharinganCore // swiftlint:disable file_length
 import CryptoKit
 import Foundation
 import Observation
+import SharinganCore // swiftlint:disable file_length
 
 struct SpendDashboardConfiguration: Equatable, Sendable {
     let costUsageEnabled: Bool

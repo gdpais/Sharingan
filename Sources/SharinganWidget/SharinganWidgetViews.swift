@@ -34,7 +34,8 @@ struct SharinganUsageWidgetView: View {
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .containerBackground(.fill.tertiary, for: .widget)
-        .environment(\.widgetUsageShowsUsed, self.entry.snapshot.usageBarsShowUsed)
+        .environment(\.widgetUsageShowsUsed, self.entry.options.showsUsed(in: self.entry.snapshot))
+        .environment(\.widgetUsageOptions, self.entry.options)
     }
 }
 
@@ -46,7 +47,13 @@ struct SharinganHistoryWidgetView: View {
         let providerEntry = self.entry.snapshot.entries.first { $0.provider == self.entry.provider.instanceID }
         Group {
             if let providerEntry {
-                HistoryView(entry: providerEntry, isLarge: self.family == .systemLarge)
+                HistoryView(
+                    entry: providerEntry,
+                    isLarge: self.family == .systemLarge,
+                    series: WidgetHistoryRange.series(
+                        for: providerEntry,
+                        range: self.entry.options.historyRange,
+                        now: self.entry.date))
             } else {
                 WidgetEmptyState(message: WidgetEmptyStateCopy.message(
                     provider: self.entry.provider,
@@ -300,7 +307,7 @@ private struct ProviderPageButton: View {
     let size: WidgetTileSize
 
     var body: some View {
-        if let choice = ProviderChoice(provider: self.provider) {
+        if let choice = ProviderChoice(catalogProvider: self.provider) {
             Group {
                 if let selectionOverride {
                     Button { selectionOverride(self.provider) } label: { self.glyph }
@@ -553,6 +560,7 @@ enum WidgetUsageDisplay {
 private struct HistoryView: View {
     let entry: WidgetSnapshot.ProviderEntry
     let isLarge: Bool
+    let series: WidgetHistorySeries
 
     var body: some View {
         VStack(alignment: .leading, spacing: WidgetLayout.sectionSpacing) {
@@ -561,9 +569,10 @@ private struct HistoryView: View {
                 updatedAt: self.entry.updatedAt,
                 size: self.isLarge ? .large : .medium)
             UsageHistoryChart(
-                points: self.entry.dailyUsage,
+                points: self.series.points,
                 color: WidgetColors.color(for: self.entry.provider),
-                currencyCode: self.entry.tokenUsage?.currencyCode)
+                currencyCode: self.entry.tokenUsage?.currencyCode,
+                dayCount: self.series.dayCount)
                 .frame(minHeight: self.isLarge ? 110 : 58, maxHeight: .infinity)
             if let token = entry.tokenUsage {
                 VStack(alignment: .leading, spacing: 4) {
@@ -600,6 +609,8 @@ struct UsageHistoryChart: View {
     let points: [WidgetSnapshot.DailyUsagePoint]
     let color: Color
     let currencyCode: String?
+    /// Days a configured range spans. Nil keeps the point-count title and the original bar spacing.
+    var dayCount: Int?
 
     var body: some View {
         let isCostMode = UsageHistoryChartMode.isCostMode(self.points)
@@ -609,7 +620,7 @@ struct UsageHistoryChart: View {
         let scale = UsageChartScale(values: values)
         VStack(alignment: .leading, spacing: 4) {
             HStack(spacing: 6) {
-                Text(UsageHistoryChartCopy.title(dayCount: self.points.count))
+                Text(UsageHistoryChartCopy.title(dayCount: self.dayCount ?? self.points.count))
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                     .lineLimit(1)
@@ -628,7 +639,12 @@ struct UsageHistoryChart: View {
                 }
             }
             GeometryReader { geometry in
-                HStack(alignment: .bottom, spacing: 3) {
+                HStack(
+                    alignment: .bottom,
+                    spacing: WidgetHistoryRange.barSpacing(
+                        pointCount: values.count,
+                        isRanged: self.dayCount != nil))
+                {
                     ForEach(values.indices, id: \.self) { index in
                         let fraction = scale.fraction(for: values[index])
                         RoundedRectangle(cornerRadius: 2.5, style: .continuous)
