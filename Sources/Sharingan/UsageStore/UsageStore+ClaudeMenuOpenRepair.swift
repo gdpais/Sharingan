@@ -10,6 +10,7 @@ extension UsageStore {
     /// token repair deferred by the "only on user action" Keychain policy runs user-initiated here instead of
     /// failing again in the background. Everything else keeps the background interaction.
     func menuOpenRetryInteraction(for provider: UsageProvider, now: Date = Date()) -> ProviderInteraction {
+        // Provider-specific by design: only Claude defers token repair to a user action under the Keychain policy.
         guard provider == .claude,
               let error = self.errors[provider.instanceID],
               ClaudeUsageError.isUserActionRepairRequiredDescription(error)
