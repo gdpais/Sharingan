@@ -140,7 +140,7 @@ struct SpendDashboardPane: View {
                     }
                     SessionUsageBrowser(
                         context: request.context,
-                        hidePersonalInfo: self.settings.hidePersonalInfo,
+                        hidePersonalInfo: self.settings.hideProjectInfo,
                         selectedSessionID: request.sessionID)
                         .id(request.id)
                         .frame(height: 600)
@@ -430,7 +430,7 @@ struct SpendDashboardPane: View {
                     chartDomain: Date.distantPast...Date.distantPast,
                     modelHistoryCompleteness: .incomplete,
                     timeZone: self.controller.configuration?.bucketCalendar.timeZone ?? .current),
-                hidePersonalInfo: self.settings.hidePersonalInfo,
+                hidePersonalInfo: self.settings.hideProjectInfo,
                 supportsCodexDetails: true,
                 selection: self.detailSelection(for: currency))
         }
@@ -458,7 +458,7 @@ struct SpendDashboardPane: View {
                 SpendDashboardCurrencySection(
                     group: group,
                     requestedDays: self.controller.model.requestedDays,
-                    hidePersonalInfo: self.settings.hidePersonalInfo,
+                    hidePersonalInfo: self.settings.hideProjectInfo,
                     detailSelection: self.detailSelection(for: group.id),
                     supportsCodexDetails: self.controller.configuration?.supportsCodexDetails == true
                         && (group.currencyCode == "USD" || group.currencyCode == self.detailCurrency),

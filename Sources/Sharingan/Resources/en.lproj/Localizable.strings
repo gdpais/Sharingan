@@ -2860,3 +2860,5 @@
 "Switcher" = "Switcher";
 "Choose which providers the switcher shows and their order." = "Choose which providers the switcher shows and their order.";
 "menu_bar_style_tomoe" = "Tomoe";
+"show_project_names_title" = "Keep project names visible";
+"show_project_names_subtitle" = "Still hide emails, but show cost-history project, session, and source names and paths.";

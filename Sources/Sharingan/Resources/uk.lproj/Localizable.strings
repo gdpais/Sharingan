@@ -2856,3 +2856,5 @@
 "Switcher" = "Перемикач";
 "Choose which providers the switcher shows and their order." = "Виберіть, яких провайдерів показує перемикач і в якому порядку.";
 "menu_bar_style_tomoe" = "Томое";
+"show_project_names_title" = "Показувати назви проєктів";
+"show_project_names_subtitle" = "Адреси електронної пошти залишаються прихованими, але назви й шляхи проєктів, сеансів і джерел в історії витрат відображаються.";

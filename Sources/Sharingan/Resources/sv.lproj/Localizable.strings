@@ -2854,3 +2854,5 @@
 "Switcher" = "Växlare";
 "Choose which providers the switcher shows and their order." = "Välj vilka leverantörer växlaren visar och i vilken ordning.";
 "menu_bar_style_tomoe" = "Tomoe";
+"show_project_names_title" = "Behåll projektnamn synliga";
+"show_project_names_subtitle" = "E-postadresser förblir dolda, men namn och sökvägar för projekt, sessioner och källor i kostnadshistoriken visas.";

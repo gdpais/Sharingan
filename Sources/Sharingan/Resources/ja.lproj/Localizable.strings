@@ -2855,3 +2855,5 @@
 "Switcher" = "スイッチャー";
 "Choose which providers the switcher shows and their order." = "スイッチャーに表示するプロバイダとその順序を選択します。";
 "menu_bar_style_tomoe" = "巴";
+"show_project_names_title" = "プロジェクト名を表示したままにする";
+"show_project_names_subtitle" = "メールアドレスは非表示のまま、コスト履歴のプロジェクト・セッション・ソースの名前とパスを表示します。";

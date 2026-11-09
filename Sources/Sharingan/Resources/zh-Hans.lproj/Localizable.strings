@@ -2847,3 +2847,5 @@
 "Switcher" = "切换器";
 "Choose which providers the switcher shows and their order." = "选择切换器显示哪些提供商以及它们的顺序。";
 "menu_bar_style_tomoe" = "勾玉";
+"show_project_names_title" = "保持显示项目名称";
+"show_project_names_subtitle" = "仍隐藏电子邮件，但显示费用历史中的项目、会话和来源名称及路径。";

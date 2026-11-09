@@ -2859,3 +2859,5 @@
 "Switcher" = "المبدّل";
 "Choose which providers the switcher shows and their order." = "اختر مقدمي الخدمات الذين يعرضهم المبدّل وترتيبهم.";
 "menu_bar_style_tomoe" = "توموي";
+"show_project_names_title" = "إبقاء أسماء المشاريع ظاهرة";
+"show_project_names_subtitle" = "يبقى البريد الإلكتروني مخفيًا، مع إظهار أسماء ومسارات المشاريع والجلسات والمصادر في سجل التكاليف.";

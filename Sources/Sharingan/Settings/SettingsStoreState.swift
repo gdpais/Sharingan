@@ -70,6 +70,7 @@ struct SettingsDefaultsState {
     var costComparisonPeriodsEnabled: Bool
     var costSummaryDisplayStyleRaw: String
     var hidePersonalInfo: Bool
+    var showProjectNamesWhenHidingPersonalInfo: Bool
     var randomBlinkEnabled: Bool
     var confettiOnSessionLimitResetsEnabled: Bool
     var confettiOnWeeklyLimitResetsEnabled: Bool

@@ -2856,3 +2856,5 @@
 "Switcher" = "Bộ chuyển đổi";
 "Choose which providers the switcher shows and their order." = "Chọn các nhà cung cấp mà bộ chuyển đổi hiển thị và thứ tự của chúng.";
 "menu_bar_style_tomoe" = "Tomoe";
+"show_project_names_title" = "Giữ hiển thị tên dự án";
+"show_project_names_subtitle" = "Email vẫn được ẩn, nhưng tên và đường dẫn của dự án, phiên và nguồn trong lịch sử chi phí vẫn hiển thị.";

@@ -297,7 +297,7 @@ extension StatusItemController {
         var fingerprint = CostHistoryChartMenuView.renderFingerprint(
             from: snapshot,
             provider: provider,
-            hidePersonalInfo: self.settings.hidePersonalInfo,
+            hidePersonalInfo: self.settings.hideProjectInfo,
             displayCurrencyCode: displayConversion.currencyCode,
             displayCostMultiplier: displayConversion.multiplier)
         fingerprint.previousPeriodCostBitPattern = self.costHistoryPreviousPeriodCost(for: snapshot).map(\.bitPattern)
@@ -470,7 +470,7 @@ extension StatusItemController {
                 preferences: chartPreferences,
                 historyDays: historyDays,
                 calendar: self.settings.costUsageBucketCalendar),
-            hidePersonalInfo: self.settings.hidePersonalInfo,
+            hidePersonalInfo: self.settings.hideProjectInfo,
             width: width,
             initialMetric: self.settings.costHistoryChartMetric(for: provider),
             onMetricChanged: { [weak self] metric in

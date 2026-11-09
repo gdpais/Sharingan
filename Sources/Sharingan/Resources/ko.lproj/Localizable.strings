@@ -2823,3 +2823,5 @@
 "Switcher" = "스위처";
 "Choose which providers the switcher shows and their order." = "스위처에 표시할 공급자와 순서를 선택합니다.";
 "menu_bar_style_tomoe" = "토모에";
+"show_project_names_title" = "프로젝트 이름 계속 표시";
+"show_project_names_subtitle" = "이메일은 계속 숨기고 비용 기록의 프로젝트, 세션, 소스 이름과 경로는 표시합니다.";

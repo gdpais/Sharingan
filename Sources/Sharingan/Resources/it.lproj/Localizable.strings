@@ -2859,3 +2859,5 @@
 "Switcher" = "Commutatore";
 "Choose which providers the switcher shows and their order." = "Scegli quali provider mostra il commutatore e in quale ordine.";
 "menu_bar_style_tomoe" = "Tomoe";
+"show_project_names_title" = "Mantieni visibili i nomi dei progetti";
+"show_project_names_subtitle" = "Le email restano nascoste, ma nomi e percorsi di progetti, sessioni e origini nella cronologia dei costi vengono mostrati.";

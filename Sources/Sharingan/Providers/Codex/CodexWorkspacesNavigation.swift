@@ -98,7 +98,7 @@ final class CodexWorkspacesWindowController: NSWindowController {
             codexHomePath: scope.codexHomePath,
             scopeSignature: scope.signature,
             historyDays: settings.costUsageHistoryDays,
-            hidePersonalInfo: settings.hidePersonalInfo)
+            hidePersonalInfo: settings.hideProjectInfo)
     }
 }
 

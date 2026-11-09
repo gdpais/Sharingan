@@ -2857,3 +2857,5 @@
 "Switcher" = "สวิตช์";
 "Choose which providers the switcher shows and their order." = "เลือกผู้ให้บริการที่สวิตช์แสดงและลำดับการแสดง";
 "menu_bar_style_tomoe" = "โทโมเอะ";
+"show_project_names_title" = "แสดงชื่อโปรเจกต์ต่อไป";
+"show_project_names_subtitle" = "ยังคงซ่อนอีเมล แต่แสดงชื่อและพาธของโปรเจกต์ เซสชัน และแหล่งที่มาในประวัติค่าใช้จ่าย";

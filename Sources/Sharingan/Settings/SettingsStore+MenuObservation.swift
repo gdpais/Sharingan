@@ -65,6 +65,7 @@ extension SettingsStore {
         _ = self.costSummaryDisplayStyle
         _ = self.appLanguage
         _ = self.hidePersonalInfo
+        _ = self.showProjectNamesWhenHidingPersonalInfo
         _ = self.randomBlinkEnabled
         _ = self.confettiOnSessionLimitResetsEnabled
         _ = self.confettiOnWeeklyLimitResetsEnabled

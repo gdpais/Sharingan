@@ -2858,3 +2858,5 @@
 "Switcher" = "Değiştirici";
 "Choose which providers the switcher shows and their order." = "Değiştiricinin hangi sağlayıcıları hangi sırayla göstereceğini seçin.";
 "menu_bar_style_tomoe" = "Tomoe";
+"show_project_names_title" = "Proje adlarını görünür tut";
+"show_project_names_subtitle" = "E-postalar gizli kalır, ancak maliyet geçmişindeki proje, oturum ve kaynak adları ile yolları gösterilir.";

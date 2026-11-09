@@ -42,6 +42,14 @@ struct AdvancedPane: View {
                         subtitle: L("hide_personal_info_subtitle") + " " + L("hide_cost_history_identity_subtitle"))
                 }
 
+                Toggle(isOn: self.$settings.showProjectNamesWhenHidingPersonalInfo) {
+                    SettingsRowLabel(
+                        L("show_project_names_title"),
+                        subtitle: L("show_project_names_subtitle"))
+                }
+                .disabled(!self.settings.hidePersonalInfo)
+                .padding(.leading, 20)
+
                 Toggle(isOn: self.$settings.debugDisableKeychainAccess) {
                     SettingsRowLabel(
                         L("disable_keychain_access_title"),

@@ -2859,3 +2859,5 @@
 "Switcher" = "سوئیچر";
 "Choose which providers the switcher shows and their order." = "انتخاب کنید سوئیچر کدام ارائه‌دهندگان را و به چه ترتیبی نشان دهد.";
 "menu_bar_style_tomoe" = "تومویه";
+"show_project_names_title" = "نام پروژه‌ها نمایش داده شود";
+"show_project_names_subtitle" = "ایمیل‌ها همچنان پنهان می‌مانند، اما نام و مسیر پروژه‌ها، نشست‌ها و منابع در تاریخچهٔ هزینه نمایش داده می‌شود.";

@@ -2833,3 +2833,5 @@
 "Switcher" = "切換器";
 "Choose which providers the switcher shows and their order." = "選擇切換器顯示哪些提供者及其順序。";
 "menu_bar_style_tomoe" = "勾玉";
+"show_project_names_title" = "保持顯示專案名稱";
+"show_project_names_subtitle" = "仍隱藏電子郵件，但顯示費用歷史中的專案、工作階段和來源名稱及路徑。";

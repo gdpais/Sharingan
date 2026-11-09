@@ -2857,3 +2857,5 @@
 "Switcher" = "Pengalih";
 "Choose which providers the switcher shows and their order." = "Pilih penyedia yang ditampilkan pengalih dan urutannya.";
 "menu_bar_style_tomoe" = "Tomoe";
+"show_project_names_title" = "Tetap tampilkan nama proyek";
+"show_project_names_subtitle" = "Email tetap disembunyikan, tetapi nama dan jalur proyek, sesi, dan sumber di riwayat biaya ditampilkan.";

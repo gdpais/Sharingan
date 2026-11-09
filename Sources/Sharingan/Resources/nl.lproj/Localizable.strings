@@ -2852,3 +2852,5 @@
 "Switcher" = "Schakelaar";
 "Choose which providers the switcher shows and their order." = "Kies welke aanbieders de schakelaar toont en in welke volgorde.";
 "menu_bar_style_tomoe" = "Tomoe";
+"show_project_names_title" = "Projectnamen zichtbaar houden";
+"show_project_names_subtitle" = "E-mailadressen blijven verborgen, maar project-, sessie- en bronnamen en paden in de kostengeschiedenis worden getoond.";

@@ -2856,3 +2856,5 @@
 "Switcher" = "Коммутатор";
 "Choose which providers the switcher shows and their order." = "Выберите, каких провайдеров показывает коммутатор и в каком порядке.";
 "menu_bar_style_tomoe" = "Томоэ";
+"show_project_names_title" = "Показывать названия проектов";
+"show_project_names_subtitle" = "Адреса электронной почты остаются скрытыми, но названия и пути проектов, сеансов и источников в истории расходов отображаются.";
