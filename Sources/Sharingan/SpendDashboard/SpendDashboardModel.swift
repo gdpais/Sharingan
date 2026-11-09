@@ -1410,11 +1410,19 @@ struct SpendDashboardModel: Equatable, Sendable {
     }
 
     static func dayCount(in interval: ClosedRange<Date>?, calendar: Calendar) -> Int {
-        guard let interval,
-              let first = calendar.ordinality(of: .day, in: .era, for: interval.lowerBound),
-              let last = calendar.ordinality(of: .day, in: .era, for: interval.upperBound)
+        // Count civil dates, not elapsed time: `ordinality(of: .day, in: .era)` skips or repeats a day
+        // across DST changes in some zones (Europe/Lisbon), and day starts can be 23 hours apart where
+        // midnight is skipped (America/Santiago). Re-anchoring each local date on UTC avoids both.
+        guard let interval else { return 0 }
+        let utc = Self.utcCalendar
+        func civilDate(_ date: Date) -> Date? {
+            utc.date(from: calendar.dateComponents([.year, .month, .day], from: date))
+        }
+        guard let first = civilDate(interval.lowerBound),
+              let last = civilDate(interval.upperBound),
+              let days = utc.dateComponents([.day], from: first, to: last).day
         else { return 0 }
-        return last - first + 1
+        return days + 1
     }
 
     static func day(
