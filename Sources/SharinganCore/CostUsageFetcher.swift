@@ -1183,9 +1183,9 @@ public struct CostUsageFetcher: Sendable {
     {
         let roots = CostUsageScanner.codexSessionsRoots(options: options)
         let rootsFingerprint = CostUsageScanner.codexRootsFingerprint(options: options)
-        // The shared read store keeps its validated connection and warm status/activity state between
-        // refreshes. A throwaway store re-ran the whole-database integrity check and re-decoded every
-        // usage row on each pass.
+        /// The shared read store keeps its validated connection and warm status/activity state between
+        /// refreshes. A throwaway store re-ran the whole-database integrity check and re-decoded every
+        /// usage row on each pass.
         func read(_ purpose: CostUsageStoreReadPurpose) -> CostUsageStoreReadView {
             CostUsageStoreAccess.readView(
                 cacheRoot: options.cacheRoot,

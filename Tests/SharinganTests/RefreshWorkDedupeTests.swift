@@ -64,7 +64,7 @@ struct RefreshWorkDedupeTests {
     }
 
     @Test
-    func `restricted plan history save leaves other provider files untouched`() throws {
+    func `restricted plan history save leaves other provider files untouched`() {
         let directory = FileManager.default.temporaryDirectory
             .appendingPathComponent("RefreshWorkDedupeTests-\(UUID().uuidString)", isDirectory: true)
         defer { try? FileManager.default.removeItem(at: directory) }

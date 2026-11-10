@@ -27,7 +27,7 @@ struct RefreshWorkCountTests {
     }
 
     @Test
-    func `unchanged publications write the widget snapshot once`() async throws {
+    func `unchanged publications write the widget snapshot once`() async {
         let url = FileManager.default.temporaryDirectory
             .appendingPathComponent("RefreshWorkCountTests-\(UUID().uuidString).json")
         defer { try? FileManager.default.removeItem(at: url) }
