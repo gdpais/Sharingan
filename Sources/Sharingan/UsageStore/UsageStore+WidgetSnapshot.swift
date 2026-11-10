@@ -41,9 +41,14 @@ extension UsageStore {
         let snapshot = self.makeWidgetSnapshot(previousSnapshot: previousSnapshot)
         self.lastQueuedWidgetSnapshot = snapshot
         self.invalidatedQueuedWidgetProviders = self.widgetUsagePreservationBlockedProviders
-        NotificationCenter.default.post(
-            name: .sharinganUsageSnapshotsDidChange,
-            object: UsageSnapshotsDidChangeEvent(snapshots: self.cloudSyncAccountSnapshots()))
+        // The only observer drops these unless snapshot sync is on, so skip building the payloads otherwise.
+        if self.settings.iCloudSyncEnabled, self.settings.iCloudSyncSnapshotsEnabled {
+            NotificationCenter.default.post(
+                name: .sharinganUsageSnapshotsDidChange,
+                object: UsageSnapshotsDidChangeEvent(snapshots: self.cloudSyncAccountSnapshots()))
+        }
+        self.widgetSnapshotPersistGeneration &+= 1
+        let generation = self.widgetSnapshotPersistGeneration
         let previousTask = self.widgetSnapshotPersistTask
         self.widgetSnapshotPersistTask = Task { @MainActor in
             _ = await previousTask?.result
@@ -53,12 +58,28 @@ extension UsageStore {
                 return
             }
 
+            // One refresh cycle publishes several times. Only the newest queued snapshot needs to reach
+            // disk, and one that shows the widget nothing new needs neither a write nor a timeline reload.
+            guard generation == self.widgetSnapshotPersistGeneration else { return }
+            let fingerprint = await Task.detached(priority: .utility) { snapshot.contentFingerprint() }.value
+            guard Self.shouldSaveWidgetSnapshot(
+                fingerprint: fingerprint,
+                lastSavedFingerprint: self.lastSavedWidgetSnapshotFingerprint)
+            else { return }
+
             await Self.saveWidgetSnapshot(
                 snapshot,
                 to: self.widgetSnapshotURL,
                 isRunningTests: SettingsStore.isRunningTests,
                 reloadTimelines: self.widgetTimelineReloader)
+            self.lastSavedWidgetSnapshotFingerprint = fingerprint
         }
+    }
+
+    /// An unknown fingerprint (encoding failed) always saves; an unchanged one never does.
+    nonisolated static func shouldSaveWidgetSnapshot(fingerprint: Data?, lastSavedFingerprint: Data?) -> Bool {
+        guard let fingerprint, let lastSavedFingerprint else { return true }
+        return fingerprint != lastSavedFingerprint
     }
 
     static func saveWidgetSnapshot(

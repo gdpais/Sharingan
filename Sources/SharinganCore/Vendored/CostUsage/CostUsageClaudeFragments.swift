@@ -36,12 +36,60 @@ final class CostUsageClaudeFragments: @unchecked Sendable {
     private let lock = NSLock()
     private let byteLimit: Int
     private var entries: [(url: URL, snapshot: Snapshot)] = []
+    /// A decoded ledger nobody has read for this long is dropped at the next access to any ledger.
+    /// Unchanged refreshes answer from the report memo and never touch the ledger, so only snapshots
+    /// that stopped being needed (typically the all-time dashboard history) go idle; each one is a
+    /// fully decoded copy of every retained transcript row.
+    private let idleLimit: TimeInterval
+    private let now: @Sendable () -> Date
+    private var lastUsed: [URL: Date] = [:]
 
-    init(byteLimit: Int = 512 * 1024 * 1024) { self.byteLimit = byteLimit }
+    init(
+        byteLimit: Int = 512 * 1024 * 1024,
+        idleLimit: TimeInterval = 30 * 60,
+        now: @escaping @Sendable () -> Date = { Date() })
+    {
+        self.byteLimit = byteLimit
+        self.idleLimit = idleLimit
+        self.now = now
+    }
 
     func evict(at url: URL) {
         let url = url.standardizedFileURL.resolvingSymlinksInPath()
-        self.lock.withLock { self.entries.removeAll { $0.url == url } }
+        self.lock.withLock {
+            self.entries.removeAll { $0.url == url }
+            self.lastUsed[url] = nil
+        }
+    }
+
+    /// Drops every decoded ledger. Safe at any time: the stamp check reloads from disk on the next use,
+    /// and a scan in flight keeps its own reference. Returns how many snapshots were released.
+    @discardableResult
+    func removeAll() -> Int {
+        self.lock.withLock {
+            let count = self.entries.count
+            self.entries.removeAll()
+            self.lastUsed.removeAll()
+            return count
+        }
+    }
+
+    var retainedSnapshotCount: Int {
+        self.lock.withLock { self.entries.count }
+    }
+
+    /// Marks `url` as in use and drops other snapshots that have sat unread past the idle limit.
+    private func touchAndPruneIdle(_ url: URL) {
+        let now = self.now()
+        self.lastUsed[url] = now
+        let idleLimit = self.idleLimit
+        let lastUsed = self.lastUsed
+        self.entries.removeAll { entry in
+            guard entry.url != url else { return false }
+            return now.timeIntervalSince(lastUsed[entry.url] ?? now) >= idleLimit
+        }
+        let retained = Set(self.entries.map(\.url)).union([url])
+        self.lastUsed = self.lastUsed.filter { retained.contains($0.key) }
     }
 
     func currentStamp(contentID: UUID, at url: URL) -> CostUsageClaudeFileStamp? {
@@ -58,6 +106,7 @@ final class CostUsageClaudeFragments: @unchecked Sendable {
         legacy: (Data) throws -> (Header, [String: Value])) throws -> (Header, [String: Value])
     {
         try self.lock.withLock {
+            self.touchAndPruneIdle(url)
             if let snapshot = self.entries.last(where: { $0.url == url })?.snapshot,
                snapshot.stamp == CostUsageClaudeFileStamp.read(at: url),
                let header = snapshot.header as? Header, let values = snapshot.values as? [String: Value]
@@ -120,6 +169,7 @@ final class CostUsageClaudeFragments: @unchecked Sendable {
                 try checkCancellation?()
                 let encoder = JSONEncoder()
                 encoder.outputFormatting = [.sortedKeys]
+                self.touchAndPruneIdle(url)
                 let previous = self.entries.last { $0.url == url }?.snapshot
                 let current = previous?.stamp == CostUsageClaudeFileStamp.read(at: url) ? previous : nil
                 let oldValues = current?.values as? [String: Value] ?? [:]
@@ -193,8 +243,9 @@ final class CostUsageClaudeFragments: @unchecked Sendable {
     private func remember(_ url: URL, _ snapshot: Snapshot) {
         self.entries.removeAll { $0.url == url }
         self.entries.append((url, snapshot))
+        self.lastUsed[url] = self.now()
         while self.entries.count > 8 || self.entries.reduce(0, { $0 + $1.snapshot.cost * 3 }) > self.byteLimit {
-            self.entries.removeFirst()
+            self.lastUsed[self.entries.removeFirst().url] = nil
         }
     }
 

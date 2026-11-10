@@ -22,6 +22,13 @@ extension UsageStore {
                 return CLIUsageCache.Entry(provider: provider, usage: snapshot)
             }
             : nil
+        // Sharing is off for most installs: withdraw the file once, not on every snapshot publication.
+        if entries == nil {
+            guard !self.cliUsageCacheWithdrawn else { return }
+            self.cliUsageCacheWithdrawn = true
+        } else {
+            self.cliUsageCacheWithdrawn = false
+        }
         let previous = self.cliUsageCachePersistTask
         self.cliUsageCachePersistTask = Task.detached(priority: .utility) {
             _ = await previous?.value

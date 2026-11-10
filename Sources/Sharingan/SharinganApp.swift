@@ -411,6 +411,10 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         self?.trimRebuildableCachesForMemoryPressure() ?? MemoryPressureCacheTrimSummary()
     })
 
+    private lazy var displayActivityMonitor = DisplayActivityMonitor(onChange: { [weak self] inactive in
+        self?.store?.setDisplayInactive(inactive)
+    })
+
     private var statusController: StatusItemControlling?
     private var store: UsageStore?
     private var settings: SettingsStore?
@@ -506,6 +510,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         WidgetExtensionRecovery.launch(reload: UsageStore.reloadWidgetTimelines)
         self.dockIconController.start()
         self.memoryPressureMonitor.start()
+        self.displayActivityMonitor.start()
         #if DEBUG
         self.installDebugMemoryPressureObserverIfNeeded()
         #endif
@@ -577,6 +582,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ notification: Notification) {
         self.cloudSyncCoordinator?.stop()
         self.memoryPressureMonitor.stop()
+        self.displayActivityMonitor.stop()
         #if DEBUG
         self.removeDebugMemoryPressureObserver()
         #endif

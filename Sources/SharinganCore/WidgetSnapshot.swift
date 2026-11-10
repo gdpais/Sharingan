@@ -236,6 +236,22 @@ public struct WidgetSnapshot: Codable, Sendable {
         try container.encode(self.usageBarsShowUsed, forKey: .usageBarsShowUsed)
         try container.encode(self.generatedAt, forKey: .generatedAt)
     }
+
+    /// Stable bytes for everything except `generatedAt`, so a writer can tell that a new snapshot would
+    /// show the widget nothing it does not already have. Nil when encoding fails; callers then save.
+    public func contentFingerprint() -> Data? {
+        let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        encoder.outputFormatting = [.sortedKeys]
+        let normalized = WidgetSnapshot(
+            entries: self.entries,
+            accounts: self.accounts,
+            accountOverflowCounts: self.accountOverflowCounts,
+            enabledProviders: self.enabledProviders,
+            usageBarsShowUsed: self.usageBarsShowUsed,
+            generatedAt: Date(timeIntervalSince1970: 0))
+        return try? encoder.encode(normalized)
+    }
 }
 
 public enum WidgetSnapshotStore {

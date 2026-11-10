@@ -6,11 +6,31 @@ import Foundation
 extension UsageStore {
     nonisolated static func effectiveAutomaticRefreshInterval(
         _ requested: TimeInterval?,
-        lowPowerModeEnabled: Bool) -> TimeInterval?
+        lowPowerModeEnabled: Bool,
+        displayInactive: Bool = false) -> TimeInterval?
     {
         BackgroundWorkPowerPolicy.automaticInterval(
             requested,
-            lowPowerModeEnabled: lowPowerModeEnabled)
+            lowPowerModeEnabled: lowPowerModeEnabled,
+            displayInactive: displayInactive)
+    }
+
+    /// Called when the display sleeps/wakes or the session locks/unlocks. Restarts the automatic timer so
+    /// the stretched (or restored) interval applies now, and catches up once if a normal tick was missed.
+    func setDisplayInactive(_ inactive: Bool, now: Date = Date()) {
+        guard inactive != self.displayInactive else { return }
+        self.displayInactive = inactive
+        guard self.startupBehavior.automaticallyStartsBackgroundWork,
+              self.settings.refreshFrequency != .manual
+        else { return }
+        self.restartAdaptiveTimerPreservingResetBoundary()
+        guard !inactive,
+              BackgroundWorkPowerPolicy.shouldRefreshOnDisplayActivation(
+                  lastRefreshStartedAt: self.lastRefreshStartedAt,
+                  normalInterval: self.normalRefreshIntervalForHeuristics(),
+                  now: now)
+        else { return }
+        Task { await self.refresh(enrichmentMode: .automatic) }
     }
 
     func effectiveTimerSleepDuration(_ computed: Duration) -> Duration {
@@ -62,7 +82,8 @@ extension UsageStore {
         let requestedDelay = TimeInterval(decision.delay.components.seconds)
         let effectiveDelay = Self.effectiveAutomaticRefreshInterval(
             requestedDelay,
-            lowPowerModeEnabled: self.settings.backgroundWorkLowPowerModeEnabled) ?? requestedDelay
+            lowPowerModeEnabled: self.settings.backgroundWorkLowPowerModeEnabled,
+            displayInactive: self.displayInactive) ?? requestedDelay
         let candidate = date.addingTimeInterval(effectiveDelay)
         guard Self.shouldAdvanceAdaptiveTimer(
             scheduledAt: self.adaptiveRefreshScheduledAt,
@@ -139,7 +160,8 @@ extension UsageStore {
         let requestedDelay = TimeInterval(decision.delay.components.seconds)
         let effectiveDelay = Self.effectiveAutomaticRefreshInterval(
             requestedDelay,
-            lowPowerModeEnabled: store.settings.backgroundWorkLowPowerModeEnabled) ?? requestedDelay
+            lowPowerModeEnabled: store.settings.backgroundWorkLowPowerModeEnabled,
+            displayInactive: store.displayInactive) ?? requestedDelay
         #if DEBUG
         store.adaptiveRefreshComputedIntervalForTesting = effectiveDelay
         #endif

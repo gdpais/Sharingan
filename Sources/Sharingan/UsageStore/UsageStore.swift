@@ -174,6 +174,8 @@ final class UsageStore {
     @ObservationIgnored var claudeSwapTransientState = ClaudeSwapTransientState()
     var tokenSnapshotPublications: [ProviderInstanceID: TokenSnapshotPublication] = [:]
     var tokenSnapshotPublicationRevisions: [ProviderInstanceID: UInt64] = [:]
+    /// Advances only when a publication changes the usage itself, not merely its timestamp.
+    var tokenSnapshotContentRevisions: [ProviderInstanceID: UInt64] = [:]
     var spendDashboardTokenPublications: [ProviderInstanceID: TokenSnapshotPublication] = [:]
     var spendDashboardTokenPublicationRevisions: [ProviderInstanceID: UInt64] = [:]
     @ObservationIgnored var spendDashboardTokenIncorporatedTriggers:
@@ -327,11 +329,14 @@ final class UsageStore {
         TimeInterval) async throws -> Void)?
     @ObservationIgnored var widgetSnapshotPersistTask: Task<Void, Never>?
     @ObservationIgnored var lastQueuedWidgetSnapshot: WidgetSnapshot?
+    @ObservationIgnored var widgetSnapshotPersistGeneration: UInt64 = 0
+    @ObservationIgnored var lastSavedWidgetSnapshotFingerprint: Data?
     @ObservationIgnored var invalidatedQueuedWidgetProviders: Set<ProviderInstanceID> = []
     @ObservationIgnored var lastWidgetSourceSnapshots: [ProviderInstanceID: UsageSnapshot] = [:]
     @ObservationIgnored let widgetSnapshotURL: URL?
     @ObservationIgnored let cliUsageCacheURL: URL?
     @ObservationIgnored var cliUsageCachePersistTask: Task<Void, Never>?
+    @ObservationIgnored var cliUsageCacheWithdrawn = false
     @ObservationIgnored let widgetTimelineReloader: @MainActor () -> Void
     @ObservationIgnored var widgetUsagePreservationBlockedProviders: Set<ProviderInstanceID> = []
 
@@ -478,6 +483,9 @@ final class UsageStore {
     @ObservationIgnored var sessionLimitResetDetectorStates: [String: LimitResetDetectorState] = [:]
     @ObservationIgnored var weeklyLimitResetDetectorStates: [String: LimitResetDetectorState] = [:]
     @ObservationIgnored private var hasCompletedInitialRefresh: Bool = false
+    /// True while the display is asleep or the session is locked; stretches the automatic refresh interval.
+    @ObservationIgnored var displayInactive = false
+    @ObservationIgnored var lastRefreshStartedAt: Date?
     @ObservationIgnored private let providerAvailabilityCacheTTL: TimeInterval = 1
     @ObservationIgnored let accountInfoCacheTTL: TimeInterval = 30
     /// Energy/WidgetKit floor for expensive local-history scans and their additional snapshot publications.
@@ -799,6 +807,7 @@ final class UsageStore {
         let refreshProviders = self.enabledProvidersForBackgroundWork()
         let availableRefreshProviders = Set(self.enabledProviders())
         let refreshStartedAt = Date()
+        self.lastRefreshStartedAt = refreshStartedAt
 
         let completedRefresh = await ProviderRefreshContext.$current.withValue(refreshPhase) {
             self.isRefreshing = true
@@ -957,7 +966,8 @@ final class UsageStore {
 
         guard let wait = Self.effectiveAutomaticRefreshInterval(
             frequency.seconds,
-            lowPowerModeEnabled: self.settings.backgroundWorkLowPowerModeEnabled)
+            lowPowerModeEnabled: self.settings.backgroundWorkLowPowerModeEnabled,
+            displayInactive: self.displayInactive)
         else { return }
         #if DEBUG
         self.fixedRefreshIntervalForTesting = wait

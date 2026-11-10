@@ -1572,9 +1572,27 @@ actor PlanUtilizationHistoryPersistenceCoordinator {
     private let store: PlanUtilizationHistoryStore
     private var pendingSnapshot: [ProviderInstanceID: PlanUtilizationHistoryBuckets]?
     private var isPersisting: Bool = false
+    /// The snapshot known to be on disk, so later saves rewrite only the providers that changed.
+    /// Nil until the first save succeeds; that save still reconciles every provider file.
+    private var lastPersistedSnapshot: [ProviderInstanceID: PlanUtilizationHistoryBuckets]?
 
     init(store: PlanUtilizationHistoryStore) {
         self.store = store
+    }
+
+    /// Providers whose buckets differ between two snapshots, including providers present in only one.
+    static func changedInstanceIDs(
+        from previous: [ProviderInstanceID: PlanUtilizationHistoryBuckets],
+        to snapshot: [ProviderInstanceID: PlanUtilizationHistoryBuckets]) -> Set<ProviderInstanceID>
+    {
+        var changed = Set<ProviderInstanceID>()
+        for (instanceID, buckets) in snapshot where previous[instanceID] != buckets {
+            changed.insert(instanceID)
+        }
+        for instanceID in previous.keys where snapshot[instanceID] == nil {
+            changed.insert(instanceID)
+        }
+        return changed
     }
 
     func enqueue(_ snapshot: [ProviderInstanceID: PlanUtilizationHistoryBuckets]) {
@@ -1598,8 +1616,14 @@ actor PlanUtilizationHistoryPersistenceCoordinator {
 
     private func saveAsync(_ snapshot: [ProviderInstanceID: PlanUtilizationHistoryBuckets]) async {
         let store = self.store
-        await Task.detached(priority: .utility) {
-            store.save(snapshot)
+        let changedInstanceIDs = self.lastPersistedSnapshot.map {
+            Self.changedInstanceIDs(from: $0, to: snapshot)
+        }
+        if let changedInstanceIDs, changedInstanceIDs.isEmpty { return }
+        let saved = await Task.detached(priority: .utility) {
+            store.save(snapshot, changedInstanceIDs: changedInstanceIDs)
         }.value
+        // A failed save leaves the on-disk state unknown; fall back to a full reconcile next time.
+        self.lastPersistedSnapshot = saved ? snapshot : nil
     }
 }

@@ -1183,15 +1183,29 @@ public struct CostUsageFetcher: Sendable {
     {
         let roots = CostUsageScanner.codexSessionsRoots(options: options)
         let rootsFingerprint = CostUsageScanner.codexRootsFingerprint(options: options)
-        let store = CostUsageStore(cacheRoot: options.cacheRoot)
+        // The shared read store keeps its validated connection and warm status/activity state between
+        // refreshes. A throwaway store re-ran the whole-database integrity check and re-decoded every
+        // usage row on each pass.
         func read(_ purpose: CostUsageStoreReadPurpose) -> CostUsageStoreReadView {
-            store.syncLoadCodexReadView(calendar: options.calendar, purpose: purpose, sourceScope: sourceScope)
+            CostUsageStoreAccess.readView(
+                cacheRoot: options.cacheRoot,
+                calendar: options.calendar,
+                purpose: purpose,
+                sourceScope: sourceScope)
                 .scoped(to: roots)
         }
         var view = read(sourceScope == nil ? .status : .activity)
         if view.hasPendingScan { view = read(.activity) }
         if view.previousReport(range: range, rootsFingerprint: rootsFingerprint) == nil { view = read(.report) }
         return view
+    }
+
+    /// Releases decoded cost-history ledgers that can be rebuilt from their on-disk caches. Intended for
+    /// system memory pressure; the next scan that needs a ledger reloads it. May wait on an in-flight
+    /// cache load or save, so call it off the main thread.
+    @discardableResult
+    public static func releaseRebuildableLedgerCaches() -> Int {
+        CostUsageClaudeFragments.shared.removeAll()
     }
 
     private struct PricingRefreshOptions: Sendable {
