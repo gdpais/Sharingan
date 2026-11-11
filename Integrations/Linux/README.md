@@ -70,10 +70,10 @@ case "$arch" in x86_64|aarch64) ;; *) echo "Unsupported architecture: $arch" >&2
 work=$(mktemp -d)
 trap 'rm -rf "$work"' EXIT
 cd "$work"
-api=https://api.github.com/repos/steipete/CodexBar/releases/latest
+api=https://api.github.com/repos/gdpais/Sharingan/releases/latest
 curl -fsSL "$api" -o release.json
 version=$(python3 -c 'import json; print(json.load(open("release.json"))["tag_name"])')
-base="https://github.com/steipete/CodexBar/releases/download/$version"
+base="https://github.com/gdpais/Sharingan/releases/download/$version"
 cli="SharinganCLI-$version-linux-$arch.tar.gz"
 desktop="SharinganDesktop-$version-linux-$arch.tar.gz"
 for archive in "$cli" "$desktop"; do
@@ -102,13 +102,13 @@ disable starting at login. Then open the installed app:
 
 Put `~/.local/bin` on your PATH to use `sharingan` without its full path. The
 symlink resolves to the CLI installation directory; keep `VERSION` and
-`Sharingan_SharinganCore.bundle` there when upgrading. Homebrew and the AUR
-`sharingan-cli` package are alternative CLI installation methods; with an existing
-CLI, pass its absolute path to the desktop installer instead.
+`Sharingan_SharinganCore.bundle` there when upgrading. GitHub Releases is the only
+distribution channel; with an existing CLI, pass its absolute path to the desktop
+installer instead.
 
 If the unauthenticated GitHub API is rate-limited, download the four matching
-files from [GitHub Releases](https://github.com/steipete/CodexBar/releases/latest),
-or use `gh release download --repo steipete/CodexBar --pattern 'Sharingan*-linux-x86_64.tar.gz*'`
+files from [GitHub Releases](https://github.com/gdpais/Sharingan/releases/latest),
+or use `gh release download --repo gdpais/Sharingan --pattern 'Sharingan*-linux-x86_64.tar.gz*'`
 (substitute `aarch64` for ARM64). In a fresh directory, verify both `.sha256`
 files successfully before extracting either archive, then use the installation
 commands above with the downloaded filenames.

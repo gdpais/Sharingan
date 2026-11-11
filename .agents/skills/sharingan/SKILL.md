@@ -33,6 +33,6 @@ All stdout: JSON. Upstream Sharingan shape kept. Less drift, fewer tokens.
 
 ## Binary
 
-Auto-find: `SHARINGAN_BIN`, PATH, app bundle, Homebrew cask. If missing: open Sharingan, Preferences > Advanced > Install CLI; or set `SHARINGAN_BIN`.
+Auto-find: `SHARINGAN_BIN`, PATH, app bundle. If missing: open Sharingan, Preferences > Advanced > Install CLI; or set `SHARINGAN_BIN`.
 
 Each stdout/stderr stream capped at 1 MiB while fully drained. Timeout kills process group.

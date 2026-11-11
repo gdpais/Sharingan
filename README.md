@@ -30,10 +30,22 @@ installs, and runs side by side with CodexBar without sharing any state.
 
 ## Install
 
+Sharingan is distributed only through [GitHub Releases](https://github.com/gdpais/Sharingan/releases). There is no
+Homebrew cask, package-manager package, or website. No release has been published yet; until the first one, build from
+source (below).
+
+### macOS app (GitHub Releases)
+
+Requires macOS 14+ (Sonoma).
+
+1. Download `Sharingan-macos-universal-<version>.zip` from the
+   [latest release](https://github.com/gdpais/Sharingan/releases/latest).
+2. Unzip it and move `Sharingan.app` to `/Applications`.
+3. Open it. To update, download the newer release and replace the app; there are no automatic updates.
+
 ### macOS app (build from source)
 
-There are no prebuilt Sharingan releases, Homebrew casks, or other packages yet. Build it yourself on macOS 14+
-(Sonoma) with Xcode and Swift 6.2+:
+Requires Xcode and Swift 6.2+:
 
 ```bash
 git clone https://github.com/gdpais/Sharingan.git
@@ -53,15 +65,18 @@ Ad-hoc-signed rebuilds can trigger repeat Keychain prompts; see [Keychain prompt
   `~/.config/codexbar/config.json` (or `~/.codexbar/config.json`) to `~/.config/sharingan/config.json` once. Display
   preferences are imported from CodexBar on first launch (read-only). See
   [Running beside CodexBar](docs/SHARINGAN_SIDE_BY_SIDE.md).
-- **No automatic updates yet.** Sharingan builds ship without a Sparkle feed and with automatic update checks off;
-  rebuild from source to update. (Owner TODO: set up a Sharingan appcast and Sparkle signing key.)
-- **iCloud sync is unavailable.** It depends on upstream's Apple developer team and is disabled in Sharingan builds.
+- **No automatic updates.** Sharingan ships without a Sparkle update feed; update by downloading the newer release
+  (or rebuilding from source).
+- **iCloud sync is unavailable.** It needs a Sharingan CloudKit container and provisioning profile, which don't exist
+  yet, so it is disabled.
 
-### Linux and CLI
+### CLI and Linux
 
-The upstream Linux desktop app, Omarchy widget, and CLI sources remain in this repository
-([Linux guide](Integrations/Linux/README.md)), but Sharingan does not publish Linux archives, CLI tarballs, or
-Homebrew/AUR packages. Upstream's published packages install CodexBar, not Sharingan.
+The macOS app bundles the `sharingan` CLI: open **Settings → Advanced → Install CLI** to link it into your `PATH`.
+Each release also attaches standalone CLI archives (`SharinganCLI-v<version>-macos-arm64.tar.gz`, `-macos-x86_64`,
+`-linux-x86_64`, `-linux-aarch64`, and static `-linux-musl-*` builds) plus the Linux desktop app
+(`SharinganDesktop-v<version>-linux-<arch>.tar.gz`). See the [CLI guide](docs/cli.md) and the
+[Linux guide](Integrations/Linux/README.md).
 
 ### macOS first run
 - Open Settings → Providers and enable what you use.
