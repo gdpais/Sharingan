@@ -37,8 +37,11 @@ extension UsageStore {
         SpendDashboardTokenRefreshTrigger(
             providerConfigRevision: self.settings.providerConfigRevision(for: provider),
             scopeSignature: self.spendDashboardTokenSnapshotScopeSignature(for: provider),
-            regularPublicationRevision: self.tokenSnapshotPublicationForCurrentProviderConfig(for: provider)?
-                .publicationRevision ?? 0)
+            // Content revision, not publication revision: a rescan that found nothing new must not
+            // start another all-time dashboard scan.
+            regularPublicationRevision: self.tokenSnapshotPublicationForCurrentProviderConfig(for: provider) == nil
+                ? 0
+                : self.tokenSnapshotContentRevision(for: provider))
     }
 
     func spendDashboardTokenRefreshNeeded(for provider: UsageProvider) -> Bool {

@@ -226,8 +226,15 @@ struct PlanUtilizationHistoryStore: Sendable {
         await Task.detached(priority: .utility) { self.load() }.value
     }
 
-    func save(_ providers: [ProviderInstanceID: PlanUtilizationHistoryBuckets]) {
-        guard let directoryURL = self.directoryURL else { return }
+    /// Persists `providers`. With `changedInstanceIDs`, only those providers' files are touched: the caller
+    /// has already established that every other file matches, so a one-sample change does not re-encode
+    /// and re-read each provider's history. Returns false when persistence failed part-way.
+    @discardableResult
+    func save(
+        _ providers: [ProviderInstanceID: PlanUtilizationHistoryBuckets],
+        changedInstanceIDs: Set<ProviderInstanceID>? = nil) -> Bool
+    {
+        guard let directoryURL = self.directoryURL else { return true }
         do {
             try FileManager.default.createDirectory(
                 at: directoryURL,
@@ -236,8 +243,9 @@ struct PlanUtilizationHistoryStore: Sendable {
             encoder.dateEncodingStrategy = .iso8601
             encoder.outputFormatting = [.sortedKeys]
 
-            let knownInstanceIDs = Set(UsageProvider.allCases.map(\.instanceID)).union(providers.keys)
-            for instanceID in knownInstanceIDs.sorted(by: { $0.rawValue < $1.rawValue }) {
+            let instanceIDs = changedInstanceIDs
+                ?? Set(UsageProvider.allCases.map(\.instanceID)).union(providers.keys)
+            for instanceID in instanceIDs.sorted(by: { $0.rawValue < $1.rawValue }) {
                 let fileURL = self.providerFileURL(for: instanceID)
                 let buckets = providers[instanceID] ?? PlanUtilizationHistoryBuckets()
                 let unscoped = Self.sortedHistories(buckets.unscoped)
@@ -262,8 +270,10 @@ struct PlanUtilizationHistoryStore: Sendable {
                 }
                 try data.write(to: fileURL, options: Data.WritingOptions.atomic)
             }
+            return true
         } catch {
             // Best-effort persistence only.
+            return false
         }
     }
 

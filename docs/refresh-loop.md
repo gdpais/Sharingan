@@ -33,6 +33,14 @@ read_when:
   selection, and stale-refresh invalidation retain their existing rules. Wrapped Codex and Vertex AI cancellations
   are suppressed before the consecutive-failure gate, including localized transport errors.
 
+## Display asleep or session locked
+- While the display sleeps or the session is locked, every automatic cadence (fixed and adaptive) is floored at
+  30 minutes, the same floor as Low Power Mode (`BackgroundWorkPowerPolicy.displayInactiveMinimumInterval`).
+  Refreshes are stretched, not paused, so quota alerts, hooks, and synced snapshots keep moving on an unattended Mac.
+- `DisplayActivityMonitor` is event-driven (`NSWorkspace` screen sleep/wake and session notifications plus the
+  screen lock/unlock distributed notifications); it never polls. On wake or unlock the timer returns to its normal
+  cadence and refreshes once immediately only if a normal tick was missed. Manual mode is unaffected.
+
 ## Adaptive mode
 - `AdaptiveRefreshPolicy` (`Sources/Sharingan/AdaptiveRefreshPolicy.swift`) is a pure function of an `Input`
   (current time, last menu-open time, latest local coding-activity time, Low Power Mode, thermal state) that returns

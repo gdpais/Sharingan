@@ -143,6 +143,9 @@ final class MemoryPressureMonitor {
         }
         let releaseFreeMallocPages = self.releaseFreeMallocPages
         Task.detached(priority: .utility) {
+            // Decoded cost ledgers reload from disk on demand; drop them before returning freed pages.
+            // Off the main actor because this can wait behind an in-flight cache load or save.
+            CostUsageFetcher.releaseRebuildableLedgerCaches()
             releaseFreeMallocPages()
         }
     }

@@ -303,9 +303,35 @@ extension UsageStore {
         accounting: PiSnapshotAccounting?)
     {
         self.tokenSnapshotPublicationRevisions[provider.instanceID, default: 0] &+= 1
+        let previous = self.tokenSnapshotPublicationForCurrentProviderConfig(for: provider)
         self.installCachedTokenSnapshot(snapshot, for: provider, accounting: accounting)
+        let installed = self.tokenSnapshotPublications[provider.instanceID]?.snapshot
+        if Self.tokenSnapshotContentChanged(from: previous, to: installed) {
+            self.tokenSnapshotContentRevisions[provider.instanceID, default: 0] &+= 1
+        }
         self.synchronizeSharedSpendDashboardAfterTokenPublication(for: provider)
         self.evaluateSpendBudgetAlerts(for: provider)
+    }
+
+    /// A rescan that found nothing new republishes the same usage with a fresh timestamp. Consumers that
+    /// start expensive follow-up work (the all-time Usage & Spend scan) key on content, not on publication.
+    nonisolated static func tokenSnapshotContentChanged(
+        from previous: CurrentProviderConfigTokenPublication?,
+        to snapshot: CostUsageTokenSnapshot?) -> Bool
+    {
+        guard let previous else { return true }
+        switch (previous.snapshot, snapshot) {
+        case (nil, nil):
+            return false
+        case let (old?, new?):
+            return !old.hasSameContent(as: new)
+        default:
+            return true
+        }
+    }
+
+    func tokenSnapshotContentRevision(for provider: UsageProvider) -> UInt64 {
+        self.tokenSnapshotContentRevisions[provider.instanceID] ?? 0
     }
 
     /// The menu card projects quota weeks synchronously while it builds, so the per-slice pass runs

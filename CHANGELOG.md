@@ -2,6 +2,8 @@
 
 ## 0.82.1 — Unreleased
 
+- Lighter in the background: automatic refreshes drop to every 30 minutes while the display sleeps or the session is locked and catch up on wake; a cost rescan that finds nothing new no longer starts a second all-time Usage & Spend scan; Codex cost reports reuse one validated database connection instead of re-checking the whole store on every refresh; decoded Claude and Vertex cost ledgers are released after 30 idle minutes and under memory pressure; widget snapshots are written and timelines reloaded only when their content changes; and plan-utilization history saves rewrite only the provider that changed.
+
 ## 0.82.0 — 2026-10-26
 
 ### Highlights

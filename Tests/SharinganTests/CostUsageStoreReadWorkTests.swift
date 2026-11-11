@@ -64,7 +64,8 @@ struct CostUsageStoreReadWorkTests {
             #expect(snapshot.updatedAt == fixture.now.addingTimeInterval(retainedReport ? -60 : 0))
             #expect(work.scannerSnapshotReads == 1)
             #expect(work.tokenSnapshotRows == 0)
-            #expect(work.integrityChecks == 2)
+            // The report read reuses the shared store, so only the scanner pass checks integrity again.
+            #expect(work.integrityChecks == 1)
             #expect(work.usageRowDecodeAttempts == fixture.rowCount * (retainedReport ? 1 : 2))
             print("[pending-report-read-proof] state=\(state) rows=\(fixture.rowCount) " +
                 "cached_decoded=\(cachedWork.usageRowDecodeAttempts) cached_checks=\(cachedWork.integrityChecks) " +

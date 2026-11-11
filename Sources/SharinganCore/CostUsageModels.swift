@@ -196,7 +196,7 @@ public struct CostUsageTokenSnapshot: Sendable, Equatable {
     public let hourly: [CostUsageHourlyEntry]
     /// Exact event-time slices for quota-window projection. Empty for legacy/coarse providers.
     public let quotaSlices: [CostUsageTimedEntry]
-    public let updatedAt: Date
+    public internal(set) var updatedAt: Date
     /// Entries of the equal window before `daily`, read only when the scan provably covered it; nil otherwise.
     public var previousPeriodDaily: [CostUsageDailyReport.Entry]?
     let quotaProjectionMemo = CostUsageQuotaProjectionMemo()
@@ -253,6 +253,14 @@ public struct CostUsageTokenSnapshot: Sendable, Equatable {
     /// window complete — must gate on this rather than on `historyCoverageIsEstablished` alone.
     public var historyIsFullyScanned: Bool {
         self.historyCoverageIsEstablished && !self.historyScanIsPartial
+    }
+
+    /// Whether `other` reports the same usage, ignoring only when each snapshot was produced. A rescan
+    /// that found no new data differs from its predecessor in `updatedAt` alone.
+    public func hasSameContent(as other: CostUsageTokenSnapshot) -> Bool {
+        var aligned = self
+        aligned.updatedAt = other.updatedAt
+        return aligned == other
     }
 
     public func currentDayEntry(calendar: Calendar = .current) -> CostUsageDailyReport.Entry? {
