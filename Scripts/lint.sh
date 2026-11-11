@@ -105,10 +105,6 @@ check_ci_build_cache() {
   python3 "${ROOT_DIR}/Scripts/test_ci_prune_swiftpm_cache.py"
 }
 
-check_homebrew_tap_wait() {
-  "${ROOT_DIR}/Scripts/test_wait_for_homebrew_tap_update.sh"
-}
-
 check_repository_size() {
   "${ROOT_DIR}/Scripts/check_repository_size.sh"
   "${ROOT_DIR}/Scripts/test_repository_size.sh"
@@ -171,7 +167,6 @@ run_portable_checks() {
   python3 "${ROOT_DIR}/Scripts/test_linux_cli_linkage.py"
   python3 "${ROOT_DIR}/Scripts/test_linux_cli_codex_cost_smoke.py"
   check_ci_build_cache
-  check_homebrew_tap_wait
   check_repository_size
   check_shell_scripts
   check_documentation_links

@@ -139,7 +139,7 @@ Devin's **Daily & Weekly** or Cursor's **Total & Cursor**. A missing lane shows 
 name. The single widget also offers the third quota when available. Combined requires a compatible first or
 second quota; a provider with only a compatible third quota appears in the single widget picker.
 
-Saved Codex/Claude intents retain their types, raw values, defaults, and exact **Session (5-hour)** / **Weekly (7-day)** meanings. Combined keeps those lanes and weekly-cap behavior; quota-slot choices and Combined use actual durations when different. Additive cases require no widget reconfiguration and preserve snapshot/empty-data handling and the 5–30-minute timeline schedule. This does not prevent Homebrew removing widget placements (#3627).
+Saved Codex/Claude intents retain their types, raw values, defaults, and exact **Session (5-hour)** / **Weekly (7-day)** meanings. Combined keeps those lanes and weekly-cap behavior; quota-slot choices and Combined use actual durations when different. Additive cases require no widget reconfiguration and preserve snapshot/empty-data handling and the 5–30-minute timeline schedule.
 
 Include a non-default Claude/Weekly widget in native upgrade verification, then check Devin/Cursor choices in the editor. Synthetic renders prove layout only, not installed WidgetKit behavior.
 
@@ -171,23 +171,6 @@ readers: keep additions optional/defaulted and retain existing field names and t
 Automatic extension recovery does not change the shared snapshot schema.
 A fresh snapshot and a reload request cannot make an old running extension use the
 replacement executable or prove that `chronod` accepted its output.
-
-### Widgets removed during Homebrew upgrades
-
-Homebrew replaces the app bundle during a cask upgrade. Even when it preserves the outer
-`Sharingan.app` directory, its removal of the old contents temporarily removes the embedded
-widget extension. macOS can treat that as an uninstall and remove placed widgets (#3627).
-If Sharingan is still in the gallery but desktop or Notification Center widgets disappeared,
-re-registering the extension or reloading timelines does not restore their saved placements
-and configuration. WidgetCenter exposes configuration queries and reload requests, not an
-API for restoring removed widget placements. Add and configure those widgets again.
-
-`brew upgrade --formula` upgrades formulae only and can defer cask replacement until you are
-ready to reconfigure widgets; it does not update Sharingan. Neither `--no-quit` nor `--no-binaries`
-prevents replacement of the app's embedded extension. For an alternative update mechanism,
-use a standalone GitHub release installation with Sparkle; Homebrew-managed installations
-disable Sparkle. Widget placement preservation with that alternative still needs native
-upgrade testing and is not guaranteed here.
 
 ### Timelines remain stale despite successful extension logs
 
