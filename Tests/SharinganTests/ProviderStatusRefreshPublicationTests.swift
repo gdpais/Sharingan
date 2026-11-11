@@ -183,11 +183,11 @@ struct ProviderStatusRefreshPublicationTests {
 
         // An open incident is rechecked on the short interval.
         indicator = .major
-        store.providerStatusLastSuccessAt[.codex] = Date().addingTimeInterval(-16 * 60)
+        store.providerStatusPublications[.codex]?.publishedAt = Date().addingTimeInterval(-16 * 60)
         #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
         #expect(requests == 3)
         #expect(store.statuses[.codex]?.indicator == .major)
-        store.providerStatusLastSuccessAt[.codex] = Date().addingTimeInterval(-3 * 60)
+        store.providerStatusPublications[.codex]?.publishedAt = Date().addingTimeInterval(-3 * 60)
         #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
         #expect(requests == 4)
         await Self.drain(store)
