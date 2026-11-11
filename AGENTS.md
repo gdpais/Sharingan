@@ -53,7 +53,7 @@
 - For CLI-testable provider/parser/settings behavior, use CLI/focused tests instead of `Scripts/package_app.sh` or `./Scripts/compile_and_run.sh`.
 - Run `./Scripts/compile_and_run.sh` only when UI/runtime behavior needs bundle-level validation; it builds, tests, packages, relaunches, and verifies the app stays running.
 - Widget/Tahoe UI issues: use Parallels macOS VM plus screenshots/clicks for autonomous verification.
-- Release workflow: wait for completion and verify the complete artifact/feed/tap handoff; do not publish locally.
+- Release workflow: wait for completion and verify the complete artifact/feed handoff (GitHub Releases is the only distribution channel); do not publish locally.
 - Sparkle: Sharingan ships without an update feed. The `AGCY…` key in `.github/release.json` is CodexBar's; before enabling updates, generate Sharingan's own EdDSA key pair, replace that public key, and set CI `SPARKLE_PRIVATE_KEY` to the matching private key (see `TODO(sharingan)` in `Scripts/package_app.sh`). Never point Sharingan at CodexBar's appcast.
 - Swift concurrency: treat sibling `async let` tasks as a review red flag when one child is required and another is optional/best-effort. Prefer sequential awaits or a drained `withThrowingTaskGroup` that surfaces required failures and explicitly contains optional failures; crash stacks mentioning `swift_task_dealloc` or `asyncLet_finish_after_task_completion` should trigger an audit of nearby `async let` usage.
 - Prefer modern SwiftUI/Observation macros: use `@Observable` models with `@State` ownership and `@Bindable` in views; avoid `ObservableObject`, `@ObservedObject`, and `@StateObject`.

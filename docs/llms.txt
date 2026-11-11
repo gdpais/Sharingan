@@ -131,8 +131,7 @@ Documentation:
 - Qwen Cloud Provider: https://github.com/gdpais/Sharingan/blob/main/docs/qwen-cloud.md - Qwen Cloud provider notes: cookie auth, Team credits, Individual quota windows, and setup.
 - Raycast Provider: https://github.com/gdpais/Sharingan/blob/main/docs/raycast.md - Raycast provider: unofficial AI credits API, website session cookies, and monthly allowance mapping.
 - Refresh loop: https://github.com/gdpais/Sharingan/blob/main/docs/refresh-loop.md - Refresh cadence, background updates, and error handling.
-- Sharingan Homebrew Release Playbook: https://github.com/gdpais/Sharingan/blob/main/docs/releasing-homebrew.md - Homebrew Cask release steps for Sharingan (Sparkle-disabled builds).
-- Release process (Sharingan): https://github.com/gdpais/Sharingan/blob/main/docs/RELEASING.md - Sharingan CI release pipeline, dry runs, signing, Sparkle, and Homebrew.
+- Release process (Sharingan): https://github.com/gdpais/Sharingan/blob/main/docs/RELEASING.md - Sharingan CI release pipeline, dry runs, and signing. GitHub Releases is the only distribution channel.
 - Replicate: https://github.com/gdpais/Sharingan/blob/main/docs/replicate.md - Replicate billing through a bundled JavaScript provider with native session selection.
 - Repository size: https://github.com/gdpais/Sharingan/blob/main/docs/repository-size.md - Repository size findings, prevention checks, and the maintainer-only history cleanup runbook.
 - Sail Research: https://github.com/gdpais/Sharingan/blob/main/docs/sailresearch.md - Sail Research organization credit balance and spend through its Usage API.
