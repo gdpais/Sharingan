@@ -163,6 +163,80 @@ struct ProviderStatusRefreshPublicationTests {
         #expect(store.providerStatusHadIssue[.codex] == false)
     }
 
+    @Test
+    func `automatic refreshes reuse a healthy status until it is due`() async {
+        let store = Self.makeStore()
+        var requests = 0
+        var indicator = ProviderStatusIndicator.none
+        store._test_providerStatusFetchOverride = { _ in
+            requests += 1
+            return Self.status(indicator, description: "Status \(requests)")
+        }
+
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
+        #expect(requests == 1)
+
+        // A manual refresh always rechecks the status page.
+        #expect(await store.runRefresh(enrichmentMode: .forcedForeground, startupConnectivityRetryAttempt: nil))
+        #expect(requests == 2)
+
+        // An open incident is rechecked on the short interval.
+        indicator = .major
+        store.providerStatusPublications[.codex]?.publishedAt = Date().addingTimeInterval(-16 * 60)
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
+        #expect(requests == 3)
+        #expect(store.statuses[.codex]?.indicator == .major)
+        store.providerStatusPublications[.codex]?.publishedAt = Date().addingTimeInterval(-3 * 60)
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
+        #expect(requests == 4)
+        await Self.drain(store)
+    }
+
+    @Test
+    func `a startup connectivity retry always rechecks the status`() async {
+        let store = Self.makeStore()
+        var requests = 0
+        store._test_providerStatusFetchOverride = { _ in
+            requests += 1
+            return Self.status(.none, description: "Operational")
+        }
+
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
+        #expect(requests == 1)
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: 1))
+        #expect(requests == 2)
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
+        #expect(requests == 2)
+        await Self.drain(store)
+    }
+
+    @Test
+    func `a failed status fetch retries on the next automatic refresh`() async {
+        let store = Self.makeStore()
+        var requests = 0
+        store._test_providerStatusFetchOverride = { _ in
+            requests += 1
+            if requests == 1 { throw URLError(.timedOut) }
+            return Self.status(.none, description: "Operational")
+        }
+
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
+        #expect(requests == 2)
+        #expect(store.statuses[.codex]?.description == "Operational")
+        await Self.drain(store)
+    }
+
+    private static func drain(_ store: UsageStore) async {
+        store.startupConnectivityRetryTask?.cancel()
+        store.startupConnectivityRetryTask = nil
+        await store.creditsRefreshTask?.value
+        await store.tokenRefreshSequenceTask?.value
+        store.memoryPressureReliefTask?.cancel()
+        await store.memoryPressureReliefTask?.value
+    }
+
     private static func makeStore(providers: Set<UsageProvider> = [.codex]) -> UsageStore {
         let settings = testSettingsStore(
             suiteName: "ProviderStatusRefreshPublicationTests",

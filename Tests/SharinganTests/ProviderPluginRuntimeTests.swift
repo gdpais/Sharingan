@@ -202,6 +202,21 @@ struct ProviderPluginRuntimeTests {
     }
 
     @Test
+    func `finished fetch releases the runtime before its timeout elapses`() async throws {
+        var runtime: ProviderPluginRuntime? = try ProviderPluginRuntime(source: Self.plugin(), timeout: 600)
+        weak let released = runtime
+        let snapshot = try await runtime?.fetchUsage(secrets: ["TEST_KEY": "test-key"])
+        #expect(snapshot?.primary?.usedPercent == 1)
+        runtime = nil
+        // The fetch watchdog used to sleep for the full timeout while holding the runtime.
+        let deadline = ContinuousClock.now + .seconds(5)
+        while released != nil, ContinuousClock.now < deadline {
+            try await Task.sleep(for: .milliseconds(20))
+        }
+        #expect(released == nil)
+    }
+
+    @Test
     func `date now uses the injected fetch clock`() async throws {
         let expected = Date(timeIntervalSince1970: 1_800_000_000)
         let runtime = try ProviderPluginRuntime(source: Self.plugin(fetchBody: """

@@ -62,3 +62,19 @@ package struct ProviderStatusComponent: Identifiable, Equatable, Sendable {
         }
     }
 }
+
+/// How often the periodic refresh re-polls a provider's status page. Status pages change far less often than
+/// usage, so a healthy provider is checked every 15 minutes instead of on every usage refresh. A provider with
+/// an open issue keeps a short interval so its recovery shows up quickly. Manual refreshes bypass this.
+package enum ProviderStatusRefreshPolicy {
+    package static let healthyInterval: TimeInterval = 15 * 60
+    package static let degradedInterval: TimeInterval = 2 * 60
+
+    /// `lastSuccessAt` and `indicator` describe the last successfully published status; `nil` means there is
+    /// none yet (or it was cleared), so the status is always due.
+    package static func isDue(lastSuccessAt: Date?, indicator: ProviderStatusIndicator?, now: Date) -> Bool {
+        guard let lastSuccessAt, let indicator else { return true }
+        let interval = indicator.hasIssue ? self.degradedInterval : self.healthyInterval
+        return now.timeIntervalSince(lastSuccessAt) >= interval
+    }
+}
