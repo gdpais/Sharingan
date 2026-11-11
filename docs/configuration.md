@@ -9,7 +9,7 @@ read_when:
 # Configuration
 
 The app's **Help → Sharingan Help** command opens the [README](https://github.com/gdpais/Sharingan/blob/main/README.md), including setup instructions and links to provider documentation.
-**Settings → About → Website** opens the project website at [sharingan.app](https://codexbar.app).
+Sharingan has no project website; **Settings → About** links to the [GitHub repository](https://github.com/gdpais/Sharingan), and builds are published on [GitHub Releases](https://github.com/gdpais/Sharingan/releases).
 
 The app and CLI share one JSON file for API keys, manual cookie headers, source selection, provider ordering, and token accounts. The running app detects external edits, atomic replacements, and restored older contents, including during watcher startup and change callbacks. App writes update the baseline without being treated as external edits.
 Keychain holds runtime cookie caches, browser Safe Storage access, and provider OAuth/device-flow credentials where required.

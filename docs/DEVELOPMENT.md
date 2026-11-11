@@ -568,7 +568,7 @@ resolved file when automatic resolution is disabled.
 
 The `lint-build-test` check in `.github/workflows/ci.yml` keeps its existing name and requires successful lint,
 change detection, and the full `build-linux-cli` glibc matrix (x86_64 and ARM64 build, tests, and smoke checks)
-when the shared macOS/Linux path gate requires it. Both platforms use the same docs/site allowlist; source,
+when the shared macOS/Linux path gate requires it. Both platforms use the same docs allowlist; source,
 test, widget, and workflow paths always require builds, including Markdown resources and fixtures. Linux has
 no draft deferral. Only `required=true / result=success` or `required=false / result=skipped` passes; failure,
 cancellation, missing or unknown values, and unexpected skips or executions fail verification.

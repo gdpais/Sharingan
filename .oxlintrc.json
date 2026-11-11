@@ -13,12 +13,6 @@
       }
     },
     {
-      "files": ["docs/site.js"],
-      "env": {
-        "browser": true
-      }
-    },
-    {
       "files": ["Scripts/*.mjs"],
       "env": {
         "node": true
