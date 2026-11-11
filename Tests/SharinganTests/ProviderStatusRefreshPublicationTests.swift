@@ -194,6 +194,24 @@ struct ProviderStatusRefreshPublicationTests {
     }
 
     @Test
+    func `a startup connectivity retry always rechecks the status`() async {
+        let store = Self.makeStore()
+        var requests = 0
+        store._test_providerStatusFetchOverride = { _ in
+            requests += 1
+            return Self.status(.none, description: "Operational")
+        }
+
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
+        #expect(requests == 1)
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: 1))
+        #expect(requests == 2)
+        #expect(await store.runRefresh(startupConnectivityRetryAttempt: nil))
+        #expect(requests == 2)
+        await Self.drain(store)
+    }
+
+    @Test
     func `a failed status fetch retries on the next automatic refresh`() async {
         let store = Self.makeStore()
         var requests = 0

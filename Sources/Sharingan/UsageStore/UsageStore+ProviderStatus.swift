@@ -52,9 +52,10 @@ extension UsageStore {
         }
     }
 
-    /// Whether a refresh pass should poll this provider's status page. A manual refresh always does; otherwise
-    /// the status is reused until `ProviderStatusRefreshPolicy` says it is due. Failed fetches publish nothing,
-    /// so they retry on the next refresh, and a cleared status is always due.
+    /// Whether a refresh pass should poll this provider's status page. A manual refresh and a startup
+    /// connectivity pass (the launch refresh or its retry) always do; otherwise the status is reused until
+    /// `ProviderStatusRefreshPolicy` says it is due. Failed fetches publish nothing, so they retry on the next
+    /// refresh, and a cleared status is always due.
     func statusRefreshIsDue(
         _ provider: UsageProvider,
         among availableProviders: Set<ProviderInstanceID>,
@@ -63,7 +64,7 @@ extension UsageStore {
     {
         let id = provider.instanceID
         guard availableProviders.contains(id) else { return false }
-        guard mode != .forcedForeground else { return true }
+        guard mode != .forcedForeground, !self.startupConnectivityRetryRefreshActive else { return true }
         return ProviderStatusRefreshPolicy.isDue(
             lastSuccessAt: self.providerStatusPublications[id]?.publishedAt,
             indicator: self.statuses[id]?.indicator,
