@@ -67,6 +67,27 @@ struct TomoeIconGeometryTests {
     }
 
     @Test
+    func `the tail is a crescent slimmer than the head and clear of the next head`() throws {
+        let metrics = self.geometry.metrics
+        // Just behind the head disk only the tail remains, and it is narrower than the head.
+        let rear = try #require(self.geometry.band(atOffset: asin(metrics.headRadius / metrics.orbitRadius)))
+        #expect(rear.outer - rear.inner < metrics.headRadius * 1.2)
+        // The tip curls outside the orbit.
+        let tip = try #require(self.geometry.samples.last)
+        #expect(tip.inner > metrics.orbitRadius)
+
+        // The session tail trails counterclockwise toward the monthly head.
+        let angle = self.geometry.headAngle(for: .monthly)
+        let nextHead = CGPoint(
+            x: metrics.canvasSize / 2 + metrics.orbitRadius * cos(angle),
+            y: metrics.canvasSize / 2 + metrics.orbitRadius * sin(angle))
+        for point in self.geometry.outlinePoints(for: .session) {
+            let distance = hypot(Double(point.x - nextHead.x), Double(point.y - nextHead.y))
+            #expect(distance > metrics.headRadius + metrics.outlineWidth * 2)
+        }
+    }
+
+    @Test
     func `fill fractions map to the matching share of the tomoe area`() {
         #expect(self.geometry.totalArea > 0)
         #expect(self.geometry.fillEndOffset(fraction: 0) == self.geometry.frontOffset)

@@ -5,8 +5,9 @@ import SharinganCore
 /// Pure geometry for the Tomoe menu bar icon: a ring, a center dot and three comma-shaped tomoe at 120°.
 ///
 /// Each tomoe is a band around the icon center. At every angle along its sweep it covers one radial interval:
-/// the union of a round head on the orbit and a tail that tapers to a point behind it. Heads lead clockwise and
-/// tails trail counterclockwise. A partial fill covers the head-first part of the band whose area is the
+/// the union of a round head on the orbit and a crescent tail behind it. The tail leaves the head's outer edge,
+/// its inner edge cuts back into the head's rear, and both edges meet at a sharp tip, as in the app icon art. Heads
+/// lead clockwise and tails trail counterclockwise. A partial fill covers the head-first part of the band whose area is the
 /// requested fraction, so it ends on a straight radial edge and half a quota looks like half the ink.
 ///
 /// All values are in points, in an unflipped (y-up) canvas of `Metrics.canvasSize`.
@@ -17,11 +18,18 @@ struct TomoeIconGeometry: Sendable {
         var ringLineWidth: Double = 1
         var pupilRadius: Double = 1.35
         var orbitRadius: Double = 4.6
-        var headRadius: Double = 2.2
+        var headRadius: Double = 2
         /// How far the tail trails behind the head center, in radians.
-        var tailSweep: Double = 78 * Double.pi / 180
+        var tailSweep: Double = 85 * Double.pi / 180
         /// The tail tip sits this many head radii outside the orbit, which gives the comma its curl.
-        var tailTipOffset: Double = 0.35
+        var tailTipOffset: Double = 0.7
+        /// Where the tail's inner edge starts, in head radii from the orbit. Inside the orbit but short of the head's
+        /// inner edge, so the tail is slimmer than the head and meets its rear in a notch.
+        var tailBaseInnerOffset: Double = -0.35
+        /// Shape exponents for the tail edges: the outer edge holds the head's width before closing in, while the
+        /// inner edge rises early, which gives the tail its crescent.
+        var tailOuterExponent: Double = 1.6
+        var tailInnerExponent: Double = 0.8
         var outlineWidth: Double = 0.5
     }
 
@@ -252,9 +260,10 @@ struct TomoeIconGeometry: Sendable {
         }
         if offset >= 0, offset <= metrics.tailSweep {
             let progress = offset / metrics.tailSweep
-            let tip = orbit + metrics.tailTipOffset * head
-            outer = max(outer, orbit + head + (tip - orbit - head) * progress * progress)
-            inner = min(inner, orbit - head + (tip - orbit + head) * pow(progress, 0.85))
+            let tip = metrics.tailTipOffset
+            let base = metrics.tailBaseInnerOffset
+            outer = max(outer, orbit + head * (1 + (tip - 1) * pow(progress, metrics.tailOuterExponent)))
+            inner = min(inner, orbit + head * (base + (tip - base) * pow(progress, metrics.tailInnerExponent)))
         }
         if !inner.isFinite || !outer.isFinite {
             // Outside the sweep: collapse onto the orbit so callers never see an inverted interval.
