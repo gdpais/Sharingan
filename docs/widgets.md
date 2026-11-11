@@ -139,7 +139,7 @@ Devin's **Daily & Weekly** or Cursor's **Total & Cursor**. A missing lane shows 
 name. The single widget also offers the third quota when available. Combined requires a compatible first or
 second quota; a provider with only a compatible third quota appears in the single widget picker.
 
-Saved Codex/Claude intents retain their types, raw values, defaults, and exact **Session (5-hour)** / **Weekly (7-day)** meanings. Combined keeps those lanes and weekly-cap behavior; quota-slot choices and Combined use actual durations when different. Additive cases require no widget reconfiguration and preserve snapshot/empty-data handling and the 5–30-minute timeline schedule. This does not prevent Homebrew removing widget placements (#3627).
+Saved Codex/Claude intents retain their types, raw values, defaults, and exact **Session (5-hour)** / **Weekly (7-day)** meanings. Combined keeps those lanes and weekly-cap behavior; quota-slot choices and Combined use actual durations when different. Additive cases require no widget reconfiguration and preserve snapshot/empty-data handling and the 5–30-minute timeline schedule.
 
 Include a non-default Claude/Weekly widget in native upgrade verification, then check Devin/Cursor choices in the editor. Synthetic renders prove layout only, not installed WidgetKit behavior.
 
