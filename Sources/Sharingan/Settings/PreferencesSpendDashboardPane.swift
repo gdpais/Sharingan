@@ -975,23 +975,14 @@ private struct SpendDailyLedger: View {
                         systemImage: "calendar.badge.exclamationmark")
                         .frame(maxWidth: .infinity, minHeight: 120)
                 } else {
-                    ScrollView(.horizontal, showsIndicators: true) {
-                        VStack(alignment: .leading, spacing: 0) {
-                            self.header
-                            Divider()
-                            VStack(spacing: 0) {
-                                ForEach(Array(self.visibleSummaries.enumerated()), id: \.element.id) { index, summary in
-                                    if index > 0 {
-                                        Divider()
-                                    }
-                                    SpendDailyLedgerRow(
-                                        summary: summary,
-                                        currencyCode: self.group.currencyCode,
-                                        timeZone: self.group.timeZone)
-                                }
-                            }
+                    // Scroll sideways only when the pane is too narrow for the table. A sideways scroller
+                    // this tall sits under the pointer for much of the page, and every vertical swipe that
+                    // starts over one is re-routed by hand to the page, which scrolls far less smoothly.
+                    ViewThatFits(in: .horizontal) {
+                        self.table
+                        ScrollView(.horizontal, showsIndicators: true) {
+                            self.table
                         }
-                        .frame(minWidth: SpendDailyLedgerLayout.minimumTableWidth, alignment: .leading)
                     }
                     SpendPanelExpandButton(
                         rowCount: self.group.dailySummaries.count,
@@ -1000,6 +991,25 @@ private struct SpendDailyLedger: View {
                 }
             }
         }
+    }
+
+    private var table: some View {
+        VStack(alignment: .leading, spacing: 0) {
+            self.header
+            Divider()
+            VStack(spacing: 0) {
+                ForEach(Array(self.visibleSummaries.enumerated()), id: \.element.id) { index, summary in
+                    if index > 0 {
+                        Divider()
+                    }
+                    SpendDailyLedgerRow(
+                        summary: summary,
+                        currencyCode: self.group.currencyCode,
+                        timeZone: self.group.timeZone)
+                }
+            }
+        }
+        .frame(minWidth: SpendDailyLedgerLayout.minimumTableWidth, alignment: .leading)
     }
 
     private var header: some View {

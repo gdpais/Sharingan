@@ -11,12 +11,14 @@ import json
 import os
 from pathlib import Path
 import re
+import shutil
 import signal
 import subprocess
 import sys
 import tempfile
 import time
-from collections.abc import Iterable
+from collections.abc import Iterable, Iterator
+from contextlib import contextmanager
 from dataclasses import asdict, dataclass
 
 
@@ -578,10 +580,51 @@ def repair_sparkle_test_runtime(swift_command: list[str], environment: dict[str,
         return sparkle_runtime_matches_source(destination, source)
 
 
+def mount_points_under(mount_output: str, root: str) -> list[str]:
+    """Mount points from `mount` output that sit inside `root`, deepest first."""
+    resolved_root = os.path.realpath(root).rstrip("/") + "/"
+    points = []
+    for line in mount_output.splitlines():
+        match = re.fullmatch(r".+? on (?P<point>.+) \([^()]*\)", line.strip())
+        if match is None:
+            continue
+        point = match.group("point")
+        # `mount` prints resolved paths (/private/var/...) while temp paths may use /var/....
+        if (os.path.realpath(point).rstrip("/") + "/").startswith(resolved_root):
+            points.append(point)
+    return sorted(points, key=len, reverse=True)
+
+
+def detach_mounts_under(root: str) -> None:
+    # Xcode can download its Metal toolchain into a private HOME and mount it read-only there
+    # (Library/Developer/DVTDownloads/MetalToolchain/mounts/...), which makes removing the home fail.
+    if sys.platform != "darwin":
+        return
+    try:
+        listing = subprocess.run(["mount"], capture_output=True, text=True, check=False).stdout
+    except OSError:
+        return
+    for point in mount_points_under(listing, root):
+        detached = subprocess.run(["hdiutil", "detach", point, "-force"], capture_output=True, check=False)
+        if detached.returncode != 0:
+            subprocess.run(["umount", "-f", point], capture_output=True, check=False)
+
+
+@contextmanager
+def private_test_home(prefix: str) -> Iterator[str]:
+    """A temporary HOME for test processes, removed even when something mounted a volume inside it."""
+    home = tempfile.mkdtemp(prefix=prefix)
+    try:
+        yield home
+    finally:
+        detach_mounts_under(home)
+        shutil.rmtree(home, ignore_errors=True)
+
+
 def swift_test_list(swift_command: list[str], inventory: list[str] | None = None) -> list[TestSelection]:
     command = [*swift_command, "test", "list"]
     # Listing loads test products, so it gets a private home like test execution.
-    with tempfile.TemporaryDirectory(prefix="sharingan-test-discovery-") as home:
+    with private_test_home("sharingan-test-discovery-") as home:
         environment = os.environ | {"HOME": home, "CFFIXED_USER_HOME": home}
         result = subprocess.run(command, capture_output=True, text=True, env=environment)
         if result.returncode != 0 and is_missing_sparkle_runtime_failure(result):
@@ -709,7 +752,7 @@ def filter_for(suites: list[TestSelection]) -> str:
 
 def run_group(suites: list[TestSelection], timeout: int, swift_command: list[str]) -> int:
     # Like direct workers, each group gets a temporary HOME and CFFIXED_USER_HOME instead of the caller's.
-    with tempfile.TemporaryDirectory(prefix="sharingan-test-group-") as home:
+    with private_test_home("sharingan-test-group-") as home:
         return run_command(
             [*swift_command, "test", "--skip-build", "--no-parallel", "--filter", filter_for(suites)],
             timeout=timeout,

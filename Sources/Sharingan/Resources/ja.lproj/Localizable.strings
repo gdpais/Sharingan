@@ -2857,3 +2857,6 @@
 "menu_bar_style_tomoe" = "巴";
 "show_project_names_title" = "プロジェクト名を表示したままにする";
 "show_project_names_subtitle" = "メールアドレスは非表示のまま、コスト履歴のプロジェクト・セッション・ソースの名前とパスを表示します。";
+"Provider order" = "プロバイダの順序";
+"Alphabetical" = "アルファベット順";
+"Drag providers to set their order in the menu bar." = "プロバイダをドラッグしてメニューバーでの順序を設定します。";

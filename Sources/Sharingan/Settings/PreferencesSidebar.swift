@@ -16,26 +16,12 @@ struct SettingsSidebarView: View {
         if #available(macOS 26.0, *) {
             self.content
                 .searchable(text: self.$searchText, placement: .sidebar, prompt: L("Search providers"))
-                .toolbar {
-                    SettingsSidebarSortToolbar(
-                        isOn: self.$settings.providersSortedAlphabetically,
-                        enabledOnly: self.$settings.providersEnabledOnly,
-                        canRestore: self.settings.canRestoreDefaultProviderOrder,
-                        onRestore: self.restoreProviderOrder)
-                }
         } else {
             VStack(spacing: 0) {
-                HStack(spacing: 6) {
-                    SettingsSidebarSearchField(searchText: self.$searchText)
-                    SettingsSidebarSortToggle(
-                        isOn: self.$settings.providersSortedAlphabetically,
-                        enabledOnly: self.$settings.providersEnabledOnly,
-                        canRestore: self.settings.canRestoreDefaultProviderOrder,
-                        onRestore: self.restoreProviderOrder)
-                }
-                .padding(.horizontal, 8)
-                .padding(.top, 16)
-                .padding(.bottom, 8)
+                SettingsSidebarSearchField(searchText: self.$searchText)
+                    .padding(.horizontal, 8)
+                    .padding(.top, 16)
+                    .padding(.bottom, 8)
 
                 self.content
             }
@@ -83,6 +69,14 @@ struct SettingsSidebarView: View {
     private var providersSection: some View {
         let visibleProviders = self.filteredProviders
         return Section {
+            SettingsSidebarProviderOrderControl(
+                isAlphabetical: self.$settings.providersSortedAlphabetically,
+                enabledOnly: self.$settings.providersEnabledOnly,
+                canRestore: self.settings.canRestoreDefaultProviderOrder,
+                onRestore: self.restoreProviderOrder)
+                .selectionDisabled()
+                .moveDisabled(true)
+
             ForEach(visibleProviders, id: \.self) { provider in
                 self.providerRow(provider)
             }
@@ -131,12 +125,7 @@ struct SettingsSidebarView: View {
     }
 
     private var orderedProviders: [UsageProvider] {
-        guard self.settings.providersSortedAlphabetically else {
-            return self.settings.orderedProviders().compactMap(\.firstPartyProvider)
-        }
-        return SharinganConfig.alphabeticalProviderOrder(enablement: { provider in
-            self.settings.isProviderEnabled(provider: provider, metadata: self.store.metadata(for: provider))
-        })
+        self.settings.orderedFirstPartyProviders()
     }
 
     private var filteredProviders: [UsageProvider] {
@@ -381,61 +370,31 @@ private struct SettingsSidebarSearchField: View {
     }
 }
 
-/// macOS 26+ sidebar toolbar group: a standard toolbar toggle (which shows its own on state) and a
-/// sorting menu, so the toolbar supplies their shared Liquid Glass.
-private struct SettingsSidebarSortToolbar: ToolbarContent {
-    @Binding var isOn: Bool
-    @Binding var enabledOnly: Bool
-    let canRestore: Bool
-    let onRestore: () -> Void
-
-    var body: some ToolbarContent {
-        ToolbarItemGroup {
-            Toggle(isOn: self.$isOn) {
-                Label(L("Sort providers alphabetically"), systemImage: "arrow.up.arrow.down")
-            }
-            .help(self.isOn
-                ? L("Sorted alphabetically (enabled first) — click to use your custom order")
-                : L("Sort providers alphabetically (enabled first)"))
-
-            Menu {
-                Toggle(L("Only show enabled providers"), isOn: self.$enabledOnly)
-                Divider()
-                Button(L("Restore default order"), action: self.onRestore)
-                    .disabled(!self.canRestore)
-                    .help(L("Also restores the provider order in the menu bar. Can be undone."))
-            } label: {
-                Label(L("Provider sorting"), systemImage: "chevron.down")
-            }
-            .menuIndicator(.hidden)
-            .help(L("Provider sorting"))
-        }
-    }
-}
-
-private struct SettingsSidebarSortToggle: View {
-    @Binding var isOn: Bool
+/// Chooses how providers are ordered in the menu bar, the menu, and this sidebar: the user's custom
+/// drag order or alphabetical (enabled first). Lives in the sidebar list itself so it is always visible,
+/// whatever room the window toolbar has.
+private struct SettingsSidebarProviderOrderControl: View {
+    @Binding var isAlphabetical: Bool
     @Binding var enabledOnly: Bool
     let canRestore: Bool
     let onRestore: () -> Void
 
     var body: some View {
-        HStack(spacing: 0) {
-            Button {
-                self.isOn.toggle()
-            } label: {
-                Image(systemName: "arrow.up.arrow.down")
-                    .font(.callout)
-                    .foregroundStyle(self.isOn ? Color.accentColor : Color.secondary)
-                    .frame(width: 24, height: 24)
-                    .contentShape(Rectangle())
+        HStack(spacing: 6) {
+            Picker(L("Provider order"), selection: self.$isAlphabetical) {
+                Text(L("Custom")).tag(false)
+                Text(L("Alphabetical")).tag(true)
             }
-            .buttonStyle(.plain)
-            .help(self.isOn
-                ? L("Sorted alphabetically (enabled first) — click to use your custom order")
-                : L("Sort providers alphabetically (enabled first)"))
-            .accessibilityLabel(L("Sort providers alphabetically"))
-            .accessibilityAddTraits(self.isOn ? .isSelected : [])
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .controlSize(.small)
+            .help(self.isAlphabetical
+                ? L("Sort providers alphabetically (enabled first)")
+                : L("Drag providers to set their order in the menu bar."))
+            .accessibilityLabel(L("Provider order"))
+            .fixedSize()
+
+            Spacer(minLength: 0)
 
             Menu {
                 Toggle(L("Only show enabled providers"), isOn: self.$enabledOnly)
@@ -444,16 +403,31 @@ private struct SettingsSidebarSortToggle: View {
                     .disabled(!self.canRestore)
                     .help(L("Also restores the provider order in the menu bar. Can be undone."))
             } label: {
-                Image(systemName: "chevron.down")
-                    .font(.caption2)
+                Image(systemName: "line.3.horizontal.decrease")
+                    .font(.system(size: 12, weight: .semibold))
                     .foregroundStyle(self.enabledOnly ? Color.accentColor : Color.secondary)
-                    .frame(width: 14, height: 24)
+                    .frame(width: 24, height: 24)
+                    .modifier(SettingsSidebarGlassCircle())
+                    .contentShape(Circle())
             }
-            .menuStyle(.borderlessButton)
+            .menuStyle(.button)
+            .buttonStyle(.plain)
             .menuIndicator(.hidden)
             .fixedSize()
             .help(L("Provider sorting"))
             .accessibilityLabel(L("Provider sorting"))
+        }
+        .padding(.vertical, 2)
+    }
+}
+
+/// Liquid Glass circle behind a small sidebar control on macOS 26+; a subtle filled circle before that.
+private struct SettingsSidebarGlassCircle: ViewModifier {
+    func body(content: Content) -> some View {
+        if #available(macOS 26.0, *) {
+            content.glassEffect(.regular.interactive(), in: .circle)
+        } else {
+            content.background(Circle().fill(Color.primary.opacity(0.08)))
         }
     }
 }

@@ -1090,8 +1090,38 @@ extension SettingsStore {
         return self.providerOrder
     }
 
+    /// The order the menu bar, menu, and Settings sidebar show providers in: the saved custom order, or
+    /// alphabetical (enabled first) when the user picked alphabetical ordering. The saved custom order is
+    /// never rewritten by the alphabetical choice, so switching back restores the hand-arranged sequence.
+    func providerDisplayOrder() -> [ProviderInstanceID] {
+        let custom = self.orderedProviders()
+        guard self.providersSortedAlphabetically else { return custom }
+        return Self.alphabeticalProviderOrder(custom, enablement: self.providerEnablement)
+    }
+
+    static func alphabeticalProviderOrder(
+        _ providers: [ProviderInstanceID],
+        enablement: [ProviderInstanceID: Bool]) -> [ProviderInstanceID]
+    {
+        let metadata = ProviderDescriptorRegistry.metadata
+        let keyed = providers.map { instanceID in
+            let name = instanceID.firstPartyProvider.flatMap { metadata[$0]?.displayName }
+                ?? UserProviderPluginRegistry.plugin(for: instanceID)?.manifest.name
+                ?? instanceID.rawValue
+            return (id: instanceID, name: name, enabled: enablement[instanceID] ?? false)
+        }
+        return keyed.sorted { lhs, rhs in
+            if lhs.enabled != rhs.enabled { return lhs.enabled }
+            switch lhs.name.localizedCaseInsensitiveCompare(rhs.name) {
+            case .orderedAscending: return true
+            case .orderedDescending: return false
+            case .orderedSame: return lhs.id.rawValue < rhs.id.rawValue
+            }
+        }.map(\.id)
+    }
+
     func orderedFirstPartyProviders() -> [UsageProvider] {
-        self.orderedProviders().compactMap(\.firstPartyProvider)
+        self.providerDisplayOrder().compactMap(\.firstPartyProvider)
     }
 
     func moveProvider(fromOffsets: IndexSet, toOffset: Int) {
@@ -1114,7 +1144,9 @@ extension SettingsStore {
 
     func enabledProvidersOrdered(metadataByProvider: [UsageProvider: ProviderMetadata]) -> [ProviderInstanceID] {
         _ = metadataByProvider
-        return self.orderedProviders().filter { self.providerEnablement[$0] ?? false }
+        let enabled = self.orderedProviders().filter { self.providerEnablement[$0] ?? false }
+        guard self.providersSortedAlphabetically else { return enabled }
+        return Self.alphabeticalProviderOrder(enabled, enablement: self.providerEnablement)
     }
 
     func setProviderEnabled(provider: UsageProvider, metadata _: ProviderMetadata, enabled: Bool) {

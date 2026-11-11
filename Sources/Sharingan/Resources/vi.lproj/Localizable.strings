@@ -2858,3 +2858,6 @@
 "menu_bar_style_tomoe" = "Tomoe";
 "show_project_names_title" = "Giữ hiển thị tên dự án";
 "show_project_names_subtitle" = "Email vẫn được ẩn, nhưng tên và đường dẫn của dự án, phiên và nguồn trong lịch sử chi phí vẫn hiển thị.";
+"Provider order" = "Thứ tự nhà cung cấp";
+"Alphabetical" = "Theo bảng chữ cái";
+"Drag providers to set their order in the menu bar." = "Kéo các nhà cung cấp để đặt thứ tự của chúng trên thanh menu.";

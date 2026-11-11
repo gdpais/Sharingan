@@ -2862,3 +2862,6 @@
 "menu_bar_style_tomoe" = "Tomoe";
 "show_project_names_title" = "Keep project names visible";
 "show_project_names_subtitle" = "Still hide emails, but show cost-history project, session, and source names and paths.";
+"Provider order" = "Provider order";
+"Alphabetical" = "Alphabetical";
+"Drag providers to set their order in the menu bar." = "Drag providers to set their order in the menu bar.";

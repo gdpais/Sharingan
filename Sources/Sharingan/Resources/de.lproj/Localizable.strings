@@ -2855,3 +2855,6 @@
 "menu_bar_style_tomoe" = "Tomoe";
 "show_project_names_title" = "Projektnamen sichtbar lassen";
 "show_project_names_subtitle" = "E-Mail-Adressen bleiben verborgen, aber Projekt-, Sitzungs- und Quellnamen sowie Pfade im Kostenverlauf werden angezeigt.";
+"Provider order" = "Anbieterreihenfolge";
+"Alphabetical" = "Alphabetisch";
+"Drag providers to set their order in the menu bar." = "Ziehe Anbieter, um ihre Reihenfolge in der Menüleiste festzulegen.";

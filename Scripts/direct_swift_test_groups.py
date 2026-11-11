@@ -14,11 +14,10 @@ import re
 import signal
 import subprocess
 import sys
-import tempfile
 import threading
 import time
 
-from ci_swift_test_by_suite import TestSelection, filter_for, run_command
+from ci_swift_test_by_suite import TestSelection, filter_for, private_test_home, run_command
 from swift_test_diagnostics import print_crash_reports, redact
 
 
@@ -138,7 +137,7 @@ def prepare_runtime(swift_command: list[str], groups: list[list[dict]], expected
 
 
 def run_worker(manifest: dict, index: int) -> int:
-    with tempfile.TemporaryDirectory(prefix=f"sharingan-direct-group-{index}-") as directory:
+    with private_test_home(f"sharingan-direct-group-{index}-") as directory:
         environment = runtime_environment(Path(manifest["runtime"]["developer"]), Path(directory))
         os.environ.clear()
         os.environ.update(environment)

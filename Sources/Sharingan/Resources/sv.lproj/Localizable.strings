@@ -2856,3 +2856,6 @@
 "menu_bar_style_tomoe" = "Tomoe";
 "show_project_names_title" = "Behåll projektnamn synliga";
 "show_project_names_subtitle" = "E-postadresser förblir dolda, men namn och sökvägar för projekt, sessioner och källor i kostnadshistoriken visas.";
+"Provider order" = "Leverantörsordning";
+"Alphabetical" = "Alfabetisk";
+"Drag providers to set their order in the menu bar." = "Dra leverantörer för att ange deras ordning i menyraden.";

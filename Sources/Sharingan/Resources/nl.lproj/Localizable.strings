@@ -2854,3 +2854,6 @@
 "menu_bar_style_tomoe" = "Tomoe";
 "show_project_names_title" = "Projectnamen zichtbaar houden";
 "show_project_names_subtitle" = "E-mailadressen blijven verborgen, maar project-, sessie- en bronnamen en paden in de kostengeschiedenis worden getoond.";
+"Provider order" = "Volgorde van providers";
+"Alphabetical" = "Alfabetisch";
+"Drag providers to set their order in the menu bar." = "Sleep providers om hun volgorde in de menubalk in te stellen.";

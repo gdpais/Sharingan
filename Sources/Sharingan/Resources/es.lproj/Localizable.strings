@@ -2855,3 +2855,6 @@
 "menu_bar_style_tomoe" = "Tomoe";
 "show_project_names_title" = "Mantener visibles los nombres de proyectos";
 "show_project_names_subtitle" = "Sigue ocultando los correos, pero muestra los nombres y rutas de proyectos, sesiones y fuentes del historial de costes.";
+"Provider order" = "Orden de proveedores";
+"Alphabetical" = "Alfabético";
+"Drag providers to set their order in the menu bar." = "Arrastra los proveedores para definir su orden en la barra de menús.";

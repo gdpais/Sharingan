@@ -2858,3 +2858,6 @@
 "menu_bar_style_tomoe" = "Томое";
 "show_project_names_title" = "Показувати назви проєктів";
 "show_project_names_subtitle" = "Адреси електронної пошти залишаються прихованими, але назви й шляхи проєктів, сеансів і джерел в історії витрат відображаються.";
+"Provider order" = "Порядок провайдерів";
+"Alphabetical" = "За абеткою";
+"Drag providers to set their order in the menu bar." = "Перетягуйте провайдерів, щоб задати їхній порядок у рядку меню.";

@@ -2859,3 +2859,6 @@
 "menu_bar_style_tomoe" = "โทโมเอะ";
 "show_project_names_title" = "แสดงชื่อโปรเจกต์ต่อไป";
 "show_project_names_subtitle" = "ยังคงซ่อนอีเมล แต่แสดงชื่อและพาธของโปรเจกต์ เซสชัน และแหล่งที่มาในประวัติค่าใช้จ่าย";
+"Provider order" = "ลำดับผู้ให้บริการ";
+"Alphabetical" = "ตามตัวอักษร";
+"Drag providers to set their order in the menu bar." = "ลากผู้ให้บริการเพื่อกำหนดลำดับในแถบเมนู";

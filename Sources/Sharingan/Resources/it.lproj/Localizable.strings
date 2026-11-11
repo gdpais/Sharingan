@@ -2861,3 +2861,6 @@
 "menu_bar_style_tomoe" = "Tomoe";
 "show_project_names_title" = "Mantieni visibili i nomi dei progetti";
 "show_project_names_subtitle" = "Le email restano nascoste, ma nomi e percorsi di progetti, sessioni e origini nella cronologia dei costi vengono mostrati.";
+"Provider order" = "Ordine dei provider";
+"Alphabetical" = "Alfabetico";
+"Drag providers to set their order in the menu bar." = "Trascina i provider per impostarne l'ordine nella barra dei menu.";

@@ -2835,3 +2835,6 @@
 "menu_bar_style_tomoe" = "勾玉";
 "show_project_names_title" = "保持顯示專案名稱";
 "show_project_names_subtitle" = "仍隱藏電子郵件，但顯示費用歷史中的專案、工作階段和來源名稱及路徑。";
+"Provider order" = "供應商順序";
+"Alphabetical" = "依字母順序";
+"Drag providers to set their order in the menu bar." = "拖移供應商以設定它們在選單列中的順序。";
