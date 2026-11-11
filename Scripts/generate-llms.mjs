@@ -9,44 +9,46 @@ const args = process.argv.slice(2);
 const mode = parseMode(args);
 const productName = "Sharingan";
 const source = "https://github.com/gdpais/Sharingan";
-// Sharingan has no hosted website yet; without docs/CNAME the index links to the files in the repository.
-const cnamePath = path.join(docsDir, "CNAME");
-const cname = fs.existsSync(cnamePath) ? fs.readFileSync(cnamePath, "utf8").trim() : "";
-const origin = cname ? "https://" + cname : source + "/blob/main/docs";
+const docsBase = source + "/blob/main/docs/";
+const releases = source + "/releases";
 const outputPath = path.join(docsDir, "llms.txt");
-
-const pages = allHtml(docsDir)
-  .map((file) => {
-    const rel = path.relative(docsDir, file).replaceAll(path.sep, "/");
-    if (rel === "404.html" || rel === "social.html") return null;
-    const html = fs.readFileSync(file, "utf8");
-    return {
-      rel,
-      title: textContent(html.match(/<title[^>]*>([\s\S]*?)<\/title>/i)?.[1]) || titleize(path.basename(rel, ".html")),
-      description: attr(html.match(/<meta\s+name=["']description["']\s+content=["']([^"']*)["'][^>]*>/i)?.[1] || ""),
-    };
-  })
-  .filter(Boolean)
-  .sort((a, b) => (a.rel === "index.html" ? -1 : b.rel === "index.html" ? 1 : a.rel.localeCompare(b.rel)));
 const productDescription =
-  pages.find((page) => page.rel === "index.html")?.description ||
-  "Sharingan shows AI coding-provider usage limits in the macOS menu bar.";
+  "Sharingan is a tiny macOS menu bar app that keeps AI coding-provider usage limits, credits, costs, and resets " +
+  "visible. It has no project website; it is distributed only through GitHub Releases.";
+
+// Sharingan has no website, so the index points at the Markdown docs on GitHub. Each doc's frontmatter summary
+// is its description; docs without a summary are skipped.
+const pages = fs
+  .readdirSync(docsDir)
+  .filter((file) => file.endsWith(".md"))
+  .sort((a, b) => a.localeCompare(b))
+  .flatMap((file) => {
+    const markdown = fs.readFileSync(path.join(docsDir, file), "utf8");
+    const front = markdown.match(/^---\n([\s\S]*?)\n---/u)?.[1] ?? "";
+    const summary = front
+      .match(/^summary:\s*(.+)$/mu)?.[1]
+      ?.trim()
+      .replace(/^(["'])(.*)\1$/u, "$2");
+    if (!summary) return [];
+    const title = markdown.match(/^# (.+)$/mu)?.[1]?.trim() || titleize(path.basename(file, ".md"));
+    return [{ file, title, description: summary }];
+  });
 
 const lines = [
   "# " + productName,
   "",
   productDescription,
   "",
-  "Canonical documentation:",
-  ...pages.map(
-    (page) => "- " + page.title + ": " + pageUrl(page.rel) + (page.description ? " - " + page.description : ""),
-  ),
-  "",
   "Source: " + source,
+  "Downloads: " + releases,
+  "README: " + source + "/blob/main/README.md",
+  "",
+  "Documentation:",
+  ...pages.map((page) => "- " + page.title + ": " + docsBase + page.file + " - " + page.description),
   "",
   "Guidance for agents:",
-  "- Prefer the canonical documentation URLs above over README excerpts or package metadata.",
-  "- Fetch only the pages needed for the current task; this is an index, not a full-site corpus.",
+  "- Prefer the documentation URLs above over README excerpts or package metadata.",
+  "- Fetch only the pages needed for the current task; this is an index, not a full documentation corpus.",
   "",
 ];
 const output = lines.join("\n");
@@ -69,37 +71,6 @@ function parseMode(values) {
   if (values.length === 1 && (values[0] === "check" || values[0] === "--check")) return "check";
   console.error("Usage: node Scripts/generate-llms.mjs [write|--write|check|--check]");
   process.exit(2);
-}
-
-function allHtml(dir) {
-  return fs.readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
-    const full = path.join(dir, entry.name);
-    if (entry.name === "node_modules" || entry.name.startsWith(".")) return [];
-    if (entry.isDirectory()) return allHtml(full);
-    return entry.name.endsWith(".html") ? [full] : [];
-  });
-}
-
-function pageUrl(rel) {
-  if (!cname) return origin + "/" + rel;
-  return rel === "index.html" ? origin + "/" : origin + "/" + rel;
-}
-
-function textContent(value) {
-  return attr(value || "")
-    .replace(/<[^>]+>/g, "")
-    .replace(/\s+/g, " ")
-    .trim();
-}
-
-function attr(value) {
-  return String(value || "")
-    .replace(/&mdash;/g, "-")
-    .replace(/&amp;/g, "&")
-    .replace(/&nbsp;/g, " ")
-    .replace(/&#39;/g, "'")
-    .replace(/&quot;/g, '"')
-    .trim();
 }
 
 function titleize(input) {

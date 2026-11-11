@@ -49,12 +49,12 @@ classify_path() {
       ;;
     *.md)
       ;;
-    docs/.nojekyll|docs/CNAME|docs/index.html|docs/llms.txt|docs/site-locales.mjs|docs/site.css|docs/site.js|docs/social.html|docs/social.png)
+    docs/llms.txt)
       ;;
     docs/*.png|docs/*.jpg|docs/*.jpeg|docs/*.webp|docs/*.ico|docs/*.svg)
       ;;
     *)
-      require_macos_tests "$path" "not covered by portable docs/site checks"
+      require_macos_tests "$path" "not covered by portable docs checks"
       ;;
   esac
 }
@@ -100,10 +100,10 @@ if [[ "$path_count" -eq 0 ]]; then
   require_macos_tests '<empty diff>' 'no changed paths were reported'
 fi
 
-# The glibc CLI matrix uses the same conservative docs/site allowlist, but draft
+# The glibc CLI matrix uses the same conservative docs allowlist, but draft
 # status only defers macOS tests. Linux builds remain required for source changes.
 linux_cli_build="$macos_tests"
-linux_cli_build_reason="${macos_tests_reason:-docs/site-only changes covered by portable checks}"
+linux_cli_build_reason="${macos_tests_reason:-docs-only changes covered by portable checks}"
 
 if [[ "$macos_tests" == true && "$draft_pull_request" == true ]]; then
   macos_tests_deferred=true
@@ -111,7 +111,7 @@ if [[ "$macos_tests" == true && "$draft_pull_request" == true ]]; then
 elif [[ "$macos_tests" == true ]]; then
   summary_reason="$macos_tests_reason"
 else
-  summary_reason="docs/site-only changes covered by portable checks"
+  summary_reason="docs-only changes covered by portable checks"
 fi
 
 if [[ -n "${GITHUB_OUTPUT:-}" ]]; then

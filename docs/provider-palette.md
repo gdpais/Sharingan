@@ -1,8 +1,8 @@
 ---
 summary: "Audited provider accents, official sources, and fixed-surface contrast decisions for the September 2026 palette refresh."
 read_when:
-  - Updating provider brand colors or website palette data
-  - Reviewing palette contrast or regenerating the social preview
+  - Updating provider brand colors or palette data
+  - Reviewing palette contrast
 ---
 
 # Provider palette audit
@@ -26,9 +26,6 @@ Old decimal RGB values are expressed as their nearest 8-bit sRGB hex (at most ha
 “Supported” means the exact proposed value was found in an official asset or site stylesheet; it does not mean
 it is that provider's only canonical brand color. In particular, Copilot's match is a GitHub Primer Brand palette token.
 “Unverified” means the old accent is retained, not that the old value has been newly certified.
-
-The website's provider cards and social preview entries use the final accent below. The social preview deliberately
-shows a subset of providers; regenerate its PNG and receipt together using [social-card.md](social-card.md).
 
 | Provider ID | Old | Proposed | Final | Official source | Contrast / decision |
 | --- | --- | --- | --- | --- | --- |

@@ -128,12 +128,6 @@ check_app_locales() {
   node "${ROOT_DIR}/Scripts/sync-widget-locales.mjs" --check
 }
 
-check_site_locales() {
-  node --test "${ROOT_DIR}/Scripts/test_social_card.mjs"
-  node "${ROOT_DIR}/Scripts/check-site-locales.mjs"
-  node --check "${ROOT_DIR}/docs/site.js"
-}
-
 check_documentation_links() {
   node "${ROOT_DIR}/Scripts/check-documentation-links.mjs"
 }
@@ -171,7 +165,6 @@ run_portable_checks() {
   check_shell_scripts
   check_documentation_links
   check_llms_index
-  check_site_locales
 }
 
 run_swiftformat_lint() {
@@ -185,7 +178,7 @@ run_swiftlint() {
 }
 
 collect_javascript_files() {
-  JAVASCRIPT_FILES=("${ROOT_DIR}/docs/site.js")
+  JAVASCRIPT_FILES=()
   local file
   for file in "${ROOT_DIR}"/Scripts/*.mjs "${ROOT_DIR}"/Sources/SharinganCore/Resources/Plugins/*.js \
     "${ROOT_DIR}"/Sources/SharinganCore/Resources/Plugins/*.ts

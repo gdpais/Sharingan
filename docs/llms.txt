@@ -1,12 +1,182 @@
 # Sharingan
 
-A tiny macOS menu bar app that tracks AI coding-provider usage windows, credits, costs, and resets across 110 providers — Codex, OpenAI, Claude, Cursor, Gemini, Copilot, LiteLLM, Helmcode, v0, TypeSafe, and more.
-
-Canonical documentation:
-- Sharingan — every AI coding limit, in your menu bar: https://github.com/gdpais/Sharingan/blob/main/docs/index.html - A tiny macOS menu bar app that tracks AI coding-provider usage windows, credits, costs, and resets across 110 providers — Codex, OpenAI, Claude, Cursor, Gemini, Copilot, LiteLLM, Helmcode, v0, TypeSafe, and more.
+Sharingan is a tiny macOS menu bar app that keeps AI coding-provider usage limits, credits, costs, and resets visible. It has no project website; it is distributed only through GitHub Releases.
 
 Source: https://github.com/gdpais/Sharingan
+Downloads: https://github.com/gdpais/Sharingan/releases
+README: https://github.com/gdpais/Sharingan/blob/main/README.md
+
+Documentation:
+- Abacus AI Provider: https://github.com/gdpais/Sharingan/blob/main/docs/abacus.md - Abacus AI provider: browser cookie auth for ChatLLM/RouteLLM compute credit tracking.
+- abliteration.ai: https://github.com/gdpais/Sharingan/blob/main/docs/abliteration.md - abliteration.ai API key setup and prepaid USD credits.
+- Aerostack: https://github.com/gdpais/Sharingan/blob/main/docs/aerostack.md - Aerostack monthly AI-token usage from its account billing API.
+- Agent Sessions design: https://github.com/gdpais/Sharingan/blob/main/docs/agent-sessions-design.md - Agent Sessions discovery, protocol versions, presentation, and privacy boundaries.
+- ai& Provider: https://github.com/gdpais/Sharingan/blob/main/docs/aiand.md - ai& provider: API key setup and 30-day spend summed from the request logs API.
+- Aixy: https://github.com/gdpais/Sharingan/blob/main/docs/aixy.md - Aixy API-key setup, key-scoped usage, and applicable budget balances.
+- Alibaba Coding Plan provider: https://github.com/gdpais/Sharingan/blob/main/docs/alibaba-coding-plan.md - Alibaba Coding Plan provider data sources: browser-session baseline, secondary API mode, and honest quota fallback behavior.
+- Alibaba Token Plan Provider: https://github.com/gdpais/Sharingan/blob/main/docs/alibaba-token-plan.md - Alibaba Token Plan provider notes: Team and Personal/Solo variants, Bailian CLI/browser auth, and setup.
+- Amp Provider: https://github.com/gdpais/Sharingan/blob/main/docs/amp.md - Amp provider notes: CLI usage, web fallback, cookie auth, and credits.
+- Antigravity provider: https://github.com/gdpais/Sharingan/blob/main/docs/antigravity.md - Antigravity provider notes: OAuth usage, multi-account switching, local LSP probing, and quota parsing.
+- Architecture overview: https://github.com/gdpais/Sharingan/blob/main/docs/architecture.md - Architecture overview: modules, entry points, and data flow.
+- Atlas Cloud: https://github.com/gdpais/Sharingan/blob/main/docs/atlascloud.md - Atlas Cloud account balance through its public billing API.
+- Augment Provider: https://github.com/gdpais/Sharingan/blob/main/docs/augment.md - Augment provider notes: cookie auth, keepalive, and credits parsing.
+- Azure OpenAI provider: https://github.com/gdpais/Sharingan/blob/main/docs/azure-openai.md - Azure OpenAI provider: API key, endpoint, and deployment validation probe.
+- AWS Bedrock provider: https://github.com/gdpais/Sharingan/blob/main/docs/bedrock.md - AWS Bedrock provider: Cost Explorer spend, CloudWatch Claude activity, credentials, and budgets.
+- Bifrost: https://github.com/gdpais/Sharingan/blob/main/docs/bifrost.md - Bifrost provider setup and usage data shape.
+- Chatbox AI: https://github.com/gdpais/Sharingan/blob/main/docs/chatbox.md - Chatbox AI quotas from a manually supplied License Key.
+- Chutes Provider: https://github.com/gdpais/Sharingan/blob/main/docs/chutes.md - Chutes provider: API key setup, subscription usage, and quota windows.
+- Claude Fetch Comparison (historical snapshot): https://github.com/gdpais/Sharingan/blob/main/docs/claude-comparison-since-0.18.0beta2.md - Historical Claude fetch comparison between two pinned revisions; see claude.md for current behavior.
+- Claude multi-account and status item decision: https://github.com/gdpais/Sharingan/blob/main/docs/claude-multi-account-and-status-items.md - Accepted design for Claude subscription accounts and per-account menu bar items.
+- Claude provider: https://github.com/gdpais/Sharingan/blob/main/docs/claude.md - Claude provider data sources: OAuth API, web API (cookies), CLI PTY, and local cost usage.
+- Claude Platform: https://github.com/gdpais/Sharingan/blob/main/docs/claudeplatform.md - Claude Platform (Claude Console) API credit balance, credit grants, and month-to-date spend via the platform.claude.com browser session.
+- ClawRouter: https://github.com/gdpais/Sharingan/blob/main/docs/clawrouter.md - ClawRouter setup for monthly budget, spend, and routed-provider usage.
+- CLI configuration: https://github.com/gdpais/Sharingan/blob/main/docs/cli-configuration.md - Sharingan CLI configuration commands for provider toggles, API keys, and isolated config files.
+- Sharingan CLI: https://github.com/gdpais/Sharingan/blob/main/docs/cli.md - Sharingan CLI for fetching usage from the command line.
+- ClinePass: https://github.com/gdpais/Sharingan/blob/main/docs/clinepass.md - ClinePass API-key or browser sign-in setup and five-hour, weekly, and monthly subscription limits.
+- Codebuff: https://github.com/gdpais/Sharingan/blob/main/docs/codebuff.md - Codebuff provider data sources: API token, CLI credentials file, credit balance, and weekly rate limits.
+- CodeRabbit provider: https://github.com/gdpais/Sharingan/blob/main/docs/coderabbit.md - CodeRabbit provider data source: CodeRabbit CLI usage and billing period limits.
+- Codex OAuth resolver: https://github.com/gdpais/Sharingan/blob/main/docs/codex-oauth.md - Codex OAuth resolver: read-only tokens, CLI-owned refresh, usage endpoint, and fetch strategy wiring.
+- Codex Workspaces local index: https://github.com/gdpais/Sharingan/blob/main/docs/codex-workspaces.md - Codex Workspaces local index, cache persistence, and debug inspector.
+- Codex provider: https://github.com/gdpais/Sharingan/blob/main/docs/codex.md - Codex provider data sources: OpenAI web dashboard, Codex CLI RPC, credits, and local cost usage.
+- Command Code: https://github.com/gdpais/Sharingan/blob/main/docs/command-code.md - Command Code provider notes: API key and cookie authentication, usage-window parsing.
+- Configuration: https://github.com/gdpais/Sharingan/blob/main/docs/configuration.md - Sharingan config file layout for CLI + app settings.
+- Copilot provider: https://github.com/gdpais/Sharingan/blob/main/docs/copilot.md - Copilot provider data sources: GitHub device flow, Copilot internal usage API, and optional GitHub web budgets.
+- Cosmic AI: https://github.com/gdpais/Sharingan/blob/main/docs/cosmic.md - Cosmic AI project input/output token usage through the official CLI's dashboard API.
+- Cost window comparison decision: https://github.com/gdpais/Sharingan/blob/main/docs/cost-window-comparisons.md - Product proposal for shorter local cost comparison periods.
+- Credential notifications: https://github.com/gdpais/Sharingan/blob/main/docs/credential-notifications.md - Opt-in credential-expiry alerts, account-scoped episodes, and shared notification delivery.
+- Cursor provider: https://github.com/gdpais/Sharingan/blob/main/docs/cursor.md - Cursor provider data sources, external-browser account switching, and cursor.com APIs.
+- Declarative custom provider design: https://github.com/gdpais/Sharingan/blob/main/docs/custom-provider-design.md - Accepted security and architecture boundary for declarative HTTP JSON providers.
+- Dashboard v1 Snapshot: https://github.com/gdpais/Sharingan/blob/main/docs/dashboard-api.md - Dashboard-v1 snapshot contract for one-shot CLI and HTTP clients, including serve auth and transport.
+- Deepgram Provider: https://github.com/gdpais/Sharingan/blob/main/docs/deepgram.md - Deepgram provider: API key setup, project discovery, and usage-breakdown metrics.
+- DeepInfra provider: https://github.com/gdpais/Sharingan/blob/main/docs/deepinfra.md - DeepInfra provider setup, API-key billing queries, and balance/spend display.
+- DeepSeek provider: https://github.com/gdpais/Sharingan/blob/main/docs/deepseek.md - DeepSeek provider data sources: API key, balance, and optional detailed usage endpoints.
+- Development Setup Guide: https://github.com/gdpais/Sharingan/blob/main/docs/DEVELOPMENT_SETUP.md - Development setup: stable signing and reducing Keychain prompts.
+- Sharingan Development Guide: https://github.com/gdpais/Sharingan/blob/main/docs/DEVELOPMENT.md - Development workflow: build/run scripts, logging, and keychain migration notes.
+- Devin Provider: https://github.com/gdpais/Sharingan/blob/main/docs/devin.md - Devin provider auth, quota endpoint, and setup.
+- DevPass: https://github.com/gdpais/Sharingan/blob/main/docs/devpass.md - DevPass plan credits and premium weekly usage through the LLM Gateway API.
+- Doubao Provider: https://github.com/gdpais/Sharingan/blob/main/docs/doubao.md - Doubao provider notes: arkcli plan usage, API-key auth, and Volcengine Ark request limits.
+- ElevenLabs Provider: https://github.com/gdpais/Sharingan/blob/main/docs/elevenlabs.md - ElevenLabs provider notes: API key setup and subscription usage fields.
+- Exa: https://github.com/gdpais/Sharingan/blob/main/docs/exa.md - Exa selected-key monthly spend through the Team Management API.
+- Factory (Droid) provider: https://github.com/gdpais/Sharingan/blob/main/docs/factory.md - Factory (Droid) provider data sources: API key, browser cookies, WorkOS tokens, and Factory APIs.
+- fal: https://github.com/gdpais/Sharingan/blob/main/docs/fal.md - fal credit balance through the documented Platform API billing endpoint.
+- Fireworks provider: https://github.com/gdpais/Sharingan/blob/main/docs/fireworks.md - Fireworks provider data sources: API key account discovery and the 30-day spend billing summary.
+- FLORA: https://github.com/gdpais/Sharingan/blob/main/docs/flora.md - FLORA workspace balance and month-to-date spend through the documented workspace usage API.
+- Future AGI: https://github.com/gdpais/Sharingan/blob/main/docs/futureagi.md - Future AGI usage and free allowances through its authenticated billing API.
+- Gemini provider: https://github.com/gdpais/Sharingan/blob/main/docs/gemini.md - Gemini CLI OAuth quotas and opt-in Gemini app web usage limits.
+- GitKraken AI: https://github.com/gdpais/Sharingan/blob/main/docs/gitkraken.md - GitKraken AI weekly personal and organization usage through its first-party API.
+- Grok provider: https://github.com/gdpais/Sharingan/blob/main/docs/grok.md - Grok provider data sources: ACP JSON-RPC, CLI-proxy and grok.com billing fallbacks, OAuth credentials, and local session signals.
+- Groq provider: https://github.com/gdpais/Sharingan/blob/main/docs/groq.md - Groq provider: console spend/usage via the browser session (Stytch), with an optional Enterprise Prometheus fallback.
+- GroqCloud: https://github.com/gdpais/Sharingan/blob/main/docs/groqcloud.md - GroqCloud Enterprise Prometheus source; see groq.md for the default console source.
+- Helmcode: https://github.com/gdpais/Sharingan/blob/main/docs/helmcode.md - Helmcode plugin: Cloud and NaN Builders sessions, model quotas, and prepaid balances.
+- Hugging Face: https://github.com/gdpais/Sharingan/blob/main/docs/huggingface.md - Hugging Face authentication and Inference Providers credit tracking.
+- Charm Hyper: https://github.com/gdpais/Sharingan/blob/main/docs/hyper.md - Charm Hyper setup, session/API authentication, and Hypercredit balance.
+- IBM Bob: https://github.com/gdpais/Sharingan/blob/main/docs/ibm-bob.md - IBM Bob authentication and Bobcoin usage tracking.
+- Icon pipeline (macOS .icon → .icns without Xcodebuild): https://github.com/gdpais/Sharingan/blob/main/docs/icon.md - Convert macOS .icon bundles to Sharingan .icns via Scripts/build_icon.sh and ictool.
+- Issue labeling guide: https://github.com/gdpais/Sharingan/blob/main/docs/ISSUE_LABELING.md - Issue labeling policy for triage, prioritization, and backlog hygiene.
+- Spec: Scan-wide fork-family event provenance for Ultra overcounting (issue #2037): https://github.com/gdpais/Sharingan/blob/main/docs/issue-2037-fork-family-provenance-spec.md - Issue 2037 proposal for scan-wide fork-family event provenance and accounting.
+- P0 local corpus findings for #2037 (rev 2): https://github.com/gdpais/Sharingan/blob/main/docs/issue-2037-p0-local-corpus-findings.md - July 2026 corpus findings and provisional fork-accounting constraints for issue 2037.
+- Spec: Contain Ultra-mode interleaved-lineage token overcounting (issue #2037): https://github.com/gdpais/Sharingan/blob/main/docs/issue-2037-ultra-fork-overcount-spec.md - Issue 2037 file-local overcount containment specification and historical PR notes.
+- JetBrains AI provider: https://github.com/gdpais/Sharingan/blob/main/docs/jetbrains.md - JetBrains AI provider notes: local XML and log quota parsing, IDE auto-detection, and UI mapping.
+- Keychain prompt containment: engineering note: https://github.com/gdpais/Sharingan/blob/main/docs/KEYCHAIN_FIX.md - Current and historical engineering notes for Sharingan Keychain prompt containment.
+- Keychain prompts: https://github.com/gdpais/Sharingan/blob/main/docs/keychain-prompts.md - Why macOS Keychain prompts appear, how Sharingan limits them, and safe troubleshooting.
+- Kilo provider: https://github.com/gdpais/Sharingan/blob/main/docs/kilo.md - Kilo provider data sources: app.kilo.ai API token and CLI auth-file fallback.
+- Kimi Code Provider: https://github.com/gdpais/Sharingan/blob/main/docs/kimi.md - Kimi provider notes: cookie auth, quotas, and rate-limit parsing.
+- Kiro provider: https://github.com/gdpais/Sharingan/blob/main/docs/kiro.md - Kiro provider data sources: CLI-based usage via kiro-cli /usage, enriched with GetUsageLimits for overage.
+- Langdock: https://github.com/gdpais/Sharingan/blob/main/docs/langdock.md - Langdock personal included-usage limits from a selected Edge, Chrome, or Safari profile.
+- Linkup: https://github.com/gdpais/Sharingan/blob/main/docs/linkup.md - Linkup credit balance through its read-only account API.
+- Linux desktop: https://github.com/gdpais/Sharingan/blob/main/docs/linux.md - Linux desktop setup and the optional compact Quick View.
+- LiteLLM: https://github.com/gdpais/Sharingan/blob/main/docs/litellm.md - LiteLLM provider setup and usage data shape.
+- LithosAI: https://github.com/gdpais/Sharingan/blob/main/docs/lithosai.md - LithosAI prepaid balance and console session authentication.
+- LLM Proxy: https://github.com/gdpais/Sharingan/blob/main/docs/llm-proxy.md - LLM Proxy provider setup and quota-stats usage source.
+- llmman Provider: https://github.com/gdpais/Sharingan/blob/main/docs/llmman.md - llmman provider notes: local daemon address, optional API key, and loaded-model memory usage.
+- LongCat provider: https://github.com/gdpais/Sharingan/blob/main/docs/longcat.md - LongCat provider cookie sources, quota requests, and snapshot mapping.
+- Manus Provider: https://github.com/gdpais/Sharingan/blob/main/docs/manus.md - Manus provider: browser session_id cookie auth for credit balance, monthly credits, and daily refresh tracking.
+- Xiaomi MiMo Provider: https://github.com/gdpais/Sharingan/blob/main/docs/mimo.md - Xiaomi MiMo provider notes: cookie auth, balance endpoint, and setup.
+- MiniMax provider: https://github.com/gdpais/Sharingan/blob/main/docs/minimax.md - MiniMax provider data sources: Coding Plan tokens, browser cookies, and web-session parsing.
+- Mistral Provider: https://github.com/gdpais/Sharingan/blob/main/docs/mistral.md - Mistral provider: browser cookie setup, billing usage, included API/Vibe allowances, and credits.
+- Model pricing metadata: https://github.com/gdpais/Sharingan/blob/main/docs/model-pricing.md - models.dev pricing metadata pipeline, custom-pricing overlay, cache, lookup rules, and token-cost units.
+- Moonshot / Kimi Open Platform provider: https://github.com/gdpais/Sharingan/blob/main/docs/moonshot.md - Moonshot / Kimi Open Platform data sources, regional key routing, and balance endpoint.
+- Munito: https://github.com/gdpais/Sharingan/blob/main/docs/munito.md - Munito today and this month's spend against organization spend limits through the documented Admin API.
+- Muse Code: https://github.com/gdpais/Sharingan/blob/main/docs/muse.md - Muse Code authentication, subscription windows, and local token history.
+- Muse (muse.ai) Provider: https://github.com/gdpais/Sharingan/blob/main/docs/museai.md - Muse provider: muse.ai Free, Power, and Maximum weekly usage from browser session cookies.
+- Neuralwatt Provider: https://github.com/gdpais/Sharingan/blob/main/docs/neuralwatt.md - Neuralwatt provider notes: API key setup and quota usage fields.
+- Notion AI Provider: https://github.com/gdpais/Sharingan/blob/main/docs/notion.md - Notion AI provider auth, usage endpoint, and allowance windows.
+- Nous Portal Provider: https://github.com/gdpais/Sharingan/blob/main/docs/nous.md - Nous Portal provider: Hermes Agent OAuth token reuse, account endpoint parsing, and credit display.
+- Ollama Provider: https://github.com/gdpais/Sharingan/blob/main/docs/ollama.md - Ollama provider notes: API key auth, settings scrape, cookie auth, and Cloud Usage parsing.
+- OpenAI API provider: https://github.com/gdpais/Sharingan/blob/main/docs/openai.md - OpenAI API provider: Admin API key daily graphs, per-minute live usage, and legacy balance fallback.
+- OpenCode provider: https://github.com/gdpais/Sharingan/blob/main/docs/opencode.md - OpenCode provider notes: browser cookies, local SQLite usage, and parsing.
+- OpenCode Go: https://github.com/gdpais/Sharingan/blob/main/docs/opencodego.md - OpenCode Go provider entry point: subscription usage, source selection, and local SQLite cost history.
+- OpenRouter Provider: https://github.com/gdpais/Sharingan/blob/main/docs/openrouter.md - OpenRouter provider: API key credits, spending caps, and daily/weekly/monthly spend.
+- Overview Scroll Stutter Investigation: https://github.com/gdpais/Sharingan/blob/main/docs/overview-scroll-stutter-investigation.md - June 2026 Overview scroll-stutter investigation, candidate designs, and measured evidence.
+- Packaging & signing: https://github.com/gdpais/Sharingan/blob/main/docs/packaging.md - Packaging, signing, and bundled CLI notes.
+- Parallel: https://github.com/gdpais/Sharingan/blob/main/docs/parallel.md - Parallel prepaid credit balance through the signed-in platform.parallel.ai browser session.
+- Sharingan Issue #139 Main Fix Validation (Post-Fix vs Pre-Fix): https://github.com/gdpais/Sharingan/blob/main/docs/perf-energy-issue-139-main-fix-validation-2026-02-19.md - Post-fix validation for issue #139 Codex CLI timeout and energy improvements.
+- Sharingan Issue #139 Performance/Energy Simulation Report: https://github.com/gdpais/Sharingan/blob/main/docs/perf-energy-issue-139-simulation-report-2026-02-19.md - Issue #139 performance and energy simulation report for Codex CLI subprocess failure paths.
+- Perplexity Provider: https://github.com/gdpais/Sharingan/blob/main/docs/perplexity.md - Perplexity provider: browser cookie setup, credits API, recurring/bonus/purchased credit display.
+- Pi: https://github.com/gdpais/Sharingan/blob/main/docs/pi.md - Pi and OMP local token history, source selection, and cost accounting.
+- Provider plugin conversion matrix: https://github.com/gdpais/Sharingan/blob/main/docs/plugin-conversion-matrix.md - All-provider conversion matrix for the bundled JavaScriptCore prototype capability set.
+- JavaScript provider-plugin prototype: https://github.com/gdpais/Sharingan/blob/main/docs/plugin-prototype.md - JavaScript provider-plugin prototype API, engine benchmark, safety boundary, enablement, and limitations.
+- Local provider plugins: https://github.com/gdpais/Sharingan/blob/main/docs/plugins.md - Authoring, installing, approving, and operating local JavaScript and TypeScript provider plugins.
+- Poe Provider: https://github.com/gdpais/Sharingan/blob/main/docs/poe.md - Poe provider: API key setup, point balance, and recent usage history.
+- Pr 1848 Body: https://github.com/gdpais/Sharingan/blob/main/docs/pr-1848-body.md - Historical PR 1848 description for the Claude MCP-only credential guard.
+- Pr 1848 Verification Comment: https://github.com/gdpais/Sharingan/blob/main/docs/pr-1848-verification-comment.md - Historical maintainer verification of PR 1848's background Claude credential guard.
+- Adaptive refresh decision record: https://github.com/gdpais/Sharingan/blob/main/docs/predictive-refresh-policy.md - Decision record for the deterministic agent-aware adaptive refresh cadence.
+- Usage & Spend provider artwork: https://github.com/gdpais/Sharingan/blob/main/docs/provider-brand-icons.md - Usage & Spend brand artwork provenance and monochrome rendering boundaries.
+- Provider palette audit: https://github.com/gdpais/Sharingan/blob/main/docs/provider-palette.md - Audited provider accents, official sources, and fixed-surface contrast decisions for the September 2026 palette refresh.
+- Provider authoring guide: https://github.com/gdpais/Sharingan/blob/main/docs/provider.md - Provider authoring guide: shared host APIs, provider boundaries, and how to add a new provider.
+- Providers: https://github.com/gdpais/Sharingan/blob/main/docs/providers.md - Provider data sources and parsing overview for every registered Sharingan provider.
+- Qoder Provider: https://github.com/gdpais/Sharingan/blob/main/docs/qoder.md - Qoder provider: browser/manual cookie setup for big model credit usage on qoder.com and qoder.com.cn.
+- Quotio Analysis & Pattern Adaptation: https://github.com/gdpais/Sharingan/blob/main/docs/QUOTIO_ANALYSIS.md - Historical Quotio analysis template; not a current feature inventory or roadmap.
+- Quotio Comparison & Enhancement Opportunities: https://github.com/gdpais/Sharingan/blob/main/docs/quotio-comparison.md - Quotio comparison notes and possible Sharingan enhancement ideas.
+- Qwen Cloud Provider: https://github.com/gdpais/Sharingan/blob/main/docs/qwen-cloud.md - Qwen Cloud provider notes: cookie auth, Team credits, Individual quota windows, and setup.
+- Raycast Provider: https://github.com/gdpais/Sharingan/blob/main/docs/raycast.md - Raycast provider: unofficial AI credits API, website session cookies, and monthly allowance mapping.
+- Refresh loop: https://github.com/gdpais/Sharingan/blob/main/docs/refresh-loop.md - Refresh cadence, background updates, and error handling.
+- Release process (Sharingan): https://github.com/gdpais/Sharingan/blob/main/docs/RELEASING.md - Sharingan CI release pipeline, dry runs, and signing. GitHub Releases is the only distribution channel.
+- Replicate: https://github.com/gdpais/Sharingan/blob/main/docs/replicate.md - Replicate billing through a bundled JavaScript provider with native session selection.
+- Repository size: https://github.com/gdpais/Sharingan/blob/main/docs/repository-size.md - Repository size findings, prevention checks, and the maintainer-only history cleanup runbook.
+- Sail Research: https://github.com/gdpais/Sharingan/blob/main/docs/sailresearch.md - Sail Research organization credit balance and spend through its Usage API.
+- Sakana AI: https://github.com/gdpais/Sharingan/blob/main/docs/sakana.md - Sakana AI provider: manual Cookie header, billing page parser, 5-hour/weekly quota windows, and pay-as-you-go credit balance.
+- Session Keepalive Enhancement Design: https://github.com/gdpais/Sharingan/blob/main/docs/session-keepalive-design.md - Design notes for unified provider session keepalive scheduling and refresh control.
+- Agent Sessions: https://github.com/gdpais/Sharingan/blob/main/docs/sessions.md - Agent Sessions setup, SSH hosts, refresh behavior, and privacy controls.
+- Running Sharingan beside CodexBar: https://github.com/gdpais/Sharingan/blob/main/docs/SHARINGAN_SIDE_BY_SIDE.md - Where Sharingan keeps its config, Keychain items, caches, and CLI so it can run beside CodexBar.
+- Sofya: https://github.com/gdpais/Sharingan/blob/main/docs/sofya.md - Sofya account credits and monthly reset through its read-only account API.
+- Soniox: https://github.com/gdpais/Sharingan/blob/main/docs/soniox.md - Soniox organization API key setup, prepaid balance, and monthly budget usage.
+- Sparkle integration: https://github.com/gdpais/Sharingan/blob/main/docs/sparkle.md - Sparkle integration details for Sharingan: updater config, keys, and release flow.
+- Spend chart provider artwork: https://github.com/gdpais/Sharingan/blob/main/docs/spend-chart-brand-icons.md - Official artwork used by spend chart legends and amount inspectors.
+- Native Codex turn performance: https://github.com/gdpais/Sharingan/blob/main/docs/spend-turn-performance-validation.md - Metric contract and synthetic verification for native Codex turn performance.
+- Status-item startup diagnostics: https://github.com/gdpais/Sharingan/blob/main/docs/status-item-diagnostics.md - Opt-in startup traces for missing Tahoe menu bar items.
+- Status checks: https://github.com/gdpais/Sharingan/blob/main/docs/status.md - Provider status checks, sources, and indicator mapping.
+- StepFun provider: https://github.com/gdpais/Sharingan/blob/main/docs/stepfun.md - StepFun provider data sources: username + password login for Step Plan rate limits and subscription plan name.
+- sub2api: https://github.com/gdpais/Sharingan/blob/main/docs/sub2api.md - sub2api setup for group API-key quota, subscription usage, and wallet balance.
+- Synthetic provider: https://github.com/gdpais/Sharingan/blob/main/docs/synthetic.md - Synthetic provider data sources: API key quota endpoint and usage lanes.
+- T3 Chat Provider: https://github.com/gdpais/Sharingan/blob/main/docs/t3chat.md - T3 Chat provider auth, tRPC endpoint, and quota windows.
+- Tavily: https://github.com/gdpais/Sharingan/blob/main/docs/tavily.md - Tavily account-plan, API-key, and pay-as-you-go credit usage.
+- Third-party notices: https://github.com/gdpais/Sharingan/blob/main/docs/THIRD_PARTY_LICENSES.md - Bundled open-source notices and how to refresh their pinned sources.
+- TinyApi: https://github.com/gdpais/Sharingan/blob/main/docs/tinyapi.md - TinyApi available credit balance through a signed-in browser session.
+- TODO: https://github.com/gdpais/Sharingan/blob/main/docs/TODO.md - Compatibility constraints to check before retiring legacy Claude quota fields.
+- Trae CN: https://github.com/gdpais/Sharingan/blob/main/docs/traecn.md - Trae CN credit usage from its signed-in dashboard session.
+- TypeSafe: https://github.com/gdpais/Sharingan/blob/main/docs/typesafe.md - TypeSafe billing spend and credit balance through the console session.
+- UI & icon: https://github.com/gdpais/Sharingan/blob/main/docs/ui.md - Menu bar UI, icon rendering, and menu layout details.
+- v0: https://github.com/gdpais/Sharingan/blob/main/docs/v0.md - v0 Platform API billing and rate-limit usage from an API key.
+- Venice: https://github.com/gdpais/Sharingan/blob/main/docs/venice.md - Venice API balance and optional browser subscription-credit details.
+- Vercel AI Gateway: https://github.com/gdpais/Sharingan/blob/main/docs/vercel.md - Vercel AI Gateway team credits through an AI Gateway key, or a personal budget through an optional Vercel access token.
+- Verification: Claude MCP-only keychain guard: https://github.com/gdpais/Sharingan/blob/main/docs/verify-1844-proof.md - Historical regression and isolated-app proof for the Claude MCP-only Keychain guard.
+- Vertex AI provider: https://github.com/gdpais/Sharingan/blob/main/docs/vertexai.md - Vertex AI provider data sources: gcloud ADC credentials and Cloud Monitoring quota usage.
+- Warp Provider: https://github.com/gdpais/Sharingan/blob/main/docs/warp.md - Warp provider notes: API token setup and request limit parsing.
+- Wayfinder: https://github.com/gdpais/Sharingan/blob/main/docs/wayfinder.md - Wayfinder setup for local gateway health, per-route breakdown, and savings.
+- OpenAI web integration (Codex): https://github.com/gdpais/Sharingan/blob/main/docs/web-integration.md - Deprecated: OpenAI web dashboard integration is documented in docs/codex.md.
+- WebKit usage: https://github.com/gdpais/Sharingan/blob/main/docs/webkit.md - WebKit usage in Sharingan: WebView hosts, cookie stores, and teardown guidance.
+- Widgets: https://github.com/gdpais/Sharingan/blob/main/docs/widgets.md - WidgetKit snapshot pipeline + visibility troubleshooting for Sharingan widgets.
+- Windsurf provider: https://github.com/gdpais/Sharingan/blob/main/docs/windsurf.md - Windsurf provider data sources: browser localStorage session import, local SQLite cache, and GetPlanStatus protobuf API.
+- WorkBuddy Provider: https://github.com/gdpais/Sharingan/blob/main/docs/workbuddy.md - WorkBuddy provider: website session cookies and the monthly credits allowance from the WorkBuddy billing API.
+- xAI Provider: https://github.com/gdpais/Sharingan/blob/main/docs/xai.md - xAI provider: Management API key + team ID setup, posted and estimated live credit, and daily platform spend.
+- X API: https://github.com/gdpais/Sharingan/blob/main/docs/xapi.md - X API prepaid dollar balance from the X developer console.
+- xKiro: https://github.com/gdpais/Sharingan/blob/main/docs/xkiro.md - xKiro daily free-token allowance through its unmetered usage API.
+- z.ai / GLM provider: https://github.com/gdpais/Sharingan/blob/main/docs/zai.md - z.ai / GLM provider data sources, regions, and Coding Plan quota mapping.
+- Zed provider: https://github.com/gdpais/Sharingan/blob/main/docs/zed.md - Zed provider data sources: editor login and opt-in browser billing.
+- ZenMux Provider: https://github.com/gdpais/Sharingan/blob/main/docs/zenmux.md - ZenMux provider: Management API key setup, rolling quota windows, and PAYG balance.
+- ZoomMate Provider: https://github.com/gdpais/Sharingan/blob/main/docs/zoommate.md - ZoomMate provider auth, credits endpoint, history/pacing, and status page.
 
 Guidance for agents:
-- Prefer the canonical documentation URLs above over README excerpts or package metadata.
-- Fetch only the pages needed for the current task; this is an index, not a full-site corpus.
+- Prefer the documentation URLs above over README excerpts or package metadata.
+- Fetch only the pages needed for the current task; this is an index, not a full documentation corpus.

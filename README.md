@@ -239,7 +239,7 @@ show an incident indicator.
   invalid preferences resolve to 5 minutes. Manual and fixed 1m, 2m, 5m, 15m, and 30m alternatives remain available.
 - Bundled CLI (`sharingan`) for scripts and CI (including `sharingan cost --provider codex`, `claude`, or `both` for local cost usage); macOS and Linux CLI builds available.
 - WidgetKit widgets for supported providers.
-- Localized app and website with a shared 23-language catalog, automatic website detection, persistent pickers, and RTL support.
+- Localized app with a shared 23-language catalog, persistent language pickers, and RTL support.
 - Optional session quota notifications and weekly-reset confetti.
 - Privacy-first: on-device parsing by default; browser cookies are opt-in and reused (no passwords stored).
 
