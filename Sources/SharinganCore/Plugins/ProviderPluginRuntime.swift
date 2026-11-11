@@ -241,7 +241,10 @@ public final class ProviderPluginRuntime: @unchecked Sendable {
         }
         let worker = try self.currentWorker()
         let gate = ProviderPluginCompletionGate<ProviderPluginResult>()
+        let timeoutTask = ProviderPluginTimeoutTask()
         let finish: @Sendable (Result<ProviderPluginResult, Error>) -> Void = { [weak self, weak worker] result in
+            // A finished fetch no longer needs its watchdog; cancelling it frees the sleeping task at once.
+            timeoutTask.cancel()
             gate.finish(result.mapError { Self.redactedError($0, secrets: sanitizedSecrets.values) }) {
                 if case let .failure(error) = result,
                    error is CancellationError || error as? ProviderPluginError == .timedOut, let worker
@@ -265,8 +268,10 @@ public final class ProviderPluginRuntime: @unchecked Sendable {
                     cookieResolver: cookieResolver,
                     instanceCookieResolver: instanceCookieResolver,
                     completion: finish)
-                Task.detached {
-                    try? await Task.sleep(for: .seconds(self.timeout))
+                let timeout = self.timeout
+                timeoutTask.start {
+                    try? await Task.sleep(for: .seconds(timeout))
+                    guard !Task.isCancelled else { return }
                     finish(.failure(ProviderPluginError.timedOut))
                 }
             }
@@ -373,6 +378,32 @@ extension String {
     fileprivate var removingPluginErrorPrefix: String {
         guard let separator = self.firstIndex(of: ":") else { return self }
         return String(self[self.index(after: separator)...]).trimmingCharacters(in: .whitespaces)
+    }
+}
+
+/// The watchdog for one plugin fetch. `cancel()` may run before `start` when the fetch finishes synchronously;
+/// the watchdog is then cancelled as soon as it starts.
+private final class ProviderPluginTimeoutTask: @unchecked Sendable {
+    private let lock = NSLock()
+    private var task: Task<Void, Never>?
+    private var cancelled = false
+
+    func start(_ operation: @escaping @Sendable () async -> Void) {
+        let task = Task.detached(operation: operation)
+        self.lock.lock()
+        let alreadyCancelled = self.cancelled
+        if !alreadyCancelled { self.task = task }
+        self.lock.unlock()
+        if alreadyCancelled { task.cancel() }
+    }
+
+    func cancel() {
+        self.lock.lock()
+        self.cancelled = true
+        let task = self.task
+        self.task = nil
+        self.lock.unlock()
+        task?.cancel()
     }
 }
 

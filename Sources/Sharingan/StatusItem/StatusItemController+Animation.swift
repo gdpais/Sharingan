@@ -57,6 +57,9 @@ extension StatusItemController {
 
     private func blinkingProviders() -> [UsageProvider] {
         guard self.stackedMergeIconProvidersIfActive() == nil else { return [] }
+        // Bars hide every critter decoration and the Tomoe glyph has none, so a blink draws nothing there.
+        // Each blink tick would still re-render and bypass the icon cache.
+        guard Self.menuBarIconStyleCanBlink(self.settings.menuBarIconStyle) else { return [] }
         let merged = self.shouldMergeIcons
         let providers = merged
             ? [self.primaryProviderForUnifiedIcon()].compactMap(\.firstPartyProvider)
@@ -68,6 +71,13 @@ extension StatusItemController {
             return !self.settings.menuBarShowsBrandIconWithPercent
                 || (self.renderedMenuBarLayoutResolution(for: provider).usesLegacyRendering
                     && self.brandIcon(provider) == nil)
+        }
+    }
+
+    nonisolated static func menuBarIconStyleCanBlink(_ style: MenuBarIconStyle) -> Bool {
+        switch style {
+        case .critters, .iconAndPercent: true
+        case .bars, .tomoe: false
         }
     }
 

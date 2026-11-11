@@ -448,6 +448,7 @@ final class UsageStore {
     @ObservationIgnored var providerStatusHadIssue: [ProviderInstanceID: Bool] = [:]
     @ObservationIgnored var providerStatusRequestGeneration: UInt64 = 0
     @ObservationIgnored var providerStatusPublishedGenerations: [ProviderInstanceID: UInt64] = [:]
+    @ObservationIgnored var providerStatusLastSuccessAt: [ProviderInstanceID: Date] = [:]
     /// Last observed usage fraction (0...1) per account and quota-warning lane, used
     /// to detect upward crossings of a quota_low hook rule's own threshold.
     @ObservationIgnored var quotaLowHookUsage: [QuotaWarningStateKey: Double] = [:]
@@ -835,7 +836,10 @@ final class UsageStore {
                             coalesceIfRefreshing: coalesceProviderRefreshesOverride ??
                                 (ProviderInteractionContext.current == .background))
                     }
-                    if availableRefreshProviders.contains(provider.instanceID) {
+                    if availableRefreshProviders.contains(provider.instanceID),
+                       enrichmentMode == .forcedForeground
+                       || self.providerStatusRefreshIsDue(provider, now: refreshStartedAt)
+                    {
                         group.addTask { await self.refreshProviderStatus(provider) }
                     }
                 }

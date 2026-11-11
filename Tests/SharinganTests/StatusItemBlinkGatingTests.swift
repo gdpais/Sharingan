@@ -70,6 +70,35 @@ struct StatusItemBlinkGatingTests {
         await task.value
     }
 
+    @Test(arguments: [MenuBarIconStyle.bars, .tomoe])
+    func `styles without critters never schedule a blink loop`(style: MenuBarIconStyle) async throws {
+        let harness = Harness(merged: false)
+        let controller = harness.controller
+        defer { controller.releaseStatusItemsForTesting() }
+        controller.updateBlinkingState()
+        let task = try #require(controller.blinkTask)
+        await harness.clock.waitForSleep()
+
+        harness.settings.menuBarIconStyle = style
+        controller.updateIcons()
+        #expect(controller.blinkTask == nil)
+        #expect(controller.blinkAmounts.isEmpty)
+        harness.clock.wake()
+        await task.value
+
+        harness.settings.menuBarIconStyle = .critters
+        controller.updateIcons()
+        #expect(controller.blinkTask != nil)
+    }
+
+    @Test
+    func `only critter and brand styles can blink`() {
+        #expect(StatusItemController.menuBarIconStyleCanBlink(.critters))
+        #expect(StatusItemController.menuBarIconStyleCanBlink(.iconAndPercent))
+        #expect(!StatusItemController.menuBarIconStyleCanBlink(.bars))
+        #expect(!StatusItemController.menuBarIconStyleCanBlink(.tomoe))
+    }
+
     @Test(arguments: [false, true])
     func `stored layout without a brand image stays static`(merged: Bool) {
         let harness = Harness(merged: merged)

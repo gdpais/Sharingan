@@ -28,6 +28,7 @@ extension UsageStore {
             // A failed newer request provides no status evidence, so only a successful
             // publication retires earlier requests for this provider.
             self.providerStatusPublishedGenerations[provider.instanceID] = requestGeneration
+            self.providerStatusLastSuccessAt[provider.instanceID] = Date()
             self.statuses[provider.instanceID] = status
             // A component endpoint is best-effort. Preserve the last good list when the
             // overall status succeeds but the component request or decoding fails.
@@ -42,6 +43,16 @@ extension UsageStore {
             // A failed fetch provides no new status information. Preserve a last good status
             // to avoid flapping, or leave it unset until the first successful fetch.
         }
+    }
+
+    /// Whether the periodic refresh should poll this provider's status page now. Failed fetches record no
+    /// success time, so they retry on the next refresh; a cleared status is always due.
+    func providerStatusRefreshIsDue(_ provider: UsageProvider, now: Date) -> Bool {
+        let id = provider.instanceID
+        return ProviderStatusRefreshPolicy.isDue(
+            lastSuccessAt: self.providerStatusLastSuccessAt[id],
+            indicator: self.statuses[id]?.indicator,
+            now: now)
     }
 
     private func statusRefreshPublicationIsCurrent(
