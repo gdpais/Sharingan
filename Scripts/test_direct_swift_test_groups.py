@@ -351,5 +351,35 @@ class DirectSwiftTestGroupsTests(unittest.TestCase):
                     probe.assert_not_called()
 
 
+class PrivateTestHomeTests(unittest.TestCase):
+    def test_mount_points_under_home_are_found_deepest_first(self):
+        home = tempfile.mkdtemp(prefix="sharingan-mount-parse-")
+        try:
+            resolved = os.path.realpath(home)
+            shallow = f"{resolved}/Library/Developer/DVTDownloads/MetalToolchain/mounts/abc"
+            deep = f"{shallow}/nested"
+            output = "\n".join([
+                "/dev/disk3s1s1 on / (apfs, sealed, local, read-only, journaled)",
+                f"/dev/disk7s1 on {shallow} (apfs, local, nodev, nosuid, read-only, noowners, mounted by runner)",
+                f"/dev/disk8s1 on {deep} (apfs, local, read-only)",
+                f"/dev/disk9s1 on {resolved}-sibling/mnt (apfs, local)",
+            ])
+            self.assertEqual(runner.mount_points_under(output, home), [deep, shallow])
+        finally:
+            os.rmdir(home)
+
+    def test_private_home_detaches_mounts_before_removal(self):
+        with patch.object(runner, "detach_mounts_under") as detach:
+            with runner.private_test_home("sharingan-home-test-") as home:
+                locked = Path(home) / "locked"
+                locked.mkdir()
+                (locked / "file").write_text("x")
+                locked.chmod(0o500)
+            detach.assert_called_once_with(home)
+        if Path(home).exists():
+            locked.chmod(0o700)
+            runner.shutil.rmtree(home)
+
+
 if __name__ == "__main__":
     unittest.main()
