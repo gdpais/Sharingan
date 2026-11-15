@@ -39,6 +39,28 @@ struct SettingsSidebarSizingTests {
     }
 
     @Test
+    func `drag that returns to the saved width keeps the saved width`() async throws {
+        let width = SidebarWidth(value: 250)
+        let window = self.makeWindow(width: width)
+        try await self.settle(window)
+        let content = try #require(window.contentView)
+        let split = try #require(self.splitView(in: content))
+        #expect(split.subviews[0].frame.width == 250)
+
+        // Move away and back before the save delay ends, as a quick drag would.
+        split.setPosition(300, ofDividerAt: 0)
+        try await self.settle(window)
+        split.setPosition(250, ofDividerAt: 0)
+        try await self.settle(window)
+        #expect(split.subviews[0].frame.width == 250)
+
+        try await Task.sleep(for: SettingsSidebarSizing.saveDelay + .milliseconds(200))
+        try await self.settle(window)
+        #expect(width.value == 250)
+        #expect(split.subviews[0].frame.width == 250)
+    }
+
+    @Test
     func `native sidebar keeps the existing saved minimum width`() async throws {
         let width = SidebarWidth(value: 200)
         let window = self.makeWindow(width: width)
