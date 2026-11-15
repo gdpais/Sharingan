@@ -311,42 +311,13 @@ CLI install (installs a `sharingan` symlink to the CLI bundled inside the app; C
 - 🧳 [MCPorter](https://mcporter.dev) — TypeScript toolkit + CLI for Model Context Protocol servers.
 - 🧿 [oracle](https://askoracle.dev) — Ask the oracle when you're stuck. Invoke GPT-5 Pro with a custom context and files.
 
-## Community projects
-The projects below were built for upstream CodexBar and its `codexbar` CLI; they are not affiliated with Sharingan.
-
-## Looking for a Windows version?
-- [Win-CodexBar](https://github.com/Finesssee/Win-CodexBar)
-- [CodexBar for Windows](https://github.com/hinneslung/CodexBar-for-Windows) — Native Windows tray app powered by the original CodexBar CLI through WSL2; x64 and ARM64 installers.
-
-## Linux desktop integration?
+## Linux desktop integration
 - [Linux desktop app](Integrations/Linux/README.md) — x86_64/ARM64 release archives with an installer; Qt 6 usage and spending windows, separate settings, optional system tray, and desktop notifications using the Linux CLI.
 - [Omarchy native widget](Integrations/Omarchy/README.md) — Compact Quickshell usage popup sharing the Linux desktop app’s backend.
-- [CodexBar GTK](https://github.com/SaahiilM/codexbar-gtk) — Community GTK4/libadwaita front-end with usage, spending, and agent sessions from the CodexBar Linux CLI.
-- [codexbar-waybar](https://github.com/Marouan-chak/codexbar-waybar) — Waybar custom module + GTK4 popover for Hyprland / Sway / other Wayland compositors, built on top of the bundled Linux CLI.
-- [codexbar-cosmic-applet](https://github.com/andrew-verde/codexbar-cosmic-applet) — Native COSMIC (System76) desktop panel applet with a tab per provider, pace projections, and cost/token stats, built on top of the bundled Linux CLI.
-- [Codexbar GNOME](https://extensions.gnome.org/extension/9841/codexbar/) — GNOME Shell extension that brings CodexBar usage into the desktop panel.
-- [codexbar-cinnamon-applet](https://github.com/jacobcalvert/codexbar-cinnamon-applet) — Linux Mint Cinnamon panel applet powered by CodexBar's JSON output.
-- [noctalia-codex-usage](https://github.com/rayoplateado/noctalia-codex-usage) — Noctalia/Quickshell plugin that shows Codex 5-hour and weekly usage limits, built on top of the bundled Linux CLI.
-- [KodexBar](https://github.com/tylxr59/KodexBar) — KDE Plasma widget that shows CodexBar usage in the Plasma panel, built on top of the bundled Linux CLI.
-- [codexbar-plasmoid](https://github.com/psimaker/codexbar-plasmoid) — KDE Plasma 6 widget for CodexBar's meter icon, provider switcher, quota windows, pace, credits, local cost, and status, powered by the bundled Linux CLI.
-- [CodexBar Plasma](https://github.com/Lucenx9/codexbar-plasma) — KDE Plasma 6 widget with multi-provider views, account selection, cost history, notifications, configurable providers, and installable `.plasmoid` releases, powered by the bundled Linux CLI.
-- [CodexBar AgentView](https://github.com/materemias/codexbar-agentview) — KDE Plasma 6 widget with usage meters, agent-session search, terminal focus, and kitty session restoration, powered by the bundled Linux CLI.
-- [CodexBar Meter](https://github.com/noctalia-dev/community-plugins/tree/main/codexbar-meter) — Noctalia v5 bar widget and panel showing every enabled provider's quota windows, credits, and pace, installable from Noctalia's plugin store, built on the bundled Linux CLI.
-- [codexbar-dms](https://github.com/quantmind-br/codexbar-dms) — DankMaterialShell bar widget with provider logo pills, a popout of quota windows, reset times, and local spending, and shortcuts to the Linux desktop app's Usage & Spend and Settings windows, sharing that app's backend.
 
-## Desk display
-- [AI Monitor](https://github.com/tobymarks/esp32-ai-monitor) — ESP32 desk display (Cheap Yellow Display) plus a macOS companion app that shows Claude, ChatGPT, Gemini, Copilot, Cursor and Antigravity limits as rings or bars, fed over USB by the bundled CLI. No Wi-Fi on the device, 3D-printable case.
-- [TokenTV](https://github.com/click6067-ship-it/token-tv) — Python host that shows Claude and Codex 5-hour and weekly limits on compatible 240×240 Wi-Fi desk clocks (GeekMagic SmallTV style), using the bundled CLI or `codexbar serve`. It uploads rendered screens to the clock's stock photo album without changing its firmware.
-
-## Status bar & terminal integration
-- [showy-quota](https://github.com/enieuwy/showy-quota) — always-on AI plan quota strips for SketchyBar, tmux, and Zellij (standalone WASM plugin), built on `codexbar serve` / the bundled CLI.
-- [AI Usage Limits](https://github.com/lenadweb/stream-deck-ai-limits) — Elgato Stream Deck integration for macOS: shows a selected CodexBar provider, account, and configurable quota or payload metrics on keys and Stream Deck+ dials, using local `codexbar serve`.
-- [ccx](https://github.com/aaronwong1999/ccx) — macOS menu bar companion for Claude Code/Codex task handoff, using `codexbar usage --provider both --format json` for quota warnings.
-
-## Phone & web
-
-- [Starbridge](https://github.com/T0mSIlver/starbridge) — Community-maintained Android and web app that displays quota windows from the CodexBar CLI on macOS and Linux, with optional quota alerts.
-- [Notify! CodexBar](https://github.com/simplytoast1/notify-codexbar) — Community-maintained macOS companion that reads CodexBar CLI or local `codexbar serve` output and sends selected usage through [Notify!](https://getnotifyapp.com/) for iPhone/iPad widgets, Live Activities, and quota notifications.
+## Community projects
+Upstream CodexBar has a community of menu bar, desktop, desk-display and phone companions, but they are built on
+CodexBar's `codexbar` CLI and need CodexBar installed. None of them reads Sharingan, so they are not listed here.
 
 ## Credits
 Inspired by [ccusage](https://github.com/ryoppippi/ccusage) (MIT), specifically the cost usage tracking.

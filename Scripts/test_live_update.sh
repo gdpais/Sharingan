@@ -8,7 +8,7 @@ PREV_VER=${PREV_TAG#v}
 CUR_VER=${CUR_TAG#v}
 APP_NAME="Sharingan"
 
-ZIP_URL="https://github.com/steipete/CodexBar/releases/download/${PREV_TAG}/${APP_NAME}-macos-universal-${PREV_VER}.zip"
+ZIP_URL="https://github.com/gdpais/Sharingan/releases/download/${PREV_TAG}/${APP_NAME}-macos-universal-${PREV_VER}.zip"
 TMP_DIR=$(mktemp -d /tmp/sharingan-live.XXXX)
 trap 'rm -rf "$TMP_DIR"' EXIT
 
