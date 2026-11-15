@@ -266,6 +266,9 @@ final class SettingsStore {
     @ObservationIgnored var configLoading = false
     @ObservationIgnored let configPersistenceCoordinator = SettingsConfigPersistenceCoordinator()
     @ObservationIgnored var configNeedsReload = false
+    /// Last alphabetical provider order, reused while the providers and their enablement are unchanged.
+    /// The menu bar icon asks for the order on every animation frame.
+    @ObservationIgnored var alphabeticalProviderOrderCache: AlphabeticalProviderOrderCache?
 
     @ObservationIgnored var cachedCodexAccountReconciliationSnapshot:
         CachedCodexAccountReconciliationSnapshot?
@@ -1096,7 +1099,25 @@ extension SettingsStore {
     func providerDisplayOrder() -> [ProviderInstanceID] {
         let custom = self.orderedProviders()
         guard self.providersSortedAlphabetically else { return custom }
-        return Self.alphabeticalProviderOrder(custom, enablement: self.providerEnablement)
+        return self.cachedAlphabeticalProviderOrder(custom)
+    }
+
+    /// `alphabeticalProviderOrder` with the last result reused for the same providers and enablement, so
+    /// per-frame callers (the animated menu bar icon) skip the localized sort.
+    func cachedAlphabeticalProviderOrder(_ providers: [ProviderInstanceID]) -> [ProviderInstanceID] {
+        let enablement = self.providerEnablement
+        if let cache = self.alphabeticalProviderOrderCache,
+           cache.providers == providers,
+           cache.enablement == enablement
+        {
+            return cache.order
+        }
+        let order = Self.alphabeticalProviderOrder(providers, enablement: enablement)
+        self.alphabeticalProviderOrderCache = AlphabeticalProviderOrderCache(
+            providers: providers,
+            enablement: enablement,
+            order: order)
+        return order
     }
 
     static func alphabeticalProviderOrder(
@@ -1146,7 +1167,9 @@ extension SettingsStore {
         _ = metadataByProvider
         let enabled = self.orderedProviders().filter { self.providerEnablement[$0] ?? false }
         guard self.providersSortedAlphabetically else { return enabled }
-        return Self.alphabeticalProviderOrder(enabled, enablement: self.providerEnablement)
+        // Enabled providers keep their relative order in the full alphabetical list (enabled sort first).
+        return self.cachedAlphabeticalProviderOrder(self.orderedProviders())
+            .filter { self.providerEnablement[$0] ?? false }
     }
 
     func setProviderEnabled(provider: UsageProvider, metadata _: ProviderMetadata, enabled: Bool) {
@@ -1232,4 +1255,11 @@ extension SettingsStore {
 
         return ordered
     }
+}
+
+/// Inputs and result of the last alphabetical provider sort, see `SettingsStore.cachedAlphabeticalProviderOrder`.
+struct AlphabeticalProviderOrderCache {
+    let providers: [ProviderInstanceID]
+    let enablement: [ProviderInstanceID: Bool]
+    let order: [ProviderInstanceID]
 }

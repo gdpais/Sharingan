@@ -2,7 +2,11 @@ import SwiftUI
 
 /// Share the saved width with the legacy sidebar while letting the native divider handle dragging.
 struct SettingsSidebarSizing: ViewModifier {
+    /// How long the divider must rest before the new width is saved.
+    static let saveDelay: Duration = .milliseconds(300)
+
     @Binding var width: Double
+    @State private var pendingSave: Task<Void, Never>?
 
     func body(content: Content) -> some View {
         content
@@ -13,7 +17,14 @@ struct SettingsSidebarSizing: ViewModifier {
                 guard newWidth >= SettingsPane.sidebarMinWidth,
                       newWidth <= SettingsPane.sidebarMaxWidth,
                       abs(self.width - newWidth) > 0.5 else { return }
-                self.width = newWidth
+                // Save once the drag settles. Writing the stored width on every frame re-renders the whole
+                // Settings view and moves the column's ideal width mid-drag, which makes the divider lag.
+                self.pendingSave?.cancel()
+                self.pendingSave = Task { @MainActor in
+                    try? await Task.sleep(for: Self.saveDelay)
+                    guard !Task.isCancelled else { return }
+                    self.width = newWidth
+                }
             }
             // Keep this last so the column preference reaches NavigationSplitView.
             .navigationSplitViewColumnWidth(
