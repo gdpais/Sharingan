@@ -16,6 +16,8 @@ struct SettingsSidebarSizingTests {
 
         firstSplit.setPosition(300, ofDividerAt: 0)
         try await self.settle(firstWindow)
+        // The width is saved once the divider rests for `SettingsSidebarSizing.saveDelay`.
+        try await self.waitForSavedWidth(300, in: width, window: firstWindow)
         #expect(width.value == 300)
 
         let secondWindow = self.makeWindow(width: width)
@@ -67,6 +69,13 @@ struct SettingsSidebarSizingTests {
     private func splitView(in view: NSView) -> NSSplitView? {
         if let split = view as? NSSplitView { return split }
         return view.subviews.lazy.compactMap { self.splitView(in: $0) }.first
+    }
+
+    private func waitForSavedWidth(_ expected: Double, in width: SidebarWidth, window: NSWindow) async throws {
+        let deadline = ContinuousClock.now + SettingsSidebarSizing.saveDelay + .seconds(5)
+        while width.value != expected, ContinuousClock.now < deadline {
+            try await self.settle(window)
+        }
     }
 
     private func settle(_ window: NSWindow) async throws {
