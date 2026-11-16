@@ -140,17 +140,19 @@ struct PreferencesView: View {
                 onSelectAbout: { self.selection.requestAboutRoot() })
                 .modifier(SettingsSidebarSizing(width: self.$sidebarWidth))
         } detail: {
-            self.detailView
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
-                .navigationTitle(self.selection.title)
-                // Panes that draw their own heading keep the window title for accessibility and the
-                // Window menu, but drop it from the toolbar.
-                .toolbar(removing: self.showsToolbarTitle ? nil : .title)
-                .toolbar {
-                    ToolbarItem(placement: .navigation) {
-                        SettingsHistoryButtons(selection: self.selection)
-                    }
+            SettingsDetailFillLayout {
+                self.detailView
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+            }
+            .navigationTitle(self.selection.title)
+            // Panes that draw their own heading keep the window title for accessibility and the
+            // Window menu, but drop it from the toolbar.
+            .toolbar(removing: self.showsToolbarTitle ? nil : .title)
+            .toolbar {
+                ToolbarItem(placement: .navigation) {
+                    SettingsHistoryButtons(selection: self.selection)
                 }
+            }
         }
     }
 

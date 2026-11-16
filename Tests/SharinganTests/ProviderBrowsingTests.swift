@@ -112,6 +112,25 @@ struct ProviderBrowsingTests {
     }
 
     @Test
+    func `cached alphabetical order follows enablement changes`() throws {
+        let settings = self.store(config: SharinganConfig(providers: [
+            ProviderConfig(id: .codex, enabled: true),
+            ProviderConfig(id: .gemini, enabled: false),
+            ProviderConfig(id: .claude, enabled: true),
+        ]))
+        let metadata = ProviderDescriptorRegistry.metadata
+        settings.providersSortedAlphabetically = true
+        #expect(settings.enabledProvidersOrdered(metadataByProvider: metadata) == [.claude, .codex])
+        #expect(Array(settings.orderedFirstPartyProviders().prefix(2)) == [.claude, .codex])
+
+        try settings.setProviderEnabled(provider: .gemini, metadata: #require(metadata[.gemini]), enabled: true)
+        #expect(settings.enabledProvidersOrdered(metadataByProvider: metadata) == [.claude, .codex, .gemini])
+        try settings.setProviderEnabled(provider: .claude, metadata: #require(metadata[.claude]), enabled: false)
+        #expect(settings.enabledProvidersOrdered(metadataByProvider: metadata) == [.codex, .gemini])
+        #expect(Array(settings.orderedFirstPartyProviders().prefix(2)) == [.codex, .gemini])
+    }
+
+    @Test
     func `stale undo cannot overwrite an external order or a later mode choice`() {
         let settings = self.store()
         let initial = settings.orderedFirstPartyProviders().map(\.instanceID)

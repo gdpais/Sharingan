@@ -952,6 +952,7 @@ func spendDailyLedgerVisibleSummaries(
 private struct SpendDailyLedger: View {
     let group: SpendDashboardModel.CurrencyGroup
     @State private var showsAllRows = false
+    @State private var tableFitsWidth = true
 
     static let collapsedRowCount = 30
 
@@ -978,8 +979,19 @@ private struct SpendDailyLedger: View {
                     // Scroll sideways only when the pane is too narrow for the table. A sideways scroller
                     // this tall sits under the pointer for much of the page, and every vertical swipe that
                     // starts over one is re-routed by hand to the page, which scrolls far less smoothly.
-                    ViewThatFits(in: .horizontal) {
+                    // The choice compares the offered width with the table's fixed minimum instead of using
+                    // `ViewThatFits`, which measures every row (twice) on each layout pass and made live
+                    // window and sidebar resizes lag.
+                    Color.clear
+                        .frame(maxWidth: .infinity, maxHeight: 0)
+                        .onGeometryChange(for: Bool.self) { geometry in
+                            geometry.size.width >= SpendDailyLedgerLayout.minimumTableWidth
+                        } action: { fits in
+                            self.tableFitsWidth = fits
+                        }
+                    if self.tableFitsWidth {
                         self.table
+                    } else {
                         ScrollView(.horizontal, showsIndicators: true) {
                             self.table
                         }

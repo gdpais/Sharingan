@@ -16,6 +16,8 @@ struct SettingsSidebarSizingTests {
 
         firstSplit.setPosition(300, ofDividerAt: 0)
         try await self.settle(firstWindow)
+        // The width is saved once the divider rests for `SettingsSidebarSizing.saveDelay`.
+        try await self.waitForSavedWidth(300, in: width, window: firstWindow)
         #expect(width.value == 300)
 
         let secondWindow = self.makeWindow(width: width)
@@ -34,6 +36,28 @@ struct SettingsSidebarSizingTests {
         sidebar.isCollapsed = false
         try await self.settle(firstWindow)
         #expect(width.value == 300)
+    }
+
+    @Test
+    func `drag that returns to the saved width keeps the saved width`() async throws {
+        let width = SidebarWidth(value: 250)
+        let window = self.makeWindow(width: width)
+        try await self.settle(window)
+        let content = try #require(window.contentView)
+        let split = try #require(self.splitView(in: content))
+        #expect(split.subviews[0].frame.width == 250)
+
+        // Move away and back before the save delay ends, as a quick drag would.
+        split.setPosition(300, ofDividerAt: 0)
+        try await self.settle(window)
+        split.setPosition(250, ofDividerAt: 0)
+        try await self.settle(window)
+        #expect(split.subviews[0].frame.width == 250)
+
+        try await Task.sleep(for: SettingsSidebarSizing.saveDelay + .milliseconds(200))
+        try await self.settle(window)
+        #expect(width.value == 250)
+        #expect(split.subviews[0].frame.width == 250)
     }
 
     @Test
@@ -67,6 +91,13 @@ struct SettingsSidebarSizingTests {
     private func splitView(in view: NSView) -> NSSplitView? {
         if let split = view as? NSSplitView { return split }
         return view.subviews.lazy.compactMap { self.splitView(in: $0) }.first
+    }
+
+    private func waitForSavedWidth(_ expected: Double, in width: SidebarWidth, window: NSWindow) async throws {
+        let deadline = ContinuousClock.now + SettingsSidebarSizing.saveDelay + .seconds(5)
+        while width.value != expected, ContinuousClock.now < deadline {
+            try await self.settle(window)
+        }
     }
 
     private func settle(_ window: NSWindow) async throws {
