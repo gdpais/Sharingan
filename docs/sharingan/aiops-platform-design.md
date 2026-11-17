@@ -3,12 +3,12 @@ summary: "System design for growing Sharingan from token-usage monitoring into a
 read_when:
   - Planning Sharingan work after Phase 1 (charts)
   - Adding resource sampling, session inspection, log search, insights, or OTLP ingest/export
-  - Deciding where new fork-owned telemetry code and storage should live
+  - Deciding where new telemetry code and storage should live
 ---
 
 # Sharingan AIOps platform: system design
 
-Status: **Draft, 2026-11-05.** It continues the fork's phase numbering. Phase 0 was the rebrand
+Status: **Draft, 2026-11-17.** It continues Sharingan's phase numbering. Phase 0 was the rebrand
 (gdpais/Sharingan#1) and Phase 1 the chart fixes (gdpais/Sharingan#2). This document plans Phases 2–8.
 
 ## 1. Summary
@@ -23,21 +23,21 @@ The work has five pillars plus one cross-cutting layer:
 
 | Pillar | Question it answers | State today |
 |---|---|---|
-| **Spend** | Tokens, quotas, cost, pace | Mature (upstream CodexBar) |
+| **Spend** | Tokens, quotas, cost, pace | Mature (inherited from CodexBar) |
 | **Resources** | CPU, memory, disk I/O, energy and ports per agent session; leftover servers and worktrees; clean-up | Process discovery only |
 | **Sessions** | Live state, step timeline, plan progress, and an interpretation of mid-session steps | Discovery, per-turn cost, and Codex-only tool activity |
 | **Logs** | Searchable, normalized agent events and tool diagnostic logs | None |
 | **Traces** | An OpenTelemetry-shaped model, with OTLP in and out for integrations | None |
 | *Insights* (cross-cutting) | Deterministic detectors for loops, stalls, cost spikes, runaway processes and leftovers | Quota pace warnings only |
 
-The design adds **one host-agnostic telemetry engine**: a new `CodexBarTelemetry` SwiftPM target with its own
+The design adds **one host-agnostic telemetry engine**: a new `SharinganTelemetry` SwiftPM target with its own
 SQLite store. It ingests from three kinds of source:
 
 1. Agent transcripts already on disk. These need zero setup and are the primary source.
 2. Process sampling of each agent's process tree.
 3. Optional push sources: Claude Code hooks, and OTLP from agents that export OpenTelemetry.
 
-The same engine runs inside the menu bar app on macOS, or inside `codexbar serve --collect` on Linux and
+The same engine runs inside the menu bar app on macOS, or inside `sharingan serve --collect` on Linux and
 headless machines. A single-writer lease lets the two hosts swap without coordination. Every surface reads from
 the same store: menu, Console window, CLI, web UI and HTTP API.
 
@@ -68,7 +68,7 @@ design adopts those safety rules unchanged.
 - **G7. Traces and integrations.** Use one normalized trace model shaped like OpenTelemetry, with GenAI
   semantic-convention attribute names where they exist. Ingest OTLP/HTTP from agents and export OTLP to any
   collector the user picks: Langfuse, Phoenix, Grafana Tempo, Datadog and similar.
-- **G8. Stay cheap.** Keep the monitor's own overhead below its budget (§12.2) and the upstream merge cost low.
+- **G8. Stay cheap.** Keep the monitor's own overhead below its budget (§12.2), and keep new work in its own module so the rest of the app changes little.
 
 ### Non-goals (for this design)
 
@@ -80,7 +80,7 @@ design adopts those safety rules unchanged.
   provider APIs expose.
 - Per-process GPU accounting. It needs root or private APIs on macOS; see §18.
 - Any automatic LLM calls. LLM-assisted explanation is a later, explicitly opt-in feature (§9.4).
-- Rewriting upstream's Spend pipeline. The cost ledger stays the source of truth for billing.
+- Rewriting the existing Spend pipeline. The cost ledger stays the source of truth for billing.
 
 ## 3. Requirements
 
@@ -99,7 +99,7 @@ design adopts those safety rules unchanged.
 | F9 | Summarize each turn deterministically: files changed, commands run (with failures), searches, tokens, cost, wall time | Sessions |
 | F10 | Read message and tool bodies on demand only, with redaction and size caps | Sessions |
 | F11 | Run detectors that produce insights with evidence (span IDs), severity and a suggested action | Insights |
-| F12 | Deliver insights through the menu badge, macOS notifications and outbound `codexbar hooks` events | Insights |
+| F12 | Deliver insights through the menu badge, macOS notifications and outbound `sharingan hooks` events | Insights |
 | F13 | Search metadata and previews across sessions; full-content indexing is opt-in | Logs |
 | F14 | Tail agent diagnostic logs (Claude Code debug logs, Codex TUI log, MCP server logs) as leveled events | Logs |
 | F15 | Expose versioned `/telemetry/v1/*` read APIs and SSE; add CLI equivalents | Traces |
@@ -120,15 +120,17 @@ design adopts those safety rules unchanged.
 
 ### 3.3 Constraints
 
-- Fork rules (`AGENTS.md`): internal names stay `CodexBar*`. Prefer additive files. Keep diffs to upstream files
-  minimal. Config paths stay `~/.config/codexbar` and `~/.codexbar`.
+- Project rules (`AGENTS.md`): everything new uses Sharingan names, and no CodexBar names are introduced.
+  Sharingan runs side by side with CodexBar, so every on-disk, defaults, Keychain and log path comes from
+  `AppIdentity` (`~/.config/sharingan`, `~/.sharingan`, `~/Library/{Application Support,Caches,Logs}/Sharingan`).
+  The telemetry store follows the same rule (§5.5).
 - Swift 6 strict concurrency and SwiftPM. **No new package dependencies** without sign-off (`VISION.md`).
   This rules out an OTLP protobuf library in v1 and drives decision D5.
 - No checks or tests that can raise Keychain prompts. The telemetry engine needs no credentials at all,
   except for an optional exporter auth header.
 - Cloud authoring sessions have no Swift toolchain, so every slice must be PR-sized and verified by macOS CI.
   Logic stays in pure, fixture-tested functions.
-- Upstream treats on-disk transcript formats as *not* a public compatibility guarantee
+- The existing Agent Sessions design treats on-disk transcript formats as *not* a public compatibility guarantee
   (`docs/agent-sessions-design.md`). The design must survive format drift.
 
 ### 3.4 Assumptions
@@ -145,15 +147,15 @@ Much of the substrate is already in the repo. The plan builds on it rather than 
 
 | Capability | Existing code | Reuse in this design |
 |---|---|---|
-| Agent session discovery (Codex, Claude, pi/omp; local plus SSH/Tailscale) | `LocalAgentSessionScanner`, `PiFamilySessionScanner`, `AgentSession`, `RemoteSessionFetcher`, `codexbar sessions --json-v2` | Root PIDs and session identity for resource attribution; the remote pull pattern |
+| Agent session discovery (Codex, Claude, pi/omp; local plus SSH/Tailscale) | `LocalAgentSessionScanner`, `PiFamilySessionScanner`, `AgentSession`, `RemoteSessionFetcher`, `sharingan sessions --json-v2` | Root PIDs and session identity for resource attribution; the remote pull pattern |
 | Process inspection (libproc) | `DarwinProcessEnumerator`: `proc_listpids`, `PROC_PIDTBSDINFO` (ppid, start time), `KERN_PROCARGS2`, cwd, `PROC_PIDLISTFDS` | Process tree and port discovery; extend with `proc_pid_rusage` |
-| Transcript cost ledger (SQLite, request de-duplication, fork/subagent coverage) | `Vendored/CostUsage/*` (`CostUsageScanner+Claude`, `+RequestIdentity`, `+ForkCoverage`), stored under `Caches/CodexBar/cost-usage/` | Stays the billing source of truth. Telemetry reuses its request-identity rules and pricing resolver. |
+| Transcript cost ledger (SQLite, request de-duplication, fork/subagent coverage) | `Vendored/CostUsage/*` (`CostUsageScanner+Claude`, `+RequestIdentity`, `+ForkCoverage`), stored under `Caches/Sharingan/cost-usage/` | Stays the billing source of truth. Telemetry reuses its request-identity rules and pricing resolver. |
 | Per-turn requests and turn performance (TTFT, duration, tokens/s) | `CostUsageSessionTurn`, `CostUsageSessionRequest`, `CostUsageTurnPerformance*` | Attributes on turn and model-call spans |
 | Tool activity (Codex native, `event_msg/item_completed`) | `SessionToolActivityParser`, `SessionToolActivityStore`, `SpendSessionToolActivityView` | Seed of the Codex normalizer: identity rules, bounded projection, on-demand body reads |
 | Per-provider disk footprint | `ProviderStorageFootprint`, `StorageBreakdownMenuView` | The "transcripts and caches" part of disk leftovers |
 | Local HTTP server with token auth and Host allowlist | `CLILocalHTTPServer`, `CLIServeAuth`, `CLIServeCommand` (`/health`, `/usage`, `/cost`, `/dashboard/v1/snapshot`, web UI) | Mount `/telemetry/v1/*` and OTLP routes. Needs request-body parsing (§10.4). |
-| Outbound automation | `Hooks/*` (`HookEventType`, `HookRunner`, `HookRateLimiter`), `codexbar hooks watch` | Deliver insights as new hook event types |
-| Redaction and logging | `LogRedactor`, `CodexBarLog` | Redact previews and stored attributes |
+| Outbound automation | `Hooks/*` (`HookEventType`, `HookRunner`, `HookRateLimiter`), `sharingan hooks watch` | Deliver insights as new hook event types |
+| Redaction and logging | `LogRedactor`, `SharinganLog` | Redact previews and stored attributes |
 | Model metadata | `ModelsDevPricing` (includes `contextWindow`) | The context-pressure detector |
 | Power policy | `backgroundWorkLowPowerModeEnabled` in `SettingsStore` | Collector cadence clamps |
 | Session browser and spend dashboard | `SessionUsageBrowser`, `SpendDashboard/*` | Entry points into the new Console session view |
@@ -205,12 +207,12 @@ flowchart TB
 
     store -- read-only --> menu["Menu bar<br/>macOS"]
     store -- read-only --> console["Console window<br/>macOS"]
-    store -- read-only --> cli["codexbar CLI<br/>macOS, Linux"]
+    store -- read-only --> cli["sharingan CLI<br/>macOS, Linux"]
     store -- read-only --> api["serve API<br/>/telemetry/v1, web UI"]
     store -- read-only --> other["Other host<br/>waits for the lease"]
 ```
 
-One writer host (`Sharingan.app` or `codexbar serve --collect`) runs the engine and holds `telemetry.lock`.
+One writer host (`Sharingan.app` or `sharingan serve --collect`) runs the engine and holds `telemetry.lock`.
 The hook writes to a spool instead of the store, so it
 never needs the lease. Every surface, and a second host if one is running, reads the store without writing. Dashed
 parts arrive in Phase 7.
@@ -257,7 +259,7 @@ creating a duplicate. Without hooks, only the transcript path runs and the state
 The engine is a library. It runs in-process in one of two hosts:
 
 - **Menu bar app (macOS default).** It starts the collector when any telemetry feature is enabled.
-- **`codexbar serve --collect` (Linux, headless, remote, and macOS when OTLP ingest is enabled).** This long-running
+- **`sharingan serve --collect` (Linux, headless, remote, and macOS when OTLP ingest is enabled).** This long-running
   process already exists. Phase 7 can register it as a per-user LaunchAgent (`SMAppService.agent`) or a systemd
   user unit for always-on collection.
 
@@ -274,8 +276,8 @@ spool that the writer drains (§8.4).
 The store holds data that cannot be rebuilt: resource samples, hook and OTLP events, and
 insight history. It therefore lives outside Caches:
 
-- macOS: `~/Library/Application Support/CodexBar/telemetry/telemetry-v1.sqlite`
-- Linux: `${XDG_STATE_HOME:-~/.local/state}/codexbar/telemetry/telemetry-v1.sqlite`
+- macOS: `~/Library/Application Support/Sharingan/telemetry/telemetry-v1.sqlite`
+- Linux: `${XDG_STATE_HOME:-~/.local/state}/sharingan/telemetry/telemetry-v1.sqlite`
 
 The directory is `0700` and the files are `0600`.
 
@@ -296,12 +298,12 @@ default; the daemon then becomes the only writer.
 
 **D2. Storage.**
 Options:
-- (a) Extend upstream's cost ledger.
+- (a) Extend the existing cost ledger.
 - (b) A new SQLite database.
 - (c) DuckDB or an embedded time-series database.
 
-**Choice: (b).** SQLite is already linked (`CSQLite3`) and needs no new dependency. A separate file keeps
-upstream's carefully migrated ledger untouched, which keeps merges cheap. *Cost:* two stores. Cost is not
+**Choice: (b).** SQLite is already linked (`CSQLite3`) and needs no new dependency. A separate file leaves
+the carefully migrated cost ledger untouched, so telemetry can't break billing history. *Cost:* two stores. Cost is not
 copied into telemetry: model-call spans keep token counts and the request identity, and cost is resolved at
 read time with the shared pricing resolver, so the two stores cannot disagree and price fixes apply
 retroactively. *Revisit (c)* if month-scale analytical queries get slow.
@@ -323,7 +325,7 @@ Options:
 - (b) The OpenTelemetry span/log model with `gen_ai.*` attribute names where defined.
 
 **Choice: (b)** internally, mapped at the export boundary. OTel GenAI semantic conventions are still marked
-*development*, so the exporter pins a semconv version and keeps the mapping in one file. Fork-specific
+*development*, so the exporter pins a semconv version and keeps the mapping in one file. Sharingan-specific
 attributes use a `sharingan.*` prefix.
 
 **D5. OTLP wire format.**
@@ -533,7 +535,7 @@ Each tick runs these steps:
    probable class exists. Probable items are never cleaned up without an extra confirmation step.
 
 The sampler only ever inspects the user's own UID and never reads process environments. That matches
-upstream's privacy rule. Argv previews go through `LogRedactor` and are truncated.
+the existing Agent Sessions privacy rule. Argv previews go through `LogRedactor` and are truncated.
 
 ### 8.3 Disk footprint and clean-up
 
@@ -545,7 +547,7 @@ upstream's privacy rule. Argv previews go through `LogRedactor` and are truncate
   - **disk**: growth in transcripts and caches. This reuses `ProviderStorageFootprint` and is informational only.
 - **Safety rules.** These are Mizu's rules plus a few of our own, and they are not configurable:
   1. Only items in the session's lineage are eligible. *Probable* items need a second confirmation.
-  2. Every item is listed before anything happens. Dry-run is the CLI default (`codexbar cleanup` lists; `--apply
+  2. Every item is listed before anything happens. Dry-run is the CLI default (`sharingan cleanup` lists; `--apply
      <ids>` acts).
   3. Processes get SIGTERM, then a 5 s wait. SIGKILL needs a separate confirmation. Before signalling, the tool
      re-checks `(pid, start_time)` so that a reused PID is never hit.
@@ -558,11 +560,11 @@ upstream's privacy rule. Argv previews go through `LogRedactor` and are truncate
 
 ### 8.4 Hook ingest (Claude Code, opt-in)
 
-- `codexbar ingest install-hooks --claude` adds `command` hooks for `SessionStart`, `UserPromptSubmit`, `PreToolUse`,
+- `sharingan ingest install-hooks --claude` adds `command` hooks for `SessionStart`, `UserPromptSubmit`, `PreToolUse`,
   `PostToolUse`, `Notification`, `PreCompact`, `Stop`, `SubagentStop` and `SessionEnd` to `~/.claude/settings.json`.
   It is idempotent, writes a timestamped backup, tags its entries with a marker, and `--uninstall` removes only the
   marked entries. The app exposes the same toggle.
-- **The hook command must be invisible to the agent.** `codexbar ingest hook --source claude`:
+- **The hook command must be invisible to the agent.** `sharingan ingest hook --source claude`:
   - reads stdin, which is capped at 1 MiB;
   - projects the payload to metadata: event, `session_id`, `transcript_path`, `cwd`, tool name, tool call ID,
     and input/output sizes and hashes;
@@ -582,7 +584,7 @@ upstream's privacy rule. Argv previews go through `LogRedactor` and are truncate
 
 ### 8.5 OTLP receiver (Phase 7)
 
-- `codexbar serve --collect --otlp` mounts `POST /v1/logs`, `/v1/metrics` and `/v1/traces`, accepting
+- `sharingan serve --collect --otlp` mounts `POST /v1/logs`, `/v1/metrics` and `/v1/traces`, accepting
   `application/json` only.
 - The server binds to loopback by default. A non-loopback bind requires the existing bearer token, and the existing
   Host-header allowlist applies on every bind.
@@ -591,7 +593,7 @@ upstream's privacy rule. Argv previews go through `LogRedactor` and are truncate
   Unknown emitters still land as generic spans and events under a synthetic session per
   `service.instance.id`.
 - Content attributes (prompt text and tool output) are dropped unless content capture is on.
-- Setup helpers (`codexbar ingest configure --codex|--claude`) print or write the env and config lines for each agent.
+- Setup helpers (`sharingan ingest configure --codex|--claude`) print or write the env and config lines for each agent.
   The `--write` variant is idempotent and makes a backup before editing.
 
 ## 9. Interpretation engine
@@ -615,8 +617,8 @@ upstream's privacy rule. Argv previews go through `LogRedactor` and are truncate
 
 - **With hooks**, transitions are exact. **Without hooks**, `awaiting_permission` is inferred when four things hold:
   a `tool_use` has no result for more than 20 s, the tool is one that normally needs approval, process CPU is near
-  zero, and no descendant was spawned. The UI labels this "probably waiting for approval". Upstream lists
-  permission-waiting as an Agent Sessions non-goal, so this lives only in the fork's Console and menu additions.
+  zero, and no descendant was spawned. The UI labels this "probably waiting for approval". The existing Agent
+  Sessions design lists permission-waiting as a non-goal, so this lives only in the new Console and menu additions.
 - `live_detail` holds a short, redacted headline such as `Bash: swift test --filter Retry · 1m12s` or
   `Edit Sources/…/RetryPolicy.swift`.
 
@@ -674,7 +676,7 @@ Nothing is ever sent automatically or in the background.
 
 ## 10. Interfaces
 
-### 10.1 HTTP (served by `codexbar serve`, same auth model as `/dashboard/v1`)
+### 10.1 HTTP (served by `sharingan serve`, same auth model as `/dashboard/v1`)
 
 | Route | Purpose |
 |---|---|
@@ -696,17 +698,17 @@ ever added; anything breaking goes in `/telemetry/v2`.
 New commands are kept in new files and sit under existing namespaces where possible:
 
 ```
-codexbar sessions inspect <id> [--json]          # state, plan, turn summaries, insights
-codexbar sessions trace <id> [--format tree|json|otlp]
-codexbar resources [--watch] [--interval 2]      # live per-session CPU/RAM/ports ("top")
-codexbar cleanup [--apply <ids>] [--kill]        # dry-run by default
-codexbar logs search <query> [--provider --since --errors --tool]
-codexbar insights [--open] [--json]
-codexbar ingest hook --source claude             # used by installed hooks; silent, exit 0
-codexbar ingest install-hooks --claude [--uninstall]
-codexbar ingest configure --claude|--codex [--write]
-codexbar serve --collect [--otlp]
-codexbar telemetry status|purge|export --otlp-endpoint <url> [--since 24h]
+sharingan sessions inspect <id> [--json]          # state, plan, turn summaries, insights
+sharingan sessions trace <id> [--format tree|json|otlp]
+sharingan resources [--watch] [--interval 2]      # live per-session CPU/RAM/ports ("top")
+sharingan cleanup [--apply <ids>] [--kill]        # dry-run by default
+sharingan logs search <query> [--provider --since --errors --tool]
+sharingan insights [--open] [--json]
+sharingan ingest hook --source claude             # used by installed hooks; silent, exit 0
+sharingan ingest install-hooks --claude [--uninstall]
+sharingan ingest configure --claude|--codex [--write]
+sharingan serve --collect [--otlp]
+sharingan telemetry status|purge|export --otlp-endpoint <url> [--since 24h]
 ```
 
 ### 10.3 Export (Phase 7)
@@ -725,7 +727,7 @@ codexbar telemetry status|purge|export --otlp-endpoint <url> [--since 24h]
 
 `CLILocalHTTPServer` parses only the request line and headers. The OTLP receiver needs bounded body reads:
 `Content-Length` capped at 4 MiB, no chunked encoding in v1, and a read deadline. The change should be one
-additive body-reader helper plus a route hook, keeping the upstream diff small.
+additive body-reader helper plus a route hook, keeping the change to the server small.
 
 ## 11. User surfaces
 
@@ -755,7 +757,7 @@ additive body-reader helper plus a route hook, keeping the upstream diff small.
 
 - **Entry points.** The existing Usage & Spend session browser gets "Open in Console" from a session row, so that
   cost history leads straight into the step timeline.
-- **Web UI** (`codexbar serve`). It gets the same Sessions and Resources views, read-only. This is the Linux and
+- **Web UI** (`sharingan serve`). It gets the same Sessions and Resources views, read-only. This is the Linux and
   remote story.
 - **Widgets.** A "Live agents" widget is deferred until the data model settles.
 
@@ -797,7 +799,7 @@ synthetic-load overhead exceeds the §3.2 budget.
 - Spans and events older than 14 days are deleted after their turns are summarized.
 - When the store is over budget, the oldest data goes first, with resources before spans before summaries.
 - `auto_vacuum = INCREMENTAL` runs in small steps while idle.
-- `codexbar telemetry purge` and a "Delete all telemetry" button remove everything.
+- `sharingan telemetry purge` and a "Delete all telemetry" button remove everything.
 
 ### 12.4 Failure modes
 
@@ -847,32 +849,31 @@ synthetic-load overhead exceeds the §3.2 budget.
 - **Files.** The telemetry directory is `0700` and its files `0600`. Purge removes the database, its WAL, the spool
   and the export queue.
 
-## 14. Upstream merge strategy
+## 14. Code layout
 
 Almost all new code goes in new places:
 
-- `Sources/CodexBarTelemetry/`: a new target with the engine, store, collectors, normalizers, interpreter and
+- `Sources/SharinganTelemetry/`: a new target with the engine, store, collectors, normalizers, interpreter and
   detectors.
-- `Sources/CodexBar/Console/`: the Console window and the menu section providers.
-- `Sources/CodexBarCLI/Telemetry*.swift`: new commands and routes.
-- `Tests/CodexBarTelemetryTests/`, plus portable tests mirrored into `TestsLinux/`.
-- `docs/sharingan/`: fork-owned docs, this file included.
+- `Sources/Sharingan/Console/`: the Console window and the menu section providers.
+- `Sources/SharinganCLI/Telemetry*.swift`: new commands and routes.
+- `Tests/SharinganTelemetryTests/`, plus portable tests mirrored into `TestsLinux/`.
+- `docs/sharingan/`: this file and later telemetry docs.
 
-The upstream files that must change are kept to small seams:
+Existing files change only at small seams, which keeps each phase easy to review:
 
 | File | Change |
 |---|---|
-| `Package.swift` | Add the `CodexBarTelemetry` target and its test target; add dependency edges from `CodexBar` and `CodexBarCLI` |
+| `Package.swift` | Add the `SharinganTelemetry` target and its test target; add dependency edges from `Sharingan` and `SharinganCLI` |
 | `CLIEntry.swift`, `CLIHelp.swift` | One dispatch line per new command namespace, delegating to new files |
 | `CLIServeCommand.swift`, `CLILocalHTTPServer.swift` | A route hook for `/telemetry/v1/*` and `/v1/*`; a bounded body reader (§10.4) |
 | `Hooks/HookEvent.swift` | Four new `HookEventType` cases |
 | Menu composition / settings pane registry | One section provider and one settings pane registration |
 | `DarwinProcessEnumerator.swift` | None. New libproc calls go in a separate file through an extension. |
 
-Upstream's Agent Sessions design lists historical analytics, permission-waiting state and a persistent
-remote daemon as non-goals. This design does the first two and offers an optional collector daemon, so it
-should be treated as **fork-only**. If upstream later
-wants pieces of it (the process sampler, the OTLP exporter), the module boundary makes them easy to offer.
+The existing Agent Sessions design (`docs/agent-sessions-design.md`) lists historical analytics,
+permission-waiting state and a persistent remote daemon as non-goals. This design deliberately does the first
+two and offers an optional collector daemon. When it lands, that doc's non-goals should be updated to point here.
 
 ## 15. Roadmap
 
@@ -881,18 +882,18 @@ S, M or L.
 
 | Phase | Scope | Size | Exit criteria |
 |---|---|---|---|
-| **2. Telemetry foundation** | `CodexBarTelemetry` target; store, lease, retention scaffolding; Claude Code and Codex normalizers; backfill and tailer with checkpoints; `codexbar sessions trace\|inspect`; turn summaries and plan tracker | L | Golden span trees for synthetic fixtures of both dialects. Re-ingest is idempotent, including shuffled, duplicated and truncated input. Cold backfill of 30 days of synthetic logs within a CI perf gate; incremental tick < 50 ms. Linux CLI tests green. |
-| **3. Resources and clean-up (Mizu parity)** | Sampler for Darwin and Linux; lineage; rusage; ports; leftovers; worktree detection; `codexbar resources`, `codexbar cleanup`; menu chips, Dev servers, Leftovers | L | Overhead within budget under synthetic load. Mach-time conversion tested. Clean-up refuses dirty worktrees, PIDs not in the lineage, and reused PIDs (fakes). Real signals are never sent in tests. |
+| **2. Telemetry foundation** | `SharinganTelemetry` target; store, lease, retention scaffolding; Claude Code and Codex normalizers; backfill and tailer with checkpoints; `sharingan sessions trace\|inspect`; turn summaries and plan tracker | L | Golden span trees for synthetic fixtures of both dialects. Re-ingest is idempotent, including shuffled, duplicated and truncated input. Cold backfill of 30 days of synthetic logs within a CI perf gate; incremental tick < 50 ms. Linux CLI tests green. |
+| **3. Resources and clean-up (Mizu parity)** | Sampler for Darwin and Linux; lineage; rusage; ports; leftovers; worktree detection; `sharingan resources`, `sharingan cleanup`; menu chips, Dev servers, Leftovers | L | Overhead within budget under synthetic load. Mach-time conversion tested. Clean-up refuses dirty worktrees, PIDs not in the lineage, and reused PIDs (fakes). Real signals are never sent in tests. |
 | **4. Session Inspector and live state** | Console window (Sessions tab, timeline, resource strip, plan, files, on-demand bodies); state machine; vnode tailing; opt-in Claude hook installer and spool | L | State latency ≤ 3 s with hooks and ≤ 15 s without, on fixtures with an injected clock. Hide personal information blocks bodies. Installer round-trips `settings.json` byte-for-byte on uninstall. |
 | **5. Insights** | Detector framework; the §9.2 detectors; insight store; notifications; new hook event types; Insights tab | M | Every detector has positive and negative fixtures. Rate limiting tested. Thresholds configurable. |
-| **6. Logs** | FTS5 over metadata and previews; tailing of agent diagnostic and MCP logs with level parsing; opt-in content index; Logs tab and `codexbar logs search` | M | p95 < 200 ms over a 30-day synthetic corpus. FTS5 availability verified for both the macOS system SQLite and the Linux `libsqlite3` (fallback: `LIKE` over previews). |
+| **6. Logs** | FTS5 over metadata and previews; tailing of agent diagnostic and MCP logs with level parsing; opt-in content index; Logs tab and `sharingan logs search` | M | p95 < 200 ms over a 30-day synthetic corpus. FTS5 availability verified for both the macOS system SQLite and the Linux `libsqlite3` (fallback: `LIKE` over previews). |
 | **7. Traces and integrations** | OTLP/HTTP JSON receiver (`serve --collect --otlp`); Claude Code and Codex OTel mappers; exporter with disk queue and presets; `/telemetry/v1` frozen; web UI views; optional LaunchAgent or systemd unit | M | Round trip: transcript → OTLP export → OTLP ingest gives an identical trace. API contract tests. Receiver fuzzed with malformed JSON. |
 | **8. Assisted explanations (optional)** | Opt-in "Explain this turn" with payload preview and spend cap | S | No request without explicit action. Preview equals the sent payload (test). |
 
 Suggested first slices, each a separate CI-verified PR:
 
 - **Slice 2a.** Target, store and lease, Claude normalizer, and `sessions trace` behind a hidden flag.
-- **Slice 3a.** Sampler and lineage, with a `codexbar resources --json` read-out and no UI.
+- **Slice 3a.** Sampler and lineage, with a `sharingan resources --json` read-out and no UI.
 
 Both are useful alone. Together they unblock Phase 4.
 
@@ -925,7 +926,7 @@ Both are useful alone. Together they unblock Phase 4.
 - **Overhead regressions** in a menu bar app. Mitigations: the CI performance gate and self-metrics in Diagnostics.
 - **Misattributed clean-up.** Mitigations: lineage-only eligibility, extra confirmation for probable items, no
   `--force`, and re-checking `(pid, start_time)` before signalling.
-- **Upstream churn** in session discovery and the cost scanner. Telemetry depends on a small, stable surface:
+- **Churn** in session discovery and the cost scanner. Telemetry depends on a small, stable surface:
   `AgentSession` and the request-identity rules.
 
 **Open questions for the owner.**
@@ -939,7 +940,6 @@ Both are useful alone. Together they unblock Phase 4.
    presets.
 5. How should remote hosts work: keep SSH pull (`sessions inspect --json` over SSH, no daemon), or allow a remote
    `serve --collect` with token-authenticated pull?
-6. Should any of this be offered upstream? That decides whether new types carry fork-neutral names.
 
 ## 18. What to revisit as the system grows
 
