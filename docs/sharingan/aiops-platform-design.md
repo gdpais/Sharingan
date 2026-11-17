@@ -160,53 +160,118 @@ Much of the substrate is already in the repo. The plan builds on it rather than 
 
 ## 5. High-level architecture
 
-```
-                            ┌───────────────────── Sources ──────────────────────┐
-  zero-setup (pull)         │ ~/.claude/projects/**.jsonl   ~/.codex/sessions/**  │
-                            │ ~/.pi/agent/sessions/**       agent debug/MCP logs  │
-  OS (sampled)              │ libproc / /proc: process tree, rusage, sockets      │
-                            │ git: worktree list / status                         │
-  opt-in (push)             │ Claude Code hooks ─▶ `codexbar ingest hook` ─▶ spool│
-                            │ OTLP/HTTP JSON (Claude Code, Codex, others)         │
-                            └──────────────┬──────────────────────────────────────┘
-                                           │
-              ┌────────────────────────────▼─────────────────────────────┐
-              │ CodexBarTelemetry engine (one writer, holds lease)       │
-              │                                                          │
-              │  Collectors                     Pipeline                 │
-              │  ├ TranscriptTailer ─┐         ┌ Normalizers (per dialect)│
-              │  ├ ProcessSampler   ─┼─ batch ─┤ Correlator (IDs, merge) │
-              │  ├ FootprintScanner ─┤         ├ Interpreter (state, plan,│
-              │  ├ SpoolDrainer     ─┤         │  turn summaries)        │
-              │  └ OTLPReceiver*    ─┘         └ Detectors ─▶ Insights   │
-              │                                        │                 │
-              │                     TelemetryStore (SQLite WAL, 0600)    │
-              │                     Retention / rollups / budget         │
-              │                     Exporter* (OTLP out, disk queue)     │
-              └───────────────┬───────────────────────────┬──────────────┘
-                              │ read-only (WAL readers)   │
-     ┌────────────────────────┼───────────────┬───────────┴──────────┐
-     ▼                        ▼               ▼                      ▼
-  Menu bar (macOS)       Console window    codexbar CLI        codexbar serve
-  session rows, badges   Sessions/Resources trace, top,        /telemetry/v1/*, SSE,
-  leftovers, insights    Logs/Insights      logs, cleanup       web UI, OTLP in*
-                                                                 (* Phase 7)
+### 5.1 Architecture
+
+```mermaid
+flowchart TB
+    agents["AI coding agents<br/>Claude Code · Codex · pi"]
+    kernel["OS kernel<br/>libproc · /proc"]
+    git["git<br/>worktrees"]
+    transcripts["Transcripts<br/>~/.claude · ~/.codex"]
+    spool["Hook spool<br/>append-only, no lease"]
+
+    agents -- appends --> transcripts
+    agents -- "hook runs ingest hook" --> spool
+
+    subgraph host["Writer host"]
+        tailer[TranscriptTailer]
+        drainer[SpoolDrainer]
+        otlpin["OTLPReceiver<br/>Phase 7"]
+        sampler[ProcessSampler]
+        footprint[FootprintScanner]
+        subgraph pipeline[Pipeline]
+            direction LR
+            normalize["Normalize<br/>per dialect"] --> correlate["Correlate<br/>deterministic IDs"]
+            correlate --> interpret["Interpret<br/>state, plan, summaries"] --> detect["Detect<br/>insights"]
+        end
+        exporter["Exporter<br/>Phase 7"]
+    end
+
+    transcripts -- "tails from checkpoint" --> tailer
+    spool -- "drained on arrival" --> drainer
+    agents -. "OTLP (Phase 7)" .-> otlpin
+    kernel -- "sampled 2–60 s" --> sampler
+    git -- "list, status" --> footprint
+    tailer & drainer & otlpin & sampler & footprint -- records --> pipeline
+    pipeline -. spans .-> exporter
+
+    lock["telemetry.lock"]
+    store[("Telemetry store<br/>telemetry-v1.sqlite · WAL")]
+    backend["Your OTLP backend<br/>Langfuse, Phoenix, …"]
+
+    host -- "holds flock" --> lock
+    pipeline -- "upserts batches" --> store
+    exporter -. "OTLP/HTTP" .-> backend
+
+    store -- read-only --> menu["Menu bar<br/>macOS"]
+    store -- read-only --> console["Console window<br/>macOS"]
+    store -- read-only --> cli["codexbar CLI<br/>macOS, Linux"]
+    store -- read-only --> api["serve API<br/>/telemetry/v1, web UI"]
+    store -- read-only --> other["Other host<br/>waits for the lease"]
 ```
 
-**Hosts.** The engine is a library. It runs in-process in one of two hosts:
+One writer host (`Sharingan.app` or `codexbar serve --collect`) runs the engine and holds `telemetry.lock`.
+The hook writes to a spool instead of the store, so it
+never needs the lease. Every surface, and a second host if one is running, reads the store without writing. Dashed
+parts arrive in Phase 7.
+
+### 5.2 Workflow: one tool call, end to end
+
+This follows one failing `swift test` run from Claude Code, with hooks installed, to an alert.
+
+```mermaid
+sequenceDiagram
+    participant A as Claude Code
+    participant H as ingest hook
+    participant T as Transcript
+    participant E as Engine
+    participant S as Store
+    participant U as You
+
+    Note over A,U: Fast path (hook)
+    A->>H: PreToolUse · Bash
+    H->>E: spool line, drained on arrival
+    E->>S: upsert span a1 · open
+    S->>U: state: running tool (≤ 3 s)
+
+    Note over A,U: Durable path (transcript)
+    A->>T: appends tool_use
+    T->>E: tailed ≤ 15 s
+    E->>S: same span a1 · merged
+
+    Note over A,U: Result → insight
+    A->>T: tool_result · exit 1
+    T->>E: tailed
+    E->>S: close a1 · status error
+    Note over E: Loop detector: 3rd identical failure
+    E->>S: open insight: Loop
+    S->>U: badge · alert · hook
+```
+
+The hook path makes the live state fast, and the transcript path makes the record complete. Both carry the same
+tool call ID, so both derive the same span ID `a1`, and the second arrival merges into the first instead of
+creating a duplicate. Without hooks, only the transcript path runs and the state lags by up to 15 s.
+
+### 5.3 Hosts
+
+The engine is a library. It runs in-process in one of two hosts:
 
 - **Menu bar app (macOS default).** It starts the collector when any telemetry feature is enabled.
 - **`codexbar serve --collect` (Linux, headless, remote, and macOS when OTLP ingest is enabled).** This long-running
   process already exists. Phase 7 can register it as a per-user LaunchAgent (`SMAppService.agent`) or a systemd
   user unit for always-on collection.
 
-**Single-writer lease.** The writer holds an exclusive non-blocking `flock` on `telemetry.lock` next to the
+### 5.4 Single-writer lease
+
+The writer holds an exclusive non-blocking `flock` on `telemetry.lock` next to the
 database. Any other host that finds the lock taken opens the database read-only and acts as a reader. The kernel
 releases the lock when the writer crashes, and the next host to try takes over. Readers learn about changes from
 `PRAGMA data_version` or `meta.revision`. Hook payloads never need the lease, because they go to an append-only
 spool that the writer drains (§8.4).
 
-**Store location.** The store holds data that cannot be rebuilt: resource samples, hook and OTLP events, and
+### 5.5 Store location
+
+The store holds data that cannot be rebuilt: resource samples, hook and OTLP events, and
 insight history. It therefore lives outside Caches:
 
 - macOS: `~/Library/Application Support/CodexBar/telemetry/telemetry-v1.sqlite`
@@ -506,8 +571,12 @@ upstream's privacy rule. Argv previews go through `LogRedactor` and are truncate
 
   Printing nothing matters because stdout from some hook events is added to the agent's context. Tool inputs
   and outputs are dropped unless content capture is on.
-- The writer drains the spool every tick, then deletes or rotates drained files. The spool is capped at 16 MiB.
-  When it is full, the oldest file is dropped and a counter records the drop.
+- The writer **watches** the spool directory and drains new lines as they arrive, so hook events reach the
+  store in well under a second. It uses a vnode `DispatchSource` on the directory and open spool files on macOS
+  and `inotify` on Linux. If watching fails, it falls back to a 1 s `stat` poll of the spool's size, which costs
+  one syscall per file. Draining doesn't wait for the collector tick. This is what meets F7's ≤ 3 s target.
+- Drained files are deleted or rotated. The spool is capped at 16 MiB. When it is full, the oldest file is
+  dropped and a counter records the drop.
 - Codex has no equivalent hooks in this design yet. Its `notify` program, which fires on turn completion, can feed
   the same spool. If Codex grows stable hooks, it gets an adapter.
 
@@ -709,12 +778,15 @@ existing `CostUsagePerformanceGate` pattern.
 
 ### 12.2 Adaptive cadence (overhead budget)
 
-| Condition | Process sample | Port scan | Transcript tail | Full sweep |
-|---|---|---|---|---|
-| Console open on a live session | 2 s (that session) | 15 s | event-driven | 60 s |
-| Agents live | 5 s | 15 s | 15 s | 60 s |
-| No live agents | off | off | 60 s | 5 min (leftovers) |
-| Low power (app setting or macOS Low Power Mode) | 30 s | 60 s | 5 min | 30 min |
+| Condition | Process sample | Port scan | Transcript tail | Hook spool | Full sweep |
+|---|---|---|---|---|---|
+| Console open on a live session | 2 s (that session) | 15 s | event-driven | on arrival | 60 s |
+| Agents live | 5 s | 15 s | 15 s | on arrival | 60 s |
+| No live agents | off | off | 60 s | on arrival | 5 min (leftovers) |
+| Low power (app setting or macOS Low Power Mode) | 30 s | 60 s | 5 min | on arrival | 30 min |
+
+The hook spool is drained on arrival in every condition (§8.4). It only does work when a hook has fired, so idle
+cost is zero, and low-power mode does not delay it.
 
 The collector measures its own `rusage` and reports it in Diagnostics. A performance gate fails CI if
 synthetic-load overhead exceeds the §3.2 budget.
