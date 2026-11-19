@@ -570,7 +570,8 @@ extension StatusItemController {
                 model: spendModel,
                 providerCount: spendProviderCount,
                 knownCostProviderCount: knownCounts.cost,
-                knownTokenProviderCount: knownCounts.tokens)
+                knownTokenProviderCount: knownCounts.tokens,
+                usesFallbackSpend: !self.overviewSpendFallbackInputs(providers: spendProviders).isEmpty)
             let summaryItem = self.makeMenuCardItem(
                 OverviewSpendSummaryCardView(
                     summary: spendSummary,

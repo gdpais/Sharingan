@@ -312,6 +312,69 @@ struct SpendDashboardPublicationTests {
     }
 
     @Test
+    func `overview falls back for a subscription with only stale or loading spend`() {
+        let publication = SpendDashboardPublication(
+            revision: 1,
+            generation: 1,
+            configuration: Self.configuration(revision: "claude:first"),
+            loadedAt: Self.now,
+            isRefreshing: false,
+            inputs: [
+                Self.input(id: "claude", provider: .claude, cost: 1940),
+                Self.input(id: "codex:a", provider: .codex, cost: 4),
+            ],
+            sources: [
+                SpendSourcePublication(
+                    id: "claude",
+                    provider: .claude,
+                    displayName: "Claude",
+                    role: .subscription,
+                    state: .staleLastKnown),
+                SpendSourcePublication(
+                    id: "codex:a",
+                    provider: .codex,
+                    displayName: "Codex",
+                    role: .subscription,
+                    state: .available),
+                SpendSourcePublication(
+                    id: "cursor",
+                    provider: .cursor,
+                    displayName: "Cursor",
+                    role: .subscription,
+                    state: .confirmedEmpty),
+            ])
+
+        #expect(publication.providersMissingFreshSubscriptionInput(
+            providerScope: [.claude, .codex, .cursor]) == [.claude])
+        #expect(publication.providersMissingFreshSubscriptionInput(
+            providerScope: [.claude, .codex],
+            hiddenSourceIDs: ["claude"]).isEmpty)
+        #expect(publication.staleLastKnownInput(for: .claude)?.id == "claude")
+        #expect(publication.staleLastKnownInput(for: .codex) == nil)
+
+        let withoutFallback = publication.model(
+            requestedDays: 30,
+            now: Self.now,
+            calendar: Self.calendar,
+            preferredCurrencyCode: "USD",
+            providerScope: [.claude, .codex])
+        #expect(withoutFallback.groups.flatMap(\.providers).map(\.provider) == [.codex])
+
+        let fallback = Self.input(id: "claude", provider: .claude, cost: 1900)
+        let overview = publication.model(
+            requestedDays: 30,
+            now: Self.now,
+            calendar: Self.calendar,
+            preferredCurrencyCode: "USD",
+            providerScope: [.claude, .codex],
+            fallbackInputs: [fallback, Self.input(id: "codex:b", provider: .codex, cost: 99)])
+        let providers = overview.groups.flatMap(\.providers)
+        #expect(Set(providers.map(\.provider)) == [.claude, .codex])
+        #expect(providers.first { $0.provider == .claude }?.totalCost == 1900)
+        #expect(providers.first { $0.provider == .codex }?.totalCost == 4)
+    }
+
+    @Test
     func `visible Codex source without a loadable input remains unavailable`() async throws {
         let configuration = SpendDashboardConfiguration(
             costUsageEnabled: true,

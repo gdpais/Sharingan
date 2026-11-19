@@ -50,13 +50,15 @@ struct SpendDashboardPublication: Sendable {
         hiddenSourceIDs: Set<String> = [],
         hideNativeCodexWhenOpenCodexPresent: Bool = false,
         selectedDay: Date? = nil,
-        providerScope: Set<UsageProvider>? = nil) -> SpendDashboardModel
+        providerScope: Set<UsageProvider>? = nil,
+        fallbackInputs: [SpendDashboardModel.ProviderInput] = []) -> SpendDashboardModel
     {
-        let staleSourceIDs = Set(self.sources.compactMap { source in
-            source.state == .staleLastKnown ? source.id : nil
-        })
+        let staleSourceIDs = self.staleSourceIDs
         let inputs = self.inputs.filter { input in
             (providerScope?.contains(input.provider) ?? true) && !staleSourceIDs.contains(input.id)
+        } + fallbackInputs.filter { fallback in
+            (providerScope?.contains(fallback.provider) ?? true) &&
+                !self.inputs.contains { $0.provider == fallback.provider && !staleSourceIDs.contains($0.id) }
         }
         return SpendDashboardModel.build(
             inputs: inputs,
@@ -68,6 +70,37 @@ struct SpendDashboardPublication: Sendable {
             hiddenSourceIDs: hiddenSourceIDs,
             hideNativeCodexWhenOpenCodexPresent: hideNativeCodexWhenOpenCodexPresent,
             selectedDay: selectedDay)
+    }
+
+    private var staleSourceIDs: Set<String> {
+        Set(self.sources.compactMap { source in
+            source.state == .staleLastKnown ? source.id : nil
+        })
+    }
+
+    /// Subscription providers in scope that this publication cannot price right now: every source is
+    /// still loading, unavailable, or only retained as stale last-known data. Leaving them out of a
+    /// total that sits beside their own provider cards would understate spend (a provider card shows
+    /// its 30-day cost while the overview total silently omits it), so callers substitute a fallback.
+    func providersMissingFreshSubscriptionInput(
+        providerScope: Set<UsageProvider>,
+        hiddenSourceIDs: Set<String> = []) -> Set<UsageProvider>
+    {
+        let staleSourceIDs = self.staleSourceIDs
+        return providerScope.filter { provider in
+            let sources = self.sources.filter { $0.provider == provider }
+            guard sources.contains(where: { $0.role == .subscription }),
+                  !hiddenSourceIDs.contains(provider.rawValue),
+                  !sources.contains(where: { hiddenSourceIDs.contains($0.id) || $0.state == .confirmedEmpty })
+            else { return false }
+            return !self.inputs.contains { $0.provider == provider && !staleSourceIDs.contains($0.id) }
+        }
+    }
+
+    /// The retained last-known input for a provider whose latest dashboard refresh failed.
+    func staleLastKnownInput(for provider: UsageProvider) -> SpendDashboardModel.ProviderInput? {
+        let staleSourceIDs = self.staleSourceIDs
+        return self.inputs.first { $0.provider == provider && staleSourceIDs.contains($0.id) }
     }
 
     func subscriptionCount(

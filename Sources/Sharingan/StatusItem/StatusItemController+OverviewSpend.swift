@@ -16,7 +16,8 @@ struct OverviewSpendSummary: Equatable {
         model: SpendDashboardModel,
         providerCount: Int,
         knownCostProviderCount: Int? = nil,
-        knownTokenProviderCount: Int? = nil)
+        knownTokenProviderCount: Int? = nil,
+        usesFallbackSpend: Bool = false)
     {
         let includedProviders = model.groups.flatMap(\.providers)
         let subscriptionProviders = includedProviders.filter { $0.sourceKind != .localHistory }
@@ -26,8 +27,10 @@ struct OverviewSpendSummary: Equatable {
         let resolvedKnownCostProviderCount = knownCostProviderCount.map {
             min(providerCount, max(pricedProviderCount, $0))
         }
+        // Fallback spend comes from a provider's own card snapshot while the shared dashboard
+        // refresh is pending or failed, so the total is an approximation until it catches up.
         let isPartial = pricedProviderCount > 0 &&
-            (resolvedKnownCostProviderCount ?? pricedProviderCount) < providerCount
+            ((resolvedKnownCostProviderCount ?? pricedProviderCount) < providerCount || usesFallbackSpend)
         self.isPartial = isPartial
 
         if model.groups.isEmpty {
@@ -252,6 +255,37 @@ extension StatusItemController {
                 hideNativeCodexWhenOpenCodexPresent: self.settings.hideNativeCodexCostWhenOpenCodexPresent))
     }
 
+    /// Inputs for subscription providers the shared dashboard publication cannot price yet (still
+    /// loading, unavailable, or failed with only stale data). Without them the overview total omits
+    /// a provider whose own card already shows its 30-day cost. Prefers the snapshot that card shows,
+    /// then the publication's retained last-known input.
+    func overviewSpendFallbackInputs(providers: [UsageProvider]) -> [SpendDashboardModel.ProviderInput] {
+        let publication = self.store.spendDashboardPublication
+        guard let configuration = publication.configuration,
+              configuration.menuOwnershipFingerprint == SpendDashboardSource.currentMenuOwnershipFingerprint(
+                  settings: self.settings,
+                  store: self.store)
+        else { return [] }
+        // Provider-specific by design: while Pi owns local history rows, Claude/Codex dashboard inputs
+        // are native projections disjoint from Pi; the inclusive card snapshot would double count them.
+        guard !publication.inputs.contains(where: {
+            $0.sourceKind == .localHistory && providers.contains($0.provider)
+        }) else { return [] }
+        let missing = publication.providersMissingFreshSubscriptionInput(
+            providerScope: Set(providers),
+            hiddenSourceIDs: Set(self.settings.spendDashboardHiddenSourceIDs))
+        return providers.compactMap { provider -> SpendDashboardModel.ProviderInput? in
+            guard missing.contains(provider) else { return nil }
+            if let snapshot = self.store.tokenSnapshotForCurrentProviderConfig(for: provider)?.snapshot {
+                return SpendDashboardModel.ProviderInput(
+                    provider: provider,
+                    displayName: self.store.metadata(for: provider).displayName,
+                    snapshot: snapshot)
+            }
+            return publication.staleLastKnownInput(for: provider)
+        }
+    }
+
     func overviewSpendDashboardModel(
         providers: [UsageProvider],
         now: Date = Date()) -> SpendDashboardModel
@@ -278,7 +312,8 @@ extension StatusItemController {
                 preferredCurrencyCode: self.settings.preferredCurrencyCode,
                 hiddenSourceIDs: Set(self.settings.spendDashboardHiddenSourceIDs),
                 hideNativeCodexWhenOpenCodexPresent: self.settings.hideNativeCodexCostWhenOpenCodexPresent,
-                providerScope: Set(providers))
+                providerScope: Set(providers),
+                fallbackInputs: self.overviewSpendFallbackInputs(providers: providers))
         }
         let inputs = providers.compactMap { provider -> SpendDashboardModel.ProviderInput? in
             // Provider-level snapshots cannot honor account-level source exclusions before publication.

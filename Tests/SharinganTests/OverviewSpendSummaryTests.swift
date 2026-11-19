@@ -49,6 +49,32 @@ struct OverviewSpendSummaryTests {
     }
 
     @Test
+    func `summary marks fallback spend as approximate even when every subscription is priced`() {
+        let group = self.group(
+            providers: [
+                self.provider(.codex, tokens: 15_500_000, cost: 3.92),
+                self.provider(.claude, tokens: 4_400_000_000, cost: 1940.71),
+            ],
+            totalTokens: 4_415_500_000,
+            totalCost: 1944.63,
+            coverage: CostUsageCoverageCounts(priced: 2, unpriced: 0))
+        let model = SpendDashboardModel(requestedDays: 30, groups: [group])
+
+        let exact = OverviewSpendSummary(model: model, providerCount: 2, knownCostProviderCount: 1)
+        let fallback = OverviewSpendSummary(
+            model: model,
+            providerCount: 2,
+            knownCostProviderCount: 1,
+            usesFallbackSpend: true)
+
+        #expect(!exact.isPartial)
+        #expect(fallback.isPartial)
+        #expect(!exact.primarySpendText.hasPrefix("~"))
+        #expect(fallback.primarySpendText == "~\(exact.primarySpendText)")
+        #expect(fallback.providerCoverageText == "2 of 2 subscriptions have spend")
+    }
+
+    @Test
     func `summary keeps distinct currencies separate`() {
         let usd = self.group(
             currencyCode: "USD",
